@@ -94,9 +94,14 @@ config="${mod_id}.mixins.json"
 #[features.${mod_id}]
 #openGLVersion="[3.2,)"
 
+# CREATE
 [[dependencies.${mod_id}]]
     modId="create"
     type="required"
     versionRange="[6.0.9,6.1.0)"
     ordering="NONE"
     side="BOTH"
+
+# EMI
+
+# SOPHISTICATED BACKPACKS
