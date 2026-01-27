@@ -93,21 +93,21 @@ public class AutoUpdater {
     private static boolean tryMigrateVersion(String version) throws IOException {
         Path modsFolder = FMLPaths.MODSDIR.get();
 
-        Path currentFile = modsFolder.resolve(CurrentVersion+".jar");
+        Path currentFile = modsFolder.resolve("utm-"+CurrentVersion+".jar");
         AtomicReference<Path> updateFile = new AtomicReference<>();
         AtomicReference<Path> oldFile = new AtomicReference<>();
 
         Files.list(modsFolder).forEach(file -> {
             if (file.endsWith(SUFFIX)) {
                 updateFile.set(file);
-            } else if (file.endsWith(SUFFIX+".old")) {
+            } else if (file.endsWith(SUFFIX + ".old")) {
                 oldFile.set(file);
             }
         });
 
         if (updateFile.get() != null) {
             Files.move(currentFile, modsFolder.resolve(formatPath(CurrentVersion)+".old"), StandardCopyOption.REPLACE_EXISTING);
-            Files.move(updateFile.get(), modsFolder.resolve(version+".jar"), StandardCopyOption.REPLACE_EXISTING);
+            Files.move(updateFile.get(), modsFolder.resolve("utm-" + version + ".jar"), StandardCopyOption.REPLACE_EXISTING);
 
             return true;
         }
@@ -122,7 +122,7 @@ public class AutoUpdater {
     }
 
     private static String formatPath(String version) {
-        return version + ".jar" + SUFFIX;
+        return "utm-" + version + ".jar" + SUFFIX;
     }
 
     public static String SUFFIX = ".utm_update";

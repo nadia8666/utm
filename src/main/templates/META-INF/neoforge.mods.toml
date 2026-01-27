@@ -106,4 +106,10 @@ config="utm.mixins.json"
 
 # SOPHISTICATED BACKPACKS
 
-modConstructor="com.nadia.utm.utm"
+# UTM
+[[dependencies.${mod_id}]]
+modId="utm_updater"
+type="required"
+versionRange="[${mod_version}]"
+ordering="AFTER"
+side="BOTH"

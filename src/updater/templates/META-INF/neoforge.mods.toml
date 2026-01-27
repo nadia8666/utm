@@ -16,3 +16,11 @@ updating your life
 
 [[mixins]]
 config="utm_updater.mixins.json"
+
+# UTM
+[[dependencies.utm_updater]]
+modId="utm"
+type="required"
+versionRange="[${mod_version}]"
+ordering="BEFORE"
+side="BOTH"
