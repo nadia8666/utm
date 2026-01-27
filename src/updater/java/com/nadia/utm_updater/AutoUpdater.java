@@ -1,11 +1,9 @@
-package com.nadia.utm_updater.util;
+package com.nadia.utm_updater;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.components.toasts.SystemToast;
-import net.minecraft.network.chat.Component;
+import net.neoforged.api.distmarker.Dist;
 import net.neoforged.fml.loading.FMLPaths;
 
 import java.io.IOException;
@@ -20,6 +18,10 @@ import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.stream.Stream;
+
+import static net.neoforged.fml.loading.FMLLoader.getDist;
+
 
 public class AutoUpdater {
     public static String CurrentVersion = "0.0.0-INTERNAL";
@@ -50,7 +52,7 @@ public class AutoUpdater {
                 startUpdate(element.get().get("browser_download_url").getAsString(), version);
             }
         } else {
-            throw new RuntimeException("UTM Version check failed: " + response.statusCode());
+            throw new RuntimeException("[UTM] Version check failed: " + response.statusCode());
         }
     }
 
@@ -72,22 +74,26 @@ public class AutoUpdater {
                     if (response.statusCode() == 200) {
                         return response.body();
                     } else {
-                        throw new RuntimeException("HTTP Error: " + response.statusCode());
+                        throw new RuntimeException("[UTM] HTTP Error: " + response.statusCode());
                     }
                 });
     }
 
+
+    public static boolean ToastReady = false;
+    public static boolean ToastTarget = false;
+    public static String VersionTarget = "v-0.0.0";
     private static void startUpdate(String downloadUrl, String latest) throws ExecutionException, InterruptedException {
         Path modsFolder = FMLPaths.MODSDIR.get();
         Path targetPath = modsFolder.resolve(formatPath(latest));
-        Path file = downloadUpdate(downloadUrl, targetPath).get();
+        downloadUpdate(downloadUrl, targetPath).get();
 
-        SystemToast.add(
-                Minecraft.getInstance().getToasts(),
-                SystemToast.SystemToastId.PERIODIC_NOTIFICATION,
-                Component.literal("Update Installed!"),
-                Component.literal("UTM Version " + latest + " has been downloaded, please restart Minecraft!")
-        );
+        utmUpdater.LOGGER.warn("[UTM] Update installed!");
+
+        if (getDist() == Dist.CLIENT) {
+            VersionTarget = "v" + latest;
+            ToastTarget = true;
+        }
     }
 
     private static boolean tryMigrateVersion(String version) throws IOException {
@@ -97,13 +103,15 @@ public class AutoUpdater {
         AtomicReference<Path> updateFile = new AtomicReference<>();
         AtomicReference<Path> oldFile = new AtomicReference<>();
 
-        Files.list(modsFolder).forEach(file -> {
-            if (file.endsWith(SUFFIX)) {
-                updateFile.set(file);
-            } else if (file.endsWith(SUFFIX + ".old")) {
-                oldFile.set(file);
-            }
-        });
+        try (Stream<Path> entries = Files.list(modsFolder)) {
+           entries.forEach(file -> {
+                if (file.toString().contains(SUFFIX) && !file.toString().contains(".old")) {
+                    updateFile.set(file);
+                } else if (file.toString().contains(SUFFIX + ".old")) {
+                    oldFile.set(file);
+                }
+            });
+        }
 
         if (updateFile.get() != null) {
             Files.move(currentFile, modsFolder.resolve(formatPath(CurrentVersion)+".old"), StandardCopyOption.REPLACE_EXISTING);
