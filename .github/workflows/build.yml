@@ -29,11 +29,10 @@ jobs:
       - name: Make Gradle wrapper executable
         run: chmod +x ./gradlew
 
-      - name: Read version from gradle.properties
+      - name: Get version
         id: get_version
         run: |
           VERSION=$(grep "mod_version" gradle.properties | cut -d'=' -f2 | tr -d '[:space:]')
-          echo "Detected version: $VERSION"
           echo "MOD_VERSION=$VERSION" >> $GITHUB_ENV
 
       - name: Build with Gradle
@@ -42,7 +41,7 @@ jobs:
       - name: Update Release
         uses: ncipollo/release-action@v1
         with:
-          tag: v${{ env.MOD_VERSION }}
+          tag: ${{ env.MOD_VERSION }}
           name: v${{ env.MOD_VERSION }}
           commit: ${{ github.sha }}
 

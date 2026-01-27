@@ -1,5 +1,7 @@
 package com.nadia.utm;
 
+import com.nadia.utm.util.AutoUpdater;
+import net.neoforged.neoforgespi.language.IModInfo;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -105,6 +107,16 @@ public class utm {
         // Register our mod's ModConfigSpec so that FML can create and load the config
         // file for us
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+
+        IModInfo info = modContainer.getModInfo();
+        String version = info.getVersion().toString();
+
+        try {
+            AutoUpdater.CurrentVersion = version;
+            AutoUpdater.CheckForUpdate();
+        } catch (Exception e) {
+            LOGGER.warn("UTM Failed to get version? {}", e.getMessage());
+        }
     }
 
     private void commonSetup(FMLCommonSetupEvent event) {
