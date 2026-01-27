@@ -158,3 +158,25 @@ tasks.named('assemble') {
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
 }
+
+
+tasks.register('renameModJars', Copy) {
+    def versionStr = project.findProperty('mod_version') ?: ""
+
+    from layout.buildDirectory.dir("libs")
+    into layout.buildDirectory.dir("libs")
+
+    rename { String fileName ->
+        if (versionStr && fileName.contains(versionStr as CharSequence)) {
+            if (fileName.contains("-updater")) {
+                return "utm_updater.jar"
+            }
+            return "utm.jar"
+        }
+        return null
+    }
+
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+}
+
+tasks.named('build') { finalizedBy('renameModJars') }

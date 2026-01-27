@@ -39,7 +39,7 @@ public class AutoUpdater {
             JsonObject json = JsonParser.parseString(response.body()).getAsJsonObject();
             String version = json.get("tag_name").getAsString();
 
-            if (!tryMigrateVersion(version) || !Objects.equals(version, CurrentVersion)) {
+            if (!tryMigrateVersion() || !Objects.equals(version, CurrentVersion)) {
                 JsonArray assets = json.get("assets").getAsJsonArray();
                 AtomicReference<JsonObject> element = new AtomicReference<>();
 
@@ -85,7 +85,7 @@ public class AutoUpdater {
     public static String VersionTarget = "v-0.0.0";
     private static void startUpdate(String downloadUrl, String latest) throws ExecutionException, InterruptedException {
         Path modsFolder = FMLPaths.MODSDIR.get();
-        Path targetPath = modsFolder.resolve(formatPath(latest));
+        Path targetPath = modsFolder.resolve(formatPath());
         downloadUpdate(downloadUrl, targetPath).get();
 
         utmUpdater.LOGGER.warn("[UTM] Update installed!");
@@ -96,26 +96,26 @@ public class AutoUpdater {
         }
     }
 
-    private static boolean tryMigrateVersion(String version) throws IOException {
+    private static boolean tryMigrateVersion() throws IOException {
         Path modsFolder = FMLPaths.MODSDIR.get();
 
-        Path currentFile = modsFolder.resolve("utm-"+CurrentVersion+".jar");
+        Path currentFile = modsFolder.resolve("utm.jar");
         AtomicReference<Path> updateFile = new AtomicReference<>();
         AtomicReference<Path> oldFile = new AtomicReference<>();
 
         try (Stream<Path> entries = Files.list(modsFolder)) {
            entries.forEach(file -> {
-                if (file.toString().contains(SUFFIX) && !file.toString().contains(".old")) {
-                    updateFile.set(file);
-                } else if (file.toString().contains(SUFFIX + ".old")) {
+                if (file.toString().contains(SUFFIX+".old")) {
                     oldFile.set(file);
+                } else if (file.toString().contains(SUFFIX)) {
+                    updateFile.set(file);
                 }
             });
         }
 
         if (updateFile.get() != null) {
-            Files.move(currentFile, modsFolder.resolve(formatPath(CurrentVersion)+".old"), StandardCopyOption.REPLACE_EXISTING);
-            Files.move(updateFile.get(), modsFolder.resolve("utm-" + version + ".jar"), StandardCopyOption.REPLACE_EXISTING);
+            Files.move(currentFile, modsFolder.resolve(formatPath()+".old"), StandardCopyOption.REPLACE_EXISTING);
+            Files.move(updateFile.get(), modsFolder.resolve("utm.jar"), StandardCopyOption.REPLACE_EXISTING);
 
             return true;
         }
@@ -129,8 +129,8 @@ public class AutoUpdater {
         return false;
     }
 
-    private static String formatPath(String version) {
-        return "utm-" + version + ".jar" + SUFFIX;
+    private static String formatPath() {
+        return "utm.jar" + SUFFIX;
     }
 
     public static String SUFFIX = ".utm_update";
