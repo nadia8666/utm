@@ -1,5 +1,6 @@
 package com.nadia.utm;
 
+import com.nadia.utm.updater.AutoUpdater;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -81,6 +82,11 @@ public class utm {
     // FML will recognize some parameter types like IEventBus or ModContainer and
     // pass them in automatically.
     public utm(IEventBus modEventBus, ModContainer modContainer) {
+        AutoUpdater.CurrentVersion = modContainer.getModInfo().getVersion().toString();
+        try {
+            AutoUpdater.CheckForUpdate();
+        } catch (Exception ignored) {}
+
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
 

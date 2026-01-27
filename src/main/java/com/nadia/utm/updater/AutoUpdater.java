@@ -1,8 +1,10 @@
-package com.nadia.utm_updater;
+package com.nadia.utm.updater;
 
+import com.nadia.utm.utm;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import net.minecraft.client.Minecraft;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.fml.loading.FMLPaths;
 
@@ -17,6 +19,7 @@ import java.nio.file.StandardCopyOption;
 import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Stream;
 
@@ -49,6 +52,7 @@ public class AutoUpdater {
                     }
                 });
 
+                utm.LOGGER.warn("[UTM] Starting update!");
                 startUpdate(element.get().get("browser_download_url").getAsString(), version);
             }
         } else {
@@ -83,41 +87,39 @@ public class AutoUpdater {
     public static boolean ToastReady = false;
     public static boolean ToastTarget = false;
     public static String VersionTarget = "v-0.0.0";
-    private static void startUpdate(String downloadUrl, String latest) throws ExecutionException, InterruptedException {
+    private static void startUpdate(String downloadUrl, String latest) throws ExecutionException, InterruptedException, IOException {
         Path modsFolder = FMLPaths.MODSDIR.get();
-        Path targetPath = modsFolder.resolve(formatPath());
-        downloadUpdate(downloadUrl, targetPath).get();
 
-        utmUpdater.LOGGER.warn("[UTM] Update installed!");
+        Path currentFile = modsFolder.resolve("utm.jar");
+        CompletableFuture.runAsync(() -> {
+            try {
+                Files.move(currentFile, modsFolder.resolve(formatPath()+".old"), StandardCopyOption.REPLACE_EXISTING);
+            } catch (Exception ignored) {}
 
-        if (getDist() == Dist.CLIENT) {
-            VersionTarget = "v" + latest;
-            ToastTarget = true;
-        }
+            Path targetPath = modsFolder.resolve("utm.jar");
+            try {
+                downloadUpdate(downloadUrl, targetPath).get();
+            } catch (Exception ignored) {}
+
+            utm.LOGGER.warn("[UTM] Update installed!");
+
+            if (getDist() == Dist.CLIENT) {
+                VersionTarget = "v" + latest;
+                ToastTarget = true;
+            }
+        });
     }
 
     private static boolean tryMigrateVersion() throws IOException {
         Path modsFolder = FMLPaths.MODSDIR.get();
-
-        Path currentFile = modsFolder.resolve("utm.jar");
-        AtomicReference<Path> updateFile = new AtomicReference<>();
         AtomicReference<Path> oldFile = new AtomicReference<>();
 
         try (Stream<Path> entries = Files.list(modsFolder)) {
            entries.forEach(file -> {
                 if (file.toString().contains(SUFFIX+".old")) {
                     oldFile.set(file);
-                } else if (file.toString().contains(SUFFIX)) {
-                    updateFile.set(file);
                 }
             });
-        }
-
-        if (updateFile.get() != null) {
-            Files.move(currentFile, modsFolder.resolve(formatPath()+".old"), StandardCopyOption.REPLACE_EXISTING);
-            Files.move(updateFile.get(), modsFolder.resolve("utm.jar"), StandardCopyOption.REPLACE_EXISTING);
-
-            return true;
         }
 
         if (oldFile.get() != null) {

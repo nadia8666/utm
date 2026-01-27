@@ -38,11 +38,6 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build
 
-      - name: Cleanup
-        run: |
-          cd build/libs
-          find . -type f ! -name 'utm.jar' ! -name 'utm_updater.jar' -delete
-
       - name: Update Release
         uses: ncipollo/release-action@v1
         with:
@@ -56,7 +51,7 @@ jobs:
           replacesArtifacts: true
           makeLatest: true
 
-          artifacts: "build/libs/utm.jar,build/libs/utm_updater.jar"
+          artifacts: "build/libs/utm.jar"
 
           token: ${{ secrets.GITHUB_TOKEN }}
         if: success()

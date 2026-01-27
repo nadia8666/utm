@@ -14,24 +14,6 @@ base {
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
-sourceSets {
-    main {
-        java { srcDir 'src/main/java' }
-        resources {
-            srcDir 'src/main/resources'
-            srcDir 'src/generated/resources'
-        }
-    }
-    updater {
-        java { srcDir 'src/updater/java' }
-        resources {
-            srcDir 'src/updater/resources'
-        }
-
-        compileClasspath += sourceSets.main.output
-    }
-}
-
 repositories {
     maven { url = "https://maven.createmod.net" }
     maven { url = "https://maven.ithundxr.dev/snapshots" }
@@ -50,34 +32,33 @@ neoForge {
         minecraftVersion = project.parchment_minecraft_version
     }
 
-    addModdingDependenciesTo(sourceSets.updater)
-
-    mods {
-        utm { sourceSet(sourceSets.main) }
-        utm_updater { sourceSet(sourceSets.updater) }
-    }
-
     runs {
         configureEach {
             systemProperty 'forge.logging.markers', 'REGISTRIES'
             logLevel = org.slf4j.event.Level.DEBUG
-
-            taskBefore tasks.named('processResources')
-            taskBefore tasks.named('processUpdaterResources')
-            taskBefore tasks.named('compileJava')
-            taskBefore tasks.named('compileUpdaterJava')
         }
 
         client {
             client()
-            loadedMods = [mods.utm, mods.utm_updater]
-            systemProperty 'neoforge.enabledGameTestNamespaces', "utm,utm_updater"
+
+            // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
         }
 
         server {
             server()
             programArgument '--nogui'
-            loadedMods = [mods.utm, mods.utm_updater]
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+        }
+
+        data {
+            data()
+
+            // example of overriding the workingDirectory set in configureEach above, uncomment if you want to use it
+            // gameDirectory = project.file('run-data')
+
+            // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
+            programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
         }
     }
 }
@@ -108,75 +89,49 @@ def replaceProperties = [
         mod_version            : mod_version,
 ]
 
-tasks.withType(ProcessResources).configureEach {
-    inputs.properties replaceProperties
-    duplicatesStrategy = DuplicatesStrategy.INCLUDE
-
-    filesMatching(['META-INF/neoforge.mods.toml', 'pack.mcmeta']) {
-        expand replaceProperties
-    }
-}
-
 def generateMainMetadata = tasks.register("generateMainMetadata", ProcessResources) {
-    var props = [minecraft_version: minecraft_version, neo_version: neo_version, mod_id: mod_id, mod_version: mod_version, mod_name: mod_name]
-    inputs.properties props
-    expand props
+    inputs.properties replaceProperties
+    expand replaceProperties
     from "src/main/templates"
     into "build/generated/sources/modMetadata/main"
 }
 
-def generateUpdaterMetadata = tasks.register("generateUpdaterMetadata", ProcessResources) {
-    var props = [minecraft_version: minecraft_version, neo_version: neo_version, mod_id: "utm_updater", mod_version: mod_version, mod_name: "${mod_name} Updater"]
-    inputs.properties props
-    expand props
-    from "src/updater/templates" // Use same templates, but different output
-    into "build/generated/sources/modMetadata/updater"
-}
-
 sourceSets.main.resources.srcDir generateMainMetadata
-sourceSets.updater.resources.srcDir generateUpdaterMetadata
 neoForge.ideSyncTask generateMainMetadata
-neoForge.ideSyncTask generateUpdaterMetadata
-
-tasks.withType(ProcessResources).configureEach {
-    duplicatesStrategy = DuplicatesStrategy.INCLUDE
-}
-
-tasks.withType(Jar).configureEach {
-    duplicatesStrategy = DuplicatesStrategy.INCLUDE
-}
-
-tasks.register('updaterJar', Jar) {
-    from sourceSets.updater.output
-    archiveClassifier = 'updater'
-}
-
-tasks.named('assemble') {
-    dependsOn 'updaterJar'
-}
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
 }
 
-
-tasks.register('renameModJars', Copy) {
-    def versionStr = project.findProperty('mod_version') ?: ""
-
-    from layout.buildDirectory.dir("libs")
-    into layout.buildDirectory.dir("libs")
-
-    rename { String fileName ->
-        if (versionStr && fileName.contains(versionStr as CharSequence)) {
-            if (fileName.contains("-updater")) {
-                return "utm_updater.jar"
-            }
-            return "utm.jar"
-        }
-        return null
+tasks.register('cleanupVersionedJars', Delete) {
+    delete layout.buildDirectory.dir("libs").map { dir ->
+        dir.asFileTree.matching { include "*-${mod_version}*.jar" }
     }
-
-    duplicatesStrategy = DuplicatesStrategy.INCLUDE
 }
 
-tasks.named('build') { finalizedBy('renameModJars') }
+def registerRename(String taskName, String oldName, String newName) {
+    def libDirProvider = layout.buildDirectory.dir("libs")
+
+    tasks.named(taskName) {
+        doLast {
+            def libDir = libDirProvider.get().asFile
+            def oldFile = new File(libDir, oldName)
+            def newFile = new File(libDir, newName)
+
+            if (oldFile.exists()) {
+                if (newFile.exists()) {
+                    newFile.delete()
+                }
+
+                if (oldFile.renameTo(newFile)) {
+                    logger.lifecycle("Successfully renamed ${oldName} to ${newName}")
+                } else {
+                    throw new GradleException("Failed to rename ${oldName}. File might be locked.")
+                }
+            }
+        }
+        finalizedBy('cleanupVersionedJars')
+    }
+}
+
+registerRename('jar', "utm-${mod_version}.jar", "utm.jar")

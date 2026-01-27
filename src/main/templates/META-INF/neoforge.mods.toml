@@ -105,11 +105,3 @@ config="utm.mixins.json"
 # EMI
 
 # SOPHISTICATED BACKPACKS
-
-# UTM
-[[dependencies.${mod_id}]]
-modId="utm_updater"
-type="required"
-versionRange="[${mod_version}]"
-ordering="AFTER"
-side="BOTH"
