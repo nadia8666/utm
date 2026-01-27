@@ -7,7 +7,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.toasts.SystemToast;
 import net.minecraft.network.chat.Component;
 import net.neoforged.fml.loading.FMLPaths;
-import org.checkerframework.checker.units.qual.Current;
 
 import java.io.IOException;
 import java.net.URI;
@@ -40,8 +39,15 @@ public class AutoUpdater {
 
             if (!tryMigrateVersion(version) || !Objects.equals(version, CurrentVersion)) {
                 JsonArray assets = json.get("assets").getAsJsonArray();
-                JsonObject element = assets.get(0).getAsJsonObject();
-                startUpdate(element.get("browser_download_url").getAsString(), version);
+                AtomicReference<JsonObject> element = new AtomicReference<>();
+
+                assets.forEach(target -> {
+                    if (!target.getAsJsonObject().get("name").getAsString().contains("_updater")) {
+                        element.set(target.getAsJsonObject());
+                    }
+                });
+
+                startUpdate(element.get().get("browser_download_url").getAsString(), version);
             }
         } else {
             throw new RuntimeException("UTM Version check failed: " + response.statusCode());
