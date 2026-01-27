@@ -105,3 +105,11 @@ config="utm.mixins.json"
 # EMI
 
 # SOPHISTICATED BACKPACKS
+
+# SPEARS
+[[dependencies.${mod_id}]]
+modId="spears"
+type="optional"
+versionRange=","
+ordering="NONE"
+side="BOTH"

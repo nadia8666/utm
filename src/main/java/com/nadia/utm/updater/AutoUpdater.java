@@ -17,9 +17,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.Objects;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Stream;
 
@@ -136,6 +134,21 @@ public class AutoUpdater {
         }
 
         return false;
+    }
+
+    private static final ScheduledExecutorService SCHEDULER = Executors.newSingleThreadScheduledExecutor(r -> {
+        Thread thread = new Thread(r, "utm-AutoUpdater");
+        thread.setDaemon(true); // Ensures the thread stops when the JVM closes
+        return thread;
+    });
+
+    public static void startAutoUpdate() {
+        SCHEDULER.scheduleAtFixedRate(() -> {
+            try {
+                utm.LOGGER.info("[UTM] Checking for updates.");
+                AutoUpdater.checkForUpdate();
+            } catch (Exception ignored) {}
+        }, 0, 30, TimeUnit.MINUTES);
     }
 
     private static String formatPath() {
