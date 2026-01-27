@@ -1,4 +1,4 @@
-package com.nadia.utm.updater;
+package com.nadia.utm.client;
 
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;

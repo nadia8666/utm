@@ -9,7 +9,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
-@EventBusSubscriber(modid = "utm")
+@EventBusSubscriber
 public class HitboxOverride {
     public static final ResourceLocation ELYTRA_SPEED_REACH = ResourceLocation.fromNamespaceAndPath("utm", "elytra_speed_reach");
 

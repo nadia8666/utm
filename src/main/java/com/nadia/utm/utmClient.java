@@ -1,6 +1,6 @@
 package com.nadia.utm;
 
-import com.nadia.utm.updater.UpdateToast;
+import com.nadia.utm.client.UpdateToast;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.TitleScreen;
 import net.neoforged.api.distmarker.Dist;
@@ -36,14 +36,17 @@ public class utmClient {
         if (!ToastReady && event.getScreen() instanceof TitleScreen) {
             ToastReady = true;
             utm.LOGGER.warn("[UTM] Toast unlocked");
+            tryToastPopup();
+        }
+    }
 
-            if (ToastTarget) {
-                utm.LOGGER.warn("[UTM] Displaying toast (2)");
+    public static void tryToastPopup() {
+        if (ToastTarget) {
+            utm.LOGGER.warn("[UTM] Displaying toast (2)");
 
-                CompletableFuture.runAsync(() -> Minecraft.getInstance().getToasts().addToast(new UpdateToast(VersionTarget)), CompletableFuture.delayedExecutor(1000, TimeUnit.MILLISECONDS));
+            CompletableFuture.runAsync(() -> Minecraft.getInstance().getToasts().addToast(new UpdateToast(VersionTarget)), CompletableFuture.delayedExecutor(1000, TimeUnit.MILLISECONDS));
 
-                ToastTarget = false;
-            }
+            ToastTarget = false;
         }
     }
 }

@@ -4,7 +4,6 @@ import com.nadia.utm.utm;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import net.minecraft.client.Minecraft;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.fml.loading.FMLPaths;
 
@@ -107,10 +106,7 @@ public class AutoUpdater {
             if (getDist() == Dist.CLIENT) {
                 VersionTarget = "v" + latest;
 
-                if (ToastReady) {
-                    CompletableFuture.runAsync(() -> Minecraft.getInstance().getToasts().addToast(new UpdateToast(VersionTarget)), CompletableFuture.delayedExecutor(1000, TimeUnit.MILLISECONDS));
-                } else
-                    ToastTarget = true;
+                ToastTarget = true;
             }
         });
     }
