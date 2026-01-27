@@ -1,0 +1,15 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Client" type="Application" factoryName="Application">
+    <option name="ALTERNATIVE_JRE_PATH" value="temurin-21" />
+    <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+    <option name="MAIN_CLASS_NAME" value="net.neoforged.devlaunch.Main" />
+    <module name="utm.main" />
+    <option name="PROGRAM_PARAMETERS" value="@C:\\development-c\\utm\\build\\moddev\\clientRunProgramArgs.txt" />
+    <option name="VM_PARAMETERS" value="@C:\\development-c\\utm\\build\\moddev\\clientRunVmArgs.txt -Dfml.modFolders=utm_updater%%C:\\development-c\\utm\\build\\classes\\java\\updater;utm_updater%%C:\\development-c\\utm\\build\\resources\\updater;utm%%C:\\development-c\\utm\\build\\classes\\java\\main;utm%%C:\\development-c\\utm\\build\\resources\\main" />
+    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/run" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+      <option name="Gradle.BeforeRunTask" enabled="true" tasks=":compileUpdaterJava :processUpdaterResources" externalProjectPath="$PROJECT_DIR$" />
+    </method>
+  </configuration>
+</component>
