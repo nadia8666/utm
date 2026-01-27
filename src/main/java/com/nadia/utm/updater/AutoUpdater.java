@@ -7,7 +7,6 @@ import com.google.gson.JsonParser;
 import net.minecraft.client.Minecraft;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.fml.loading.FMLPaths;
-import org.checkerframework.checker.units.qual.Current;
 
 import java.io.IOException;
 import java.net.URI;
@@ -29,7 +28,7 @@ import static net.neoforged.fml.loading.FMLLoader.getDist;
 
 public class AutoUpdater {
     public static String CurrentVersion = "0.0.0-INTERNAL";
-    public static void CheckForUpdate() throws ExecutionException, InterruptedException, RuntimeException, IOException {
+    public static void checkForUpdate() throws ExecutionException, InterruptedException, RuntimeException, IOException {
         HttpClient client = HttpClient.newHttpClient();
 
         HttpRequest request = HttpRequest.newBuilder(URI.create("https://api.github.com/repos/nadia8666/utm/releases/latest"))

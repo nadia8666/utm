@@ -2,7 +2,9 @@
   "required": true,
   "package": "com.nadia.utm.mixin",
   "compatibilityLevel": "JAVA_21",
-  "mixins": [],
+  "mixins": [
+    "HitboxMixin"
+  ],
   "injectors": {
     "defaultRequire": 1
   },

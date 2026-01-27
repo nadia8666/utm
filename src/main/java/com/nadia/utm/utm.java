@@ -109,7 +109,7 @@ public class utm {
         // Update mod
         AutoUpdater.CurrentVersion = modContainer.getModInfo().getVersion().toString();
         try {
-            AutoUpdater.CheckForUpdate();
+            AutoUpdater.checkForUpdate();
         } catch (Exception ignored) {}
     }
 
