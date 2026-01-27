@@ -82,11 +82,6 @@ public class utm {
     // FML will recognize some parameter types like IEventBus or ModContainer and
     // pass them in automatically.
     public utm(IEventBus modEventBus, ModContainer modContainer) {
-        AutoUpdater.CurrentVersion = modContainer.getModInfo().getVersion().toString();
-        try {
-            AutoUpdater.CheckForUpdate();
-        } catch (Exception ignored) {}
-
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
 
@@ -110,6 +105,12 @@ public class utm {
         // Register our mod's ModConfigSpec so that FML can create and load the config
         // file for us
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+
+        // Update mod
+        AutoUpdater.CurrentVersion = modContainer.getModInfo().getVersion().toString();
+        try {
+            AutoUpdater.CheckForUpdate();
+        } catch (Exception ignored) {}
     }
 
     private void commonSetup(FMLCommonSetupEvent event) {

@@ -109,7 +109,11 @@ public class AutoUpdater {
 
             if (getDist() == Dist.CLIENT) {
                 VersionTarget = "v" + latest;
-                ToastTarget = true;
+
+                if (ToastReady) {
+                    CompletableFuture.runAsync(() -> Minecraft.getInstance().getToasts().addToast(new UpdateToast(VersionTarget)), CompletableFuture.delayedExecutor(1000, TimeUnit.MILLISECONDS));
+                } else
+                    ToastTarget = true;
             }
         });
     }
