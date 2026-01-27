@@ -43,9 +43,9 @@ public class AutoUpdater {
             JsonObject json = JsonParser.parseString(response.body()).getAsJsonObject();
             String version = json.get("tag_name").getAsString();
 
-            utm.LOGGER.warn("[UTM] " + version + " " + CurrentVersion + " " + Objects.equals(version, CurrentVersion));
+            utm.LOGGER.warn("[UTM] Version check: " + version + " " + CurrentVersion + " " + Objects.equals(version, CurrentVersion));
 
-            if (!tryMigrateVersion() || !Objects.equals(version, CurrentVersion)) {
+            if (!tryMigrateVersion() && !Objects.equals(version, CurrentVersion)) {
                 JsonArray assets = json.get("assets").getAsJsonArray();
                 AtomicReference<JsonObject> element = new AtomicReference<>();
 
