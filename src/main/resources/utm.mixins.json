@@ -2,8 +2,10 @@
   "required": true,
   "package": "com.nadia.utm.mixin",
   "compatibilityLevel": "JAVA_21",
+  "plugin": "com.nadia.utm.mixin.ConfigPlugin",
   "mixins": [
-    "HitboxMixin"
+    "HitboxMixin",
+    "compat.SpearsMixin"
   ],
   "injectors": {
     "defaultRequire": 1

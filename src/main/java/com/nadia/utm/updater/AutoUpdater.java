@@ -42,7 +42,7 @@ public class AutoUpdater {
             JsonObject json = JsonParser.parseString(response.body()).getAsJsonObject();
             String version = json.get("tag_name").getAsString();
 
-            utm.LOGGER.warn("[UTM] Version check: " + version + " " + CurrentVersion + " " + Objects.equals(version, CurrentVersion));
+            utm.LOGGER.warn("[UTM] Version check: {} {} {}", version, CurrentVersion, Objects.equals(version, CurrentVersion));
 
             if (!tryMigrateVersion() && !Objects.equals(version, CurrentVersion)) {
                 JsonArray assets = json.get("assets").getAsJsonArray();
@@ -90,7 +90,7 @@ public class AutoUpdater {
     public static boolean ToastReady = false;
     public static boolean ToastTarget = false;
     public static String VersionTarget = "v-0.0.0";
-    private static void startUpdate(String downloadUrl, String latest) throws ExecutionException, InterruptedException, IOException {
+    private static void startUpdate(String downloadUrl, String latest) {
         Path modsFolder = FMLPaths.MODSDIR.get();
 
         Path currentFile = modsFolder.resolve("utm.jar");

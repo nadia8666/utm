@@ -1,6 +1,8 @@
 package com.nadia.utm.mixin;
 
+import com.nadia.utm.hitbox.HitboxOverride;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.phys.AABB;
@@ -27,10 +29,14 @@ public class HitboxMixin {
         AABB originalBox = target.getBoundingBox();
 
         if (shooter instanceof Player player && player.isFallFlying()) {
-            double speed = player.getDeltaMovement().horizontalDistance();
-            double expansion = speed * 1.5;
+            var reach = player.getAttribute(Attributes.ENTITY_INTERACTION_RANGE);
 
-            return originalBox.inflate(expansion);
+            if (reach != null) {
+                var modifier = reach.getModifier(HitboxOverride.ELYTRA_SPEED_REACH);
+                if (modifier != null) {
+                    return originalBox.inflate(modifier.amount());
+                }
+            }
         }
 
         return originalBox;

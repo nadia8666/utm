@@ -79,7 +79,8 @@ dependencies {
     compileOnly("dev.emi:emi-neoforge:${emi_version}:api")
     runtimeOnly("dev.emi:emi-neoforge:${emi_version}")
 
-    jarJar(implementation("maven.modrinth:5IIKsxiL:KXmiEin1"))
+    jarJar(implementation("maven.modrinth:5IIKsxiL:KXmiEin1")) // extreme sound muffler
+    (implementation("maven.modrinth:rVUtrHuM:uUy23VAp")) // backported spears
 }
 
 def replaceProperties = [
