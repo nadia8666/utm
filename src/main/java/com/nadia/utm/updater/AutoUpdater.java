@@ -7,6 +7,7 @@ import com.google.gson.JsonParser;
 import net.minecraft.client.Minecraft;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.fml.loading.FMLPaths;
+import org.checkerframework.checker.units.qual.Current;
 
 import java.io.IOException;
 import java.net.URI;
@@ -42,6 +43,8 @@ public class AutoUpdater {
             JsonObject json = JsonParser.parseString(response.body()).getAsJsonObject();
             String version = json.get("tag_name").getAsString();
 
+            utm.LOGGER.warn("[UTM] " + version + " " + CurrentVersion + " " + Objects.equals(version, CurrentVersion));
+
             if (!tryMigrateVersion() || !Objects.equals(version, CurrentVersion)) {
                 JsonArray assets = json.get("assets").getAsJsonArray();
                 AtomicReference<JsonObject> element = new AtomicReference<>();
@@ -56,6 +59,7 @@ public class AutoUpdater {
                 startUpdate(element.get().get("browser_download_url").getAsString(), version);
             }
         } else {
+            tryMigrateVersion();
             throw new RuntimeException("[UTM] Version check failed: " + response.statusCode());
         }
     }
