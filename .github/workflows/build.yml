@@ -51,7 +51,6 @@ jobs:
           commit: ${{ github.sha }}
 
           generateReleaseNotes: true
-          body: "v${{ env.MOD_VERSION }} changes"
 
           allowUpdates: true
           replacesArtifacts: true
