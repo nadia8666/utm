@@ -2,24 +2,23 @@ package com.nadia.utm.mixin.compat;
 
 import com.llamalad7.mixinextras.expression.Definition;
 import com.llamalad7.mixinextras.expression.Expression;
-import com.nadia.utm.client.compat.jei.utmJeiPlugin;
 import com.nadia.utm.compat.ShareJeiItem;
 import com.nadia.utm.utm;
 import com.ultramega.showcaseitem.ShowcaseItemFeature;
-import mezz.jei.api.runtime.IJeiRuntime;
+import dev.emi.emi.api.EmiApi;
+import dev.emi.emi.api.stack.EmiIngredient;
+import dev.emi.emi.api.stack.EmiStack;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.NonNullList;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.api.distmarker.Dist;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import static net.neoforged.fml.loading.FMLLoader.getDist;
 
 @Mixin(value = ShowcaseItemFeature.class, remap = false)
 public class ShowcaseItemMixin {
@@ -32,14 +31,24 @@ public class ShowcaseItemMixin {
     private static void utm$showcaseCompat(CallbackInfo ci) {
         utm.LOGGER.info("[UTM] yea");
 
-        IJeiRuntime runtime = utmJeiPlugin.RUNTIME;
-        if (runtime == null) return;
+        Minecraft mc = Minecraft.getInstance();
+        double mouseX = mc.mouseHandler.xpos() * (double)mc.getWindow().getGuiScaledWidth() / (double)mc.getWindow().getWidth();
+        double mouseY = mc.mouseHandler.ypos() * (double)mc.getWindow().getGuiScaledHeight() / (double)mc.getWindow().getHeight();
 
-        runtime.getIngredientListOverlay().getIngredientUnderMouse().ifPresent(stack -> {
-            stack.getItemStack().ifPresent(target -> PacketDistributor.sendToServer(new ShareJeiItem(target.getDisplayName().getString())));
+        EmiIngredient hovered = EmiApi.getHoveredStack((int)mouseX, (int)mouseY, false).getStack();
 
-            ci.cancel();
-        });
+        if (!hovered.isEmpty()) {
+            EmiStack emiStack = hovered.getEmiStacks().get(0);
+            ItemStack target = emiStack.getItemStack();
+
+            if (!target.isEmpty()) {
+                String itemName = target.getDisplayName().getString();
+                PacketDistributor.sendToServer(new ShareJeiItem(itemName));
+
+                // Cancel the original mouse event
+                ci.cancel();
+            }
+        }
     }
 
     @Inject(method = "shareItem", at= @At(value = "INVOKE", target = "Lnet/minecraft/network/chat/Component;translatable(Ljava/lang/String;[Ljava/lang/Object;)Lnet/minecraft/network/chat/MutableComponent;"))

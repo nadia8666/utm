@@ -12,6 +12,14 @@ base {
     archivesName = mod_id
 }
 
+sourceSets {
+    main {
+        resources {
+            srcDir 'src/generated/resources'
+        }
+    }
+}
+
 java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
 repositories {

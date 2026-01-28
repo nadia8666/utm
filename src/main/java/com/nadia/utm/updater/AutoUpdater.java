@@ -102,7 +102,7 @@ public class AutoUpdater {
                 downloadUpdate(downloadUrl, targetPath).get();
             } catch (Exception ignored) {}
 
-            utm.LOGGER.warn("[UTM] Update installed!");
+            utm.LOGGER.warn("[UTM] Update installed, please restart Minecraft!");
 
             if (getDist() == Dist.CLIENT) {
                 VersionTarget = "v" + latest;

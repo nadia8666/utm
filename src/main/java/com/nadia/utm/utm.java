@@ -30,7 +30,13 @@ public class utm {
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
 
+        utmRegister.BLOCKS.register(modEventBus);
+        utmRegister.ITEMS.register(modEventBus);
+        utmRegister.TABS.register(modEventBus);
+
         NeoForge.EVENT_BUS.register(this);
+        modEventBus.addListener(utmRegister::addCreative);
+
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
 
         // Update mod

@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "utm:block/heavy_metal_anvil" },
+    "facing=south": { "model": "utm:block/heavy_metal_anvil", "y": 180 },
+    "facing=east": { "model": "utm:block/heavy_metal_anvil", "y": 90 },
+    "facing=west": { "model": "utm:block/heavy_metal_anvil", "y": 270 }
+  }
+}

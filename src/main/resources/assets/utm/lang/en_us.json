@@ -2,8 +2,11 @@
   "utm.configuration.title": "undertale mod Configs",
   "utm.configuration.section.utm.common.toml": "undertale mod Configs",
   "utm.configuration.section.utm.common.toml.title": "undertale mod Configs",
-  "utm.configuration.items": "Item List",
-  "utm.configuration.logDirtBlock": "Log Dirt Block",
-  "utm.configuration.magicNumberIntroduction": "Magic Number Text",
-  "utm.configuration.magicNumber": "Magic Number"
+  "utm.configuration.heavyMetalAnvilLV": "Heavy-Metal Anvil Reinforcement Req.",
+  "block.utm.heavy_metal_anvil": "Heavy-Metal Anvil",
+  "itemGroup.utm": "utm Items",
+
+  "emi.category.utm.anvil_transformation": "Anvil Reinforcement",
+  "utm.emi.requires_levels": "Enchantment Cost: %s",
+  "utm.configuration.heavyMetalAnvilLV.tooltip": "Level require to reinforce an anvil into a heavy-metal anvil."
 }

@@ -5,7 +5,8 @@
   "plugin": "com.nadia.utm.mixin.ConfigPlugin",
   "mixins": [
     "HitboxMixin",
-    "compat.SpearsMixin"
+    "compat.SpearsMixin",
+    "FreeAnvilMixin"
   ],
   "client": [
     "compat.ShowcaseItemMixin"
