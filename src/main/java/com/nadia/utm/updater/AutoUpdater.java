@@ -1,5 +1,6 @@
 package com.nadia.utm.updater;
 
+import com.nadia.utm.Config;
 import com.nadia.utm.utm;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -25,7 +26,7 @@ import static net.neoforged.fml.loading.FMLLoader.getDist;
 
 
 public class AutoUpdater {
-    public static String CurrentVersion = "0.0.0-INTERNAL";
+    public static String CURRENT_VERSION = "0.0.0-INTERNAL";
     public static void checkForUpdate() throws ExecutionException, InterruptedException, RuntimeException, IOException {
         HttpClient client = HttpClient.newHttpClient();
 
@@ -40,9 +41,9 @@ public class AutoUpdater {
             JsonObject json = JsonParser.parseString(response.body()).getAsJsonObject();
             String version = json.get("tag_name").getAsString();
 
-            utm.LOGGER.warn("[UTM] Version check: {} {} {}", version, CurrentVersion, Objects.equals(version, CurrentVersion));
+            utm.LOGGER.warn("[UTM] Version check: {} {} {}", version, CURRENT_VERSION, Objects.equals(version, CURRENT_VERSION));
 
-            if (!tryMigrateVersion() && !Objects.equals(version, CurrentVersion)) {
+            if (!tryMigrateVersion() && !Objects.equals(version, CURRENT_VERSION)) {
                 JsonArray assets = json.get("assets").getAsJsonArray();
                 AtomicReference<JsonObject> element = new AtomicReference<>();
 
@@ -103,6 +104,7 @@ public class AutoUpdater {
             } catch (Exception ignored) {}
 
             utm.LOGGER.warn("[UTM] Update installed, please restart Minecraft!");
+            CURRENT_VERSION = latest;
 
             if (getDist() == Dist.CLIENT) {
                 VersionTarget = "v" + latest;
@@ -144,6 +146,7 @@ public class AutoUpdater {
 
         SCHEDULER.scheduleAtFixedRate(() -> {
             try {
+                if (!Config.AUTO_UPDATE_ENABLED.get()) return;
                 utm.LOGGER.info("[UTM] Checking for updates.");
                 AutoUpdater.checkForUpdate();
             } catch (Exception ignored) {}

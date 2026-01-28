@@ -8,5 +8,9 @@ public class Config {
             .comment("Level require to reinforce an anvil into a heavy-metal anvil.")
             .defineInRange("heavyMetalAnvilLV", 10, 0, 30);
 
+    public static final ModConfigSpec.BooleanValue AUTO_UPDATE_ENABLED = BUILDER
+            .comment("Should utm automatically update.")
+            .define("autoUpdate", true);
+
     static final ModConfigSpec SPEC = BUILDER.build();
 }
