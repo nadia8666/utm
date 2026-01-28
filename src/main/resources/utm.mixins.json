@@ -7,10 +7,14 @@
     "HitboxMixin",
     "compat.SpearsMixin"
   ],
+  "client": [
+    "compat.ShowcaseItemMixin"
+  ],
   "injectors": {
     "defaultRequire": 1
   },
   "overwrites": {
-    "requireAnnotations": true
-  }
+    "requireAnnotations": false
+  },
+  "mixinextras": {"minVersion":  "0.5.0"}
 }

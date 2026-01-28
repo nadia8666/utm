@@ -5,6 +5,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import net.neoforged.api.distmarker.Dist;
+import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.fml.loading.FMLPaths;
 
 import java.io.IOException;
@@ -139,6 +140,8 @@ public class AutoUpdater {
     });
 
     public static void startAutoUpdate() {
+        if (!FMLEnvironment.production) return;
+
         SCHEDULER.scheduleAtFixedRate(() -> {
             try {
                 utm.LOGGER.info("[UTM] Checking for updates.");

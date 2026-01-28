@@ -96,20 +96,48 @@ config="utm.mixins.json"
 
 # CREATE
 [[dependencies.${mod_id}]]
-    modId="create"
-    type="required"
-    versionRange="[6.0.9,6.1.0)"
-    ordering="NONE"
-    side="BOTH"
+modId="create"
+type="required"
+versionRange="[6.0.9,6.1.0)"
+ordering="AFTER"
+side="BOTH"
 
 # EMI
+[[dependencies.${mod_id}]]
+modId="emi"
+type="required"
+versionRange=","
+ordering="AFTER"
+side="CLIENT"
+
+[[dependencies.${mod_id}]]
+modId="jei"
+type="required"
+versionRange=","
+ordering="AFTER"
+side="CLIENT"
+
 
 # SOPHISTICATED BACKPACKS
+[[dependencies.${mod_id}]]
+modId="sophisticatedbackpacks"
+type="optional"
+versionRange=","
+ordering="AFTER"
+side="BOTH"
 
 # SPEARS
 [[dependencies.${mod_id}]]
 modId="spears"
 type="optional"
 versionRange=","
-ordering="NONE"
+ordering="AFTER"
 side="BOTH"
+
+# SHOWCASE ITEM
+[[dependencies.${mod_id}]]
+modId="showcaseitem"
+type="required"
+versionRange=","
+ordering="AFTER"
+side="CLIENT"

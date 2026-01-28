@@ -22,6 +22,14 @@ repositories {
         forRepository { maven { name = "Modrinth"; url = "https://api.modrinth.com/maven" } }
         filter { includeGroup "maven.modrinth" }
     }
+    maven {
+        name = "Jared's maven"
+        url = "https://maven.blamejared.com/"
+    }
+    maven {
+        name = "ModMaven"
+        url = "https://modmaven.dev"
+    }
 }
 
 neoForge {
@@ -76,11 +84,15 @@ dependencies {
     runtimeOnly("dev.engine-room.flywheel:flywheel-neoforge-${minecraft_version}:${flywheel_version}")
     implementation("com.tterrag.registrate:Registrate:${registrate_version}")
 
+    // EMI+JEI
     compileOnly("dev.emi:emi-neoforge:${emi_version}:api")
     runtimeOnly("dev.emi:emi-neoforge:${emi_version}")
+    compileOnly("mezz.jei:jei-1.21-neoforge-api:${jei_version}")
+    runtimeOnly("mezz.jei:jei-1.21-neoforge:${jei_version}")
 
     jarJar(implementation("maven.modrinth:5IIKsxiL:KXmiEin1")) // extreme sound muffler
     (implementation("maven.modrinth:rVUtrHuM:uUy23VAp")) // backported spears
+    implementation("maven.modrinth:P5Jjjezm:AD6eBCKn") // showcase item
 }
 
 def replaceProperties = [
