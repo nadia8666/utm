@@ -129,6 +129,8 @@ public class AutoUpdater {
         if (oldFile.get() != null) {
             try {
                 Files.deleteIfExists(oldFile.get());
+
+                return true;
             } catch (Exception ignored) {}
         }
 
@@ -157,5 +159,5 @@ public class AutoUpdater {
         return "utm.jar" + SUFFIX;
     }
 
-    public static String SUFFIX = ".utm_update";
+    public static final String SUFFIX = ".utm_update";
 }

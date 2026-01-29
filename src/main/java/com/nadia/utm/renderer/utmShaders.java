@@ -20,9 +20,7 @@ public class utmShaders {
         try {
             event.registerShader(new ShaderInstance(event.getResourceProvider(),
                     ResourceLocation.fromNamespaceAndPath("utm", "glint"),
-                    DefaultVertexFormat.POSITION_TEX), (shader) -> {
-                COLORED_GLINT = shader;
-            });
+                    DefaultVertexFormat.POSITION_TEX), (shader) -> COLORED_GLINT = shader);
         } catch (IOException e) {
             utm.LOGGER.info("[UTM] Shader failure: {}", e.getMessage());
         }

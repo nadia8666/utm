@@ -29,7 +29,7 @@ public class ShowcaseItemMixin {
             at = @At(value = "MIXINEXTRAS:EXPRESSION", shift = At.Shift.AFTER),
             cancellable = true)
     private static void utm$showcaseCompat(CallbackInfo ci) {
-        utm.LOGGER.info("[UTM] yea");
+        utm.LOGGER.info("[UTM] check share");
 
         Minecraft mc = Minecraft.getInstance();
         double mouseX = mc.mouseHandler.xpos() * (double)mc.getWindow().getGuiScaledWidth() / (double)mc.getWindow().getWidth();
@@ -38,14 +38,13 @@ public class ShowcaseItemMixin {
         EmiIngredient hovered = EmiApi.getHoveredStack((int)mouseX, (int)mouseY, false).getStack();
 
         if (!hovered.isEmpty()) {
-            EmiStack emiStack = hovered.getEmiStacks().get(0);
+            EmiStack emiStack = hovered.getEmiStacks().getFirst();
             ItemStack target = emiStack.getItemStack();
 
             if (!target.isEmpty()) {
                 String itemName = target.getDisplayName().getString();
                 PacketDistributor.sendToServer(new ShareJeiItem(itemName));
 
-                // Cancel the original mouse event
                 ci.cancel();
             }
         }
@@ -58,7 +57,7 @@ public class ShowcaseItemMixin {
         if (player.containerMenu instanceof InventoryMenu) {
             stack = player.getInventory().getItem(slotIndex);
         } else {
-            Slot slot = (Slot)slots.get(slotIndex);
+            Slot slot = slots.get(slotIndex);
             stack = slot.getItem();
         }
 

@@ -17,7 +17,6 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 
 import static com.nadia.utm.updater.AutoUpdater.*;
-import static com.nadia.utm.updater.AutoUpdater.ToastTarget;
 
 // This class will not load on dedicated servers. Accessing client side code from here is safe.
 @Mod(value = utm.MODID, dist = Dist.CLIENT)

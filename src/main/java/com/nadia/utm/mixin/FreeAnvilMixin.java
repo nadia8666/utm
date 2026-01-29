@@ -3,7 +3,6 @@ package com.nadia.utm.mixin;
 import com.nadia.utm.Config;
 import com.nadia.utm.registry.block.utmBlocks;
 import com.nadia.utm.utm;
-import com.nadia.utm.registry.utmRegistry;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AnvilMenu;
 import net.minecraft.world.inventory.ContainerLevelAccess;

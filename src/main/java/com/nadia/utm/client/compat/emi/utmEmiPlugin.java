@@ -1,7 +1,6 @@
 package com.nadia.utm.client.compat.emi;
 
 import com.nadia.utm.registry.block.utmBlocks;
-import com.nadia.utm.registry.utmRegistry;
 import dev.emi.emi.api.EmiEntrypoint;
 import dev.emi.emi.api.EmiInitRegistry;
 import dev.emi.emi.api.EmiPlugin;

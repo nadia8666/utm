@@ -1,7 +1,6 @@
 package com.nadia.utm.datagen.providers;
 
 import com.nadia.utm.registry.block.utmBlocks;
-import com.nadia.utm.registry.utmRegistry;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;

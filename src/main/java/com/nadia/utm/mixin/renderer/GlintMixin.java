@@ -20,8 +20,6 @@ public abstract class GlintMixin {
         return () -> {
             ShaderInstance shader = original.get();
 
-            // This checks if the shader being requested is any of the glint variants
-            // (e.g., 'rendertype_glint', 'rendertype_armor_glint', etc.)
             if (shader != null && shader.getName().contains("glint")) {
                 return utmShaders.COLORED_GLINT != null ? utmShaders.COLORED_GLINT : shader;
             }

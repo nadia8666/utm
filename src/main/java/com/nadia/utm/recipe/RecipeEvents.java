@@ -1,7 +1,6 @@
 package com.nadia.utm.recipe;
 
 import com.nadia.utm.registry.block.utmBlocks;
-import com.nadia.utm.registry.utmRegistry;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.neoforged.bus.api.SubscribeEvent;
