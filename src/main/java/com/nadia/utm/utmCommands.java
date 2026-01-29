@@ -1,5 +1,6 @@
 package com.nadia.utm;
 
+import com.nadia.utm.updater.AutoUpdater;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -12,7 +13,7 @@ public class utmCommands {
     @SubscribeEvent
     public static void onRegisterCommands(RegisterCommandsEvent event) {
         event.getDispatcher().register(Commands.literal("utm_restart")
-                .requires(source -> source.hasPermission(4))
+                .requires(source -> source.hasPermission(0))
                 .executes(context -> {
                     var server = context.getSource().getServer();
                     context.getSource().sendSuccess(() -> Component.literal("[UTM] Closing server..."), true);
@@ -22,6 +23,17 @@ public class utmCommands {
                     }
 
                     server.halt(false);
+
+                    return 1;
+                })
+        );
+
+        event.getDispatcher().register(Commands.literal("utm_update")
+                .requires(source -> source.hasPermission(0))
+                .executes(context -> {
+                    try {
+                        AutoUpdater.checkForUpdate();
+                    } catch (Exception ignored) {}
 
                     return 1;
                 })
