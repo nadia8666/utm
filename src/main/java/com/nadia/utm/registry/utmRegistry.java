@@ -1,7 +1,10 @@
-package com.nadia.utm;
+package com.nadia.utm.registry;
 
 import com.nadia.utm.block.HeavyMetalAnvilBlock;
 import com.nadia.utm.block.utmBlockContainer;
+import com.nadia.utm.registry.block.utmBlocks;
+import com.nadia.utm.registry.item.tool.utmTools;
+import com.nadia.utm.registry.item.utmItems;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.BlockItem;
@@ -18,22 +21,11 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Function;
 
-public class utmRegister {
-    public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks("utm");
-    public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems("utm");
+public class utmRegistry {
     public static final DeferredRegister<CreativeModeTab> TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, "utm");
 
-    public static <B extends Block> DeferredBlock<B> register(String name, Function<BlockBehaviour.Properties, ? extends B> func, BlockBehaviour.Properties props) {
-        return BLOCKS.registerBlock(name, func, props);
-    }
-    public static <B extends Block> utmBlockContainer<B, BlockItem> iregister(String name, Function<BlockBehaviour.Properties, ? extends B> func, BlockBehaviour.Properties props) {
-        DeferredBlock<B> block = register(name, func, props);
-        return new utmBlockContainer<B, BlockItem>(block, ITEMS.registerSimpleBlockItem(block));
-    }
-
-    public static final utmBlockContainer<HeavyMetalAnvilBlock, BlockItem> HEAVY_METAL_ANVIL = iregister("heavy_metal_anvil", HeavyMetalAnvilBlock::new, BlockBehaviour.Properties.of()
-            .destroyTime(7.0f)
-            .explosionResistance(2500f).sound(SoundType.ANVIL));
+    public static final DeferredRegister.Items ITEMS = utmItems.ITEMS;
+    public static final DeferredRegister.Blocks BLOCKS = utmBlocks.BLOCKS;
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> MAIN = TABS
             .register("main", () -> CreativeModeTab.builder()
@@ -41,12 +33,24 @@ public class utmRegister {
                     .withTabsBefore(CreativeModeTabs.COMBAT)
                     .icon(Items.ANVIL::getDefaultInstance)
                     .displayItems((parameters, output) -> {
-                        output.accept(HEAVY_METAL_ANVIL.block.get());
+                        output.accept(utmBlocks.HEAVY_METAL_ANVIL.block.get());
+
+                        output.accept(utmTools.COPPER_SWORD.get());
+                        output.accept(utmTools.COPPER_PICKAXE.get());
+                        output.accept(utmTools.COPPER_AXE.get());
+                        output.accept(utmTools.COPPER_SHOVEL.get());
+                        output.accept(utmTools.COPPER_HOE.get());
+
+                        output.accept(utmTools.AWESOME_AXE.get());
                     }).build());
 
-    static void addCreative(BuildCreativeModeTabContentsEvent event) {
+    public static void addCreative(BuildCreativeModeTabContentsEvent event) {
         if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
-            event.accept(HEAVY_METAL_ANVIL.item);
+            event.accept(utmBlocks.HEAVY_METAL_ANVIL.item);
         }
+    }
+
+    public static void registerAll() {
+        utmTools.registerTools();
     }
 }

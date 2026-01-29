@@ -3,13 +3,22 @@
   "utm.configuration.section.utm.common.toml": "undertale mod Configs",
   "utm.configuration.section.utm.common.toml.title": "undertale mod Configs",
   "utm.configuration.heavyMetalAnvilLV": "Heavy-Metal Anvil Reinforcement Req.",
-  "block.utm.heavy_metal_anvil": "Heavy-Metal Anvil",
+  "utm.configuration.autoUpdate": "Auto Update Enabled",
+  "utm.configuration.heavyMetalAnvilLV.tooltip": "Level require to reinforce an anvil into a heavy-metal anvil.",
+  "utm.configuration.heavyMetalAnvilLV.autoUpdate": "Should utm automatically update.",
+
   "itemGroup.utm": "utm Items",
 
   "emi.category.utm.anvil_transformation": "Anvil Reinforcement",
   "utm.emi.requires_levels": "Enchantment Cost: %s",
 
-  "utm.configuration.autoUpdate": "Auto Update Enabled",
-  "utm.configuration.heavyMetalAnvilLV.tooltip": "Level require to reinforce an anvil into a heavy-metal anvil.",
-  "utm.configuration.heavyMetalAnvilLV.autoUpdate": "Should utm automatically update."
+  "block.utm.heavy_metal_anvil": "Heavy-Metal Anvil",
+
+  "item.utm.copper_sword": "Copper Sword",
+  "item.utm.copper_pickaxe": "Copper Pickaxe",
+  "item.utm.copper_axe": "Copper Axe",
+  "item.utm.copper_shovel": "Copper Shovel",
+  "item.utm.copper_hoe": "Copper Hoe",
+
+  "item.utm.awesome_axe": "Awesome Axe"
 }

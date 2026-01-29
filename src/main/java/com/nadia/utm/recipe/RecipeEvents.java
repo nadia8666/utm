@@ -1,6 +1,7 @@
 package com.nadia.utm.recipe;
 
-import com.nadia.utm.utmRegister;
+import com.nadia.utm.registry.block.utmBlocks;
+import com.nadia.utm.registry.utmRegistry;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -17,7 +18,7 @@ public class RecipeEvents {
         ItemStack left = event.getLeft();
         ItemStack right = event.getRight();
         if (left.is(Items.ANVIL) && right.is(Items.NETHERITE_INGOT) && right.getCount() >= 1) {
-            event.setOutput(new ItemStack(utmRegister.HEAVY_METAL_ANVIL.item.get()));
+            event.setOutput(new ItemStack(utmBlocks.HEAVY_METAL_ANVIL.item.get()));
             event.setMaterialCost(1);
             event.setCost(HEAVY_METAL_ANVIL_LEVEL_REQUIREMENT.getAsInt());
         }

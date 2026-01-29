@@ -1,6 +1,7 @@
 package com.nadia.utm.datagen.providers;
 
-import com.nadia.utm.utmRegister;
+import com.nadia.utm.registry.block.utmBlocks;
+import com.nadia.utm.registry.utmRegistry;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.BlockLootSubProvider;
@@ -17,11 +18,11 @@ public class utmBlockLootTableProvider extends BlockLootSubProvider {
 
     @Override
     protected void generate() {
-        dropSelf(utmRegister.HEAVY_METAL_ANVIL.block.get());
+        dropSelf(utmBlocks.HEAVY_METAL_ANVIL.block.get());
     }
 
     @Override
     protected @NotNull Iterable<Block> getKnownBlocks() {
-        return utmRegister.BLOCKS.getEntries().stream().map(Holder::value)::iterator;
+        return utmRegistry.BLOCKS.getEntries().stream().map(Holder::value)::iterator;
     }
 }
