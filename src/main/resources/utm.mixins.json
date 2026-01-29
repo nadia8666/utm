@@ -4,13 +4,14 @@
   "compatibilityLevel": "JAVA_21",
   "plugin": "com.nadia.utm.mixin.ConfigPlugin",
   "mixins": [
+    "FreeAnvilMixin",
     "HitboxMixin",
-    "compat.SpearsMixin",
-    "FreeAnvilMixin"
+    "compat.SpearsMixin"
   ],
   "client": [
     "compat.ShowcaseItemMixin",
-    "renderer.GlintMixin"
+    "renderer.GlintMixin",
+    "renderer.ItemRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1
@@ -18,5 +19,6 @@
   "overwrites": {
     "requireAnnotations": false
   },
-  "mixinextras": {"minVersion":  "0.5.0"}
+  "mixinextras": {
+    "minVersion": "0.5.0"}
 }

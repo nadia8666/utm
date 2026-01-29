@@ -24,9 +24,7 @@ public class utm {
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
 
-        utmRegistry.BLOCKS.register(modEventBus);
-        utmRegistry.ITEMS.register(modEventBus);
-        utmRegistry.TABS.register(modEventBus);
+        utmRegistry.registerAll(modEventBus);
 
         NeoForge.EVENT_BUS.register(this);
         modEventBus.addListener(utmRegistry::addCreative);
@@ -36,8 +34,6 @@ public class utm {
         // Update mod
         AutoUpdater.CURRENT_VERSION = modContainer.getModInfo().getVersion().toString();
         AutoUpdater.startAutoUpdate();
-
-        utmRegistry.registerAll();
     }
 
     private void commonSetup(FMLCommonSetupEvent event) {

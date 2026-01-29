@@ -41,8 +41,7 @@ public class utmTools {
             ))
     );
 
-
-    // generic tool of type x
+    /*
     public static final Supplier<AxeItem> AWESOME_AXE = utmItems.ITEMS.register("awesome_axe", () -> {
             var Tier = utmToolBuilder.buildTier(
                     BlockTags.INCORRECT_FOR_WOODEN_TOOL, 1281, 5f, 3f, 30, () -> Ingredient.EMPTY
@@ -51,8 +50,5 @@ public class utmTools {
                             AxeItem.createAttributes(Tier, 4, -2.4f)));
             }
     );
-
-    public static void registerTools() {
-        utm.LOGGER.info("[UTM] Registered tools!");
-    }
+    */
 }
