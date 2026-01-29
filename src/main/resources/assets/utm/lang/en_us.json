@@ -9,6 +9,7 @@
   "emi.category.utm.anvil_transformation": "Anvil Reinforcement",
   "utm.emi.requires_levels": "Enchantment Cost: %s",
 
+  "utm.configuration.autoUpdate": "Auto Update Enabled",
   "utm.configuration.heavyMetalAnvilLV.tooltip": "Level require to reinforce an anvil into a heavy-metal anvil.",
   "utm.configuration.heavyMetalAnvilLV.autoUpdate": "Should utm automatically update."
 }

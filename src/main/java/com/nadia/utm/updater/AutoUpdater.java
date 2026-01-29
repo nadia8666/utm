@@ -146,7 +146,7 @@ public class AutoUpdater {
 
         SCHEDULER.scheduleAtFixedRate(() -> {
             try {
-                if (!Config.AUTO_UPDATE_ENABLED.get()) return;
+                if (!Config.AUTO_UPDATE_ENABLED.getAsBoolean()) return;
                 utm.LOGGER.info("[UTM] Checking for updates.");
                 AutoUpdater.checkForUpdate();
             } catch (Exception ignored) {}
