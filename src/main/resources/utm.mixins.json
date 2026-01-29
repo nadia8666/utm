@@ -9,7 +9,8 @@
     "FreeAnvilMixin"
   ],
   "client": [
-    "compat.ShowcaseItemMixin"
+    "compat.ShowcaseItemMixin",
+    "renderer.GlintMixin"
   ],
   "injectors": {
     "defaultRequire": 1
