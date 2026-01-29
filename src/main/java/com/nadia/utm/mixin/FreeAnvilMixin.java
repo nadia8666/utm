@@ -1,8 +1,9 @@
 package com.nadia.utm.mixin;
 
 import com.nadia.utm.Config;
+import com.nadia.utm.registry.block.utmBlocks;
 import com.nadia.utm.utm;
-import com.nadia.utm.utmRegister;
+import com.nadia.utm.registry.utmRegistry;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AnvilMenu;
 import net.minecraft.world.inventory.ContainerLevelAccess;
@@ -24,7 +25,7 @@ public abstract class FreeAnvilMixin extends ItemCombinerMenu {
         utm.LOGGER.info("[UTM] Attempting anvil bypass");
         ItemStack outputStack = this.resultSlots.getItem(0);
 
-        if (!outputStack.isEmpty() && outputStack.is(utmRegister.HEAVY_METAL_ANVIL.item.get()) && Config.HEAVY_METAL_ANVIL_LEVEL_REQUIREMENT.getAsInt() <= 0) {
+        if (!outputStack.isEmpty() && outputStack.is(utmBlocks.HEAVY_METAL_ANVIL.item.get()) && Config.HEAVY_METAL_ANVIL_LEVEL_REQUIREMENT.getAsInt() <= 0) {
             utm.LOGGER.info("[UTM] Anvil success");
             return -1;
         }

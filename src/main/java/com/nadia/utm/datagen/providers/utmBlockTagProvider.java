@@ -1,6 +1,7 @@
 package com.nadia.utm.datagen.providers;
 
-import com.nadia.utm.utmRegister;
+import com.nadia.utm.registry.block.utmBlocks;
+import com.nadia.utm.registry.utmRegistry;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
@@ -16,9 +17,9 @@ public class utmBlockTagProvider extends BlockTagsProvider {
     }
     @Override
     protected void addTags(HolderLookup.@NotNull Provider provider) {
-        tag(BlockTags.ANVIL).add(utmRegister.HEAVY_METAL_ANVIL.block.get());
+        tag(BlockTags.ANVIL).add(utmBlocks.HEAVY_METAL_ANVIL.block.get());
 
-        tag(BlockTags.NEEDS_DIAMOND_TOOL).add(utmRegister.HEAVY_METAL_ANVIL.block.get());
-        tag(BlockTags.MINEABLE_WITH_PICKAXE).add(utmRegister.HEAVY_METAL_ANVIL.block.get());
+        tag(BlockTags.NEEDS_DIAMOND_TOOL).add(utmBlocks.HEAVY_METAL_ANVIL.block.get());
+        tag(BlockTags.MINEABLE_WITH_PICKAXE).add(utmBlocks.HEAVY_METAL_ANVIL.block.get());
     }
 }

@@ -1,6 +1,7 @@
 package com.nadia.utm.client.compat.emi;
 
-import com.nadia.utm.utmRegister;
+import com.nadia.utm.registry.block.utmBlocks;
+import com.nadia.utm.registry.utmRegistry;
 import dev.emi.emi.api.EmiEntrypoint;
 import dev.emi.emi.api.EmiInitRegistry;
 import dev.emi.emi.api.EmiPlugin;
@@ -29,7 +30,7 @@ public class utmEmiPlugin implements EmiPlugin {
                 ResourceLocation.fromNamespaceAndPath("utm", "/anvil_transform/heavy_metal_anvil"),
                 new ItemStack(Items.ANVIL),
                 new ItemStack(Items.NETHERITE_INGOT),
-                new ItemStack(utmRegister.HEAVY_METAL_ANVIL.item.get())
+                new ItemStack(utmBlocks.HEAVY_METAL_ANVIL.item.get())
         ));
     }
 }

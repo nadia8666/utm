@@ -1,5 +1,6 @@
 package com.nadia.utm;
 
+import com.nadia.utm.registry.utmRegistry;
 import com.nadia.utm.updater.AutoUpdater;
 import org.slf4j.Logger;
 
@@ -23,18 +24,20 @@ public class utm {
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
 
-        utmRegister.BLOCKS.register(modEventBus);
-        utmRegister.ITEMS.register(modEventBus);
-        utmRegister.TABS.register(modEventBus);
+        utmRegistry.BLOCKS.register(modEventBus);
+        utmRegistry.ITEMS.register(modEventBus);
+        utmRegistry.TABS.register(modEventBus);
 
         NeoForge.EVENT_BUS.register(this);
-        modEventBus.addListener(utmRegister::addCreative);
+        modEventBus.addListener(utmRegistry::addCreative);
 
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
 
         // Update mod
         AutoUpdater.CURRENT_VERSION = modContainer.getModInfo().getVersion().toString();
         AutoUpdater.startAutoUpdate();
+
+        utmRegistry.registerAll();
     }
 
     private void commonSetup(FMLCommonSetupEvent event) {
