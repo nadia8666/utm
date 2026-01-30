@@ -1,4 +1,4 @@
-package com.nadia.utm.renderer;
+package com.nadia.utm.client.renderer;
 
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.nadia.utm.utm;

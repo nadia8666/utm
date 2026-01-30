@@ -1,8 +1,8 @@
 package com.nadia.utm.mixin.renderer.glint;
 
-import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.*;
 import com.nadia.utm.registry.data.utmDataComponents;
-import com.nadia.utm.renderer.utmShaders;
+import com.nadia.utm.client.renderer.utmShaders;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.resources.model.BakedModel;
@@ -14,8 +14,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import static com.nadia.utm.renderer.glint.utmGlintContainer.GLINT_CURRENT;
-import static com.nadia.utm.renderer.glint.utmGlintContainer.GLINT_DEFAULT;
+import static com.nadia.utm.client.renderer.glint.utmGlintContainer.*;
 
 @Mixin(value = ItemRenderer.class, remap = false)
 public abstract class ItemRendererMixin {
@@ -23,15 +22,11 @@ public abstract class ItemRendererMixin {
     private static final ThreadLocal<Integer> utm$glintColor = ThreadLocal.withInitial(() -> -1);
 
     @Unique
-    private static void utm$setGlintColor(int rgb) {
-        var uniform = utmShaders.COLORED_GLINT.getUniform("GlintColor");
-        if (uniform != null) {
-            float r = ((rgb >> 16) & 0xFF) / 255f;
-            float g = ((rgb >> 8) & 0xFF) / 255f;
-            float b = (rgb & 0xFF) / 255f;
+    private static void utm$setGlintColor(int rgb, boolean isAdditive) {
+        var uniform = utmShaders.COLORED_GLINT.safeGetUniform("GlintColor");
+        uniform.set(((rgb >> 16) & 0xFF) / 255f, ((rgb >> 8) & 0xFF) / 255f, (rgb & 0xFF) / 255f, 1.0f);
 
-            uniform.set(r, g, b, 1.0f);
-        }
+        utmShaders.COLORED_GLINT.safeGetUniform("IsAdditive").set(isAdditive ? 1 : 0);
     }
 
     @Inject(
@@ -50,18 +45,22 @@ public abstract class ItemRendererMixin {
             CallbackInfo ci
     ) {
         if (buffer instanceof MultiBufferSource.BufferSource bufferSource) {
-            int newColor = stack.getOrDefault(utmDataComponents.GLINT_COLOR.get(), -1);
-            int oldColor = utm$glintColor.get();
+            var newColor = stack.getOrDefault(utmDataComponents.GLINT_COLOR.get(), -1);
+            var oldColor = utm$glintColor.get();
 
             var newTexture = stack.getOrDefault(utmDataComponents.GLINT_TYPE.get(), GLINT_DEFAULT);
             var oldTexture = GLINT_CURRENT.get();
 
-            if (newColor != oldColor || newTexture != oldTexture) {
+            var newMode = stack.getOrDefault(utmDataComponents.GLINT_ADDITIVE, true);
+            var oldMode = GLINT_ADDITIVE.get();
+
+            if (!newColor.equals(oldColor) || newTexture != oldTexture || newMode != oldMode) {
                 bufferSource.endBatch();
-                utm$setGlintColor(newColor != -1 ? newColor : 0x8040CC);
+                utm$setGlintColor(newColor != -1 ? newColor : 0x8040CC, newMode);
 
                 utm$glintColor.set(newColor);
                 GLINT_CURRENT.set(newTexture);
+                GLINT_ADDITIVE.set(newMode);
             }
         }
     }

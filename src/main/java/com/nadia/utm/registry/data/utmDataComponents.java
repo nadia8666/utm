@@ -18,6 +18,12 @@ public class utmDataComponents {
                     .networkSynchronized(ByteBufCodecs.INT)
                     .build());
 
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> GLINT_ADDITIVE =
+            COMPONENTS.register("glint_additive", () -> DataComponentType.<Boolean>builder()
+                    .persistent(Codec.BOOL)
+                    .networkSynchronized(ByteBufCodecs.BOOL)
+                    .build());
+
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<ResourceLocation>> GLINT_TYPE =
             COMPONENTS.register("glint_type", () -> DataComponentType.<ResourceLocation>builder()
                     .persistent(ResourceLocation.CODEC)

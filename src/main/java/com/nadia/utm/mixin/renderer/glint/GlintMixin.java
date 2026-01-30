@@ -1,6 +1,6 @@
 package com.nadia.utm.mixin.renderer.glint;
 
-import com.nadia.utm.renderer.utmShaders;
+import com.nadia.utm.client.renderer.utmShaders;
 import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.ShaderInstance;
 import org.spongepowered.asm.mixin.Mixin;
@@ -16,7 +16,7 @@ public abstract class GlintMixin {
             at = @At("HEAD"),
             argsOnly = true
     )
-    private static Supplier<ShaderInstance> utm$replaceGlintSupplier(Supplier<ShaderInstance> original) {
+    private static Supplier<ShaderInstance> utm$glintOverride(Supplier<ShaderInstance> original) {
         return () -> {
             ShaderInstance shader = original.get();
 
