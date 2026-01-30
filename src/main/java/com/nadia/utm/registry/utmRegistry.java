@@ -40,7 +40,9 @@ public class utmRegistry {
     public static void registerAll(IEventBus modEventBus) {
         BLOCKS.register(modEventBus);
         ITEMS.register(modEventBus);
-        TABS.register(modEventBus);
         COMPONENTS.register(modEventBus);
+
+        utmTools.doNothing();
+        TABS.register(modEventBus);
     }
 }

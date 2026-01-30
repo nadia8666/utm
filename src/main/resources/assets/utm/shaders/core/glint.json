@@ -6,8 +6,7 @@
     "UV0"
   ],
   "samplers": [
-    { "name": "Sampler0" },
-    { "name": "GlintSampler", "file": "utm:misc/glint" }
+    { "name": "Sampler0" }
   ],
   "uniforms": [
     { "name": "GlintColor", "type": "float", "count": 4, "values": [ 0.0, 0.0, 0.0, 0.0 ] },

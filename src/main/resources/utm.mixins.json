@@ -10,8 +10,9 @@
   ],
   "client": [
     "compat.ShowcaseItemMixin",
-    "renderer.GlintMixin",
-    "renderer.ItemRendererMixin"
+    "renderer.glint.GlintMixin",
+    "renderer.glint.ItemRendererMixin",
+    "renderer.glint.RenderSystemMixin"
   ],
   "injectors": {
     "defaultRequire": 1

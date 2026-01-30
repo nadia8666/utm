@@ -1,4 +1,4 @@
-package com.nadia.utm.mixin.renderer;
+package com.nadia.utm.mixin.renderer.glint;
 
 import com.nadia.utm.renderer.utmShaders;
 import net.minecraft.client.renderer.RenderStateShard;

@@ -3,7 +3,6 @@
 #moj_import <fog.glsl>
 
 uniform sampler2D Sampler0;
-uniform sampler2D GlintSampler;
 uniform vec4 ColorModulator;
 uniform float FogStart;
 uniform float FogEnd;
@@ -17,14 +16,9 @@ in vec4 vertexColor;
 out vec4 fragColor;
 
 void main() {
-    vec4 ignoredColor = texture(Sampler0, texCoord0);
-    vec4 texColor = texture(GlintSampler, texCoord0);
-
+    vec4 texColor = texture(Sampler0, texCoord0) * ColorModulator;
     if (texColor.a < 0.01) discard;
 
-    vec3 finalColor = texColor.r * GlintColor.rgb;
-    float finalAlpha = texColor.a * GlintAlpha * ColorModulator.a;
-
-    float fade = linear_fog_fade(vertexDistance, FogStart, FogEnd);
-    fragColor = vec4(finalColor * fade, finalAlpha);
+    float fade = linear_fog_fade(vertexDistance, FogStart, FogEnd) * GlintAlpha;
+    fragColor = vec4(texColor.rgb * GlintColor.rgb * fade, texColor.a);
 }

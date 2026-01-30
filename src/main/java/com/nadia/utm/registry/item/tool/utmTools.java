@@ -20,9 +20,9 @@ public class utmTools {
                     SwordItem.createAttributes(TIER_COPPER, 4, -2)
             ))
     );
-    public static final Supplier<PickaxeItem> COPPER_PICKAXE = utmItems.ITEMS.register("copper_pickaxe", () -> new PickaxeItem(TIER_COPPER,
+    public static final Supplier<ShovelItem> COPPER_SHOVEL = utmItems.ITEMS.register("copper_shovel", () -> new ShovelItem(TIER_COPPER,
             new Item.Properties().attributes(
-                    PickaxeItem.createAttributes(TIER_COPPER, 4, -2)
+                    ShovelItem.createAttributes(TIER_COPPER, 4, -2)
             ))
     );
     public static final Supplier<AxeItem> COPPER_AXE = utmItems.ITEMS.register("copper_axe", () -> new AxeItem(TIER_COPPER,
@@ -30,9 +30,9 @@ public class utmTools {
                     AxeItem.createAttributes(TIER_COPPER, 4, -2)
             ))
     );
-    public static final Supplier<ShovelItem> COPPER_SHOVEL = utmItems.ITEMS.register("copper_shovel", () -> new ShovelItem(TIER_COPPER,
+    public static final Supplier<PickaxeItem> COPPER_PICKAXE = utmItems.ITEMS.register("copper_pickaxe", () -> new PickaxeItem(TIER_COPPER,
             new Item.Properties().attributes(
-                    ShovelItem.createAttributes(TIER_COPPER, 4, -2)
+                    PickaxeItem.createAttributes(TIER_COPPER, 4, -2)
             ))
     );
     public static final Supplier<HoeItem> COPPER_HOE = utmItems.ITEMS.register("copper_hoe", () -> new HoeItem(TIER_COPPER,
@@ -51,4 +51,8 @@ public class utmTools {
             }
     );
     */
+
+    public static void doNothing() {
+        utm.LOGGER.info("[UTM] Tools class loaded, so that it shows up!");
+    }
 }

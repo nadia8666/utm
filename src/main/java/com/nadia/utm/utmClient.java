@@ -3,12 +3,15 @@ package com.nadia.utm;
 import com.nadia.utm.client.UpdateToast;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.TitleScreen;
+import net.minecraft.client.renderer.texture.TextureAtlas;
+import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.client.event.ModelEvent;
 import net.neoforged.neoforge.client.event.ScreenEvent;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
@@ -27,8 +30,7 @@ public class utmClient {
     }
 
     @SubscribeEvent
-    static void onClientSetup(FMLClientSetupEvent event) {
-    }
+    static void onClientSetup(FMLClientSetupEvent event) {}
 
     @SubscribeEvent
     public static void onGuiInit(ScreenEvent.Init.Post event) {
@@ -47,5 +49,13 @@ public class utmClient {
 
             ToastTarget = false;
         }
+    }
+
+    public static void loadTextures() {
+        var tm = Minecraft.getInstance().getTextureManager();
+        ResourceLocation glint = ResourceLocation.fromNamespaceAndPath("utm", "textures/misc/glint.png");
+
+
+        tm.getTexture(glint);
     }
 }

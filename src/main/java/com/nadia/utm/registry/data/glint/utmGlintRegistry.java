@@ -1,2 +1,4 @@
-package com.nadia.utm.registry.data.glint;public class utmGlintRegistry {
+package com.nadia.utm.registry.data.glint;
+
+public class utmGlintRegistry {
 }

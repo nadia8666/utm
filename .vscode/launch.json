@@ -48,32 +48,10 @@
     {
       "type": "java",
       "request": "launch",
-      "name": "GameTestServer",
-      "presentation": {
-        "group": "Mod Development - utm",
-        "order": 2
-      },
-      "projectName": "utm",
-      "mainClass": "net.neoforged.devlaunch.Main",
-      "args": [
-        "@C:\\development-c\\utm\\build\\moddev\\gameTestServerRunProgramArgs.txt"
-      ],
-      "vmArgs": [
-        "@C:\\development-c\\utm\\build\\moddev\\gameTestServerRunVmArgs.txt",
-        "-Dfml.modFolders\u003dutm%%C:\\development-c\\utm\\bin\\main"
-      ],
-      "cwd": "${workspaceFolder}\\run",
-      "env": {},
-      "console": "internalConsole",
-      "shortenCommandLine": "none"
-    },
-    {
-      "type": "java",
-      "request": "launch",
       "name": "Server",
       "presentation": {
         "group": "Mod Development - utm",
-        "order": 3
+        "order": 2
       },
       "projectName": "utm",
       "mainClass": "net.neoforged.devlaunch.Main",
