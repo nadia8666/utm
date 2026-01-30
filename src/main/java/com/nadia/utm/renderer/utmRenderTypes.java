@@ -9,6 +9,7 @@ import com.nadia.utm.client.renderer.utmShaders;
 import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.ItemRenderer;
+import org.joml.Matrix4f;
 
 import static net.minecraft.client.renderer.RenderStateShard.*;
 
@@ -24,7 +25,12 @@ public class utmRenderTypes {
                     .setCullState(NO_CULL)
                     .setDepthTestState(EQUAL_DEPTH_TEST)
                     .setTransparencyState(TRANSLUCENT_TRANSPARENCY)
-                    .setTexturingState(GLINT_TEXTURING)
+                    .setTexturingState(new RenderStateShard.TexturingStateShard("utm_glint_o_tex", () -> {
+                        RenderSystem.setShaderTexture(0, utmGlintContainer.GLINT_LOCATION.THREAD.get());
+
+                        RenderSystem.bindTexture(RenderSystem.getShaderTexture(0));
+                        RenderSystem.setTextureMatrix(new Matrix4f());
+                    }, RenderSystem::resetTextureMatrix))
                     .createCompositeState(false)
     );
 
@@ -45,7 +51,12 @@ public class utmRenderTypes {
                         RenderSystem.disableBlend();
                         RenderSystem.defaultBlendFunc();
                     }))
-                    .setTexturingState(GLINT_TEXTURING)
+                    .setTexturingState(new RenderStateShard.TexturingStateShard("utm_glint_a_tex", () -> {
+                        RenderSystem.setShaderTexture(0, utmGlintContainer.GLINT_LOCATION.THREAD.get());
+
+                        RenderSystem.bindTexture(RenderSystem.getShaderTexture(0));
+                        RenderSystem.setTextureMatrix(new Matrix4f());
+                    }, RenderSystem::resetTextureMatrix))
                     .createCompositeState(false)
     );
 }

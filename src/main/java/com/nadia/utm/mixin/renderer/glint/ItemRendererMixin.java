@@ -1,8 +1,10 @@
 package com.nadia.utm.mixin.renderer.glint;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
-import com.nadia.utm.registry.data.utmDataComponents;
 import com.nadia.utm.client.renderer.utmShaders;
+import com.nadia.utm.utm;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.resources.model.BakedModel;
@@ -19,15 +21,18 @@ import static com.nadia.utm.client.renderer.glint.utmGlintContainer.*;
 @Mixin(value = ItemRenderer.class, remap = false)
 public abstract class ItemRendererMixin {
     @Unique
-    private static final ThreadLocal<Integer> utm$glintColor = ThreadLocal.withInitial(() -> -1);
+    private static void utm$setGlintColor(int rgb) {
+        utmShaders.COLORED_GLINT.safeGetUniform("GlintColor")
+                .set(((rgb >> 16) & 0xFF) / 255f, ((rgb >> 8) & 0xFF) / 255f, (rgb & 0xFF) / 255f, 1.0f);
+        utmShaders.COLORED_GLINT.safeGetUniform("IsAdditive").set(GLINT_ADDITIVE.THREAD.get() ? 1 : 0);
+        utmShaders.COLORED_GLINT.safeGetUniform("UVScale").set(GLINT_SCALE.THREAD.get().x, GLINT_SCALE.THREAD.get().y);
+        utmShaders.COLORED_GLINT.safeGetUniform("ScrollSpeed").set(GLINT_SPEED.THREAD.get().x, GLINT_SPEED.THREAD.get().y);
+    }
 
     @Unique
-    private static void utm$setGlintColor(int rgb, boolean isAdditive) {
-        var uniform = utmShaders.COLORED_GLINT.safeGetUniform("GlintColor");
-        uniform.set(((rgb >> 16) & 0xFF) / 255f, ((rgb >> 8) & 0xFF) / 255f, (rgb & 0xFF) / 255f, 1.0f);
-
-        utmShaders.COLORED_GLINT.safeGetUniform("IsAdditive").set(isAdditive ? 1 : 0);
-    }
+    private float utm$time = 0f;
+    @Unique
+    private float utm$lastDraw = RenderSystem.getShaderGameTime();
 
     @Inject(
             method = "render",
@@ -45,22 +50,24 @@ public abstract class ItemRendererMixin {
             CallbackInfo ci
     ) {
         if (buffer instanceof MultiBufferSource.BufferSource bufferSource) {
-            var newColor = stack.getOrDefault(utmDataComponents.GLINT_COLOR.get(), -1);
-            var oldColor = utm$glintColor.get();
+            var time = RenderSystem.getShaderGameTime();
+            if (time != utm$lastDraw) {
+                utm$time = (utm$time + (time - utm$lastDraw) * 20 * Minecraft.getInstance().options.glintSpeed().get().floatValue()) % 1f;
+                utm$lastDraw = time;
 
-            var newTexture = stack.getOrDefault(utmDataComponents.GLINT_TYPE.get(), GLINT_DEFAULT);
-            var oldTexture = GLINT_CURRENT.get();
-
-            var newMode = stack.getOrDefault(utmDataComponents.GLINT_ADDITIVE, true);
-            var oldMode = GLINT_ADDITIVE.get();
-
-            if (!newColor.equals(oldColor) || newTexture != oldTexture || newMode != oldMode) {
                 bufferSource.endBatch();
-                utm$setGlintColor(newColor != -1 ? newColor : 0x8040CC, newMode);
+                utmShaders.COLORED_GLINT.safeGetUniform("ScrollOffset").set(utm$time, utm$time);
+            }
 
-                utm$glintColor.set(newColor);
-                GLINT_CURRENT.set(newTexture);
-                GLINT_ADDITIVE.set(newMode);
+            var refColor = GLINT_COLOR.tryUpdate(stack);
+            var refTexture = GLINT_LOCATION.tryUpdate(stack);
+            var refAdditive = GLINT_ADDITIVE.tryUpdate(stack);
+            var refSpeed = GLINT_SPEED.tryUpdate(stack);
+            var refScale = GLINT_SCALE.tryUpdate(stack);
+
+            if (refColor || refTexture || refAdditive || refSpeed || refScale) {
+                bufferSource.endBatch();
+                utm$setGlintColor(GLINT_COLOR.THREAD.get() != -1 ? GLINT_COLOR.THREAD.get() : 0x8040CC);
             }
         }
     }
