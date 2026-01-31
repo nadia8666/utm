@@ -1,5 +1,6 @@
 package com.nadia.utm.registry.item.tool;
 
+import com.nadia.utm.item.FiddleheadItem;
 import com.nadia.utm.registry.item.utmItems;
 import com.nadia.utm.utm;
 import net.minecraft.tags.BlockTags;
@@ -40,7 +41,7 @@ public class utmTools {
                     HoeItem.createAttributes(TIER_COPPER, 4, -2)
             ))
     );
-
+    public static final Supplier<FiddleheadItem> FIDDLEHEAD = utmItems.ITEMS.register("fiddlehead", () -> new FiddleheadItem(new Item.Properties()));
     /*
     public static final Supplier<AxeItem> AWESOME_AXE = utmItems.ITEMS.register("awesome_axe", () -> {
             var Tier = utmToolBuilder.buildTier(
