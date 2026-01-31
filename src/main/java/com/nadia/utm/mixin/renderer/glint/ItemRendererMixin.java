@@ -5,7 +5,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
 import com.nadia.utm.client.renderer.utmShaders;
 import com.nadia.utm.renderer.utmRenderTypes;
-import com.nadia.utm.utm;
+import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -34,8 +34,6 @@ public abstract class ItemRendererMixin {
     }
 
     @Unique
-    private float utm$time = 0f;
-    @Unique
     private float utm$lastDraw = RenderSystem.getShaderGameTime();
 
     @Inject(
@@ -56,12 +54,14 @@ public abstract class ItemRendererMixin {
         if (buffer instanceof MultiBufferSource.BufferSource bufferSource) {
             float time = RenderSystem.getShaderGameTime();
             if (time != utm$lastDraw) {
-                utm$time = (utm$time + (time - utm$lastDraw) * 20 * Minecraft.getInstance().options.glintSpeed().get().floatValue()) % 1f;
-                utm$lastDraw = time;
-
                 bufferSource.endBatch();
-                utmShaders.GLINT_ADDITIVE.getUniform("ScrollOffset").set(utm$time, utm$time);
-                utmShaders.GLINT_OVERLAY.safeGetUniform("ScrollOffset").set(utm$time, utm$time);
+
+                long offset = (long)((double) Util.getMillis() * Minecraft.getInstance().options.glintSpeed().get() * 8.0);
+                float x = (float)(offset % 110000L) / 110000.0F;
+                float y = (float)(offset % 30000L) / 30000.0F;
+
+                utmShaders.GLINT_ADDITIVE.safeGetUniform("ScrollOffset").set(-x, y);
+                utmShaders.GLINT_OVERLAY.safeGetUniform("ScrollOffset").set(-x, y);
             }
 
             boolean refColor = GLINT_COLOR.tryUpdate(stack);

@@ -35,7 +35,7 @@ public class utmRenderTypes {
                         RenderSystem.setShaderTexture(0, utmGlintContainer.GLINT_LOCATION.THREAD.get());
 
                         RenderSystem.bindTexture(RenderSystem.getShaderTexture(0));
-                        RenderSystem.setTextureMatrix(new Matrix4f());
+                        RenderSystem.setTextureMatrix(new Matrix4f().scale(8).rotateZ(0.17453292F));
                     }, RenderSystem::resetTextureMatrix))
                     .createCompositeState(false)
     );
@@ -61,7 +61,7 @@ public class utmRenderTypes {
                         RenderSystem.setShaderTexture(0, utmGlintContainer.GLINT_LOCATION.THREAD.get());
 
                         RenderSystem.bindTexture(RenderSystem.getShaderTexture(0));
-                        RenderSystem.setTextureMatrix(new Matrix4f());
+                        RenderSystem.setTextureMatrix(new Matrix4f().scale(8).rotateZ(0.17453292F));
                     }, RenderSystem::resetTextureMatrix))
                     .createCompositeState(false)
     );
