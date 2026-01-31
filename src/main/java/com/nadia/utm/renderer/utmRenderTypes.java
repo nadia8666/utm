@@ -20,11 +20,17 @@ public class utmRenderTypes {
             1536,
             RenderType.CompositeState.builder()
                     .setShaderState(new RenderStateShard.ShaderStateShard(() -> utmShaders.GLINT_OVERLAY))
-                    .setTextureState(new RenderStateShard.TextureStateShard(utmGlintContainer.GLINT_DEFAULT, true, false))
+                    .setTextureState(new RenderStateShard.TextureStateShard(ItemRenderer.ENCHANTED_GLINT_ITEM, true, false))
                     .setWriteMaskState(COLOR_WRITE)
                     .setCullState(NO_CULL)
                     .setDepthTestState(EQUAL_DEPTH_TEST)
-                    .setTransparencyState(TRANSLUCENT_TRANSPARENCY)
+                    .setTransparencyState(new TransparencyStateShard("utm_translucent_transparency", () -> {
+                        RenderSystem.enableBlend();
+                        RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+                    }, () -> {
+                        RenderSystem.disableBlend();
+                        RenderSystem.defaultBlendFunc();
+                    }))
                     .setTexturingState(new RenderStateShard.TexturingStateShard("utm_glint_o_tex", () -> {
                         RenderSystem.setShaderTexture(0, utmGlintContainer.GLINT_LOCATION.THREAD.get());
 
@@ -44,7 +50,7 @@ public class utmRenderTypes {
                     .setWriteMaskState(COLOR_WRITE)
                     .setCullState(NO_CULL)
                     .setDepthTestState(EQUAL_DEPTH_TEST)
-                    .setTransparencyState(new TransparencyStateShard("additive_transparency", () -> {
+                    .setTransparencyState(new TransparencyStateShard("utm_additive_transparency", () -> {
                         RenderSystem.enableBlend(); // essentially just additive but include alpha channel
                         RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.DST_ALPHA);
                     }, () -> {
