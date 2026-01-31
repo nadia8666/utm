@@ -19,7 +19,7 @@ public class utmRenderTypes {
             VertexFormat.Mode.QUADS,
             1536,
             RenderType.CompositeState.builder()
-                    .setShaderState(new RenderStateShard.ShaderStateShard(() -> utmShaders.COLORED_GLINT))
+                    .setShaderState(new RenderStateShard.ShaderStateShard(() -> utmShaders.GLINT_OVERLAY))
                     .setTextureState(new RenderStateShard.TextureStateShard(utmGlintContainer.GLINT_DEFAULT, true, false))
                     .setWriteMaskState(COLOR_WRITE)
                     .setCullState(NO_CULL)
@@ -39,7 +39,7 @@ public class utmRenderTypes {
             VertexFormat.Mode.QUADS,
             1536,
             RenderType.CompositeState.builder()
-                    .setShaderState(new RenderStateShard.ShaderStateShard(() -> utmShaders.COLORED_GLINT))
+                    .setShaderState(new RenderStateShard.ShaderStateShard(() -> utmShaders.GLINT_ADDITIVE))
                     .setTextureState(new RenderStateShard.TextureStateShard(ItemRenderer.ENCHANTED_GLINT_ITEM, true, false))
                     .setWriteMaskState(COLOR_WRITE)
                     .setCullState(NO_CULL)
