@@ -34,6 +34,8 @@ public abstract class ItemRendererMixin {
     }
 
     @Unique
+    private float utm$time = 0f;
+    @Unique
     private float utm$lastDraw = RenderSystem.getShaderGameTime();
 
     @Inject(
@@ -54,11 +56,14 @@ public abstract class ItemRendererMixin {
         if (buffer instanceof MultiBufferSource.BufferSource bufferSource) {
             float time = RenderSystem.getShaderGameTime();
             if (time != utm$lastDraw) {
+                utm$time = (utm$time + (time - utm$lastDraw) * 20 * Minecraft.getInstance().options.glintSpeed().get().floatValue()) % 1f;
+                utm$lastDraw = time;
+
                 bufferSource.endBatch();
 
-                long offset = (long)((double) Util.getMillis() * Minecraft.getInstance().options.glintSpeed().get() * 8.0);
-                float x = (float)(offset % 110000L) / 110000.0F;
-                float y = (float)(offset % 30000L) / 30000.0F;
+                float offset = utm$time * 100000;
+                float x = (offset % 110000) / 110000.0f;
+                float y = (offset % 30000) / 30000.0f;
 
                 utmShaders.GLINT_ADDITIVE.safeGetUniform("ScrollOffset").set(-x, y);
                 utmShaders.GLINT_OVERLAY.safeGetUniform("ScrollOffset").set(-x, y);
