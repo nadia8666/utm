@@ -8,7 +8,9 @@ import static com.nadia.utm.updater.AutoUpdater.ToastReady;
 import static com.nadia.utm.updater.AutoUpdater.ToastTarget;
 import static com.nadia.utm.updater.AutoUpdater.VersionTarget;
 
+import com.nadia.utm.registry.ui.utmMenus;
 import com.nadia.utm.renderer.utmRenderTypes;
+import com.nadia.utm.ui.GlintScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.TitleScreen;
 import net.neoforged.api.distmarker.Dist;
@@ -17,6 +19,7 @@ import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.event.RegisterRenderBuffersEvent;
 import net.neoforged.neoforge.client.event.ScreenEvent;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
@@ -50,6 +53,11 @@ public class utmClient {
 
             ToastTarget = false;
         }
+    }
+
+    @SubscribeEvent
+    public static void registerScreens(RegisterMenuScreensEvent event) {
+        event.register(utmMenus.GLINT_MENU.get(), GlintScreen::new);
     }
 
     @SubscribeEvent

@@ -1,5 +1,6 @@
 package com.nadia.utm.registry.block;
 
+import com.nadia.utm.block.GlintTableBlock;
 import com.nadia.utm.block.HeavyMetalAnvilBlock;
 import com.nadia.utm.block.utmBlockContainer;
 import com.nadia.utm.registry.utmRegistry;
@@ -27,4 +28,8 @@ public class utmBlocks {
     public static final utmBlockContainer<HeavyMetalAnvilBlock, BlockItem> HEAVY_METAL_ANVIL = iregister("heavy_metal_anvil", HeavyMetalAnvilBlock::new, BlockBehaviour.Properties.of()
             .destroyTime(7.0f)
             .explosionResistance(2500f).sound(SoundType.ANVIL));
+
+    public static final utmBlockContainer<GlintTableBlock, BlockItem> GLINT_TABLE = iregister("glint_table", GlintTableBlock::new, BlockBehaviour.Properties.of()
+            .destroyTime(3.0f)
+            .explosionResistance(25f).sound(SoundType.WOOD));
 }

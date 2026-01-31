@@ -1,0 +1,17 @@
+package com.nadia.utm.registry.block;
+
+import com.nadia.utm.block.entity.GlintTableBlockEntity;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.neoforged.neoforge.registries.DeferredRegister;
+
+import java.util.function.Supplier;
+
+public class utmBlockEntities {
+    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES =
+            DeferredRegister.create(BuiltInRegistries.BLOCK_ENTITY_TYPE, "utm");
+
+    public static final Supplier<BlockEntityType<GlintTableBlockEntity>> GLINT_TABLE = BLOCK_ENTITIES.register("glint_table", () ->
+            BlockEntityType.Builder.of(GlintTableBlockEntity::new, utmBlocks.GLINT_TABLE.block.get())
+                    .build(null));
+}

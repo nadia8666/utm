@@ -1,5 +1,8 @@
 package com.nadia.utm;
 
+import com.nadia.utm.registry.ui.utmMenus;
+import com.nadia.utm.ui.GlintScreen;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -21,7 +24,6 @@ public class utm {
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public utm(IEventBus modEventBus, ModContainer modContainer) {
-        // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
 
         utmRegistry.registerAll(modEventBus);

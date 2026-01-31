@@ -1,14 +1,18 @@
 package com.nadia.utm.registry;
 
+import com.nadia.utm.registry.block.utmBlockEntities;
 import com.nadia.utm.registry.block.utmBlocks;
 import com.nadia.utm.registry.data.utmDataComponents;
 import com.nadia.utm.registry.item.tool.utmTools;
 import com.nadia.utm.registry.item.utmItems;
+import com.nadia.utm.registry.ui.utmMenus;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -20,6 +24,8 @@ public class utmRegistry {
     public static final DeferredRegister.Items ITEMS = utmItems.ITEMS;
     public static final DeferredRegister.Blocks BLOCKS = utmBlocks.BLOCKS;
     public static final DeferredRegister.DataComponents COMPONENTS = utmDataComponents.COMPONENTS;
+    public static final DeferredRegister<MenuType<?>> MENUS = utmMenus.MENUS;
+    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = utmBlockEntities.BLOCK_ENTITIES;
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> MAIN = TABS
             .register("main", () -> CreativeModeTab.builder()
@@ -41,6 +47,8 @@ public class utmRegistry {
         BLOCKS.register(modEventBus);
         ITEMS.register(modEventBus);
         COMPONENTS.register(modEventBus);
+        MENUS.register(modEventBus);
+        BLOCK_ENTITIES.register(modEventBus);
 
         utmTools.doNothing();
         TABS.register(modEventBus);
