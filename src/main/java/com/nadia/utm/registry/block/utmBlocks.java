@@ -5,6 +5,8 @@ import com.nadia.utm.block.utmBlockContainer;
 import com.nadia.utm.registry.utmRegistry;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.CarpetBlock;
+import net.minecraft.world.level.block.FenceBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.neoforged.neoforge.registries.DeferredBlock;
@@ -27,4 +29,8 @@ public class utmBlocks {
     public static final utmBlockContainer<HeavyMetalAnvilBlock, BlockItem> HEAVY_METAL_ANVIL = iregister("heavy_metal_anvil", HeavyMetalAnvilBlock::new, BlockBehaviour.Properties.of()
             .destroyTime(7.0f)
             .explosionResistance(2500f).sound(SoundType.ANVIL));
+
+    public static final utmBlockContainer<CarpetBlock, BlockItem> GRATE = iregister("grate", CarpetBlock::new, BlockBehaviour.Properties.of()
+            .destroyTime(1.0f)
+            .sound(SoundType.CHAIN)); //id like to make it waterlog but i dont knwo how!
 }
