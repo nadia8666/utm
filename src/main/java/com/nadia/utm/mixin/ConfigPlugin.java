@@ -26,9 +26,9 @@ public class ConfigPlugin implements IMixinConfigPlugin {
             return LoadingModList.get().getModFileById("spears") != null;
         }
 
-        // spears compat
+        // showcase item x jei compat
         if (mixinClassName.contains("ClientShowcaseMixin")) {
-            return LoadingModList.get().getModFileById("showcaseitem") != null;
+            return LoadingModList.get().getModFileById("showcaseitem") != null && LoadingModList.get().getModFileById("jei") != null;
         }
 
         return true;

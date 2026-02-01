@@ -1,12 +1,12 @@
 package com.nadia.utm.registry.block;
 
+import com.nadia.utm.block.GlintTableBlock;
 import com.nadia.utm.block.HeavyMetalAnvilBlock;
 import com.nadia.utm.block.utmBlockContainer;
 import com.nadia.utm.registry.utmRegistry;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.Block;
-import mport net.minecraft.world.level.block.CarpetBlock;
-import net.minecraft.world.level.block.FenceBlock;
+import net.minecraft.world.level.block.CarpetBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.neoforged.neoforge.registries.DeferredBlock;

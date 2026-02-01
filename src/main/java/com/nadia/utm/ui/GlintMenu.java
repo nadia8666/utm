@@ -3,6 +3,7 @@ package com.nadia.utm.ui;
 import com.nadia.utm.block.entity.GlintTableBlockEntity;
 import com.nadia.utm.registry.block.utmBlocks;
 import com.nadia.utm.registry.ui.utmMenus;
+import com.nadia.utm.utm;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -32,7 +33,8 @@ public class GlintMenu extends AbstractContainerMenu {
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
 
-        this.addSlot(new SlotItemHandler(this.blockEntity.inventory, 0, 80, 35));
+        this.addSlot(new SlotItemHandler(this.blockEntity.inventory, 0, 8, 10));
+        this.addSlot(new SlotItemHandler(this.blockEntity.inventory, 1, 34, 10));
     }
 
 
@@ -93,5 +95,11 @@ public class GlintMenu extends AbstractContainerMenu {
         for (int i = 0; i < 9; ++i) {
             this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 142));
         }
+    }
+
+    @Override
+    public boolean canDragTo(Slot slot) {
+        utm.LOGGER.info("[UTM] {}", slot.index);
+        return slot.index == 35;
     }
 }
