@@ -34,7 +34,7 @@ public class FiddleheadItem extends Item {
 
         utm.LOGGER.info("[UTM] used");
         ItemStack itemstack = player.getItemInHand(hand);
-        if (player.isFallFlying() & (player.position().y >1024)) {
+        if (player.isFallFlying() & (player.position().y >300)) {
             var hi  = player.getLookAngle();
             var mult = 10;
             player.setDeltaMovement(hi.x * mult, hi.y*1, hi.z*mult);
