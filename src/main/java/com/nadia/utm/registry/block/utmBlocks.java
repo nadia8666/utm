@@ -1,11 +1,12 @@
 package com.nadia.utm.registry.block;
 
-import com.nadia.utm.block.GlintTableBlock;
 import com.nadia.utm.block.HeavyMetalAnvilBlock;
 import com.nadia.utm.block.utmBlockContainer;
 import com.nadia.utm.registry.utmRegistry;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.Block;
+import mport net.minecraft.world.level.block.CarpetBlock;
+import net.minecraft.world.level.block.FenceBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.neoforged.neoforge.registries.DeferredBlock;
@@ -32,4 +33,8 @@ public class utmBlocks {
     public static final utmBlockContainer<GlintTableBlock, BlockItem> GLINT_TABLE = iregister("glint_table", GlintTableBlock::new, BlockBehaviour.Properties.of()
             .destroyTime(3.0f)
             .explosionResistance(25f).sound(SoundType.WOOD));
+
+    public static final utmBlockContainer<CarpetBlock, BlockItem> GRATE = iregister("grate", CarpetBlock::new, BlockBehaviour.Properties.of()
+            .destroyTime(1.0f)
+            .sound(SoundType.CHAIN)); //id like to make it waterlog but i dont knwo how!
 }

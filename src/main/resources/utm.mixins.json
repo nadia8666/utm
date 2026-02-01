@@ -6,7 +6,8 @@
   "mixins": [
     "FreeAnvilMixin",
     "HitboxMixin",
-    "compat.SpearsMixin"
+    "compat.SpearsMixin",
+    "LivingEntityMixin"
   ],
   "client": [
     "compat.ShowcaseItemMixin",

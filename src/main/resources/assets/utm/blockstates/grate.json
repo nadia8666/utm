@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "facing=up": { "model": "utm:block/grate" },
+    "facing=south": { "model": "utm:block/grate", "x": 90 },
+    "facing=north": { "model": "utm:block/grate", "x": 270 },
+    "facing=west": { "model": "utm:block/grate", "z": 90 },
+    "facing=east": { "model": "utm:block/grate", "x": 270 },
+    "facing=down": { "model": "utm:block/grate", "x": 180 }
+  }
+}
