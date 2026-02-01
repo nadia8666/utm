@@ -49,9 +49,9 @@ public class EanFlightBehaviour {
 
         // ? Read config file values
         double minSpeed = 30.35;
-        double maxSpeed = 257.22;
-        double curveStart = 300d;
-        double curveEnd = 301.0d;
+        double maxSpeed = 60.70; //257.22
+        double curveStart = 320d;
+        double curveEnd = 511.0d;
 
         // + Calculate additional speed based on player altitude.
         // * Clamp the calculated modified speed to not be below or over the speed range.

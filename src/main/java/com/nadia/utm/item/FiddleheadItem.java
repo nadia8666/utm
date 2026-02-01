@@ -34,19 +34,22 @@ public class FiddleheadItem extends Item {
 
         utm.LOGGER.info("[UTM] used");
         ItemStack itemstack = player.getItemInHand(hand);
-        if (player.isFallFlying() & (player.position().y >300)) {
-            var hi  = player.getLookAngle();
-            var mult = 10;
-            player.setDeltaMovement(hi.x * mult, hi.y*1, hi.z*mult);
+        if (!isTooDamagedToUse(itemstack)) {
+            var hi = player.getLookAngle();
+            var mult = 0.5;
+            if (player.isFallFlying() & (player.position().y > 512)) {
+              mult=10;
+            }
+            //  player.startUsingItem(hand);
+            player.setDeltaMovement(hi.x * mult, hi.y * Math.min(mult,1), hi.z * mult);
+            itemstack.setDamageValue(1);
             return InteractionResultHolder.consume(itemstack);
         } else {
             return InteractionResultHolder.fail(itemstack);
         }
-          //  player.startUsingItem(hand);
-
     }
     private static boolean isTooDamagedToUse(ItemStack stack) {
-        return true; // stack.getDamageValue() >= stack.getMaxDamage() - 1;
+        return stack.getDamageValue() >= stack.getMaxDamage() - 1;
         //idk how to add damage to items : )
     }
 

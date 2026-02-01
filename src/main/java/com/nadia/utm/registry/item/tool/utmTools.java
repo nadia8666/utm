@@ -41,7 +41,7 @@ public class utmTools {
                     HoeItem.createAttributes(TIER_COPPER, 4, -2)
             ))
     );
-    public static final Supplier<FiddleheadItem> FIDDLEHEAD = utmItems.ITEMS.register("fiddlehead", () -> new FiddleheadItem(new Item.Properties()));
+    public static final Supplier<FiddleheadItem> FIDDLEHEAD = utmItems.ITEMS.register("fiddlehead", () -> new FiddleheadItem(new Item.Properties().durability(72000)));
     /*
     public static final Supplier<AxeItem> AWESOME_AXE = utmItems.ITEMS.register("awesome_axe", () -> {
             var Tier = utmToolBuilder.buildTier(
