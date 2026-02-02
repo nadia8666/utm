@@ -1,9 +1,6 @@
 package com.nadia.utm.registry.block;
 
-import com.nadia.utm.block.GlintTableBlock;
-import com.nadia.utm.block.GrateBlock;
-import com.nadia.utm.block.HeavyMetalAnvilBlock;
-import com.nadia.utm.block.utmBlockContainer;
+import com.nadia.utm.block.*;
 import com.nadia.utm.registry.utmRegistry;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.Block;
@@ -37,6 +34,13 @@ public class utmBlocks {
     public static final utmBlockContainer<GrateBlock, BlockItem> GRATE = iregister("grate", GrateBlock::new, BlockBehaviour.Properties.of()
             .destroyTime(1.0f)
             .sound(SoundType.CHAIN)
+            .noOcclusion()
+            .isViewBlocking((state, level, pos) -> false)
+            .isSuffocating((state, level, pos) -> false)); //id like to make it waterlog but i dont knwo how!
+
+    public static final utmBlockContainer<CitywallsMetalBlock, BlockItem> CITYWALLS_METAL = iregister("citywalls_metal", CitywallsMetalBlock::new, BlockBehaviour.Properties.of()
+            .destroyTime(1.0f)
+            .sound(SoundType.ANCIENT_DEBRIS)
             .noOcclusion()
             .isViewBlocking((state, level, pos) -> false)
             .isSuffocating((state, level, pos) -> false)); //id like to make it waterlog but i dont knwo how!
