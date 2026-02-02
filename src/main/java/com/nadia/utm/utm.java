@@ -1,8 +1,5 @@
 package com.nadia.utm;
 
-import com.nadia.utm.registry.ui.utmMenus;
-import com.nadia.utm.ui.GlintScreen;
-import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;

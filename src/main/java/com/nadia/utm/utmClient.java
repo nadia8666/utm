@@ -10,7 +10,7 @@ import static com.nadia.utm.updater.AutoUpdater.VersionTarget;
 
 import com.nadia.utm.registry.ui.utmMenus;
 import com.nadia.utm.renderer.utmRenderTypes;
-import com.nadia.utm.ui.GlintScreen;
+import com.nadia.utm.ui.glint.GlintScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.TitleScreen;
 import net.neoforged.api.distmarker.Dist;

@@ -24,10 +24,10 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 
 public class GrateBlock extends Block implements IWrenchable, SimpleWaterloggedBlock {
-    public static DirectionProperty VERTICAL_DIRECTION = DirectionProperty.create("vertical_direction", Direction.UP, Direction.DOWN);
+    public static final DirectionProperty VERTICAL_DIRECTION = DirectionProperty.create("vertical_direction", Direction.UP, Direction.DOWN);
     private static final VoxelShape BOTTOM;
     private static final VoxelShape TOP;
-    public static BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+    public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
     public GrateBlock(Properties properties) {
         super(properties);

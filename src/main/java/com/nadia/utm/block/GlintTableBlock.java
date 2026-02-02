@@ -10,19 +10,19 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
 public class GlintTableBlock extends BaseEntityBlock {
-    public static final VoxelShape SHAPE = Block.box(2, 0, 2, 14, 13, 14);
+    public static final VoxelShape SHAPE = Shapes.block();
     public static final MapCodec<GlintTableBlock> CODEC = simpleCodec(GlintTableBlock::new);
 
     public GlintTableBlock(Properties properties) {
@@ -30,33 +30,32 @@ public class GlintTableBlock extends BaseEntityBlock {
     }
 
     @Override
-    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+    protected @NotNull VoxelShape getShape(@NotNull BlockState state, @NotNull BlockGetter level, @NotNull BlockPos pos, @NotNull CollisionContext context) {
         return SHAPE;
     }
 
     @Override
-    protected MapCodec<? extends BaseEntityBlock> codec() {
+    protected @NotNull MapCodec<? extends BaseEntityBlock> codec() {
         return CODEC;
     }
 
     /* BLOCK ENTITY */
 
     @Override
-    protected RenderShape getRenderShape(BlockState state) {
+    protected @NotNull RenderShape getRenderShape(@NotNull BlockState state) {
         return RenderShape.MODEL;
     }
 
     @Nullable
     @Override
-    public BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
+    public BlockEntity newBlockEntity(@NotNull BlockPos blockPos, @NotNull BlockState blockState) {
         return new GlintTableBlockEntity(blockPos, blockState);
     }
 
     @Override
-    protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
+    protected void onRemove(BlockState state, @NotNull Level level, @NotNull BlockPos pos, BlockState newState, boolean movedByPiston) {
         if(state.getBlock() != newState.getBlock()) {
-            if(level.getBlockEntity(pos) instanceof GlintTableBlockEntity entity) {
-                entity.drops();
+            if(level.getBlockEntity(pos) instanceof GlintTableBlockEntity) {
                 level.updateNeighbourForOutputSignal(pos, this);
             }
         }
