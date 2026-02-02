@@ -1,11 +1,21 @@
 {
   "variants": {
-    "vertical_direction=up": {
+    "vertical_direction=up,waterlogged=true": {
       "model": "utm:block/grate",
       "x": 0,
       "y": 0
     },
-    "vertical_direction=down": {
+    "vertical_direction=down,waterlogged=true": {
+      "model": "utm:block/grate",
+      "x": 180,
+      "y": 0
+    },
+    "vertical_direction=up,waterlogged=false": {
+      "model": "utm:block/grate",
+      "x": 0,
+      "y": 0
+    },
+    "vertical_direction=down,waterlogged=false": {
       "model": "utm:block/grate",
       "x": 180,
       "y": 0
