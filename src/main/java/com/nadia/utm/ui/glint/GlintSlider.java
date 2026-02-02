@@ -1,10 +1,15 @@
 package com.nadia.utm.ui.glint;
 
+import com.nadia.utm.registry.sound.utmSounds;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
+import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import org.jetbrains.annotations.NotNull;
 
@@ -14,15 +19,21 @@ public class GlintSlider extends AbstractWidget {
     private final float minRange;
     private final float maxRange;
     private float currentValue;
+    private final Font font;
     private final Runnable onSync;
     public boolean isDragging = false;
+    private long lastUpdate = 0;
+    private float lastValue = 0;
 
-    public GlintSlider(int x, int y, int height, float min, float max, float initialValue, Runnable onSync) {
+    public GlintSlider(Font font, int x, int y, int height, float min, float max, float initialValue, Runnable onSync) {
         super(x, y, 4, height, Component.empty());
         this.minRange = min;
         this.maxRange = max;
         this.currentValue = initialValue;
         this.onSync = onSync;
+        this.font = font;
+
+        this.lastValue = currentValue;
     }
 
     /** @return 0.0 - 1.0 alpha for the range*/
@@ -43,6 +54,10 @@ public class GlintSlider extends AbstractWidget {
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
         if (this.active && this.visible && this.clicked(mouseX, mouseY)) {
+            Minecraft.getInstance().getSoundManager().play(
+                    SimpleSoundInstance.forUI(SoundEvents.UI_BUTTON_CLICK, 1F)
+            );
+
             this.updateFromMouse(mouseY);
             isDragging = true;
 
@@ -71,6 +86,19 @@ public class GlintSlider extends AbstractWidget {
 
         if (this.currentValue != newValue) {
             this.currentValue = newValue;
+
+            long currentTime = System.currentTimeMillis();
+            if (currentTime - lastUpdate > .25) {
+                float diff = Mth.abs(currentValue - lastValue);
+                float pitch = 0.75f + diff/maxRange;
+                Minecraft.getInstance().getSoundManager().play(
+                        SimpleSoundInstance.forUI(utmSounds.SLIDER_TICK.get(), pitch, .8f)
+                );
+
+                lastValue = currentValue;
+                lastUpdate = currentTime;
+            }
+
             this.onSync.run();
         }
     }
@@ -91,6 +119,13 @@ public class GlintSlider extends AbstractWidget {
                 8, 8,
                 8, 8
         );
+
+        if (this.isHovered()) {
+            String tooltipText = String.format("%.1f", this.getActualValue());
+
+            guiGraphics.renderTooltip(this.font,
+                    Component.literal(tooltipText), mouseX, mouseY);
+        }
     }
 
     @Override

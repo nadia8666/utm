@@ -1,2 +1,5 @@
-// 1.21.1	2026-01-27T22:43:53.901152	Loot Tables
+// 1.21.1	2026-02-02T09:47:30.4371713	Loot Tables
+cffc805801ca90da8fc3022b03b2f653dff81aed data/utm/loot_table/blocks/citywalls_metal.json
+c8b4fb55f495bda3a63e2ecc474b1d059415d051 data/utm/loot_table/blocks/glint_table.json
+bd2b22b9652c80441bc5b1f717eddec48ad69841 data/utm/loot_table/blocks/grate.json
 5b79fc9e6175902b985a60f308e9fbb32425351b data/utm/loot_table/blocks/heavy_metal_anvil.json

@@ -22,5 +22,7 @@
 
   "emi.category.utm.anvil_transformation": "Anvil Reinforcement",
   "utm.emi.requires_levels": "Enchantment Cost: %s",
-  "utm.gui.glint_table_menu": "Glint Augmenter"
+  "utm.gui.glint_table_menu": "Glint Augmenter",
+
+  "subtitles.utm.slider_drag": "Slider drag"
 }

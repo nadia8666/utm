@@ -1,0 +1,8 @@
+{
+  "slider_drag": {
+    "sounds": [
+      "utm:slider_drag"
+    ],
+    "subtitle": "subtitles.utm.slider_drag"
+  }
+}

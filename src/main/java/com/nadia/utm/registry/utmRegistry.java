@@ -5,9 +5,11 @@ import com.nadia.utm.registry.block.utmBlocks;
 import com.nadia.utm.registry.data.utmDataComponents;
 import com.nadia.utm.registry.item.tool.utmTools;
 import com.nadia.utm.registry.item.utmItems;
+import com.nadia.utm.registry.sound.utmSounds;
 import com.nadia.utm.registry.ui.utmMenus;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -26,6 +28,7 @@ public class utmRegistry {
     public static final DeferredRegister.DataComponents COMPONENTS = utmDataComponents.COMPONENTS;
     public static final DeferredRegister<MenuType<?>> MENUS = utmMenus.MENUS;
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = utmBlockEntities.BLOCK_ENTITIES;
+    public static final DeferredRegister<SoundEvent> SOUNDS = utmSounds.SOUNDS;
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> MAIN = TABS
             .register("main", () -> CreativeModeTab.builder()
@@ -49,6 +52,7 @@ public class utmRegistry {
         COMPONENTS.register(modEventBus);
         MENUS.register(modEventBus);
         BLOCK_ENTITIES.register(modEventBus);
+        SOUNDS.register(modEventBus);
 
         utmTools.doNothing();
         TABS.register(modEventBus);

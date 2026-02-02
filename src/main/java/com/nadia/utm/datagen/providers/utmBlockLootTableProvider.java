@@ -19,6 +19,9 @@ public class utmBlockLootTableProvider extends BlockLootSubProvider {
     @Override
     protected void generate() {
         dropSelf(utmBlocks.HEAVY_METAL_ANVIL.block.get());
+        dropSelf(utmBlocks.GLINT_TABLE.block.get());
+        dropSelf(utmBlocks.GRATE.block.get());
+        dropSelf(utmBlocks.CITYWALLS_METAL.block.get());
     }
 
     @Override

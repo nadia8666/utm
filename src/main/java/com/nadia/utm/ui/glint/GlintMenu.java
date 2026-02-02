@@ -68,10 +68,7 @@ public class GlintMenu extends AbstractContainerMenu {
             @Override
             public void onTake(@NotNull Player player, @NotNull ItemStack stack) {
                 ItemStack input = inSlot.getItem();
-                utm.LOGGER.info("[UTM] {}", input);
-                utm.LOGGER.info("[UTM] {}", input.isEmpty());
                 if (!input.isEmpty()) {
-                    utm.LOGGER.info("[UTM] {}", input.getCount());
                     input.shrink(1);
 
                     if (input.getCount() <= 0) {
@@ -201,13 +198,11 @@ public class GlintMenu extends AbstractContainerMenu {
     }
 
     protected void updateGlintConfig(ItemStack stack) {
-        this.COLOR = stack.getOrDefault(utmDataComponents.GLINT_COLOR, 0xFFFFFF);
+        this.COLOR = stack.getOrDefault(utmDataComponents.GLINT_COLOR, 0x8040CC);
         this.ADDITIVE = stack.getOrDefault(utmDataComponents.GLINT_ADDITIVE, true);
         this.SCALE = new Vector2f(stack.getOrDefault(utmDataComponents.GLINT_SCALE, new Vector2f(1, 1)));
         this.SPEED = new Vector2f(stack.getOrDefault(utmDataComponents.GLINT_SPEED, new Vector2f(1, 1)));
         this.TYPE = stack.getOrDefault(utmDataComponents.GLINT_TYPE, TEXTURES.getFirst());
-
-        utm.LOGGER.warn("[UTM] updated config {} {} {} {} {}", COLOR, ADDITIVE, SCALE, SPEED, TYPE);
     }
 
     @Override

@@ -3,11 +3,14 @@ package com.nadia.utm.ui.glint;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.nadia.utm.networking.GlintSyncPayload;
 import com.nadia.utm.registry.data.utmDataComponents;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
@@ -43,13 +46,13 @@ public class GlintScreen extends AbstractContainerScreen<GlintMenu> {
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
 
-        scaleX = this.addRenderableWidget(new GlintSlider(x+107, y+24, 47, 0f, 10f, 1f, this::sync));
-        scaleY = this.addRenderableWidget(new GlintSlider(x+113, y+24, 47, 0f, 10f, 1f, this::sync));
-        speedX = this.addRenderableWidget(new GlintSlider(x+119, y+24, 47, 0f, 10f, 1f, this::sync));
-        speedY = this.addRenderableWidget(new GlintSlider(x+125, y+24, 47, 0f, 10f, 1f, this::sync));
-        r = this.addRenderableWidget(new GlintSlider(x+138, y+12, 59, 0f, 255f, 255f, this::sync));
-        g = this.addRenderableWidget(new GlintSlider(x+144, y+12, 59, 0f, 255f, 255f, this::sync));
-        b = this.addRenderableWidget(new GlintSlider(x+150, y+12, 59, 0f, 255f, 255f, this::sync));
+        scaleX = this.addRenderableWidget(new GlintSlider(this.font, x+107, y+24, 47, 0f, 10f, 1f, this::sync));
+        scaleY = this.addRenderableWidget(new GlintSlider(this.font, x+113, y+24, 47, 0f, 10f, 1f, this::sync));
+        speedX = this.addRenderableWidget(new GlintSlider(this.font, x+119, y+24, 47, -10f, 10f, 1f, this::sync));
+        speedY = this.addRenderableWidget(new GlintSlider(this.font, x+125, y+24, 47, -10f, 10f, 1f, this::sync));
+        r = this.addRenderableWidget(new GlintSlider(this.font, x+138, y+12, 59, 0f, 255f, 255f, this::sync));
+        g = this.addRenderableWidget(new GlintSlider(this.font, x+144, y+12, 59, 0f, 255f, 255f, this::sync));
+        b = this.addRenderableWidget(new GlintSlider(this.font, x+150, y+12, 59, 0f, 255f, 255f, this::sync));
 
         additiveBtn = this.addRenderableWidget(new GlintButton(x+106, y+11, 22, 11, Component.empty(), this::sync));
     }
@@ -85,10 +88,46 @@ public class GlintScreen extends AbstractContainerScreen<GlintMenu> {
         ));
     }
 
+    private void updateSliders() {
+        if (!r.isDragging) r.setActualValue(intToRGB(menu.COLOR, 0));
+        if (!g.isDragging) g.setActualValue(intToRGB(menu.COLOR, 1));
+        if (!b.isDragging) b.setActualValue(intToRGB(menu.COLOR, 2));
+
+        if (!scaleX.isDragging) scaleX.setActualValue(menu.SCALE.x);
+        if (!scaleY.isDragging) scaleY.setActualValue(menu.SCALE.y);
+        if (!speedX.isDragging) speedX.setActualValue(menu.SPEED.x);
+        if (!speedY.isDragging) speedY.setActualValue(menu.SPEED.y);
+
+        additiveBtn.pressed = menu.ADDITIVE;
+    }
+
     @Override
     public boolean mouseReleased(double mouseX, double mouseY, int button) {
-        sync();
+        int x = (width - imageWidth) / 2;
+        int y = (height - imageHeight) / 2;
 
+        if (mouseX >= x + 8 && mouseX <= x + 50 && mouseY >= y + 32 && mouseY <= y + 74) {
+            ItemStack heldItem = menu.getCarried();
+
+            if (!heldItem.isEmpty()) {
+                menu.COLOR = heldItem.getOrDefault(utmDataComponents.GLINT_COLOR, menu.COLOR);
+                menu.ADDITIVE = heldItem.getOrDefault(utmDataComponents.GLINT_ADDITIVE, menu.ADDITIVE);
+                menu.SCALE = new Vector2f(heldItem.getOrDefault(utmDataComponents.GLINT_SCALE, menu.SCALE));
+                menu.SPEED = new Vector2f(heldItem.getOrDefault(utmDataComponents.GLINT_SPEED, menu.SPEED));
+                menu.TYPE = heldItem.getOrDefault(utmDataComponents.GLINT_TYPE, menu.TYPE);
+
+                Minecraft.getInstance().getSoundManager().play(
+                        SimpleSoundInstance.forUI(SoundEvents.EXPERIENCE_ORB_PICKUP, 1F)
+                );
+
+                updateSliders();
+                sync();
+
+                return true;
+            }
+        }
+
+        sync();
         return super.mouseReleased(mouseX, mouseY, button);
     }
 
@@ -131,7 +170,11 @@ public class GlintScreen extends AbstractContainerScreen<GlintMenu> {
 
             if (col != -1 && row >= 0) {
                 int index = row * 2 + col;
-                if (index < GlintMenu.TEXTURES.size()) {
+                if (index < GlintMenu.TEXTURES.size() && !menu.resultContainer.getItem(0).isEmpty() && menu.TYPE != GlintMenu.TEXTURES.get(index)) {
+                    Minecraft.getInstance().getSoundManager().play(
+                            SimpleSoundInstance.forUI(SoundEvents.UI_BUTTON_CLICK, 1F)
+                    );
+
                     menu.TYPE = GlintMenu.TEXTURES.get(index);
                     sync();
                     return true;
@@ -200,16 +243,7 @@ public class GlintScreen extends AbstractContainerScreen<GlintMenu> {
     public void containerTick() {
         super.containerTick();
 
-        if (!r.isDragging) r.setActualValue(intToRGB(menu.COLOR, 0));
-        if (!g.isDragging) g.setActualValue(intToRGB(menu.COLOR, 1));
-        if (!b.isDragging) b.setActualValue(intToRGB(menu.COLOR, 2));
-
-        if (!scaleX.isDragging) scaleX.setActualValue(menu.SCALE.x);
-        if (!scaleY.isDragging) scaleY.setActualValue(menu.SCALE.y);
-        if (!speedX.isDragging) speedX.setActualValue(menu.SPEED.x);
-        if (!speedY.isDragging) speedY.setActualValue(menu.SPEED.y);
-
-        additiveBtn.pressed = menu.ADDITIVE;
+        updateSliders();
     }
 
     @Override

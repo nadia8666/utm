@@ -1,14 +1,17 @@
 package com.nadia.utm.ui.glint;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
+import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
 import org.jetbrains.annotations.NotNull;
 
 public class GlintButton extends AbstractWidget {
-    public boolean pressed = false;
+    public boolean pressed = true;
     public static final ResourceLocation BUTTON_DEFAULT = ResourceLocation.fromNamespaceAndPath("utm", "textures/gui/container/glint_table_btn.png");
     public static final ResourceLocation BUTTON_PRESSED = ResourceLocation.fromNamespaceAndPath("utm", "textures/gui/container/glint_table_btn_p.png");
     private final Runnable onSync;
@@ -23,6 +26,9 @@ public class GlintButton extends AbstractWidget {
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
         if (this.active && this.visible && this.clicked(mouseX, mouseY)) {
             pressed = !pressed;
+            Minecraft.getInstance().getSoundManager().play(
+                    SimpleSoundInstance.forUI(SoundEvents.UI_BUTTON_CLICK, 1F)
+            );
 
             onSync.run();
 
