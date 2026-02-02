@@ -1,5 +1,5 @@
 {
   "variants": {
-    "": { "model": "utm:obj/citywalls_metal" }
+    "": { "model": "utm:block/citywalls_metal" }
   }
 }
