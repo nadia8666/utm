@@ -42,7 +42,11 @@ public class GlintMenu extends AbstractContainerMenu {
             ResourceLocation.fromNamespaceAndPath("utm", "textures/misc/along.png"),
             ResourceLocation.fromNamespaceAndPath("utm", "textures/misc/along2.png"),
             ResourceLocation.fromNamespaceAndPath("utm", "textures/misc/along3.png"),
-            ResourceLocation.fromNamespaceAndPath("utm", "textures/misc/along4.png")
+            ResourceLocation.fromNamespaceAndPath("utm", "textures/misc/along4.png"),
+            ResourceLocation.fromNamespaceAndPath("utm", "textures/misc/glint_grid_thin.png"),
+            ResourceLocation.fromNamespaceAndPath("utm", "textures/misc/glint_grid.png"),
+            ResourceLocation.fromNamespaceAndPath("utm", "textures/misc/glint_checkers.png"),
+            ResourceLocation.fromNamespaceAndPath("utm", "textures/misc/glint_items.png")
     );
 
     public GlintMenu(int containerId, Inventory inv, FriendlyByteBuf extraData) {

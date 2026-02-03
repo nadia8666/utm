@@ -1,2 +1,4 @@
-// 1.21.1	2026-01-27T21:03:30.111874	Tags for minecraft:item mod id utm
+// 1.21.1	2026-02-02T22:18:36.3586915	Tags for minecraft:item mod id utm
+7f56a7e67dd1fa415dc0312e5b206821476a2788 data/c/tags/item/enchantables.json
 6cd88e214573b659c707666abea9d2e53d37d1ef data/minecraft/tags/item/anvil.json
+7f56a7e67dd1fa415dc0312e5b206821476a2788 data/minecraft/tags/item/enchantable/sword.json
