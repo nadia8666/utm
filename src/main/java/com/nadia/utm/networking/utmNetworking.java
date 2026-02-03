@@ -1,5 +1,6 @@
 package com.nadia.utm.networking;
 
+import com.nadia.utm.client.ui.TabMenuLayer;
 import com.nadia.utm.ui.glint.GlintMenu;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -24,5 +25,15 @@ public class utmNetworking {
                 menu.broadcastChanges();
             }
         }));
+
+        registrar.playToClient(
+                TabLayerPayload.TYPE,
+                TabLayerPayload.STREAM_CODEC,
+                (payload, context) -> {
+                    context.enqueueWork(() -> {
+                        TabMenuLayer.CACHE = payload.players();
+                    });
+                }
+        );
     }
 }

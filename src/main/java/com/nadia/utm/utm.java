@@ -39,9 +39,7 @@ public class utm {
 
     }
 
+    // dont delete this apprently. this is core to utm working.
     @SubscribeEvent
-    public void onServerStarting(ServerStartingEvent event) {
-        // Do something when the server starts
-        LOGGER.info("HELLO from server starting");
-    }
+    public void onServerStarting(ServerStartingEvent event) {}
 }
