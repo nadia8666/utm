@@ -43,6 +43,14 @@ public class utmTools {
     );
     public static final Supplier<FiddleheadItem> FIDDLEHEAD = utmItems.ITEMS.register("fiddlehead", () -> new FiddleheadItem(new Item.Properties().durability(72000)));
 
+    public static final Supplier<AxeItem> OBSIDIAN_SWORD = utmItems.ITEMS.register("obsidian_sword", () -> {
+                var Tier = utmToolBuilder.buildTier(
+                        BlockTags.INCORRECT_FOR_WOODEN_TOOL, 4200, 1f, 0f, 5, () -> Ingredient.EMPTY
+                );
+                return new AxeItem(Tier, new Item.Properties().attributes(
+                        AxeItem.createAttributes(Tier, 12, -3.75f)));
+            }
+    );
     public static void doNothing() {
         utm.LOGGER.info("[UTM] Tools class loaded, so that it shows up!");
     }
