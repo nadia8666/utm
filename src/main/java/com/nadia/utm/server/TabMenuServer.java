@@ -2,7 +2,6 @@ package com.nadia.utm.server;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.mojang.authlib.GameProfile;
 import com.nadia.utm.networking.TabLayerPayload;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;

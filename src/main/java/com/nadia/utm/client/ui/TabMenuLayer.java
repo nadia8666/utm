@@ -1,10 +1,11 @@
 package com.nadia.utm.client.ui;
 
+import com.mojang.authlib.GameProfile;
 import com.nadia.utm.networking.TabLayerPayload;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.PlayerFaceRenderer;
-import net.minecraft.client.renderer.entity.LivingEntityRenderer;
+import net.minecraft.client.resources.DefaultPlayerSkin;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.neoforged.api.distmarker.Dist;
@@ -68,14 +69,14 @@ public class TabMenuLayer {
             // player heads
             if (p.online()) {
                 var playerInfo = Objects.requireNonNull(mc.getConnection()).getPlayerInfo(p.id());
-                ResourceLocation skinTexture = playerInfo != null ? playerInfo.getSkin().texture() : net.minecraft.client.resources.DefaultPlayerSkin.get(p.id()).texture();
+                ResourceLocation skinTexture = playerInfo != null ? playerInfo.getSkin().texture() : DefaultPlayerSkin.get(p.id()).texture();
 
                 gui.setColor(1f, 1f, 1f, 1f);
                 PlayerFaceRenderer.draw(gui, skinTexture, x + 2, rowY + 2, 7, true, false);
             } else {
                 gui.setColor(1f, 1f, 1f,0.5f);
                 PlayerFaceRenderer.draw(gui,
-                        mc.getSkinManager().getInsecureSkin(new com.mojang.authlib.GameProfile(p.id(), p.name())).texture(),
+                        mc.getSkinManager().getInsecureSkin(new GameProfile(p.id(), p.name())).texture(),
                         x + 2, rowY + 2, 7, true, false);
                 gui.setColor(1f, 1f, 1f, 1f);
             }

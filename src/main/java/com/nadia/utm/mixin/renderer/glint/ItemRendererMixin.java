@@ -68,15 +68,14 @@ public abstract class ItemRendererMixin {
                 utmShaders.GLINT_OVERLAY.safeGetUniform("ScrollOffset").set(-x, y);
             }
 
-            boolean refColor = GLINT_COLOR.tryUpdate(stack);
-            boolean refTexture = GLINT_LOCATION.tryUpdate(stack);
-            boolean refSpeed = GLINT_SPEED.tryUpdate(stack);
-            boolean refScale = GLINT_SCALE.tryUpdate(stack);
-            boolean refAdditive = GLINT_ADDITIVE.tryUpdate(stack);
+            boolean changed = false;
+            changed = GLINT_COLOR.passUpdate(stack, bufferSource, changed);
+            changed = GLINT_LOCATION.passUpdate(stack, bufferSource, changed);
+            changed = GLINT_SPEED.passUpdate(stack, bufferSource, changed);
+            changed = GLINT_SCALE.passUpdate(stack, bufferSource, changed);
+            changed = GLINT_ADDITIVE.passUpdate(stack, bufferSource, changed);
 
-            if (refColor || refTexture || refAdditive || refSpeed || refScale) {
-                bufferSource.endBatch();
-
+            if (changed) {
                 int color = GLINT_COLOR.THREAD.get();
                 utm$setGlintColor(color != -1 ? color : 0x8040CC, GLINT_ADDITIVE.THREAD.get() ? utmShaders.GLINT_ADDITIVE : utmShaders.GLINT_OVERLAY);
             }
