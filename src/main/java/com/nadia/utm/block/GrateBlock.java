@@ -1,6 +1,5 @@
 package com.nadia.utm.block;
 
-import com.simibubi.create.content.contraptions.wrench.RadialWrenchMenu;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -100,7 +99,5 @@ public class GrateBlock extends Block implements IWrenchable, SimpleWaterloggedB
     static {
         BOTTOM = Block.box(0, 0.0, 0, 16, 1, 16);
         TOP = Block.box(0, 15.0, 0, 16, 16, 16);
-
-        RadialWrenchMenu.registerRotationProperty(VERTICAL_DIRECTION, "Vertical Direction");
     }
 }

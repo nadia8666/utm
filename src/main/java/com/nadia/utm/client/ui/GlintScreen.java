@@ -1,8 +1,11 @@
-package com.nadia.utm.ui.glint;
+package com.nadia.utm.client.ui;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.nadia.utm.networking.GlintSyncPayload;
 import com.nadia.utm.registry.data.utmDataComponents;
+import com.nadia.utm.ui.glint.GlintButton;
+import com.nadia.utm.ui.glint.GlintMenu;
+import com.nadia.utm.ui.glint.GlintSlider;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;

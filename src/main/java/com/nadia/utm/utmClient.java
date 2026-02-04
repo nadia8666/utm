@@ -1,9 +1,11 @@
 package com.nadia.utm;
 
+import com.nadia.utm.block.GrateBlock;
 import com.nadia.utm.client.UpdateToast;
 import com.nadia.utm.registry.ui.utmMenus;
 import com.nadia.utm.renderer.utmRenderTypes;
-import com.nadia.utm.ui.glint.GlintScreen;
+import com.nadia.utm.client.ui.GlintScreen;
+import com.simibubi.create.content.contraptions.wrench.RadialWrenchMenu;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.TitleScreen;
 import net.neoforged.api.distmarker.Dist;
@@ -29,6 +31,8 @@ import static com.nadia.utm.updater.AutoUpdater.*;
 public class utmClient {
     public utmClient(ModContainer container) {
         container.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
+
+        RadialWrenchMenu.registerRotationProperty(GrateBlock.VERTICAL_DIRECTION, "Vertical Direction");
     }
 
     @SubscribeEvent
