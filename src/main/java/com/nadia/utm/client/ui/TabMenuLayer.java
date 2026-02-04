@@ -1,6 +1,7 @@
 package com.nadia.utm.client.ui;
 
 import com.mojang.authlib.GameProfile;
+import com.nadia.utm.Config;
 import com.nadia.utm.networking.TabLayerPayload;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -24,8 +25,10 @@ public class TabMenuLayer {
 
     @SubscribeEvent
     public static void onRenderLayer(RenderGuiLayerEvent.Pre event) {
+        if (!Config.ALTERNATE_TAB_MENU.get()) return;
         if (event.getName().equals(VanillaGuiLayers.TAB_LIST)) {
             Minecraft mc = Minecraft.getInstance();
+
             if (mc.options.keyPlayerList.isDown()) {
                 event.setCanceled(true);
                 render(event.getGuiGraphics(), event.getGuiGraphics().guiWidth(), event.getGuiGraphics().guiHeight());

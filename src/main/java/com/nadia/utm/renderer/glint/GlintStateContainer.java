@@ -4,7 +4,6 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.registries.DeferredHolder;
-import oshi.util.tuples.Pair;
 
 import javax.annotation.Nullable;
 import java.util.Objects;

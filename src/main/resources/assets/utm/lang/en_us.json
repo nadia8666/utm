@@ -10,6 +10,7 @@
   "block.utm.heavy_metal_anvil": "Heavy-Metal Anvil",
   "block.utm.grate": "Grating",
   "block.utm.glint_table": "Glint Augmenter",
+  "block.utm.citywalls_metal": "city walls metal",
 
   "item.utm.copper_sword": "Copper Sword",
   "item.utm.copper_pickaxe": "Copper Pickaxe",
@@ -17,6 +18,8 @@
   "item.utm.copper_shovel": "Copper Shovel",
   "item.utm.copper_hoe": "Copper Hoe",
   "item.utm.fiddlehead": "Lesser Fiddlehead",
+  "item.utm.unfinished_glint_table": "Unfinished Glint Augmenter",
+  "item.utm.obsidian_sword": "Obsidian Sword",
 
   "itemGroup.utm": "utm Items",
 

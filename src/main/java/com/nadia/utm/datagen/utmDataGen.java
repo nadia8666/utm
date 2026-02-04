@@ -45,5 +45,7 @@ public class utmDataGen {
         generator.addProvider(event.includeServer(), new utmRecipeProvider(output, lookupProvider));
 
         generator.addProvider(event.includeClient(), new utmSoundDefsProvider(output, existingFileHelper));
+
+        generator.addProvider(event.includeClient(), new utmItemModelProvider(output, existingFileHelper));
     }
 }

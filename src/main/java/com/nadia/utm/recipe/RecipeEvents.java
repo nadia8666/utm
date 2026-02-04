@@ -11,8 +11,7 @@ import static com.nadia.utm.Config.HEAVY_METAL_ANVIL_LEVEL_REQUIREMENT;
 
 @EventBusSubscriber(modid = "utm")
 public class RecipeEvents {
-    // This example allows repairing a stone pickaxe with a full stack of dirt, consuming half the stack, for 3 levels.
-    @SubscribeEvent // on the game event bus
+    @SubscribeEvent
     public static void onAnvilUpdate(AnvilUpdateEvent event) {
         ItemStack left = event.getLeft();
         ItemStack right = event.getRight();

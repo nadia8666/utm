@@ -2,13 +2,15 @@ package com.nadia.utm.mixin.renderer.glint;
 
 import com.llamalad7.mixinextras.sugar.Local;
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.*;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.SheetedDecalTextureGenerator;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.blaze3d.vertex.VertexMultiConsumer;
 import com.nadia.utm.client.renderer.utmShaders;
 import com.nadia.utm.renderer.utmRenderTypes;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.world.item.ItemDisplayContext;
@@ -19,19 +21,12 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import static com.nadia.utm.client.renderer.glint.utmGlintContainer.*;
 
 @Mixin(value = ItemRenderer.class, remap = false)
 public abstract class ItemRendererMixin {
-    @Unique
-    private static void utm$setGlintColor(int rgb, ShaderInstance shader) {
-        shader.safeGetUniform("GlintColor")
-                .set(((rgb >> 16) & 0xFF) / 255f, ((rgb >> 8) & 0xFF) / 255f, (rgb & 0xFF) / 255f, 1.0f);
-        shader.safeGetUniform("UVScale").set(GLINT_SCALE.THREAD.get().x, GLINT_SCALE.THREAD.get().y);
-        shader.safeGetUniform("ScrollSpeed").set(GLINT_SPEED.THREAD.get().x, GLINT_SPEED.THREAD.get().y);
-    }
-
     @Unique
     private float utm$time = 0f;
     @Unique
@@ -53,23 +48,25 @@ public abstract class ItemRendererMixin {
             CallbackInfo ci
     ) {
         if (buffer instanceof MultiBufferSource.BufferSource bufferSource) {
+            boolean changed;
+            boolean timeUpdated = false;
+
             float time = RenderSystem.getShaderGameTime();
             if (time != utm$lastDraw) {
                 utm$time = (utm$time + (time - utm$lastDraw) * 20 * Minecraft.getInstance().options.glintSpeed().get().floatValue()) % 1f;
                 utm$lastDraw = time;
 
-                bufferSource.endBatch();
-
                 float offset = utm$time * 100000;
                 float x = (offset % 110000) / 110000.0f;
                 float y = (offset % 30000) / 30000.0f;
+
+                timeUpdated = true;
 
                 utmShaders.GLINT_ADDITIVE.safeGetUniform("ScrollOffset").set(-x, y);
                 utmShaders.GLINT_OVERLAY.safeGetUniform("ScrollOffset").set(-x, y);
             }
 
-            boolean changed = false;
-            changed = GLINT_COLOR.passUpdate(stack, bufferSource, changed);
+            changed = GLINT_COLOR.passUpdate(stack, bufferSource, false);
             changed = GLINT_LOCATION.passUpdate(stack, bufferSource, changed);
             changed = GLINT_SPEED.passUpdate(stack, bufferSource, changed);
             changed = GLINT_SCALE.passUpdate(stack, bufferSource, changed);
@@ -77,8 +74,10 @@ public abstract class ItemRendererMixin {
 
             if (changed) {
                 int color = GLINT_COLOR.THREAD.get();
-                utm$setGlintColor(color != -1 ? color : 0x8040CC, GLINT_ADDITIVE.THREAD.get() ? utmShaders.GLINT_ADDITIVE : utmShaders.GLINT_OVERLAY);
+                setGlintColor(color != -1 ? color : 0x8040CC, GLINT_ADDITIVE.THREAD.get() ? utmShaders.GLINT_ADDITIVE : utmShaders.GLINT_OVERLAY);
             }
+
+            if (timeUpdated && !changed) bufferSource.endBatch();
         }
     }
 
@@ -94,6 +93,33 @@ public abstract class ItemRendererMixin {
     ) {
         var isAdditive = GLINT_ADDITIVE.THREAD.get();
         return withGlint ?
-                VertexMultiConsumer.create(bufferSource.getBuffer(isAdditive ? utmRenderTypes.ADDITIVE_GLINT : utmRenderTypes.OVERLAY_GLINT), bufferSource.getBuffer(renderType)) : bufferSource.getBuffer(renderType);
+                VertexMultiConsumer.create(bufferSource.getBuffer(isAdditive ? utmRenderTypes.ADDITIVE_GLINT_ITEM.get() : utmRenderTypes.OVERLAY_GLINT_ITEM.get()), bufferSource.getBuffer(renderType)) : bufferSource.getBuffer(renderType);
+    }
+
+
+    @Inject(
+            method = "getArmorFoilBuffer",
+            at=@At("HEAD"),
+            cancellable = true
+    )
+    private static void utm$addOverlayArmor(
+            MultiBufferSource bufferSource, RenderType renderType, boolean hasFoil, CallbackInfoReturnable<VertexConsumer> cir
+    ) {
+        cir.setReturnValue(hasFoil ? VertexMultiConsumer.create(bufferSource.getBuffer(GLINT_ADDITIVE.THREAD.get() ? utmRenderTypes.ADDITIVE_GLINT_ENTITY.get() : utmRenderTypes.OVERLAY_GLINT_ENTITY.get()), bufferSource.getBuffer(renderType)) : bufferSource.getBuffer(renderType));
+    }
+
+    @Inject(
+            method = "getCompassFoilBuffer",
+            at=@At("HEAD"),
+            cancellable = true
+    )
+    private static void utm$addOverlayArmor(
+            MultiBufferSource bufferSource, RenderType renderType, PoseStack.Pose pose, CallbackInfoReturnable<VertexConsumer> cir
+    ) {
+        cir.setReturnValue(
+                VertexMultiConsumer.create(new SheetedDecalTextureGenerator(bufferSource.getBuffer(
+                        GLINT_ADDITIVE.THREAD.get() ? utmRenderTypes.ADDITIVE_GLINT_ITEM.get() : utmRenderTypes.OVERLAY_GLINT_ITEM.get()
+                ), pose, 0.0078125F), bufferSource.getBuffer(renderType))
+        );
     }
 }

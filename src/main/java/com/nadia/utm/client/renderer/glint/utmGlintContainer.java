@@ -2,6 +2,7 @@ package com.nadia.utm.client.renderer.glint;
 
 import com.nadia.utm.registry.data.utmDataComponents;
 import com.nadia.utm.renderer.glint.GlintStateContainer;
+import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.resources.ResourceLocation;
 import org.joml.Vector2f;
 
@@ -37,4 +38,11 @@ public class utmGlintContainer {
             new Vector2f(1,1),
             null
     );
+
+    public static void setGlintColor(int rgb, ShaderInstance shader) {
+        shader.safeGetUniform("GlintColor")
+                .set(((rgb >> 16) & 0xFF) / 255f, ((rgb >> 8) & 0xFF) / 255f, (rgb & 0xFF) / 255f, 1.0f);
+        shader.safeGetUniform("UVScale").set(GLINT_SCALE.THREAD.get().x, GLINT_SCALE.THREAD.get().y);
+        shader.safeGetUniform("ScrollSpeed").set(GLINT_SPEED.THREAD.get().x, GLINT_SPEED.THREAD.get().y);
+    }
 }
