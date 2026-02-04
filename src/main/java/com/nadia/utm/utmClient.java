@@ -1,13 +1,6 @@
 package com.nadia.utm;
 
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.TimeUnit;
-
 import com.nadia.utm.client.UpdateToast;
-import static com.nadia.utm.updater.AutoUpdater.ToastReady;
-import static com.nadia.utm.updater.AutoUpdater.ToastTarget;
-import static com.nadia.utm.updater.AutoUpdater.VersionTarget;
-
 import com.nadia.utm.registry.ui.utmMenus;
 import com.nadia.utm.renderer.utmRenderTypes;
 import com.nadia.utm.ui.glint.GlintScreen;
@@ -24,6 +17,11 @@ import net.neoforged.neoforge.client.event.RegisterRenderBuffersEvent;
 import net.neoforged.neoforge.client.event.ScreenEvent;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
+
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
+
+import static com.nadia.utm.updater.AutoUpdater.*;
 
 // This class will not load on dedicated servers. Accessing client side code from here is safe.
 @Mod(value = utm.MODID, dist = Dist.CLIENT)
@@ -62,7 +60,9 @@ public class utmClient {
 
     @SubscribeEvent
     public static void onRegisterBuffers(RegisterRenderBuffersEvent event) {
-        event.registerRenderBuffer(utmRenderTypes.ADDITIVE_GLINT);
-        event.registerRenderBuffer(utmRenderTypes.OVERLAY_GLINT);
+        event.registerRenderBuffer(utmRenderTypes.ADDITIVE_GLINT_ITEM.get());
+        event.registerRenderBuffer(utmRenderTypes.OVERLAY_GLINT_ITEM.get());
+        event.registerRenderBuffer(utmRenderTypes.ADDITIVE_GLINT_ENTITY.get());
+        event.registerRenderBuffer(utmRenderTypes.OVERLAY_GLINT_ENTITY.get());
     }
 }

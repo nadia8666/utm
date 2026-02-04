@@ -1,5 +1,6 @@
 package com.nadia.utm.renderer.glint;
 
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -25,15 +26,18 @@ public class GlintStateContainer<T> {
         SUPPLIER = sup;
     }
 
-    public boolean tryUpdate(ItemStack stack) {
-        var LastState = SUPPLIER != null ? SUPPLIER.apply(THREAD) : THREAD.get();
-        var CurrentState = stack.getOrDefault(COMPONENT.get(), INITIAL_VALUE);
+    public boolean passUpdate(ItemStack stack, MultiBufferSource.BufferSource bufferSource, boolean changed) {
+        T lastState = SUPPLIER != null ? SUPPLIER.apply(THREAD) : THREAD.get();
+        T currentState = stack.getOrDefault(COMPONENT.get(), INITIAL_VALUE);
 
-        var DidChange = !Objects.equals(LastState, CurrentState);
-        if (DidChange) {
-            THREAD.set(CurrentState);
+        boolean thisChanged = !Objects.equals(lastState, currentState);
+
+        if (thisChanged) {
+            bufferSource.endBatch();
+            THREAD.set(currentState);
+            changed = true;
         }
 
-        return DidChange;
+        return changed;
     }
 }

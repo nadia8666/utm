@@ -34,6 +34,12 @@ jobs:
         run: |
           VERSION=$(grep "mod_version" gradle.properties | cut -d'=' -f2 | tr -d '[:space:]')
           echo "MOD_VERSION=$VERSION" >> $GITHUB_ENV
+          
+          if [[ "$VERSION" == *"dev"* ]]; then
+            echo "IS_PRERELEASE=true" >> $GITHUB_ENV
+          else
+            echo "IS_PRERELEASE=false" >> $GITHUB_ENV
+          fi
 
       - name: Build with Gradle
         run: ./gradlew build
@@ -46,6 +52,7 @@ jobs:
           commit: ${{ github.sha }}
 
           generateReleaseNotes: true
+          prerelease: ${{ env.IS_PRERELEASE == 'true' }}
 
           allowUpdates: true
           replacesArtifacts: true

@@ -1,0 +1,108 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "minecraft:cherry_wood"
+  },
+  "loops": 1,
+  "results": [
+    {
+      "id": "utm:glint_table",
+      "chance": 100,
+      "count": 1
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "minecraft:cherry_wood"
+        },
+        {
+          "item": "create:sturdy_sheet"
+        }
+      ],
+      "results": [
+        {
+          "id": "utm:unfinished_glint_table"
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "utm:unfinished_glint_table"
+        }
+      ],
+      "results": [
+        {
+          "id": "utm:unfinished_glint_table",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "utm:unfinished_glint_table"
+        },
+        {
+          "item": "create:iron_sheet"
+        }
+      ],
+      "results": [
+        {
+          "id": "utm:unfinished_glint_table"
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "utm:unfinished_glint_table"
+        }
+      ],
+      "results": [
+        {
+          "id": "utm:unfinished_glint_table"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "utm:unfinished_glint_table"
+        },
+        {
+          "item": "minecraft:nether_star"
+        }
+      ],
+      "results": [
+        {
+          "id": "utm:unfinished_glint_table"
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "utm:unfinished_glint_table"
+        }
+      ],
+      "results": [
+        {
+          "id": "utm:glint_table",
+          "count": 1
+        }
+      ]
+    }
+  ],
+  "transitional_item": {
+    "id": "utm:unfinished_glint_table"
+  }
+}
