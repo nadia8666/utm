@@ -25,5 +25,6 @@ public class utmItemTagProvider extends ItemTagsProvider {
 
         tag(Tags.Items.ENCHANTABLES).add(utmTools.OBSIDIAN_SWORD.get());
         tag(ItemTags.SWORD_ENCHANTABLE).add(utmTools.OBSIDIAN_SWORD.get());
+        tag(ItemTags.WEAPON_ENCHANTABLE).add(utmTools.OBSIDIAN_SWORD.get()); //need both
     }
 }
