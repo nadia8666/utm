@@ -9,6 +9,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
+import net.neoforged.neoforge.event.server.ServerStoppingEvent;
 import net.neoforged.neoforge.event.tick.ServerTickEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 
@@ -23,27 +24,37 @@ public class utmEvents {
 
     @SubscribeEvent
     public static void onServerStarting(ServerStartingEvent event) {
-        TabMenuServer.scanPlayerHistory(event.getServer());
+        MinecraftServer server = event.getServer();
+        TabMenuServer.loadData(server);
+        refreshTabMenuData(server);
+    }
+
+    @SubscribeEvent
+    public static void onServerStopping(ServerStoppingEvent event) {
+        TabMenuServer.saveData();
     }
 
     @SubscribeEvent
     public static void onPlayerJoin(PlayerEvent.PlayerLoggedInEvent event) {
         MinecraftServer server = event.getEntity().getServer();
-        if (server != null) TabMenuServer.scanPlayerHistory(server);
+        if (server == null) return;
+
+        if (event.getEntity() instanceof ServerPlayer player) TabMenuServer.addPlayer(player);
+        refreshTabMenuData(server);
     }
 
     @SubscribeEvent
-    public static void utmOnPlayerDamage(LivingDamageEvent.Post event) {
+    public static void onEntityDamage(LivingDamageEvent.Post event) {
         if (event.getEntity() instanceof ServerPlayer player) refreshTabMenuData(player.getServer());
     }
 
     @SubscribeEvent
-    public static void utmOnDimensionChange(PlayerEvent.PlayerChangedDimensionEvent event) {
+    public static void onDimensionChange(PlayerEvent.PlayerChangedDimensionEvent event) {
         if (event.getEntity() instanceof ServerPlayer player) refreshTabMenuData(player.getServer());
     }
 
     public static void refreshTabMenuData(MinecraftServer server) {
-        TabLayerPayload payload = TabMenuServer.createPayload(server);
+        TabLayerPayload payload = TabMenuServer.create(server);
         PacketDistributor.sendToAllPlayers(payload);
     }
 }

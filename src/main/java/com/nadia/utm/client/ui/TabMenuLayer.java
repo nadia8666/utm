@@ -4,6 +4,7 @@ import com.nadia.utm.networking.TabLayerPayload;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.PlayerFaceRenderer;
+import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.neoforged.api.distmarker.Dist;
@@ -14,6 +15,7 @@ import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @EventBusSubscriber(modid = "utm", value = Dist.CLIENT)
 public class TabMenuLayer {
@@ -34,24 +36,24 @@ public class TabMenuLayer {
         Minecraft mc = Minecraft.getInstance();
         if (CACHE.isEmpty()) return;
 
-        int maxNameWidth = 0;
-        int maxHeartCount = 10;
+        int targetWidth = 0;
+        int maxHearts = 10;
 
         for (TabLayerPayload.PlayerData p : CACHE) {
-            maxNameWidth = Math.max(maxNameWidth, mc.font.width(p.name()));
+            targetWidth = Math.max(targetWidth, mc.font.width(p.name()));
             int heartsNeeded = (int) Math.ceil(Math.max(p.maxHealth(), p.health()) / 2.0f);
-            maxHeartCount = Math.max(maxHeartCount, heartsNeeded);
+            maxHearts = Math.max(maxHearts, heartsNeeded);
         }
 
         int leftPadding = 14;
         int dimWidth = 30;
         int pingWidth = 15;
-        int maxHealthBarWidth = Math.min(80, maxHeartCount * 8);
+        int healthWidth = Math.min(80, maxHearts * 8);
 
-        int statsWidth = dimWidth + maxHealthBarWidth + pingWidth + 20;
+        int statsWidth = dimWidth + healthWidth + pingWidth + 20;
         int minWidth = 165;
 
-        int entryWidth = Math.max(minWidth, leftPadding + maxNameWidth + statsWidth);
+        int entryWidth = Math.max(minWidth, leftPadding + targetWidth + statsWidth);
         int entryHeight = 12;
         int x = (width - entryWidth) / 2;
         int y = 40;
@@ -63,16 +65,25 @@ public class TabMenuLayer {
             gui.fill(x, rowY, x + entryWidth, rowY + entryHeight - 1, 0xAA000000);
             gui.renderOutline(x, rowY, entryWidth, entryHeight - 1, 0xFF000000);
 
-            gui.setColor(1f, 1f, 1f, p.online() ? 1f : 0.5f);
-            PlayerFaceRenderer.draw(gui,
-                    mc.getSkinManager().getInsecureSkin(new com.mojang.authlib.GameProfile(p.id(), p.name())).texture(),
-                    x + 2, rowY + 2, 7);
-            gui.setColor(1f, 1f, 1f, 1f);
+            // player heads
+            if (p.online()) {
+                var playerInfo = Objects.requireNonNull(mc.getConnection()).getPlayerInfo(p.id());
+                ResourceLocation skinTexture = playerInfo != null ? playerInfo.getSkin().texture() : net.minecraft.client.resources.DefaultPlayerSkin.get(p.id()).texture();
+
+                gui.setColor(1f, 1f, 1f, 1f);
+                PlayerFaceRenderer.draw(gui, skinTexture, x + 2, rowY + 2, 7, true, false);
+            } else {
+                gui.setColor(1f, 1f, 1f,0.5f);
+                PlayerFaceRenderer.draw(gui,
+                        mc.getSkinManager().getInsecureSkin(new com.mojang.authlib.GameProfile(p.id(), p.name())).texture(),
+                        x + 2, rowY + 2, 7, true, false);
+                gui.setColor(1f, 1f, 1f, 1f);
+            }
 
             int nameColor = p.online() ? 0xFFFFFFFF : 0xFF707070;
             gui.drawString(mc.font, p.name(), x + leftPadding, rowY + 2, nameColor, false);
 
-            int statsX = x + leftPadding + maxNameWidth + 10;
+            int statsX = x + leftPadding + targetWidth + 10;
 
             if (p.online()) {
                 String dim = p.dimension();
@@ -100,35 +111,35 @@ public class TabMenuLayer {
     private static final ResourceLocation HEART_ABSORB_HALF = ResourceLocation.withDefaultNamespace("hud/heart/absorbing_half");
 
     private static void renderHealth(GuiGraphics gui, int x, int y, float health, float maxHealth) {
-        float utmEffectiveMax = Math.max(maxHealth, health);
-        int utmTotalHearts = Mth.ceil(utmEffectiveMax / 2.0f);
+        float max = Math.max(maxHealth, health);
+        int totalHealth = Mth.ceil(max / 2.0f);
 
-        float utmMaxWidth = 80.0f;
-        float utmSpacing = utmTotalHearts > 10 ? utmMaxWidth / utmTotalHearts : 8.0f;
+        float maxWidth = 80.0f;
+        float spacing = totalHealth > 10 ? maxWidth / totalHealth : 8.0f;
 
-        for (int i = 0; i < utmTotalHearts; i++) {
+        for (int i = 0; i < totalHealth; i++) {
             gui.pose().pushPose();
             gui.pose().translate(0, 0, i * 0.05f);
 
-            int tgtX = x + (int)(i * utmSpacing);
+            int tgtX = x + (int)(i * spacing);
             float heartVal = i * 2;
 
             gui.blitSprite(HEART_EMPTY, tgtX, y, 9, 9);
 
             if (heartVal < maxHealth) {
-                float utmHpInHeart = health - heartVal;
-                if (utmHpInHeart >= 2) {
+                float fillState = health - heartVal;
+                if (fillState >= 2) {
                     gui.blitSprite(HEART_FULL, tgtX, y, 9, 9);
-                } else if (utmHpInHeart >= 1) {
+                } else if (fillState >= 1) {
                     gui.blitSprite(HEART_HALF, tgtX, y, 9, 9);
                 }
             }
 
             else if (heartVal < health) {
-                float utmAbsorbInHeart = health - heartVal;
-                if (utmAbsorbInHeart >= 2) {
+                float fillState = health - heartVal;
+                if (fillState >= 2) {
                     gui.blitSprite(HEART_ABSORB_FULL, tgtX, y, 9, 9);
-                } else if (utmAbsorbInHeart >= 1) {
+                } else if (fillState >= 1) {
                     gui.blitSprite(HEART_ABSORB_HALF, tgtX, y, 9, 9);
                 }
             }
