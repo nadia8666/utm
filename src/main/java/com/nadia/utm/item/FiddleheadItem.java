@@ -31,7 +31,7 @@ public class FiddleheadItem extends Item {
             }
             //  player.startUsingItem(hand);
             player.setDeltaMovement(hi.x * mult, hi.y * Math.min(mult,1), hi.z * mult);
-            itemstack.setDamageValue(1);
+            itemstack.setDamageValue(itemstack.getDamageValue()+1);
             return InteractionResultHolder.consume(itemstack);
         } else {
             return InteractionResultHolder.fail(itemstack);

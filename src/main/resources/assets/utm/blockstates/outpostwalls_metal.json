@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "utm:block/outpostwalls_metal" },
+    "facing=south": { "model": "utm:block/outpostwalls_metal", "y": 180 },
+    "facing=east": { "model": "utm:block/outpostwalls_metal", "y": 90 },
+    "facing=west": { "model": "utm:block/outpostwalls_metal", "y": 270 }
+  }
+}

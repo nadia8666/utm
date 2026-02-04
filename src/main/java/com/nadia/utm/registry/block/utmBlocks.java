@@ -38,10 +38,16 @@ public class utmBlocks {
             .isViewBlocking((state, level, pos) -> false)
             .isSuffocating((state, level, pos) -> false)); //id like to make it waterlog but i dont knwo how!
 
-    public static final utmBlockContainer<CitywallsMetalBlock, BlockItem> CITYWALLS_METAL = iregister("citywalls_metal", CitywallsMetalBlock::new, BlockBehaviour.Properties.of()
+    public static final utmBlockContainer<RotatableBlock, BlockItem> CITYWALLS_METAL = iregister("citywalls_metal", RotatableBlock::new, BlockBehaviour.Properties.of()
             .destroyTime(1.0f)
             .sound(SoundType.ANCIENT_DEBRIS)
             .noOcclusion()
             .isViewBlocking((state, level, pos) -> false)
-            .isSuffocating((state, level, pos) -> false)); //id like to make it waterlog but i dont knwo how!
+            .isSuffocating((state, level, pos) -> false));
+    public static final utmBlockContainer<RotatableBlock, BlockItem> OUTPOSTWALLS_METAL = iregister("outpostwalls_metal", RotatableBlock::new, BlockBehaviour.Properties.of()
+            .destroyTime(1.0f)
+            .sound(SoundType.ANCIENT_DEBRIS)
+            .noOcclusion()
+            .isViewBlocking((state, level, pos) -> false)
+            .isSuffocating((state, level, pos) -> false));
 }

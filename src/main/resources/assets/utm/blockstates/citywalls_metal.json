@@ -1,5 +1,8 @@
 {
   "variants": {
-    "": { "model": "utm:block/citywalls_metal" }
+    "facing=north": { "model": "utm:block/citywalls_metal" },
+    "facing=south": { "model": "utm:block/citywalls_metal", "y": 180 },
+    "facing=east": { "model": "utm:block/citywalls_metal", "y": 90 },
+    "facing=west": { "model": "utm:block/citywalls_metal", "y": 270 }
   }
 }

@@ -17,7 +17,9 @@
   "item.utm.copper_shovel": "Copper Shovel",
   "item.utm.copper_hoe": "Copper Hoe",
   "item.utm.fiddlehead": "Lesser Fiddlehead",
-
+  "item.utm.obsidian_sword": "Obsidian Sword",
+  "item.utm.citywalls_metal": "Metal City",
+  "item.utm.outpostwalls_metal": "Metal Town",
   "itemGroup.utm": "utm Items",
 
   "emi.category.utm.anvil_transformation": "Anvil Reinforcement",
