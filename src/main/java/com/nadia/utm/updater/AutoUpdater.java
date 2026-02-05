@@ -149,14 +149,18 @@ public class AutoUpdater {
     });
 
     public static void startAutoUpdate() {
+        utm.LOGGER.info("[UTM] Starting auto updater loop");
         if (!FMLEnvironment.production) return;
+        utm.LOGGER.info("[UTM] Scheduling...");
 
         SCHEDULER.scheduleAtFixedRate(() -> {
             try {
-                if (!Config.AUTO_UPDATE_ENABLED.getAsBoolean()) return;
+                if (!Config.AUTO_UPDATE_ENABLED.get()) return;
                 utm.LOGGER.info("[UTM] Checking for updates.");
                 AutoUpdater.checkForUpdate();
-            } catch (Exception ignored) {}
+            } catch (Exception e) {
+                utm.LOGGER.info("[UTM] Auto update failed: {}", e.getMessage());
+            }
         }, 0, 30, TimeUnit.MINUTES);
     }
 
