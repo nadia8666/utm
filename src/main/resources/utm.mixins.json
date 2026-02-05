@@ -10,6 +10,7 @@
   ],
   "client": [
     "compat.ShowcaseItemMixin",
+    "renderer.MultiBufferSourceMixin",
     "renderer.glint.ElytraLayerMixin",
     "renderer.glint.HumanoidArmorLayerMixin",
     "renderer.glint.ItemRendererMixin"

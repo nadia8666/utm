@@ -101,6 +101,7 @@ dependencies {
     jarJar(implementation("maven.modrinth:5IIKsxiL:KXmiEin1")) // extreme sound muffler
     (implementation("maven.modrinth:rVUtrHuM:uUy23VAp")) // backported spears
     implementation("maven.modrinth:P5Jjjezm:AD6eBCKn") // showcase item
+    implementation("maven.modrinth:s9gIPDom:yXFi1fed") // figura
 }
 
 def replaceProperties = [

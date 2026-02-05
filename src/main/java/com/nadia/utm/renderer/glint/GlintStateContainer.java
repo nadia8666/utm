@@ -17,6 +17,13 @@ public class GlintStateContainer<T> {
 
     public GlintStateContainer (
             DeferredHolder<DataComponentType<?>, DataComponentType<T>> component,
+            T initialValue
+    ) {
+        this(component, initialValue, null);
+    }
+
+    public GlintStateContainer (
+            DeferredHolder<DataComponentType<?>, DataComponentType<T>> component,
             T initialValue,
             @Nullable() Function<ThreadLocal<T>, T> sup
     ) {
@@ -33,7 +40,7 @@ public class GlintStateContainer<T> {
         boolean thisChanged = !Objects.equals(lastState, currentState);
 
         if (thisChanged) {
-            bufferSource.endBatch();
+            if (bufferSource != null) bufferSource.endBatch();
             THREAD.set(currentState);
             changed = true;
         }

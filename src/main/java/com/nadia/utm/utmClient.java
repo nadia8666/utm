@@ -2,6 +2,7 @@ package com.nadia.utm;
 
 import com.nadia.utm.block.GrateBlock;
 import com.nadia.utm.client.UpdateToast;
+import com.nadia.utm.client.renderer.glint.utmGlintContainer;
 import com.nadia.utm.registry.ui.utmMenus;
 import com.nadia.utm.renderer.utmRenderTypes;
 import com.nadia.utm.client.ui.GlintScreen;
@@ -25,7 +26,6 @@ import java.util.concurrent.TimeUnit;
 
 import static com.nadia.utm.updater.AutoUpdater.*;
 
-// This class will not load on dedicated servers. Accessing client side code from here is safe.
 @Mod(value = utm.MODID, dist = Dist.CLIENT)
 @EventBusSubscriber(modid = utm.MODID, value = Dist.CLIENT)
 public class utmClient {
@@ -36,7 +36,9 @@ public class utmClient {
     }
 
     @SubscribeEvent
-    static void onClientSetup(FMLClientSetupEvent event) {}
+    static void onClientSetup(FMLClientSetupEvent event) {
+        event.enqueueWork(() -> Minecraft.getInstance().getTextureManager().getTexture(utmGlintContainer.GLINT_DEFAULT));
+    }
 
     @SubscribeEvent
     public static void onGuiInit(ScreenEvent.Init.Post event) {

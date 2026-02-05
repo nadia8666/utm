@@ -11,32 +11,27 @@ public class utmGlintContainer {
 
     public static final GlintStateContainer<ResourceLocation> GLINT_LOCATION = new GlintStateContainer<>(
             utmDataComponents.GLINT_TYPE,
-            GLINT_DEFAULT,
-            null
+            GLINT_DEFAULT
     );
 
     public static final GlintStateContainer<Integer> GLINT_COLOR = new GlintStateContainer<>(
             utmDataComponents.GLINT_COLOR,
-            -1,
-            null
+            -1
     );
 
     public static final GlintStateContainer<Boolean> GLINT_ADDITIVE = new GlintStateContainer<>(
             utmDataComponents.GLINT_ADDITIVE,
-            true,
-            null
+            true
     );
 
     public static final GlintStateContainer<Vector2f> GLINT_SPEED = new GlintStateContainer<>(
             utmDataComponents.GLINT_SPEED,
-            new Vector2f(1,1),
-            null
+            new Vector2f(1,1)
     );
 
     public static final GlintStateContainer<Vector2f> GLINT_SCALE = new GlintStateContainer<>(
             utmDataComponents.GLINT_SCALE,
-            new Vector2f(1,1),
-            null
+            new Vector2f(1,1)
     );
 
     public static void setGlintColor(int rgb, ShaderInstance shader) {

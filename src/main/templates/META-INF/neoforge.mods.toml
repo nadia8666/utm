@@ -96,3 +96,11 @@ type="required"
 versionRange=","
 ordering="AFTER"
 side="CLIENT"
+
+# FIGURA
+[[dependencies.${mod_id}]]
+modId="figura"
+type="required"
+versionRange=","
+ordering="AFTER"
+side="CLIENT"

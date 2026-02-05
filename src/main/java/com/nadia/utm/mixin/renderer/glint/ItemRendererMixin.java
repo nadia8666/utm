@@ -102,7 +102,7 @@ public abstract class ItemRendererMixin {
             at=@At("HEAD"),
             cancellable = true
     )
-    private static void utm$addOverlayArmor(
+    private static void utm$gAFB(
             MultiBufferSource bufferSource, RenderType renderType, boolean hasFoil, CallbackInfoReturnable<VertexConsumer> cir
     ) {
         cir.setReturnValue(hasFoil ? VertexMultiConsumer.create(bufferSource.getBuffer(GLINT_ADDITIVE.THREAD.get() ? utmRenderTypes.ADDITIVE_GLINT_ENTITY.get() : utmRenderTypes.OVERLAY_GLINT_ENTITY.get()), bufferSource.getBuffer(renderType)) : bufferSource.getBuffer(renderType));
@@ -113,13 +113,29 @@ public abstract class ItemRendererMixin {
             at=@At("HEAD"),
             cancellable = true
     )
-    private static void utm$addOverlayArmor(
+    private static void utm$gCFB(
             MultiBufferSource bufferSource, RenderType renderType, PoseStack.Pose pose, CallbackInfoReturnable<VertexConsumer> cir
     ) {
         cir.setReturnValue(
                 VertexMultiConsumer.create(new SheetedDecalTextureGenerator(bufferSource.getBuffer(
                         GLINT_ADDITIVE.THREAD.get() ? utmRenderTypes.ADDITIVE_GLINT_ITEM.get() : utmRenderTypes.OVERLAY_GLINT_ITEM.get()
                 ), pose, 0.0078125F), bufferSource.getBuffer(renderType))
+        );
+    }
+
+    @Inject(
+            method = "getFoilBufferDirect",
+            at=@At("HEAD"),
+            cancellable = true
+    )
+    private static void utm$gFBD(
+            MultiBufferSource bufferSource, RenderType renderType, boolean noEntity, boolean withGlint, CallbackInfoReturnable<VertexConsumer> cir
+    ) {
+        cir.setReturnValue(
+        withGlint ? VertexMultiConsumer.create(bufferSource.getBuffer(noEntity ?
+                        (GLINT_ADDITIVE.THREAD.get() ? utmRenderTypes.ADDITIVE_GLINT_ITEM.get() : utmRenderTypes.OVERLAY_GLINT_ITEM.get()) :
+                        (GLINT_ADDITIVE.THREAD.get() ? utmRenderTypes.ADDITIVE_GLINT_ENTITY.get() : utmRenderTypes.OVERLAY_GLINT_ENTITY.get())
+                ), bufferSource.getBuffer(renderType)) : bufferSource.getBuffer(renderType)
         );
     }
 }
