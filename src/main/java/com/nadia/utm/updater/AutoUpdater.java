@@ -6,7 +6,6 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import net.neoforged.api.distmarker.Dist;
-import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.fml.loading.FMLPaths;
 
@@ -28,7 +27,6 @@ import static net.neoforged.fml.loading.FMLLoader.getDist;
 
 public class AutoUpdater {
     public static String CURRENT_VERSION = "0.0.0-INTERNAL";
-    public static IEventBus BUS;
 
     public static void checkForUpdate() throws ExecutionException, InterruptedException, RuntimeException, IOException {
         HttpClient client = HttpClient.newHttpClient();
@@ -113,15 +111,14 @@ public class AutoUpdater {
 
             if (getDist() == Dist.CLIENT) {
                 VersionTarget = "v" + latest;
-
                 ToastTarget = true;
 
-                if (BUS != null) BUS.post(new ToastDisplaySignal());
+                utm.EVENT_BUS.post(new ToastDisplaySignal());
             }
         });
     }
 
-    private static boolean tryMigrateVersion() throws IOException {
+    private static void tryMigrateVersion() throws IOException {
         Path modsFolder = FMLPaths.MODSDIR.get();
         AtomicReference<Path> oldFile = new AtomicReference<>();
 
@@ -137,11 +134,9 @@ public class AutoUpdater {
             try {
                 Files.deleteIfExists(oldFile.get());
 
-                return true;
             } catch (Exception ignored) {}
         }
 
-        return false;
     }
 
     private static final ScheduledExecutorService SCHEDULER = Executors.newSingleThreadScheduledExecutor(r -> {
