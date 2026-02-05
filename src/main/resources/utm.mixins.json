@@ -12,6 +12,7 @@
     "compat.ShowcaseItemMixin",
     "renderer.MultiBufferSourceMixin",
     "renderer.glint.ElytraLayerMixin",
+    "renderer.glint.FiguraCompatMixin",
     "renderer.glint.HumanoidArmorLayerMixin",
     "renderer.glint.ItemRendererMixin"
   ],

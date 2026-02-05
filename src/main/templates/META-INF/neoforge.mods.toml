@@ -100,7 +100,7 @@ side="CLIENT"
 # FIGURA
 [[dependencies.${mod_id}]]
 modId="figura"
-type="required"
+type="optional"
 versionRange=","
 ordering="AFTER"
 side="CLIENT"
