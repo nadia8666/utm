@@ -1,11 +1,12 @@
 package com.nadia.utm;
 
 import com.nadia.utm.block.GrateBlock;
-import com.nadia.utm.client.UpdateToast;
+import com.nadia.utm.client.updater.UpdateToast;
 import com.nadia.utm.client.renderer.glint.utmGlintContainer;
 import com.nadia.utm.registry.ui.utmMenus;
 import com.nadia.utm.renderer.utmRenderTypes;
 import com.nadia.utm.client.ui.GlintScreen;
+import com.nadia.utm.updater.ToastDisplaySignal;
 import com.simibubi.create.content.contraptions.wrench.RadialWrenchMenu;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.TitleScreen;
@@ -44,15 +45,17 @@ public class utmClient {
     public static void onGuiInit(ScreenEvent.Init.Post event) {
         if (!ToastReady && event.getScreen() instanceof TitleScreen) {
             ToastReady = true;
-            utm.LOGGER.warn("[UTM] Toast unlocked");
             tryToastPopup();
         }
     }
 
+    @SubscribeEvent
+    public static void onToast(ToastDisplaySignal event) {
+        tryToastPopup();
+    }
+
     public static void tryToastPopup() {
         if (ToastTarget) {
-            utm.LOGGER.warn("[UTM] Displaying toast (2)");
-
             CompletableFuture.runAsync(() -> Minecraft.getInstance().getToasts().addToast(new UpdateToast(VersionTarget)), CompletableFuture.delayedExecutor(1000, TimeUnit.MILLISECONDS));
 
             ToastTarget = false;

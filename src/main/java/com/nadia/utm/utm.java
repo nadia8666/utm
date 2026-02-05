@@ -31,6 +31,7 @@ public class utm {
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
 
         // Update mod
+        AutoUpdater.BUS = modEventBus;
         AutoUpdater.CURRENT_VERSION = modContainer.getModInfo().getVersion().toString();
         AutoUpdater.startAutoUpdate();
     }

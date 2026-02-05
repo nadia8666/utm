@@ -6,6 +6,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.fml.loading.FMLPaths;
 
@@ -27,6 +28,8 @@ import static net.neoforged.fml.loading.FMLLoader.getDist;
 
 public class AutoUpdater {
     public static String CURRENT_VERSION = "0.0.0-INTERNAL";
+    public static IEventBus BUS;
+
     public static void checkForUpdate() throws ExecutionException, InterruptedException, RuntimeException, IOException {
         HttpClient client = HttpClient.newHttpClient();
 
@@ -110,6 +113,8 @@ public class AutoUpdater {
                 VersionTarget = "v" + latest;
 
                 ToastTarget = true;
+
+                if (BUS != null) BUS.post(new ToastDisplaySignal());
             }
         });
     }
