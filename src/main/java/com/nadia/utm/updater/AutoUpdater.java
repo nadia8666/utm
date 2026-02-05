@@ -46,7 +46,9 @@ public class AutoUpdater {
 
             utm.LOGGER.warn("[UTM] Version check: {} {} {}", version, CURRENT_VERSION, Objects.equals(version, CURRENT_VERSION));
 
-            if (!tryMigrateVersion() && !Objects.equals(version, CURRENT_VERSION)) {
+            tryMigrateVersion();
+
+            if (!Objects.equals(version, CURRENT_VERSION)) {
                 JsonArray assets = json.get("assets").getAsJsonArray();
                 AtomicReference<JsonObject> element = new AtomicReference<>();
 
