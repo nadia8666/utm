@@ -28,10 +28,12 @@ public class utmCommands {
                             switch (StringArgumentType.getString(context, "command_type")) {
                                 case "update": {
                                     AutoUpdater.checkForUpdate();
+                                    break;
                                 }
 
                                 case "reinstall": {
                                     AutoUpdater.checkForUpdate(true);
+                                    break;
                                 }
 
                                 case "restart": {
@@ -43,6 +45,7 @@ public class utmCommands {
                                     }
 
                                     server.halt(false);
+                                    break;
                                 }
                             }
 
