@@ -19,10 +19,8 @@ import net.neoforged.neoforge.event.server.ServerStartingEvent;
 public class utm {
     public static final String MODID = "utm";
     public static final Logger LOGGER = LogUtils.getLogger();
-    public static IEventBus EVENT_BUS = null;
 
     public utm(IEventBus modEventBus, ModContainer modContainer) {
-        EVENT_BUS = modEventBus;
         AutoUpdater.CURRENT_VERSION = modContainer.getModInfo().getVersion().toString();
 
         modEventBus.addListener(this::commonSetup);

@@ -8,6 +8,7 @@ import com.google.gson.JsonParser;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.fml.loading.FMLPaths;
+import net.neoforged.neoforge.common.NeoForge;
 
 import java.io.IOException;
 import java.net.URI;
@@ -114,7 +115,7 @@ public class AutoUpdater {
                 ToastTarget = true;
 
                 utm.LOGGER.warn("[UTM] Sending toast!");
-                utm.EVENT_BUS.post(new ToastDisplaySignal());
+                NeoForge.EVENT_BUS.post(new ToastDisplaySignal());
             }
         });
     }
