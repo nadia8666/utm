@@ -104,3 +104,11 @@ type="optional"
 versionRange=","
 ordering="AFTER"
 side="CLIENT"
+
+# GRAVESTONES
+[[dependencies.${mod_id}]]
+modId="gravestone"
+type="optional"
+versionRange=","
+ordering="AFTER"
+side="CLIENT"

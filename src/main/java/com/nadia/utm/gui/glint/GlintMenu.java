@@ -1,11 +1,10 @@
-package com.nadia.utm.ui.glint;
+package com.nadia.utm.gui.glint;
 
 import com.nadia.utm.block.entity.GlintTableBlockEntity;
 import com.nadia.utm.client.renderer.glint.utmGlintContainer;
 import com.nadia.utm.registry.block.utmBlocks;
 import com.nadia.utm.registry.data.utmDataComponents;
 import com.nadia.utm.registry.ui.utmMenus;
-import com.nadia.utm.utm;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;

@@ -99,9 +99,10 @@ dependencies {
     runtimeOnly("mezz.jei:jei-1.21-neoforge:${jei_version}")
 
     jarJar(implementation("maven.modrinth:5IIKsxiL:KXmiEin1")) // extreme sound muffler
-    (implementation("maven.modrinth:rVUtrHuM:uUy23VAp")) // backported spears
+    implementation("maven.modrinth:rVUtrHuM:uUy23VAp") // backported spears
     implementation("maven.modrinth:P5Jjjezm:AD6eBCKn") // showcase item
     compileOnly("maven.modrinth:s9gIPDom:yXFi1fed") // figura
+    implementation("maven.modrinth:RYtXKJPr:AZm51eX1") // gravestones
 }
 
 def replaceProperties = [

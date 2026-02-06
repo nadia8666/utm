@@ -1,4 +1,4 @@
-package com.nadia.utm.ui.glint;
+package com.nadia.utm.gui.glint;
 
 import com.nadia.utm.registry.sound.utmSounds;
 import net.minecraft.client.Minecraft;

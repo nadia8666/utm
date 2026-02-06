@@ -1,7 +1,7 @@
 package com.nadia.utm.block.entity;
 
 import com.nadia.utm.registry.block.utmBlockEntities;
-import com.nadia.utm.ui.glint.GlintMenu;
+import com.nadia.utm.gui.glint.GlintMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;

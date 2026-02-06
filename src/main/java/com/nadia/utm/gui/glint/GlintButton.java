@@ -1,4 +1,4 @@
-package com.nadia.utm.ui.glint;
+package com.nadia.utm.gui.glint;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;

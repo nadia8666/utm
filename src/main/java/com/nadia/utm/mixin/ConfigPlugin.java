@@ -31,9 +31,14 @@ public class ConfigPlugin implements IMixinConfigPlugin {
             return LoadingModList.get().getModFileById("showcaseitem") != null && LoadingModList.get().getModFileById("jei") != null;
         }
 
-        // figura
+        // figura compat
         if (mixinClassName.contains("FiguraCompatMixin")) {
             return LoadingModList.get().getModFileById("figura") != null;
+        }
+
+        // gravestones compat
+        if (mixinClassName.contains("ObituaryScreenMixin")) {
+            return LoadingModList.get().getModFileById("gravestone") != null;
         }
 
         return true;

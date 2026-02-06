@@ -6,9 +6,12 @@
   "mixins": [
     "FreeAnvilMixin",
     "HitboxMixin",
+    "compat.GraveBlockEntityMixin",
+    "compat.GraveBlockMixin",
     "compat.SpearsMixin"
   ],
   "client": [
+    "compat.ObituaryScreenMixin",
     "compat.ShowcaseItemMixin",
     "renderer.MultiBufferSourceMixin",
     "renderer.glint.ElytraLayerMixin",

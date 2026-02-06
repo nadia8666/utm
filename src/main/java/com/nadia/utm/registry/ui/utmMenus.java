@@ -1,6 +1,6 @@
 package com.nadia.utm.registry.ui;
 
-import com.nadia.utm.ui.glint.GlintMenu;
+import com.nadia.utm.gui.glint.GlintMenu;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.inventory.MenuType;
 import net.neoforged.neoforge.common.extensions.IMenuTypeExtension;
