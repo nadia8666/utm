@@ -1,6 +1,7 @@
 package com.nadia.utm.mixin.compat;
 
 import com.nadia.utm.gui.compat.ObituaryDropButton;
+import com.nadia.utm.networking.DropGravePayload;
 import de.maxhenkel.gravestone.corelib.death.Death;
 import de.maxhenkel.gravestone.gui.ObituaryScreen;
 import net.minecraft.client.gui.screens.Screen;
@@ -27,6 +28,9 @@ public abstract class ObituaryScreenMixin extends Screen {
     )
     private void utm$addDropButton(CallbackInfo ci) {
         var death = utm$getDeath();
-        addRenderableWidget(new ObituaryDropButton((width - 160)/2 +10, 20+118, 25, 25, Component.empty(), death.getBlockPos()));
+        addRenderableWidget(new ObituaryDropButton((width - 160)/2 +10, 20+118, 25, 25, Component.empty(), new DropGravePayload(
+                death.getBlockPos(),
+                death.getDimension()
+        )));
     }
 }

@@ -23,13 +23,15 @@ public class utmCommands {
     public static void onRegisterCommands(RegisterCommandsEvent event) {
         event.getDispatcher().register(Commands.literal("utm_server")
                 .then(Commands.argument("command_type", StringArgumentType.word())
-                        .suggests((context, builder) -> SharedSuggestionProvider.suggest(new String[]{"update", "restart"}, builder))
+                        .suggests((context, builder) -> SharedSuggestionProvider.suggest(new String[]{"update", "restart", "reinstall"}, builder))
                         .executes(context -> {
-                            switch(StringArgumentType.getString(context, "command_type")) {
+                            switch (StringArgumentType.getString(context, "command_type")) {
                                 case "update": {
-                                    try {
-                                        AutoUpdater.checkForUpdate();
-                                    } catch (Exception ignored) {}
+                                    AutoUpdater.checkForUpdate();
+                                }
+
+                                case "reinstall": {
+                                    AutoUpdater.checkForUpdate(true);
                                 }
 
                                 case "restart": {
@@ -53,34 +55,38 @@ public class utmCommands {
     @SubscribeEvent
     public static void onRegisterClientCommands(RegisterClientCommandsEvent event) {
         event.getDispatcher().register(Commands.literal("utm")
-                        .then(Commands.literal("update").executes(context -> {
-                            try {
-                                AutoUpdater.checkForUpdate();
-                            } catch (Exception ignored) {}
-                            return 1;
-                        }))
-                        .then(Commands.literal("stop").executes(context -> {
-                            var mc = Minecraft.getInstance();
-                            Minecraft.getInstance().execute(mc::stop);
+                .then(Commands.literal("update").executes(context -> {
+                    AutoUpdater.checkForUpdate();
+
+                    return 1;
+                }))
+                .then(Commands.literal("reinstall").executes(context -> {
+                    AutoUpdater.checkForUpdate(true);
+
+                    return 1;
+                }))
+                .then(Commands.literal("stop").executes(context -> {
+                    var mc = Minecraft.getInstance();
+                    Minecraft.getInstance().execute(mc::stop);
+
+                    return 1;
+                }))
+                .then(Commands.literal("test").then(Commands.argument("test_type", StringArgumentType.word())
+                        .suggests((context, builder) -> SharedSuggestionProvider.suggest(new String[]{"update_toast"}, builder)).executes(context -> {
+                            switch (StringArgumentType.getString(context, "test_type")) {
+                                case "update_toast": {
+                                    utm.LOGGER.info("[UTM] Testing toast!");
+
+                                    ToastTarget = true;
+                                    VersionTarget = "TEST VERSION";
+                                    NeoForge.EVENT_BUS.post(new ToastDisplaySignal());
+                                    utm.LOGGER.info("[UTM] Test toast sent!");
+                                }
+                            }
 
                             return 1;
                         }))
-                        .then(Commands.literal("test").then(Commands.argument("test_type", StringArgumentType.word())
-                                .suggests((context, builder) -> SharedSuggestionProvider.suggest(new String[]{"update_toast"}, builder)).executes(context -> {
-                                    switch(StringArgumentType.getString(context, "test_type")) {
-                                        case "update_toast": {
-                                            utm.LOGGER.info("[UTM] Testing toast!");
-
-                                            ToastTarget = true;
-                                            VersionTarget = "TEST VERSION";
-                                            NeoForge.EVENT_BUS.post(new ToastDisplaySignal());
-                                            utm.LOGGER.info("[UTM] Test toast sent!");
-                                        }
-                                    }
-
-                                    return 1;
-                                }))
-                        )
+                )
         );
     }
 }

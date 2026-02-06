@@ -9,6 +9,7 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.fml.loading.FMLPaths;
 import net.neoforged.neoforge.common.NeoForge;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.net.URI;
@@ -29,41 +30,62 @@ import static net.neoforged.fml.loading.FMLLoader.getDist;
 public class AutoUpdater {
     public static String CURRENT_VERSION = "0.0.0-INTERNAL";
 
-    public static void checkForUpdate() throws ExecutionException, InterruptedException, RuntimeException, IOException {
-        HttpClient client = HttpClient.newHttpClient();
+    public static void checkForUpdate() {
+        checkForUpdate(null);
+    }
 
-        HttpRequest request = HttpRequest.newBuilder(URI.create("https://api.github.com/repos/nadia8666/utm/releases/latest"))
-                .header("User-Agent", "utm-update")
-                .header("Accept", "application/vnd.github.v3+json")
-                .GET()
-                .build();
+    public static void checkForUpdate(@Nullable Boolean forceUpdate) {
+        CompletableFuture.runAsync(() -> {
+            HttpClient client = HttpClient.newHttpClient();
 
-        HttpResponse<String> response = client.sendAsync(request, HttpResponse.BodyHandlers.ofString()).get();
-        if (response.statusCode() == 200) {
-            JsonObject json = JsonParser.parseString(response.body()).getAsJsonObject();
-            String version = json.get("tag_name").getAsString();
+            HttpRequest request = HttpRequest.newBuilder(URI.create("https://api.github.com/repos/nadia8666/utm/releases/latest"))
+                    .header("User-Agent", "utm-update")
+                    .header("Accept", "application/vnd.github.v3+json")
+                    .GET()
+                    .build();
 
-            utm.LOGGER.warn("[UTM] Version check: {} {} {}", version, CURRENT_VERSION, Objects.equals(version, CURRENT_VERSION));
-
-            tryMigrateVersion();
-
-            if (!Objects.equals(version, CURRENT_VERSION)) {
-                JsonArray assets = json.get("assets").getAsJsonArray();
-                AtomicReference<JsonObject> element = new AtomicReference<>();
-
-                assets.forEach(target -> {
-                    if (!target.getAsJsonObject().get("name").getAsString().contains("_updater")) {
-                        element.set(target.getAsJsonObject());
-                    }
-                });
-
-                utm.LOGGER.warn("[UTM] Starting update!");
-                startUpdate(element.get().get("browser_download_url").getAsString(), version);
+            HttpResponse<String> response;
+            try {
+                response = client.sendAsync(request, HttpResponse.BodyHandlers.ofString()).get();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
             }
-        } else {
-            tryMigrateVersion();
-            throw new RuntimeException("[UTM] Version check failed: " + response.statusCode());
-        }
+
+            if (response.statusCode() == 200) {
+                JsonObject json = JsonParser.parseString(response.body()).getAsJsonObject();
+                String version = json.get("tag_name").getAsString();
+
+                utm.LOGGER.warn("[UTM] Version check: {} {} {}", version, CURRENT_VERSION, Objects.equals(version, CURRENT_VERSION));
+
+                try {
+                    tryMigrateVersion();
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+
+                if (!Objects.equals(version, CURRENT_VERSION) || Boolean.TRUE.equals(forceUpdate)) {
+                    JsonArray assets = json.get("assets").getAsJsonArray();
+                    AtomicReference<JsonObject> element = new AtomicReference<>();
+
+                    assets.forEach(target -> {
+                        if (!target.getAsJsonObject().get("name").getAsString().contains("_updater")) {
+                            element.set(target.getAsJsonObject());
+                        }
+                    });
+
+                    utm.LOGGER.warn("[UTM] Starting update!");
+                    startUpdate(element.get().get("browser_download_url").getAsString(), version);
+                }
+            } else {
+                try {
+                    tryMigrateVersion();
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+
+                throw new RuntimeException("[UTM] Version check failed: " + response.statusCode());
+            }
+        });
     }
 
     private static CompletableFuture<Path> downloadUpdate(String downloadUrl, Path targetPath) {

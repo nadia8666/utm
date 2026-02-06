@@ -6,7 +6,6 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
-import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
@@ -15,10 +14,10 @@ import org.jetbrains.annotations.NotNull;
 
 public class ObituaryDropButton extends AbstractWidget {
     public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath("utm", "textures/gui/gravestone_descend.png");
-    private final BlockPos POS;
-    public ObituaryDropButton(int x, int y, int width, int height, Component message, BlockPos pos) {
+    private final DropGravePayload PAYLOAD;
+    public ObituaryDropButton(int x, int y, int width, int height, Component message, DropGravePayload payload) {
         super(x, y, width, height, message);
-        POS = pos;
+        PAYLOAD = payload;
     }
 
     @Override
@@ -28,7 +27,7 @@ public class ObituaryDropButton extends AbstractWidget {
                     SimpleSoundInstance.forUI(SoundEvents.UI_BUTTON_CLICK, 1F)
             );
 
-            PacketDistributor.sendToServer(new DropGravePayload(POS));
+            PacketDistributor.sendToServer(PAYLOAD);
 
             return true;
         }

@@ -3,13 +3,15 @@ package com.nadia.utm.networking;
 import com.nadia.utm.client.ui.TabMenuLayer;
 import com.nadia.utm.compat.GraveInterface;
 import com.nadia.utm.gui.glint.GlintMenu;
-import com.nadia.utm.utm;
 import de.maxhenkel.gravestone.Main;
 import de.maxhenkel.gravestone.tileentity.GraveStoneTileEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Vec3i;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -23,6 +25,7 @@ import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import org.joml.Vector2f;
 
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
@@ -53,10 +56,14 @@ public class utmNetworking {
             dropGraveDebounce.put(uuid, true);
             CompletableFuture.runAsync(() -> dropGraveDebounce.remove(uuid), CompletableFuture.delayedExecutor(3, TimeUnit.SECONDS));
 
-            utm.LOGGER.info("[UTM] trying to drop: block");
-
             var pos = payload.blockPos();
-            var level = context.player().level();
+            var level = Objects.requireNonNull(context.player().level().getServer()).getLevel(
+                    ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse(payload.dimension()))
+            );
+
+            if (level == null)
+                level = (ServerLevel) context.player().level();
+
             var target = level.getBlockState(pos);
 
             if (target.is(Main.GRAVESTONE.get())) {
