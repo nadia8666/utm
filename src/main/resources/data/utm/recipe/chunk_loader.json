@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "chunk_loader",
+  "key": {
+    "a": {
+      "item": "utm:player_chunk_loader"
+    },
+    "b": {
+      "item": "minecraft:crying_obsidian"
+    },
+    "g": {
+      "item": "create:golden_sheet"
+    },
+    "c": {
+      "item": "minecraft:ender_pearl"
+    },
+    "d": {
+      "item": "create:powdered_obsidian"
+    }
+  },
+  "pattern": [
+    "bbb",
+    "gcg",
+    "dad"
+  ],
+  "result": {
+    "count": 1,
+    "id": "utm:chunk_loader"
+  }
+}

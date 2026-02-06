@@ -1,5 +1,6 @@
 package com.nadia.utm.registry.block;
 
+import com.nadia.utm.block.entity.ChunkLoaderBlockEntity;
 import com.nadia.utm.block.entity.GlintTableBlockEntity;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -13,5 +14,9 @@ public class utmBlockEntities {
 
     public static final Supplier<BlockEntityType<GlintTableBlockEntity>> GLINT_TABLE = BLOCK_ENTITIES.register("glint_table", () ->
             BlockEntityType.Builder.of(GlintTableBlockEntity::new, utmBlocks.GLINT_TABLE.block.get())
+                    .build(null));
+
+    public static final Supplier<BlockEntityType<ChunkLoaderBlockEntity>> CHUNK_LOADER = BLOCK_ENTITIES.register("chunk_loader", () ->
+            BlockEntityType.Builder.of(ChunkLoaderBlockEntity::new, utmBlocks.CHUNK_LOADER.block.get(), utmBlocks.PLAYER_CHUNK_LOADER.block.get())
                     .build(null));
 }

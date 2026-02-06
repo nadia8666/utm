@@ -21,11 +21,9 @@ public abstract class FreeAnvilMixin extends ItemCombinerMenu {
 
     @ModifyConstant(method = "mayPickup", constant = @Constant(intValue = 0))
     private int utm$allowFreeAnvilCraft(int constant) {
-        utm.LOGGER.info("[UTM] Attempting anvil bypass");
         ItemStack outputStack = this.resultSlots.getItem(0);
 
         if (!outputStack.isEmpty() && outputStack.is(utmBlocks.HEAVY_METAL_ANVIL.item.get()) && Config.HEAVY_METAL_ANVIL_LEVEL_REQUIREMENT.getAsInt() <= 0) {
-            utm.LOGGER.info("[UTM] Anvil success");
             return -1;
         }
 

@@ -31,12 +31,24 @@ public class utmBlocks {
             .destroyTime(3.0f)
             .explosionResistance(25f).sound(SoundType.WOOD));
 
+    public static final utmBlockContainer<BlockChunkLoaderBlock, BlockItem> CHUNK_LOADER = iregister("chunk_loader", BlockChunkLoaderBlock::new, BlockBehaviour.Properties.of()
+            .destroyTime(5.0f)
+            .explosionResistance(25f).sound(SoundType.WOOD)
+            .requiresCorrectToolForDrops()
+            .noOcclusion());
+
+    public static final utmBlockContainer<PlayerChunkLoaderBlock, BlockItem> PLAYER_CHUNK_LOADER = iregister("player_chunk_loader", PlayerChunkLoaderBlock::new, BlockBehaviour.Properties.of()
+            .destroyTime(5.0f)
+            .explosionResistance(25f).sound(SoundType.WOOD)
+            .requiresCorrectToolForDrops()
+            .noOcclusion());
+
     public static final utmBlockContainer<GrateBlock, BlockItem> GRATE = iregister("grate", GrateBlock::new, BlockBehaviour.Properties.of()
             .destroyTime(1.0f)
             .sound(SoundType.CHAIN)
             .noOcclusion()
             .isViewBlocking((state, level, pos) -> false)
-            .isSuffocating((state, level, pos) -> false)); //id like to make it waterlog but i dont knwo how!
+            .isSuffocating((state, level, pos) -> false));
 
     public static final utmBlockContainer<RotatableBlock, BlockItem> CITYWALLS_METAL = iregister("citywalls_metal", RotatableBlock::new, BlockBehaviour.Properties.of()
             .destroyTime(1.0f)

@@ -1,0 +1,31 @@
+{
+  "display": {
+    "icon": {
+      "id": "minecraft:netherite_pickaxe"
+    },
+    "title": "i dont know what to call this one i was thinking 'Amirite?' but it sounds tupid but thats also kind of really funny so give me some ideas",
+    "description": "Upgrade to the most durable pickaxe",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "minecraft:nether/get_ancient_debris",
+  "criteria": {
+    "has_netherite_pickaxe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:netherite_pickaxe"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_netherite_pickaxe"
+    ]
+  ]
+}

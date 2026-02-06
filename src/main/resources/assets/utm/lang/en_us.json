@@ -17,6 +17,8 @@
   "block.utm.glint_table": "Glint Augmenter",
   "block.utm.citywalls_metal": "Metal City",
   "block.utm.outpostwalls_metal": "Metal Town",
+  "block.utm.chunk_loader": "Chunk Loader",
+  "block.utm.player_chunk_loader": "Player-bound Chunk Loader",
 
   "item.utm.copper_sword": "Copper Sword",
   "item.utm.copper_pickaxe": "Copper Pickaxe",

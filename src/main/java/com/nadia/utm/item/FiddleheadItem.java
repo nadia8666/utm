@@ -16,12 +16,12 @@ public class FiddleheadItem extends Item {
         super(properties);
     }
     public @NotNull UseAnim getUseAnimation(@NotNull ItemStack stack) {
-        utm.LOGGER.info("[UTM] got");
+        utm.LOGGER.info("[UTM] got"); //TODO: remove
         return UseAnim.SPEAR;
     }
     public @NotNull InteractionResultHolder<ItemStack> use(@NotNull Level level, Player player, @NotNull InteractionHand hand) {
 
-        utm.LOGGER.info("[UTM] used");
+        utm.LOGGER.info("[UTM] used"); //TODO: remove
         ItemStack itemstack = player.getItemInHand(hand);
         if (!isTooDamagedToUse(itemstack)) {
             var hi = player.getLookAngle();

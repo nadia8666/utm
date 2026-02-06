@@ -39,8 +39,6 @@ public class GlintTableBlock extends BaseEntityBlock {
         return CODEC;
     }
 
-    /* BLOCK ENTITY */
-
     @Override
     protected @NotNull RenderShape getRenderShape(@NotNull BlockState state) {
         return RenderShape.MODEL;

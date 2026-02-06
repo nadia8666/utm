@@ -1,0 +1,7 @@
+{
+	"parent": "utm:block/chunk_loader",
+	"textures": {
+		"0": "utm:block/player_chunk_loader",
+		"particle": "utm:block/player_chunk_loader"
+	}
+}

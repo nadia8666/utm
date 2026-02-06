@@ -1,0 +1,34 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "chunk_loader",
+  "key": {
+    "a": {
+      "item": "minecraft:warped_stem"
+    },
+    "b": {
+      "item": "minecraft:ender_pearl"
+    },
+    "c": {
+      "item": "create:brass_sheet"
+    },
+    "d": {
+      "item": "minecraft:warped_planks"
+    },
+    "e": {
+      "item": "create:brass_ingot"
+    },
+    "f": {
+      "item": "minecraft:redstone_block"
+    }
+  },
+  "pattern": [
+    "cfc",
+    "ebe",
+    "dad"
+  ],
+  "result": {
+    "count": 1,
+    "id": "utm:player_chunk_loader"
+  }
+}
