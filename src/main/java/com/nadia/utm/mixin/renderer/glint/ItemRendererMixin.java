@@ -7,7 +7,7 @@ import com.mojang.blaze3d.vertex.SheetedDecalTextureGenerator;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.blaze3d.vertex.VertexMultiConsumer;
 import com.nadia.utm.client.renderer.utmShaders;
-import com.nadia.utm.renderer.utmRenderTypes;
+import com.nadia.utm.client.renderer.utmRenderTypes;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -74,7 +74,7 @@ public abstract class ItemRendererMixin {
 
             if (changed) {
                 int color = GLINT_COLOR.THREAD.get();
-                setGlintColor(color != -1 ? color : 0x8040CC, GLINT_ADDITIVE.THREAD.get() ? utmShaders.GLINT_ADDITIVE : utmShaders.GLINT_OVERLAY);
+                setGlintColor(color != -1 ? color : DEFAULT_COLOR, GLINT_ADDITIVE.THREAD.get() ? utmShaders.GLINT_ADDITIVE : utmShaders.GLINT_OVERLAY);
             }
 
             if (timeUpdated && !changed) bufferSource.endBatch();

@@ -1,6 +1,5 @@
 package com.nadia.utm.networking;
 
-import com.nadia.utm.renderer.glint.utmCodecs;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;

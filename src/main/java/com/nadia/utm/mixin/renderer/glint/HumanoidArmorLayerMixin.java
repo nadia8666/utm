@@ -4,7 +4,7 @@ import com.llamalad7.mixinextras.sugar.Local;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.nadia.utm.client.renderer.glint.utmGlintContainer;
 import com.nadia.utm.client.renderer.utmShaders;
-import com.nadia.utm.renderer.utmRenderTypes;
+import com.nadia.utm.client.renderer.utmRenderTypes;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -45,7 +45,7 @@ public class HumanoidArmorLayerMixin<T extends LivingEntity, A extends HumanoidM
 
             if (changed) {
                 int color = GLINT_COLOR.THREAD.get();
-                setGlintColor(color != -1 ? color : 0x8040CC, GLINT_ADDITIVE.THREAD.get() ? utmShaders.GLINT_ADDITIVE : utmShaders.GLINT_OVERLAY);
+                setGlintColor(color != -1 ? color : DEFAULT_COLOR, GLINT_ADDITIVE.THREAD.get() ? utmShaders.GLINT_ADDITIVE : utmShaders.GLINT_OVERLAY);
             }
         }
     }

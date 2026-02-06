@@ -1,6 +1,6 @@
 package com.nadia.utm.mixin.renderer;
 
-import com.nadia.utm.renderer.utmRenderTypes;
+import com.nadia.utm.client.renderer.utmRenderTypes;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import org.spongepowered.asm.mixin.Mixin;

@@ -1,4 +1,4 @@
-package com.nadia.utm.renderer.glint;
+package com.nadia.utm.client.renderer.glint;
 
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.core.component.DataComponentType;

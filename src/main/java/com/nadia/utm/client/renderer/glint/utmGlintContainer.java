@@ -1,13 +1,13 @@
 package com.nadia.utm.client.renderer.glint;
 
 import com.nadia.utm.registry.data.utmDataComponents;
-import com.nadia.utm.renderer.glint.GlintStateContainer;
 import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.resources.ResourceLocation;
 import org.joml.Vector2f;
 
 public class utmGlintContainer {
     public static final ResourceLocation GLINT_DEFAULT = ResourceLocation.fromNamespaceAndPath("utm", "textures/misc/glint.png");
+    public static final int DEFAULT_COLOR = 0x8040CC;
 
     public static final GlintStateContainer<ResourceLocation> GLINT_LOCATION = new GlintStateContainer<>(
             utmDataComponents.GLINT_TYPE,

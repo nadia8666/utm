@@ -1,7 +1,6 @@
 package com.nadia.utm.gui.glint;
 
 import com.nadia.utm.block.entity.GlintTableBlockEntity;
-import com.nadia.utm.client.renderer.glint.utmGlintContainer;
 import com.nadia.utm.registry.block.utmBlocks;
 import com.nadia.utm.registry.data.utmDataComponents;
 import com.nadia.utm.registry.ui.utmMenus;
@@ -20,6 +19,9 @@ import org.joml.Vector2f;
 
 import java.util.List;
 
+import static com.nadia.utm.client.renderer.glint.utmGlintContainer.DEFAULT_COLOR;
+import static com.nadia.utm.client.renderer.glint.utmGlintContainer.GLINT_DEFAULT;
+
 public class GlintMenu extends AbstractContainerMenu {
     public final GlintTableBlockEntity blockEntity;
     private final Level level;
@@ -29,12 +31,12 @@ public class GlintMenu extends AbstractContainerMenu {
 
     public int COLOR = 0;
     public boolean ADDITIVE = true;
-    public ResourceLocation TYPE = utmGlintContainer.GLINT_DEFAULT;
+    public ResourceLocation TYPE = GLINT_DEFAULT;
     public Vector2f SCALE = new Vector2f(1, 1);
     public Vector2f SPEED = new Vector2f(1, 1);
 
     public static final List<ResourceLocation> TEXTURES = List.of(
-            ResourceLocation.fromNamespaceAndPath("utm", "textures/misc/glint.png"),
+            GLINT_DEFAULT,
             ResourceLocation.fromNamespaceAndPath("utm", "textures/misc/test_glint.png"),
             ResourceLocation.fromNamespaceAndPath("utm", "textures/misc/gyig1.png"),
             ResourceLocation.fromNamespaceAndPath("utm", "textures/misc/boundtosmile.png"),
@@ -201,7 +203,7 @@ public class GlintMenu extends AbstractContainerMenu {
     }
 
     protected void updateGlintConfig(ItemStack stack) {
-        this.COLOR = stack.getOrDefault(utmDataComponents.GLINT_COLOR, 0x8040CC);
+        this.COLOR = stack.getOrDefault(utmDataComponents.GLINT_COLOR, DEFAULT_COLOR);
         this.ADDITIVE = stack.getOrDefault(utmDataComponents.GLINT_ADDITIVE, true);
         this.SCALE = new Vector2f(stack.getOrDefault(utmDataComponents.GLINT_SCALE, new Vector2f(1, 1)));
         this.SPEED = new Vector2f(stack.getOrDefault(utmDataComponents.GLINT_SPEED, new Vector2f(1, 1)));

@@ -46,7 +46,7 @@ public class FiguraCompatMixin<T extends LivingEntity, A extends HumanoidModel<T
 
                 if (changed) {
                     int color = GLINT_COLOR.THREAD.get();
-                    setGlintColor(color != -1 ? color : 0x8040CC, GLINT_ADDITIVE.THREAD.get() ? utmShaders.GLINT_ADDITIVE : utmShaders.GLINT_OVERLAY);
+                    setGlintColor(color != -1 ? color : DEFAULT_COLOR, GLINT_ADDITIVE.THREAD.get() ? utmShaders.GLINT_ADDITIVE : utmShaders.GLINT_OVERLAY);
                 }
             }
         }

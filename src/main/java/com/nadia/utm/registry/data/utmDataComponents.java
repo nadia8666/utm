@@ -1,7 +1,7 @@
 package com.nadia.utm.registry.data;
 
 import com.mojang.serialization.Codec;
-import com.nadia.utm.renderer.glint.utmCodecs;
+import com.nadia.utm.networking.utmCodecs;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.codec.ByteBufCodecs;

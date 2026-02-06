@@ -1,4 +1,4 @@
-package com.nadia.utm.renderer;
+package com.nadia.utm.client.renderer;
 
 import com.google.common.base.Suppliers;
 import com.mojang.blaze3d.platform.GlStateManager;
@@ -6,7 +6,6 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormat;
 import com.nadia.utm.client.renderer.glint.utmGlintContainer;
-import com.nadia.utm.client.renderer.utmShaders;
 import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.ItemRenderer;

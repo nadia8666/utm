@@ -1,4 +1,4 @@
-package com.nadia.utm.renderer.glint;
+package com.nadia.utm.networking;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -22,7 +22,7 @@ public class utmCodecs {
             Vector2f::new
     );
 
-    public static final StreamCodec<ByteBuf, Vec3> VEC3 = StreamCodec.composite(
+    public static final StreamCodec<ByteBuf, Vec3> VEC3_STREAM = StreamCodec.composite(
             ByteBufCodecs.DOUBLE, Vec3::x,
             ByteBufCodecs.DOUBLE, Vec3::y,
             ByteBufCodecs.DOUBLE, Vec3::z,

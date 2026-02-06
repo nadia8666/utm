@@ -1,11 +1,11 @@
 package com.nadia.utm;
 
 import com.nadia.utm.block.GrateBlock;
-import com.nadia.utm.client.updater.UpdateToast;
 import com.nadia.utm.client.renderer.glint.utmGlintContainer;
-import com.nadia.utm.registry.ui.utmMenus;
-import com.nadia.utm.renderer.utmRenderTypes;
 import com.nadia.utm.client.ui.GlintScreen;
+import com.nadia.utm.client.updater.UpdateToast;
+import com.nadia.utm.registry.ui.utmMenus;
+import com.nadia.utm.client.renderer.utmRenderTypes;
 import com.nadia.utm.updater.ToastDisplaySignal;
 import com.simibubi.create.content.contraptions.wrench.RadialWrenchMenu;
 import net.minecraft.client.Minecraft;
