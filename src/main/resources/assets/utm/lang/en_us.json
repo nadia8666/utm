@@ -2,10 +2,15 @@
   "utm.configuration.title": "undertale mod Configs",
   "utm.configuration.section.utm.common.toml": "undertale mod Configs",
   "utm.configuration.section.utm.common.toml.title": "undertale mod Configs",
-  "utm.configuration.heavyMetalAnvilLV": "Heavy-Metal Anvil Reinforcement Req.",
+
+  "utm.configuration.altTabMenu": "Alternate Playerlist",
+  "utm.configuration.altTabMenu.tooltip": "Should utm replace the tab menu with a more detailed varaint?",
+
   "utm.configuration.autoUpdate": "Auto Update Enabled",
+  "utm.configuration.autoUpdate.tooltip": "Should utm automatically update.",
+
+  "utm.configuration.heavyMetalAnvilLV": "Heavy-Metal Anvil Reinforcement Req.",
   "utm.configuration.heavyMetalAnvilLV.tooltip": "Level require to reinforce an anvil into a heavy-metal anvil.",
-  "utm.configuration.heavyMetalAnvilLV.autoUpdate": "Should utm automatically update.",
 
   "block.utm.heavy_metal_anvil": "Heavy-Metal Anvil",
   "block.utm.grate": "Grating",

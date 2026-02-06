@@ -23,6 +23,7 @@ public class utm {
 
     public utm(IEventBus modEventBus, ModContainer modContainer) {
         EVENT_BUS = modEventBus;
+        AutoUpdater.CURRENT_VERSION = modContainer.getModInfo().getVersion().toString();
 
         modEventBus.addListener(this::commonSetup);
 
@@ -32,14 +33,10 @@ public class utm {
         modEventBus.addListener(utmRegistry::addCreative);
 
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
-
-        // Update mod
-        AutoUpdater.CURRENT_VERSION = modContainer.getModInfo().getVersion().toString();
-        AutoUpdater.startAutoUpdate();
     }
 
     private void commonSetup(FMLCommonSetupEvent event) {
-
+        AutoUpdater.startAutoUpdateLoop();
     }
 
     // dont delete this apprently. this is core to utm working.

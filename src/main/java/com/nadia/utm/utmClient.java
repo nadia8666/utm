@@ -51,14 +51,17 @@ public class utmClient {
 
     @SubscribeEvent
     public static void onToast(ToastDisplaySignal event) {
+        utm.LOGGER.warn("[UTM] Toast recieved");
         tryToastPopup();
     }
 
     public static void tryToastPopup() {
+        utm.LOGGER.warn("[UTM] Toast popup attempted w/ flag {}", ToastTarget);
         if (ToastTarget) {
-            CompletableFuture.runAsync(() -> Minecraft.getInstance().getToasts().addToast(new UpdateToast(VersionTarget)), CompletableFuture.delayedExecutor(1000, TimeUnit.MILLISECONDS));
-
             ToastTarget = false;
+
+            CompletableFuture.runAsync(() -> Minecraft.getInstance().getToasts().addToast(new UpdateToast(VersionTarget)), CompletableFuture.delayedExecutor(1000, TimeUnit.MILLISECONDS));
+            utm.LOGGER.warn("[UTM] Toast ran");
         }
     }
 

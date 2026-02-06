@@ -98,7 +98,7 @@ public class AutoUpdater {
         Path currentFile = modsFolder.resolve("utm.jar");
         CompletableFuture.runAsync(() -> {
             try {
-                Files.move(currentFile, modsFolder.resolve(formatPath()+".old"), StandardCopyOption.REPLACE_EXISTING);
+                Files.move(currentFile, modsFolder.resolve("utm.jar.utm_update.old"), StandardCopyOption.REPLACE_EXISTING);
             } catch (Exception ignored) {}
 
             Path targetPath = modsFolder.resolve("utm.jar");
@@ -113,6 +113,7 @@ public class AutoUpdater {
                 VersionTarget = "v" + latest;
                 ToastTarget = true;
 
+                utm.LOGGER.warn("[UTM] Sending toast!");
                 utm.EVENT_BUS.post(new ToastDisplaySignal());
             }
         });
@@ -124,7 +125,7 @@ public class AutoUpdater {
 
         try (Stream<Path> entries = Files.list(modsFolder)) {
            entries.forEach(file -> {
-                if (file.toString().contains(SUFFIX+".old")) {
+                if (file.toString().contains(".utm_update" + ".old")) {
                     oldFile.set(file);
                 }
             });
@@ -145,7 +146,7 @@ public class AutoUpdater {
         return thread;
     });
 
-    public static void startAutoUpdate() {
+    public static void startAutoUpdateLoop() {
         utm.LOGGER.info("[UTM] Starting auto updater loop");
         if (!FMLEnvironment.production) return;
         utm.LOGGER.info("[UTM] Scheduling...");
@@ -160,10 +161,4 @@ public class AutoUpdater {
             }
         }, 0, 30, TimeUnit.MINUTES);
     }
-
-    private static String formatPath() {
-        return "utm.jar" + SUFFIX;
-    }
-
-    public static final String SUFFIX = ".utm_update";
 }
