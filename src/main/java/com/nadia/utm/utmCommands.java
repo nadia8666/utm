@@ -22,36 +22,28 @@ public class utmCommands {
     @SubscribeEvent
     public static void onRegisterCommands(RegisterCommandsEvent event) {
         event.getDispatcher().register(Commands.literal("utm_server")
-                .then(Commands.argument("command_type", StringArgumentType.word())
-                        .suggests((context, builder) -> SharedSuggestionProvider.suggest(new String[]{"update", "restart", "reinstall"}, builder))
-                        .executes(context -> {
-                            switch (StringArgumentType.getString(context, "command_type")) {
-                                case "update": {
-                                    AutoUpdater.checkForUpdate();
-                                    break;
-                                }
+                .then(Commands.literal("update").executes(context -> {
+                    AutoUpdater.checkForUpdate();
 
-                                case "reinstall": {
-                                    AutoUpdater.checkForUpdate(true);
-                                    break;
-                                }
+                    return 1;
+                }))
+                .then(Commands.literal("reinstall").executes(context -> {
+                    AutoUpdater.checkForUpdate(true);
 
-                                case "restart": {
-                                    var server = context.getSource().getServer();
-                                    context.getSource().sendSuccess(() -> Component.literal("[UTM] Closing server..."), true);
+                    return 1;
+                }))
+                .then(Commands.literal("restart").executes(context -> {
+                    var server = context.getSource().getServer();
+                    context.getSource().sendSuccess(() -> Component.literal("[UTM] Closing server..."), true);
 
-                                    for (ServerPlayer player : server.getPlayerList().getPlayers()) {
-                                        player.connection.disconnect(Component.literal("Restarting server!"));
-                                    }
+                    for (ServerPlayer player : server.getPlayerList().getPlayers()) {
+                        player.connection.disconnect(Component.literal("Restarting server!"));
+                    }
 
-                                    server.halt(false);
-                                    break;
-                                }
-                            }
+                    server.halt(false);
 
-                            return 1;
-                        })
-                )
+                    return 1;
+                }))
         );
     }
 
