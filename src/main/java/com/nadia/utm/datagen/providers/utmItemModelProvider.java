@@ -29,5 +29,6 @@ public class utmItemModelProvider extends ItemModelProvider {
         handheldItem(utmTools.COPPER_HOE.get());
 
         handheldItem(utmTools.OBSIDIAN_SWORD.get());
+        basicItem(utmTools.NETHERYTRA.get());
     }
 }

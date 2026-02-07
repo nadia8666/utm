@@ -1,6 +1,7 @@
 package com.nadia.utm.registry.item.tool;
 
 import com.nadia.utm.item.FiddleheadItem;
+import com.nadia.utm.item.NetherytraItem;
 import com.nadia.utm.registry.item.utmItems;
 import com.nadia.utm.utm;
 import net.minecraft.tags.BlockTags;
@@ -42,13 +43,14 @@ public class utmTools {
             ))
     );
     public static final Supplier<FiddleheadItem> FIDDLEHEAD = utmItems.ITEMS.register("fiddlehead", () -> new FiddleheadItem(new Item.Properties().durability(72000)));
+    public static final Supplier<NetherytraItem> NETHERYTRA = utmItems.ITEMS.register("netherytra", () -> new NetherytraItem(new Item.Properties().durability(850).fireResistant()));
 
-    public static final Supplier<AxeItem> OBSIDIAN_SWORD = utmItems.ITEMS.register("obsidian_sword", () -> {
+    public static final Supplier<SwordItem> OBSIDIAN_SWORD = utmItems.ITEMS.register("obsidian_sword", () -> {
                 var Tier = utmToolBuilder.buildTier(
                         BlockTags.INCORRECT_FOR_WOODEN_TOOL, 4200, 1f, 0f, 5, () -> Ingredient.EMPTY
                 );
-                return new AxeItem(Tier, new Item.Properties().attributes(
-                        AxeItem.createAttributes(Tier, 12, -3.75f)));
+                return new SwordItem(Tier, new Item.Properties().attributes(
+                        SwordItem.createAttributes(Tier, 12, -3.75f)));
             }
     );
     public static void doNothing() {

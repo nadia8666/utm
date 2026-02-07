@@ -8,4 +8,5 @@ public class utmItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems("utm");
 
     public static final DeferredItem<Item> UNFINISHED_GLINT_TABLE = ITEMS.registerSimpleItem("unfinished_glint_table");
+
 }
