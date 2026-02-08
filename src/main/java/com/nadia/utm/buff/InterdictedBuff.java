@@ -1,14 +1,19 @@
 package com.nadia.utm.buff;
 
+import com.nadia.utm.registry.item.tool.utmTools;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ElytraItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Mirror;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.rmi.registry.Registry;
@@ -18,23 +23,37 @@ public class InterdictedBuff extends MobEffect {
         super(category, color);
     }
 
-    public void InterdictionDisable(LivingEntity entity ,ItemStack itemStack) {
-        Object serverPlayer = null;
 
-        itemStack.set
-
-        if (itemStack.getItem() instanceof ElytraItem elytraItem ) {
-
-        }
-    }
 
     @Override
     public boolean applyEffectTick(LivingEntity entity, int amplifier) {
         if (entity instanceof Player player) {
             player.getCooldowns().addCooldown(Items.ELYTRA.asItem(),45*20);
             player.getCooldowns().addCooldown(Items.ENDER_PEARL.asItem(),45*20);
-            if
-            player.getCooldowns().addCooldown(Items.ENDER_PEARL.asItem(),45*20);
+            player.getCooldowns().addCooldown(utmTools.NETHERYTRA.get(),120*20);
+            player.getCooldowns().addCooldown(utmTools.FIDDLEHEAD.get(),120*20);
+            player.getCooldowns().addCooldown(Items.FIREWORK_ROCKET.asItem(),45*20);
+
+            Item mirror = BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath("bountifulbaubles", "magic_mirror"));
+            if (mirror != Items.AIR) {
+                player.getCooldowns().addCooldown(mirror,45*20);
+            }
+            Item voidmirror = BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath("bountifulbaubles", "wormhole_mirror"));
+            if (voidmirror != Items.AIR) {
+                player.getCooldowns().addCooldown(voidmirror,120*20);
+            }
+            Item enderhook = BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath("hooked", "ender_hook"));
+            if (enderhook != Items.AIR) {
+                player.getCooldowns().addCooldown(enderhook,120*20);
+            }
+            Item mirrorp = BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath("bountifulbaubles", "potion_recall"));
+            if (mirrorp != Items.AIR) {
+                player.getCooldowns().addCooldown(mirrorp,45*15);
+            }
+            Item voidmirrorp = BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath("bountifulbaubles", "potion_wormhole"));
+            if (voidmirrorp != Items.AIR) {
+                player.getCooldowns().addCooldown(voidmirrorp,120*15);
+            }
         }
 
         return true;
