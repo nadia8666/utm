@@ -27,7 +27,7 @@ public class FiddleheadItem extends Item {
             var hi = player.getLookAngle();
             var mult = 0.5;
             if (player.isFallFlying() & (player.position().y > 512)) {
-              mult=10;
+              mult=15;
             }
             //  player.startUsingItem(hand);
             player.setDeltaMovement(hi.x * mult, hi.y * Math.min(mult,1), hi.z * mult);
