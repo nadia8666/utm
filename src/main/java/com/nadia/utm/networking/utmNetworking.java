@@ -80,7 +80,7 @@ public class utmNetworking {
                     var targetPos = new BlockPos(pos.getX(), y, pos.getZ());
                     var blockAt = level.getBlockState(targetPos);
 
-                    ((ServerLevel) level).sendParticles(
+                    level.sendParticles(
                             ParticleTypes.REVERSE_PORTAL,
                             pos.getX() + 0.5, y + 0.5, pos.getZ() + 0.5,
                             3,

@@ -6,11 +6,14 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormat;
 import com.nadia.utm.client.renderer.glint.utmGlintContainer;
+import net.minecraft.Util;
 import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.ItemRenderer;
+import net.minecraft.resources.ResourceLocation;
 import org.joml.Matrix4f;
 
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 import static net.minecraft.client.renderer.RenderStateShard.*;
@@ -120,5 +123,22 @@ public class utmRenderTypes {
                     }, RenderSystem::resetTextureMatrix))
                     .setLayeringState(VIEW_OFFSET_Z_LAYERING)
                     .createCompositeState(false)
+    ));
+
+    public static final Function<ResourceLocation, RenderType> EMISSIVE_ARMOR_CUTOUT = Util.memoize((id) -> RenderType.create("utm_emissive_armor_cutout",
+                    DefaultVertexFormat.NEW_ENTITY,
+                    VertexFormat.Mode.QUADS,
+                    1536,
+                    true,
+                    false,
+                    RenderType.CompositeState.builder()
+                            .setShaderState(new RenderStateShard.ShaderStateShard(() -> utmShaders.EMISSIVE_ARMOR_CUTOUT))
+                            .setTextureState(new RenderStateShard.TextureStateShard(id, false, false))
+                            .setTransparencyState(NO_TRANSPARENCY)
+                            .setCullState(NO_CULL)
+                            .setOverlayState(OVERLAY)
+                            .setLayeringState(VIEW_OFFSET_Z_LAYERING)
+                            .setDepthTestState(EQUAL_DEPTH_TEST)
+                            .createCompositeState(true)
     ));
 }

@@ -15,6 +15,7 @@ import java.io.IOException;
 public class utmShaders {
     public static ShaderInstance GLINT_ADDITIVE;
     public static ShaderInstance GLINT_OVERLAY;
+    public static ShaderInstance EMISSIVE_ARMOR_CUTOUT;
 
     @SubscribeEvent
     public static void onRegisterShaders(RegisterShadersEvent event) {
@@ -26,6 +27,10 @@ public class utmShaders {
             event.registerShader(new ShaderInstance(event.getResourceProvider(),
                     ResourceLocation.fromNamespaceAndPath("utm", "glint/glint_overlay"),
                     DefaultVertexFormat.POSITION_TEX), (shader) -> GLINT_OVERLAY = shader);
+
+            event.registerShader(new ShaderInstance(event.getResourceProvider(),
+                    ResourceLocation.fromNamespaceAndPath("utm", "emissive_armor_cutout"),
+                    DefaultVertexFormat.NEW_ENTITY), (shader) -> EMISSIVE_ARMOR_CUTOUT = shader);
         } catch (IOException e) {
             utm.LOGGER.info("[UTM] Shader failure: {}", e.getMessage());
         }

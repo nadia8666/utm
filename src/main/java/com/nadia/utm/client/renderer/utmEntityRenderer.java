@@ -25,7 +25,7 @@ public class utmEntityRenderer {
                 if(rawRenderer.getModel() instanceof PlayerModel<?> playerModel) {
                     LivingEntityRenderer<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> castedRenderer =
                             (LivingEntityRenderer<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>>) rawRenderer;
-                    castedRenderer.addLayer(new NetherytraRenderLayer<>(castedRenderer, event.getEntityModels()));
+                    castedRenderer.addLayer(new NetherytraLayer<>(castedRenderer, event.getEntityModels()));
                 }
             }
         }
