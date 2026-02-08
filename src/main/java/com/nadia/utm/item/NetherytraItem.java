@@ -1,5 +1,6 @@
 package com.nadia.utm.item;
 
+import com.nadia.utm.utm;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.core.Holder;
@@ -16,8 +17,13 @@ import net.minecraft.world.item.FireworkRocketItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.phys.Vec3;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class NetherytraItem extends ElytraItem {
+
+    private static final Logger log = LoggerFactory.getLogger(NetherytraItem.class);
 
     public NetherytraItem(Properties properties) {
         super(properties);
@@ -39,13 +45,17 @@ public class NetherytraItem extends ElytraItem {
     @Override
     public boolean elytraFlightTick(ItemStack stack, LivingEntity entity, int flightTicks) {
         var pos = entity.position();
-        if (entity.level().isClientSide) {
-            Minecraft.getInstance().particleEngine.createParticle(ParticleTypes.WHITE_ASH, pos.x+createRandom()*30, pos.y+createRandom()*30, pos.z+createRandom()*30, 0, 0, 0);
-        }
         if (!entity.level().isClientSide) {
             if (entity.level() instanceof ServerLevel level) {
-                var lA = entity.getLookAngle();
+                var lA = (entity.getDeltaMovement().length())*8;
+                var lA2 = (int) Math.max(0,Math.floor(lA))-5;
+                utm.LOGGER.info("[UTM] "); //TODO: remove
+                utm.LOGGER.info(String.valueOf(lA)); //TODO: remove
+                utm.LOGGER.info(String.valueOf(lA2)); //TODO: remove
                 level.sendParticles(ParticleTypes.TOTEM_OF_UNDYING,pos.x,pos.y,pos.z,1,0,0,0,0);
+                if (lA2 >1) {
+                    level.sendParticles(ParticleTypes.SNOWFLAKE, pos.x, pos.y, pos.z, lA2 * 2, 1 + (double) lA2 /3, 1 + (double) lA2 /3, 1 + (double) lA2 /3, 0);
+                }
             }
 
 
