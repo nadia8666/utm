@@ -20,7 +20,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
-
+import com.nadia.utm.registry.buffs.utmBuffs;
 public class utmRegistry {
     public static final DeferredRegister<CreativeModeTab> TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, "utm");
 
@@ -30,7 +30,7 @@ public class utmRegistry {
     public static final DeferredRegister<MenuType<?>> MENUS = utmMenus.MENUS;
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = utmBlockEntities.BLOCK_ENTITIES;
     public static final DeferredRegister<SoundEvent> SOUNDS = utmSounds.SOUNDS;
-    public static final DeferredRegister<MobEffect> BUFFS = utmRegistry.BUFFS;
+    public static final DeferredRegister<MobEffect> BUFFS = utmBuffs.BUFFS;
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> MAIN = TABS
             .register("main", () -> CreativeModeTab.builder()

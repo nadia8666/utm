@@ -10,7 +10,7 @@ import java.util.function.Supplier;
 
 public class utmBuffs {
     public static final DeferredRegister<MobEffect> BUFFS = DeferredRegister.create(Registries.MOB_EFFECT, "utm");
-    public static final Supplier<InterdictedBuff> MY_MOB_EFFECT = BUFFS.register("my_mob_effect", () -> new InterdictedBuff(
+    public static final Supplier<InterdictedBuff> INTERDICTED = BUFFS.register("interdicted", () -> new InterdictedBuff(
             //Can be either BENEFICIAL, NEUTRAL or HARMFUL. Used to determine the potion tooltip color of this effect.
             MobEffectCategory.HARMFUL,
             //The color of the effect particles.

@@ -23,11 +23,12 @@ import org.slf4j.LoggerFactory;
 
 public class NetherytraItem extends ElytraItem {
 
-    private static final Logger log = LoggerFactory.getLogger(NetherytraItem.class);
 
     public NetherytraItem(Properties properties) {
         super(properties);
     }
+
+
     @Override
     public boolean isValidRepairItem(ItemStack toRepair, ItemStack repair) {
         return repair.is(Items.NETHERITE_INGOT);
@@ -49,7 +50,6 @@ public class NetherytraItem extends ElytraItem {
             if (entity.level() instanceof ServerLevel level) {
                 var lA = (entity.getDeltaMovement().length())*8;
                 var lA2 = (int) Math.max(0,Math.floor(lA))-5;
-                utm.LOGGER.info("[UTM] "); //TODO: remove
                 utm.LOGGER.info(String.valueOf(lA)); //TODO: remove
                 utm.LOGGER.info(String.valueOf(lA2)); //TODO: remove
                 level.sendParticles(ParticleTypes.TOTEM_OF_UNDYING,pos.x,pos.y,pos.z,1,0,0,0,0);

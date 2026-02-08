@@ -28,12 +28,12 @@ public class InterdictedBuff extends MobEffect {
     @Override
     public boolean applyEffectTick(LivingEntity entity, int amplifier) {
         if (entity instanceof Player player) {
-            player.getCooldowns().addCooldown(Items.ELYTRA.asItem(),45*20);
-            player.getCooldowns().addCooldown(Items.ENDER_PEARL.asItem(),45*20);
-            player.getCooldowns().addCooldown(utmTools.NETHERYTRA.get(),120*20);
-            player.getCooldowns().addCooldown(utmTools.FIDDLEHEAD.get(),120*20);
-            player.getCooldowns().addCooldown(Items.FIREWORK_ROCKET.asItem(),45*20);
-
+            player.getCooldowns().addCooldown(Items.ELYTRA.asItem(),10*20);
+            player.getCooldowns().addCooldown(Items.ENDER_PEARL.asItem(),30*20);
+            player.getCooldowns().addCooldown(utmTools.NETHERYTRA.get(),10*20);
+            player.getCooldowns().addCooldown(utmTools.FIDDLEHEAD.get(),60*20);
+            player.getCooldowns().addCooldown(Items.FIREWORK_ROCKET.asItem(),15*20);
+            player.stopFallFlying();
             Item mirror = BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath("bountifulbaubles", "magic_mirror"));
             if (mirror != Items.AIR) {
                 player.getCooldowns().addCooldown(mirror,45*20);
@@ -63,7 +63,7 @@ public class InterdictedBuff extends MobEffect {
     // once every x ticks, depending on the tick count and amplifier.
     @Override
     public boolean shouldApplyEffectTickThisTick(int tickCount, int amplifier) {
-        return tickCount % 40 == 0; // replace this with whatever check you want
+        return tickCount % 5 == 0; // replace this with whatever check you want
     }
 
     // Utility method that is called when the effect is first added to the entity.
