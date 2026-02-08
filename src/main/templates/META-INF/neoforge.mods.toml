@@ -95,7 +95,7 @@ modId="showcaseitem"
 type="required"
 versionRange=","
 ordering="AFTER"
-side="CLIENT"
+side="BOTH"
 
 # FIGURA
 [[dependencies.${mod_id}]]
@@ -109,6 +109,22 @@ side="CLIENT"
 [[dependencies.${mod_id}]]
 modId="gravestone"
 type="optional"
+versionRange=","
+ordering="AFTER"
+side="BOTH"
+
+# EXTREME SOUND MUFFLER
+[[dependencies.${mod_id}]]
+modId="extremesoundmuffler"
+type="required"
+versionRange=","
+ordering="AFTER"
+side="CLIENT"
+
+# GRIMBLE MOD
+[[dependencies.${mod_id}]]
+modId="grimble_mod"
+type="required"
 versionRange=","
 ordering="AFTER"
 side="CLIENT"

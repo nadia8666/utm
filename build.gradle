@@ -23,6 +23,7 @@ sourceSets {
 java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
 repositories {
+    flatDir { dirs 'src/jij' }
     maven { url = "https://maven.createmod.net" }
     maven { url = "https://maven.ithundxr.dev/snapshots" }
     maven { name = "TerraformersMC"; url = "https://maven.terraformersmc.com/" }
@@ -106,6 +107,7 @@ dependencies {
     implementation("maven.modrinth:TyCTlI4b:ovVp31Ci") // sophisticated backpacks
     implementation("maven.modrinth:nmoqTijg:23alQult") // sophisticated core
     jarJar(implementation("maven.modrinth:s85zLEDe:bWd7B59k")) // sophisticated backpacks x create
+    jarJar(implementation('local:grimble_mod:1.0.0')) // bluebibbob's grimble mod
 }
 
 def replaceProperties = [
@@ -129,9 +131,12 @@ def generateMainMetadata = tasks.register("generateMainMetadata", ProcessResourc
 sourceSets.main.resources.srcDir generateMainMetadata
 neoForge.ideSyncTask generateMainMetadata
 
+
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
 }
+
+tasks.named('jarJar') {}
 
 tasks.register('cleanupVersionedJars', Delete) {
     delete layout.buildDirectory.dir("libs").map { dir ->
