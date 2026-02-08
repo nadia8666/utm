@@ -1,4 +1,4 @@
-// 1.21.1	2026-02-06T14:24:53.0512299	Item Models: utm
+// 1.21.1	2026-02-07T15:38:20.9113804	Item Models: utm
 f2e9775563c86f68d71b06bb62045008a975a3de assets/utm/models/item/chunk_loader.json
 336758cbcbfdf58cdfae0d301428baacb9e69221 assets/utm/models/item/copper_axe.json
 b461f6062f97a9a4f36e2c003164cd40afbf068d assets/utm/models/item/copper_hoe.json
@@ -8,6 +8,7 @@ bc9e209da310ceed24cf8511ef375493917308c7 assets/utm/models/item/copper_shovel.js
 17c810dab8cfad3e3bdffbe6bcbb14b5d9400a87 assets/utm/models/item/glint_table.json
 fc48134fda3d120191f6a58897d1bb3fd5632f78 assets/utm/models/item/grate.json
 487ba2c00f30efd980d0a646b53d75f69fc4fafe assets/utm/models/item/heavy_metal_anvil.json
+a951d96a793876f77a37a1d469861589165ec946 assets/utm/models/item/netherytra.json
 aaed7d47793a03535e0fc1e59b89f24ea056bb7d assets/utm/models/item/obsidian_sword.json
 2e991b169a46604733a459264944f9b6d47893bb assets/utm/models/item/player_chunk_loader.json
 723955985396594051586dbe811a3de8de5bf99b assets/utm/models/item/unfinished_glint_table.json

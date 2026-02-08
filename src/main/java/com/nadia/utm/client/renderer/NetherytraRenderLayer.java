@@ -14,6 +14,7 @@ public class NetherytraRenderLayer<T extends AbstractClientPlayer, M extends net
     }
 
     private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath("utm" , "textures/entity/elytra/netherytra.png");
+    private static final ResourceLocation EMISSIVE = ResourceLocation.fromNamespaceAndPath("utm" , "textures/entity/elytra/netherytra_e.png");
 
     @Override
     public ResourceLocation getElytraTexture(ItemStack stack, T entity) {
