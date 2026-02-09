@@ -32,7 +32,7 @@ config="utm.mixins.json"
 [[dependencies.${mod_id}]]
     modId="neoforge"
     type="required"
-    versionRange="[${neo_version},)"
+    versionRange="[21.1.218,)"
     ordering="NONE"
     side="BOTH"
 
