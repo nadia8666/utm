@@ -97,7 +97,8 @@ public class NetherytraLayer<T extends AbstractClientPlayer, M extends net.minec
                             .set(((rgb >> 16) & 0xFF) / 255f, ((rgb >> 8) & 0xFF) / 255f, (rgb & 0xFF) / 255f, 1.0f);
                 }
 
-                this.elytraModel.renderToBuffer(poseStack, buffer.getBuffer(utmRenderTypes.EMISSIVE_ARMOR_CUTOUT.apply(EMISSIVE)), packedLight, OverlayTexture.NO_OVERLAY);
+                if (livingEntity.isFallFlying())
+                    this.elytraModel.renderToBuffer(poseStack, buffer.getBuffer(utmRenderTypes.EMISSIVE_ARMOR_CUTOUT.apply(EMISSIVE)), packedLight, OverlayTexture.NO_OVERLAY);
             };
 
 
