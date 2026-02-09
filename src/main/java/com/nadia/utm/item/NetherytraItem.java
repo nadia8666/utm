@@ -52,7 +52,7 @@ public class NetherytraItem extends ElytraItem {
                 var lA2 = (int) Math.max(0,Math.floor(lA))-5;
                 utm.LOGGER.info(String.valueOf(lA)); //TODO: remove
                 utm.LOGGER.info(String.valueOf(lA2)); //TODO: remove
-                level.sendParticles(ParticleTypes.TOTEM_OF_UNDYING,pos.x,pos.y,pos.z,1,0,0,0,0);
+
                 if (lA2 >1) {
                     level.sendParticles(ParticleTypes.SNOWFLAKE, pos.x, pos.y, pos.z, lA2 * 2, 1 + (double) lA2 /3, 1 + (double) lA2 /3, 1 + (double) lA2 /3, 0);
                 }

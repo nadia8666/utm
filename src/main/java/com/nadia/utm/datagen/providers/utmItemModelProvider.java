@@ -19,6 +19,7 @@ public class utmItemModelProvider extends ItemModelProvider {
         withExistingParent(utmBlocks.GRATE.item.getId().toString(), modLoc("block/grate"));
         withExistingParent(utmBlocks.CHUNK_LOADER.item.getId().toString(), modLoc("block/chunk_loader"));
         withExistingParent(utmBlocks.PLAYER_CHUNK_LOADER.item.getId().toString(), modLoc("block/player_chunk_loader"));
+        withExistingParent(utmBlocks.INTERDICTOR.item.getId().toString(), modLoc("block/interdictor"));
 
         basicItem(utmItems.UNFINISHED_GLINT_TABLE.get());
 

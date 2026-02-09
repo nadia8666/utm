@@ -62,4 +62,10 @@ public class utmBlocks {
             .noOcclusion()
             .isViewBlocking((state, level, pos) -> false)
             .isSuffocating((state, level, pos) -> false));
+    public static final utmBlockContainer<InterdictorBlock, BlockItem> INTERDICTOR = iregister("interdictor", InterdictorBlock::new, BlockBehaviour.Properties.of()
+            .destroyTime(10.0f)
+            .sound(SoundType.NETHERITE_BLOCK)
+            .noOcclusion()
+            .isViewBlocking((state, level, pos) -> false)
+            .isSuffocating((state, level, pos) -> false));
 }
