@@ -71,8 +71,6 @@ public abstract class ElytraLayerMixin<T extends LivingEntity, M extends EntityM
 
             this.elytraModel.renderToBuffer(poseStack, buffer.getBuffer(RenderType.armorCutoutNoCull(resourcelocation)), packedLight, OverlayTexture.NO_OVERLAY);
 
-
-            // entirely disable batching becuase every elytra will be on off w/ this
             if (buffer instanceof MultiBufferSource.BufferSource source) {
                 var changed = utmElytraTrimContainer.TRIM_TYPE.passUpdate(itemstack, source, false);
                 changed = utmElytraTrimContainer.TRIM_COLOR.passUpdate(itemstack, source, changed);

@@ -97,16 +97,16 @@ dependencies {
     compileOnly("dev.emi:emi-neoforge:${emi_version}:api")
     runtimeOnly("dev.emi:emi-neoforge:${emi_version}")
     compileOnly("mezz.jei:jei-1.21.1-neoforge-api:19.27.0.340")
-    runtimeOnly("maven.modrinth:u6dRKJwZ:YAcQ6elZ")
+    runtimeOnly("maven.modrinth:jei:YAcQ6elZ")
 
-    jarJar(implementation("maven.modrinth:5IIKsxiL:KXmiEin1")) // extreme sound muffler
-    implementation("maven.modrinth:rVUtrHuM:uUy23VAp") // backported spears
-    implementation("maven.modrinth:P5Jjjezm:AD6eBCKn") // showcase item
-    compileOnly("maven.modrinth:s9gIPDom:yXFi1fed") // figura
-    implementation("maven.modrinth:RYtXKJPr:AZm51eX1") // gravestones
-    implementation("maven.modrinth:TyCTlI4b:ovVp31Ci") // sophisticated backpacks
-    implementation("maven.modrinth:nmoqTijg:23alQult") // sophisticated core
-    jarJar(implementation("maven.modrinth:s85zLEDe:bWd7B59k")) // sophisticated backpacks x create
+    jarJar(implementation("maven.modrinth:extreme_sound_muffler:KXmiEin1")) // extreme sound muffler
+    implementation("maven.modrinth:backported-spears:uUy23VAp") // backported spears
+    implementation("maven.modrinth:showcase-item:AD6eBCKn") // showcase item
+    compileOnly("maven.modrinth:figura:yXFi1fed") // figura
+    implementation("maven.modrinth:gravestone-mod:AZm51eX1") // gravestones
+    implementation("maven.modrinth:sophisticated-backpacks:ovVp31Ci") // sophisticated backpacks
+    implementation("maven.modrinth:sophisticated-core:23alQult") // sophisticated core
+    jarJar(implementation("maven.modrinth:sophisticated-backpacks-create-integration:bWd7B59k")) // sophisticated backpacks x create
     jarJar(implementation('local:grimble_mod:1.0.0')) // bluebibbob's grimble mod
 }
 
