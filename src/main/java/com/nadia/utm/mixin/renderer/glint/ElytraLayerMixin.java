@@ -108,7 +108,7 @@ public abstract class ElytraLayerMixin<T extends LivingEntity, M extends EntityM
 
             if (!Objects.equals(utmElytraTrimContainer.TRIM_TYPE.THREAD.get(), "") && livingEntity.isFallFlying())
                 ElytraUtil.drawTrimParticles(
-                        livingEntity.level(), poseStack, this.elytraModel, ParticleTypes.EGG_CRACK
+                        livingEntity.level(), poseStack, this.elytraModel, ParticleTypes.ELECTRIC_SPARK
                 );
         }
 

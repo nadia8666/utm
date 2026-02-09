@@ -111,7 +111,7 @@ public class NetherytraLayer<T extends AbstractClientPlayer, M extends net.minec
 
             if (!Objects.equals(utmElytraTrimContainer.TRIM_TYPE.THREAD.get(), "") && livingEntity.isFallFlying())
                 ElytraUtil.drawTrimParticles(
-                        livingEntity.level(), poseStack, this.elytraModel, ParticleTypes.EGG_CRACK
+                        livingEntity.level(), poseStack, this.elytraModel, ParticleTypes.ELECTRIC_SPARK
                 );
         }
     }
