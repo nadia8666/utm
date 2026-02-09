@@ -23,6 +23,10 @@ public class utmItemModelProvider extends ItemModelProvider {
 
         basicItem(utmItems.UNFINISHED_GLINT_TABLE.get());
 
+        basicItem(utmItems.ELYTRA_TRIM_VEIN.get());
+        basicItem(utmItems.ELYTRA_TRIM_OUTWARD.get());
+        basicItem(utmItems.ELYTRA_TRIM_LESSER.get());
+
         handheldItem(utmTools.COPPER_SWORD.get());
         handheldItem(utmTools.COPPER_PICKAXE.get());
         handheldItem(utmTools.COPPER_AXE.get());

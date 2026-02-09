@@ -19,6 +19,7 @@
   "block.utm.outpostwalls_metal": "Metal Town",
   "block.utm.chunk_loader": "Chunk Loader",
   "block.utm.player_chunk_loader": "Player-bound Chunk Loader",
+  "block.utm.interdictor": "Interdictor",
 
   "item.utm.copper_sword": "Copper Sword",
   "item.utm.copper_pickaxe": "Copper Pickaxe",
@@ -28,6 +29,10 @@
   "item.utm.fiddlehead": "Lesser Fiddlehead",
   "item.utm.unfinished_glint_table": "Unfinished Glint Augmenter",
   "item.utm.obsidian_sword": "Obsidian Sword",
+  "item.utm.netherytra": "Netherytra",
+  "item.utm.elytra_trim_vein": "Vein Elytra Trim Template",
+  "item.utm.elytra_trim_outward": "Outward Elytra Trim Template",
+  "item.utm.elytra_trim_lesser": "Lesser Elytra Trim Template",
 
   "effect.utm.interdicted": "Interdicted!",
 
@@ -37,5 +42,9 @@
   "utm.emi.requires_levels": "Enchantment Cost: %s",
   "utm.gui.glint_table_menu": "Glint Augmenter",
 
-  "subtitles.utm.slider_drag": "Slider drag"
+  "subtitles.utm.slider_drag": "Slider drag",
+
+  "utm.elytra_trim_type.vein": " Vein Elytra Trim",
+  "utm.elytra_trim_type.outward": " Outward Elytra Trim",
+  "utm.elytra_trim_type.lesser": " Lesser Elytra Trim"
 }

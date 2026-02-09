@@ -5,6 +5,7 @@ import com.nadia.utm.registry.block.utmBlocks;
 import com.nadia.utm.registry.data.utmDataComponents;
 import com.nadia.utm.registry.item.tool.utmTools;
 import com.nadia.utm.registry.item.utmItems;
+import com.nadia.utm.registry.recipe.utmRecipes;
 import com.nadia.utm.registry.sound.utmSounds;
 import com.nadia.utm.registry.ui.utmMenus;
 import net.minecraft.core.registries.Registries;
@@ -31,6 +32,7 @@ public class utmRegistry {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = utmBlockEntities.BLOCK_ENTITIES;
     public static final DeferredRegister<SoundEvent> SOUNDS = utmSounds.SOUNDS;
     public static final DeferredRegister<MobEffect> BUFFS = utmBuffs.BUFFS;
+    public static final DeferredRegister<?> RECIPE_SERIALIZERS = utmRecipes.RECIPE_SERIALIZERS;
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> MAIN = TABS
             .register("main", () -> CreativeModeTab.builder()
@@ -58,5 +60,6 @@ public class utmRegistry {
         BUFFS.register(modEventBus);
         utmTools.doNothing();
         TABS.register(modEventBus);
+        RECIPE_SERIALIZERS.register(modEventBus);
     }
 }

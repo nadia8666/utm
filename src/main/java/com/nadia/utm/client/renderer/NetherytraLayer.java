@@ -1,8 +1,6 @@
 package com.nadia.utm.client.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.blaze3d.vertex.VertexMultiConsumer;
 import net.minecraft.client.model.ElytraModel;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.model.geom.ModelLayers;
@@ -18,7 +16,9 @@ import net.minecraft.world.item.ItemStack;
 import com.nadia.utm.registry.item.tool.utmTools;
 import org.jetbrains.annotations.NotNull;
 
-import static com.nadia.utm.client.renderer.glint.utmGlintContainer.GLINT_ADDITIVE;
+import java.util.Objects;
+
+import static com.nadia.utm.client.renderer.glint.utmGlintContainer.*;
 
 public class NetherytraLayer<T extends AbstractClientPlayer, M extends net.minecraft.client.model.PlayerModel<T>>
         extends ElytraLayer<T, M> {
@@ -59,7 +59,48 @@ public class NetherytraLayer<T extends AbstractClientPlayer, M extends net.minec
             this.elytraModel.setupAnim(livingEntity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
 
             this.elytraModel.renderToBuffer(poseStack, buffer.getBuffer(RenderType.armorCutoutNoCull(TEXTURE)), packedLight, OverlayTexture.NO_OVERLAY);
-            this.elytraModel.renderToBuffer(poseStack, buffer.getBuffer(utmRenderTypes.EMISSIVE_ARMOR_CUTOUT.apply(EMISSIVE)), packedLight, OverlayTexture.NO_OVERLAY);
+
+
+            // entirely disable batching becuase every elytra will be on off w/ this
+            if (buffer instanceof MultiBufferSource.BufferSource source) {
+                var changed = utmElytraTrimContainer.TRIM_TYPE.passUpdate(itemstack, source, false);
+                changed = utmElytraTrimContainer.TRIM_COLOR.passUpdate(itemstack, source, changed);
+                changed = GLINT_COLOR.passUpdate(itemstack, source, changed);
+                changed = GLINT_LOCATION.passUpdate(itemstack, source, changed);
+                changed = GLINT_SPEED.passUpdate(itemstack, source, changed);
+                changed = GLINT_SCALE.passUpdate(itemstack, source, changed);
+                changed = GLINT_ADDITIVE.passUpdate(itemstack, source, changed);
+
+                if (changed) {
+                    int color = GLINT_COLOR.THREAD.get();
+                    setGlintColor(color != -1 ? color : DEFAULT_COLOR, GLINT_ADDITIVE.THREAD.get() ? utmShaders.GLINT_ADDITIVE : utmShaders.GLINT_OVERLAY);
+
+                    var rgb = utmElytraTrimContainer.TRIM_COLOR.THREAD.get();
+                    utmShaders.EMISSIVE_ARMOR_CUTOUT.safeGetUniform("Color")
+                            .set(((rgb >> 16) & 0xFF) / 255f, ((rgb >> 8) & 0xFF) / 255f, (rgb & 0xFF) / 255f, 1.0f);
+                }
+
+                var trimType = utmElytraTrimContainer.TRIM_TYPE.THREAD.get();
+                var renderType = utmRenderTypes.EMISSIVE_ARMOR_CUTOUT
+                        .apply(ResourceLocation.fromNamespaceAndPath("utm",
+                                String.format("textures/entity/elytra/trim/%s.png", trimType)));
+
+                if (!Objects.equals(trimType, ""))
+                    this.elytraModel.renderToBuffer(poseStack, buffer.getBuffer(renderType), packedLight, OverlayTexture.NO_OVERLAY);
+
+                if (utmElytraTrimContainer.TRIM_COLOR.THREAD.get() != 0xFFFFFF) {
+                    source.endBatch();
+                    utmElytraTrimContainer.TRIM_COLOR.THREAD.set(0xFFFFFF);
+
+                    var rgb = utmElytraTrimContainer.TRIM_COLOR.THREAD.get();
+                    utmShaders.EMISSIVE_ARMOR_CUTOUT.safeGetUniform("Color")
+                            .set(((rgb >> 16) & 0xFF) / 255f, ((rgb >> 8) & 0xFF) / 255f, (rgb & 0xFF) / 255f, 1.0f);
+                }
+
+                this.elytraModel.renderToBuffer(poseStack, buffer.getBuffer(utmRenderTypes.EMISSIVE_ARMOR_CUTOUT.apply(EMISSIVE)), packedLight, OverlayTexture.NO_OVERLAY);
+            };
+
+
             if (itemstack.hasFoil())
                 this.elytraModel.renderToBuffer(poseStack,
                         buffer.getBuffer(GLINT_ADDITIVE.THREAD.get() ? utmRenderTypes.ADDITIVE_GLINT_ENTITY.get() : utmRenderTypes.OVERLAY_GLINT_ENTITY.get())

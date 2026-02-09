@@ -1,0 +1,7 @@
+{
+  "type": "utm:elytra_trim",
+  "template": { "tag": "utm:elytra_trim_templates" },
+  "base": { "item": "utm:netherytra" },
+  "addition": { "tag": "minecraft:trim_materials" },
+  "result": { "id": "utm:netherytra" }
+}

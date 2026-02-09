@@ -43,4 +43,16 @@ public class utmDataComponents {
                     .persistent(ResourceLocation.CODEC)
                     .networkSynchronized(ResourceLocation.STREAM_CODEC)
                     .build());
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<String>> ELYRA_TRIM_TYPE =
+            COMPONENTS.register("elytra_trim_type", () -> DataComponentType.<String>builder()
+                    .persistent(Codec.STRING)
+                    .networkSynchronized(ByteBufCodecs.STRING_UTF8)
+                    .build());
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> ELYRA_TRIM_COLOR =
+            COMPONENTS.register("elytra_trim_color", () -> DataComponentType.<Integer>builder()
+                    .persistent(Codec.INT)
+                    .networkSynchronized(ByteBufCodecs.INT)
+                    .build());
 }

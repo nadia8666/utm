@@ -9,20 +9,20 @@ import javax.annotation.Nullable;
 import java.util.Objects;
 import java.util.function.Function;
 
-public class GlintStateContainer<T> {
+public class StackComponentContainer<T> {
     public final DeferredHolder<DataComponentType<?>, DataComponentType<T>> COMPONENT;
     public final ThreadLocal<T> THREAD;
     private final T INITIAL_VALUE;
     private final @Nullable() Function<ThreadLocal<T>, T> SUPPLIER;
 
-    public GlintStateContainer (
+    public StackComponentContainer(
             DeferredHolder<DataComponentType<?>, DataComponentType<T>> component,
             T initialValue
     ) {
         this(component, initialValue, null);
     }
 
-    public GlintStateContainer (
+    public StackComponentContainer(
             DeferredHolder<DataComponentType<?>, DataComponentType<T>> component,
             T initialValue,
             @Nullable() Function<ThreadLocal<T>, T> sup

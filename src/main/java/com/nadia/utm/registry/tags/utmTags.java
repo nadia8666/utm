@@ -1,10 +1,14 @@
 package com.nadia.utm.registry.tags;
 
+import com.nadia.utm.registry.utmRegistry;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
+
 public class utmTags {
     public static class ITEMS {
-        // examplef or me for later dont delete Ever it's Important
-        //public static TagKey<Item> TEST_TAGS = TagKey.create(
-        //        utmRegistry.ITEMS.getRegistryKey(),
-        //        ResourceLocation.fromNamespaceAndPath("utm", "test"));
+        public static TagKey<Item> ELYTRA_TRIM_TEMPLATES = TagKey.create(
+                utmRegistry.ITEMS.getRegistryKey(),
+                ResourceLocation.fromNamespaceAndPath("utm", "elytra_trim_templates"));
     }
 }
