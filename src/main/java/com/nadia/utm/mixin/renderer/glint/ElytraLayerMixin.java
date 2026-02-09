@@ -1,6 +1,7 @@
 package com.nadia.utm.mixin.renderer.glint;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.nadia.utm.client.renderer.ElytraUtil;
 import com.nadia.utm.client.renderer.utmElytraTrimContainer;
 import com.nadia.utm.client.renderer.utmRenderTypes;
 import com.nadia.utm.client.renderer.utmShaders;
@@ -14,6 +15,7 @@ import net.minecraft.client.renderer.entity.layers.ElytraLayer;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.resources.PlayerSkin;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -24,7 +26,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Objects;
@@ -104,6 +105,11 @@ public abstract class ElytraLayerMixin<T extends LivingEntity, M extends EntityM
                         buffer.getBuffer(GLINT_ADDITIVE.THREAD.get() ? utmRenderTypes.ADDITIVE_GLINT_ENTITY.get() : utmRenderTypes.OVERLAY_GLINT_ENTITY.get()), packedLight, OverlayTexture.NO_OVERLAY);
 
             poseStack.popPose();
+
+            if (!Objects.equals(utmElytraTrimContainer.TRIM_TYPE.THREAD.get(), "") && livingEntity.isFallFlying())
+                ElytraUtil.drawTrimParticles(
+                        livingEntity.level(), poseStack, this.elytraModel, ParticleTypes.EGG_CRACK
+                );
         }
 
         ci.cancel();

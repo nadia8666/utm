@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.ElytraLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
@@ -55,11 +56,10 @@ public class NetherytraLayer<T extends AbstractClientPlayer, M extends net.minec
         if (shouldRender(itemstack, livingEntity)) {
             poseStack.pushPose();
             poseStack.translate(0.0F, 0.0F, 0.125F);
+
             this.getParentModel().copyPropertiesTo(this.elytraModel);
             this.elytraModel.setupAnim(livingEntity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-
             this.elytraModel.renderToBuffer(poseStack, buffer.getBuffer(RenderType.armorCutoutNoCull(TEXTURE)), packedLight, OverlayTexture.NO_OVERLAY);
-
 
             // entirely disable batching becuase every elytra will be on off w/ this
             if (buffer instanceof MultiBufferSource.BufferSource source) {
@@ -108,6 +108,11 @@ public class NetherytraLayer<T extends AbstractClientPlayer, M extends net.minec
                         , packedLight, OverlayTexture.NO_OVERLAY);
 
             poseStack.popPose();
+
+            if (!Objects.equals(utmElytraTrimContainer.TRIM_TYPE.THREAD.get(), "") && livingEntity.isFallFlying())
+                ElytraUtil.drawTrimParticles(
+                        livingEntity.level(), poseStack, this.elytraModel, ParticleTypes.EGG_CRACK
+                );
         }
     }
 }
