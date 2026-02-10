@@ -21,6 +21,7 @@ import java.util.Objects;
 
 @EventBusSubscriber(modid = "utm", value = Dist.CLIENT)
 public class TabMenuLayer {
+    public static final ResourceLocation OFFLINE_HEAD = ResourceLocation.fromNamespaceAndPath("utm", "textures/gui/player_offline.png");
     public static List<TabLayerPayload.PlayerData> CACHE = new ArrayList<>();
 
     @SubscribeEvent
@@ -78,9 +79,12 @@ public class TabMenuLayer {
                 PlayerFaceRenderer.draw(gui, skinTexture, x + 2, rowY + 2, 7, true, false);
             } else {
                 gui.setColor(1f, 1f, 1f,0.5f);
-                PlayerFaceRenderer.draw(gui,
-                        mc.getSkinManager().getInsecureSkin(new GameProfile(p.id(), p.name())).texture(),
-                        x + 2, rowY + 2, 7, true, false);
+                gui.blit(OFFLINE_HEAD,
+                        x+2, y+2,
+                        7, 7,
+                        0, 0,
+                        7, 7,
+                        7, 7);
                 gui.setColor(1f, 1f, 1f, 1f);
             }
 

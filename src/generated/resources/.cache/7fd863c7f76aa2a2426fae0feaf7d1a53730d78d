@@ -1,7 +1,7 @@
-// 1.21.1	2026-02-09T23:33:44.6762043	Tags for minecraft:item mod id utm
+// 1.21.1	2026-02-10T11:19:13.7598166	Tags for minecraft:item mod id utm
 7f56a7e67dd1fa415dc0312e5b206821476a2788 data/c/tags/item/enchantables.json
 6cd88e214573b659c707666abea9d2e53d37d1ef data/minecraft/tags/item/anvil.json
 7f56a7e67dd1fa415dc0312e5b206821476a2788 data/minecraft/tags/item/enchantable/sword.json
 7f56a7e67dd1fa415dc0312e5b206821476a2788 data/minecraft/tags/item/enchantable/weapon.json
-b0bb3be8d0db297d43a5030476282d6ca8be9c26 data/minecraft/tags/item/trim_templates.json
+e55b118a364cdcea99ae211a43e57d4117bbf5bc data/minecraft/tags/item/trim_templates.json
 e55b118a364cdcea99ae211a43e57d4117bbf5bc data/utm/tags/item/elytra_trim_templates.json
