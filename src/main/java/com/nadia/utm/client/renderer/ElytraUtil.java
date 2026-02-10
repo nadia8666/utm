@@ -34,14 +34,10 @@ public class ElytraUtil {
         g = ((color >> 8) & 0xFF) / 255f;
         b = (color & 0xFF) / 255f;
 
-        var targetType = switch (type) {
-            case "vein" -> utmParticles.VEIN_TRAIL.get();
-            case "outward" -> utmParticles.OUTWARD_TRAIL.get();
-            case "lesser" -> utmParticles.LESSER_TRAIL.get();
-            default -> throw new IllegalStateException("[UTM] invalid trim type for trail: " + type);
-        };
+        var targetType = utmParticles.getFromString(type);
+        assert targetType != null : "[UTM] Unable to find target particle for " + type;
 
-        level.addParticle(new ColorParticleOptions(targetType, r, g, b), cam.x + leftTip.x(), cam.y + leftTip.y(), cam.z + leftTip.z(), 0, 0, 0);
-        level.addParticle(new ColorParticleOptions(targetType, r, g, b), cam.x + rightTip.x(), cam.y + rightTip.y(), cam.z + rightTip.z(), 0, 0, 0);
+        level.addParticle(new ColorParticleOptions(targetType.get(), r, g, b), cam.x + leftTip.x(), cam.y + leftTip.y(), cam.z + leftTip.z(), 0, 0, 0);
+        level.addParticle(new ColorParticleOptions(targetType.get(), r, g, b), cam.x + rightTip.x(), cam.y + rightTip.y(), cam.z + rightTip.z(), 0, 0, 0);
     }
 }

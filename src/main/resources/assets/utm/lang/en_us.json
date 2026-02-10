@@ -33,6 +33,10 @@
   "item.utm.elytra_trim_vein": "Vein Elytra Trim Template",
   "item.utm.elytra_trim_outward": "Outward Elytra Trim Template",
   "item.utm.elytra_trim_lesser": "Lesser Elytra Trim Template",
+  "item.utm.elytra_trim_ecologist": "Ecologist Elytra Trim Template",
+  "item.utm.elytra_trim_heartstwings": "'heartstwings' Elytra Trim Template",
+  "item.utm.elytra_trim_roadrunner": "Roadrunner Elytra Trim Template",
+  "item.utm.elytra_trim_spades": "Spades Elytra Trim Template",
 
   "effect.utm.interdicted": "Interdicted!",
 
@@ -46,5 +50,9 @@
 
   "utm.elytra_trim_type.vein": " Vein Elytra Trim",
   "utm.elytra_trim_type.outward": " Outward Elytra Trim",
-  "utm.elytra_trim_type.lesser": " Lesser Elytra Trim"
+  "utm.elytra_trim_type.lesser": " Lesser Elytra Trim",
+  "utm.elytra_trim_type.ecologist": " Ecologist Elytra Trim",
+  "utm.elytra_trim_type.heartstwings": " 'heartstwings' Elytra Trim",
+  "utm.elytra_trim_type.roadrunner": " Roadrunner Elytra Trim",
+  "utm.elytra_trim_type.spades": " Spades Elytra Trim"
 }

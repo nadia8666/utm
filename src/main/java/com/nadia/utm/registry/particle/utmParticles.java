@@ -11,24 +11,51 @@ import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @EventBusSubscriber(modid = "utm", value = Dist.CLIENT)
 public class utmParticles {
     public static final DeferredRegister<ParticleType<?>> PARTICLE_TYPES =
             DeferredRegister.create(BuiltInRegistries.PARTICLE_TYPE, "utm");
 
-    public static final DeferredHolder<ParticleType<?>, ColorParticleType> VEIN_TRAIL =
-            PARTICLE_TYPES.register("vein_trail", ColorParticleType::new);
+    private static final Map<String, DeferredHolder<ParticleType<?>, ColorParticleType>> COLOR_PARTICLES = new HashMap<>();
+    private static DeferredHolder<ParticleType<?>, ColorParticleType> registerColorParticle(String name) {
+        var holder = PARTICLE_TYPES.register(name, ColorParticleType::new);
+        COLOR_PARTICLES.put(name, holder);
 
-    public static final DeferredHolder<ParticleType<?>, ColorParticleType> OUTWARD_TRAIL =
-            PARTICLE_TYPES.register("outward_trail", ColorParticleType::new);
+        return holder;
+    }
 
-    public static final DeferredHolder<ParticleType<?>, ColorParticleType> LESSER_TRAIL =
-            PARTICLE_TYPES.register("lesser_trail", ColorParticleType::new);
+    public static final class Trails {
+        public static final DeferredHolder<ParticleType<?>, ColorParticleType> VEIN =
+                PARTICLE_TYPES.register("vein_trail", ColorParticleType::new);
+
+        public static final DeferredHolder<ParticleType<?>, ColorParticleType> OUTWARD =
+                PARTICLE_TYPES.register("outward_trail", ColorParticleType::new);
+
+        public static final DeferredHolder<ParticleType<?>, ColorParticleType> LESSER =
+                PARTICLE_TYPES.register("lesser_trail", ColorParticleType::new);
+
+        public static final DeferredHolder<ParticleType<?>, ColorParticleType> ECOLOGIST =
+                PARTICLE_TYPES.register("ecologist_trail", ColorParticleType::new);
+
+        public static final DeferredHolder<ParticleType<?>, ColorParticleType> HEARTSTWINGS =
+                PARTICLE_TYPES.register("heartstwings_trail", ColorParticleType::new);
+
+        public static final DeferredHolder<ParticleType<?>, ColorParticleType> ROADRUNNER =
+                PARTICLE_TYPES.register("roadrunner_trail", ColorParticleType::new);
+
+        public static final DeferredHolder<ParticleType<?>, ColorParticleType> SPADES =
+                PARTICLE_TYPES.register("spades_trail", ColorParticleType::new);
+    }
+
+    public static DeferredHolder<ParticleType<?>, ColorParticleType> getFromString(String name) {
+        return COLOR_PARTICLES.get(name + "_trail");
+    }
 
     @SubscribeEvent
     public static void registerParticleProviders(RegisterParticleProvidersEvent event) {
-        event.registerSpriteSet(utmParticles.VEIN_TRAIL.get(), ColorParticleProvider::new);
-        event.registerSpriteSet(utmParticles.OUTWARD_TRAIL.get(), ColorParticleProvider::new);
-        event.registerSpriteSet(utmParticles.LESSER_TRAIL.get(), ColorParticleProvider::new);
+        COLOR_PARTICLES.forEach((ignored, particle) -> event.registerSpriteSet(particle.get(), ColorParticleProvider::new));
     }
 }
