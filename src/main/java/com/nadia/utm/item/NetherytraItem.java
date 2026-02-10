@@ -1,11 +1,6 @@
 package com.nadia.utm.item;
 
-import com.nadia.utm.utm;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.particle.Particle;
 import net.minecraft.core.Holder;
-import net.minecraft.core.particles.ParticleOptions;
-import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
@@ -13,45 +8,36 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ElytraItem;
-import net.minecraft.world.item.FireworkRocketItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.gameevent.GameEvent;
-import net.minecraft.world.phys.Vec3;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.jetbrains.annotations.NotNull;
 
 public class NetherytraItem extends ElytraItem {
-
-
     public NetherytraItem(Properties properties) {
         super(properties);
     }
 
-
     @Override
-    public boolean isValidRepairItem(ItemStack toRepair, ItemStack repair) {
+    public boolean isValidRepairItem(@NotNull ItemStack toRepair, ItemStack repair) {
         return repair.is(Items.NETHERITE_INGOT);
     }
     @Override
-    public Holder<SoundEvent> getEquipSound() {
+    public @NotNull Holder<SoundEvent> getEquipSound() {
         return SoundEvents.ARMOR_EQUIP_NETHERITE;
     }
-
 
     public double createRandom() {
         return (Math.random()-0.5)*2;
     };
 
     @Override
-    public boolean elytraFlightTick(ItemStack stack, LivingEntity entity, int flightTicks) {
+    public boolean elytraFlightTick(@NotNull ItemStack stack, LivingEntity entity, int flightTicks) {
         var pos = entity.position();
         if (!entity.level().isClientSide) {
             if (entity.level() instanceof ServerLevel level) {
                 var lA = (entity.getDeltaMovement().length())*8;
                 var lA2 = (int) Math.max(0,Math.floor(lA))-5;
-                utm.LOGGER.info(String.valueOf(lA)); //TODO: remove
-                utm.LOGGER.info(String.valueOf(lA2)); //TODO: remove
 
                 if (lA2 >1) {
                     level.sendParticles(ParticleTypes.SNOWFLAKE, pos.x, pos.y, pos.z, lA2 * 2, 1 + (double) lA2 /3, 1 + (double) lA2 /3, 1 + (double) lA2 /3, 0);

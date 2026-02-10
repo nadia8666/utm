@@ -3,14 +3,20 @@ package com.nadia.utm.client.renderer;
 import com.google.common.base.Suppliers;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.BufferBuilder;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
+import com.mojang.blaze3d.vertex.Tesselator;
 import com.mojang.blaze3d.vertex.VertexFormat;
 import com.nadia.utm.client.renderer.glint.utmGlintContainer;
 import net.minecraft.Util;
+import net.minecraft.client.particle.ParticleRenderType;
+import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.ItemRenderer;
+import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.resources.ResourceLocation;
+import org.jetbrains.annotations.NotNull;
 import org.joml.Matrix4f;
 
 import java.util.function.Function;
@@ -141,4 +147,24 @@ public class utmRenderTypes {
                             .setDepthTestState(EQUAL_DEPTH_TEST)
                             .createCompositeState(true)
     ));
+
+    private static final ResourceLocation PARTICLE_ATLAS = ResourceLocation.withDefaultNamespace("textures/atlas/particles.png");
+    public static final Supplier<ParticleRenderType> EMISSIVE_PARTICLE = Suppliers.memoize(() -> new ParticleRenderType() {
+        @Override
+        public BufferBuilder begin(@NotNull Tesselator tess, @NotNull TextureManager texManager) {
+            RenderSystem.setShader(GameRenderer::getParticleShader);
+            RenderSystem.setShaderTexture(0, PARTICLE_ATLAS);
+
+            RenderSystem.enableBlend();
+            RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
+            RenderSystem.depthMask(false);
+
+            return tess.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.PARTICLE);
+        }
+
+        @Override
+        public String toString() {
+            return "CUSTOM";
+        }
+    });
 }

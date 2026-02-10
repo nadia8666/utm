@@ -61,6 +61,8 @@ public class NetherytraLayer<T extends AbstractClientPlayer, M extends net.minec
             this.elytraModel.setupAnim(livingEntity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
             this.elytraModel.renderToBuffer(poseStack, buffer.getBuffer(RenderType.armorCutoutNoCull(TEXTURE)), packedLight, OverlayTexture.NO_OVERLAY);
 
+            int particleColor = 0;
+
             // entirely disable batching becuase every elytra will be on off w/ this
             if (buffer instanceof MultiBufferSource.BufferSource source) {
                 var changed = utmElytraTrimContainer.TRIM_TYPE.passUpdate(itemstack, source, false);
@@ -78,7 +80,10 @@ public class NetherytraLayer<T extends AbstractClientPlayer, M extends net.minec
                     var rgb = utmElytraTrimContainer.TRIM_COLOR.THREAD.get();
                     utmShaders.EMISSIVE_ARMOR_CUTOUT.safeGetUniform("Color")
                             .set(((rgb >> 16) & 0xFF) / 255f, ((rgb >> 8) & 0xFF) / 255f, (rgb & 0xFF) / 255f, 1.0f);
+                    particleColor = rgb;
                 }
+
+
 
                 var trimType = utmElytraTrimContainer.TRIM_TYPE.THREAD.get();
                 var renderType = utmRenderTypes.EMISSIVE_ARMOR_CUTOUT
@@ -111,7 +116,7 @@ public class NetherytraLayer<T extends AbstractClientPlayer, M extends net.minec
 
             if (!Objects.equals(utmElytraTrimContainer.TRIM_TYPE.THREAD.get(), "") && livingEntity.isFallFlying())
                 ElytraUtil.drawTrimParticles(
-                        livingEntity.level(), poseStack, this.elytraModel, ParticleTypes.ELECTRIC_SPARK
+                        livingEntity.level(), poseStack, this.elytraModel, particleColor, utmElytraTrimContainer.TRIM_TYPE.THREAD.get()
                 );
         }
     }
