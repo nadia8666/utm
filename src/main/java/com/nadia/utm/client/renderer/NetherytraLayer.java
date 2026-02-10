@@ -1,6 +1,7 @@
 package com.nadia.utm.client.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ElytraModel;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.model.geom.ModelLayers;
@@ -10,14 +11,16 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.ElytraLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import com.nadia.utm.registry.item.tool.utmTools;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Map;
 import java.util.Objects;
+import java.util.WeakHashMap;
 
 import static com.nadia.utm.client.renderer.glint.utmGlintContainer.*;
 
@@ -39,6 +42,8 @@ public class NetherytraLayer<T extends AbstractClientPlayer, M extends net.minec
     public boolean shouldRender(ItemStack stack, @NotNull T entity) {
         return stack.is(utmTools.NETHERYTRA.get());
     }
+
+    private Map<LivingEntity, Float> trailAccumulator = new WeakHashMap<>();
 
     public void render(
             @NotNull PoseStack poseStack,
@@ -83,8 +88,6 @@ public class NetherytraLayer<T extends AbstractClientPlayer, M extends net.minec
                     particleColor = rgb;
                 }
 
-
-
                 var trimType = utmElytraTrimContainer.TRIM_TYPE.THREAD.get();
                 var renderType = utmRenderTypes.EMISSIVE_ARMOR_CUTOUT
                         .apply(ResourceLocation.fromNamespaceAndPath("utm",
@@ -104,8 +107,7 @@ public class NetherytraLayer<T extends AbstractClientPlayer, M extends net.minec
 
                 if (livingEntity.isFallFlying())
                     this.elytraModel.renderToBuffer(poseStack, buffer.getBuffer(utmRenderTypes.EMISSIVE_ARMOR_CUTOUT.apply(EMISSIVE)), packedLight, OverlayTexture.NO_OVERLAY);
-            };
-
+            }
 
             if (itemstack.hasFoil())
                 this.elytraModel.renderToBuffer(poseStack,
@@ -114,10 +116,18 @@ public class NetherytraLayer<T extends AbstractClientPlayer, M extends net.minec
 
             poseStack.popPose();
 
-            if (!Objects.equals(utmElytraTrimContainer.TRIM_TYPE.THREAD.get(), "") && livingEntity.isFallFlying())
-                ElytraUtil.drawTrimParticles(
-                        livingEntity.level(), poseStack, this.elytraModel, particleColor, utmElytraTrimContainer.TRIM_TYPE.THREAD.get()
-                );
+            if (!Objects.equals(utmElytraTrimContainer.TRIM_TYPE.THREAD.get(), "") && livingEntity.isFallFlying()) {
+                var accumulator = trailAccumulator.getOrDefault(livingEntity, 0f);
+                accumulator += Minecraft.getInstance().getTimer().getRealtimeDeltaTicks() * 3;
+
+                while (accumulator > 1) {
+                    ElytraUtil.draw3PTrail(
+                            livingEntity.level(), poseStack, this.elytraModel, particleColor, utmElytraTrimContainer.TRIM_TYPE.THREAD.get()
+                    );
+                    accumulator--;
+                }
+                trailAccumulator.put(livingEntity, accumulator);
+            }
         }
     }
 }

@@ -3,6 +3,7 @@ package com.nadia.utm.client.renderer;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.nadia.utm.particle.ColorParticleOptions;
 import com.nadia.utm.registry.particle.utmParticles;
+import com.nadia.utm.utm;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ElytraModel;
 import net.minecraft.world.level.Level;
@@ -11,7 +12,7 @@ import org.joml.Matrix4f;
 import org.joml.Vector4f;
 
 public class ElytraUtil {
-    public static void drawTrimParticles(Level level, PoseStack poseStack, ElytraModel<?> model, int color, String type) {
+    public static void draw3PTrail(Level level, PoseStack poseStack, ElytraModel<?> model, int color, String type) {
         poseStack.pushPose();
         poseStack.translate(0.0F, 0.0F, 0.125F);
         model.leftWing.translateAndRotate(poseStack);
@@ -34,10 +35,22 @@ public class ElytraUtil {
         g = ((color >> 8) & 0xFF) / 255f;
         b = (color & 0xFF) / 255f;
 
-        var targetType = utmParticles.getFromString(type);
-        assert targetType != null : "[UTM] Unable to find target particle for " + type;
+        spawnTrail(
+                level, type, r, g, b,
+                cam.x + leftTip.x(), cam.y + leftTip.y(), cam.z + leftTip.z(),
+                cam.x + rightTip.x(), cam.y + rightTip.y(), cam.z + rightTip.z()
+        );
+    }
 
-        level.addParticle(new ColorParticleOptions(targetType.get(), r, g, b), cam.x + leftTip.x(), cam.y + leftTip.y(), cam.z + leftTip.z(), 0, 0, 0);
-        level.addParticle(new ColorParticleOptions(targetType.get(), r, g, b), cam.x + rightTip.x(), cam.y + rightTip.y(), cam.z + rightTip.z(), 0, 0, 0);
+    public static void spawnTrail(Level level, String type, float r, float g, float b, double lx, double ly, double lz, double rx, double ry, double rz) {
+        try {
+            var targetType = utmParticles.getFromString(type);
+            if (targetType == null) throw new Exception("[UTM] Unable to find target particle for " + type);
+
+            level.addParticle(new ColorParticleOptions(targetType.get(), r, g, b), lx, ly, lz, 0, 0, 0);
+            level.addParticle(new ColorParticleOptions(targetType.get(), r, g, b), rx, ry, rz, 0, 0, 0);
+        } catch (Exception e) {
+            utm.LOGGER.error(e.getMessage());
+        }
     }
 }

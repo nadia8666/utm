@@ -9,6 +9,7 @@ import com.nadia.utm.registry.particle.utmParticles;
 import com.nadia.utm.registry.recipe.utmRecipes;
 import com.nadia.utm.registry.sound.utmSounds;
 import com.nadia.utm.registry.ui.utmMenus;
+import com.nadia.utm.utm;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;

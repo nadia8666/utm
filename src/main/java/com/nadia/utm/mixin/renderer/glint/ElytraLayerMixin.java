@@ -5,6 +5,7 @@ import com.nadia.utm.client.renderer.ElytraUtil;
 import com.nadia.utm.client.renderer.utmElytraTrimContainer;
 import com.nadia.utm.client.renderer.utmRenderTypes;
 import com.nadia.utm.client.renderer.utmShaders;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ElytraModel;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.player.AbstractClientPlayer;
@@ -15,7 +16,6 @@ import net.minecraft.client.renderer.entity.layers.ElytraLayer;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.resources.PlayerSkin;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -24,25 +24,37 @@ import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.Map;
 import java.util.Objects;
+import java.util.WeakHashMap;
 
 import static com.nadia.utm.client.renderer.glint.utmGlintContainer.*;
 
 @Mixin(value = ElytraLayer.class, remap = false)
 public abstract class ElytraLayerMixin<T extends LivingEntity, M extends EntityModel<T>> extends RenderLayer<T, M> {
-    @Shadow @Final private ElytraModel<T> elytraModel;
-    @Shadow public abstract boolean shouldRender(ItemStack stack, T entity);
-    @Shadow public abstract ResourceLocation getElytraTexture(ItemStack stack, T entity);
+    @Shadow
+    @Final
+    private ElytraModel<T> elytraModel;
+
+    @Shadow
+    public abstract boolean shouldRender(ItemStack stack, T entity);
+
+    @Shadow
+    public abstract ResourceLocation getElytraTexture(ItemStack stack, T entity);
 
     public ElytraLayerMixin(RenderLayerParent<T, M> renderer) {
         super(renderer);
     }
 
-    @Inject(method = "render(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;ILnet/minecraft/world/entity/LivingEntity;FFFFFF)V", at=@At("HEAD"), cancellable = true)
+    @Unique
+    private Map<LivingEntity, Float> utm$trailAccumulator = new WeakHashMap<>();
+
+    @Inject(method = "render(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;ILnet/minecraft/world/entity/LivingEntity;FFFFFF)V", at = @At("HEAD"), cancellable = true)
     private void render(
             PoseStack poseStack,
             MultiBufferSource buffer, int packedLight, T livingEntity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch,
@@ -97,8 +109,7 @@ public abstract class ElytraLayerMixin<T extends LivingEntity, M extends EntityM
 
                 if (!Objects.equals(trimType, ""))
                     this.elytraModel.renderToBuffer(poseStack, buffer.getBuffer(renderType), packedLight, OverlayTexture.NO_OVERLAY);
-            };
-
+            }
 
             if (itemstack.hasFoil())
                 this.elytraModel.renderToBuffer(poseStack,
@@ -106,10 +117,18 @@ public abstract class ElytraLayerMixin<T extends LivingEntity, M extends EntityM
 
             poseStack.popPose();
 
-            if (!Objects.equals(utmElytraTrimContainer.TRIM_TYPE.THREAD.get(), "") && livingEntity.isFallFlying())
-                ElytraUtil.drawTrimParticles(
-                        livingEntity.level(), poseStack, this.elytraModel, utmElytraTrimContainer.TRIM_COLOR.THREAD.get(), utmElytraTrimContainer.TRIM_TYPE.THREAD.get()
-                );
+            if (!Objects.equals(utmElytraTrimContainer.TRIM_TYPE.THREAD.get(), "") && livingEntity.isFallFlying()) {
+                var accumulator = utm$trailAccumulator.getOrDefault(livingEntity, 0f);
+                accumulator += Minecraft.getInstance().getTimer().getRealtimeDeltaTicks() * 3;
+
+                while (accumulator > 1) {
+                    ElytraUtil.draw3PTrail(
+                            livingEntity.level(), poseStack, this.elytraModel, utmElytraTrimContainer.TRIM_COLOR.THREAD.get(), utmElytraTrimContainer.TRIM_TYPE.THREAD.get()
+                    );
+                    accumulator--;
+                }
+                utm$trailAccumulator.put(livingEntity, accumulator);
+            }
         }
 
         ci.cancel();
