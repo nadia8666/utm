@@ -41,11 +41,9 @@ public class utmDataGen {
         );
 
         generator.addProvider(event.includeClient(), new utmModelProvider(output, existingFileHelper));
-
         generator.addProvider(event.includeServer(), new utmRecipeProvider(output, lookupProvider));
-
         generator.addProvider(event.includeClient(), new utmSoundDefsProvider(output, existingFileHelper));
-
         generator.addProvider(event.includeClient(), new utmItemModelProvider(output, existingFileHelper));
+        generator.addProvider(event.includeServer(), new utmGlobalLootModifiersProvider(output, lookupProvider));
     }
 }

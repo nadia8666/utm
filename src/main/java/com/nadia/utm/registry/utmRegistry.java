@@ -5,11 +5,11 @@ import com.nadia.utm.registry.block.utmBlocks;
 import com.nadia.utm.registry.data.utmDataComponents;
 import com.nadia.utm.registry.item.tool.utmTools;
 import com.nadia.utm.registry.item.utmItems;
+import com.nadia.utm.registry.loot.utmLoot;
 import com.nadia.utm.registry.particle.utmParticles;
 import com.nadia.utm.registry.recipe.utmRecipes;
 import com.nadia.utm.registry.sound.utmSounds;
 import com.nadia.utm.registry.ui.utmMenus;
-import com.nadia.utm.utm;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
@@ -37,6 +37,7 @@ public class utmRegistry {
     public static final DeferredRegister<MobEffect> BUFFS = utmBuffs.BUFFS;
     public static final DeferredRegister<?> RECIPE_SERIALIZERS = utmRecipes.RECIPE_SERIALIZERS;
     public static final DeferredRegister<?> PARTICLE_TYPES = utmParticles.PARTICLE_TYPES;
+    public static final DeferredRegister<?> GLOBAL_LOOT_MODIFIER_SERIALIZERS = utmLoot.GLOBAL_LOOT_MODIFIER_SERIALIZERS;
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> MAIN = TABS
             .register("main", () -> CreativeModeTab.builder()
@@ -66,5 +67,6 @@ public class utmRegistry {
         TABS.register(modEventBus);
         RECIPE_SERIALIZERS.register(modEventBus);
         PARTICLE_TYPES.register(modEventBus);
+        GLOBAL_LOOT_MODIFIER_SERIALIZERS.register(modEventBus);
     }
 }
