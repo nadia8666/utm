@@ -2,6 +2,10 @@
   "values": [
     "utm:elytra_trim_vein",
     "utm:elytra_trim_outward",
-    "utm:elytra_trim_lesser"
+    "utm:elytra_trim_lesser",
+    "utm:elytra_trim_heartstwings",
+    "utm:elytra_trim_spades",
+    "utm:elytra_trim_roadrunner",
+    "utm:elytra_trim_ecologist"
   ]
 }

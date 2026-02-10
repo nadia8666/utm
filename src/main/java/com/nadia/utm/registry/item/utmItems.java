@@ -13,4 +13,8 @@ public class utmItems {
     public static final DeferredItem<Item> ELYTRA_TRIM_VEIN = ITEMS.registerSimpleItem("elytra_trim_vein");
     public static final DeferredItem<Item> ELYTRA_TRIM_OUTWARD = ITEMS.registerSimpleItem("elytra_trim_outward");
     public static final DeferredItem<Item> ELYTRA_TRIM_LESSER = ITEMS.registerSimpleItem("elytra_trim_lesser");
+    public static final DeferredItem<Item> ELYTRA_TRIM_SPADES = ITEMS.registerSimpleItem("elytra_trim_spades");
+    public static final DeferredItem<Item> ELYTRA_TRIM_HEARTSTWINGS = ITEMS.registerSimpleItem("elytra_trim_heartstwings");
+    public static final DeferredItem<Item> ELYTRA_TRIM_ECOLOGIST = ITEMS.registerSimpleItem("elytra_trim_ecologist");
+    public static final DeferredItem<Item> ELYTRA_TRIM_ROADRUNNER = ITEMS.registerSimpleItem("elytra_trim_roadrunner");
 }

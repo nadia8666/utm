@@ -37,6 +37,11 @@ public class utmItemTagProvider extends ItemTagsProvider {
         tag(utmTags.ITEMS.ELYTRA_TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_VEIN.get());
         tag(utmTags.ITEMS.ELYTRA_TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_OUTWARD.get());
         tag(utmTags.ITEMS.ELYTRA_TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_LESSER.get());
+        tag(utmTags.ITEMS.ELYTRA_TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_HEARTSTWINGS.get());
+        tag(utmTags.ITEMS.ELYTRA_TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_SPADES.get());
+        tag(utmTags.ITEMS.ELYTRA_TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_ROADRUNNER.get());
+        tag(utmTags.ITEMS.ELYTRA_TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_ECOLOGIST.get());
+
 
         tag(ItemTags.TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_VEIN.get());
         tag(ItemTags.TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_OUTWARD.get());

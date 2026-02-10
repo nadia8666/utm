@@ -26,12 +26,18 @@ public class utmItemModelProvider extends ItemModelProvider {
         basicItem(utmItems.ELYTRA_TRIM_VEIN.get());
         basicItem(utmItems.ELYTRA_TRIM_OUTWARD.get());
         basicItem(utmItems.ELYTRA_TRIM_LESSER.get());
+        basicItem(utmItems.ELYTRA_TRIM_SPADES.get());
+        basicItem(utmItems.ELYTRA_TRIM_HEARTSTWINGS.get());
+        basicItem(utmItems.ELYTRA_TRIM_ROADRUNNER.get());
+        basicItem(utmItems.ELYTRA_TRIM_ECOLOGIST.get());
 
         handheldItem(utmTools.COPPER_SWORD.get());
         handheldItem(utmTools.COPPER_PICKAXE.get());
         handheldItem(utmTools.COPPER_AXE.get());
         handheldItem(utmTools.COPPER_SHOVEL.get());
         handheldItem(utmTools.COPPER_HOE.get());
+
+        handheldItem(utmTools.ENCHANTED_SWORD_BLUE.get());
 
         handheldItem(utmTools.OBSIDIAN_SWORD.get());
         basicItem(utmTools.NETHERYTRA.get());

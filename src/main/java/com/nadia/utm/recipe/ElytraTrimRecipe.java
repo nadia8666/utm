@@ -38,6 +38,10 @@ public class ElytraTrimRecipe extends SmithingTransformRecipe {
             case "utm:elytra_trim_vein" -> "vein";
             case "utm:elytra_trim_outward" -> "outward";
             case "utm:elytra_trim_lesser" -> "lesser";
+            case "utm:elytra_trim_spades" -> "spades";
+            case "utm:elytra_trim_heartstwings" -> "heartstwings";
+            case "utm:elytra_trim_roadrunner" -> "roadrunner";
+            case "utm:elytra_trim_ecologist" -> "ecologist";
             default -> throw new IllegalStateException("[UTM] Unknown trim type: " + input.template().getItem());
         });
 
