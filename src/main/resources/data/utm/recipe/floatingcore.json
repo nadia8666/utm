@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "floatingcore",
+  "key": {
+    "s": {
+      "item": "minecraft:nether_star"
+    },
+    "b": {
+      "item": "minecraft:wind_charge"
+    },
+    "c": {
+      "item": "minecraft:netherite_ingot"
+    }
+  },
+  "pattern": [
+    "bcb",
+    "csc",
+    "bcb"
+  ],
+  "result": {
+    "count": 1,
+    "id": "utm:floatingcore"
+  }
+}
