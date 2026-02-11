@@ -23,6 +23,9 @@ public class utmItemModelProvider extends ItemModelProvider {
 
         basicItem(utmItems.UNFINISHED_GLINT_TABLE.get());
 
+        basicItem(utmItems.FIDDLECORE.get());
+        basicItem(utmItems.FLOATINGCORE.get());
+
         basicItem(utmItems.ELYTRA_TRIM_VEIN.get());
         basicItem(utmItems.ELYTRA_TRIM_OUTWARD.get());
         basicItem(utmItems.ELYTRA_TRIM_LESSER.get());
@@ -38,6 +41,8 @@ public class utmItemModelProvider extends ItemModelProvider {
         handheldItem(utmTools.COPPER_HOE.get());
 
         handheldItem(utmTools.ENCHANTED_SWORD_BLUE.get());
+        handheldItem(utmTools.ENCHANTED_SWORD_RED.get());
+        handheldItem(utmTools.ENCHANTED_SWORD_GREEN.get());
 
         handheldItem(utmTools.OBSIDIAN_SWORD.get());
         basicItem(utmTools.NETHERYTRA.get());

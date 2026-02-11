@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "fiddlehead",
+  "key": {
+    "s": {
+      "item": "utm:fiddlecore"
+    },
+    "b": {
+      "item": "minecraft:nether_star"
+    },
+    "c": {
+      "item": "minecraft:mangrove_propagule"
+    }
+  },
+  "pattern": [
+    "ccc",
+    "csc",
+    "cbc"
+  ],
+  "result": {
+    "count": 1,
+    "id": "utm:fiddlehead"
+  }
+}

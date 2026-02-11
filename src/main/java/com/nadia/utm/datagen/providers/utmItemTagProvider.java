@@ -31,6 +31,12 @@ public class utmItemTagProvider extends ItemTagsProvider {
         tag(Tags.Items.ENCHANTABLES).add(utmTools.OBSIDIAN_SWORD.get());
         tag(ItemTags.SWORD_ENCHANTABLE).add(utmTools.OBSIDIAN_SWORD.get());
         tag(ItemTags.WEAPON_ENCHANTABLE).add(utmTools.OBSIDIAN_SWORD.get()); //need both
+        tag(ItemTags.DURABILITY_ENCHANTABLE).add(utmTools.OBSIDIAN_SWORD.get());
+
+        tag(Tags.Items.ENCHANTABLES).add(utmTools.NETHERYTRA.get());
+        tag(ItemTags.EQUIPPABLE_ENCHANTABLE).add(utmTools.NETHERYTRA.get());
+        tag(ItemTags.DURABILITY_ENCHANTABLE).add(utmTools.NETHERYTRA.get());
+        tag(ItemTags.CHEST_ARMOR_ENCHANTABLE).add(utmTools.NETHERYTRA.get()); // dont want prot but oh well
 
         tag(utmTags.ITEMS.ELYTRA_TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_VEIN.get());
         tag(utmTags.ITEMS.ELYTRA_TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_OUTWARD.get());

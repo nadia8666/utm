@@ -58,9 +58,25 @@ public class utmTools {
                         BlockTags.INCORRECT_FOR_WOODEN_TOOL, 8200, 1f, 0f, 25, () -> Ingredient.EMPTY
                 );
                 return new SwordItem(Tier, new Item.Properties().attributes(
-                        SwordItem.createAttributes(Tier, 6, -2.4f)));
+                        SwordItem.createAttributes(Tier, 5, -2.4f)));
             }
     );
+    public static final Supplier<SwordItem> ENCHANTED_SWORD_RED = utmItems.ITEMS.register("enchanted_sword_red", () -> {
+                var Tier = utmToolBuilder.buildTier(
+                        BlockTags.INCORRECT_FOR_WOODEN_TOOL, 8200, 1f, 0f, 25, () -> Ingredient.EMPTY
+                );
+                return new SwordItem(Tier, new Item.Properties().attributes(
+                        SwordItem.createAttributes(Tier, 5, -2.4f)));
+            }
+    );
+    public static final Supplier<SwordItem> ENCHANTED_SWORD_GREEN = utmItems.ITEMS.register("enchanted_sword_green", () -> {
+                var Tier = utmToolBuilder.buildTier(
+                        BlockTags.INCORRECT_FOR_WOODEN_TOOL, 8200, 1f, 0f, 25, () -> Ingredient.EMPTY
+                );
+                return new SwordItem(Tier, new Item.Properties().attributes(
+                        SwordItem.createAttributes(Tier, 5, -2.4f)));
+            }
+    ); // maybe make these use the same material as the blue sword?
     public static void doNothing() {
         utm.LOGGER.info("[UTM] Tools class loaded, so that it shows up!");
     }
