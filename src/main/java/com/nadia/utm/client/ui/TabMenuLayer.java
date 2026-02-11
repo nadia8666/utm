@@ -80,7 +80,7 @@ public class TabMenuLayer {
             } else {
                 gui.setColor(1f, 1f, 1f,0.5f);
                 gui.blit(OFFLINE_HEAD,
-                        x+2, y+2,
+                        x+2, rowY+2,
                         7, 7,
                         0, 0,
                         7, 7,
