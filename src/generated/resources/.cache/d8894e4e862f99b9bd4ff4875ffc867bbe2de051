@@ -1,4 +1,4 @@
-// 1.21.1	2026-02-09T23:33:24.3787703	Item Models: utm
+// 1.21.1	2026-02-10T23:53:51.69785	Item Models: utm
 f2e9775563c86f68d71b06bb62045008a975a3de assets/utm/models/item/chunk_loader.json
 336758cbcbfdf58cdfae0d301428baacb9e69221 assets/utm/models/item/copper_axe.json
 b461f6062f97a9a4f36e2c003164cd40afbf068d assets/utm/models/item/copper_hoe.json
@@ -13,6 +13,10 @@ b70ae8d95cae2ea40f12657cd2e531c29a69e252 assets/utm/models/item/elytra_trim_road
 bf7ce50398fee1fe862df8fe326abe10ddd2d6e5 assets/utm/models/item/elytra_trim_spades.json
 230d3d95aff4fa1b038fa23d7d656dc966308594 assets/utm/models/item/elytra_trim_vein.json
 b6912f8a34e5f47793b3a45056355b5c11880109 assets/utm/models/item/enchanted_sword_blue.json
+8d14b0314f834aaad1854d850f9b7c043a413997 assets/utm/models/item/enchanted_sword_green.json
+a4495964b84cc59be5e289d9966f9ee877a88a18 assets/utm/models/item/enchanted_sword_red.json
+0e08ce62563cfd1766ab57f2472b2d0843132d30 assets/utm/models/item/fiddlecore.json
+6ad9dfbf9e1d77cb8161f7302a0c25940e57aa58 assets/utm/models/item/floatingcore.json
 17c810dab8cfad3e3bdffbe6bcbb14b5d9400a87 assets/utm/models/item/glint_table.json
 fc48134fda3d120191f6a58897d1bb3fd5632f78 assets/utm/models/item/grate.json
 487ba2c00f30efd980d0a646b53d75f69fc4fafe assets/utm/models/item/heavy_metal_anvil.json

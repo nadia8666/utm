@@ -17,4 +17,8 @@ public class utmItems {
     public static final DeferredItem<Item> ELYTRA_TRIM_HEARTSTWINGS = ITEMS.registerSimpleItem("elytra_trim_heartstwings");
     public static final DeferredItem<Item> ELYTRA_TRIM_ECOLOGIST = ITEMS.registerSimpleItem("elytra_trim_ecologist");
     public static final DeferredItem<Item> ELYTRA_TRIM_ROADRUNNER = ITEMS.registerSimpleItem("elytra_trim_roadrunner");
+
+    public static final DeferredItem<Item> FIDDLECORE = ITEMS.registerSimpleItem("fiddlecore");
+    public static final DeferredItem<Item> FLOATINGCORE = ITEMS.registerSimpleItem("floatingcore");
+
 }

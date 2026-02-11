@@ -1,0 +1,43 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "fiddlecore",
+  "key": {
+    "s": {
+      "item": "minecraft:sniffer_egg"
+    },
+    "b": {
+      "item": "minecraft:mangrove_leaves"
+    },
+    "c": {
+      "item": "minecraft:oak_leaves"
+    },
+    "d": {
+      "item": "minecraft:spruce_leaves"
+    },
+    "e": {
+      "item": "minecraft:birch_leaves"
+    },
+    "f": {
+      "item": "minecraft:jungle_leaves"
+    },
+    "g": {
+      "item": "minecraft:acacia_leaves"
+    },
+    "h": {
+      "item": "minecraft:cherry_leaves"
+    },
+    "i": {
+      "item": "minecraft:azalea_leaves"
+    }
+  },
+  "pattern": [
+    "bcd",
+    "ise",
+    "hgf"
+  ],
+  "result": {
+    "count": 1,
+    "id": "utm:fiddlecore"
+  }
+}
