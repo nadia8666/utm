@@ -1,9 +1,9 @@
-// 1.21.1	2026-02-10T12:51:02.8480285	Global Loot Modifiers : utm
+// 1.21.1	2026-02-10T17:35:56.5767784	Global Loot Modifiers : utm
 aba4dcb28d4cfbf45bcc215b3de6b9d4e78e7d6e data/neoforge/loot_modifiers/global_loot_modifiers.json
 c28db0b09fcf5268209af5d9f217aa2ecdc67894 data/utm/loot_modifiers/elytra_trim_ecologist_trail_ruins.json
 f1d91c61191f98688efcf4633238aad225b9d67e data/utm/loot_modifiers/elytra_trim_heartstwings_end_city.json
 f96f1490d2931dfdcb0749807f8870c1aa85ad32 data/utm/loot_modifiers/elytra_trim_lesser_fortress.json
 f3429e3d798bcd2653a6cfd9c6f0a33b0f30aff8 data/utm/loot_modifiers/elytra_trim_outward_dungeon.json
 f0e762f6377772d31c88162679296055c704006b data/utm/loot_modifiers/elytra_trim_roadrunner_village.json
-1c6610c7e3644ae5c82d43cd5a3731764e00733c data/utm/loot_modifiers/elytra_trim_spades_zombie.json
+e1be2d141753cb64f5c7de69e31b9a8ef60eae73 data/utm/loot_modifiers/elytra_trim_spades_zombie.json
 3149db0459335e7f567ccc4ccd6d52f4acec223f data/utm/loot_modifiers/elytra_trim_vein_mansion.json

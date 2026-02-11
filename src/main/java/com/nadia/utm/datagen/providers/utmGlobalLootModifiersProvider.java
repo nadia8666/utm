@@ -23,7 +23,7 @@ public class utmGlobalLootModifiersProvider extends GlobalLootModifierProvider {
         add("elytra_trim_spades_zombie", new AddItemModifier(
                 new LootItemCondition[]{
                         LootTableIdCondition.builder(ResourceLocation.withDefaultNamespace("entities/zombie")).build(),
-                        LootItemRandomChanceCondition.randomChance(.5f).build()
+                        LootItemRandomChanceCondition.randomChance(.005f).build()
                 },
                 utmItems.ELYTRA_TRIM_SPADES.get()
         ));
