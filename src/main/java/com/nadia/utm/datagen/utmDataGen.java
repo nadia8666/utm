@@ -8,6 +8,7 @@ import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 
@@ -24,14 +25,14 @@ public class utmDataGen {
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
 
-        var prov = generator.addProvider(
+        var blockTags = generator.addProvider(
                 event.includeServer(),
                 new utmBlockTagProvider(output, lookupProvider, existingFileHelper)
         );
 
         generator.addProvider(
                 event.includeServer(),
-                new utmItemTagProvider(output, lookupProvider, prov.contentsGetter(), existingFileHelper)
+                new utmItemTagProvider(output, lookupProvider, blockTags.contentsGetter(), existingFileHelper)
         );
 
         generator.addProvider(
@@ -45,5 +46,6 @@ public class utmDataGen {
         generator.addProvider(event.includeClient(), new utmSoundDefsProvider(output, existingFileHelper));
         generator.addProvider(event.includeClient(), new utmItemModelProvider(output, existingFileHelper));
         generator.addProvider(event.includeServer(), new utmGlobalLootModifiersProvider(output, lookupProvider));
+        generator.addProvider(event.includeServer(), new utmAdvancementsProvider(output, lookupProvider, existingFileHelper));
     }
 }

@@ -1,0 +1,271 @@
+{
+  "parent": "minecraft:adventure/play_jukebox_in_meadows",
+  "criteria": {
+    "has_minecraft:music_disc_11": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:music_disc_11"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_minecraft:music_disc_13": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:music_disc_13"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_minecraft:music_disc_5": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:music_disc_5"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_minecraft:music_disc_blocks": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:music_disc_blocks"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_minecraft:music_disc_cat": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:music_disc_cat"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_minecraft:music_disc_chirp": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:music_disc_chirp"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_minecraft:music_disc_creator": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:music_disc_creator"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_minecraft:music_disc_creator_music_box": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:music_disc_creator_music_box"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_minecraft:music_disc_far": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:music_disc_far"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_minecraft:music_disc_mall": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:music_disc_mall"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_minecraft:music_disc_mellohi": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:music_disc_mellohi"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_minecraft:music_disc_otherside": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:music_disc_otherside"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_minecraft:music_disc_pigstep": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:music_disc_pigstep"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_minecraft:music_disc_precipice": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:music_disc_precipice"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_minecraft:music_disc_relic": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:music_disc_relic"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_minecraft:music_disc_stal": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:music_disc_stal"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_minecraft:music_disc_strad": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:music_disc_strad"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_minecraft:music_disc_wait": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:music_disc_wait"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_minecraft:music_disc_ward": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:music_disc_ward"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.utm.all_discs.description"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "minecraft:music_disc_stal"
+    },
+    "title": {
+      "translate": "advancements.utm.all_discs.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_minecraft:music_disc_chirp"
+    ],
+    [
+      "has_minecraft:music_disc_relic"
+    ],
+    [
+      "has_minecraft:music_disc_pigstep"
+    ],
+    [
+      "has_minecraft:music_disc_5"
+    ],
+    [
+      "has_minecraft:music_disc_far"
+    ],
+    [
+      "has_minecraft:music_disc_11"
+    ],
+    [
+      "has_minecraft:music_disc_cat"
+    ],
+    [
+      "has_minecraft:music_disc_mellohi"
+    ],
+    [
+      "has_minecraft:music_disc_creator"
+    ],
+    [
+      "has_minecraft:music_disc_stal"
+    ],
+    [
+      "has_minecraft:music_disc_mall"
+    ],
+    [
+      "has_minecraft:music_disc_13"
+    ],
+    [
+      "has_minecraft:music_disc_wait"
+    ],
+    [
+      "has_minecraft:music_disc_blocks"
+    ],
+    [
+      "has_minecraft:music_disc_creator_music_box"
+    ],
+    [
+      "has_minecraft:music_disc_precipice"
+    ],
+    [
+      "has_minecraft:music_disc_strad"
+    ],
+    [
+      "has_minecraft:music_disc_ward"
+    ],
+    [
+      "has_minecraft:music_disc_otherside"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  },
+  "sends_telemetry_event": true
+}

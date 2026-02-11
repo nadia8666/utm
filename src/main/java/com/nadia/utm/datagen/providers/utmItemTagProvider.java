@@ -20,8 +20,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.concurrent.CompletableFuture;
 
 public class utmItemTagProvider extends ItemTagsProvider {
-    public static final TagKey<Item> SMITHING_TEMPLATES = ItemTags.create(ResourceLocation.withDefaultNamespace("smithing_template"));
-
     public utmItemTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, CompletableFuture<TagLookup<Block>> blockTags, @Nullable ExistingFileHelper existingFileHelper) {
         super(output, lookupProvider, blockTags, "utm", existingFileHelper);
     }
