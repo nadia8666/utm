@@ -1,6 +1,7 @@
 package com.nadia.utm.block;
 
 import com.mojang.serialization.MapCodec;
+import com.nadia.utm.block.entity.CitywallsBlockEntity;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -58,6 +59,6 @@ public class CitywallsBlock extends BaseEntityBlock implements IWrenchable, Simp
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
-        return null;
+        return new CitywallsBlockEntity(blockPos, blockState);
     }
 }

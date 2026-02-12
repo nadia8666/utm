@@ -60,12 +60,4 @@ public class utmEvents {
         TabLayerPayload payload = TabMenuServer.create(server);
         PacketDistributor.sendToAllPlayers(payload);
     }
-    public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
-        event.registerBlockEntityRenderer(
-                // The block entity type to register the renderer for.
-                utmBlockEntities.CITYWALLS_METAL.get(),
-                // A function of BlockEntityRendererProvider.Context to BlockEntityRenderer.
-                CitywallsBlockEntityRenderer::new
-        );
-    }
 }

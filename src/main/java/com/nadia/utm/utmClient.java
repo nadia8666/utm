@@ -6,6 +6,7 @@ import com.nadia.utm.client.renderer.CitywallsBlockEntityRenderer;
 import com.nadia.utm.client.renderer.glint.utmGlintContainer;
 import com.nadia.utm.client.ui.GlintScreen;
 import com.nadia.utm.client.updater.UpdateToast;
+import com.nadia.utm.registry.block.utmBlockEntities;
 import com.nadia.utm.registry.data.utmDataComponents;
 import com.nadia.utm.registry.ui.utmMenus;
 import com.nadia.utm.client.renderer.utmRenderTypes;
@@ -24,10 +25,7 @@ import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
-import net.neoforged.neoforge.client.event.ModelEvent;
-import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
-import net.neoforged.neoforge.client.event.RegisterRenderBuffersEvent;
-import net.neoforged.neoforge.client.event.ScreenEvent;
+import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
@@ -132,5 +130,13 @@ public class utmClient {
     @SubscribeEvent
     public static void registerModels(ModelEvent.RegisterAdditional event) {
         event.register(CitywallsBlockEntityRenderer.MRL);
+    }
+
+    @SubscribeEvent
+    public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerBlockEntityRenderer(
+                utmBlockEntities.CITYWALLS_METAL.get(),
+                CitywallsBlockEntityRenderer::new
+        );
     }
 }
