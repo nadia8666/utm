@@ -8,11 +8,12 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ElytraModel;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.Nullable;
 import org.joml.Matrix4f;
 import org.joml.Vector4f;
 
 public class ElytraUtil {
-    public static void draw3PTrail(Level level, PoseStack poseStack, ElytraModel<?> model, int color, String type) {
+    public static void draw3PTrail(Level level, PoseStack poseStack, ElytraModel<?> model, int color, String type, @Nullable Float scale) {
         poseStack.pushPose();
         poseStack.translate(0.0F, 0.0F, 0.125F);
         model.leftWing.translateAndRotate(poseStack);
@@ -38,10 +39,10 @@ public class ElytraUtil {
         spawnTrail(
                 level, type, r, g, b,
                 cam.x + leftTip.x(), cam.y + leftTip.y(), cam.z + leftTip.z(),
-                cam.x + rightTip.x(), cam.y + rightTip.y(), cam.z + rightTip.z()
+                cam.x + rightTip.x(), cam.y + rightTip.y(), cam.z + rightTip.z(), scale
         );
     }
-    public static void draw3PTrailNV(Level level, PoseStack poseStack, ElytraModel<?> model, int color, String type) {
+    public static void draw3PTrailNV(Level level, PoseStack poseStack, ElytraModel<?> model) {
         poseStack.pushPose(); //FORKKKKKKKKKKKKKKK
         poseStack.translate(0.0F, 0.0F, 0.125F);
         model.leftWing.translateAndRotate(poseStack);
@@ -69,22 +70,24 @@ public class ElytraUtil {
         spawnTrail(
                 level, "nep", 1, 1, 1,
                 cam.x + leftTip.x(), cam.y + leftTip.y(), cam.z + leftTip.z(),
-                cam.x + rightTip.x(), cam.y + rightTip.y(), cam.z + rightTip.z()
+                cam.x + rightTip.x(), cam.y + rightTip.y(), cam.z + rightTip.z(), 1f
         );
         spawnTrail(
                 level, "nep", 1, 1, 1,
                 cam.x + leftTip2.x(), cam.y + leftTip2.y(), cam.z + leftTip2.z(),
-                cam.x + rightTip2.x(), cam.y + rightTip2.y(), cam.z + rightTip2.z()
+                cam.x + rightTip2.x(), cam.y + rightTip2.y(), cam.z + rightTip2.z(), 1f
         );
     }
-    public static void spawnTrail(Level level, String type, float r, float g, float b, double lx, double ly, double lz, double rx, double ry, double rz) {
+    public static void spawnTrail(Level level, String type, float r, float g, float b, double lx, double ly, double lz, double rx, double ry, double rz, @Nullable Float scale) {
         try {
             var targetType = utmParticles.getFromString(type);
             if (targetType == null) throw new Exception("[UTM] Unable to find target particle for " + type);
-            level.addParticle(new ColorParticleOptions(targetType.get(), r, g, b), lx, ly, lz, 0, 0, 0);
-            level.addParticle(new ColorParticleOptions(targetType.get(), r, g, b), rx, ry, rz, 0, 0, 0);
-        } catch (Exception e) {
+            if (scale == null) scale = 2f;
 
+            level.addParticle(new ColorParticleOptions(targetType.get(), r, g, b, scale), lx, ly, lz, 0, 0, 0);
+            level.addParticle(new ColorParticleOptions(targetType.get(), r, g, b, scale), rx, ry, rz, 0, 0, 0);
+        } catch (Exception e) {
+            utm.LOGGER.warn(e.getMessage());
         }
     }
 }

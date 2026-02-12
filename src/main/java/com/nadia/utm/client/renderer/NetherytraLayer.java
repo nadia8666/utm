@@ -122,19 +122,20 @@ public class NetherytraLayer<T extends AbstractClientPlayer, M extends net.minec
 
                 while (accumulator > 1) {
                     ElytraUtil.draw3PTrail(
-                            livingEntity.level(), poseStack, this.elytraModel, particleColor, utmElytraTrimContainer.TRIM_TYPE.THREAD.get()
+                            livingEntity.level(), poseStack, this.elytraModel, particleColor, utmElytraTrimContainer.TRIM_TYPE.THREAD.get(), null
                     );
                     accumulator--;
                 }
                 trailAccumulator.put(livingEntity, accumulator);
             }
+
             if (livingEntity.isFallFlying()) {
                 var accumulator = trailAccumulator.getOrDefault(livingEntity, 0f);
                 accumulator += Minecraft.getInstance().getTimer().getRealtimeDeltaTicks() * 3;
 
                 while (accumulator > 1) {
                     ElytraUtil.draw3PTrailNV(
-                            livingEntity.level(), poseStack, this.elytraModel, 0, "nep"
+                            livingEntity.level(), poseStack, this.elytraModel
                     );
                     accumulator--;
                 }
