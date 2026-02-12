@@ -16,6 +16,7 @@ import java.util.List;
 
 import static com.nadia.utm.Config.HEAVY_METAL_ANVIL_LEVEL_REQUIREMENT;
 
+@SuppressWarnings("unused")
 public class AnvilTransformCategory implements EmiRecipe {
     // Use a standard category or create a custom one
     public static final EmiRecipeCategory CATEGORY = new EmiRecipeCategory(

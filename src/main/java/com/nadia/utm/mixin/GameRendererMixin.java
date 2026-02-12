@@ -3,7 +3,6 @@ package com.nadia.utm.mixin;
 import com.nadia.utm.client.renderer.ElytraUtil;
 import com.nadia.utm.item.NetherytraItem;
 import com.nadia.utm.registry.data.utmDataComponents;
-import com.nadia.utm.utm;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;

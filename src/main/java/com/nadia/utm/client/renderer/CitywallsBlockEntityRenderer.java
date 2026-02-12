@@ -28,7 +28,7 @@ public class CitywallsBlockEntityRenderer implements BlockEntityRenderer<Citywal
 
     @Override
     public @NotNull AABB getRenderBoundingBox(@NotNull CitywallsBlockEntity blockEntity) {
-        return AABB.ofSize(Vec3.atLowerCornerOf(blockEntity.getBlockPos()), 140, 140, 140); // i checked the size manually (its diameter). so . i think its too big but idc
+        return AABB.ofSize(Vec3.atLowerCornerOf(blockEntity.getBlockPos()), 140, 140, 140); // i checked the size manually (its diameter). so . i think it's too big but idc
     }
 
     @Override
@@ -36,7 +36,7 @@ public class CitywallsBlockEntityRenderer implements BlockEntityRenderer<Citywal
         return 512;
     }
 
-    public static ModelResourceLocation MRL = ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath("utm", "block/citywalls_metal"));
+    public static final ModelResourceLocation MRL = ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath("utm", "block/citywalls_metal"));
 
     @Override
     public void render(CitywallsBlockEntity blockEntity, float partialTick, PoseStack stack, @NotNull MultiBufferSource bufferSource, int packedLight, int packedOverlay) {

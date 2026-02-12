@@ -1,6 +1,5 @@
 package com.nadia.utm.client.ui;
 
-import com.mojang.authlib.GameProfile;
 import com.nadia.utm.Config;
 import com.nadia.utm.networking.TabLayerPayload;
 import net.minecraft.client.Minecraft;

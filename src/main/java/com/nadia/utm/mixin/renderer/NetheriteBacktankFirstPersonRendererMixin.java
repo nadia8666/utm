@@ -21,6 +21,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
+@SuppressWarnings("SameReturnValue")
 @Mixin(value = NetheriteBacktankFirstPersonRenderer.class, remap = false)
 public abstract class NetheriteBacktankFirstPersonRendererMixin {
     @Accessor("rendererActive")

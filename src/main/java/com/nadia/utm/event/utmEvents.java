@@ -1,14 +1,11 @@
 package com.nadia.utm.event;
 
-import com.nadia.utm.client.renderer.CitywallsBlockEntityRenderer;
 import com.nadia.utm.networking.TabLayerPayload;
 import com.nadia.utm.server.TabMenuServer;
-import com.nadia.utm.registry.block.utmBlockEntities;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;

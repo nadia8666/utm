@@ -24,7 +24,6 @@ import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.client.ICurioRenderer;
 
 import static com.nadia.utm.client.renderer.glint.utmGlintContainer.*;
-import static com.nadia.utm.client.renderer.glint.utmGlintContainer.DEFAULT_COLOR;
 
 public class BacktankCurioRenderer implements ICurioRenderer {
     @Override

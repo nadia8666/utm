@@ -27,6 +27,7 @@ import java.util.Map;
 
 import static com.nadia.utm.client.renderer.glint.utmGlintContainer.*;
 
+@SuppressWarnings("AddedMixinMembersNamePattern")
 @Mixin(value = LayeredArmorItem.class, remap = false)
 public interface LayeredArmorItemMixin {
     /**

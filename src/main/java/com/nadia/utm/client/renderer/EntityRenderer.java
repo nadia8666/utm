@@ -21,8 +21,8 @@ public class EntityRenderer {
             if(rendererRaw instanceof LivingEntityRenderer<?,?> genericRenderer) {
                 LivingEntityRenderer<?,?> rawRenderer;
                 rawRenderer = genericRenderer;
-                if(rawRenderer.getModel() instanceof PlayerModel<?> playerModel) {
-                    LivingEntityRenderer<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> castedRenderer =
+                if(rawRenderer.getModel() instanceof PlayerModel<?>) {
+                    @SuppressWarnings("unchecked") LivingEntityRenderer<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> castedRenderer =
                             (LivingEntityRenderer<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>>) rawRenderer;
                     castedRenderer.addLayer(new NetherytraLayer<>(castedRenderer, event.getEntityModels()));
                 }

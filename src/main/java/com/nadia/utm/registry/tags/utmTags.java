@@ -7,7 +7,7 @@ import net.minecraft.world.item.Item;
 
 public class utmTags {
     public static class ITEMS {
-        public static TagKey<Item> ELYTRA_TRIM_TEMPLATES = TagKey.create(
+        public static final TagKey<Item> ELYTRA_TRIM_TEMPLATES = TagKey.create(
                 utmRegistry.ITEMS.getRegistryKey(),
                 ResourceLocation.fromNamespaceAndPath("utm", "elytra_trim_templates"));
     }

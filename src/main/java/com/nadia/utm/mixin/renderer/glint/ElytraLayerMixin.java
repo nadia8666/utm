@@ -52,7 +52,7 @@ public abstract class ElytraLayerMixin<T extends LivingEntity, M extends EntityM
     }
 
     @Unique
-    private Map<LivingEntity, Float> utm$trailAccumulator = new WeakHashMap<>();
+    private final Map<LivingEntity, Float> utm$trailAccumulator = new WeakHashMap<>();
 
     @Inject(method = "render(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;ILnet/minecraft/world/entity/LivingEntity;FFFFFF)V", at = @At("HEAD"), cancellable = true)
     private void render(

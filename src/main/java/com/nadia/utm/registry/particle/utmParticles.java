@@ -14,6 +14,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import java.util.HashMap;
 import java.util.Map;
 
+@SuppressWarnings("unused")
 @EventBusSubscriber(modid = "utm", value = Dist.CLIENT)
 public class utmParticles {
     public static final DeferredRegister<ParticleType<?>> PARTICLE_TYPES =

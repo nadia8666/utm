@@ -38,6 +38,7 @@ public class utm {
     }
 
     // dont delete this apprently. this is core to utm working.
+    @SuppressWarnings("EmptyMethod")
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {}
 }

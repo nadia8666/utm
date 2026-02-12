@@ -28,7 +28,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 
 import static com.nadia.utm.client.renderer.glint.utmGlintContainer.*;
-import static com.nadia.utm.client.renderer.glint.utmGlintContainer.DEFAULT_COLOR;
 
 @Mixin(value = BacktankArmorLayer.class, remap = false)
 public class BacktankArmorLayerMixin<T extends LivingEntity, M extends EntityModel<T>> extends RenderLayer<T, M> {

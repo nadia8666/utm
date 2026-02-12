@@ -2,7 +2,6 @@ package com.nadia.utm.registry.buffs;
 
 import com.nadia.utm.buff.InterdictedBuff;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.neoforged.neoforge.registries.DeferredRegister;

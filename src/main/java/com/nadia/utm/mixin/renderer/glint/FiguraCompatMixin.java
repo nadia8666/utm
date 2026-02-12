@@ -20,6 +20,7 @@ import static com.nadia.utm.client.renderer.glint.utmGlintContainer.*;
 @Mixin(value = HumanoidArmorLayer.class, remap = false, priority = 2000)
 public class FiguraCompatMixin<T extends LivingEntity, A extends HumanoidModel<T>> {
     // shh, it's okay little mixin. the errors are intentional you see?
+    @SuppressWarnings({"MixinAnnotationTarget", "UnresolvedMixinReference"})
     @Inject(
             method = "figura$renderArmorPart",
             at= @At(value = "HEAD"),

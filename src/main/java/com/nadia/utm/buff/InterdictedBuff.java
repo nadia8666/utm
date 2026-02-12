@@ -2,21 +2,13 @@ package com.nadia.utm.buff;
 
 import com.nadia.utm.registry.item.tool.utmTools;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ElytraItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.block.Mirror;
-import net.neoforged.neoforge.registries.DeferredRegister;
-
-import java.rmi.registry.Registry;
 
 public class InterdictedBuff extends MobEffect {
     public InterdictedBuff(MobEffectCategory category, int color) {

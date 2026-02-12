@@ -15,10 +15,10 @@ import net.minecraft.world.item.crafting.SmithingTransformRecipe;
 import org.jetbrains.annotations.NotNull;
 
 public class ElytraTrimRecipe extends SmithingTransformRecipe {
-    public Ingredient template;
-    public Ingredient base;
-    public Ingredient addition;
-    public ItemStack result;
+    public final Ingredient template;
+    public final Ingredient base;
+    public final Ingredient addition;
+    public final ItemStack result;
 
     public ElytraTrimRecipe(Ingredient template, Ingredient base, Ingredient addition, ItemStack result) {
         super(template, base, addition, result);

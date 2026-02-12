@@ -18,7 +18,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
-import java.util.UUID;
 
 public class GlintTableBlockEntity extends BlockEntity implements MenuProvider {
     public GlintTableBlockEntity(BlockPos pos, BlockState blockState) {

@@ -26,7 +26,7 @@ import static net.minecraft.client.renderer.RenderStateShard.*;
 
 public class utmRenderTypes {
     private static class Shards {
-        public static TransparencyStateShard OVERLAY_TRANSPARENCY = new TransparencyStateShard("utm_translucent_transparency", () -> {
+        public static final TransparencyStateShard OVERLAY_TRANSPARENCY = new TransparencyStateShard("utm_translucent_transparency", () -> {
             RenderSystem.enableBlend();
             RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
         }, () -> {
@@ -34,7 +34,7 @@ public class utmRenderTypes {
             RenderSystem.defaultBlendFunc();
         });
 
-        public static TransparencyStateShard ADDITIVE_TRANSPARENCY = new TransparencyStateShard("utm_additive_transparency", () -> {
+        public static final TransparencyStateShard ADDITIVE_TRANSPARENCY = new TransparencyStateShard("utm_additive_transparency", () -> {
             RenderSystem.enableBlend(); // essentially just additive but include alpha channel
             RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.DST_ALPHA);
         }, () -> {
@@ -42,14 +42,14 @@ public class utmRenderTypes {
             RenderSystem.defaultBlendFunc();
         });
 
-        public static TexturingStateShard ITEM_TEXTURING = new TexturingStateShard("utm_glint_item_tex", () -> {
+        public static final TexturingStateShard ITEM_TEXTURING = new TexturingStateShard("utm_glint_item_tex", () -> {
             RenderSystem.setShaderTexture(0, utmGlintContainer.GLINT_LOCATION.THREAD.get());
 
             RenderSystem.bindTexture(RenderSystem.getShaderTexture(0));
             RenderSystem.setTextureMatrix(new Matrix4f().scale(8).rotateZ(0.17453292F));
         }, RenderSystem::resetTextureMatrix);
 
-        public static TexturingStateShard ARMOR_TEXTURING = new TexturingStateShard("utm_glint_armor_tex", () -> {
+        public static final TexturingStateShard ARMOR_TEXTURING = new TexturingStateShard("utm_glint_armor_tex", () -> {
             RenderSystem.setShaderTexture(0, utmGlintContainer.GLINT_LOCATION.THREAD.get());
 
             RenderSystem.bindTexture(RenderSystem.getShaderTexture(0));

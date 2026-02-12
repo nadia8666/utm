@@ -43,7 +43,7 @@ public class NetherytraLayer<T extends AbstractClientPlayer, M extends net.minec
         return stack.is(utmTools.NETHERYTRA.get());
     }
 
-    private Map<LivingEntity, Float> trailAccumulator = new WeakHashMap<>();
+    private final Map<LivingEntity, Float> trailAccumulator = new WeakHashMap<>();
 
     public void render(
             @NotNull PoseStack poseStack,

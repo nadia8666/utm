@@ -20,8 +20,10 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+@SuppressWarnings("ALL")
 @Mixin(value = ShowcaseItemFeature.class, remap = false)
 public class ShowcaseItemMixin {
+    @SuppressWarnings("DiscouragedShift")
     @Definition(id = "getSlotUnderMouse", method = "Lnet/minecraft/client/gui/screens/inventory/AbstractContainerScreen;getSlotUnderMouse()Lnet/minecraft/world/inventory/Slot;")
     @Expression("? = ?.getSlotUnderMouse()")
     @Inject(
