@@ -57,5 +57,8 @@
   "utm.elytra_trim_type.ecologist": " Ecologist Elytra Trim",
   "utm.elytra_trim_type.heartstwings": " 'heartstwings' Elytra Trim",
   "utm.elytra_trim_type.roadrunner": " Roadrunner Elytra Trim",
-  "utm.elytra_trim_type.spades": " Spades Elytra Trim"
+  "utm.elytra_trim_type.spades": " Spades Elytra Trim",
+
+  "advancements.utm.all_discs.title": "Quite Compact Disc",
+  "advancements.utm.all_discs.description": "Collect all music discs"
 }
