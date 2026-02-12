@@ -48,7 +48,6 @@ public class GameRendererMixin {
                     var backwardOffset = forward.scale(2.0);
                     var leftVec = pos.subtract(rightUnit).subtract(backwardOffset).scale(1);
                     var rightVec = pos.add(rightUnit).subtract(backwardOffset).scale(1);
-                    utm.LOGGER.warn(type);
                     ElytraUtil.spawnTrail(
                             mc.level, type, r, g, b,
                             leftVec.x, leftVec.y, leftVec.z,

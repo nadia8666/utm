@@ -45,10 +45,10 @@ public class ElytraUtil {
         poseStack.pushPose(); //FORKKKKKKKKKKKKKKK
         poseStack.translate(0.0F, 0.0F, 0.125F);
         model.leftWing.translateAndRotate(poseStack);
-        Vector4f leftTip = new Vector4f(-7.0F / 16.0F, 20.0F / 16.0F, 0.125F, 1.0F);
+        Vector4f leftTip = new Vector4f(-10.0F / 16.0F, 17.5F / 16.0F, 0.125F, 1.0F);
         Matrix4f leftMatrix = poseStack.last().pose();
         leftTip = leftTip.mul(leftMatrix);
-        Vector4f leftTip2 = new Vector4f(-4.0F / 16.0F, 20.0F / 16.0F, 0.125F, 1.0F);
+        Vector4f leftTip2 = new Vector4f(-10.0F / 16.0F, 8.5F / 16.0F, 0.125F, 1.0F);
         Matrix4f leftMatrix2 = poseStack.last().pose();
         leftTip2 = leftTip2.mul(leftMatrix2);
         poseStack.popPose();
@@ -56,10 +56,10 @@ public class ElytraUtil {
         poseStack.pushPose();
         poseStack.translate(0.0F, 0.0F, 0.125F);
         model.rightWing.translateAndRotate(poseStack);
-        Vector4f rightTip = new Vector4f(7.0F / 16.0F, 20.0F / 16.0F, 0.125F, 1.0F);
+        Vector4f rightTip = new Vector4f(10.0F / 16.0F, 17.5F / 16.0F, 0.125F, 1.0F);
         Matrix4f rightMatrix = poseStack.last().pose();
         rightTip = rightTip.mul(rightMatrix);
-        Vector4f rightTip2 = new Vector4f(4.0F / 16.0F, 20.0F / 16.0F, 0.125F, 1.0F);
+        Vector4f rightTip2 = new Vector4f(10.0F / 16.0F, 8.50F / 16.0F, 0.125F, 1.0F);
         Matrix4f rightMatrix2 = poseStack.last().pose();
         rightTip2 = rightTip2.mul(rightMatrix2);
         poseStack.popPose();
@@ -84,7 +84,7 @@ public class ElytraUtil {
             level.addParticle(new ColorParticleOptions(targetType.get(), r, g, b), lx, ly, lz, 0, 0, 0);
             level.addParticle(new ColorParticleOptions(targetType.get(), r, g, b), rx, ry, rz, 0, 0, 0);
         } catch (Exception e) {
-            utm.LOGGER.error(e.getMessage());
+
         }
     }
 }
