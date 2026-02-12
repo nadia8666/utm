@@ -2,6 +2,7 @@ package com.nadia.utm;
 
 import com.nadia.utm.block.GrateBlock;
 import com.nadia.utm.client.renderer.BacktankCurioRenderer;
+import com.nadia.utm.client.renderer.CitywallsBlockEntityRenderer;
 import com.nadia.utm.client.renderer.glint.utmGlintContainer;
 import com.nadia.utm.client.ui.GlintScreen;
 import com.nadia.utm.client.updater.UpdateToast;
@@ -23,6 +24,7 @@ import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.client.event.ModelEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.event.RegisterRenderBuffersEvent;
 import net.neoforged.neoforge.client.event.ScreenEvent;
@@ -121,10 +123,14 @@ public class utmClient {
         }
     }
 
-    // In your ClientModBus subscriber
     @SubscribeEvent
     public static void registerCurioRenderers(FMLClientSetupEvent event) {
         CuriosRendererRegistry.register(AllItems.COPPER_BACKTANK.get(), BacktankCurioRenderer::new);
         CuriosRendererRegistry.register(AllItems.NETHERITE_BACKTANK.get(), BacktankCurioRenderer::new);
+    }
+
+    @SubscribeEvent
+    public static void registerModels(ModelEvent.RegisterAdditional event) {
+        event.register(CitywallsBlockEntityRenderer.MRL);
     }
 }
