@@ -11,6 +11,7 @@ import com.nadia.utm.client.renderer.utmRenderTypes;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.world.item.ItemDisplayContext;
@@ -48,7 +49,6 @@ public abstract class ItemRendererMixin {
             CallbackInfo ci
     ) {
         if (buffer instanceof MultiBufferSource.BufferSource bufferSource) {
-            boolean changed;
             boolean timeUpdated = false;
 
             float time = RenderSystem.getShaderGameTime();
@@ -66,7 +66,7 @@ public abstract class ItemRendererMixin {
                 utmShaders.GLINT_OVERLAY.safeGetUniform("ScrollOffset").set(-x, y);
             }
 
-            changed = GLINT_COLOR.passUpdate(stack, bufferSource, false);
+            var changed = GLINT_COLOR.passUpdate(stack, bufferSource, false);
             changed = GLINT_LOCATION.passUpdate(stack, bufferSource, changed);
             changed = GLINT_SPEED.passUpdate(stack, bufferSource, changed);
             changed = GLINT_SCALE.passUpdate(stack, bufferSource, changed);
@@ -99,7 +99,7 @@ public abstract class ItemRendererMixin {
 
     @Inject(
             method = "getArmorFoilBuffer",
-            at=@At("HEAD"),
+            at = @At("HEAD"),
             cancellable = true
     )
     private static void utm$gAFB(
@@ -110,7 +110,7 @@ public abstract class ItemRendererMixin {
 
     @Inject(
             method = "getCompassFoilBuffer",
-            at=@At("HEAD"),
+            at = @At("HEAD"),
             cancellable = true
     )
     private static void utm$gCFB(
@@ -125,17 +125,37 @@ public abstract class ItemRendererMixin {
 
     @Inject(
             method = "getFoilBufferDirect",
-            at=@At("HEAD"),
+            at = @At("HEAD"),
             cancellable = true
     )
     private static void utm$gFBD(
             MultiBufferSource bufferSource, RenderType renderType, boolean noEntity, boolean withGlint, CallbackInfoReturnable<VertexConsumer> cir
     ) {
         cir.setReturnValue(
-        withGlint ? VertexMultiConsumer.create(bufferSource.getBuffer(noEntity ?
+                withGlint ? VertexMultiConsumer.create(bufferSource.getBuffer(noEntity ?
                         (GLINT_ADDITIVE.THREAD.get() ? utmRenderTypes.ADDITIVE_GLINT_ITEM.get() : utmRenderTypes.OVERLAY_GLINT_ITEM.get()) :
                         (GLINT_ADDITIVE.THREAD.get() ? utmRenderTypes.ADDITIVE_GLINT_ENTITY.get() : utmRenderTypes.OVERLAY_GLINT_ENTITY.get())
                 ), bufferSource.getBuffer(renderType)) : bufferSource.getBuffer(renderType)
         );
+    }
+
+    @Inject(
+            method = "getFoilBuffer",
+            at = @At("HEAD"),
+            cancellable = true
+    )
+    private static void utm$gFB(
+            MultiBufferSource bufferSource, RenderType renderType, boolean isItem, boolean glint, CallbackInfoReturnable<VertexConsumer> cir
+    ) {
+        if (glint)
+            cir.setReturnValue(Minecraft.useShaderTransparency() && renderType == Sheets.translucentItemSheet()
+                    ? VertexMultiConsumer.create(bufferSource.getBuffer(
+                    GLINT_ADDITIVE.THREAD.get() ? utmRenderTypes.ADDITIVE_GLINT_ITEM.get() : utmRenderTypes.OVERLAY_GLINT_ITEM.get()
+            ), bufferSource.getBuffer(renderType))
+                    : VertexMultiConsumer.create(bufferSource.getBuffer(isItem ?
+                    (GLINT_ADDITIVE.THREAD.get() ? utmRenderTypes.ADDITIVE_GLINT_ITEM.get() : utmRenderTypes.OVERLAY_GLINT_ITEM.get()) :
+                    (GLINT_ADDITIVE.THREAD.get() ? utmRenderTypes.ADDITIVE_GLINT_ENTITY.get() : utmRenderTypes.OVERLAY_GLINT_ENTITY.get())
+            ), bufferSource.getBuffer(renderType)));
+        else cir.setReturnValue(bufferSource.getBuffer(renderType));
     }
 }

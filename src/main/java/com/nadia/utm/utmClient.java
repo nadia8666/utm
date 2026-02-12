@@ -1,15 +1,15 @@
 package com.nadia.utm;
 
 import com.nadia.utm.block.GrateBlock;
+import com.nadia.utm.client.renderer.BacktankCurioRenderer;
 import com.nadia.utm.client.renderer.glint.utmGlintContainer;
 import com.nadia.utm.client.ui.GlintScreen;
 import com.nadia.utm.client.updater.UpdateToast;
-import com.nadia.utm.particle.ColorParticleProvider;
 import com.nadia.utm.registry.data.utmDataComponents;
-import com.nadia.utm.registry.particle.utmParticles;
 import com.nadia.utm.registry.ui.utmMenus;
 import com.nadia.utm.client.renderer.utmRenderTypes;
 import com.nadia.utm.updater.ToastDisplaySignal;
+import com.simibubi.create.AllItems;
 import com.simibubi.create.content.contraptions.wrench.RadialWrenchMenu;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
@@ -24,12 +24,12 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
-import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 import net.neoforged.neoforge.client.event.RegisterRenderBuffersEvent;
 import net.neoforged.neoforge.client.event.ScreenEvent;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
+import top.theillusivec4.curios.api.client.CuriosRendererRegistry;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
@@ -119,5 +119,12 @@ public class utmClient {
             event.getToolTip().add(1, Component.literal("Upgrade:")
                     .withStyle(ChatFormatting.GRAY));
         }
+    }
+
+    // In your ClientModBus subscriber
+    @SubscribeEvent
+    public static void registerCurioRenderers(FMLClientSetupEvent event) {
+        CuriosRendererRegistry.register(AllItems.COPPER_BACKTANK.get(), BacktankCurioRenderer::new);
+        CuriosRendererRegistry.register(AllItems.NETHERITE_BACKTANK.get(), BacktankCurioRenderer::new);
     }
 }

@@ -12,6 +12,9 @@
   "utm.configuration.heavyMetalAnvilLV": "Heavy-Metal Anvil Reinforcement Req.",
   "utm.configuration.heavyMetalAnvilLV.tooltip": "Level require to reinforce an anvil into a heavy-metal anvil.",
 
+  "utm.configuration.netheriteBacktankArm": "Netherite Backtank Arm",
+  "utm.configuration.netheriteBacktankArm.tooltip": "Should Create's Netherite Backtank have its custom first person arm?",
+
   "block.utm.heavy_metal_anvil": "Heavy-Metal Anvil",
   "block.utm.grate": "Grating",
   "block.utm.glint_table": "Glint Augmenter",

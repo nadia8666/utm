@@ -13,5 +13,8 @@ public class Config {
     public static final ModConfigSpec.BooleanValue ALTERNATE_TAB_MENU = BUILDER
             .define("altTabMenu", true);
 
+    public static final ModConfigSpec.BooleanValue NETHERITE_BACKTANK_ARM = BUILDER
+            .define("netheriteBacktankArm", true);
+
     static final ModConfigSpec SPEC = BUILDER.build();
 }
