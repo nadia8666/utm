@@ -1,6 +1,7 @@
 package com.nadia.utm.registry.block;
 
 import com.nadia.utm.block.entity.ChunkLoaderBlockEntity;
+import com.nadia.utm.block.entity.CitywallsBlockEntity;
 import com.nadia.utm.block.entity.GlintTableBlockEntity;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -18,5 +19,9 @@ public class utmBlockEntities {
 
     public static final Supplier<BlockEntityType<ChunkLoaderBlockEntity>> CHUNK_LOADER = BLOCK_ENTITIES.register("chunk_loader", () ->
             BlockEntityType.Builder.of(ChunkLoaderBlockEntity::new, utmBlocks.CHUNK_LOADER.block.get(), utmBlocks.PLAYER_CHUNK_LOADER.block.get())
+                    .build(null));
+
+    public static final Supplier<BlockEntityType<CitywallsBlockEntity>> CITYWALLS_METAL = BLOCK_ENTITIES.register("citywalls", () ->
+            BlockEntityType.Builder.of(CitywallsBlockEntity::new, utmBlocks.CITYWALLS_METAL.block.get())
                     .build(null));
 }

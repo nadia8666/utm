@@ -1,11 +1,14 @@
 package com.nadia.utm.event;
 
+import com.nadia.utm.client.renderer.CitywallsBlockEntityRenderer;
 import com.nadia.utm.networking.TabLayerPayload;
 import com.nadia.utm.server.TabMenuServer;
+import com.nadia.utm.registry.block.utmBlockEntities;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
@@ -56,5 +59,13 @@ public class utmEvents {
     public static void refreshTabMenuData(MinecraftServer server) {
         TabLayerPayload payload = TabMenuServer.create(server);
         PacketDistributor.sendToAllPlayers(payload);
+    }
+    public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerBlockEntityRenderer(
+                // The block entity type to register the renderer for.
+                utmBlockEntities.CITYWALLS_METAL.get(),
+                // A function of BlockEntityRendererProvider.Context to BlockEntityRenderer.
+                CitywallsBlockEntityRenderer::new
+        );
     }
 }

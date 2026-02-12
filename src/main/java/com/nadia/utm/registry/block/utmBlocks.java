@@ -50,13 +50,13 @@ public class utmBlocks {
             .isViewBlocking((state, level, pos) -> false)
             .isSuffocating((state, level, pos) -> false));
 
-    public static final utmBlockContainer<RotatableBlock, BlockItem> CITYWALLS_METAL = iregister("citywalls_metal", RotatableBlock::new, BlockBehaviour.Properties.of()
+    public static final utmBlockContainer<CitywallsBlock, BlockItem> CITYWALLS_METAL = iregister("citywalls_metal", CitywallsBlock::new, BlockBehaviour.Properties.of()
             .destroyTime(1.0f)
             .sound(SoundType.ANCIENT_DEBRIS)
             .noOcclusion()
             .isViewBlocking((state, level, pos) -> false)
             .isSuffocating((state, level, pos) -> false));
-    public static final utmBlockContainer<RotatableBlock, BlockItem> OUTPOSTWALLS_METAL = iregister("outpostwalls_metal", RotatableBlock::new, BlockBehaviour.Properties.of()
+    public static final utmBlockContainer<CitywallsBlock, BlockItem> OUTPOSTWALLS_METAL = iregister("outpostwalls_metal", CitywallsBlock::new, BlockBehaviour.Properties.of()
             .destroyTime(1.0f)
             .sound(SoundType.ANCIENT_DEBRIS)
             .noOcclusion()
