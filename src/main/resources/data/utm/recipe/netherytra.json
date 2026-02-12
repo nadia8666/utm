@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:smithing_transform",
+  "group": "netherytra",
+  "base": {
+    "item": "minecraft:elytra"
+  },
+  "addition": {
+    "item": "utm:floatingcore"
+  },
+  "template": {
+    "item": "minecraft:netherite_upgrade_smithing_template"
+  },
+  "result": {
+    "count": 1,
+    "id": "utm:netherytra"
+  }
+}

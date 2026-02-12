@@ -49,6 +49,9 @@ public class utmParticles {
     public static final DeferredHolder<ParticleType<?>, ColorParticleType> SPADES =
             registerColorParticle("spades");
 
+    public static final DeferredHolder<ParticleType<?>, ColorParticleType> NEP =
+            registerColorParticle("nep");
+
     public static DeferredHolder<ParticleType<?>, ColorParticleType> getFromString(String name) {
         return COLOR_PARTICLES.get(name + "_trail");
     }

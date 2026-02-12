@@ -1,7 +1,9 @@
 package com.nadia.utm.mixin;
 
 import com.nadia.utm.client.renderer.ElytraUtil;
+import com.nadia.utm.item.NetherytraItem;
 import com.nadia.utm.registry.data.utmDataComponents;
+import com.nadia.utm.utm;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
@@ -40,15 +42,42 @@ public class GameRendererMixin {
 
                     var camera = mc.gameRenderer.getMainCamera();
                     var pos = camera.getPosition();
-                    var forward = new Vec3(camera.getLookVector());
+                    var forward = new Vec3(camera.getLookVector()).scale(1);
                     var rightUnit = new Vec3(camera.getLeftVector()).scale(-1.0);
 
                     var backwardOffset = forward.scale(2.0);
-                    var leftVec = pos.subtract(rightUnit).subtract(backwardOffset);
-                    var rightVec = pos.add(rightUnit).subtract(backwardOffset);
-
+                    var leftVec = pos.subtract(rightUnit).subtract(backwardOffset).scale(1);
+                    var rightVec = pos.add(rightUnit).subtract(backwardOffset).scale(1);
+                    utm.LOGGER.warn(type);
                     ElytraUtil.spawnTrail(
                             mc.level, type, r, g, b,
+                            leftVec.x, leftVec.y, leftVec.z,
+                            rightVec.x, rightVec.y, rightVec.z
+                    );
+                }
+                if (itemstack.getItem() instanceof NetherytraItem netherytraItem) {
+                    float r = 1f;
+                    float g = 1f;
+                    float b = 1f;
+
+                    var camera = mc.gameRenderer.getMainCamera();
+                    var pos = camera.getPosition();
+                    var forward = new Vec3(camera.getLookVector()).scale(1);
+                    var rightUnit = new Vec3(camera.getLeftVector()).scale(-1);
+
+                    var backwardOffset = forward.scale(2.0);
+                    var leftVec = pos.subtract(rightUnit).scale(0.66).subtract(backwardOffset);
+                    var rightVec = pos.add(rightUnit).scale(0.66).subtract(backwardOffset);
+
+                    ElytraUtil.spawnTrail(
+                            mc.level, "nep", r, g, b,
+                            leftVec.x, leftVec.y, leftVec.z,
+                            rightVec.x, rightVec.y, rightVec.z
+                    );
+                     leftVec = pos.subtract(rightUnit).scale(0.33).subtract(backwardOffset);
+                     rightVec = pos.add(rightUnit).scale(0.33).subtract(backwardOffset);
+                    ElytraUtil.spawnTrail(
+                            mc.level, "nep", r, g, b,
                             leftVec.x, leftVec.y, leftVec.z,
                             rightVec.x, rightVec.y, rightVec.z
                     );
