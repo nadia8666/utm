@@ -10,20 +10,22 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import org.jetbrains.annotations.NotNull;
 
-public record ColorParticleOptions(ParticleType<ColorParticleOptions> type, float r, float g, float b) implements ParticleOptions {
+public record ColorParticleOptions(ParticleType<ColorParticleOptions> type, float r, float g, float b, float size) implements ParticleOptions {
     public static MapCodec<ColorParticleOptions> codec(ParticleType<ColorParticleOptions> type) {
         return RecordCodecBuilder.mapCodec(instance -> instance.group(
                 Codec.FLOAT.fieldOf("r").forGetter(ColorParticleOptions::r),
                 Codec.FLOAT.fieldOf("g").forGetter(ColorParticleOptions::g),
-                Codec.FLOAT.fieldOf("b").forGetter(ColorParticleOptions::b)
-        ).apply(instance, (r, g, b) -> new ColorParticleOptions(type, r, g, b)));
+                Codec.FLOAT.fieldOf("b").forGetter(ColorParticleOptions::b),
+                Codec.FLOAT.fieldOf("size").forGetter(ColorParticleOptions::size)
+        ).apply(instance, (r, g, b, size) -> new ColorParticleOptions(type, r, g, b, size)));
     }
     public static StreamCodec<RegistryFriendlyByteBuf, ColorParticleOptions> streamCodec(ParticleType<ColorParticleOptions> type) {
         return StreamCodec.composite(
                 ByteBufCodecs.FLOAT, ColorParticleOptions::r,
                 ByteBufCodecs.FLOAT, ColorParticleOptions::g,
                 ByteBufCodecs.FLOAT, ColorParticleOptions::b,
-                (r, g, b) -> new ColorParticleOptions(type, r, g, b)
+                ByteBufCodecs.FLOAT, ColorParticleOptions::size,
+                (r, g, b, size) -> new ColorParticleOptions(type, r, g, b, size)
         );
     }
 

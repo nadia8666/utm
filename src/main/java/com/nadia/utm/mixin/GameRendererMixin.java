@@ -51,7 +51,7 @@ public class GameRendererMixin {
                     ElytraUtil.spawnTrail(
                             mc.level, type, r, g, b,
                             leftVec.x, leftVec.y, leftVec.z,
-                            rightVec.x, rightVec.y, rightVec.z
+                            rightVec.x, rightVec.y, rightVec.z, null
                     );
                 }
                 if (itemstack.getItem() instanceof NetherytraItem netherytraItem) {
@@ -71,14 +71,14 @@ public class GameRendererMixin {
                     ElytraUtil.spawnTrail(
                             mc.level, "nep", r, g, b,
                             leftVec.x, leftVec.y, leftVec.z,
-                            rightVec.x, rightVec.y, rightVec.z
+                            rightVec.x, rightVec.y, rightVec.z, 1f
                     );
                      leftVec = pos.subtract(rightUnit).scale(0.33).subtract(backwardOffset);
                      rightVec = pos.add(rightUnit).scale(0.33).subtract(backwardOffset);
                     ElytraUtil.spawnTrail(
                             mc.level, "nep", r, g, b,
                             leftVec.x, leftVec.y, leftVec.z,
-                            rightVec.x, rightVec.y, rightVec.z
+                            rightVec.x, rightVec.y, rightVec.z, 1f
                     );
                 }
 

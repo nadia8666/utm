@@ -123,7 +123,7 @@ public abstract class ElytraLayerMixin<T extends LivingEntity, M extends EntityM
 
                 while (accumulator > 1) {
                     ElytraUtil.draw3PTrail(
-                            livingEntity.level(), poseStack, this.elytraModel, utmElytraTrimContainer.TRIM_COLOR.THREAD.get(), utmElytraTrimContainer.TRIM_TYPE.THREAD.get()
+                            livingEntity.level(), poseStack, this.elytraModel, utmElytraTrimContainer.TRIM_COLOR.THREAD.get(), utmElytraTrimContainer.TRIM_TYPE.THREAD.get(), null
                     );
                     accumulator--;
                 }
