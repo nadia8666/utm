@@ -4,26 +4,25 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.nadia.utm.block.entity.CitywallsBlockEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.NotNull;
 
-// The generic type in the superinterface should be set to what block entity
-// you are trying to render, along with its extracted render state. More on this below.
 public class CitywallsBlockEntityRenderer implements BlockEntityRenderer<CitywallsBlockEntity> {
     private final BlockRenderDispatcher dispatcher;
     public CitywallsBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
         this.dispatcher = context.getBlockRenderDispatcher();
     }
 
+    // dont cull :D
     @Override
-    public boolean shouldRenderOffScreen(CitywallsBlockEntity blockEntity) {
+    public boolean shouldRenderOffScreen(@NotNull CitywallsBlockEntity blockEntity) {
         return true;
     }
 
@@ -32,22 +31,34 @@ public class CitywallsBlockEntityRenderer implements BlockEntityRenderer<Citywal
         return 512;
     }
 
-    public static ModelResourceLocation MRL = ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath("utm", "utm:block/citywalls_metal"));
+    public static ModelResourceLocation MRL = ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath("utm", "block/citywalls_metal"));
 
-
-    // This method is called every frame in order to render the block entity. Parameters are:
-    // - blockEntity:   The block entity instance being rendered. Uses the generic type passed to the super interface.
-    // - partialTick:   The amount of time, in fractions of a tick (0.0 to 1.0), that has passed since the last tick.
-    // - poseStack:     The pose stack to render to.
-    // - bufferSource:  The buffer source to get vertex buffers from.
-    // - packedLight:   The light value of the block entity.
-    // - packedOverlay: The current overlay value of the block entity, usually OverlayTexture.NO_OVERLAY.
     @Override
-    public void render(CitywallsBlockEntity blockEntity, float partialTick, PoseStack stack, MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
+    public void render(CitywallsBlockEntity blockEntity, float partialTick, PoseStack stack, @NotNull MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
         stack.pushPose();
 
+        var data = blockEntity.getModelData();
         var state = blockEntity.getBlockState();
-        this.dispatcher.renderSingleBlock(state, stack, bufferSource, packedLight, packedOverlay);
+
+        BakedModel bakedmodel = Minecraft.getInstance().getModelManager().getModel(MRL);
+        int i = Minecraft.getInstance().getBlockColors().getColor(state, null, null, 0);
+        float f = (float)(i >> 16 & 0xFF) / 255.0F;
+        float f1 = (float)(i >> 8 & 0xFF) / 255.0F;
+        float f2 = (float)(i & 0xFF) / 255.0F;
+        for (RenderType rt : bakedmodel.getRenderTypes(state, RandomSource.create(42), data))
+            this.dispatcher.getModelRenderer().renderModel(
+                            stack.last(),
+                            bufferSource.getBuffer(rt),
+                            state,
+                            bakedmodel,
+                            f,
+                            f1,
+                            f2,
+                            packedLight,
+                            packedOverlay,
+                            data,
+                            rt
+                    );
 
         stack.popPose();
     }
