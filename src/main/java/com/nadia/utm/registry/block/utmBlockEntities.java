@@ -21,7 +21,8 @@ public class utmBlockEntities {
             BlockEntityType.Builder.of(ChunkLoaderBlockEntity::new, utmBlocks.CHUNK_LOADER.block.get(), utmBlocks.PLAYER_CHUNK_LOADER.block.get())
                     .build(null));
 
-    public static final Supplier<BlockEntityType<CitywallsBlockEntity>> CITYWALLS_METAL = BLOCK_ENTITIES.register("citywalls", () ->
-            BlockEntityType.Builder.of(CitywallsBlockEntity::new, utmBlocks.CITYWALLS_METAL.block.get())
+    public static final Supplier<BlockEntityType<CitywallsBlockEntity>> CITYWALLS_METAL = BLOCK_ENTITIES.register("citywalls_metal", () ->
+            BlockEntityType.Builder.of(CitywallsBlockEntity::new, utmBlocks.CITYWALLS_METAL.block.get(), utmBlocks.OUTPOSTWALLS_METAL.block.get(),
+                            utmBlocks.OUTPOSTWALLS_SHRINE.block.get())
                     .build(null));
 }

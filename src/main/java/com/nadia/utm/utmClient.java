@@ -129,7 +129,9 @@ public class utmClient {
 
     @SubscribeEvent
     public static void registerModels(ModelEvent.RegisterAdditional event) {
-        event.register(CitywallsBlockEntityRenderer.MRL);
+        event.register(CitywallsBlockEntityRenderer.CWL);
+        event.register(CitywallsBlockEntityRenderer.OWM);
+        event.register(CitywallsBlockEntityRenderer.OWS);
     }
 
     @SubscribeEvent
