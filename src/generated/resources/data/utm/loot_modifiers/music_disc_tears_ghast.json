@@ -1,0 +1,17 @@
+{
+  "type": "utm:add_item",
+  "conditions": [
+    {
+      "condition": "neoforge:loot_table_id",
+      "loot_table_id": "minecraft:entities/ghast"
+    },
+    {
+      "condition": "minecraft:entity_properties",
+      "entity": "direct_attacker",
+      "predicate": {
+        "type": "minecraft:fireball"
+      }
+    }
+  ],
+  "item": "utm:music_disc_tears"
+}

@@ -1,0 +1,8 @@
+{
+  "comparator_output": 10,
+  "description": {
+    "translate": "jukebox_song.utm.tears"
+  },
+  "length_in_seconds": 175.0,
+  "sound_event": "utm:music_disc_tears"
+}

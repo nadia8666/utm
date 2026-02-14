@@ -3,9 +3,16 @@ package com.nadia.utm.datagen.providers;
 import com.nadia.utm.registry.block.utmBlocks;
 import com.nadia.utm.registry.item.tool.utmTools;
 import com.nadia.utm.registry.item.utmItems;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
+import net.neoforged.neoforge.client.model.generators.ItemModelBuilder;
 import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
+import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
+
+import java.util.Objects;
 
 public class utmItemModelProvider extends ItemModelProvider {
     public utmItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
@@ -25,6 +32,9 @@ public class utmItemModelProvider extends ItemModelProvider {
 
         basicItem(utmItems.FIDDLECORE.get());
         basicItem(utmItems.FLOATINGCORE.get());
+
+        musicDisc(utmItems.MUSIC_DISC_TEARS.get());
+        musicDisc(utmItems.MUSIC_DISC_LAVA_CHICKEN.get());
 
         basicItem(utmItems.ELYTRA_TRIM_VEIN.get());
         basicItem(utmItems.ELYTRA_TRIM_OUTWARD.get());
@@ -46,5 +56,15 @@ public class utmItemModelProvider extends ItemModelProvider {
 
         handheldItem(utmTools.OBSIDIAN_SWORD.get());
         basicItem(utmTools.NETHERYTRA.get());
+    }
+
+    public ItemModelBuilder musicDisc(ResourceLocation item) {
+        return getBuilder(item.toString())
+                .parent(new ModelFile.UncheckedModelFile("item/template_music_disc"))
+                .texture("layer0", ResourceLocation.fromNamespaceAndPath(item.getNamespace(), "item/" + item.getPath()));
+    }
+
+    public ItemModelBuilder musicDisc(Item item) {
+        return musicDisc(Objects.requireNonNull(BuiltInRegistries.ITEM.getKey(item)));
     }
 }

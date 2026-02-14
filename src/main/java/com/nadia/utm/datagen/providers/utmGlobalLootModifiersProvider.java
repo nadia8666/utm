@@ -3,10 +3,16 @@ package com.nadia.utm.datagen.providers;
 import com.nadia.utm.registry.loot.AddItemModifier;
 import com.nadia.utm.registry.item.utmItems;
 import com.nadia.utm.registry.loot.ReplaceItemModifier;
+import net.minecraft.advancements.critereon.DamageSourcePredicate;
+import net.minecraft.advancements.critereon.EntityFlagsPredicate;
+import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
 import net.neoforged.neoforge.common.data.GlobalLootModifierProvider;
 import net.neoforged.neoforge.common.loot.LootTableIdCondition;
@@ -74,6 +80,32 @@ public class utmGlobalLootModifiersProvider extends GlobalLootModifierProvider {
                         LootItemRandomChanceCondition.randomChance(.50f).build()
                 },
                 utmItems.ELYTRA_TRIM_VEIN.get()
+        ));
+
+        // this is completley untested i just fumbled my way trhough it
+        add("music_disc_tears_ghast", new AddItemModifier(
+                new LootItemCondition[]{
+                        LootTableIdCondition.builder(ResourceLocation.withDefaultNamespace("entities/ghast")).build(),
+                        LootItemEntityPropertyCondition.hasProperties(
+                                LootContext.EntityTarget.DIRECT_ATTACKER,
+                                EntityPredicate.Builder.entity().of(EntityType.FIREBALL)
+                        ).build()
+                },
+                utmItems.MUSIC_DISC_TEARS.get()
+        ));
+
+        add("music_disc_lava_chicken_zombie", new AddItemModifier(
+                new LootItemCondition[]{
+                        LootTableIdCondition.builder(ResourceLocation.withDefaultNamespace("entities/zombie")).build(),
+                        LootItemRandomChanceCondition.randomChance(0.25f).build(),
+                        LootItemEntityPropertyCondition.hasProperties(
+                                LootContext.EntityTarget.THIS,
+                                EntityPredicate.Builder.entity()
+                                        .flags(net.minecraft.advancements.critereon.EntityFlagsPredicate.Builder.flags()
+                                                .setIsBaby(true))
+                        ).build()
+                },
+                utmItems.MUSIC_DISC_LAVA_CHICKEN.get()
         ));
     }
 }

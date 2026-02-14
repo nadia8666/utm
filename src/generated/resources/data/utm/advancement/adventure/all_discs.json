@@ -190,6 +190,26 @@
         ]
       },
       "trigger": "minecraft:inventory_changed"
+    },
+    "has_utm:music_disc_lava_chicken": {
+      "conditions": {
+        "items": [
+          {
+            "items": "utm:music_disc_lava_chicken"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_utm:music_disc_tears": {
+      "conditions": {
+        "items": [
+          {
+            "items": "utm:music_disc_tears"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
     }
   },
   "display": {
@@ -228,6 +248,9 @@
       "has_minecraft:music_disc_cat"
     ],
     [
+      "has_utm:music_disc_tears"
+    ],
+    [
       "has_minecraft:music_disc_mellohi"
     ],
     [
@@ -247,6 +270,9 @@
     ],
     [
       "has_minecraft:music_disc_blocks"
+    ],
+    [
+      "has_utm:music_disc_lava_chicken"
     ],
     [
       "has_minecraft:music_disc_creator_music_box"

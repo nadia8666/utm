@@ -50,5 +50,8 @@ public class utmItemTagProvider extends ItemTagsProvider {
         tag(ItemTags.TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_SPADES.get());
         tag(ItemTags.TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_ROADRUNNER.get());
         tag(ItemTags.TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_ECOLOGIST.get());
+
+        tag(Tags.Items.MUSIC_DISCS).add(utmItems.MUSIC_DISC_TEARS.get());
+        tag(Tags.Items.MUSIC_DISCS).add(utmItems.MUSIC_DISC_LAVA_CHICKEN.get());
     }
 }

@@ -42,6 +42,8 @@
   "item.utm.elytra_trim_spades": "Spades Elytra Trim Template",
   "item.utm.fiddlecore": "Fiddlehead Core",
   "item.utm.floatingcore": "Floating Core",
+  "item.utm.music_disc_tears": "Music Disc",
+  "item.utm.music_disc_lava_chicken": "Music Disc",
 
 
   "effect.utm.interdicted": "Interdicted!",
@@ -63,5 +65,8 @@
   "utm.elytra_trim_type.spades": " Spades Elytra Trim",
 
   "advancements.utm.all_discs.title": "Quite Compact Disc",
-  "advancements.utm.all_discs.description": "Collect all music discs"
+  "advancements.utm.all_discs.description": "Collect all music discs",
+
+  "jukebox_song.utm.lava_chicken": "Hyper Potions - Lava Chicken",
+  "jukebox_song.utm.tears": "Amos Roddy - Tears"
 }

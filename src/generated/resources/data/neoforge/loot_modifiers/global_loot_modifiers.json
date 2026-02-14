@@ -6,7 +6,9 @@
     "utm:elytra_trim_heartstwings_end_city",
     "utm:elytra_trim_lesser_fortress",
     "utm:elytra_trim_outward_dungeon",
-    "utm:elytra_trim_vein_mansion"
+    "utm:elytra_trim_vein_mansion",
+    "utm:music_disc_tears_ghast",
+    "utm:music_disc_lava_chicken_zombie"
   ],
   "replace": false
 }
