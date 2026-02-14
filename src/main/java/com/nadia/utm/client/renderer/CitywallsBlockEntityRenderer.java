@@ -2,6 +2,8 @@ package com.nadia.utm.client.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.nadia.utm.block.entity.CitywallsBlockEntity;
+import com.nadia.utm.registry.block.utmBlocks;
+import com.nadia.utm.utm;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -36,7 +38,9 @@ public class CitywallsBlockEntityRenderer implements BlockEntityRenderer<Citywal
         return 512;
     }
 
-    public static final ModelResourceLocation MRL = ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath("utm", "block/citywalls_metal"));
+    public static final ModelResourceLocation CWL = ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath("utm", "block/citywalls_metal"));
+    public static final ModelResourceLocation OWM = ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath("utm", "block/outpostwalls_metal"));
+    public static final ModelResourceLocation OWS = ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath("utm", "block/outpostwalls_shrine"));
 
     @Override
     public void render(CitywallsBlockEntity blockEntity, float partialTick, PoseStack stack, @NotNull MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
@@ -44,7 +48,10 @@ public class CitywallsBlockEntityRenderer implements BlockEntityRenderer<Citywal
 
         var data = blockEntity.getModelData();
         var state = blockEntity.getBlockState();
-        var model = Minecraft.getInstance().getModelManager().getModel(MRL);
+        var model = Minecraft.getInstance().getModelManager().getModel(CWL);
+        if (state.getBlock().toString().equals("Block{utm:outpostwalls_shrine}")){
+            model = Minecraft.getInstance().getModelManager().getModel(OWS);
+        }
 
         int i = Minecraft.getInstance().getBlockColors().getColor(state, blockEntity.getLevel(), blockEntity.getBlockPos(), 0);
         float f = (float)(i >> 16 & 0xFF) / 255.0F;
