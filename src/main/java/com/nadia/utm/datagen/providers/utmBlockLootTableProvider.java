@@ -22,6 +22,7 @@ public class utmBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(utmBlocks.GLINT_TABLE.block.get());
         dropSelf(utmBlocks.GRATE.block.get());
         dropSelf(utmBlocks.CITYWALLS_METAL.block.get());
+        dropSelf(utmBlocks.CITYWALLS_SHRINE.block.get());
         dropSelf(utmBlocks.OUTPOSTWALLS_METAL.block.get());
         dropSelf(utmBlocks.OUTPOSTWALLS_SHRINE.block.get());
         dropSelf(utmBlocks.CHUNK_LOADER.block.get());

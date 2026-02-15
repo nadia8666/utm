@@ -1,6 +1,7 @@
-// 1.21.1	2026-02-15T11:19:29.1541191	Loot Tables
+// 1.21.1	2026-02-15T12:14:00.2512615	Loot Tables
 bbbc267fdb298806c35bae4a14b95045887620fa data/utm/loot_table/blocks/chunk_loader.json
 cffc805801ca90da8fc3022b03b2f653dff81aed data/utm/loot_table/blocks/citywalls_metal.json
+b9f7d9fec92a5f6dcb1f82471c980169900928b9 data/utm/loot_table/blocks/citywalls_shrine.json
 c8b4fb55f495bda3a63e2ecc474b1d059415d051 data/utm/loot_table/blocks/glint_table.json
 bd2b22b9652c80441bc5b1f717eddec48ad69841 data/utm/loot_table/blocks/grate.json
 5b79fc9e6175902b985a60f308e9fbb32425351b data/utm/loot_table/blocks/heavy_metal_anvil.json
