@@ -21,5 +21,5 @@ public class utmItems {
     public static final DeferredItem<Item> FIDDLECORE = ITEMS.registerSimpleItem("fiddlecore");
     public static final DeferredItem<Item> FLOATINGCORE = ITEMS.registerSimpleItem("floatingcore");
 
-
+    public static final DeferredItem<Item> INCREDI = ITEMS.registerSimpleItem("incredi");
 }

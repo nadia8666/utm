@@ -23,6 +23,7 @@ public class utmItemModelProvider extends ItemModelProvider {
 
         basicItem(utmItems.UNFINISHED_GLINT_TABLE.get());
 
+        basicItem(utmItems.INCREDI.get());
         basicItem(utmItems.FIDDLECORE.get());
         basicItem(utmItems.FLOATINGCORE.get());
 
