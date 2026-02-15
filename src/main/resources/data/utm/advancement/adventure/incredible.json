@@ -1,7 +1,7 @@
 {
   "display": {
     "icon": {
-      "id": "minecraft:cityyyyys"
+      "id": "utm:incredipak"
     },
     "title": "Cut Stage",
     "description": "Craft your first Colony Incredi-Pak",
@@ -17,7 +17,7 @@
       "conditions": {
         "items": [
           {
-            "items": "utm:incredi"
+            "items": "utm:incredipak"
           }
         ]
       }
