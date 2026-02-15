@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "wallstuff",
+  "key": {
+    "#": {
+      "item": "utm:outpostwalls_shrine"
+    },
+    "X": {
+      "item": "minecraft:smooth_stone"
+    },
+    "Y": {
+      "item": "minecraft:iron_block"
+    },
+    "G": {
+      "item": "minecraft:grass"
+    }
+  },
+  "pattern": [
+    "XGX",
+    "X#Y",
+    "XYX"
+  ],
+  "result": {
+    "count": 1,
+    "id": "utm:citywalls_shrine"
+  }
+}

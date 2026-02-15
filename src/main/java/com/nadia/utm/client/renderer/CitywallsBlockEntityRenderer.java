@@ -52,6 +52,7 @@ public class CitywallsBlockEntityRenderer implements BlockEntityRenderer<Citywal
     public static final ModelResourceLocation CWL = ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath("utm", "block/citywalls_metal"));
     public static final ModelResourceLocation OWM = ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath("utm", "block/outpostwalls_metal"));
     public static final ModelResourceLocation OWS = ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath("utm", "block/outpostwalls_shrine"));
+    public static final ModelResourceLocation CWS = ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath("utm", "block/citywalls_shrine"));
 
     @Override
     public void render(CitywallsBlockEntity blockEntity, float partialTick, PoseStack stack, @NotNull MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
@@ -59,13 +60,17 @@ public class CitywallsBlockEntityRenderer implements BlockEntityRenderer<Citywal
 
         var data = blockEntity.getModelData();
         var state = blockEntity.getBlockState();
+
         var model = Minecraft.getInstance().getModelManager().getModel(CWL);
         if (state.getBlock().toString().equals("Block{utm:outpostwalls_shrine}")) {
             stack.translate(0, 1, 0);
             model = Minecraft.getInstance().getModelManager().getModel(OWS);
         } else if (state.getBlock().toString().equals("Block{utm:outpostwalls_metal}")) {
             stack.translate(0, 5, 0);
-        model = Minecraft.getInstance().getModelManager().getModel(OWM);
+            model = Minecraft.getInstance().getModelManager().getModel(OWM);
+        } else if (state.getBlock().toString().equals("Block{utm:citywalls_shrine}")) {
+            stack.translate(0, 2, 0);
+            model = Minecraft.getInstance().getModelManager().getModel(CWS);
         }
 
         int i = Minecraft.getInstance().getBlockColors().getColor(state, blockEntity.getLevel(), blockEntity.getBlockPos(), 0);
