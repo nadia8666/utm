@@ -69,6 +69,12 @@ public class utmBlocks {
             .noOcclusion()
             .isViewBlocking((state, level, pos) -> false)
             .isSuffocating((state, level, pos) -> false));
+    public static final utmBlockContainer<CitywallsBlock, BlockItem> CITYWALLS_SHRINE = iregister("citywalls_shrine", CitywallsBlock::new, BlockBehaviour.Properties.of()
+            .destroyTime(1.0f)
+            .sound(SoundType.ANCIENT_DEBRIS)
+            .noOcclusion()
+            .isViewBlocking((state, level, pos) -> false)
+            .isSuffocating((state, level, pos) -> false));
     public static final utmBlockContainer<InterdictorBlock, BlockItem> INTERDICTOR = iregister("interdictor", InterdictorBlock::new, BlockBehaviour.Properties.of()
             .destroyTime(10.0f)
             .sound(SoundType.NETHERITE_BLOCK)

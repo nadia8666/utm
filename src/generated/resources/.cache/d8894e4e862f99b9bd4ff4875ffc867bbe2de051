@@ -1,4 +1,4 @@
-// 1.21.1	2026-02-14T13:53:10.8281348	Item Models: utm
+// 1.21.1	2026-02-14T22:16:18.451317	Item Models: utm
 f2e9775563c86f68d71b06bb62045008a975a3de assets/utm/models/item/chunk_loader.json
 336758cbcbfdf58cdfae0d301428baacb9e69221 assets/utm/models/item/copper_axe.json
 b461f6062f97a9a4f36e2c003164cd40afbf068d assets/utm/models/item/copper_hoe.json
@@ -20,6 +20,7 @@ a4495964b84cc59be5e289d9966f9ee877a88a18 assets/utm/models/item/enchanted_sword_
 17c810dab8cfad3e3bdffbe6bcbb14b5d9400a87 assets/utm/models/item/glint_table.json
 fc48134fda3d120191f6a58897d1bb3fd5632f78 assets/utm/models/item/grate.json
 487ba2c00f30efd980d0a646b53d75f69fc4fafe assets/utm/models/item/heavy_metal_anvil.json
+eefe598e6be1dfb91180516989c5ec10467978f6 assets/utm/models/item/incredi.json
 1beffc85c61be34cb43493ffabd9c1930107d759 assets/utm/models/item/interdictor.json
 dfac8393a8467bd1ab1ace9e4ad852baf5ad1852 assets/utm/models/item/music_disc_lava_chicken.json
 d1d2c967c30729a23a0453dc02c563694ea48256 assets/utm/models/item/music_disc_tears.json

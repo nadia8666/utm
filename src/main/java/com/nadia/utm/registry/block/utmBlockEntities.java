@@ -23,6 +23,6 @@ public class utmBlockEntities {
 
     public static final Supplier<BlockEntityType<CitywallsBlockEntity>> CITYWALLS_METAL = BLOCK_ENTITIES.register("citywalls_metal", () ->
             BlockEntityType.Builder.of(CitywallsBlockEntity::new, utmBlocks.CITYWALLS_METAL.block.get(), utmBlocks.OUTPOSTWALLS_METAL.block.get(),
-                            utmBlocks.OUTPOSTWALLS_SHRINE.block.get())
+                            utmBlocks.OUTPOSTWALLS_SHRINE.block.get(),utmBlocks.CITYWALLS_SHRINE.block.get())
                     .build(null));
 }

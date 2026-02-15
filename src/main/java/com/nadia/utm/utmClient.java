@@ -132,6 +132,7 @@ public class utmClient {
         event.register(CitywallsBlockEntityRenderer.CWL);
         event.register(CitywallsBlockEntityRenderer.OWM);
         event.register(CitywallsBlockEntityRenderer.OWS);
+        event.register(CitywallsBlockEntityRenderer.CWS);
     }
 
     @SubscribeEvent

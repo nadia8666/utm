@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "wallstuff",
+  "key": {
+    "#": {
+      "item": "minecraft:oak_log"
+    },
+    "C": {
+      "item": "minecraft:chest"
+    },
+    "D": {
+      "item": "minecraft:diamond"
+    },
+    "X": {
+      "item": "minecraft:iron_block"
+    }
+  },
+  "pattern": [
+    "DCX",
+    "C#C",
+    "XCD"
+  ],
+  "result": {
+    "count": 1,
+    "id": "utm:incredi"
+  }
+}
