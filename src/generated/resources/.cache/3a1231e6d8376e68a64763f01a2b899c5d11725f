@@ -1,5 +1,5 @@
-// 1.21.1	2026-02-14T14:28:52.109368	Global Loot Modifiers : utm
-260237936b63dfe9c05b9e8846a85650263d7bfa data/neoforge/loot_modifiers/global_loot_modifiers.json
+// 1.21.1	2026-02-15T12:03:46.0338066	Global Loot Modifiers : utm
+e8ab92c0d8c388af55ba2a828167495678ebb401 data/neoforge/loot_modifiers/global_loot_modifiers.json
 c28db0b09fcf5268209af5d9f217aa2ecdc67894 data/utm/loot_modifiers/elytra_trim_ecologist_trail_ruins.json
 f1d91c61191f98688efcf4633238aad225b9d67e data/utm/loot_modifiers/elytra_trim_heartstwings_end_city.json
 f96f1490d2931dfdcb0749807f8870c1aa85ad32 data/utm/loot_modifiers/elytra_trim_lesser_fortress.json
@@ -9,3 +9,4 @@ e1be2d141753cb64f5c7de69e31b9a8ef60eae73 data/utm/loot_modifiers/elytra_trim_spa
 3149db0459335e7f567ccc4ccd6d52f4acec223f data/utm/loot_modifiers/elytra_trim_vein_mansion.json
 867f7d6f8481285e63f0cdc90c2241cac7e33dfa data/utm/loot_modifiers/music_disc_lava_chicken_zombie.json
 0202b716145eb49efd44d8ee77d9227abefa3742 data/utm/loot_modifiers/music_disc_tears_ghast.json
+57ce55c7ec138cc9037b3534669c6a6ded62745d data/utm/loot_modifiers/music_disc_undertale_creeper.json

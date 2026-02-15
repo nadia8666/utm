@@ -18,11 +18,15 @@ public class utmSoundDefsProvider extends SoundDefinitionsProvider {
         ).subtitle("subtitles.utm.slider_drag"));
 
         add(utmSounds.MUSIC_DISC_TEARS, SoundDefinition.definition().with(
-                sound("utm:records/tears")
+                sound("utm:records/tears").stream()
         ).subtitle("jukebox_song.utm.tears"));
 
         add(utmSounds.MUSIC_DISC_LAVA_CHICKEN, SoundDefinition.definition().with(
-                sound("utm:records/lava_chicken")
+                sound("utm:records/lava_chicken").stream()
         ).subtitle("jukebox_song.utm.lava_chicken"));
+
+        add(utmSounds.MUSIC_DISC_UNDERTALE, SoundDefinition.definition().with(
+                sound("utm:records/undertale").stream()
+        ).subtitle("jukebox_song.utm.undertale"));
     }
 }

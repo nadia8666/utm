@@ -8,6 +8,7 @@ import net.minecraft.world.item.JukeboxSong;
 public class utmSongs {
     public static final ResourceKey<JukeboxSong> TEARS = create("tears");
     public static final ResourceKey<JukeboxSong> LAVA_CHICKEN = create("lava_chicken");
+    public static final ResourceKey<JukeboxSong> UNDERTALE = create("undertale");
 
     private static ResourceKey<JukeboxSong> create(String name) {
         return ResourceKey.create(Registries.JUKEBOX_SONG, ResourceLocation.fromNamespaceAndPath("utm", name));

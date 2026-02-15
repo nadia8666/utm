@@ -36,6 +36,7 @@ public class utmItemModelProvider extends ItemModelProvider {
 
         musicDisc(utmItems.MUSIC_DISC_TEARS.get());
         musicDisc(utmItems.MUSIC_DISC_LAVA_CHICKEN.get());
+        musicDisc(utmItems.MUSIC_DISC_UNDERTALE.get());
 
         basicItem(utmItems.ELYTRA_TRIM_VEIN.get());
         basicItem(utmItems.ELYTRA_TRIM_OUTWARD.get());

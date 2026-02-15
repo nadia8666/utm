@@ -28,9 +28,9 @@ import com.nadia.utm.registry.buffs.utmBuffs;
 public class utmRegistry {
     public static final DeferredRegister<CreativeModeTab> TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, "utm");
 
+    public static final DeferredRegister.DataComponents COMPONENTS = utmDataComponents.COMPONENTS;
     public static final DeferredRegister.Items ITEMS = utmItems.ITEMS;
     public static final DeferredRegister.Blocks BLOCKS = utmBlocks.BLOCKS;
-    public static final DeferredRegister.DataComponents COMPONENTS = utmDataComponents.COMPONENTS;
     public static final DeferredRegister<MenuType<?>> MENUS = utmMenus.MENUS;
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = utmBlockEntities.BLOCK_ENTITIES;
     public static final DeferredRegister<SoundEvent> SOUNDS = utmSounds.SOUNDS;

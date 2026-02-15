@@ -3,13 +3,15 @@ package com.nadia.utm.datagen.providers;
 import com.nadia.utm.registry.loot.AddItemModifier;
 import com.nadia.utm.registry.item.utmItems;
 import com.nadia.utm.registry.loot.ReplaceItemModifier;
-import net.minecraft.advancements.critereon.DamageSourcePredicate;
-import net.minecraft.advancements.critereon.EntityFlagsPredicate;
 import net.minecraft.advancements.critereon.EntityPredicate;
+import net.minecraft.advancements.critereon.EntitySubPredicates;
+import net.minecraft.advancements.critereon.NbtPredicate;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.TraceableEntity;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyCondition;
@@ -18,6 +20,8 @@ import net.neoforged.neoforge.common.data.GlobalLootModifierProvider;
 import net.neoforged.neoforge.common.loot.LootTableIdCondition;
 
 import java.util.concurrent.CompletableFuture;
+
+import static net.p3pp3rf1y.sophisticatedcore.util.NBTHelper.putBoolean;
 
 public class utmGlobalLootModifiersProvider extends GlobalLootModifierProvider {
     public utmGlobalLootModifiersProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
@@ -106,6 +110,24 @@ public class utmGlobalLootModifiersProvider extends GlobalLootModifierProvider {
                         ).build()
                 },
                 utmItems.MUSIC_DISC_LAVA_CHICKEN.get()
+        ));
+
+        add("music_disc_undertale_creeper", new AddItemModifier(
+                new LootItemCondition[]{
+                        LootTableIdCondition.builder(ResourceLocation.withDefaultNamespace("entities/creeper")).build(),
+                        LootItemEntityPropertyCondition.hasProperties(
+                                LootContext.EntityTarget.THIS,
+                                EntityPredicate.Builder.entity()
+                                        .nbt(new NbtPredicate(new CompoundTag() {{
+                                            putBoolean("powered", true);
+                                        }}))
+                        ).build(),
+                        LootItemEntityPropertyCondition.hasProperties(
+                                LootContext.EntityTarget.DIRECT_ATTACKER,
+                                EntityPredicate.Builder.entity().of(EntityType.SPECTRAL_ARROW)
+                        ).build()
+                },
+                utmItems.MUSIC_DISC_UNDERTALE.get()
         ));
     }
 }

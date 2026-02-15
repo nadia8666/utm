@@ -1,0 +1,24 @@
+{
+  "type": "utm:add_item",
+  "conditions": [
+    {
+      "condition": "neoforge:loot_table_id",
+      "loot_table_id": "minecraft:entities/creeper"
+    },
+    {
+      "condition": "minecraft:entity_properties",
+      "entity": "this",
+      "predicate": {
+        "nbt": "{powered:1b}"
+      }
+    },
+    {
+      "condition": "minecraft:entity_properties",
+      "entity": "direct_attacker",
+      "predicate": {
+        "type": "minecraft:spectral_arrow"
+      }
+    }
+  ],
+  "item": "utm:music_disc_undertale"
+}

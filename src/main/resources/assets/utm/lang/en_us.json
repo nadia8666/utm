@@ -43,9 +43,11 @@
   "item.utm.elytra_trim_spades": "Spades Elytra Trim Template",
   "item.utm.fiddlecore": "Fiddlehead Core",
   "item.utm.floatingcore": "Floating Core",
+  "item.utm.incredipak": "Colony Incredi-Pak",
   "item.utm.music_disc_tears": "Music Disc",
   "item.utm.music_disc_lava_chicken": "Music Disc",
-  "item.utm.incredi": "Colony Incredi-Pak",
+  "item.utm.music_disc_undertale": "Music Disc",
+
   "effect.utm.interdicted": "Interdicted!",
 
   "itemGroup.utm": "utm Items",
@@ -65,5 +67,9 @@
   "utm.elytra_trim_type.spades": " Spades Elytra Trim",
 
   "advancements.utm.all_discs.title": "Quite Compact Disc",
-  "advancements.utm.all_discs.description": "Collect all music discs"
+  "advancements.utm.all_discs.description": "Collect all music discs",
+
+  "jukebox_song.utm.lava_chicken": "Hyper Potions - Lava Chicken",
+  "jukebox_song.utm.tears": "Amos Roddy - Tears",
+  "jukebox_song.utm.undertale": "XTRATUNA - AN UNDER'S TALE"
 }

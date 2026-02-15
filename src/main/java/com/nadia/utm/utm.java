@@ -1,5 +1,6 @@
 package com.nadia.utm;
 
+import net.neoforged.fml.loading.FMLPaths;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -14,6 +15,11 @@ import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
+
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 
 @Mod(utm.MODID)
 public class utm {
@@ -35,6 +41,22 @@ public class utm {
 
     private void commonSetup(FMLCommonSetupEvent event) {
         AutoUpdater.startAutoUpdateLoop();
+
+        event.enqueueWork(() -> {
+            try {
+                Path schematicDir = FMLPaths.GAMEDIR.get().resolve("schematics\\uploaded\\SERVER");
+                if (!Files.exists(schematicDir)) Files.createDirectories(schematicDir); // is this needed?
+
+                Path targetPath = schematicDir.resolve("incredipak.nbt");
+                String sourcePath = "/assets/utm/schematics/incredipak.nbt";
+
+                try (InputStream stream = getClass().getResourceAsStream(sourcePath)) {
+                    if (stream != null) Files.copy(stream, targetPath, StandardCopyOption.REPLACE_EXISTING);
+                }
+            } catch (Exception e) {
+                utm.LOGGER.warn("[UTM] Failed to save schematics: {}", e.getMessage());
+            }
+        });
     }
 
     // dont delete this apprently. this is core to utm working.

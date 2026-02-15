@@ -1,15 +1,30 @@
 {
   "music_disc_lava_chicken": {
     "sounds": [
-      "utm:records/lava_chicken"
+      {
+        "name": "utm:records/lava_chicken",
+        "stream": true
+      }
     ],
     "subtitle": "jukebox_song.utm.lava_chicken"
   },
   "music_disc_tears": {
     "sounds": [
-      "utm:records/tears"
+      {
+        "name": "utm:records/tears",
+        "stream": true
+      }
     ],
     "subtitle": "jukebox_song.utm.tears"
+  },
+  "music_disc_undertale": {
+    "sounds": [
+      {
+        "name": "utm:records/undertale",
+        "stream": true
+      }
+    ],
+    "subtitle": "jukebox_song.utm.undertale"
   },
   "slider_drag": {
     "sounds": [

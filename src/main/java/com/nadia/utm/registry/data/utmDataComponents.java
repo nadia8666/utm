@@ -55,4 +55,10 @@ public class utmDataComponents {
                     .persistent(Codec.INT)
                     .networkSynchronized(ByteBufCodecs.INT)
                     .build());
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> IS_PLACABLE_SCHEMATIC =
+            COMPONENTS.register("is_placable_schematic", () -> DataComponentType.<Boolean>builder()
+                    .persistent(Codec.BOOL)
+                    .networkSynchronized(ByteBufCodecs.BOOL)
+                    .build());
 }

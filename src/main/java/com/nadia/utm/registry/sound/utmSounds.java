@@ -17,4 +17,7 @@ public class utmSounds {
 
     public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_DISC_LAVA_CHICKEN = SOUNDS.register("music_disc_lava_chicken",
             () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath("utm", "music_disc_lava_chicken")));
+
+    public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_DISC_UNDERTALE = SOUNDS.register("music_disc_undertale",
+            () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath("utm", "music_disc_undertale")));
 }

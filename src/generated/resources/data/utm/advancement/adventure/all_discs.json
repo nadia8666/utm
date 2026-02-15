@@ -210,6 +210,16 @@
         ]
       },
       "trigger": "minecraft:inventory_changed"
+    },
+    "has_utm:music_disc_undertale": {
+      "conditions": {
+        "items": [
+          {
+            "items": "utm:music_disc_undertale"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
     }
   },
   "display": {
@@ -249,6 +259,9 @@
     ],
     [
       "has_utm:music_disc_tears"
+    ],
+    [
+      "has_utm:music_disc_undertale"
     ],
     [
       "has_minecraft:music_disc_mellohi"

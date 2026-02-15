@@ -6,18 +6,20 @@
   "mixins": [
     "FreeAnvilMixin",
     "HitboxMixin",
+    "SchematicPlacePacketMixin",
     "compat.GraveBlockEntityMixin",
     "compat.GraveBlockMixin",
     "compat.SpearsMixin"
   ],
   "client": [
     "GameRendererMixin",
+    "SchematicHandlerMixin",
     "compat.ObituaryScreenMixin",
     "compat.ShowcaseItemMixin",
     "renderer.BacktankArmorLayerMixin",
     "renderer.LayeredArmorItemMixin",
-    "renderer.NetheriteBacktankFirstPersonRendererMixin",
     "renderer.MultiBufferSourceMixin",
+    "renderer.NetheriteBacktankFirstPersonRendererMixin",
     "renderer.glint.ElytraLayerMixin",
     "renderer.glint.FiguraCompatMixin",
     "renderer.glint.HumanoidArmorLayerMixin",
