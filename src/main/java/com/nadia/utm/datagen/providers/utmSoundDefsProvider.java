@@ -16,5 +16,13 @@ public class utmSoundDefsProvider extends SoundDefinitionsProvider {
         add(utmSounds.SLIDER_TICK, SoundDefinition.definition().with(
                 sound("utm:slider_drag")
         ).subtitle("subtitles.utm.slider_drag"));
+
+        add(utmSounds.MUSIC_DISC_TEARS, SoundDefinition.definition().with(
+                sound("utm:records/tears")
+        ).subtitle("jukebox_song.utm.tears"));
+
+        add(utmSounds.MUSIC_DISC_LAVA_CHICKEN, SoundDefinition.definition().with(
+                sound("utm:records/lava_chicken")
+        ).subtitle("jukebox_song.utm.lava_chicken"));
     }
 }

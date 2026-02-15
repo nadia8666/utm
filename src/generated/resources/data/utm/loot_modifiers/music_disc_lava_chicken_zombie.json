@@ -1,0 +1,23 @@
+{
+  "type": "utm:add_item",
+  "conditions": [
+    {
+      "condition": "neoforge:loot_table_id",
+      "loot_table_id": "minecraft:entities/zombie"
+    },
+    {
+      "chance": 0.25,
+      "condition": "minecraft:random_chance"
+    },
+    {
+      "condition": "minecraft:entity_properties",
+      "entity": "this",
+      "predicate": {
+        "flags": {
+          "is_baby": true
+        }
+      }
+    }
+  ],
+  "item": "utm:music_disc_lava_chicken"
+}

@@ -11,4 +11,10 @@ public class utmSounds {
 
     public static final DeferredHolder<SoundEvent, SoundEvent> SLIDER_TICK = SOUNDS.register("slider_drag",
             () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath("utm", "slider_drag")));
+
+    public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_DISC_TEARS = SOUNDS.register("music_disc_tears",
+            () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath("utm", "music_disc_tears")));
+
+    public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_DISC_LAVA_CHICKEN = SOUNDS.register("music_disc_lava_chicken",
+            () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath("utm", "music_disc_lava_chicken")));
 }

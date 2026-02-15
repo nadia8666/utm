@@ -20,6 +20,11 @@ public class utmItems {
 
     public static final DeferredItem<Item> FIDDLECORE = ITEMS.registerSimpleItem("fiddlecore");
     public static final DeferredItem<Item> FLOATINGCORE = ITEMS.registerSimpleItem("floatingcore");
-
     public static final DeferredItem<Item> INCREDI = ITEMS.registerSimpleItem("incredi");
+
+    // discs
+    public static final DeferredItem<Item> MUSIC_DISC_TEARS = ITEMS.registerSimpleItem("music_disc_tears", new Item.Properties()
+            .stacksTo(1).jukeboxPlayable(utmSongs.TEARS));
+    public static final DeferredItem<Item> MUSIC_DISC_LAVA_CHICKEN = ITEMS.registerSimpleItem("music_disc_lava_chicken", new Item.Properties()
+            .stacksTo(1).jukeboxPlayable(utmSongs.LAVA_CHICKEN));
 }

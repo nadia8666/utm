@@ -43,8 +43,9 @@
   "item.utm.elytra_trim_spades": "Spades Elytra Trim Template",
   "item.utm.fiddlecore": "Fiddlehead Core",
   "item.utm.floatingcore": "Floating Core",
-  "item.utm.incredi": "Colony Incredi-Pak",   "description.utm.incredi": "Places a colony wherever used",
-
+  "item.utm.music_disc_tears": "Music Disc",
+  "item.utm.music_disc_lava_chicken": "Music Disc",
+  "item.utm.incredi": "Colony Incredi-Pak",
   "effect.utm.interdicted": "Interdicted!",
 
   "itemGroup.utm": "utm Items",

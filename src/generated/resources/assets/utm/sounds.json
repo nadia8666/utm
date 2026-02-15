@@ -1,4 +1,16 @@
 {
+  "music_disc_lava_chicken": {
+    "sounds": [
+      "utm:records/lava_chicken"
+    ],
+    "subtitle": "jukebox_song.utm.lava_chicken"
+  },
+  "music_disc_tears": {
+    "sounds": [
+      "utm:records/tears"
+    ],
+    "subtitle": "jukebox_song.utm.tears"
+  },
   "slider_drag": {
     "sounds": [
       "utm:slider_drag"
