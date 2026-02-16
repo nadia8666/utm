@@ -53,5 +53,6 @@ public class utmItemTagProvider extends ItemTagsProvider {
 
         tag(Tags.Items.MUSIC_DISCS).add(utmItems.MUSIC_DISC_TEARS.get());
         tag(Tags.Items.MUSIC_DISCS).add(utmItems.MUSIC_DISC_LAVA_CHICKEN.get());
+        tag(Tags.Items.MUSIC_DISCS).add(utmItems.MUSIC_DISC_UNDERTALE.get());
     }
 }
