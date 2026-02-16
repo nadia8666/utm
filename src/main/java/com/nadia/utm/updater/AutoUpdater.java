@@ -118,15 +118,19 @@ public class AutoUpdater {
     private static void startUpdate(String downloadUrl, String latest) {
         Path modsFolder = FMLPaths.MODSDIR.get();
 
+        Path installPath = modsFolder.resolve("utm.jar.utm_update");
         Path currentFile = modsFolder.resolve("utm.jar");
         CompletableFuture.runAsync(() -> {
             try {
-                Files.move(currentFile, modsFolder.resolve("utm.jar.utm_update.old"), StandardCopyOption.REPLACE_EXISTING);
-            } catch (Exception ignored) {}
+                downloadUpdate(downloadUrl, installPath).get();
+            } catch (Exception e) {
+                utm.LOGGER.warn("[UTM] Failed to install update! {}", e.getMessage());
+                return;
+            }
 
-            Path targetPath = modsFolder.resolve("utm.jar");
             try {
-                downloadUpdate(downloadUrl, targetPath).get();
+                Files.move(currentFile, modsFolder.resolve("utm.jar.utm_update. old"), StandardCopyOption.REPLACE_EXISTING);
+                Files.move(installPath, installPath, StandardCopyOption.REPLACE_EXISTING);
             } catch (Exception ignored) {}
 
             utm.LOGGER.warn("[UTM] Update installed, please restart Minecraft!");
@@ -165,7 +169,7 @@ public class AutoUpdater {
 
     private static final ScheduledExecutorService SCHEDULER = Executors.newSingleThreadScheduledExecutor(r -> {
         Thread thread = new Thread(r, "utm-AutoUpdater");
-        thread.setDaemon(true); // Ensures the thread stops when the JVM closes
+        thread.setDaemon(true);
         return thread;
     });
 

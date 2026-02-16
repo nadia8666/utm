@@ -4,14 +4,12 @@ import com.nadia.utm.registry.loot.AddItemModifier;
 import com.nadia.utm.registry.item.utmItems;
 import com.nadia.utm.registry.loot.ReplaceItemModifier;
 import net.minecraft.advancements.critereon.EntityPredicate;
-import net.minecraft.advancements.critereon.EntitySubPredicates;
 import net.minecraft.advancements.critereon.NbtPredicate;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.TraceableEntity;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyCondition;
@@ -20,8 +18,6 @@ import net.neoforged.neoforge.common.data.GlobalLootModifierProvider;
 import net.neoforged.neoforge.common.loot.LootTableIdCondition;
 
 import java.util.concurrent.CompletableFuture;
-
-import static net.p3pp3rf1y.sophisticatedcore.util.NBTHelper.putBoolean;
 
 public class utmGlobalLootModifiersProvider extends GlobalLootModifierProvider {
     public utmGlobalLootModifiersProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
