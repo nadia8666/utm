@@ -57,6 +57,7 @@ public class utmItemModelProvider extends ItemModelProvider {
         handheldItem(utmTools.ENCHANTED_SWORD_GREEN.get());
 
         handheldItem(utmTools.OBSIDIAN_SWORD.get());
+        handheldItem(utmTools.CYCLESWORD.get());
         basicItem(utmTools.NETHERYTRA.get());
     }
 

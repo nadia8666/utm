@@ -77,6 +77,25 @@ public class utmTools {
                         SwordItem.createAttributes(Tier, 5, -2.4f)));
             }
     ); // maybe make these use the same material as the blue sword?
+    public static final Supplier<SwordItem> CYCLESWORD = utmItems.ITEMS.register("cyclesword", () -> {
+                var Tier = utmToolBuilder.buildTier(
+                        BlockTags.INCORRECT_FOR_WOODEN_TOOL, 350, 1f, 0f, 15, () -> Ingredient.EMPTY
+                );
+                return new SwordItem(Tier, new Item.Properties().attributes(
+                        SwordItem.createAttributes(Tier, 4, -1.125f)));
+            }
+    );
+
+
+
+
+
+
+
+
+
+
+
     public static void doNothing() {
         utm.LOGGER.info("[UTM] Tools class loaded, so that it shows up!");
     }

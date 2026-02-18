@@ -30,6 +30,11 @@ public class utmItemTagProvider extends ItemTagsProvider {
         tag(ItemTags.WEAPON_ENCHANTABLE).add(utmTools.OBSIDIAN_SWORD.get()); //need both
         tag(ItemTags.DURABILITY_ENCHANTABLE).add(utmTools.OBSIDIAN_SWORD.get());
 
+        tag(Tags.Items.ENCHANTABLES).add(utmTools.CYCLESWORD.get());
+        tag(ItemTags.SWORD_ENCHANTABLE).add(utmTools.CYCLESWORD.get());
+        tag(ItemTags.WEAPON_ENCHANTABLE).add(utmTools.CYCLESWORD.get());
+        tag(ItemTags.DURABILITY_ENCHANTABLE).add(utmTools.CYCLESWORD.get());
+
         tag(Tags.Items.ENCHANTABLES).add(utmTools.NETHERYTRA.get());
         tag(ItemTags.EQUIPPABLE_ENCHANTABLE).add(utmTools.NETHERYTRA.get());
         tag(ItemTags.DURABILITY_ENCHANTABLE).add(utmTools.NETHERYTRA.get());

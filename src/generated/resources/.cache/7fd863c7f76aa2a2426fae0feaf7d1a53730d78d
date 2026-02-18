@@ -1,11 +1,11 @@
-// 1.21.1	2026-02-14T13:53:10.827123	Tags for minecraft:item mod id utm
-0f7bb50cddb1b75da24f5d1148d8c834997693d1 data/c/tags/item/enchantables.json
-6f89ba0363202fc520a60c90d37ac2724052432c data/c/tags/item/music_discs.json
+// 1.21.1	2026-02-17T18:59:47.0073896	Tags for minecraft:item mod id utm
+f386d04d9bfb7e32737e70f3648023eb72e11b36 data/c/tags/item/enchantables.json
+cc5ee93a6de880a1acd213e033d0123d2bb90869 data/c/tags/item/music_discs.json
 6cd88e214573b659c707666abea9d2e53d37d1ef data/minecraft/tags/item/anvil.json
 f4c3db116b1c88abe3f5aec2a85614e85916409a data/minecraft/tags/item/enchantable/chest_armor.json
-0f7bb50cddb1b75da24f5d1148d8c834997693d1 data/minecraft/tags/item/enchantable/durability.json
+f386d04d9bfb7e32737e70f3648023eb72e11b36 data/minecraft/tags/item/enchantable/durability.json
 f4c3db116b1c88abe3f5aec2a85614e85916409a data/minecraft/tags/item/enchantable/equippable.json
-7f56a7e67dd1fa415dc0312e5b206821476a2788 data/minecraft/tags/item/enchantable/sword.json
-7f56a7e67dd1fa415dc0312e5b206821476a2788 data/minecraft/tags/item/enchantable/weapon.json
+09c12f496e9da8295e22e870881219fb8186f4e7 data/minecraft/tags/item/enchantable/sword.json
+09c12f496e9da8295e22e870881219fb8186f4e7 data/minecraft/tags/item/enchantable/weapon.json
 e55b118a364cdcea99ae211a43e57d4117bbf5bc data/minecraft/tags/item/trim_templates.json
 e55b118a364cdcea99ae211a43e57d4117bbf5bc data/utm/tags/item/elytra_trim_templates.json
