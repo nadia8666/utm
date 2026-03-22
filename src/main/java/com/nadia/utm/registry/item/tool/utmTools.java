@@ -14,32 +14,32 @@ import java.util.function.Supplier;
 public class utmTools {
     // tool set
     public static final Tier TIER_COPPER = utmToolBuilder.buildTier(
-            BlockTags.INCORRECT_FOR_GOLD_TOOL, 80, 5f, 2, 20,
+            BlockTags.INCORRECT_FOR_IRON_TOOL, 32, 7f, 2, 67,
             () -> Ingredient.of(Tags.Items.INGOTS_COPPER));
 
     public static final Supplier<SwordItem> COPPER_SWORD = utmItems.ITEMS.register("copper_sword", () -> new SwordItem(TIER_COPPER,
             new Item.Properties().attributes(
-                    SwordItem.createAttributes(TIER_COPPER, 4, -2)
+                    SwordItem.createAttributes(TIER_COPPER, 5, 0)
             ))
     );
     public static final Supplier<ShovelItem> COPPER_SHOVEL = utmItems.ITEMS.register("copper_shovel", () -> new ShovelItem(TIER_COPPER,
             new Item.Properties().attributes(
-                    ShovelItem.createAttributes(TIER_COPPER, 4, -2)
+                    ShovelItem.createAttributes(TIER_COPPER, 1.5f, -3)
             ))
     );
     public static final Supplier<AxeItem> COPPER_AXE = utmItems.ITEMS.register("copper_axe", () -> new AxeItem(TIER_COPPER,
             new Item.Properties().attributes(
-                    AxeItem.createAttributes(TIER_COPPER, 4, -2)
+                    AxeItem.createAttributes(TIER_COPPER, 6.111f, -3.98f)
             ))
     );
     public static final Supplier<PickaxeItem> COPPER_PICKAXE = utmItems.ITEMS.register("copper_pickaxe", () -> new PickaxeItem(TIER_COPPER,
             new Item.Properties().attributes(
-                    PickaxeItem.createAttributes(TIER_COPPER, 4, -2)
+                    PickaxeItem.createAttributes(TIER_COPPER, 1, -1)
             ))
     );
     public static final Supplier<HoeItem> COPPER_HOE = utmItems.ITEMS.register("copper_hoe", () -> new HoeItem(TIER_COPPER,
             new Item.Properties().attributes(
-                    HoeItem.createAttributes(TIER_COPPER, 4, -2)
+                    HoeItem.createAttributes(TIER_COPPER, 0, -1)
             ))
     );
     public static final Supplier<FiddleheadItem> FIDDLEHEAD = utmItems.ITEMS.register("fiddlehead", () -> new FiddleheadItem(new Item.Properties().durability(72000)));
