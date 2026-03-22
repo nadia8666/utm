@@ -1,5 +1,10 @@
 {
   "values": [
-    "utm:obsidian_sword"
+    "utm:obsidian_sword",
+    "utm:copper_sword",
+    "utm:copper_pickaxe",
+    "utm:copper_axe",
+    "utm:copper_shovel",
+    "utm:copper_hoe"
   ]
 }

@@ -14,32 +14,32 @@ import java.util.function.Supplier;
 public class utmTools {
     // tool set
     public static final Tier TIER_COPPER = utmToolBuilder.buildTier(
-            BlockTags.INCORRECT_FOR_GOLD_TOOL, 80, 5f, 2, 20,
+            BlockTags.INCORRECT_FOR_IRON_TOOL, 32, 7f, 2, 67,
             () -> Ingredient.of(Tags.Items.INGOTS_COPPER));
 
     public static final Supplier<SwordItem> COPPER_SWORD = utmItems.ITEMS.register("copper_sword", () -> new SwordItem(TIER_COPPER,
             new Item.Properties().attributes(
-                    SwordItem.createAttributes(TIER_COPPER, 4, -2)
+                    SwordItem.createAttributes(TIER_COPPER, 5, 0)
             ))
     );
     public static final Supplier<ShovelItem> COPPER_SHOVEL = utmItems.ITEMS.register("copper_shovel", () -> new ShovelItem(TIER_COPPER,
             new Item.Properties().attributes(
-                    ShovelItem.createAttributes(TIER_COPPER, 4, -2)
+                    ShovelItem.createAttributes(TIER_COPPER, 1.5f, -2.25f)
             ))
     );
     public static final Supplier<AxeItem> COPPER_AXE = utmItems.ITEMS.register("copper_axe", () -> new AxeItem(TIER_COPPER,
             new Item.Properties().attributes(
-                    AxeItem.createAttributes(TIER_COPPER, 4, -2)
+                    AxeItem.createAttributes(TIER_COPPER, 6, -3.8f)
             ))
     );
     public static final Supplier<PickaxeItem> COPPER_PICKAXE = utmItems.ITEMS.register("copper_pickaxe", () -> new PickaxeItem(TIER_COPPER,
             new Item.Properties().attributes(
-                    PickaxeItem.createAttributes(TIER_COPPER, 4, -2)
+                    PickaxeItem.createAttributes(TIER_COPPER, 1, -2.5f)
             ))
     );
     public static final Supplier<HoeItem> COPPER_HOE = utmItems.ITEMS.register("copper_hoe", () -> new HoeItem(TIER_COPPER,
             new Item.Properties().attributes(
-                    HoeItem.createAttributes(TIER_COPPER, 4, -2)
+                    HoeItem.createAttributes(TIER_COPPER, 2, -2.5f)
             ))
     );
     public static final Supplier<FiddleheadItem> FIDDLEHEAD = utmItems.ITEMS.register("fiddlehead", () -> new FiddleheadItem(new Item.Properties().durability(72000)));
@@ -53,30 +53,26 @@ public class utmTools {
                         SwordItem.createAttributes(Tier, 12, -3.75f)));
             }
     );
-    public static final Supplier<SwordItem> ENCHANTED_SWORD_BLUE = utmItems.ITEMS.register("enchanted_sword_blue", () -> {
-                var Tier = utmToolBuilder.buildTier(
-                        BlockTags.INCORRECT_FOR_WOODEN_TOOL, 8200, 1f, 0f, 25, () -> Ingredient.EMPTY
-                );
-                return new SwordItem(Tier, new Item.Properties().attributes(
-                        SwordItem.createAttributes(Tier, 5, -2.4f)));
-            }
+
+    private static final Tier TIER_ENCHANTED_SWORD = utmToolBuilder.buildTier(
+            BlockTags.INCORRECT_FOR_WOODEN_TOOL, 8200, 1f, 0f, 25, () -> Ingredient.EMPTY
     );
-    public static final Supplier<SwordItem> ENCHANTED_SWORD_RED = utmItems.ITEMS.register("enchanted_sword_red", () -> {
-                var Tier = utmToolBuilder.buildTier(
-                        BlockTags.INCORRECT_FOR_WOODEN_TOOL, 8200, 1f, 0f, 25, () -> Ingredient.EMPTY
-                );
-                return new SwordItem(Tier, new Item.Properties().attributes(
-                        SwordItem.createAttributes(Tier, 5, -2.4f)));
-            }
+    public static final Supplier<SwordItem> ENCHANTED_SWORD_RED = utmItems.ITEMS.register("enchanted_sword_red", () -> new SwordItem(TIER_ENCHANTED_SWORD,
+            new Item.Properties().attributes(
+                    SwordItem.createAttributes(TIER_ENCHANTED_SWORD, 5, -2.4f)
+            ))
     );
-    public static final Supplier<SwordItem> ENCHANTED_SWORD_GREEN = utmItems.ITEMS.register("enchanted_sword_green", () -> {
-                var Tier = utmToolBuilder.buildTier(
-                        BlockTags.INCORRECT_FOR_WOODEN_TOOL, 8200, 1f, 0f, 25, () -> Ingredient.EMPTY
-                );
-                return new SwordItem(Tier, new Item.Properties().attributes(
-                        SwordItem.createAttributes(Tier, 5, -2.4f)));
-            }
-    ); // maybe make these use the same material as the blue sword?
+    public static final Supplier<SwordItem> ENCHANTED_SWORD_GREEN = utmItems.ITEMS.register("enchanted_sword_green", () -> new SwordItem(TIER_ENCHANTED_SWORD,
+            new Item.Properties().attributes(
+                    SwordItem.createAttributes(TIER_ENCHANTED_SWORD, 5, -2.4f)
+            ))
+    );
+    public static final Supplier<SwordItem> ENCHANTED_SWORD_BLUE = utmItems.ITEMS.register("enchanted_sword_blue", () -> new SwordItem(TIER_ENCHANTED_SWORD,
+            new Item.Properties().attributes(
+                SwordItem.createAttributes(TIER_ENCHANTED_SWORD, 5, -2.4f)
+            ))
+    );
+
     public static void doNothing() {
         utm.LOGGER.info("[UTM] Tools class loaded, so that it shows up!");
     }

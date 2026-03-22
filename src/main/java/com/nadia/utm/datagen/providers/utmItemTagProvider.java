@@ -30,6 +30,32 @@ public class utmItemTagProvider extends ItemTagsProvider {
         tag(ItemTags.WEAPON_ENCHANTABLE).add(utmTools.OBSIDIAN_SWORD.get()); //need both
         tag(ItemTags.DURABILITY_ENCHANTABLE).add(utmTools.OBSIDIAN_SWORD.get());
 
+        // copper tools
+        tag(Tags.Items.ENCHANTABLES).add(utmTools.COPPER_SWORD.get());
+        tag(ItemTags.SWORD_ENCHANTABLE).add(utmTools.COPPER_SWORD.get());
+        tag(ItemTags.WEAPON_ENCHANTABLE).add(utmTools.COPPER_SWORD.get());
+        tag(ItemTags.DURABILITY_ENCHANTABLE).add(utmTools.COPPER_SWORD.get());
+
+        tag(Tags.Items.ENCHANTABLES).add(utmTools.COPPER_PICKAXE.get());
+        tag(ItemTags.SWORD_ENCHANTABLE).add(utmTools.COPPER_PICKAXE.get());
+        tag(ItemTags.WEAPON_ENCHANTABLE).add(utmTools.COPPER_PICKAXE.get());
+        tag(ItemTags.DURABILITY_ENCHANTABLE).add(utmTools.COPPER_PICKAXE.get());
+
+        tag(Tags.Items.ENCHANTABLES).add(utmTools.COPPER_AXE.get());
+        tag(ItemTags.SWORD_ENCHANTABLE).add(utmTools.COPPER_AXE.get());
+        tag(ItemTags.WEAPON_ENCHANTABLE).add(utmTools.COPPER_AXE.get());
+        tag(ItemTags.DURABILITY_ENCHANTABLE).add(utmTools.COPPER_AXE.get());
+
+        tag(Tags.Items.ENCHANTABLES).add(utmTools.COPPER_SHOVEL.get());
+        tag(ItemTags.SWORD_ENCHANTABLE).add(utmTools.COPPER_SHOVEL.get());
+        tag(ItemTags.WEAPON_ENCHANTABLE).add(utmTools.COPPER_SHOVEL.get());
+        tag(ItemTags.DURABILITY_ENCHANTABLE).add(utmTools.COPPER_SHOVEL.get());
+
+        tag(Tags.Items.ENCHANTABLES).add(utmTools.COPPER_HOE.get());
+        tag(ItemTags.SWORD_ENCHANTABLE).add(utmTools.COPPER_HOE.get());
+        tag(ItemTags.WEAPON_ENCHANTABLE).add(utmTools.COPPER_HOE.get());
+        tag(ItemTags.DURABILITY_ENCHANTABLE).add(utmTools.COPPER_HOE.get());
+
         tag(Tags.Items.ENCHANTABLES).add(utmTools.NETHERYTRA.get());
         tag(ItemTags.EQUIPPABLE_ENCHANTABLE).add(utmTools.NETHERYTRA.get());
         tag(ItemTags.DURABILITY_ENCHANTABLE).add(utmTools.NETHERYTRA.get());
