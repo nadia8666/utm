@@ -9,6 +9,7 @@
     "SchematicPlacePacketMixin",
     "compat.GraveBlockEntityMixin",
     "compat.GraveBlockMixin",
+    "compat.PumpUpgradeWrapperMixin",
     "compat.SpearsMixin"
   ],
   "client": [

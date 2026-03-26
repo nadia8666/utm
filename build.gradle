@@ -114,6 +114,7 @@ dependencies {
     implementation("maven.modrinth:sophisticated-core:23alQult") // sophisticated core
     jarJar(implementation("maven.modrinth:sophisticated-backpacks-create-integration:bWd7B59k")) // sophisticated backpacks x create
     jarJar(implementation('local:grimble_mod:1.0.0')) // bluebibbob's grimble mod
+    implementation("maven.modrinth:open-parties-and-claims:zy0ZFpGO") // open parties and claims
 
     // curios
     compileOnly "top.theillusivec4.curios:curios-neoforge:9.5.1+1.21.1:api"
