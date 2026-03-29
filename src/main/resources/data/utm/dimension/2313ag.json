@@ -1,0 +1,11 @@
+{
+  "type": "utm:2313ag_type",
+  "generator": {
+    "type": "minecraft:noise",
+    "settings": "utm:2313ag_cliffs",
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "utm:2313ag_stone"
+    }
+  }
+}

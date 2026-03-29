@@ -4,6 +4,7 @@ import com.nadia.utm.block.GrateBlock;
 import com.nadia.utm.client.renderer.BacktankCurioRenderer;
 import com.nadia.utm.client.renderer.CitywallsBlockEntityRenderer;
 import com.nadia.utm.client.renderer.glint.utmGlintContainer;
+import com.nadia.utm.client.renderer.planets.PlanetRenderer;
 import com.nadia.utm.client.ui.GlintScreen;
 import com.nadia.utm.client.updater.UpdateToast;
 import com.nadia.utm.registry.block.utmBlockEntities;
@@ -16,9 +17,12 @@ import com.simibubi.create.content.contraptions.wrench.RadialWrenchMenu;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.TitleScreen;
+import net.minecraft.client.renderer.DimensionSpecialEffects;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextColor;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
@@ -29,6 +33,7 @@ import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
+import org.jetbrains.annotations.NotNull;
 import top.theillusivec4.curios.api.client.CuriosRendererRegistry;
 
 import java.util.concurrent.CompletableFuture;
@@ -85,6 +90,8 @@ public class utmClient {
         event.registerRenderBuffer(utmRenderTypes.OVERLAY_GLINT_ITEM.get());
         event.registerRenderBuffer(utmRenderTypes.ADDITIVE_GLINT_ENTITY.get());
         event.registerRenderBuffer(utmRenderTypes.OVERLAY_GLINT_ENTITY.get());
+
+        PlanetRenderer.register();
     }
 
     @SubscribeEvent
@@ -141,5 +148,25 @@ public class utmClient {
                 utmBlockEntities.CITYWALLS_METAL.get(),
                 CitywallsBlockEntityRenderer::new
         );
+    }
+
+    @SubscribeEvent
+    public static void registerDimensionEffects(RegisterDimensionSpecialEffectsEvent event) {
+        event.register(ResourceLocation.fromNamespaceAndPath("utm", "2313ag"), new DimensionSpecialEffects(Float.NaN, false, DimensionSpecialEffects.SkyType.NONE, false, false) {
+            @Override
+            public @NotNull Vec3 getBrightnessDependentFogColor(@NotNull Vec3 pos, float arg2) {
+                return Vec3.ZERO;
+            }
+
+            @Override
+            public boolean isFoggyAt(int x, int z) {
+                return true;
+            }
+
+            @Override
+            public float[] getSunriseColor(float timeOfDay, float partialTicks) {
+                return null;
+            }
+        });
     }
 }

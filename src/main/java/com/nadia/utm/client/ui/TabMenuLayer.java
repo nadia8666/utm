@@ -99,6 +99,7 @@ public class TabMenuLayer {
                     case "overworld" -> "OVR";
                     case "the_nether" -> "NTH";
                     case "the_end" -> "END";
+                    case "2313ag" -> "23A";
                     default -> dimStr.length() > 3 ? dimStr.substring(0, 3).toUpperCase() : dimStr.toUpperCase();
                 };
 

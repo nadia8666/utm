@@ -1,5 +1,6 @@
 package com.nadia.utm;
 
+import net.minecraft.resources.ResourceLocation;
 import net.neoforged.fml.loading.FMLPaths;
 import org.slf4j.Logger;
 
@@ -63,4 +64,8 @@ public class utm {
     @SuppressWarnings("EmptyMethod")
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {}
+
+    public static ResourceLocation key(String path) {
+        return ResourceLocation.fromNamespaceAndPath("utm", path);
+    }
 }
