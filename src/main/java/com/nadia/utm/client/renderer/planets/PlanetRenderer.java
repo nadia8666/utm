@@ -19,10 +19,12 @@ public class PlanetRenderer {
 
     public static class PLANETS {
         public static Planet EARTH = new Planet(150, 25, utm.key("textures/misc/earth.png"));
-        public static Planet AG = new Planet(750, 10, utm.key("textures/misc/2313ag.png")) {
+        public static Planet AG = new Planet(150, 3, utm.key("textures/misc/2313ag.png")) {
             @Override
             protected float getBrightness(long time, float partialTick) {
-                return .85F;
+                double pTime = (time % 24000L) + partialTick;
+                double ang = (pTime / 24000.0) * 2.0 * Math.PI;
+                return (float) (0.5 + (0.4 * -Math.sin(ang)));
             }
 
             @Override
