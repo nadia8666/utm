@@ -33,7 +33,9 @@ public class Planet {
         PoseStack poseStack = event.getPoseStack();
 
         long time = mc.level.dayTime() % 24000;
-        float brightness = getBrightness(time, event.getPartialTick().getGameTimeDeltaTicks());
+        float partialTicks = event.getPartialTick().getGameTimeDeltaTicks();
+        float brightness = getBrightness(time, partialTicks);
+        float alpha = getAlpha(time, partialTicks);
 
         RenderSystem.enableBlend();
         RenderSystem.defaultBlendFunc();
@@ -41,7 +43,6 @@ public class Planet {
         RenderSystem.setShader(GameRenderer::getPositionTexColorShader);
         RenderSystem.setShaderTexture(0, TEXTURE);
 
-        var color = RenderSystem.getShaderColor();
         RenderSystem.setShaderColor(1, 1, 1, 1.0f);
 
         Tesselator tesselator = Tesselator.getInstance();
@@ -55,31 +56,34 @@ public class Planet {
         transform(poseStack);
 
         Matrix4f matrix4f = poseStack.last().pose();
-        bufferBuilder.addVertex(matrix4f, -SIZE, DISTANCE, -SIZE).setUv(0.0F, 0.0F).setColor(brightness, brightness, brightness, 1f);
-        bufferBuilder.addVertex(matrix4f, SIZE, DISTANCE, -SIZE).setUv(1.0F, 0.0F).setColor(brightness, brightness, brightness, 1f);
-        bufferBuilder.addVertex(matrix4f, SIZE, DISTANCE, SIZE).setUv(1.0F, 1.0F).setColor(brightness, brightness, brightness, 1f);
-        bufferBuilder.addVertex(matrix4f, -SIZE, DISTANCE, SIZE).setUv(0.0F, 1.0F).setColor(brightness, brightness, brightness, 1f);
+        bufferBuilder.addVertex(matrix4f, -SIZE, DISTANCE, -SIZE).setUv(0.0F, 0.0F).setColor(brightness, brightness, brightness, alpha);
+        bufferBuilder.addVertex(matrix4f, SIZE, DISTANCE, -SIZE).setUv(1.0F, 0.0F).setColor(brightness, brightness, brightness, alpha);
+        bufferBuilder.addVertex(matrix4f, SIZE, DISTANCE, SIZE).setUv(1.0F, 1.0F).setColor(brightness, brightness, brightness, alpha);
+        bufferBuilder.addVertex(matrix4f, -SIZE, DISTANCE, SIZE).setUv(0.0F, 1.0F).setColor(brightness, brightness, brightness, alpha);
 
         BufferUploader.drawWithShader(bufferBuilder.buildOrThrow());
 
         poseStack.popPose();
         RenderSystem.enableDepthTest();
         RenderSystem.disableBlend();
-        RenderSystem.setShaderColor(color[0], color[1], color[2], color[3]);
     }
 
-    protected boolean shouldPass(RenderLevelStageEvent event, Minecraft mc) {
+    public boolean shouldPass(RenderLevelStageEvent event, Minecraft mc) {
         if (mc.level == null) return false; // not needed in logic
         return mc.level.dimension().equals(utmDimensions.AG_KEY);
     }
 
-    protected void transform(PoseStack poseStack) {
+    public void transform(PoseStack poseStack) {
         poseStack.mulPose(Axis.XP.rotationDegrees(11.2F));
     }
 
-    protected float getBrightness(long time, float partialTick) {
+    public float getBrightness(long time, float partialTick) {
         double pTime = (time % 24000L) + partialTick;
         double ang = (pTime / 24000.0) * 2.0 * Math.PI;
         return (float) ((Math.sin(ang) + 1.0) / 2.0);
+    }
+
+    public float getAlpha(long time, float partialTick) {
+        return 1;
     }
 }
