@@ -1,0 +1,38 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "flint_block_block",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "utm:flint_block"
+    },
+    {
+      "item": "utm:flint_block"
+    },
+    {
+      "item": "utm:flint_block"
+    },
+    {
+      "item": "utm:flint_block"
+    },
+    {
+      "item": "utm:flint_block"
+    },
+    {
+      "item": "utm:flint_block"
+    },
+    {
+      "item": "utm:flint_block"
+    },
+    {
+      "item": "utm:flint_block"
+    },
+    {
+      "item": "utm:flint_block"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "utm:flint_block_block"
+  }
+}

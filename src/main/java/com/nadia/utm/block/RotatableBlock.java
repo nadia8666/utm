@@ -13,7 +13,7 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.Property;
 import org.jetbrains.annotations.NotNull;
 
-public class RotatableBlock extends Block implements IWrenchable, SimpleWaterloggedBlock {
+public class RotatableBlock extends Block implements IWrenchable {
     public static final DirectionProperty FACING;
     public RotatableBlock(Properties properties) {
         super(properties);
@@ -21,17 +21,15 @@ public class RotatableBlock extends Block implements IWrenchable, SimpleWaterlog
         registerDefaultState(this.stateDefinition.any());
     }
 
-    //create bcz Flip the rotation! rotation is Keys.
-
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        return (BlockState)this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getClockWise());
+        return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getClockWise());
     }
     protected @NotNull BlockState rotate(BlockState state, Rotation rot) {
-        return (BlockState)state.setValue(FACING, rot.rotate((Direction)state.getValue(FACING)));
+        return state.setValue(FACING, rot.rotate(state.getValue(FACING)));
     }
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(new Property[]{FACING});
+        builder.add(FACING);
     }
     static {
         FACING = HorizontalDirectionalBlock.FACING;

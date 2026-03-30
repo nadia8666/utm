@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "flint_block",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "utm:flint_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "minecraft:flint"
+  }
+}

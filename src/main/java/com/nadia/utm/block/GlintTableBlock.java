@@ -75,7 +75,6 @@ public class GlintTableBlock extends BaseEntityBlock {
             }
         }
 
-
         return InteractionResult.SUCCESS;
     }
 }

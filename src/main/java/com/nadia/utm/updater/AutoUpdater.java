@@ -129,9 +129,24 @@ public class AutoUpdater {
             }
 
             try {
-                Files.move(currentFile, modsFolder.resolve("utm.jar.utm_update. old"), StandardCopyOption.REPLACE_EXISTING);
+                Files.move(currentFile, modsFolder.resolve("utm.jar.utm_update.old"), StandardCopyOption.REPLACE_EXISTING);
                 Files.move(installPath, installPath, StandardCopyOption.REPLACE_EXISTING);
-            } catch (Exception ignored) {}
+            } catch (Exception e) {
+                utm.LOGGER.warn("[UTM] Failed to override utm jar! {}", e.getMessage());
+                try {
+                    Files.move(modsFolder.resolve("utm.jar.utm_update.old"), currentFile, StandardCopyOption.REPLACE_EXISTING);
+                } catch (Exception ignored) {}
+
+                if (getDist() == Dist.CLIENT) {
+                    VersionTarget = "FAILED";
+                    ToastTarget = true;
+
+                    utm.LOGGER.warn("[UTM] Sending error toast!");
+                    NeoForge.EVENT_BUS.post(new ToastDisplaySignal());
+                }
+
+                return;
+            }
 
             utm.LOGGER.warn("[UTM] Update installed, please restart Minecraft!");
             CURRENT_VERSION = latest;
@@ -151,8 +166,8 @@ public class AutoUpdater {
         AtomicReference<Path> oldFile = new AtomicReference<>();
 
         try (Stream<Path> entries = Files.list(modsFolder)) {
-           entries.forEach(file -> {
-                if (file.toString().contains(".utm_update" + ".old")) {
+            entries.forEach(file -> {
+                if (file.toString().contains(".utm_update.old")) {
                     oldFile.set(file);
                 }
             });
