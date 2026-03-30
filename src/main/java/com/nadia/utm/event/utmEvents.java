@@ -3,13 +3,14 @@ package com.nadia.utm.event;
 import com.nadia.utm.networking.TabLayerPayload;
 import com.nadia.utm.registry.dimension.utmDimensions;
 import com.nadia.utm.server.TabMenuServer;
+import net.minecraft.core.BlockPos;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.level.block.Blocks;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
@@ -100,13 +101,35 @@ public class utmEvents {
             if (player.getData(ENTERED_2313AG) && !player.serverLevel().dimension().equals(utmDimensions.AG_KEY)) {
                 ServerLevel target = server.getLevel(utmDimensions.AG_KEY);
                 if (target != null) {
-                    int height = target.getHeight(Heightmap.Types.MOTION_BLOCKING, player.blockPosition().getX(), player.blockPosition().getZ());
-                    player.teleportTo(target, player.getX(), height + 1, player.getZ(), player.getYRot(), player.getXRot());
+                    int x = player.blockPosition().getX();
+                    int z = player.blockPosition().getZ();
+                    int height = getSurface(target, x, z);
+
+                    if (height == 13579) {
+                        height = -63;
+                        target.setBlock(new BlockPos(x, -64, z), Blocks.COBBLESTONE.defaultBlockState(), 3);
+                    }
+                    player.teleportTo(target, player.getX(), height, player.getZ(), player.getYRot(), player.getXRot());
                 }
             } else if (!player.getData(ENTERED_2313AG) && player.serverLevel().dimension().equals(utmDimensions.AG_KEY)) {
                 player.setData(ENTERED_2313AG, true);
                 player.setRespawnPosition(utmDimensions.AG_KEY, player.blockPosition(), player.getYRot(), true, true);
             }
         }
+    }
+
+    private static int getSurface(ServerLevel level, int x, int z) {
+        int minY = level.getMinBuildHeight();
+        int maxY = level.getMaxBuildHeight();
+        BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos(x, maxY, z);
+
+        while (pos.getY() > minY) {
+            if (!level.getBlockState(pos).isAir()) {
+                return pos.above().getY();
+            }
+            pos.move(0, -1, 0);
+        }
+
+        return -13579;
     }
 }
