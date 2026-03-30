@@ -116,7 +116,7 @@ dependencies {
     implementation("maven.modrinth:gravestone-mod:AZm51eX1") // gravestones
     implementation("maven.modrinth:sophisticated-backpacks:ovVp31Ci") // sophisticated backpacks
     implementation("maven.modrinth:sophisticated-core:23alQult") // sophisticated core
-    implementation("maven.modrinth:open-parties-and-claims:g5OOSal5") // open parties and claims
+    implementation("maven.modrinth:open-parties-and-claims:M6DB7Bdh") // open parties and claims
 
     jarJar(implementation("maven.modrinth:extreme_sound_muffler:KXmiEin1")) // extreme sound muffler
     jarJar(implementation("maven.modrinth:sophisticated-backpacks-create-integration:bWd7B59k")) // sophisticated backpacks x create
