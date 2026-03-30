@@ -25,6 +25,8 @@
   "block.utm.interdictor": "Interdictor",
   "block.utm.outpostwalls_shrine": "Shrine Town",
   "block.utm.citywalls_shrine": "Shrine City",
+  "block.utm.flint_block": "Block of Flint",
+  "block.utm.flint_block_block": "Block of Block of Flint",
 
   "item.utm.copper_sword": "Copper Sword",
   "item.utm.copper_pickaxe": "Copper Pickaxe",
