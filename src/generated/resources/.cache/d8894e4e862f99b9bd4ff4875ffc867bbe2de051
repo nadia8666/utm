@@ -1,4 +1,4 @@
-// 1.21.1	2026-02-17T18:59:47.009391	Item Models: utm
+// 1.21.1	2026-03-29T22:49:27.2283568	Item Models: utm
 f2e9775563c86f68d71b06bb62045008a975a3de assets/utm/models/item/chunk_loader.json
 336758cbcbfdf58cdfae0d301428baacb9e69221 assets/utm/models/item/copper_axe.json
 b461f6062f97a9a4f36e2c003164cd40afbf068d assets/utm/models/item/copper_hoe.json
@@ -17,6 +17,8 @@ b6912f8a34e5f47793b3a45056355b5c11880109 assets/utm/models/item/enchanted_sword_
 8d14b0314f834aaad1854d850f9b7c043a413997 assets/utm/models/item/enchanted_sword_green.json
 a4495964b84cc59be5e289d9966f9ee877a88a18 assets/utm/models/item/enchanted_sword_red.json
 0e08ce62563cfd1766ab57f2472b2d0843132d30 assets/utm/models/item/fiddlecore.json
+92fcaec4bf4c4e0d70ec342a344a87fc8c646f5f assets/utm/models/item/flint_block.json
+192ecb9b1b7a99765794b5b804b5972e54f4af1d assets/utm/models/item/flint_block_block.json
 6ad9dfbf9e1d77cb8161f7302a0c25940e57aa58 assets/utm/models/item/floatingcore.json
 17c810dab8cfad3e3bdffbe6bcbb14b5d9400a87 assets/utm/models/item/glint_table.json
 fc48134fda3d120191f6a58897d1bb3fd5632f78 assets/utm/models/item/grate.json
