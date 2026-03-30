@@ -6,6 +6,7 @@ import com.nadia.utm.client.renderer.CitywallsBlockEntityRenderer;
 import com.nadia.utm.client.renderer.glint.utmGlintContainer;
 import com.nadia.utm.client.renderer.planets.PlanetRenderer;
 import com.nadia.utm.client.ui.GlintScreen;
+import com.nadia.utm.client.ui.LaunchScreen;
 import com.nadia.utm.client.updater.UpdateToast;
 import com.nadia.utm.registry.block.utmBlockEntities;
 import com.nadia.utm.registry.data.utmDataComponents;
@@ -82,6 +83,7 @@ public class utmClient {
     @SubscribeEvent
     public static void registerScreens(RegisterMenuScreensEvent event) {
         event.register(utmMenus.GLINT_MENU.get(), GlintScreen::new);
+        event.register(utmMenus.LAUNCH_MENU.get(), LaunchScreen::new);
     }
 
     @SubscribeEvent

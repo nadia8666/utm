@@ -1,5 +1,6 @@
 package com.nadia.utm.registry.ui;
 
+import com.nadia.utm.gui.LaunchMenu;
 import com.nadia.utm.gui.glint.GlintMenu;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.inventory.MenuType;
@@ -12,4 +13,5 @@ public class utmMenus {
     public static final DeferredRegister<MenuType<?>> MENUS = DeferredRegister.create(BuiltInRegistries.MENU, "utm");
 
     public static final Supplier<MenuType<GlintMenu>> GLINT_MENU = MENUS.register("glint_menu", () -> IMenuTypeExtension.create(GlintMenu::new));
+    public static final Supplier<MenuType<LaunchMenu>> LAUNCH_MENU = MENUS.register("launch_menu", () -> IMenuTypeExtension.create(LaunchMenu::new));
 }
