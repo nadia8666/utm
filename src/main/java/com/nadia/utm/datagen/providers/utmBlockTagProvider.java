@@ -30,5 +30,6 @@ public class utmBlockTagProvider extends BlockTagsProvider {
         tag(BlockTags.MINEABLE_WITH_AXE).add(utmBlocks.PLAYER_CHUNK_LOADER.block.get());
 
         tag(BlockTags.MINEABLE_WITH_AXE).add(utmBlocks.GLINT_TABLE.block.get());
+        tag(BlockTags.MINEABLE_WITH_SHOVEL).add(utmBlocks.FLINT_BLOCK.block.get());
     }
 }
