@@ -83,10 +83,8 @@ public class utmBlocks {
             .isSuffocating((state, level, pos) -> false));
     public static final utmBlockContainer<Block,BlockItem> FLINT_BLOCK = iregister("flint_block", Block::new, BlockBehaviour.Properties.of()
             .destroyTime(10.0f)
-
             .sound(SoundType.GRAVEL));
     public static final utmBlockContainer<Block,BlockItem> FLINT_BLOCK_BLOCK = iregister("flint_block_block", Block::new, BlockBehaviour.Properties.of()
             .destroyTime(100.0f)
-
             .sound(SoundType.GRAVEL));
 }

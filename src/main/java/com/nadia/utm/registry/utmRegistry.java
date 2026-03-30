@@ -43,7 +43,7 @@ public class utmRegistry {
             .register("main", () -> CreativeModeTab.builder()
                     .title(Component.translatable("itemGroup.utm"))
                     .withTabsBefore(CreativeModeTabs.COMBAT)
-                    .icon(Items.ANVIL::getDefaultInstance)
+                    .icon(utmItems.MUSIC_DISC_UNDERTALE.get()::getDefaultInstance)
                     .displayItems((parameters, output) -> {
                         utmRegistry.BLOCKS.getEntries().forEach(entry -> output.accept(entry.get()));
                         utmRegistry.ITEMS.getEntries().forEach(entry -> output.accept(entry.get()));
