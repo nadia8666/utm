@@ -32,6 +32,10 @@ public class utmBlocks {
             .destroyTime(3.0f)
             .explosionResistance(25f).sound(SoundType.WOOD));
 
+    public static final utmBlockContainer<LaunchContraptionBlock, BlockItem> LAUNCH_CONTRAPTION = iregister("launch_contraption", LaunchContraptionBlock::new, BlockBehaviour.Properties.of()
+            .destroyTime(3.0f)
+            .explosionResistance(50f).sound(SoundType.METAL));
+
     public static final utmBlockContainer<BlockChunkLoaderBlock, BlockItem> CHUNK_LOADER = iregister("chunk_loader", BlockChunkLoaderBlock::new, BlockBehaviour.Properties.of()
             .destroyTime(5.0f)
             .explosionResistance(25f).sound(SoundType.WOOD)
