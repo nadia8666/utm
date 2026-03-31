@@ -42,26 +42,22 @@ public class Planet {
         RenderSystem.disableDepthTest();
         RenderSystem.setShader(GameRenderer::getPositionTexColorShader);
         RenderSystem.setShaderTexture(0, TEXTURE);
-
         RenderSystem.setShaderColor(1, 1, 1, 1.0f);
 
-        Tesselator tesselator = Tesselator.getInstance();
-        BufferBuilder bufferBuilder = tesselator.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX_COLOR);
-
+        // transformation
         poseStack.pushPose();
 
-        Quaternionf camRot = mc.gameRenderer.getMainCamera().rotation();
-        poseStack.mulPose(camRot.invert());
-
+        poseStack.mulPose(new Quaternionf(mc.gameRenderer.getMainCamera().rotation()).invert());
         transform(poseStack);
 
-        Matrix4f matrix4f = poseStack.last().pose();
-        bufferBuilder.addVertex(matrix4f, -SIZE, DISTANCE, -SIZE).setUv(0.0F, 0.0F).setColor(brightness, brightness, brightness, alpha);
-        bufferBuilder.addVertex(matrix4f, SIZE, DISTANCE, -SIZE).setUv(1.0F, 0.0F).setColor(brightness, brightness, brightness, alpha);
-        bufferBuilder.addVertex(matrix4f, SIZE, DISTANCE, SIZE).setUv(1.0F, 1.0F).setColor(brightness, brightness, brightness, alpha);
-        bufferBuilder.addVertex(matrix4f, -SIZE, DISTANCE, SIZE).setUv(0.0F, 1.0F).setColor(brightness, brightness, brightness, alpha);
+        Matrix4f matrix = poseStack.last().pose();
+        BufferBuilder buffer = Tesselator.getInstance().begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX_COLOR);
+        buffer.addVertex(matrix, -SIZE, DISTANCE, -SIZE).setUv(0.0F, 0.0F).setColor(brightness, brightness, brightness, alpha);
+        buffer.addVertex(matrix, SIZE, DISTANCE, -SIZE).setUv(1.0F, 0.0F).setColor(brightness, brightness, brightness, alpha);
+        buffer.addVertex(matrix, SIZE, DISTANCE, SIZE).setUv(1.0F, 1.0F).setColor(brightness, brightness, brightness, alpha);
+        buffer.addVertex(matrix, -SIZE, DISTANCE, SIZE).setUv(0.0F, 1.0F).setColor(brightness, brightness, brightness, alpha);
 
-        BufferUploader.drawWithShader(bufferBuilder.buildOrThrow());
+        BufferUploader.drawWithShader(buffer.buildOrThrow());
 
         poseStack.popPose();
         RenderSystem.enableDepthTest();
