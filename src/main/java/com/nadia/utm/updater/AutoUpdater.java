@@ -119,7 +119,7 @@ public class AutoUpdater {
         Path modsFolder = FMLPaths.MODSDIR.get();
 
         Path installPath = modsFolder.resolve("utm.jar.utm_update");
-        Path currentFile = modsFolder.resolve("utm.jar");
+        Path currentPath = modsFolder.resolve("utm.jar");
         CompletableFuture.runAsync(() -> {
             try {
                 downloadUpdate(downloadUrl, installPath).get();
@@ -129,12 +129,12 @@ public class AutoUpdater {
             }
 
             try {
-                Files.move(currentFile, modsFolder.resolve("utm.jar.utm_update.old"), StandardCopyOption.REPLACE_EXISTING);
-                Files.move(installPath, installPath, StandardCopyOption.REPLACE_EXISTING);
+                Files.move(currentPath, modsFolder.resolve("utm.jar.utm_update.old"), StandardCopyOption.REPLACE_EXISTING);
+                Files.move(installPath, currentPath, StandardCopyOption.REPLACE_EXISTING);
             } catch (Exception e) {
                 utm.LOGGER.warn("[UTM] Failed to override utm jar! {}", e.getMessage());
                 try {
-                    Files.move(modsFolder.resolve("utm.jar.utm_update.old"), currentFile, StandardCopyOption.REPLACE_EXISTING);
+                    Files.move(modsFolder.resolve("utm.jar.utm_update.old"), currentPath, StandardCopyOption.REPLACE_EXISTING);
                 } catch (Exception ignored) {}
 
                 if (getDist() == Dist.CLIENT) {
