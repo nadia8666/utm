@@ -1,19 +1,22 @@
 package com.nadia.utm.client.ui;
 
-import com.nadia.utm.gui.LaunchMenu;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.gui.components.Renderable;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.entity.player.Inventory;
 import org.jetbrains.annotations.NotNull;
 
-public class LaunchScreen extends AbstractContainerScreen<LaunchMenu> {
-    public LaunchScreen(LaunchMenu menu, Inventory playerInventory, Component title) {
-        super(menu, playerInventory, title);
+public class LaunchScreen extends Screen {
+    public LaunchScreen(Component title) {
+        super(title);
     }
 
     @Override
-    protected void renderBg(@NotNull GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY) {
+    public void render(@NotNull GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+        this.renderBackground(guiGraphics, mouseX, mouseY, partialTick);
 
+        for (Renderable renderable : this.renderables) {
+            renderable.render(guiGraphics, mouseX, mouseY, partialTick);
+        }
     }
 }

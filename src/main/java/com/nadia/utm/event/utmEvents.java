@@ -115,7 +115,6 @@ public class utmEvents {
 
                 if (fill > 0) {
                     event.getEntity().getPersistentData().putInt("VisualBacktankAir", fill);
-                    utm.LOGGER.info("[UTM] set fill, in space!");
                 }
             }
 

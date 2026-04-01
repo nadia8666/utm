@@ -65,6 +65,8 @@
   "utm.emi.requires_levels": "Enchantment Cost: %s",
   "utm.gui.glint_table_menu": "Glint Augmenter",
 
+  "utm.gui.launch_contraption_desc": "WARNING: LAUNCHING THIS CONTRAPTION IS IRREVERSIBLE!",
+
   "subtitles.utm.slider_drag": "Slider drag",
 
   "utm.elytra_trim_type.vein": " Vein Elytra Trim",
