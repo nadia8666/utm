@@ -2,18 +2,29 @@ package com.nadia.utm.event;
 
 import com.nadia.utm.networking.TabLayerPayload;
 import com.nadia.utm.registry.dimension.utmDimensions;
+import com.nadia.utm.registry.enchantment.utmEnchantments;
 import com.nadia.utm.server.TabMenuServer;
+import com.nadia.utm.utm;
+import com.simibubi.create.AllItems;
+import com.simibubi.create.content.equipment.armor.BacktankUtil;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
+import net.neoforged.neoforge.event.entity.living.LivingEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import net.neoforged.neoforge.event.server.ServerStoppingEvent;
@@ -21,6 +32,8 @@ import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.event.tick.ServerTickEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
+
+import java.util.List;
 
 import static com.nadia.utm.registry.attachment.utmAttachments.ENTERED_2313AG;
 
@@ -93,27 +106,87 @@ public class utmEvents {
 
     @SubscribeEvent
     public static void onPlayerTick(PlayerTickEvent.Post event) {
-        //TODO: see if this can be optimized better idk this feels like a lot for 20/s
-        if (event.getEntity() instanceof ServerPlayer player) {
-            MinecraftServer server = player.getServer();
+        if (event.getEntity().level().isClientSide()) {
+            if (event.getEntity().level().dimension().equals(utmDimensions.AG_KEY)) {
+                List<ItemStack> tanks = BacktankUtil.getAllWithAir(event.getEntity());
+                int fill = 0;
+                for (ItemStack stack : tanks)
+                    fill += BacktankUtil.getAir(stack);
+
+                if (fill > 0) {
+                    event.getEntity().getPersistentData().putInt("VisualBacktankAir", fill);
+                    utm.LOGGER.info("[UTM] set fill, in space!");
+                }
+            }
+
+        }
+
+        //TODO: see if this can be optimized better
+        if (event.getEntity() instanceof ServerPlayer sPlayer) {
+            MinecraftServer server = sPlayer.getServer();
             if (server == null) return;
 
-            if (player.getData(ENTERED_2313AG) && !player.serverLevel().dimension().equals(utmDimensions.AG_KEY)) {
-                ServerLevel target = server.getLevel(utmDimensions.AG_KEY);
-                if (target != null) {
-                    int x = player.blockPosition().getX();
-                    int z = player.blockPosition().getZ();
-                    int height = getSurface(target, x, z);
+            ServerLevel level = server.getLevel(utmDimensions.AG_KEY);
+            boolean inAG = sPlayer.serverLevel().dimension().equals(utmDimensions.AG_KEY);
+            boolean enteredAG = sPlayer.getData(ENTERED_2313AG);
+
+            if (enteredAG && !inAG) {
+                if (level != null) {
+                    int x = sPlayer.blockPosition().getX();
+                    int z = sPlayer.blockPosition().getZ();
+                    int height = getSurface(level, x, z);
 
                     if (height == 13579) {
                         height = -63;
-                        target.setBlock(new BlockPos(x, -64, z), Blocks.COBBLESTONE.defaultBlockState(), 3);
+                        level.setBlock(new BlockPos(x, -64, z), Blocks.COBBLESTONE.defaultBlockState(), 3);
                     }
-                    player.teleportTo(target, player.getX(), height, player.getZ(), player.getYRot(), player.getXRot());
+                    sPlayer.teleportTo(level, sPlayer.getX(), height, sPlayer.getZ(), sPlayer.getYRot(), sPlayer.getXRot());
                 }
-            } else if (!player.getData(ENTERED_2313AG) && player.serverLevel().dimension().equals(utmDimensions.AG_KEY)) {
-                player.setData(ENTERED_2313AG, true);
-                player.setRespawnPosition(utmDimensions.AG_KEY, player.blockPosition(), player.getYRot(), true, true);
+            } else if (!enteredAG && inAG) {
+                sPlayer.setData(ENTERED_2313AG, true);
+                sPlayer.setRespawnPosition(utmDimensions.AG_KEY, sPlayer.blockPosition(), sPlayer.getYRot(), true, true);
+            }
+
+            if (inAG && level != null) {
+                ItemStack helmet = sPlayer.getItemBySlot(EquipmentSlot.HEAD);
+                ItemStack chestplate = sPlayer.getItemBySlot(EquipmentSlot.CHEST);
+                ItemStack leggings = sPlayer.getItemBySlot(EquipmentSlot.LEGS);
+                ItemStack boots = sPlayer.getItemBySlot(EquipmentSlot.FEET);
+                if (
+                        (helmet.is(AllItems.NETHERITE_DIVING_HELMET) || helmet.is(AllItems.COPPER_DIVING_HELMET)) &&
+                                !chestplate.isEmpty() &&
+                                !leggings.isEmpty() &&
+                                (boots.is(AllItems.NETHERITE_DIVING_BOOTS) || boots.is(AllItems.COPPER_DIVING_BOOTS)) &&
+                                !BacktankUtil.getAllWithAir(sPlayer).isEmpty()
+                ) {
+                    List<ItemStack> tanks = BacktankUtil.getAllWithAir(sPlayer);
+                    if (level.getGameTime() % 20 == 0) {
+                        BacktankUtil.consumeAir(sPlayer, tanks.getFirst(), 1);
+
+                        if (helmet.is(AllItems.COPPER_DIVING_HELMET))
+                            helmet.getItem().damageItem(helmet, 1, sPlayer, p -> {
+                            });
+
+                        if (boots.is(AllItems.COPPER_DIVING_BOOTS))
+                            boots.getItem().damageItem(boots, 1, sPlayer, p -> {
+                            });
+                    }
+
+                } else {
+                    sPlayer.hurt(level.damageSources().source(DamageTypes.IN_WALL), 1f);
+                }
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void onLivingJump(LivingEvent.LivingJumpEvent event) {
+        if (event.getEntity() instanceof Player player) {
+            ItemStack boots = player.getItemBySlot(EquipmentSlot.FEET);
+            int jumpPower = boots.getEnchantmentLevel(player.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(utmEnchantments.POWER_JUMP));
+            if (jumpPower > 0) {
+                Vec3 delta = player.getDeltaMovement();
+                player.setDeltaMovement(delta.x, delta.y + (0.15D * jumpPower), delta.z);
             }
         }
     }

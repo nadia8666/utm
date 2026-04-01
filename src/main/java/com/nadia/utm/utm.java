@@ -58,6 +58,8 @@ public class utm {
                 utm.LOGGER.warn("[UTM] Failed to save schematics: {}", e.getMessage());
             }
         });
+
+        event.enqueueWork(utmRegistry::lateRegister);
     }
 
     // dont delete this apprently. this is core to utm working.

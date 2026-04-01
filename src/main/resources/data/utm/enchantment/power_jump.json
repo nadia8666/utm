@@ -1,0 +1,22 @@
+{
+  "description": {
+    "translate": "enchantment.utm.power_jump"
+  },
+  "supported_items": ["create:netherite_diving_boots", "minecraft:netherite_boots"],
+  "primary_items": ["create:netherite_diving_boots", "minecraft:netherite_boots"],
+  "weight": 5,
+  "max_level": 3,
+  "min_cost": {
+    "base": 10,
+    "per_level_above_first": 8
+  },
+  "max_cost": {
+    "base": 20,
+    "per_level_above_first": 8
+  },
+  "anvil_cost": 4,
+  "slots": [
+    "feet"
+  ],
+  "effects": {}
+}

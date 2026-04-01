@@ -10,7 +10,7 @@
     "announce_to_chat": true,
     "hidden": false
   },
-  "parent": "minecraft:nether/get_ancient_debris",
+  "parent": "minecraft:nether/hidden_in_the_depths",
   "criteria": {
     "has_netherite_pickaxe": {
       "trigger": "minecraft:inventory_changed",
