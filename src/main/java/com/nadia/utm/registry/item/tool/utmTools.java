@@ -82,7 +82,7 @@ public class utmTools {
     );
     public static final Supplier<AxeItem> ARID_AXE = utmItems.ITEMS.register("arid_axe", () -> {
                 var Tier = utmToolBuilder.buildTier(
-                        BlockTags.INCORRECT_FOR_WOODEN_TOOL, 500, 8f, 0f, 15, () -> Ingredient.EMPTY
+                        BlockTags.INCORRECT_FOR_WOODEN_TOOL, 2500, 8f, 0f, 15, () -> Ingredient.EMPTY
                 );
                 return new AxeItem(Tier, new Item.Properties().attributes(
                         AxeItem.createAttributes(Tier, 17, -3.4f)).rarity(Rarity.RARE));
@@ -90,7 +90,7 @@ public class utmTools {
     );
     public static final Supplier<SwordItem> ARID_SWORD = utmItems.ITEMS.register("arid_sword", () -> {
                 var Tier = utmToolBuilder.buildTier(
-                        BlockTags.INCORRECT_FOR_WOODEN_TOOL, 1000, 8f, 0f, 15, () -> Ingredient.EMPTY
+                        BlockTags.INCORRECT_FOR_WOODEN_TOOL, 5000, 8f, 0f, 15, () -> Ingredient.EMPTY
                 );
                 return new SwordItem(Tier, new Item.Properties().attributes(
                         SwordItem.createAttributes(Tier, 6.5f, 6)));
