@@ -93,7 +93,7 @@ public class utmTools {
                         BlockTags.INCORRECT_FOR_WOODEN_TOOL, 1000, 8f, 0f, 15, () -> Ingredient.EMPTY
                 );
                 return new SwordItem(Tier, new Item.Properties().attributes(
-                        SwordItem.createAttributes(Tier, 4, 2)));
+                        SwordItem.createAttributes(Tier, 6.5f, 6)));
             }
     );
     public static void doNothing() {
