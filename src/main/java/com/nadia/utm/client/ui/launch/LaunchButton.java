@@ -1,5 +1,6 @@
-package com.nadia.utm.gui.glint;
+package com.nadia.utm.client.ui.launch;
 
+import com.nadia.utm.utm;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
@@ -10,13 +11,16 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import org.jetbrains.annotations.NotNull;
 
-public class GlintButton extends AbstractWidget {
-    public boolean pressed = true;
-    public static final ResourceLocation BUTTON_DEFAULT = ResourceLocation.fromNamespaceAndPath("utm", "textures/gui/container/glint_table_btn.png");
-    public static final ResourceLocation BUTTON_PRESSED = ResourceLocation.fromNamespaceAndPath("utm", "textures/gui/container/glint_table_btn_p.png");
-    private final Runnable onSync;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 
-    public GlintButton(int x, int y, int width, int height, Component message, Runnable onSync) {
+public class LaunchButton extends AbstractWidget {
+    public boolean pressed = false;
+    public static final ResourceLocation BUTTON_DEFAULT = utm.key("textures/gui/launch_btn.png");
+    public static final ResourceLocation BUTTON_PRESSED = utm.key("textures/gui/launch_btn_p.png");
+    private final Consumer<Boolean> onSync;
+
+    public LaunchButton(int x, int y, int width, int height, Component message, Consumer<Boolean> onSync) {
         super(x, y, width, height, message);
 
         this.onSync = onSync;
@@ -24,13 +28,13 @@ public class GlintButton extends AbstractWidget {
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
-        if (this.active && this.visible && this.clicked(mouseX, mouseY)) {
-            pressed = !pressed;
+        if (this.active && this.visible && this.clicked(mouseX, mouseY) && !pressed) {
+            pressed = true;
             Minecraft.getInstance().getSoundManager().play(
                     SimpleSoundInstance.forUI(SoundEvents.UI_BUTTON_CLICK, 1F)
             );
 
-            onSync.run();
+            onSync.accept(pressed);
 
             return true;
         }
@@ -39,7 +43,7 @@ public class GlintButton extends AbstractWidget {
 
     @Override
     protected void renderWidget(@NotNull GuiGraphics guiGraphics, int i, int i1, float v) {
-        guiGraphics.blit(!pressed ? BUTTON_PRESSED : BUTTON_DEFAULT, getX(), getY(), 0, 0, this.width, this.height, 22, 11);
+        guiGraphics.blit(pressed ? BUTTON_PRESSED : BUTTON_DEFAULT, getX(), getY(), 0, 0, this.width, this.height, 34, 34);
     }
 
     @Override

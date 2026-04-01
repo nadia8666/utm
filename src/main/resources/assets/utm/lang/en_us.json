@@ -65,7 +65,8 @@
   "utm.emi.requires_levels": "Enchantment Cost: %s",
   "utm.gui.glint_table_menu": "Glint Augmenter",
 
-  "utm.gui.launch_contraption_desc": "WARNING: LAUNCHING THIS CONTRAPTION IS IRREVERSIBLE!",
+  "utm.gui.launch_contraption_head": "WARNING:",
+  "utm.gui.launch_contraption_desc": "THIS ACTION IS IRREVERSIBLE!",
 
   "subtitles.utm.slider_drag": "Slider drag",
 

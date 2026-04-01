@@ -2,7 +2,7 @@ package com.nadia.utm.networking;
 
 import com.nadia.utm.client.ui.TabMenuLayer;
 import com.nadia.utm.compat.GraveInterface;
-import com.nadia.utm.gui.glint.GlintMenu;
+import com.nadia.utm.gui.GlintMenu;
 import de.maxhenkel.gravestone.Main;
 import de.maxhenkel.gravestone.tileentity.GraveStoneTileEntity;
 import net.minecraft.core.BlockPos;
