@@ -19,7 +19,7 @@ public class utmTools {
 
     public static final Supplier<SwordItem> COPPER_SWORD = utmItems.ITEMS.register("copper_sword", () -> new SwordItem(TIER_COPPER,
             new Item.Properties().attributes(
-                    SwordItem.createAttributes(TIER_COPPER, 5, 0)
+                    SwordItem.createAttributes(TIER_COPPER, 5, -2.4f)
             ))
     );
     public static final Supplier<ShovelItem> COPPER_SHOVEL = utmItems.ITEMS.register("copper_shovel", () -> new ShovelItem(TIER_COPPER,
