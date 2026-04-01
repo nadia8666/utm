@@ -48,7 +48,7 @@ public class utmTools {
 
     public static final Supplier<SwordItem> OBSIDIAN_SWORD = utmItems.ITEMS.register("obsidian_sword", () -> {
                 var Tier = utmToolBuilder.buildTier(
-                        BlockTags.INCORRECT_FOR_WOODEN_TOOL, 4200, 1f, 0f, 5, () -> Ingredient.EMPTY
+                        BlockTags.INCORRECT_FOR_WOODEN_TOOL, 4200, 1f, 0f, 5, () -> Ingredient.of(Tags.Items.OBSIDIANS)
                 );
                 return new SwordItem(Tier, new Item.Properties().attributes(
                         SwordItem.createAttributes(Tier, 12, -3.75f)));
@@ -74,10 +74,18 @@ public class utmTools {
     );
     public static final Supplier<SwordItem> CYCLESWORD = utmItems.ITEMS.register("cyclesword", () -> {
                 var Tier = utmToolBuilder.buildTier(
-                        BlockTags.INCORRECT_FOR_WOODEN_TOOL, 350, 1f, 0f, 15, () -> Ingredient.EMPTY
+                        BlockTags.INCORRECT_FOR_WOODEN_TOOL, 350, 1f, 0f, 15, () -> Ingredient.of(Tags.Items.INGOTS_IRON)
                 );
                 return new SwordItem(Tier, new Item.Properties().attributes(
                         SwordItem.createAttributes(Tier, 4, -1.125f)));
+            }
+    );
+    public static final Supplier<AxeItem> ARID_AXE = utmItems.ITEMS.register("arid_axe", () -> {
+                var Tier = utmToolBuilder.buildTier(
+                        BlockTags.INCORRECT_FOR_WOODEN_TOOL, 500, 8f, 0f, 15, () -> Ingredient.of(Tags.Items.OBSIDIANS)
+                );
+                return new AxeItem(Tier, new Item.Properties().attributes(
+                        AxeItem.createAttributes(Tier, 14, -3.4f)));
             }
     );
     public static void doNothing() {

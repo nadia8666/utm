@@ -35,6 +35,10 @@ public class utmItemTagProvider extends ItemTagsProvider {
         tag(ItemTags.WEAPON_ENCHANTABLE).add(utmTools.CYCLESWORD.get());
         tag(ItemTags.DURABILITY_ENCHANTABLE).add(utmTools.CYCLESWORD.get());
 
+        tag(Tags.Items.ENCHANTABLES).add(utmTools.CYCLESWORD.get());
+        tag(ItemTags.WEAPON_ENCHANTABLE).add(utmTools.CYCLESWORD.get());
+        tag(ItemTags.DURABILITY_ENCHANTABLE).add(utmTools.CYCLESWORD.get());
+
         // copper tools
         tag(Tags.Items.ENCHANTABLES).add(utmTools.COPPER_SWORD.get());
         tag(ItemTags.SWORD_ENCHANTABLE).add(utmTools.COPPER_SWORD.get());
@@ -85,5 +89,18 @@ public class utmItemTagProvider extends ItemTagsProvider {
         tag(Tags.Items.MUSIC_DISCS).add(utmItems.MUSIC_DISC_TEARS.get());
         tag(Tags.Items.MUSIC_DISCS).add(utmItems.MUSIC_DISC_LAVA_CHICKEN.get());
         tag(Tags.Items.MUSIC_DISCS).add(utmItems.MUSIC_DISC_UNDERTALE.get());
+
+        tag(Tags.Items.ENCHANTABLES).add(utmTools.ENCHANTED_SWORD_BLUE.get());
+        tag(ItemTags.SWORD_ENCHANTABLE).add(utmTools.ENCHANTED_SWORD_BLUE.get());
+        tag(ItemTags.WEAPON_ENCHANTABLE).add(utmTools.ENCHANTED_SWORD_BLUE.get());
+        tag(ItemTags.DURABILITY_ENCHANTABLE).add(utmTools.ENCHANTED_SWORD_BLUE.get());
+        tag(Tags.Items.ENCHANTABLES).add(utmTools.ENCHANTED_SWORD_GREEN.get());
+        tag(ItemTags.SWORD_ENCHANTABLE).add(utmTools.ENCHANTED_SWORD_GREEN.get());
+        tag(ItemTags.WEAPON_ENCHANTABLE).add(utmTools.ENCHANTED_SWORD_GREEN.get());
+        tag(ItemTags.DURABILITY_ENCHANTABLE).add(utmTools.ENCHANTED_SWORD_GREEN.get());
+        tag(Tags.Items.ENCHANTABLES).add(utmTools.ENCHANTED_SWORD_RED.get());
+        tag(ItemTags.SWORD_ENCHANTABLE).add(utmTools.ENCHANTED_SWORD_RED.get());
+        tag(ItemTags.WEAPON_ENCHANTABLE).add(utmTools.ENCHANTED_SWORD_RED.get());
+        tag(ItemTags.DURABILITY_ENCHANTABLE).add(utmTools.ENCHANTED_SWORD_RED.get());
     }
 }

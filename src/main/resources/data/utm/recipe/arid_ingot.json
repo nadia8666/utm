@@ -1,0 +1,299 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "minecraft:netherite_ingot"
+  },
+  "loops": 1,
+  "results": [
+    {
+      "id": "utm:arid_ingot",
+      "chance": 100,
+      "count": 1
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "minecraft:netherite_ingot"
+        },
+        {
+          "type": "neoforge:single",
+          "amount": 5000,
+          "tag": "minecraft:lava"
+        }
+      ],
+      "results": [
+        {
+          "id": "utm:unfinished_arid_ingot"
+        }
+      ]
+    },
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "utm:unfinished_arid_ingot"
+        },
+        {
+          "type": "neoforge:single",
+          "amount": 5000,
+          "tag": "minecraft:water"
+        }
+      ],
+      "results": [
+        {
+          "id": "utm:unfinished_arid_ingot"
+        }
+      ]
+    },
+    {
+      "type": "create:mixing",
+      "ingredients": [
+        {
+          "item": "utm:unfinished_arid_ingot"
+        },
+        {
+          "type": "neoforge:tag",
+          "amount": 250,
+          "tag": "c:honey"
+        }
+      ],
+      "results": [
+        {
+          "id": "utm:unfinished_arid_ingot"
+        }
+      ]
+    },
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "utm:unfinished_arid_ingot"
+        },
+        {
+          "type": "neoforge:single",
+          "amount": 5000,
+          "tag": "minecraft:lava"
+        }
+      ],
+      "results": [
+        {
+          "id": "utm:unfinished_arid_ingot"
+        }
+      ]
+    },
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "utm:unfinished_arid_ingot"
+        },
+        {
+          "type": "neoforge:single",
+          "amount": 5000,
+          "tag": "minecraft:lava"
+        }
+      ],
+      "results": [
+        {
+          "id": "utm:unfinished_arid_ingot"
+        }
+      ]
+    },
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "utm:unfinished_arid_ingot"
+        },
+        {
+          "type": "neoforge:single",
+          "amount": 5000,
+          "tag": "minecraft:water"
+        }
+      ],
+      "results": [
+        {
+          "id": "utm:unfinished_arid_ingot"
+        }
+      ]
+    },
+    {
+      "type": "create:mixing",
+      "ingredients": [
+        {
+          "item": "utm:unfinished_arid_ingot"
+        },
+        {
+          "type": "neoforge:tag",
+          "amount": 250,
+          "tag": "c:honey"
+        }
+      ],
+      "results": [
+        {
+          "id": "utm:unfinished_arid_ingot"
+        }
+      ]
+    },
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "utm:unfinished_arid_ingot"
+        },
+        {
+          "type": "neoforge:single",
+          "amount": 5000,
+          "tag": "minecraft:lava"
+        }
+      ],
+      "results": [
+        {
+          "id": "utm:unfinished_arid_ingot"
+        }
+      ]
+    },
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "utm:unfinished_arid_ingot"
+        },
+        {
+          "type": "neoforge:single",
+          "amount": 5000,
+          "tag": "minecraft:lava"
+        }
+      ],
+      "results": [
+        {
+          "id": "utm:unfinished_arid_ingot"
+        }
+      ]
+    },
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "utm:unfinished_arid_ingot"
+        },
+        {
+          "type": "neoforge:single",
+          "amount": 5000,
+          "tag": "minecraft:lava"
+        }
+      ],
+      "results": [
+        {
+          "id": "utm:unfinished_arid_ingot"
+        }
+      ]
+    },
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "utm:unfinished_arid_ingot"
+        },
+        {
+          "type": "neoforge:single",
+          "amount": 5000,
+          "tag": "minecraft:water"
+        }
+      ],
+      "results": [
+        {
+          "id": "utm:unfinished_arid_ingot"
+        }
+      ]
+    },
+    {
+      "type": "create:mixing",
+      "ingredients": [
+        {
+          "item": "utm:unfinished_arid_ingot"
+        },
+        {
+          "type": "neoforge:tag",
+          "amount": 250,
+          "tag": "c:honey"
+        }
+      ],
+      "results": [
+        {
+          "id": "utm:unfinished_arid_ingot"
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "utm:unfinished_arid_ingot"
+        }
+      ],
+      "results": [
+        {
+          "id": "utm:unfinished_arid_ingot",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "utm:unfinished_arid_ingot"
+        },
+        {
+          "type": "neoforge:single",
+          "amount": 5000,
+          "tag": "minecraft:lava"
+        }
+      ],
+      "results": [
+        {
+          "id": "utm:unfinished_arid_ingot"
+        }
+      ]
+    },
+    {
+      "type": "create:mixing",
+      "ingredients": [
+        {
+          "item": "utm:unfinished_arid_ingot"
+        },
+        {
+          "type": "neoforge:tag",
+          "amount": 250,
+          "tag": "c:honey"
+        }
+      ],
+      "results": [
+        {
+          "id": "utm:unfinished_arid_ingot"
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "utm:unfinished_arid_ingot"
+        }
+      ],
+      "results": [
+        {
+          "id": "utm:arid_ingot",
+          "count": 1
+        }
+      ]
+    }
+  ],
+  "transitional_item": {
+    "id": "utm:unfinished_arid_ingot"
+  }
+}

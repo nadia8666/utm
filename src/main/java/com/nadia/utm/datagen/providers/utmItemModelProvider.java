@@ -32,6 +32,8 @@ public class utmItemModelProvider extends ItemModelProvider {
         withExistingParent(utmBlocks.LAUNCH_CONTRAPTION.item.getId().toString(), modLoc("block/launch_contraption"));
 
         basicItem(utmItems.UNFINISHED_GLINT_TABLE.get());
+        basicItem(utmItems.UNFINISHED_ARID_INGOT.get());
+
 
         basicItem(utmItems.INCREDI.get());
         basicItem(utmItems.FIDDLECORE.get());

@@ -32,4 +32,10 @@ public class utmItems {
             .stacksTo(1).rarity(Rarity.RARE).jukeboxPlayable(utmSongs.LAVA_CHICKEN));
     public static final DeferredItem<Item> MUSIC_DISC_UNDERTALE = ITEMS.registerSimpleItem("music_disc_undertale", new Item.Properties()
             .stacksTo(1).rarity(Rarity.EPIC).jukeboxPlayable(utmSongs.UNDERTALE));
+
+
+
+
+    public static final DeferredItem<Item> UNFINISHED_ARID_INGOT = ITEMS.registerSimpleItem("unfinished_arid_ingot");
+    public static final DeferredItem<Item> ARID_INGOT = ITEMS.registerSimpleItem("arid_ingot");
 }
