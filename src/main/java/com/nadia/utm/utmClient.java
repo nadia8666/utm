@@ -83,7 +83,6 @@ public class utmClient {
     @SubscribeEvent
     public static void registerScreens(RegisterMenuScreensEvent event) {
         event.register(utmMenus.GLINT_MENU.get(), GlintScreen::new);
-        event.register(utmMenus.LAUNCH_MENU.get(), LaunchScreen::new);
     }
 
     @SubscribeEvent

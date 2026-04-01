@@ -65,6 +65,8 @@
   "utm.emi.requires_levels": "Enchantment Cost: %s",
   "utm.gui.glint_table_menu": "Glint Augmenter",
 
+  "utm.gui.launch_contraption_desc": "WARNING: LAUNCHING THIS CONTRAPTION IS IRREVERSIBLE!",
+
   "subtitles.utm.slider_drag": "Slider drag",
 
   "utm.elytra_trim_type.vein": " Vein Elytra Trim",
@@ -81,5 +83,7 @@
   "jukebox_song.utm.lava_chicken": "Hyper Potions - Lava Chicken",
   "jukebox_song.utm.tears": "Amos Roddy - Tears",
   "jukebox_song.utm.undertale": "XTRATUNA - AN UNDER'S TALE",
-  "utm.gui.launch_contraption_menu": "Launch Contraption"
+  "utm.gui.launch_contraption_menu": "Launch Contraption",
+
+  "enchantment.utm.power_jump": "Boost Pads"
 }

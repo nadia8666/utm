@@ -1,6 +1,7 @@
 package com.nadia.utm.registry;
 
 import com.nadia.utm.registry.attachment.utmAttachments;
+import com.nadia.utm.registry.behavior.utmMovingInteractions;
 import com.nadia.utm.registry.block.utmBlockEntities;
 import com.nadia.utm.registry.block.utmBlocks;
 import com.nadia.utm.registry.data.utmDataComponents;
@@ -67,5 +68,9 @@ public class utmRegistry {
         PARTICLE_TYPES.register(modEventBus);
         GLOBAL_LOOT_MODIFIER_SERIALIZERS.register(modEventBus);
         ATTACHMENTS.register(modEventBus);
+    }
+
+    public static void lateRegister() {
+        utmMovingInteractions.register();
     }
 }

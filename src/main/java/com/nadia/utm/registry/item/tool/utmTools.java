@@ -3,6 +3,7 @@ package com.nadia.utm.registry.item.tool;
 import com.nadia.utm.item.FiddleheadItem;
 import com.nadia.utm.item.NetherytraItem;
 import com.nadia.utm.registry.item.utmItems;
+import com.nadia.utm.tool.CopperSword;
 import com.nadia.utm.utm;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.*;
@@ -14,10 +15,10 @@ import java.util.function.Supplier;
 public class utmTools {
     // tool set
     public static final Tier TIER_COPPER = utmToolBuilder.buildTier(
-            BlockTags.INCORRECT_FOR_IRON_TOOL, 32, 7f, 2, 67,
+            BlockTags.INCORRECT_FOR_IRON_TOOL, 0, 7f, 2, 67,
             () -> Ingredient.of(Tags.Items.INGOTS_COPPER));
 
-    public static final Supplier<SwordItem> COPPER_SWORD = utmItems.ITEMS.register("copper_sword", () -> new SwordItem(TIER_COPPER,
+    public static final Supplier<CopperSword> COPPER_SWORD = utmItems.ITEMS.register("copper_sword", () -> new CopperSword(TIER_COPPER,
             new Item.Properties().attributes(
                     SwordItem.createAttributes(TIER_COPPER, 5, -2.4f)
             ))

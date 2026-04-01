@@ -36,7 +36,6 @@ public class PlanetRenderer {
             public void transform(PoseStack poseStack) {
                 poseStack.mulPose(Axis.XP.rotationDegrees(32));
                 poseStack.mulPose(Axis.YP.rotationDegrees(12));
-                poseStack.mulPose(Axis.ZP.rotationDegrees(5));
             }
 
             @Override
