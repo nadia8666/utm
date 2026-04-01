@@ -6,6 +6,11 @@
     "utm:copper_pickaxe",
     "utm:copper_axe",
     "utm:copper_shovel",
-    "utm:copper_hoe"
+    "utm:copper_hoe",
+    "utm:enchanted_sword_blue",
+    "utm:enchanted_sword_green",
+    "utm:enchanted_sword_red",
+    "utm:arid_axe",
+    "utm:arid_sword"
   ]
 }

@@ -102,5 +102,17 @@ public class utmItemTagProvider extends ItemTagsProvider {
         tag(ItemTags.SWORD_ENCHANTABLE).add(utmTools.ENCHANTED_SWORD_RED.get());
         tag(ItemTags.WEAPON_ENCHANTABLE).add(utmTools.ENCHANTED_SWORD_RED.get());
         tag(ItemTags.DURABILITY_ENCHANTABLE).add(utmTools.ENCHANTED_SWORD_RED.get());
+
+
+        tag(Tags.Items.ENCHANTABLES).add(utmTools.ARID_AXE.get());
+        tag(ItemTags.SWORD_ENCHANTABLE).add(utmTools.ARID_AXE.get());
+        tag(ItemTags.WEAPON_ENCHANTABLE).add(utmTools.ARID_AXE.get());
+        tag(ItemTags.FIRE_ASPECT_ENCHANTABLE).add(utmTools.ARID_AXE.get());
+        tag(ItemTags.MINING_ENCHANTABLE).add(utmTools.ARID_AXE.get());
+        tag(Tags.Items.ENCHANTABLES).add(utmTools.ARID_SWORD.get());
+        tag(ItemTags.SWORD_ENCHANTABLE).add(utmTools.ARID_SWORD.get());
+        tag(ItemTags.WEAPON_ENCHANTABLE).add(utmTools.ARID_SWORD.get());
+        tag(ItemTags.FIRE_ASPECT_ENCHANTABLE).add(utmTools.ARID_SWORD.get());
+        // it is purposefully not durability enchant-able.
     }
 }

@@ -29,6 +29,7 @@
   "block.utm.flint_block_block": "Block of Block of Flint",
   "block.utm.launch_contraption": "Launch Contraption",
 
+
   "item.utm.copper_sword": "Copper Sword",
   "item.utm.copper_pickaxe": "Copper Pickaxe",
   "item.utm.copper_axe": "Copper Axe",
@@ -51,6 +52,10 @@
   "item.utm.music_disc_tears": "Music Disc",
   "item.utm.music_disc_lava_chicken": "Music Disc",
   "item.utm.music_disc_undertale": "Music Disc",
+  "item.utm.arid_axe": "Arid Axe",
+  "item.utm.unfinished_arid_ingot": "Arid Ingot..?",
+  "item.utm.arid_ingot": "Arid Ingot",
+  "item.utm.arid_sword": "Arid Sword",
 
   "item.utm.enchanted_sword_red": "Enchanted Sword",
   "item.utm.enchanted_sword_green": "Enchanted Sword",

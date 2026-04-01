@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "arid_tool",
+  "key": {
+    "#": {
+      "item": "utm:arid_ingot"
+    },
+    "X": {
+      "item": "minecraft:diamond_sword"
+    },
+    "N": {
+      "item": "minecraft:netherite_ingot"
+    }
+  },
+  "pattern": [
+    "###",
+    "NNN",
+    " X "
+  ],
+  "result": {
+    "count": 1,
+    "id": "utm:arid_sword"
+  }
+}

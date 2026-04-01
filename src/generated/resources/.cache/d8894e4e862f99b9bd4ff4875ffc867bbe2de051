@@ -1,4 +1,7 @@
-// 1.21.1	2026-03-29T23:01:56.9184447	Item Models: utm
+// 1.21.1	2026-04-01T14:50:02.7171176	Item Models: utm
+679773fb2dc807de14de241f634f4748c3b5e0e4 assets/utm/models/item/arid_axe.json
+27e2ddb57591da009a7d2abd5330e7a3d8baa304 assets/utm/models/item/arid_ingot.json
+e8c545b67cd72e79158a9dcc2a75ccc4d13232ac assets/utm/models/item/arid_sword.json
 f2e9775563c86f68d71b06bb62045008a975a3de assets/utm/models/item/chunk_loader.json
 336758cbcbfdf58cdfae0d301428baacb9e69221 assets/utm/models/item/copper_axe.json
 b461f6062f97a9a4f36e2c003164cd40afbf068d assets/utm/models/item/copper_hoe.json
@@ -32,4 +35,5 @@ d1d2c967c30729a23a0453dc02c563694ea48256 assets/utm/models/item/music_disc_tears
 a951d96a793876f77a37a1d469861589165ec946 assets/utm/models/item/netherytra.json
 aaed7d47793a03535e0fc1e59b89f24ea056bb7d assets/utm/models/item/obsidian_sword.json
 2e991b169a46604733a459264944f9b6d47893bb assets/utm/models/item/player_chunk_loader.json
+4bb429556d32c018342d162fceee88326f55c9a6 assets/utm/models/item/unfinished_arid_ingot.json
 723955985396594051586dbe811a3de8de5bf99b assets/utm/models/item/unfinished_glint_table.json

@@ -33,7 +33,7 @@ public class utmItemModelProvider extends ItemModelProvider {
 
         basicItem(utmItems.UNFINISHED_GLINT_TABLE.get());
         basicItem(utmItems.UNFINISHED_ARID_INGOT.get());
-
+        basicItem(utmItems.ARID_INGOT.get());
 
         basicItem(utmItems.INCREDI.get());
         basicItem(utmItems.FIDDLECORE.get());
@@ -64,6 +64,8 @@ public class utmItemModelProvider extends ItemModelProvider {
         handheldItem(utmTools.OBSIDIAN_SWORD.get());
         handheldItem(utmTools.CYCLESWORD.get());
         basicItem(utmTools.NETHERYTRA.get());
+        handheldItem(utmTools.ARID_AXE.get());
+        handheldItem(utmTools.ARID_SWORD.get());
     }
 
     public ItemModelBuilder musicDisc(ResourceLocation item) {
