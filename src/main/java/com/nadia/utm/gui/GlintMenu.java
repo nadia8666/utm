@@ -1,4 +1,4 @@
-package com.nadia.utm.gui.glint;
+package com.nadia.utm.gui;
 
 import com.nadia.utm.block.entity.GlintTableBlockEntity;
 import com.nadia.utm.registry.block.utmBlocks;

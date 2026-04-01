@@ -1,6 +1,6 @@
 package com.nadia.utm.behavior;
 
-import com.nadia.utm.client.ui.LaunchScreen;
+import com.nadia.utm.client.ui.launch.LaunchScreen;
 import com.simibubi.create.content.contraptions.Contraption;
 import com.simibubi.create.content.contraptions.behaviour.SimpleBlockMovingInteraction;
 import net.minecraft.client.Minecraft;
