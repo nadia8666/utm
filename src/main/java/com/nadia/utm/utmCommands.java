@@ -44,6 +44,11 @@ public class utmCommands {
 
                     return 1;
                 }))
+                .then(Commands.literal("version").executes(context -> {
+                    context.getSource().sendSystemMessage(Component.literal("[UTM] utm Version " + utm.VERSION + " Pending version " + VersionTarget));
+
+                    return 1;
+                }))
         );
     }
 

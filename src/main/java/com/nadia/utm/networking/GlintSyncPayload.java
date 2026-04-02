@@ -15,7 +15,6 @@ public record GlintSyncPayload(
         Vector2f scale,
         ResourceLocation glintType
 ) implements CustomPacketPayload {
-
     public static final Type<GlintSyncPayload> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath("utm", "glint_sync"));
 
     public static final StreamCodec<ByteBuf, GlintSyncPayload> STREAM_CODEC = StreamCodec.composite(

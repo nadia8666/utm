@@ -26,10 +26,11 @@ import java.nio.file.StandardCopyOption;
 public class utm {
     public static final String MODID = "utm";
     public static final Logger LOGGER = LogUtils.getLogger();
+    public static String VERSION = "";
 
     public utm(IEventBus modEventBus, ModContainer modContainer) {
-        AutoUpdater.CURRENT_VERSION = modContainer.getModInfo().getVersion().toString();
-
+        VERSION = modContainer.getModInfo().getVersion().toString();
+        AutoUpdater.CURRENT_VERSION = VERSION;
         modEventBus.addListener(this::commonSetup);
 
         utmRegistry.registerAll(modEventBus);

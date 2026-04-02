@@ -1,6 +1,7 @@
 package com.nadia.utm.client.ui.launch;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.nadia.utm.networking.LaunchContraptionPayload;
 import com.nadia.utm.utm;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Renderable;
@@ -8,6 +9,7 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.NotNull;
 
 public class LaunchScreen extends Screen {
@@ -25,7 +27,7 @@ public class LaunchScreen extends Screen {
         this.addRenderableWidget(new LaunchButton(x + 71, y + 34, 34, 34, Component.empty(), pressed -> {
             if (!pressed) return;
 
-            utm.LOGGER.warn("[UTM] PRESSED");
+            PacketDistributor.sendToServer(new LaunchContraptionPayload(0));
         }));
     }
 

@@ -4,7 +4,6 @@ import com.nadia.utm.networking.TabLayerPayload;
 import com.nadia.utm.registry.dimension.utmDimensions;
 import com.nadia.utm.registry.enchantment.utmEnchantments;
 import com.nadia.utm.server.TabMenuServer;
-import com.nadia.utm.utm;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.content.equipment.armor.BacktankUtil;
 import net.minecraft.core.BlockPos;
@@ -135,7 +134,7 @@ public class utmEvents {
                     int z = sPlayer.blockPosition().getZ();
                     int height = getSurface(level, x, z);
 
-                    if (height == 13579) {
+                    if (height == -13579) {
                         height = -63;
                         level.setBlock(new BlockPos(x, -64, z), Blocks.COBBLESTONE.defaultBlockState(), 3);
                     }
@@ -181,6 +180,8 @@ public class utmEvents {
     @SubscribeEvent
     public static void onLivingJump(LivingEvent.LivingJumpEvent event) {
         if (event.getEntity() instanceof Player player) {
+            if (!player.level().dimension().equals(utmDimensions.AG_KEY)) return;
+
             ItemStack boots = player.getItemBySlot(EquipmentSlot.FEET);
             int jumpPower = boots.getEnchantmentLevel(player.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(utmEnchantments.POWER_JUMP));
             if (jumpPower > 0) {
@@ -190,7 +191,7 @@ public class utmEvents {
         }
     }
 
-    private static int getSurface(ServerLevel level, int x, int z) {
+    public static int getSurface(ServerLevel level, int x, int z) {
         int minY = level.getMinBuildHeight();
         int maxY = level.getMaxBuildHeight();
         BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos(x, maxY, z);

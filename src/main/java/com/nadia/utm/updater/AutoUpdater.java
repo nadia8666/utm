@@ -182,7 +182,7 @@ public class AutoUpdater {
 
     }
 
-    private static final ScheduledExecutorService SCHEDULER = Executors.newSingleThreadScheduledExecutor(r -> {
+    public static final ScheduledExecutorService SCHEDULER = Executors.newSingleThreadScheduledExecutor(r -> {
         Thread thread = new Thread(r, "utm-AutoUpdater");
         thread.setDaemon(true);
         return thread;
