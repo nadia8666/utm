@@ -9,7 +9,7 @@
   "monster_spawn_block_light_limit": 0,
   "piglin_safe": false,
   "bed_works": false,
-  "respawn_anchor_works": false,
+  "respawn_anchor_works": true,
   "has_raids": false,
   "logical_height": 384,
   "min_y": -64,
