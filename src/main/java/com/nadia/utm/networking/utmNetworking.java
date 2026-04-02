@@ -176,8 +176,7 @@ public class utmNetworking {
                     target.setBlock(new BlockPos(contraption.blockPosition().getX(), -64, contraption.blockPosition().getZ()), Blocks.COBBLESTONE.defaultBlockState(), 3);
                 }
 
-                double yOffset = Math.min(highestHeight, 319 - (bounds.getYsize() + 1)) - contraption.getY();
-
+                double yOffset = Math.min(highestHeight, 319 - (bounds.getYsize())) - contraption.getY();
 
                 AABB targetBounds = bounds.move(0, yOffset, 0);
                 int tMinX = Mth.floor(targetBounds.minX);
@@ -201,34 +200,11 @@ public class utmNetworking {
                     }
                 }
 
-                for (Entity entity : passengers) {
-                    entity.stopRiding();
-                    entity.changeDimension(new DimensionTransition(
-                            target,
-                            entity.position().add(0, yOffset, 0),
-                            entity.getDeltaMovement(),
-                            entity.getYRot(),
-                            entity.getXRot(),
-                            DimensionTransition.DO_NOTHING
-                    ));
-                }
-
                 var originalBlocks = new HashMap<>(contraption.getContraption().getBlocks());
-                contraption.getContraption().getBlocks().clear();
 
                 Entity cVehicle = contraption.getVehicle();
                 AtomicReference<Entity> finalVehicle = new AtomicReference<>(null);
-                if (cVehicle != null) {
-                    cVehicle.changeDimension(new DimensionTransition(
-                            target,
-                            cVehicle.position().add(0, yOffset, 0),
-                            cVehicle.getDeltaMovement(),
-                            cVehicle.getYRot(),
-                            cVehicle.getXRot(),
-                            finalVehicle::set
-                    ));
-                }
-
+                contraption.getContraption().getBlocks().clear();
                 contraption.changeDimension(new DimensionTransition(
                         target,
                         contraption.position().add(0, yOffset, 0),
@@ -237,7 +213,7 @@ public class utmNetworking {
                         contraption.getXRot(),
                         (newEntity) -> {
                             if (newEntity instanceof AbstractContraptionEntity newContraption) {
-                                newContraption.getContraption().getBlocks().putAll(originalBlocks); // TODO: doesnt work, this is the last part. wtf is wrong here ?
+                                newContraption.getContraption().getBlocks().putAll(originalBlocks);
                                 player.getServer().tell(new TickTask(player.getServer().getTickCount() + 20, () -> {
                                     Entity targVehicle = finalVehicle.get();
                                     if (targVehicle != null) {
@@ -248,15 +224,30 @@ public class utmNetworking {
                                             newContraption.addSittingPassenger(pass, index);
                                             index++;
                                         }
+
+                                        newContraption.getContraption().invalidateClientContraptionStructure();
+                                        newContraption.getContraption().invalidateClientContraptionChildren();
+                                        newContraption.getContraption().invalidateColliders();
+                                        newContraption.getContraption().resetClientContraption();
                                     } else {
                                         newContraption.stopRiding();
                                         newContraption.discard();
-                                        utm.LOGGER.info("[UTM] deleted");
                                     }
                                 }));
                             }
                         }
                 ));
+
+                if (cVehicle != null) {
+                    cVehicle.changeDimension(new DimensionTransition(
+                            target,
+                            cVehicle.position().add(0, yOffset, 0),
+                            cVehicle.getDeltaMovement(),
+                            cVehicle.getYRot(),
+                            cVehicle.getXRot(),
+                            finalVehicle::set
+                    ));
+                }
             }
         }));
     }
