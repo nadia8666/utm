@@ -17,12 +17,59 @@ import java.util.List;
 public class PlanetRenderer {
     public static final List<Planet> PLANET_REGISTRY = new ArrayList<>();
 
+    // ordered by relative distance, moon renders over the earth which renders over the sun
     public static class PLANETS {
-        public static Planet EARTH = new Planet(150, 25, utm.key("textures/misc/earth.png"));
+        public static Planet SUN = new Planet(300, 15, utm.key("textures/misc/sun.png")) {
+            @Override
+            public float[] getColor(long time, float partialTicks) {
+                return new float[]{1, 1, 1};
+            }
+
+            @Override
+            public void transform(PoseStack poseStack, float partialTicks) {
+                Minecraft mc = Minecraft.getInstance();
+                if (mc.level == null) return;
+                long time = mc.level.dayTime();
+                float offset = (((time + partialTicks) % 24000) / 24000) * 360 + 90;
+                poseStack.mulPose(Axis.XP.rotationDegrees(11.2F));
+                poseStack.mulPose(Axis.ZP.rotationDegrees(offset));
+            }
+        };
+        public static Planet EARTH = new Planet(150, 25/3f, utm.key("textures/misc/earth.png")) {
+            @Override
+            public void transform(PoseStack poseStack, float partialTicks) {
+                poseStack.mulPose(Axis.XP.rotationDegrees(11.2F));
+            }
+        };
+        public static Planet MOON = new Planet(150, 12.5f/3f, utm.key("textures/misc/moon.png")) {
+            @Override
+            public float[] getColor(long time, float partialTicks) {
+                float brightness = .25f + PLANETS.EARTH.getColor(time, partialTicks)[0]/3;
+
+                return new float[]{brightness, brightness, brightness};
+            }
+
+            @Override
+            public void transform(PoseStack poseStack, float partialTicks) {
+                Minecraft mc = Minecraft.getInstance();
+                if (mc.level == null) return;
+                long time = mc.level.dayTime();
+
+                float progress = ((time + partialTicks) % 24000) / 24000f;
+                float angle = progress * (float) Math.PI * 2;
+                float offset = (float) Math.cos(angle) * 60;
+                float distance = (float) Math.sin(angle) * 60;
+
+                poseStack.mulPose(Axis.XP.rotationDegrees(11.2F));
+                poseStack.translate(offset, distance, 0);
+            }
+        };
         public static Planet AG = new Planet(150, 3, utm.key("textures/misc/2313ag.png")) {
             @Override
-            public float getBrightness(long time, float partialTicks) {
-                return 1 - PLANETS.EARTH.getBrightness(time, partialTicks)/2 - .175F;
+            public float[] getColor(long time, float partialTicks) {
+                float brightness = 1 - PLANETS.EARTH.getColor(time, partialTicks)[0] / 2 - .175F;
+
+                return new float[]{brightness / 1.25f, brightness / 1.25f, brightness * 1.25f};
             }
 
             @Override
@@ -33,9 +80,9 @@ public class PlanetRenderer {
             }
 
             @Override
-            public void transform(PoseStack poseStack) {
+            public void transform(PoseStack poseStack, float partialTicks) {
                 poseStack.mulPose(Axis.XP.rotationDegrees(32));
-                poseStack.mulPose(Axis.YP.rotationDegrees(12));
+                poseStack.mulPose(Axis.ZP.rotationDegrees(12));
             }
 
             @Override

@@ -34,12 +34,12 @@ public class Planet {
 
         long time = mc.level.dayTime() % 24000;
         float partialTicks = event.getPartialTick().getGameTimeDeltaTicks();
-        float brightness = getBrightness(time, partialTicks);
+        float[] brightness = getColor(time, partialTicks);
         float alpha = getAlpha(time, partialTicks);
 
         RenderSystem.enableBlend();
         RenderSystem.defaultBlendFunc();
-        RenderSystem.disableDepthTest();
+        RenderSystem.enableDepthTest();
         RenderSystem.setShader(GameRenderer::getPositionTexColorShader);
         RenderSystem.setShaderTexture(0, TEXTURE);
         RenderSystem.setShaderColor(1, 1, 1, 1.0f);
@@ -48,19 +48,18 @@ public class Planet {
         poseStack.pushPose();
 
         poseStack.mulPose(new Quaternionf(mc.gameRenderer.getMainCamera().rotation()).invert());
-        transform(poseStack);
+        transform(poseStack, partialTicks);
 
         Matrix4f matrix = poseStack.last().pose();
         BufferBuilder buffer = Tesselator.getInstance().begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX_COLOR);
-        buffer.addVertex(matrix, -SIZE, DISTANCE, -SIZE).setUv(0.0F, 0.0F).setColor(brightness, brightness, brightness, alpha);
-        buffer.addVertex(matrix, SIZE, DISTANCE, -SIZE).setUv(1.0F, 0.0F).setColor(brightness, brightness, brightness, alpha);
-        buffer.addVertex(matrix, SIZE, DISTANCE, SIZE).setUv(1.0F, 1.0F).setColor(brightness, brightness, brightness, alpha);
-        buffer.addVertex(matrix, -SIZE, DISTANCE, SIZE).setUv(0.0F, 1.0F).setColor(brightness, brightness, brightness, alpha);
+        buffer.addVertex(matrix, -SIZE, DISTANCE, -SIZE).setUv(0.0F, 0.0F).setColor(brightness[0], brightness[1], brightness[2], alpha);
+        buffer.addVertex(matrix, SIZE, DISTANCE, -SIZE).setUv(1.0F, 0.0F).setColor(brightness[0], brightness[1], brightness[2], alpha);
+        buffer.addVertex(matrix, SIZE, DISTANCE, SIZE).setUv(1.0F, 1.0F).setColor(brightness[0], brightness[1], brightness[2], alpha);
+        buffer.addVertex(matrix, -SIZE, DISTANCE, SIZE).setUv(0.0F, 1.0F).setColor(brightness[0], brightness[1], brightness[2], alpha);
 
         BufferUploader.drawWithShader(buffer.buildOrThrow());
 
         poseStack.popPose();
-        RenderSystem.enableDepthTest();
         RenderSystem.disableBlend();
     }
 
@@ -69,14 +68,14 @@ public class Planet {
         return mc.level.dimension().equals(utmDimensions.AG_KEY);
     }
 
-    public void transform(PoseStack poseStack) {
-        poseStack.mulPose(Axis.XP.rotationDegrees(11.2F));
-    }
+    public void transform(PoseStack poseStack, float partialTicks) {}
 
-    public float getBrightness(long time, float partialTick) {
+    public float[] getColor(long time, float partialTick) {
         double pTime = (time % 24000L) + partialTick;
         double ang = (pTime / 24000.0) * 2.0 * Math.PI;
-        return (float) ((Math.sin(ang) + 1.0) / 2.0);
+        float brightness = (float) ((Math.sin(ang) + 1.0) / 2.0);
+
+        return new float[]{brightness, brightness, brightness};
     }
 
     public float getAlpha(long time, float partialTick) {
