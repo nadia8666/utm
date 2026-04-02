@@ -131,7 +131,7 @@ public class utmEvents {
                 sPlayer.setRespawnPosition(utmDimensions.AG_KEY, sPlayer.blockPosition(), sPlayer.getYRot(), true, true);
             }
 
-            if (inAG && level != null && sPlayer.getAbilities().instabuild) {
+            if (inAG && level != null && !sPlayer.getAbilities().instabuild) {
                 ItemStack helmet = sPlayer.getItemBySlot(EquipmentSlot.HEAD);
                 ItemStack chestplate = sPlayer.getItemBySlot(EquipmentSlot.CHEST);
                 ItemStack leggings = sPlayer.getItemBySlot(EquipmentSlot.LEGS);
