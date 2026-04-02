@@ -1,4 +1,20 @@
 {
+  "2313ag_music": {
+    "sounds": [
+      {
+        "name": "utm:music/2313ag_1",
+        "stream": true
+      },
+      {
+        "name": "utm:music/2313ag_2",
+        "stream": true
+      },
+      {
+        "name": "utm:music/2313ag_3",
+        "stream": true
+      }
+    ]
+  },
   "music_disc_lava_chicken": {
     "sounds": [
       {

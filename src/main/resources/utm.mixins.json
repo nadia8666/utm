@@ -25,7 +25,8 @@
     "renderer.glint.ElytraLayerMixin",
     "renderer.glint.FiguraCompatMixin",
     "renderer.glint.HumanoidArmorLayerMixin",
-    "renderer.glint.ItemRendererMixin"
+    "renderer.glint.ItemRendererMixin",
+    "RemainingAirOverlayMixin"
   ],
   "injectors": {
     "defaultRequire": 1

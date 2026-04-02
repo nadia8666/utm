@@ -5,7 +5,6 @@ import com.nadia.utm.compat.GraveInterface;
 import com.nadia.utm.event.utmEvents;
 import com.nadia.utm.gui.GlintMenu;
 import com.nadia.utm.registry.dimension.utmDimensions;
-import com.nadia.utm.utm;
 import com.simibubi.create.content.contraptions.AbstractContraptionEntity;
 import de.maxhenkel.gravestone.Main;
 import de.maxhenkel.gravestone.tileentity.GraveStoneTileEntity;

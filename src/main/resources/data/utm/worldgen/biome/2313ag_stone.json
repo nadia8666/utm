@@ -12,6 +12,12 @@
       "tick_delay": 4000,
       "block_search_extent": 8,
       "offset": 2.0
+    },
+    "music": {
+      "sound": "utm:2313ag_music",
+      "min_delay": 100,
+      "max_delay": 3000,
+      "replace_current_music": true
     }
   },
   "carvers": {

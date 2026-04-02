@@ -105,20 +105,6 @@ public class utmEvents {
 
     @SubscribeEvent
     public static void onPlayerTick(PlayerTickEvent.Post event) {
-        if (event.getEntity().level().isClientSide()) {
-            if (event.getEntity().level().dimension().equals(utmDimensions.AG_KEY)) {
-                List<ItemStack> tanks = BacktankUtil.getAllWithAir(event.getEntity());
-                int fill = 0;
-                for (ItemStack stack : tanks)
-                    fill += BacktankUtil.getAir(stack);
-
-                if (fill > 0) {
-                    event.getEntity().getPersistentData().putInt("VisualBacktankAir", fill);
-                }
-            }
-
-        }
-
         //TODO: see if this can be optimized better
         if (event.getEntity() instanceof ServerPlayer sPlayer) {
             MinecraftServer server = sPlayer.getServer();
@@ -180,13 +166,11 @@ public class utmEvents {
     @SubscribeEvent
     public static void onLivingJump(LivingEvent.LivingJumpEvent event) {
         if (event.getEntity() instanceof Player player) {
-            if (!player.level().dimension().equals(utmDimensions.AG_KEY)) return;
-
             ItemStack boots = player.getItemBySlot(EquipmentSlot.FEET);
             int jumpPower = boots.getEnchantmentLevel(player.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(utmEnchantments.POWER_JUMP));
             if (jumpPower > 0) {
                 Vec3 delta = player.getDeltaMovement();
-                player.setDeltaMovement(delta.x, delta.y + (0.15D * jumpPower), delta.z);
+                player.setDeltaMovement(delta.x, delta.y + (0.10D * jumpPower), delta.z);
             }
         }
     }
