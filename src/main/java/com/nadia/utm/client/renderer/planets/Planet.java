@@ -2,7 +2,6 @@ package com.nadia.utm.client.renderer.planets;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
-import com.mojang.math.Axis;
 import com.nadia.utm.registry.dimension.utmDimensions;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GameRenderer;

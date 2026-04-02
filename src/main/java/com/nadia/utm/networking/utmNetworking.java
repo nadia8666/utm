@@ -9,6 +9,7 @@ import com.simibubi.create.content.contraptions.AbstractContraptionEntity;
 import de.maxhenkel.gravestone.Main;
 import de.maxhenkel.gravestone.tileentity.GraveStoneTileEntity;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.Vec3i;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
@@ -195,11 +196,15 @@ public class utmNetworking {
                             if (!state.isAir() && UNMODIFIED_BLOCKS.contains(state.getBlock()) && !state.hasBlockEntity()) {
                                 target.setBlock(mPos, Blocks.AIR.defaultBlockState(), 3);
                             }
+
+                            if (y == tMinY && target.getBlockState(mPos).isAir() && target.getBlockState(mPos.below()).isAir()) {
+                                target.setBlock(mPos.below(), Blocks.COBBLESTONE.defaultBlockState(), 3);
+                            }
                         }
                     }
                 }
 
-                var originalBlocks = new HashMap<>(contraption.getContraption().getBlocks());
+                CompoundTag nbt = contraption.getContraption().writeNBT(contraption.registryAccess(), false);;
 
                 Entity cVehicle = contraption.getVehicle();
                 AtomicReference<Entity> finalVehicle = new AtomicReference<>(null);
@@ -212,7 +217,8 @@ public class utmNetworking {
                         contraption.getXRot(),
                         (newEntity) -> {
                             if (newEntity instanceof AbstractContraptionEntity newContraption) {
-                                newContraption.getContraption().getBlocks().putAll(originalBlocks);
+
+                                newContraption.getContraption().readNBT(target, nbt, true);
                                 player.getServer().tell(new TickTask(player.getServer().getTickCount() + 20, () -> {
                                     Entity targVehicle = finalVehicle.get();
                                     if (targVehicle != null) {
@@ -231,6 +237,10 @@ public class utmNetworking {
                                     } else {
                                         newContraption.stopRiding();
                                         newContraption.discard();
+                                    }
+
+                                    for (Entity pass : List.copyOf(newContraption.getPassengers())) {
+                                        pass.stopRiding();
                                     }
                                 }));
                             }
