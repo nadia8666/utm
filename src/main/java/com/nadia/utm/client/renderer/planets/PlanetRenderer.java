@@ -2,6 +2,7 @@ package com.nadia.utm.client.renderer.planets;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
+import com.nadia.utm.Config;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.level.Level;
 import net.neoforged.api.distmarker.Dist;
@@ -95,6 +96,8 @@ public class PlanetRenderer {
 
     @SubscribeEvent
     public static void onRenderSky(RenderLevelStageEvent event) {
+        if (!Config.RENDER_PLANETS.getAsBoolean()) return;
+
         for (Planet planet : PLANET_REGISTRY)
             planet.onRenderSky(event);
     }

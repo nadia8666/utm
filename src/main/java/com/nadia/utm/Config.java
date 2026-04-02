@@ -16,5 +16,8 @@ public class Config {
     public static final ModConfigSpec.BooleanValue NETHERITE_BACKTANK_ARM = BUILDER
             .define("netheriteBacktankArm", true);
 
+    public static final ModConfigSpec.BooleanValue RENDER_PLANETS = BUILDER
+            .define("renderPlanets", true);
+
     static final ModConfigSpec SPEC = BUILDER.build();
 }
