@@ -23,15 +23,10 @@ public class Planet {
         PlanetRenderer.PLANET_REGISTRY.add(this);
     }
 
-    public void onRenderSky(RenderLevelStageEvent event) {
-        Minecraft mc = Minecraft.getInstance();
-        if (mc.level == null) return;
-        if (event.getStage() != RenderLevelStageEvent.Stage.AFTER_SKY) return;
+    public void onRenderSky(long time, Minecraft mc, RenderLevelStageEvent event) {
         if (!shouldPass(event, mc)) return;
 
         PoseStack poseStack = event.getPoseStack();
-
-        long time = mc.level.dayTime() % 24000;
         float partialTicks = event.getPartialTick().getGameTimeDeltaTicks();
         float[] brightness = getColor(time, partialTicks);
         float alpha = getAlpha(time, partialTicks);

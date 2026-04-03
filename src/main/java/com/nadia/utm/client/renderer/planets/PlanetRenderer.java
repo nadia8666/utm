@@ -1,5 +1,6 @@
 package com.nadia.utm.client.renderer.planets;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import com.nadia.utm.Config;
@@ -10,6 +11,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
 import com.nadia.utm.utm;
+import org.lwjgl.opengl.GL11;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -97,9 +99,16 @@ public class PlanetRenderer {
     @SubscribeEvent
     public static void onRenderSky(RenderLevelStageEvent event) {
         if (!Config.RENDER_PLANETS.getAsBoolean()) return;
+        if (event.getStage() != RenderLevelStageEvent.Stage.AFTER_SKY) return;
+        Minecraft mc = Minecraft.getInstance();
+        if (mc.level == null) return;
+
+        long time = mc.level.dayTime() % 24000;
 
         for (Planet planet : PLANET_REGISTRY)
-            planet.onRenderSky(event);
+            planet.onRenderSky(time, mc, event);
+
+        RenderSystem.clear(GL11.GL_DEPTH_BUFFER_BIT, Minecraft.ON_OSX);
     }
 
     public static void register() {
