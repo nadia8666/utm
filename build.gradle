@@ -25,6 +25,8 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 repositories {
     maven { url = "https://maven.createmod.net" }
 
+    maven { url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/" }
+
     maven { url = "https://maven.ithundxr.dev/snapshots" }
 
     maven { name = "TerraformersMC"; url = "https://maven.terraformersmc.com/" }
@@ -127,7 +129,7 @@ dependencies {
     jarJar(implementation("maven.modrinth:extreme_sound_muffler:KXmiEin1")) // extreme sound muffler
     jarJar(implementation("maven.modrinth:sophisticated-backpacks-create-integration:bWd7B59k")) // sophisticated backpacks x create
     jarJar(implementation('local:grimble_mod:1.0.0')) // bluebibbob's grimble mod
-
+    
     // curios
     compileOnly "top.theillusivec4.curios:curios-neoforge:9.5.1+1.21.1:api"
     runtimeOnly "top.theillusivec4.curios:curios-neoforge:9.5.1+1.21.1"

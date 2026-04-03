@@ -30,7 +30,7 @@ public class utmBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(utmBlocks.INTERDICTOR.block.get());
         dropSelf(utmBlocks.FLINT_BLOCK.block.get());
         dropSelf(utmBlocks.FLINT_BLOCK_BLOCK.block.get());
-        dropSelf(utmBlocks.LAUNCH_CONTRAPTION.block.get());
+        dropSelf(utmBlocks.LAUNCH_CONTRAPTION.get());
     }
 
     @Override

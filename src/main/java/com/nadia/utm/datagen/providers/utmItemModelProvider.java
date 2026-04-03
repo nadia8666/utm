@@ -29,7 +29,7 @@ public class utmItemModelProvider extends ItemModelProvider {
         withExistingParent(utmBlocks.INTERDICTOR.item.getId().toString(), modLoc("block/interdictor"));
         withExistingParent(utmBlocks.FLINT_BLOCK.item.getId().toString(), modLoc("block/flint_block"));
         withExistingParent(utmBlocks.FLINT_BLOCK_BLOCK.item.getId().toString(), modLoc("block/flint_block_block"));
-        withExistingParent(utmBlocks.LAUNCH_CONTRAPTION.item.getId().toString(), modLoc("block/launch_contraption"));
+        withExistingParent(utmBlocks.LAUNCH_CONTRAPTION.getId().toString(), modLoc("block/launch_contraption"));
 
         basicItem(utmItems.UNFINISHED_GLINT_TABLE.get());
         basicItem(utmItems.UNFINISHED_ARID_INGOT.get());

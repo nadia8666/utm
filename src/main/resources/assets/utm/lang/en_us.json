@@ -96,5 +96,15 @@
 
   "enchantment.utm.power_jump": "Boost Pads",
 
-  "dimension.utm.2313ag": "2313AG"
+  "dimension.utm.2313ag": "2313AG",
+  "biome.2313ag_cliffs": "2313AG - Cliffs",
+
+  "utm.ponder.tag.2313ag_reqs": "2313AG Components",
+  "utm.ponder.tag.2313ag_reqs.description": "Required components to interact with/enter 2313AG",
+  "utm.ponder.launch_contraption.intro.header": "Using the Launch Contraption",
+  "utm.ponder.launch_contraption.intro.text_1": "The Launch Contraption is the core component required to leave for space",
+  "utm.ponder.launch_contraption.intro.text_2": "When attached to a minecart contraption, it gains a functional interface",
+  "utm.ponder.launch_contraption.intro.text_3": "Pressing the buttom will launch the contraption into space",
+  "utm.ponder.launch_contraption.intro.text_4": "All entities sat on the contraption will be transported with it",
+  "utm.ponder.launch_contraption.intro.text_5": "Goodbye parrot!"
 }
