@@ -70,9 +70,14 @@ public class PlanetRenderer {
         public static Planet AG = new Planet(150, 3, utm.key("textures/misc/2313ag.png")) {
             @Override
             public float[] getColor(long time, float partialTicks) {
-                float brightness = 1 - PLANETS.EARTH.getColor(time, partialTicks)[0] / 2 - .175F;
+                double pTime = (time % 24000L) + partialTicks;
+                double ang = (pTime / 24000.0) * 2.0 * Math.PI;
+                float otherTime = (float) ((Math.sin(ang) + 1.0) / 2.0);
+                float r = 0.7f - (otherTime * 0.4f);
+                float g = 0.7f - (otherTime * 0.4f);
+                float b = 0.7f + (otherTime * 0.3f);
 
-                return new float[]{brightness / 1.25f, brightness / 1.25f, brightness * 1.25f};
+                return new float[]{r, g, b};
             }
 
             @Override
