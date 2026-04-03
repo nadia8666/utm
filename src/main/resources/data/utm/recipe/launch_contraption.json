@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "utm_space",
+  "key": {
+    "b": {
+      "item": "minecraft:crying_obsidian"
+    },
+    "f": {
+      "item": "utm:floatingcore"
+    },
+    "a": {
+      "item": "create:sturdy_sheet"
+    },
+    "c": {
+      "item": "minecraft:nether_star"
+    }
+  },
+  "pattern": [
+    "aaa",
+    "aca",
+    "bfb"
+  ],
+  "result": {
+    "count": 1,
+    "id": "utm:launch_contraption"
+  }
+}
