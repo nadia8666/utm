@@ -1,9 +1,7 @@
 package com.nadia.utm.block;
 
-import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -11,7 +9,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 
-public class LaunchContraptionBlock extends Block implements IWrenchable {
+public class LaunchContraptionBlock extends RotatableBlock {
     public static final VoxelShape SHAPE = Shapes.block();
 
     public LaunchContraptionBlock(Properties properties) {

@@ -34,7 +34,7 @@ public class HitboxMixin {
             if (reach != null) {
                 var modifier = reach.getModifier(HitboxOverride.ELYTRA_SPEED_REACH);
                 if (modifier != null) {
-                    return originalBox.inflate(modifier.amount());
+                    return originalBox.inflate(modifier.amount() * (player.level().isClientSide() ? 1 : 2.25));
                 }
             }
         }

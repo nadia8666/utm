@@ -34,7 +34,10 @@ public class utmBlocks {
 
     public static final utmBlockContainer<LaunchContraptionBlock, BlockItem> LAUNCH_CONTRAPTION = iregister("launch_contraption", LaunchContraptionBlock::new, BlockBehaviour.Properties.of()
             .destroyTime(3.0f)
-            .explosionResistance(50f).sound(SoundType.METAL));
+            .explosionResistance(50f).sound(SoundType.METAL)
+            .noOcclusion()
+            .isViewBlocking((state, level, pos) -> false)
+            .isSuffocating((state, level, pos) -> false));
 
     public static final utmBlockContainer<BlockChunkLoaderBlock, BlockItem> CHUNK_LOADER = iregister("chunk_loader", BlockChunkLoaderBlock::new, BlockBehaviour.Properties.of()
             .destroyTime(5.0f)

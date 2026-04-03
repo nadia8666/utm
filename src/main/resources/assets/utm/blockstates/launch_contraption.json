@@ -1,5 +1,8 @@
 {
   "variants": {
-    "": { "model": "utm:block/launch_contraption" }
+    "facing=north": { "model": "utm:block/launch_contraption", "y": 180 },
+    "facing=east": { "model": "utm:block/launch_contraption", "y": 270 },
+    "facing=south": { "model": "utm:block/launch_contraption", "y": 0 },
+    "facing=west": { "model": "utm:block/launch_contraption", "y": 90 }
   }
 }
