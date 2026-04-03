@@ -12,8 +12,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.entity.vehicle.Minecart;
 import net.minecraft.world.level.block.Blocks;
 
-import java.util.Vector;
-
 public class LaunchContraptionScene {
     public static void basic(SceneBuilder builder, SceneBuildingUtil util) {
         CreateSceneBuilder scene = new CreateSceneBuilder(builder);
@@ -58,7 +56,7 @@ public class LaunchContraptionScene {
 
         scene.overlay().showText(40)
                 .attachKeyFrame()
-                .text("Pressing the buttom will launch the contraption into space")
+                .text("Pressing the button will launch the contraption into space")
                 .placeNearTarget()
                 .pointAt(util.vector().topOf(2, 3, 3));
 

@@ -9,6 +9,7 @@ import com.nadia.utm.client.ui.glint.GlintScreen;
 import com.nadia.utm.client.updater.UpdateToast;
 import com.nadia.utm.registry.block.utmBlockEntities;
 import com.nadia.utm.registry.data.utmDataComponents;
+import com.nadia.utm.registry.ponder.utmPonderPlugin;
 import com.nadia.utm.registry.ui.utmMenus;
 import com.nadia.utm.client.renderer.utmRenderTypes;
 import com.nadia.utm.updater.ToastDisplaySignal;
@@ -53,6 +54,8 @@ public class utmClient {
     @SubscribeEvent
     static void onClientSetup(FMLClientSetupEvent event) {
         event.enqueueWork(() -> Minecraft.getInstance().getTextureManager().getTexture(utmGlintContainer.GLINT_DEFAULT));
+
+        new utmPonderPlugin().register();
     }
 
     @SubscribeEvent

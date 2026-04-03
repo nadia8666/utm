@@ -9,21 +9,12 @@ import com.nadia.utm.registry.item.tool.utmTools;
 import com.nadia.utm.registry.item.utmItems;
 import com.nadia.utm.registry.loot.utmLoot;
 import com.nadia.utm.registry.particle.utmParticles;
-import com.nadia.utm.registry.ponder.utmPonderPlugin;
 import com.nadia.utm.registry.recipe.utmRecipes;
 import com.nadia.utm.registry.sound.utmSounds;
 import com.nadia.utm.registry.ui.utmMenus;
-import com.nadia.utm.utm;
-import com.simibubi.create.foundation.data.CreateRegistrate;
-import com.simibubi.create.foundation.item.ItemDescription;
-import com.simibubi.create.foundation.item.KineticStats;
-import com.simibubi.create.foundation.item.TooltipModifier;
-import net.createmod.catnip.lang.FontHelper;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.*;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -31,13 +22,6 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import com.nadia.utm.registry.buffs.utmBuffs;
 
 public class utmRegistry {
-    public static final CreateRegistrate REGISTRATE = CreateRegistrate.create(utm.MODID)
-            .defaultCreativeTab((ResourceKey<CreativeModeTab>) null)
-            .setTooltipModifierFactory(item ->
-                    new ItemDescription.Modifier(item, FontHelper.Palette.STANDARD_CREATE)
-                            .andThen(TooltipModifier.mapNull(KineticStats.create(item)))
-            );;
-
     public static final DeferredRegister<CreativeModeTab> TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, "utm");
     public static final DeferredRegister.DataComponents COMPONENTS = utmDataComponents.COMPONENTS;
     public static final DeferredRegister.Items ITEMS = utmItems.ITEMS;
@@ -68,9 +52,6 @@ public class utmRegistry {
     }
 
     public static void registerAll(IEventBus modEventBus) {
-        REGISTRATE.setModEventBus(modEventBus);
-        REGISTRATE.registerEventListeners(modEventBus);
-
         BLOCKS.register(modEventBus);
         ITEMS.register(modEventBus);
         COMPONENTS.register(modEventBus);
@@ -84,8 +65,6 @@ public class utmRegistry {
         PARTICLE_TYPES.register(modEventBus);
         GLOBAL_LOOT_MODIFIER_SERIALIZERS.register(modEventBus);
         ATTACHMENTS.register(modEventBus);
-
-        new utmPonderPlugin().register();
     }
 
     public static void lateRegister() {

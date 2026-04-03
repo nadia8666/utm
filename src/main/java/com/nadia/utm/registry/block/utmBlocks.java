@@ -2,7 +2,6 @@ package com.nadia.utm.registry.block;
 
 import com.nadia.utm.block.*;
 import com.nadia.utm.registry.utmRegistry;
-import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
@@ -32,17 +31,14 @@ public class utmBlocks {
             .destroyTime(3.0f)
             .explosionResistance(25f).sound(SoundType.WOOD));
 
-    public static final BlockEntry<LaunchContraptionBlock> LAUNCH_CONTRAPTION =
-            utmRegistry.REGISTRATE.block("launch_contraption", LaunchContraptionBlock::new)
-                    .properties(p -> p.destroyTime(3.0f)
-                            .explosionResistance(25f)
-                            .sound(SoundType.WOOD)
-                            .requiresCorrectToolForDrops()
-                            .noOcclusion()
-                            .isViewBlocking((state, level, pos) -> false)
-                            .isSuffocating((state, level, pos) -> false))
-                    .simpleItem()
-                    .register();
+    public static final utmBlockContainer<LaunchContraptionBlock, BlockItem> LAUNCH_CONTRAPTION =
+            iregister("launch_contraption", LaunchContraptionBlock::new, BlockBehaviour.Properties.of().destroyTime(3.0f)
+                    .explosionResistance(25f)
+                    .sound(SoundType.WOOD)
+                    .requiresCorrectToolForDrops()
+                    .noOcclusion()
+                    .isViewBlocking((state, level, pos) -> false)
+                    .isSuffocating((state, level, pos) -> false));
 
     public static final utmBlockContainer<BlockChunkLoaderBlock, BlockItem> CHUNK_LOADER = iregister("chunk_loader", BlockChunkLoaderBlock::new, BlockBehaviour.Properties.of()
             .destroyTime(5.0f)

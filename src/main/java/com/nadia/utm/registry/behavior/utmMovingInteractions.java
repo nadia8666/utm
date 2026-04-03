@@ -6,6 +6,6 @@ import com.simibubi.create.api.behaviour.interaction.MovingInteractionBehaviour;
 
 public class utmMovingInteractions {
     public static void register() {
-        MovingInteractionBehaviour.REGISTRY.register(utmBlocks.LAUNCH_CONTRAPTION.get(), new LaunchContraptionInteraction());
+        MovingInteractionBehaviour.REGISTRY.register(utmBlocks.LAUNCH_CONTRAPTION.block.get(), new LaunchContraptionInteraction());
     }
 }

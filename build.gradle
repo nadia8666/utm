@@ -120,12 +120,6 @@ dependencies {
     implementation("maven.modrinth:sophisticated-core:23alQult") // sophisticated core
     implementation("maven.modrinth:open-parties-and-claims:M6DB7Bdh") // open parties and claims
 
-    // hooked & deps
-    runtimeOnly("maven.modrinth:hooked:Jwdpo3CR") // hooked
-    runtimeOnly("maven.modrinth:architectury-api:ZxYGwlk0") // architectury
-    runtimeOnly("maven.modrinth:kotlin-for-forge:NrSebcsG") // kotlin
-    runtimeOnly("maven.modrinth:librarianlib:cjdV1zT2") // librarian lib
-
     jarJar(implementation("maven.modrinth:extreme_sound_muffler:KXmiEin1")) // extreme sound muffler
     jarJar(implementation("maven.modrinth:sophisticated-backpacks-create-integration:bWd7B59k")) // sophisticated backpacks x create
     jarJar(implementation('local:grimble_mod:1.0.0')) // bluebibbob's grimble mod
