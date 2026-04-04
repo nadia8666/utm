@@ -4,6 +4,7 @@
   "compatibilityLevel": "JAVA_21",
   "plugin": "com.nadia.utm.mixin.ConfigPlugin",
   "mixins": [
+    "BacktankBlockEntityMixin",
     "FreeAnvilMixin",
     "HitboxMixin",
     "SchematicPlacePacketMixin",
@@ -15,6 +16,7 @@
   "client": [
     "AnvilScreenMixin",
     "GameRendererMixin",
+    "RemainingAirOverlayMixin",
     "SchematicHandlerMixin",
     "compat.ObituaryScreenMixin",
     "compat.ShowcaseItemMixin",
@@ -25,8 +27,7 @@
     "renderer.glint.ElytraLayerMixin",
     "renderer.glint.FiguraCompatMixin",
     "renderer.glint.HumanoidArmorLayerMixin",
-    "renderer.glint.ItemRendererMixin",
-    "RemainingAirOverlayMixin"
+    "renderer.glint.ItemRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

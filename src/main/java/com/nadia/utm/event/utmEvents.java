@@ -4,6 +4,7 @@ import com.nadia.utm.networking.TabLayerPayload;
 import com.nadia.utm.registry.dimension.utmDimensions;
 import com.nadia.utm.registry.enchantment.utmEnchantments;
 import com.nadia.utm.server.TabMenuServer;
+import com.nadia.utm.util.OxyUtil;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.content.equipment.armor.BacktankUtil;
 import net.minecraft.core.BlockPos;
@@ -131,7 +132,7 @@ public class utmEvents {
                 sPlayer.setRespawnPosition(utmDimensions.AG_KEY, sPlayer.blockPosition(), sPlayer.getYRot(), true, true);
             }
 
-            if (inAG && level != null && !sPlayer.getAbilities().instabuild) {
+            if (!OxyUtil.canBreathe(sPlayer) && level != null && !sPlayer.getAbilities().instabuild) {
                 ItemStack helmet = sPlayer.getItemBySlot(EquipmentSlot.HEAD);
                 ItemStack chestplate = sPlayer.getItemBySlot(EquipmentSlot.CHEST);
                 ItemStack leggings = sPlayer.getItemBySlot(EquipmentSlot.LEGS);
@@ -148,14 +149,11 @@ public class utmEvents {
                         BacktankUtil.consumeAir(sPlayer, tanks.getFirst(), 1);
 
                         if (helmet.is(AllItems.COPPER_DIVING_HELMET))
-                            helmet.getItem().damageItem(helmet, 1, sPlayer, p -> {
-                            });
+                            helmet.setDamageValue(helmet.getDamageValue() + 1);
 
                         if (boots.is(AllItems.COPPER_DIVING_BOOTS))
-                            boots.getItem().damageItem(boots, 1, sPlayer, p -> {
-                            });
+                            boots.setDamageValue(boots.getDamageValue() + 1);
                     }
-
                 } else {
                     sPlayer.hurt(level.damageSources().source(DamageTypes.IN_WALL), 1f);
                 }

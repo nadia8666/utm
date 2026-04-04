@@ -1,4 +1,4 @@
-package com.nadia.utm.registry.ponder.scenes;
+package com.nadia.utm.client.ponder.scenes;
 
 import com.simibubi.create.AllItems;
 import com.simibubi.create.foundation.ponder.CreateSceneBuilder;

@@ -1,7 +1,7 @@
-package com.nadia.utm.registry.ponder;
+package com.nadia.utm.client.ponder;
 
+import com.nadia.utm.client.ponder.scenes.LaunchContraptionScene;
 import com.nadia.utm.registry.block.utmBlocks;
-import com.nadia.utm.registry.ponder.scenes.LaunchContraptionScene;
 import com.nadia.utm.utm;
 import com.simibubi.create.infrastructure.ponder.AllCreatePonderTags;
 import net.createmod.ponder.api.registration.PonderPlugin;
