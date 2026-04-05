@@ -12,7 +12,6 @@ import net.minecraft.sounds.SoundEvents;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
-import java.util.function.Supplier;
 
 public class LaunchButton extends AbstractWidget {
     public boolean pressed = false;

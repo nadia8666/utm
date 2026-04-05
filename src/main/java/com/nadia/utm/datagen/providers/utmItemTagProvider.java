@@ -7,7 +7,6 @@ import com.nadia.utm.registry.tags.utmTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.Tags;
@@ -39,6 +38,8 @@ public class utmItemTagProvider extends ItemTagsProvider {
         tag(Tags.Items.ENCHANTABLES).add(utmTools.CYCLESWORD.get());
         tag(ItemTags.WEAPON_ENCHANTABLE).add(utmTools.CYCLESWORD.get());
         tag(ItemTags.DURABILITY_ENCHANTABLE).add(utmTools.CYCLESWORD.get());
+
+        tag(Tags.Items.BUCKETS).add(utmItems.LIQUID_OXYGEN_BUCKET.get());
 
         // copper tools
         tag(Tags.Items.ENCHANTABLES).add(utmTools.COPPER_SWORD.get());

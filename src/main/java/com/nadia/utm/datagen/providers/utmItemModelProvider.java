@@ -7,7 +7,6 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
-import net.neoforged.neoforge.client.model.generators.ItemModelBuilder;
 import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
@@ -68,13 +67,13 @@ public class utmItemModelProvider extends ItemModelProvider {
         handheldItem(utmTools.ARID_SWORD.get());
     }
 
-    public ItemModelBuilder musicDisc(ResourceLocation item) {
-        return getBuilder(item.toString())
+    public void musicDisc(ResourceLocation item) {
+        getBuilder(item.toString())
                 .parent(new ModelFile.UncheckedModelFile("item/template_music_disc"))
                 .texture("layer0", ResourceLocation.fromNamespaceAndPath(item.getNamespace(), "item/" + item.getPath()));
     }
 
-    public ItemModelBuilder musicDisc(Item item) {
-        return musicDisc(Objects.requireNonNull(BuiltInRegistries.ITEM.getKey(item)));
+    public void musicDisc(Item item) {
+        musicDisc(Objects.requireNonNull(BuiltInRegistries.ITEM.getKey(item)));
     }
 }

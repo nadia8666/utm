@@ -2,8 +2,6 @@ package com.nadia.utm.client.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.nadia.utm.block.entity.CitywallsBlockEntity;
-import com.nadia.utm.registry.block.utmBlocks;
-import com.nadia.utm.utm;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -20,8 +18,6 @@ import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.Objects;
 
 public class CitywallsBlockEntityRenderer implements BlockEntityRenderer<CitywallsBlockEntity> {
     private final BlockRenderDispatcher dispatcher;

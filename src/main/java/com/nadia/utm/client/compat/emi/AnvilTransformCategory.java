@@ -18,7 +18,6 @@ import static com.nadia.utm.Config.HEAVY_METAL_ANVIL_LEVEL_REQUIREMENT;
 
 @SuppressWarnings("unused")
 public class AnvilTransformCategory implements EmiRecipe {
-    // Use a standard category or create a custom one
     public static final EmiRecipeCategory CATEGORY = new EmiRecipeCategory(
             ResourceLocation.fromNamespaceAndPath("utm", "anvil_transformation"),
             EmiStack.of(Items.ANVIL)
@@ -39,7 +38,7 @@ public class AnvilTransformCategory implements EmiRecipe {
     public EmiRecipeCategory getCategory() { return CATEGORY; }
 
     @Override
-    public ResourceLocation getId() { return this.id; } // EMI can auto-generate IDs
+    public ResourceLocation getId() { return this.id; }
 
     @Override
     public List<EmiIngredient> getInputs() { return List.of(left, right); }

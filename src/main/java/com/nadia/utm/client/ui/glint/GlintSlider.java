@@ -23,7 +23,7 @@ public class GlintSlider extends AbstractWidget {
     private final Runnable onSync;
     public boolean isDragging = false;
     private long lastUpdate = 0;
-    private float lastValue = 0;
+    private float lastValue;
 
     public GlintSlider(Font font, int x, int y, int height, float min, float max, float initialValue, Runnable onSync) {
         super(x, y, 4, height, Component.empty());
@@ -32,7 +32,6 @@ public class GlintSlider extends AbstractWidget {
         this.currentValue = initialValue;
         this.onSync = onSync;
         this.font = font;
-
         this.lastValue = currentValue;
     }
 
