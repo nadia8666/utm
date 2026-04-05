@@ -1,6 +1,7 @@
 package com.nadia.utm.event;
 
 import com.nadia.utm.networking.TabLayerPayload;
+import com.nadia.utm.registry.block.utmBlockEntities;
 import com.nadia.utm.registry.dimension.utmDimensions;
 import com.nadia.utm.registry.enchantment.utmEnchantments;
 import com.nadia.utm.server.TabMenuServer;
@@ -23,6 +24,8 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
@@ -105,8 +108,16 @@ public class utmEvents {
     }
 
     @SubscribeEvent
+    public static void registerCapabilities(RegisterCapabilitiesEvent event) {
+        event.registerBlockEntity(
+                Capabilities.FluidHandler.BLOCK,
+                utmBlockEntities.OXYGEN_COLLECTOR.get(),
+                (be, side) -> be.fluidTank
+        );
+    }
+
+    @SubscribeEvent
     public static void onPlayerTick(PlayerTickEvent.Post event) {
-        //TODO: see if this can be optimized better
         if (event.getEntity() instanceof ServerPlayer sPlayer) {
             MinecraftServer server = sPlayer.getServer();
             if (server == null) return;

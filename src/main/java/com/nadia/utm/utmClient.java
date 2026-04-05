@@ -3,6 +3,7 @@ package com.nadia.utm;
 import com.nadia.utm.block.GrateBlock;
 import com.nadia.utm.client.renderer.BacktankCurioRenderer;
 import com.nadia.utm.client.renderer.CitywallsBlockEntityRenderer;
+import com.nadia.utm.client.renderer.OxygenCollectorRenderer;
 import com.nadia.utm.client.renderer.glint.utmGlintContainer;
 import com.nadia.utm.client.renderer.planets.PlanetRenderer;
 import com.nadia.utm.client.ui.glint.GlintScreen;
@@ -10,13 +11,13 @@ import com.nadia.utm.client.updater.UpdateToast;
 import com.nadia.utm.registry.block.utmBlockEntities;
 import com.nadia.utm.registry.data.utmDataComponents;
 import com.nadia.utm.client.ponder.utmPonderPlugin;
+import com.nadia.utm.registry.fluid.utmFluids;
+import com.nadia.utm.registry.model.utmPartialModels;
 import com.nadia.utm.registry.ui.utmMenus;
 import com.nadia.utm.client.renderer.utmRenderTypes;
 import com.nadia.utm.updater.ToastDisplaySignal;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.content.contraptions.wrench.RadialWrenchMenu;
-import net.createmod.catnip.lang.Lang;
-import net.createmod.catnip.lang.LangBuilder;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.TitleScreen;
@@ -33,6 +34,8 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.*;
+import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
+import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
@@ -51,6 +54,7 @@ public class utmClient {
         container.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
 
         RadialWrenchMenu.registerRotationProperty(GrateBlock.VERTICAL_DIRECTION, "Vertical Direction");
+        utmPartialModels.register();
     }
 
     @SubscribeEvent
@@ -153,6 +157,11 @@ public class utmClient {
                 utmBlockEntities.CITYWALLS_METAL.get(),
                 CitywallsBlockEntityRenderer::new
         );
+
+        event.registerBlockEntityRenderer(
+                utmBlockEntities.OXYGEN_COLLECTOR.get(),
+                OxygenCollectorRenderer::new
+        );
     }
 
     @SubscribeEvent
@@ -173,5 +182,20 @@ public class utmClient {
                 return null;
             }
         });
+    }
+
+    @SubscribeEvent
+    public static void registerClientExtensions(RegisterClientExtensionsEvent event) {
+        event.registerFluidType(new IClientFluidTypeExtensions() {
+            private static final ResourceLocation STILL = ResourceLocation.fromNamespaceAndPath("minecraft", "block/water_still");
+            private static final ResourceLocation FLOWING = ResourceLocation.fromNamespaceAndPath("minecraft", "block/water_flow");
+
+            @Override
+            public @NotNull ResourceLocation getStillTexture() { return STILL; }
+            @Override
+            public @NotNull ResourceLocation getFlowingTexture() { return FLOWING; }
+            @Override
+            public int getTintColor() { return 0xFFB3E5FC; }
+        }, utmFluids.LIQUID_OXYGEN_TYPE);
     }
 }

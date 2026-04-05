@@ -9,6 +9,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import org.jetbrains.annotations.NotNull;
 
 public class InterdictedBuff extends MobEffect {
     public InterdictedBuff(MobEffectCategory category, int color) {
@@ -18,7 +19,7 @@ public class InterdictedBuff extends MobEffect {
 
 
     @Override
-    public boolean applyEffectTick(LivingEntity entity, int amplifier) {
+    public boolean applyEffectTick(@NotNull LivingEntity entity, int amplifier) {
         if (entity instanceof Player player) {
             player.getCooldowns().addCooldown(Items.ELYTRA.asItem(),10*20);
             player.getCooldowns().addCooldown(Items.ENDER_PEARL.asItem(),30*20);
@@ -61,13 +62,13 @@ public class InterdictedBuff extends MobEffect {
     // Utility method that is called when the effect is first added to the entity.
     // This does not get called again until all instances of this effect have been removed from the entity.
     @Override
-    public void onEffectAdded(LivingEntity entity, int amplifier) {
+    public void onEffectAdded(@NotNull LivingEntity entity, int amplifier) {
         super.onEffectAdded(entity, amplifier);
     }
 
     // Utility method that is called when the effect is added to the entity.
     // This gets called every time this effect is added to the entity.
     @Override
-    public void onEffectStarted(LivingEntity entity, int amplifier) {
+    public void onEffectStarted(@NotNull LivingEntity entity, int amplifier) {
     }
 }

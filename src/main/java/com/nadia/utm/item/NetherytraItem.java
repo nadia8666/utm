@@ -27,10 +27,6 @@ public class NetherytraItem extends ElytraItem {
         return SoundEvents.ARMOR_EQUIP_NETHERITE;
     }
 
-    public double createRandom() {
-        return (Math.random()-0.5)*2;
-    };
-
     @Override
     public boolean elytraFlightTick(@NotNull ItemStack stack, LivingEntity entity, int flightTicks) {
         var pos = entity.position();

@@ -22,7 +22,7 @@ public class PlanetRenderer {
 
     // ordered by relative distance, moon renders over the earth which renders over the sun
     public static class PLANETS {
-        public static Planet SUN = new Planet(300, 15, utm.key("textures/misc/sun.png")) {
+        public static final Planet SUN = new Planet(300, 15, utm.key("textures/misc/sun.png")) {
             @Override
             public float[] getColor(long time, float partialTicks) {
                 return new float[]{1, 1, 1};
@@ -38,13 +38,13 @@ public class PlanetRenderer {
                 poseStack.mulPose(Axis.ZP.rotationDegrees(offset));
             }
         };
-        public static Planet EARTH = new Planet(150, 25/3f, utm.key("textures/misc/earth.png")) {
+        public static final Planet EARTH = new Planet(150, 25/3f, utm.key("textures/misc/earth.png")) {
             @Override
             public void transform(PoseStack poseStack, float partialTicks) {
                 poseStack.mulPose(Axis.XP.rotationDegrees(11.2F));
             }
         };
-        public static Planet MOON = new Planet(150, 12.5f/3f, utm.key("textures/misc/moon.png")) {
+        public static final Planet MOON = new Planet(150, 12.5f/3f, utm.key("textures/misc/moon.png")) {
             @Override
             public float[] getColor(long time, float partialTicks) {
                 float brightness = .25f + PLANETS.EARTH.getColor(time, partialTicks)[0]/3;
@@ -67,7 +67,7 @@ public class PlanetRenderer {
                 poseStack.translate(offset, distance, 0);
             }
         };
-        public static Planet AG = new Planet(150, 3, utm.key("textures/misc/2313ag.png")) {
+        public static final Planet AG = new Planet(150, 3, utm.key("textures/misc/2313ag.png")) {
             @Override
             public float[] getColor(long time, float partialTicks) {
                 double pTime = (time % 24000L) + partialTicks;

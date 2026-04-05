@@ -13,7 +13,7 @@ import net.minecraft.world.entity.vehicle.Minecart;
 import net.minecraft.world.level.block.Blocks;
 
 public class LaunchContraptionScene {
-    public static void basic(SceneBuilder builder, SceneBuildingUtil util) {
+    public static void scene(SceneBuilder builder, SceneBuildingUtil util) {
         CreateSceneBuilder scene = new CreateSceneBuilder(builder);
         scene.title("launch_contraption.intro", "Using the Launch Contraption");
         CreateSceneBuilder.WorldInstructions world = scene.world();
@@ -28,9 +28,9 @@ public class LaunchContraptionScene {
         scene.idle(10);
         world.showSection(util.select().layer(3), Direction.DOWN);
         var birb = scene.special().createBirb(util.vector().of(2.5, 3.5, 1.5), ParrotPose.FlappyPose::new);
+        scene.special().rotateParrot(birb, 0, 180, 0, 0);
 
         Selection toggle = util.select().fromTo(util.grid().at(1, 1, 2), util.grid().at(2, 1, 2));
-
         scene.overlay().showText(100)
                 .attachKeyFrame()
                 .text("The Launch Contraption is the core component required to leave for space")

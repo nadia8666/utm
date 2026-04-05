@@ -16,17 +16,22 @@ public class OxyUtil {
     public static double getCollectionStrength(Level level, BlockPos pos) {
         return getCollectionStrength(level, pos, null, false);
     }
+
     public static double getCollectionStrength(Level level, BlockPos pos, @Nullable Integer radius, boolean raw) {
         double str = 0;
         int targetRadius = radius == null ? 3 : radius;
 
-        for (BlockPos target : BlockPos.betweenClosed(
-                pos.offset(-targetRadius, -targetRadius, -targetRadius),
-                pos.offset(targetRadius, targetRadius, targetRadius)
-        )) {
-                    BlockState block = level.getBlockState(target);
-                    if (block.is(BlockTags.LEAVES))
-                        str++;
+        if (hasOxygen(level)) {
+            str = 343;
+        } else {
+            for (BlockPos target : BlockPos.betweenClosed(
+                    pos.offset(-targetRadius, -targetRadius, -targetRadius),
+                    pos.offset(targetRadius, targetRadius, targetRadius)
+            )) {
+                BlockState block = level.getBlockState(target);
+                if (block.is(BlockTags.LEAVES))
+                    str++;
+            }
         }
 
         if (!raw && str > 0) {

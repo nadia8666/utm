@@ -5,6 +5,7 @@ import com.nadia.utm.registry.behavior.utmMovingInteractions;
 import com.nadia.utm.registry.block.utmBlockEntities;
 import com.nadia.utm.registry.block.utmBlocks;
 import com.nadia.utm.registry.data.utmDataComponents;
+import com.nadia.utm.registry.fluid.utmFluids;
 import com.nadia.utm.registry.item.tool.utmTools;
 import com.nadia.utm.registry.item.utmItems;
 import com.nadia.utm.registry.loot.utmLoot;
@@ -15,6 +16,7 @@ import com.nadia.utm.registry.ui.utmMenus;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.*;
+import net.minecraft.world.level.block.LiquidBlock;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -34,6 +36,8 @@ public class utmRegistry {
     public static final DeferredRegister<?> PARTICLE_TYPES = utmParticles.PARTICLE_TYPES;
     public static final DeferredRegister<?> GLOBAL_LOOT_MODIFIER_SERIALIZERS = utmLoot.GLOBAL_LOOT_MODIFIER_SERIALIZERS;
     public static final DeferredRegister<?> ATTACHMENTS = utmAttachments.ATTACHMENTS;
+    public static final DeferredRegister<?> FLUID_TYPES = utmFluids.FLUID_TYPES;
+    public static final DeferredRegister<?> FLUIDS = utmFluids.FLUIDS;
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> MAIN = TABS
             .register("main", () -> CreativeModeTab.builder()
@@ -41,7 +45,11 @@ public class utmRegistry {
                     .withTabsBefore(CreativeModeTabs.COMBAT)
                     .icon(utmItems.MUSIC_DISC_UNDERTALE.get()::getDefaultInstance)
                     .displayItems((parameters, output) -> {
-                        utmRegistry.BLOCKS.getEntries().forEach(entry -> output.accept(entry.get()));
+                        utmRegistry.BLOCKS.getEntries().forEach(entry -> {
+                            if (entry.get() instanceof LiquidBlock) return;
+
+                            output.accept(entry.get());
+                        });
                         utmRegistry.ITEMS.getEntries().forEach(entry -> output.accept(entry.get()));
                     }).build());
 
@@ -65,6 +73,8 @@ public class utmRegistry {
         PARTICLE_TYPES.register(modEventBus);
         GLOBAL_LOOT_MODIFIER_SERIALIZERS.register(modEventBus);
         ATTACHMENTS.register(modEventBus);
+        FLUID_TYPES.register(modEventBus);
+        FLUIDS.register(modEventBus);
     }
 
     public static void lateRegister() {

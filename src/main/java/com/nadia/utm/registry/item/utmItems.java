@@ -1,8 +1,11 @@
 package com.nadia.utm.registry.item;
 
 import com.nadia.utm.item.LockedSchematicItem;
+import com.nadia.utm.registry.fluid.utmFluids;
 import com.nadia.utm.registry.song.utmSongs;
+import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Rarity;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -33,8 +36,10 @@ public class utmItems {
     public static final DeferredItem<Item> MUSIC_DISC_UNDERTALE = ITEMS.registerSimpleItem("music_disc_undertale", new Item.Properties()
             .stacksTo(1).rarity(Rarity.EPIC).jukeboxPlayable(utmSongs.UNDERTALE));
 
-
-
+    // fluid
+    public static final DeferredItem<Item> LIQUID_OXYGEN_BUCKET = ITEMS.register("liquid_oxygen_bucket",
+            () -> new BucketItem(utmFluids.LIQUID_OXYGEN.get(),
+                    new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
 
     public static final DeferredItem<Item> UNFINISHED_ARID_INGOT = ITEMS.registerSimpleItem("unfinished_arid_ingot");
     public static final DeferredItem<Item> ARID_INGOT = ITEMS.registerSimpleItem("arid_ingot");

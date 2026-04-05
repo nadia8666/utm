@@ -19,14 +19,13 @@ import java.util.Map;
 public class ChunkLoadHandler {
     public static final TicketController CONTROLLER = new TicketController(
             ResourceLocation.fromNamespaceAndPath("utm", "chunk_loader"),
-            (level, helper) -> {
-                helper.getBlockTickets().forEach((pos, ticketSet) -> {
-                    if (!(level.getBlockState(pos).getBlock() instanceof BlockChunkLoaderBlock)) {
-                        ticketSet.ticking().forEach(chunk -> helper.removeTicket(pos, chunk, true));
-                        ticketSet.nonTicking().forEach(chunk -> helper.removeTicket(pos, chunk, false));
-                    }
-                });
-            }
+            (level, helper) ->
+                    helper.getBlockTickets().forEach((pos, ticketSet) -> {
+                        if (!(level.getBlockState(pos).getBlock() instanceof BlockChunkLoaderBlock)) {
+                            ticketSet.ticking().forEach(chunk -> helper.removeTicket(pos, chunk, true));
+                            ticketSet.nonTicking().forEach(chunk -> helper.removeTicket(pos, chunk, false));
+                        }
+                    })
     );
 
     public static final Map<BlockPos, ChunkLoaderBlockEntity> LOADERS = new HashMap<>();

@@ -22,8 +22,7 @@ import java.util.Optional;
 public class PumpUpgradeWrapperMixin {
     @Inject(
             method = "interactWithWorld",
-            at= @At(value = "INVOKE", target = "Lnet/p3pp3rf1y/sophisticatedcore/upgrades/pump/PumpUpgradeWrapper;placeFluidInWorld(Lnet/minecraft/world/level/Level;Lnet/neoforged/neoforge/fluids/capability/IFluidHandler;Lnet/minecraft/core/Direction;Lnet/minecraft/core/BlockPos;)Z"),
-            cancellable = true
+            at= @At(value = "INVOKE", target = "Lnet/p3pp3rf1y/sophisticatedcore/upgrades/pump/PumpUpgradeWrapper;placeFluidInWorld(Lnet/minecraft/world/level/Level;Lnet/neoforged/neoforge/fluids/capability/IFluidHandler;Lnet/minecraft/core/Direction;Lnet/minecraft/core/BlockPos;)Z")
     )
     public void utm$compatPumpProtection(Level level, BlockPos pos, IFluidHandler storageFluidHandler, Entity entity, CallbackInfoReturnable<Optional<Integer>> cir) {
          if (!(level instanceof ServerLevel serverLevel)) return;

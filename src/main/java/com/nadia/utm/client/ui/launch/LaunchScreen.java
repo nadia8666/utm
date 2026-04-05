@@ -2,7 +2,6 @@ package com.nadia.utm.client.ui.launch;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.nadia.utm.networking.LaunchContraptionPayload;
-import com.nadia.utm.utm;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Renderable;
 import net.minecraft.client.gui.screens.Screen;

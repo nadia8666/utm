@@ -4,6 +4,7 @@ import net.minecraft.advancements.Criterion;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.util.LinkedHashMap;
@@ -27,7 +28,7 @@ public abstract class SimpleRecipeBuilder implements RecipeBuilder {
 
     // This method adds a criterion for the recipe advancement.
     @Override
-    public SimpleRecipeBuilder unlockedBy(String name, Criterion<?> criterion) {
+    public @NotNull SimpleRecipeBuilder unlockedBy(@NotNull String name, @NotNull Criterion<?> criterion) {
         this.criteria.put(name, criterion);
         return this;
     }
@@ -35,7 +36,7 @@ public abstract class SimpleRecipeBuilder implements RecipeBuilder {
     // This method adds a recipe book group. If you do not want to use recipe book groups,
     // remove the this.group field and make this method no-op (i.e. return this).
     @Override
-    public SimpleRecipeBuilder group(@Nullable String group) {
+    public @NotNull SimpleRecipeBuilder group(@Nullable String group) {
         this.group = group;
         return this;
     }
@@ -43,7 +44,7 @@ public abstract class SimpleRecipeBuilder implements RecipeBuilder {
     // Vanilla wants an Item here, not an ItemStack. You still can and should use the ItemStack
     // for serializing the recipes.
     @Override
-    public Item getResult() {
+    public @NotNull Item getResult() {
         return this.result.getItem();
     }
 }
