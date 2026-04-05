@@ -1,0 +1,36 @@
+{
+  "display": {
+    "icon": {
+      "id": "utm:launch_contraption"
+    },
+    "title": "Introducing: Content++",
+    "description": "Visit 2313AG!!!... visit is the wrong word. you cannot leave 2313AG. this is your new home",
+    "background": "utm:textures/misc/2313ag_adv_bg.png",
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "entered_2313ag": {
+      "trigger": "minecraft:changed_dimension",
+      "conditions": {
+        "to": "utm:2313ag"
+      }
+    },
+    "in_2313ag": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "location": {
+          "dimension": "utm:2313ag"
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "entered_2313ag",
+      "in_2313ag"
+    ]
+  ]
+}

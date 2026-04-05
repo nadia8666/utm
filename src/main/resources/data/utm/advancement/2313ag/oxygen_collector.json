@@ -1,0 +1,19 @@
+{
+  "parent": "utm:2313ag/root",
+  "display": {
+    "icon": {
+      "id": "utm:oxygen_collector"
+    },
+    "title": "Certified Retro",
+    "description": "Activate an Oxygen Collector and watch it work! why does this work?",
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "criteria": {
+    "manual_trigger": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

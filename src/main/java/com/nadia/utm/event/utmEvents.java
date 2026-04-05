@@ -5,14 +5,20 @@ import com.nadia.utm.registry.block.utmBlockEntities;
 import com.nadia.utm.registry.dimension.utmDimensions;
 import com.nadia.utm.registry.enchantment.utmEnchantments;
 import com.nadia.utm.server.TabMenuServer;
+import com.nadia.utm.util.AdvancementUtil;
 import com.nadia.utm.util.OxyUtil;
+import com.nadia.utm.utm;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.content.equipment.armor.BacktankUtil;
+import com.simibubi.create.content.kinetics.base.KineticBlock;
+import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -21,6 +27,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -167,6 +174,28 @@ public class utmEvents {
                     }
                 } else {
                     sPlayer.hurt(level.damageSources().source(DamageTypes.IN_WALL), 1f);
+
+                    AdvancementUtil.AwardAdvancement(sPlayer, utm.key("2313ag/suffocate"));
+                }
+            }
+
+            List<ItemStack> tanks = BacktankUtil.getAllWithAir(sPlayer);
+            if (!tanks.isEmpty()) {
+                double headLevel = sPlayer.getBoundingBox().maxY + 0.4;
+                BlockPos pos = BlockPos.containing(sPlayer.getX(), headLevel, sPlayer.getZ());
+                BlockState tank = sPlayer.level().getBlockState(pos);
+                if (tank.getBlock() instanceof KineticBlock block) {
+                    if (block.hasShaftTowards(sPlayer.level(), pos, tank, Direction.DOWN) && sPlayer.level().getBlockEntity(pos) instanceof KineticBlockEntity be) {
+                        ItemStack target = tanks.getFirst();
+                        int max = BacktankUtil.maxAir(target);
+                        int air = BacktankUtil.getAir(target);
+                        if (air < max) {
+                            double strength = OxyUtil.getCollectionStrength(sPlayer.level(), pos);
+                            float abs = Math.abs(be.getSpeed());
+                            int increment = Mth.clamp(((int)abs - 100) / 20, 1, 5);
+                            BacktankUtil.consumeAir(sPlayer, target, -Math.max(Mth.floor(increment * strength), 0));
+                        }
+                    }
                 }
             }
         }

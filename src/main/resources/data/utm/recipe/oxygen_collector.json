@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "utm_space",
+  "key": {
+    "s": {
+      "item": "create:shaft"
+    },
+    "t": {
+      "item": "create:fluid_tank"
+    },
+    "f": {
+      "item": "create:encased_fan"
+    },
+    "a": {
+      "item": "create:sturdy_sheet"
+    },
+    "c": {
+      "item": "create:copper_sheet"
+    }
+  },
+  "pattern": [
+    "afa",
+    "ctc",
+    "asa"
+  ],
+  "result": {
+    "count": 1,
+    "id": "utm:oxygen_collector"
+  }
+}

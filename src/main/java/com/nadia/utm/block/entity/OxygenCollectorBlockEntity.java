@@ -2,21 +2,27 @@ package com.nadia.utm.block.entity;
 
 import com.nadia.utm.registry.block.utmBlockEntities;
 import com.nadia.utm.registry.fluid.utmFluids;
+import com.nadia.utm.util.AdvancementUtil;
 import com.nadia.utm.util.OxyUtil;
 import com.nadia.utm.util.utmLang;
+import com.nadia.utm.utm;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.kinetics.transmission.SplitShaftBlockEntity;
 import com.simibubi.create.foundation.particle.AirParticleData;
 import net.createmod.catnip.math.VecHelper;
 import net.minecraft.ChatFormatting;
+import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.ServerAdvancementManager;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -26,6 +32,7 @@ import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+import java.util.Objects;
 
 public class OxygenCollectorBlockEntity extends SplitShaftBlockEntity implements IHaveGoggleInformation {
     public static final int MAX_AIR = 1000;
@@ -78,6 +85,10 @@ public class OxygenCollectorBlockEntity extends SplitShaftBlockEntity implements
 
                     if (level.getGameTime() % 20 == 0 || fluidTank.getFluidAmount() == MAX_AIR) {
                         sendData();
+
+                        List<ServerPlayer> players = level.getEntitiesOfClass(ServerPlayer.class, new AABB(worldPosition).inflate(8.0));
+                        for (ServerPlayer player : players)
+                            AdvancementUtil.AwardAdvancement(player, utm.key("2313ag/oxygen_collector"));
                     }
                 } else if (rate > 0) {
                     Vec3 center = VecHelper.getCenterOf(this.worldPosition);

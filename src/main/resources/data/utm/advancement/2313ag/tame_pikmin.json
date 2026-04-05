@@ -1,0 +1,38 @@
+{
+  "parent": "utm:2313ag/root",
+  "display": {
+    "icon": {
+      "id": "pnf404:nectar"
+    },
+    "title": "Oh. You're here.",
+    "description": "Tame a pikmin in space",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "tamed_pikmin_in_dim": {
+      "trigger": "minecraft:tame_animal",
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "#pnf404:pikmin",
+              "location": {
+                "dimension": "utm:2313ag"
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "tamed_pikmin_in_dim"
+    ]
+  ]
+}

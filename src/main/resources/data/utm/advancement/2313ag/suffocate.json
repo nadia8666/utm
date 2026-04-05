@@ -1,0 +1,19 @@
+{
+  "parent": "utm:2313ag/root",
+  "display": {
+    "icon": {
+      "id": "create:netherite_backtank"
+    },
+    "title": "Oops! All   ",
+    "description": "you are suffocating.",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "manual_trigger": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}
