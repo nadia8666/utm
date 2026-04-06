@@ -33,9 +33,10 @@ public class OxyUtil {
     public static double getCollectionStrength(Level level, BlockPos pos, @Nullable Integer radius, boolean raw) {
         double str = 0;
         int targetRadius = radius == null ? 3 : radius;
+        int pow = (int) Math.pow(targetRadius * 2 + 1, 3);
 
         if (hasOxygen(level)) {
-            str = Math.pow(targetRadius, 3);
+            str = pow;
         } else {
             for (BlockPos target : BlockPos.betweenClosed(
                     pos.offset(-targetRadius, -targetRadius, -targetRadius),
@@ -49,7 +50,7 @@ public class OxyUtil {
 
         if (!raw && str > 0) {
             if (str - 32 > 0)
-                str = str / (Math.pow(targetRadius, 3) - 1);
+                str = str / (pow - 1);
             else
                 str = 0;
         }
