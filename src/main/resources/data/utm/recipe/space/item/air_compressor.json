@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "utm_space",
+  "key": {
+    "a": {
+      "item": "create:copper_sheet"
+    },
+    "s": {
+      "item": "create:fluid_tank"
+    },
+    "c": {
+      "item": "create:brass_casing"
+    },
+    "p": {
+      "item": "create:propeller"
+    }
+  },
+  "pattern": [
+    "apa",
+    "asa",
+    "aca"
+  ],
+  "result": {
+    "count": 1,
+    "id": "utm:air_compressor"
+  }
+}

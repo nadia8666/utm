@@ -9,6 +9,11 @@ import net.minecraft.server.level.ServerPlayer;
 import java.util.Objects;
 
 public class AdvancementUtil {
+    /**
+     * Grants a player all criteria for an advancement
+     * @param player target player
+     * @param advancement advancement location
+     */
     public static void AwardAdvancement(ServerPlayer player, ResourceLocation advancement) {
         ServerAdvancementManager manager = Objects.requireNonNull(player.getServer()).getAdvancements();
         AdvancementHolder holder = manager.get(advancement);

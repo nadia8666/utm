@@ -7,21 +7,18 @@
       "item": "create:shaft"
     },
     "t": {
-      "item": "create:fluid_tank"
+      "item": "utm:air_compressor"
     },
     "f": {
       "item": "create:encased_fan"
     },
     "a": {
       "item": "create:sturdy_sheet"
-    },
-    "c": {
-      "item": "create:copper_sheet"
     }
   },
   "pattern": [
     "afa",
-    "ctc",
+    "ata",
     "asa"
   ],
   "result": {

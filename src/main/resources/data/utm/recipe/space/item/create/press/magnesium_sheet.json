@@ -1,0 +1,14 @@
+{
+  "type": "create:pressing",
+  "ingredients": [
+    {
+      "item": "utm:magnesium_ingot"
+    }
+  ],
+  "results": [
+    {
+      "id": "utm:magnesium_sheet",
+      "count": 1
+    }
+  ]
+}

@@ -15,10 +15,11 @@ public class utmFluids {
     public static final DeferredRegister<FluidType> FLUID_TYPES = DeferredRegister.create(NeoForgeRegistries.FLUID_TYPES, "utm");
     public static final DeferredRegister<Fluid> FLUIDS = DeferredRegister.create(BuiltInRegistries.FLUID, "utm");
 
+    // liquid oxygen
     public static final DeferredHolder<FluidType, FluidType> LIQUID_OXYGEN_TYPE = FLUID_TYPES.register("liquid_oxygen",
             () -> new FluidType(FluidType.Properties.create()
                     .descriptionId("fluid.utm.liquid_oxygen")
-                    .fallDistanceModifier(0f)
+                    .fallDistanceModifier(2f)
                     .canExtinguish(true)
                     .density(1150)
                     .viscosity(200)
@@ -35,4 +36,24 @@ public class utmFluids {
             LIQUID_OXYGEN_TYPE, LIQUID_OXYGEN, FLOWING_LIQUID_OXYGEN)
             .bucket(utmItems.LIQUID_OXYGEN_BUCKET)
             .block(utmBlocks.LIQUID_OXYGEN_BLOCK);
+
+    // molten steel
+    public static final DeferredHolder<FluidType, FluidType> MOLTEN_STEEL_TYPE = FLUID_TYPES.register("molten_steel",
+            () -> new FluidType(FluidType.Properties.create()
+                    .descriptionId("fluid.utm.molten_steel")
+                    .density(1450)
+                    .viscosity(150)
+                    .temperature(1800)
+                    .rarity(Rarity.RARE)));
+
+    public static final DeferredHolder<Fluid, BaseFlowingFluid.Source> MOLTEN_STEEL = FLUIDS.register("molten_steel",
+            () -> new BaseFlowingFluid.Source(utmFluids.MOLTEN_STEEL_PROPERTIES));
+
+    public static final DeferredHolder<Fluid, BaseFlowingFluid.Flowing> FLOWING_MOLTEN_STEEL = FLUIDS.register("flowing_molten_steel",
+            () -> new BaseFlowingFluid.Flowing(utmFluids.MOLTEN_STEEL_PROPERTIES));
+
+    protected static final BaseFlowingFluid.Properties MOLTEN_STEEL_PROPERTIES = new BaseFlowingFluid.Properties(
+            MOLTEN_STEEL_TYPE, MOLTEN_STEEL, FLOWING_MOLTEN_STEEL)
+            .bucket(utmItems.MOLTEN_STEEL_BUCKET)
+            .block(utmBlocks.MOLTEN_STEEL_BLOCK);
 }

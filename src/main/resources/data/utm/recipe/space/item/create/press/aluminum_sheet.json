@@ -1,0 +1,15 @@
+
+{
+  "type": "create:pressing",
+  "ingredients": [
+    {
+      "item": "utm:aluminum_ingot"
+    }
+  ],
+  "results": [
+    {
+      "id": "utm:aluminum_sheet",
+      "count": 1
+    }
+  ]
+}

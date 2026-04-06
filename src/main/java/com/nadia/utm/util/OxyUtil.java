@@ -13,16 +13,29 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class OxyUtil {
+    /**
+     * @see #getCollectionStrength(Level, BlockPos, Integer, boolean)
+     */
     public static double getCollectionStrength(Level level, BlockPos pos) {
         return getCollectionStrength(level, pos, null, false);
     }
 
+
+    /**
+     * Collects nearby leaves and returns a strength alpha accordingly
+     * Always assumes 100% leaf coverage while in {@link #hasOxygen(Level) breathable} levels
+     * @param level target level
+     * @param pos target position
+     * @param radius amount of blocks to check, default 3 = 7x7x7 area
+     * @param raw modifies the output to return the raw amount of leaves nearby instead of
+     * @return collection strength
+     */
     public static double getCollectionStrength(Level level, BlockPos pos, @Nullable Integer radius, boolean raw) {
         double str = 0;
         int targetRadius = radius == null ? 3 : radius;
 
         if (hasOxygen(level)) {
-            str = 343;
+            str = Math.pow(targetRadius, 3);
         } else {
             for (BlockPos target : BlockPos.betweenClosed(
                     pos.offset(-targetRadius, -targetRadius, -targetRadius),
@@ -35,28 +48,47 @@ public class OxyUtil {
         }
 
         if (!raw && str > 0) {
-            str = Math.max(0, str - 32);
-
-            if (str > 0)
-                str = str / 312;
+            if (str - 32 > 0)
+                str = str / (Math.pow(targetRadius, 3) - 1);
+            else
+                str = 0;
         }
 
         return str;
     }
 
-    private static final Set<ResourceKey<Level>> UNBREATHABLE_DIMENSIONS = new HashSet<>();
+    public static final Set<ResourceKey<Level>> UNBREATHABLE_DIMENSIONS = new HashSet<>();
     static {
         UNBREATHABLE_DIMENSIONS.add(utmDimensions.AG_KEY);
     }
 
+    /**
+     * Checks if a level has oxygen or not
+     * @param level target level
+     * @return if the level is breathable (has oxygen)
+     *
+     * @see #hasOxygen(Level)
+     * @see #hasOxygen(ResourceKey)
+     * @see #canBreathe(Entity)
+     */
     public static boolean hasOxygen(Level level) {
         return !UNBREATHABLE_DIMENSIONS.contains(level.dimension());
     }
 
+    /**
+     * @see #hasOxygen(Level)
+     * @see #hasOxygen(ResourceKey)
+     * @see #canBreathe(Entity)
+     */
     public static boolean hasOxygen(ResourceKey<Level> dimension) {
         return !UNBREATHABLE_DIMENSIONS.contains(dimension);
     }
 
+    /**
+     * @see #hasOxygen(Level)
+     * @see #hasOxygen(ResourceKey)
+     * @see #canBreathe(Entity)
+     */
     public static boolean canBreathe(Entity entity) {
         return !UNBREATHABLE_DIMENSIONS.contains(entity.level().dimension());
     }

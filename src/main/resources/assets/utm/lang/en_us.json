@@ -61,6 +61,16 @@
   "item.utm.arid_ingot": "Arid Ingot",
   "item.utm.arid_sword": "Arid Sword",
   "item.utm.liquid_oxygen_bucket": "Liquid Oxygen Bucket",
+  "item.utm.molten_steel_bucket": "Molten Steel Bucket",
+  "item.utm.air_compressor": "Air Compressor",
+  "item.utm.raw_aluminum": "Raw Aluminum",
+  "item.utm.raw_magnesium": "Raw Magnesium",
+  "item.utm.aluminum_ingot": "Aluminum Ingot",
+  "item.utm.magnesium_ingot": "Magnesium Ingot",
+  "item.utm.steel_ingot": "Steel Ingot",
+  "item.utm.aluminum_sheet": "Aluminum Sheet",
+  "item.utm.magnesium_sheet": "Magnesium Sheet",
+  "item.utm.steel_sheet": "Steel Sheet",
 
   "item.utm.enchanted_sword_red": "Enchanted Sword",
   "item.utm.enchanted_sword_green": "Enchanted Sword",
@@ -87,9 +97,6 @@
   "utm.elytra_trim_type.heartstwings": " 'heartstwings' Elytra Trim",
   "utm.elytra_trim_type.roadrunner": " Roadrunner Elytra Trim",
   "utm.elytra_trim_type.spades": " Spades Elytra Trim",
-
-  "advancements.utm.all_discs.title": "Quite Compact Disc",
-  "advancements.utm.all_discs.description": "Collect all music discs",
 
   "jukebox_song.utm.lava_chicken": "Hyper Potions - Lava Chicken",
   "jukebox_song.utm.tears": "Amos Roddy - Tears",
@@ -119,5 +126,6 @@
   "utm.ponder.oxygen_collector.intro.text_4": "The more leaves and the higher the RPM, the more efficient it is!",
   "utm.ponder.oxygen_collector.intro.text_5": "* This functionality is shared with the backtank",
 
-  "fluid.utm.liquid_oxygen": "Liquid Oxygen"
+  "fluid.utm.liquid_oxygen": "Liquid Oxygen",
+  "fluid.utm.molten_steel": "Molten Steel"
 }

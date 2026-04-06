@@ -13,16 +13,19 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public class utmItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems("utm");
 
-    public static final DeferredItem<Item> UNFINISHED_GLINT_TABLE = ITEMS.registerSimpleItem("unfinished_glint_table");
+    // ingredients
+    public static final DeferredItem<Item> UNFINISHED_GLINT_TABLE = ITEMS.registerSimpleItem("unfinished_glint_table"),
+    UNFINISHED_ARID_INGOT = ITEMS.registerSimpleItem("unfinished_arid_ingot"),
+    AIR_COMPRESSOR = ITEMS.registerSimpleItem("air_compressor");
 
     // elytra trim
-    public static final DeferredItem<Item> ELYTRA_TRIM_VEIN = ITEMS.registerSimpleItem("elytra_trim_vein");
-    public static final DeferredItem<Item> ELYTRA_TRIM_OUTWARD = ITEMS.registerSimpleItem("elytra_trim_outward");
-    public static final DeferredItem<Item> ELYTRA_TRIM_LESSER = ITEMS.registerSimpleItem("elytra_trim_lesser");
-    public static final DeferredItem<Item> ELYTRA_TRIM_SPADES = ITEMS.registerSimpleItem("elytra_trim_spades");
-    public static final DeferredItem<Item> ELYTRA_TRIM_HEARTSTWINGS = ITEMS.registerSimpleItem("elytra_trim_heartstwings");
-    public static final DeferredItem<Item> ELYTRA_TRIM_ECOLOGIST = ITEMS.registerSimpleItem("elytra_trim_ecologist");
-    public static final DeferredItem<Item> ELYTRA_TRIM_ROADRUNNER = ITEMS.registerSimpleItem("elytra_trim_roadrunner");
+    public static final DeferredItem<Item> ELYTRA_TRIM_VEIN = ITEMS.registerSimpleItem("elytra_trim_vein"),
+            ELYTRA_TRIM_OUTWARD = ITEMS.registerSimpleItem("elytra_trim_outward"),
+            ELYTRA_TRIM_LESSER = ITEMS.registerSimpleItem("elytra_trim_lesser"),
+            ELYTRA_TRIM_SPADES = ITEMS.registerSimpleItem("elytra_trim_spades"),
+            ELYTRA_TRIM_HEARTSTWINGS = ITEMS.registerSimpleItem("elytra_trim_heartstwings"),
+            ELYTRA_TRIM_ECOLOGIST = ITEMS.registerSimpleItem("elytra_trim_ecologist"),
+            ELYTRA_TRIM_ROADRUNNER = ITEMS.registerSimpleItem("elytra_trim_roadrunner");
 
     public static final DeferredItem<Item> FIDDLECORE = ITEMS.registerSimpleItem("fiddlecore");
     public static final DeferredItem<Item> FLOATINGCORE = ITEMS.registerSimpleItem("floatingcore");
@@ -40,7 +43,19 @@ public class utmItems {
     public static final DeferredItem<Item> LIQUID_OXYGEN_BUCKET = ITEMS.register("liquid_oxygen_bucket",
             () -> new BucketItem(utmFluids.LIQUID_OXYGEN.get(),
                     new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
+    public static final DeferredItem<Item> MOLTEN_STEEL_BUCKET = ITEMS.register("molten_steel_bucket",
+            () -> new BucketItem(utmFluids.MOLTEN_STEEL.get(),
+                    new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
 
-    public static final DeferredItem<Item> UNFINISHED_ARID_INGOT = ITEMS.registerSimpleItem("unfinished_arid_ingot");
     public static final DeferredItem<Item> ARID_INGOT = ITEMS.registerSimpleItem("arid_ingot");
+
+    // resources
+    public static final DeferredItem<Item> RAW_ALUMINUM = ITEMS.registerSimpleItem("raw_aluminum"),
+            RAW_MAGNESIUM = ITEMS.registerSimpleItem("raw_magnesium"),
+            ALUMINUM_INGOT = ITEMS.registerSimpleItem("aluminum_ingot"),
+            STEEL_INGOT = ITEMS.registerSimpleItem("steel_ingot"),
+            MAGNESIUM_INGOT = ITEMS.registerSimpleItem("magnesium_ingot"),
+            ALUMINUM_SHEET = ITEMS.registerSimpleItem("aluminum_sheet"),
+            MAGNESIUM_SHEET = ITEMS.registerSimpleItem("magnesium_sheet"),
+            STEEL_SHEET = ITEMS.registerSimpleItem("steel_sheet");
 }

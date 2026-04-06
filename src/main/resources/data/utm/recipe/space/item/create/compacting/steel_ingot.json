@@ -1,0 +1,15 @@
+{
+  "type": "create:compacting",
+  "ingredients": [
+    {
+      "fluid": "utm:molten_steel",
+      "type": "fluid_stack",
+      "amount": 1000
+    }
+  ],
+  "results": [
+    {
+      "id": "utm:steel_ingot"
+    }
+  ]
+}

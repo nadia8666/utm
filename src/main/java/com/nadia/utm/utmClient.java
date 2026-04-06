@@ -197,5 +197,17 @@ public class utmClient {
             @Override
             public int getTintColor() { return 0xFFB3E5FC; }
         }, utmFluids.LIQUID_OXYGEN_TYPE);
+
+        event.registerFluidType(new IClientFluidTypeExtensions() {
+            private static final ResourceLocation STILL = ResourceLocation.fromNamespaceAndPath("minecraft", "block/lava_still");
+            private static final ResourceLocation FLOWING = ResourceLocation.fromNamespaceAndPath("minecraft", "block/lava_flow");
+
+            @Override
+            public @NotNull ResourceLocation getStillTexture() { return STILL; }
+            @Override
+            public @NotNull ResourceLocation getFlowingTexture() { return FLOWING; }
+            @Override
+            public int getTintColor() { return 0xFFFFB278; }
+        }, utmFluids.MOLTEN_STEEL_TYPE);
     }
 }

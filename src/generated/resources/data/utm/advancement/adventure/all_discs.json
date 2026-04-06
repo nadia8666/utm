@@ -223,17 +223,13 @@
     }
   },
   "display": {
-    "description": {
-      "translate": "advancements.utm.all_discs.description"
-    },
+    "description": "Collect all music discs",
     "frame": "goal",
     "icon": {
       "count": 1,
       "id": "minecraft:music_disc_stal"
     },
-    "title": {
-      "translate": "advancements.utm.all_discs.title"
-    }
+    "title": "Quite Compact Disc"
   },
   "requirements": [
     [

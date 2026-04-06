@@ -1,0 +1,14 @@
+{
+  "type": "create:pressing",
+  "ingredients": [
+    {
+      "item": "utm:steel_ingot"
+    }
+  ],
+  "results": [
+    {
+      "id": "utm:steel_sheet",
+      "count": 1
+    }
+  ]
+}
