@@ -1,5 +1,5 @@
 {
   "textures": {
-    "particle": "minecraft:block/lava_still"
+    "particle": "utm:block/molten_steel_still"
   }
 }

@@ -23,6 +23,6 @@ public class utmRecipeProvider extends RecipeProvider {
         new StonecutterRecipeBuilder(
                 "iron_ingot",  // apparently group clumps together recipes with the same group idk what that means so.
                 Ingredient.of(new ItemStack(Items.IRON_INGOT)),
-                new ItemStack(utmBlocks.GRATE.item.get(), 3)).unlockedBy("has_iron_ingot", has(Items.IRON_INGOT)).save(output);
+                new ItemStack(utmBlocks.GRATE.ITEM.get(), 3)).unlockedBy("has_iron_ingot", has(Items.IRON_INGOT)).save(output);
     }
 }

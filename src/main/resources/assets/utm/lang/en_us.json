@@ -32,7 +32,7 @@
   "block.utm.flint_block_block": "Block of Block of Flint",
   "block.utm.launch_contraption": "Launch Contraption",
   "block.utm.oxygen_collector": "Oxygen Collector",
-  "block.utm.liquid_oxygen": "Liquid Oxygen",
+  "block.utm.oxygen_furnace": "Oxygen Furnace",
 
   "item.utm.copper_sword": "Copper Sword",
   "item.utm.copper_pickaxe": "Copper Pickaxe",
@@ -127,5 +127,6 @@
   "utm.ponder.oxygen_collector.intro.text_5": "* This functionality is shared with the backtank",
 
   "fluid.utm.liquid_oxygen": "Liquid Oxygen",
-  "fluid.utm.molten_steel": "Molten Steel"
+  "fluid.utm.molten_steel": "Molten Steel",
+  "utm.gui.oxygen_furnace_menu": "Oxygen Furnace"
 }

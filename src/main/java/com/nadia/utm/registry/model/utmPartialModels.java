@@ -7,5 +7,6 @@ public class utmPartialModels {
     public static final PartialModel OXYGEN_FAN = PartialModel.of(utm.key("block/oxygen_fan"));
     public static final PartialModel OXYGEN_COLLECTOR_GRILL = PartialModel.of(utm.key("block/oxygen_collector_grill"));
 
+    @SuppressWarnings("EmptyMethod")
     public static void register() {}
 }

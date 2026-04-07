@@ -57,16 +57,16 @@ public class utmBlocks {
             return i;
         });
 
-        return new utmBlockContainer<>(blockTarget, itemTarget, blockCallbacks);
+        return new utmBlockContainer<>(name, blockTarget, itemTarget, blockCallbacks);
     }
 
     public static final utmBlockContainer<HeavyMetalAnvilBlock, BlockItem> HEAVY_METAL_ANVIL = dualRegister("heavy_metal_anvil", HeavyMetalAnvilBlock::new, BlockBehaviour.Properties.of()
             .destroyTime(7.0f)
-            .explosionResistance(2500f).sound(SoundType.ANVIL));
+            .explosionResistance(2500f).sound(SoundType.ANVIL)).drops().bModel();
 
     public static final utmBlockContainer<GlintTableBlock, BlockItem> GLINT_TABLE = dualRegister("glint_table", GlintTableBlock::new, BlockBehaviour.Properties.of()
             .destroyTime(3.0f)
-            .explosionResistance(25f).sound(SoundType.WOOD));
+            .explosionResistance(25f).sound(SoundType.WOOD)).drops().bModel();
 
     public static final utmBlockContainer<LaunchContraptionBlock, BlockItem> LAUNCH_CONTRAPTION = dualRegister("launch_contraption", LaunchContraptionBlock::new, BlockBehaviour.Properties.of()
             .destroyTime(3.0f)
@@ -74,7 +74,7 @@ public class utmBlocks {
             .requiresCorrectToolForDrops()
             .noOcclusion()
             .isViewBlocking((state, level, pos) -> false)
-            .isSuffocating((state, level, pos) -> false));
+            .isSuffocating((state, level, pos) -> false)).drops().bModel();
 
     public static final utmBlockContainer<OxygenCollectorBlock, BlockItem> OXYGEN_COLLECTOR = dualRegister("oxygen_collector", OxygenCollectorBlock::new, BlockBehaviour.Properties.of()
             .destroyTime(3.0f)
@@ -82,63 +82,68 @@ public class utmBlocks {
             .requiresCorrectToolForDrops()
             .noOcclusion()
             .isViewBlocking((state, level, pos) -> false)
-            .isSuffocating((state, level, pos) -> false)).stress(8);
+            .isSuffocating((state, level, pos) -> false)).stress(8).drops();
+
+    public static final utmBlockContainer<OxygenFurnaceBlock, BlockItem> OXYGEN_FURNACE = dualRegister("oxygen_furnace", OxygenFurnaceBlock::new, BlockBehaviour.Properties.of()
+            .destroyTime(5.0f)
+            .explosionResistance(50f).sound(SoundType.METAL)
+            .noOcclusion()).drops().bModel();
 
     public static final utmBlockContainer<BlockChunkLoaderBlock, BlockItem> CHUNK_LOADER = dualRegister("chunk_loader", BlockChunkLoaderBlock::new, BlockBehaviour.Properties.of()
             .destroyTime(5.0f)
             .explosionResistance(25f).sound(SoundType.WOOD)
             .requiresCorrectToolForDrops()
-            .noOcclusion());
+            .noOcclusion()).drops().bModel();
 
     public static final utmBlockContainer<PlayerChunkLoaderBlock, BlockItem> PLAYER_CHUNK_LOADER = dualRegister("player_chunk_loader", PlayerChunkLoaderBlock::new, BlockBehaviour.Properties.of()
             .destroyTime(5.0f)
             .explosionResistance(25f).sound(SoundType.WOOD)
             .requiresCorrectToolForDrops()
-            .noOcclusion());
+            .noOcclusion()).drops().bModel();
 
     public static final utmBlockContainer<GrateBlock, BlockItem> GRATE = dualRegister("grate", GrateBlock::new, BlockBehaviour.Properties.of()
             .destroyTime(1.0f)
             .sound(SoundType.CHAIN)
             .noOcclusion()
             .isViewBlocking((state, level, pos) -> false)
-            .isSuffocating((state, level, pos) -> false));
+            .isSuffocating((state, level, pos) -> false)).drops().bModel();
 
     public static final utmBlockContainer<CitywallsBlock, BlockItem> CITYWALLS_METAL = dualRegister("citywalls_metal", CitywallsBlock::new, BlockBehaviour.Properties.of()
             .destroyTime(1.0f)
             .sound(SoundType.ANCIENT_DEBRIS)
             .noOcclusion()
             .isViewBlocking((state, level, pos) -> false)
-            .isSuffocating((state, level, pos) -> false));
-    public static final utmBlockContainer<CitywallsBlock, BlockItem> OUTPOSTWALLS_METAL = dualRegister("outpostwalls_metal", CitywallsBlock::new, BlockBehaviour.Properties.of()
-            .destroyTime(1.0f)
-            .sound(SoundType.ANCIENT_DEBRIS)
-            .noOcclusion()
-            .isViewBlocking((state, level, pos) -> false)
-            .isSuffocating((state, level, pos) -> false));
-    public static final utmBlockContainer<CitywallsBlock, BlockItem> OUTPOSTWALLS_SHRINE = dualRegister("outpostwalls_shrine", CitywallsBlock::new, BlockBehaviour.Properties.of()
-            .destroyTime(1.0f)
-            .sound(SoundType.ANCIENT_DEBRIS)
-            .noOcclusion()
-            .isViewBlocking((state, level, pos) -> false)
-            .isSuffocating((state, level, pos) -> false));
-    public static final utmBlockContainer<CitywallsBlock, BlockItem> CITYWALLS_SHRINE = dualRegister("citywalls_shrine", CitywallsBlock::new, BlockBehaviour.Properties.of()
-            .destroyTime(1.0f)
-            .sound(SoundType.ANCIENT_DEBRIS)
-            .noOcclusion()
-            .isViewBlocking((state, level, pos) -> false)
-            .isSuffocating((state, level, pos) -> false));
+            .isSuffocating((state, level, pos) -> false)).drops(),
+            OUTPOSTWALLS_METAL = dualRegister("outpostwalls_metal", CitywallsBlock::new, BlockBehaviour.Properties.of()
+                    .destroyTime(1.0f)
+                    .sound(SoundType.ANCIENT_DEBRIS)
+                    .noOcclusion()
+                    .isViewBlocking((state, level, pos) -> false)
+                    .isSuffocating((state, level, pos) -> false)).drops(),
+            OUTPOSTWALLS_SHRINE = dualRegister("outpostwalls_shrine", CitywallsBlock::new, BlockBehaviour.Properties.of()
+                    .destroyTime(1.0f)
+                    .sound(SoundType.ANCIENT_DEBRIS)
+                    .noOcclusion()
+                    .isViewBlocking((state, level, pos) -> false)
+                    .isSuffocating((state, level, pos) -> false)).drops(),
+            CITYWALLS_SHRINE = dualRegister("citywalls_shrine", CitywallsBlock::new, BlockBehaviour.Properties.of()
+                    .destroyTime(1.0f)
+                    .sound(SoundType.ANCIENT_DEBRIS)
+                    .noOcclusion()
+                    .isViewBlocking((state, level, pos) -> false)
+                    .isSuffocating((state, level, pos) -> false)).drops();
     public static final utmBlockContainer<InterdictorBlock, BlockItem> INTERDICTOR = dualRegister("interdictor", InterdictorBlock::new, BlockBehaviour.Properties.of()
             .destroyTime(10.0f)
             .sound(SoundType.NETHERITE_BLOCK)
             .noOcclusion()
             .isViewBlocking((state, level, pos) -> false)
-            .isSuffocating((state, level, pos) -> false));
+            .isSuffocating((state, level, pos) -> false)).drops().bModel();
     public static final utmBlockContainer<Block, BlockItem> FLINT_BLOCK = dualRegister("flint_block", Block::new, BlockBehaviour.Properties.of()
             .destroyTime(10.0f)
-            .sound(SoundType.GRAVEL));
+            .sound(SoundType.GRAVEL)).drops().bModel();
     public static final utmBlockContainer<Block, BlockItem> FLINT_BLOCK_BLOCK = dualRegister("flint_block_block", Block::new, BlockBehaviour.Properties.of()
             .destroyTime(100.0f)
-            .sound(SoundType.GRAVEL));
+            .sound(SoundType.GRAVEL)).drops().bModel();
 
     public static final DeferredBlock<LiquidBlock> LIQUID_OXYGEN_BLOCK = BLOCKS.register("liquid_oxygen",
             () -> new LiquidBlock(utmFluids.LIQUID_OXYGEN.get(),

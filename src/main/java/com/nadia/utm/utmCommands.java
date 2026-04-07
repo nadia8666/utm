@@ -52,6 +52,7 @@ public class utmCommands {
         );
     }
 
+    @SuppressWarnings("SwitchStatementWithTooFewBranches")
     @SubscribeEvent
     public static void onRegisterClientCommands(RegisterClientCommandsEvent event) {
         event.getDispatcher().register(Commands.literal("utm")

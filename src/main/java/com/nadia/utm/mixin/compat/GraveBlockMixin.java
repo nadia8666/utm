@@ -18,8 +18,8 @@ public class GraveBlockMixin {
             at=@At("HEAD"),
             cancellable = true
     )
-    public void utm$skipDrop(Level level, BlockPos pos, NonNullList<ItemStack> items, CallbackInfo ci) {
-        var entity = level.getBlockEntity(pos);
-        if (entity != null && ((GraveInterface) entity).utm$skipItems.get()) ci.cancel();
+    public void utm$skipDrop(Level world, BlockPos pos, NonNullList<ItemStack> items, CallbackInfo ci) {
+        var entity = world.getBlockEntity(pos);
+        if (entity != null && GraveInterface.utm$skipItems.get()) ci.cancel();
     }
 }

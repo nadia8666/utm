@@ -2,6 +2,8 @@ package com.nadia.utm.networking;
 
 import com.nadia.utm.client.ui.TabMenuLayer;
 import com.nadia.utm.compat.GraveInterface;
+import com.nadia.utm.event.BoundEvent;
+import com.nadia.utm.event.SpacePlayerStateHandler;
 import com.nadia.utm.event.utmEvents;
 import com.nadia.utm.gui.GlintMenu;
 import com.nadia.utm.registry.dimension.utmDimensions;
@@ -28,8 +30,6 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.portal.DimensionTransition;
 import net.minecraft.world.phys.AABB;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import org.joml.Vector2f;
@@ -39,7 +39,8 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 
-@EventBusSubscriber(modid = "utm")
+// TODO: refactor
+@BoundEvent
 public class utmNetworking {
     private static final Set<Block> UNMODIFIED_BLOCKS = Set.of(
             Blocks.STONE,
@@ -51,7 +52,6 @@ public class utmNetworking {
             Blocks.COBBLED_DEEPSLATE
     );
 
-    @SubscribeEvent
     public static void registerNetworkingEvents(final RegisterPayloadHandlersEvent event) {
         final PayloadRegistrar registrar = event.registrar("1");
 
@@ -121,7 +121,7 @@ public class utmNetworking {
                         }
 
                         if (entity instanceof GraveStoneTileEntity grave) {
-                            ((GraveInterface) grave).utm$skipItems.set(true);
+                            GraveInterface.utm$skipItems.set(true);
                         }
 
                         level.removeBlock(pos, false);
@@ -162,7 +162,7 @@ public class utmNetworking {
                 int highestHeight = -13579;
                 for (int x = minX; x <= maxX; x++) {
                     for (int z = minZ; z <= maxZ; z++) {
-                        int surfaceY = utmEvents.getSurface(target, x, z);
+                        int surfaceY = SpacePlayerStateHandler.getSurface(target, x, z);
                         if (surfaceY > highestHeight) {
                             highestHeight = surfaceY;
                         }
@@ -257,5 +257,9 @@ public class utmNetworking {
                 }
             }
         }));
+    }
+
+    static {
+        utmEvents.register(RegisterPayloadHandlersEvent.class, utmNetworking::registerNetworkingEvents);
     }
 }

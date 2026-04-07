@@ -24,13 +24,13 @@ public class SpearsMixin {
             )
     )
     private Collection<EntityHitResult> utm$spearCompat(
-            LivingEntity attacker,
+            LivingEntity entity,
             float minReach,
             float maxReach,
             float hitboxMargin,
-            Predicate<Entity> filter
+            Predicate<Entity> hitPredicate
     ) {
-        if (attacker instanceof LivingEntity living) {
+        if (entity instanceof LivingEntity living) {
             var reachAttr = living.getAttribute(Attributes.ENTITY_INTERACTION_RANGE);
 
             if (reachAttr != null) {
@@ -45,6 +45,6 @@ public class SpearsMixin {
             }
         }
 
-        return Spears.collectPiercingCollisions(attacker, minReach, maxReach, hitboxMargin, filter);
+        return Spears.collectPiercingCollisions(entity, minReach, maxReach, hitboxMargin, hitPredicate);
     }
 }

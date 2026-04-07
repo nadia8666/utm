@@ -26,7 +26,7 @@ public class GlintTableBlockEntity extends BlockEntity implements MenuProvider {
 
     @Override
     public @NotNull Component getDisplayName() {
-        return Component.literal("Glint Augmenter");
+        return Component.translatable("utm.gui.glint_table_menu");
     }
 
     @Nullable

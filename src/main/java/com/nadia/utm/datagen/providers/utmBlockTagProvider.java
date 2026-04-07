@@ -16,23 +16,23 @@ public class utmBlockTagProvider extends BlockTagsProvider {
     }
     @Override
     protected void addTags(HolderLookup.@NotNull Provider provider) {
-        tag(BlockTags.ANVIL).add(utmBlocks.HEAVY_METAL_ANVIL.block.get());
+        tag(BlockTags.ANVIL).add(utmBlocks.HEAVY_METAL_ANVIL.BLOCK.get());
 
-        tag(BlockTags.NEEDS_DIAMOND_TOOL).add(utmBlocks.HEAVY_METAL_ANVIL.block.get());
-        tag(BlockTags.MINEABLE_WITH_PICKAXE).add(utmBlocks.HEAVY_METAL_ANVIL.block.get());
-        tag(BlockTags.MINEABLE_WITH_PICKAXE).add(utmBlocks.LAUNCH_CONTRAPTION.block.get());
-        tag(BlockTags.MINEABLE_WITH_PICKAXE).add(utmBlocks.OXYGEN_COLLECTOR.block.get());
-        tag(BlockTags.MINEABLE_WITH_PICKAXE).add(utmBlocks.GRATE.block.get());
+        tag(BlockTags.NEEDS_DIAMOND_TOOL).add(utmBlocks.HEAVY_METAL_ANVIL.BLOCK.get());
+        tag(BlockTags.MINEABLE_WITH_PICKAXE).add(utmBlocks.HEAVY_METAL_ANVIL.BLOCK.get());
+        tag(BlockTags.MINEABLE_WITH_PICKAXE).add(utmBlocks.LAUNCH_CONTRAPTION.BLOCK.get());
+        tag(BlockTags.MINEABLE_WITH_PICKAXE).add(utmBlocks.OXYGEN_COLLECTOR.BLOCK.get());
+        tag(BlockTags.MINEABLE_WITH_PICKAXE).add(utmBlocks.GRATE.BLOCK.get());
 
-        tag(BlockTags.NEEDS_STONE_TOOL).add(utmBlocks.CHUNK_LOADER.block.get());
-        tag(BlockTags.MINEABLE_WITH_AXE).add(utmBlocks.CHUNK_LOADER.block.get());
+        tag(BlockTags.NEEDS_STONE_TOOL).add(utmBlocks.CHUNK_LOADER.BLOCK.get());
+        tag(BlockTags.MINEABLE_WITH_AXE).add(utmBlocks.CHUNK_LOADER.BLOCK.get());
 
-        tag(BlockTags.NEEDS_STONE_TOOL).add(utmBlocks.PLAYER_CHUNK_LOADER.block.get());
-        tag(BlockTags.MINEABLE_WITH_AXE).add(utmBlocks.PLAYER_CHUNK_LOADER.block.get());
+        tag(BlockTags.NEEDS_STONE_TOOL).add(utmBlocks.PLAYER_CHUNK_LOADER.BLOCK.get());
+        tag(BlockTags.MINEABLE_WITH_AXE).add(utmBlocks.PLAYER_CHUNK_LOADER.BLOCK.get());
 
-        tag(BlockTags.MINEABLE_WITH_AXE).add(utmBlocks.GLINT_TABLE.block.get());
+        tag(BlockTags.MINEABLE_WITH_AXE).add(utmBlocks.GLINT_TABLE.BLOCK.get());
 
-        tag(BlockTags.MINEABLE_WITH_SHOVEL).add(utmBlocks.FLINT_BLOCK.block.get());
-        tag(BlockTags.MINEABLE_WITH_SHOVEL).add(utmBlocks.FLINT_BLOCK_BLOCK.block.get());
+        tag(BlockTags.MINEABLE_WITH_SHOVEL).add(utmBlocks.FLINT_BLOCK.BLOCK.get());
+        tag(BlockTags.MINEABLE_WITH_SHOVEL).add(utmBlocks.FLINT_BLOCK_BLOCK.BLOCK.get());
     }
 }

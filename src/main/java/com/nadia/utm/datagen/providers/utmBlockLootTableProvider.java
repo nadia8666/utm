@@ -1,7 +1,9 @@
 package com.nadia.utm.datagen.providers;
 
+import com.nadia.utm.registry.block.utmBlockContainer;
 import com.nadia.utm.registry.block.utmBlocks;
 import com.nadia.utm.registry.utmRegistry;
+import com.nadia.utm.utm;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.BlockLootSubProvider;
@@ -18,20 +20,28 @@ public class utmBlockLootTableProvider extends BlockLootSubProvider {
 
     @Override
     protected void generate() {
-        dropSelf(utmBlocks.HEAVY_METAL_ANVIL.block.get());
-        dropSelf(utmBlocks.GLINT_TABLE.block.get());
-        dropSelf(utmBlocks.GRATE.block.get());
-        dropSelf(utmBlocks.CITYWALLS_METAL.block.get());
-        dropSelf(utmBlocks.CITYWALLS_SHRINE.block.get());
-        dropSelf(utmBlocks.OUTPOSTWALLS_METAL.block.get());
-        dropSelf(utmBlocks.OUTPOSTWALLS_SHRINE.block.get());
-        dropSelf(utmBlocks.CHUNK_LOADER.block.get());
-        dropSelf(utmBlocks.PLAYER_CHUNK_LOADER.block.get());
-        dropSelf(utmBlocks.INTERDICTOR.block.get());
-        dropSelf(utmBlocks.FLINT_BLOCK.block.get());
-        dropSelf(utmBlocks.FLINT_BLOCK_BLOCK.block.get());
-        dropSelf(utmBlocks.LAUNCH_CONTRAPTION.block.get());
-        dropSelf(utmBlocks.OXYGEN_COLLECTOR.block.get());
+        dropSelf(utmBlocks.HEAVY_METAL_ANVIL.BLOCK.get());
+        dropSelf(utmBlocks.GLINT_TABLE.BLOCK.get());
+        dropSelf(utmBlocks.GRATE.BLOCK.get());
+        dropSelf(utmBlocks.CITYWALLS_METAL.BLOCK.get());
+        dropSelf(utmBlocks.CITYWALLS_SHRINE.BLOCK.get());
+        dropSelf(utmBlocks.OUTPOSTWALLS_METAL.BLOCK.get());
+        dropSelf(utmBlocks.OUTPOSTWALLS_SHRINE.BLOCK.get());
+        dropSelf(utmBlocks.CHUNK_LOADER.BLOCK.get());
+        dropSelf(utmBlocks.PLAYER_CHUNK_LOADER.BLOCK.get());
+        dropSelf(utmBlocks.INTERDICTOR.BLOCK.get());
+        dropSelf(utmBlocks.FLINT_BLOCK.BLOCK.get());
+        dropSelf(utmBlocks.FLINT_BLOCK_BLOCK.BLOCK.get());
+        dropSelf(utmBlocks.LAUNCH_CONTRAPTION.BLOCK.get());
+        dropSelf(utmBlocks.OXYGEN_COLLECTOR.BLOCK.get());
+
+        utmBlockContainer.DATAGEN_TAGS.forEach((c, tags) -> {
+            for (String tag : tags) {
+                if (tag.equals("dropSelf"))
+                    dropSelf(c.BLOCK.get());
+                utm.LOGGER.info("[UTM] REGISTERING TAGS FOR {}:{}", c.toString(), tag);
+            }
+        });
     }
 
     @Override

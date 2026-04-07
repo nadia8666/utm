@@ -1,8 +1,8 @@
 package com.nadia.utm.datagen.providers;
 
-import com.nadia.utm.registry.block.utmBlocks;
+import com.nadia.utm.registry.block.utmBlockContainer;
 import com.nadia.utm.registry.item.tool.utmTools;
-import com.nadia.utm.registry.item.utmItems;
+import com.nadia.utm.registry.item.utmItemContainer;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
@@ -20,35 +20,21 @@ public class utmItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        withExistingParent(utmBlocks.GLINT_TABLE.item.getId().toString(), modLoc("block/glint_table"));
-        withExistingParent(utmBlocks.HEAVY_METAL_ANVIL.item.getId().toString(), modLoc("block/heavy_metal_anvil"));
-        withExistingParent(utmBlocks.GRATE.item.getId().toString(), modLoc("block/grate"));
-        withExistingParent(utmBlocks.CHUNK_LOADER.item.getId().toString(), modLoc("block/chunk_loader"));
-        withExistingParent(utmBlocks.PLAYER_CHUNK_LOADER.item.getId().toString(), modLoc("block/player_chunk_loader"));
-        withExistingParent(utmBlocks.INTERDICTOR.item.getId().toString(), modLoc("block/interdictor"));
-        withExistingParent(utmBlocks.FLINT_BLOCK.item.getId().toString(), modLoc("block/flint_block"));
-        withExistingParent(utmBlocks.FLINT_BLOCK_BLOCK.item.getId().toString(), modLoc("block/flint_block_block"));
-        withExistingParent(utmBlocks.LAUNCH_CONTRAPTION.item.getId().toString(), modLoc("block/launch_contraption"));
+        utmBlockContainer.DATAGEN_TAGS.forEach((c, tags) -> {
+            for (String tag : tags) {
+                if (tag.equals("blockModel"))
+                    withExistingParent(c.ITEM.getId().toString(), modLoc("block/" + c.NAME));
+            }
+        });
 
-        basicItem(utmItems.UNFINISHED_GLINT_TABLE.get());
-        basicItem(utmItems.UNFINISHED_ARID_INGOT.get());
-        basicItem(utmItems.ARID_INGOT.get());
-
-        basicItem(utmItems.INCREDI.get());
-        basicItem(utmItems.FIDDLECORE.get());
-        basicItem(utmItems.FLOATINGCORE.get());
-
-        musicDisc(utmItems.MUSIC_DISC_TEARS.get());
-        musicDisc(utmItems.MUSIC_DISC_LAVA_CHICKEN.get());
-        musicDisc(utmItems.MUSIC_DISC_UNDERTALE.get());
-
-        basicItem(utmItems.ELYTRA_TRIM_VEIN.get());
-        basicItem(utmItems.ELYTRA_TRIM_OUTWARD.get());
-        basicItem(utmItems.ELYTRA_TRIM_LESSER.get());
-        basicItem(utmItems.ELYTRA_TRIM_SPADES.get());
-        basicItem(utmItems.ELYTRA_TRIM_HEARTSTWINGS.get());
-        basicItem(utmItems.ELYTRA_TRIM_ROADRUNNER.get());
-        basicItem(utmItems.ELYTRA_TRIM_ECOLOGIST.get());
+        utmItemContainer.DATAGEN_TAGS.forEach((c, tags) -> {
+            for (String tag : tags) {
+                if (tag.equals("generated"))
+                    basicItem(c.ITEM().get());
+                if (tag.equals("disc"))
+                    musicDisc(c.ITEM().get());
+            }
+        });
 
         handheldItem(utmTools.COPPER_SWORD.get());
         handheldItem(utmTools.COPPER_PICKAXE.get());

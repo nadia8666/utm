@@ -183,7 +183,7 @@ public class GlintMenu extends AbstractContainerMenu {
     @Override
     public boolean stillValid(@NotNull Player player) {
         return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()),
-                player, utmBlocks.GLINT_TABLE.block.get());
+                player, utmBlocks.GLINT_TABLE.BLOCK.get());
     }
 
     private void addPlayerInventory(Inventory playerInventory) {

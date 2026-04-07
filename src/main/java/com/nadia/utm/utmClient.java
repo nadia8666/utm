@@ -1,20 +1,20 @@
 package com.nadia.utm;
 
 import com.nadia.utm.block.GrateBlock;
+import com.nadia.utm.client.ponder.utmPonderPlugin;
 import com.nadia.utm.client.renderer.BacktankCurioRenderer;
-import com.nadia.utm.client.renderer.CitywallsBlockEntityRenderer;
-import com.nadia.utm.client.renderer.OxygenCollectorRenderer;
+import com.nadia.utm.client.renderer.block.CitywallsBlockEntityRenderer;
 import com.nadia.utm.client.renderer.glint.utmGlintContainer;
 import com.nadia.utm.client.renderer.planets.PlanetRenderer;
+import com.nadia.utm.client.renderer.utmRenderTypes;
 import com.nadia.utm.client.ui.glint.GlintScreen;
+import com.nadia.utm.client.ui.oxygen_furnace.OxygenFurnaceScreen;
 import com.nadia.utm.client.updater.UpdateToast;
 import com.nadia.utm.registry.block.utmBlockEntities;
 import com.nadia.utm.registry.data.utmDataComponents;
-import com.nadia.utm.client.ponder.utmPonderPlugin;
 import com.nadia.utm.registry.fluid.utmFluids;
 import com.nadia.utm.registry.model.utmPartialModels;
 import com.nadia.utm.registry.ui.utmMenus;
-import com.nadia.utm.client.renderer.utmRenderTypes;
 import com.nadia.utm.updater.ToastDisplaySignal;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.content.contraptions.wrench.RadialWrenchMenu;
@@ -64,33 +64,12 @@ public class utmClient {
         new utmPonderPlugin().register();
     }
 
-    @SubscribeEvent
-    public static void onGuiInit(ScreenEvent.Init.Post event) {
-        if (!ToastReady && event.getScreen() instanceof TitleScreen) {
-            ToastReady = true;
-            tryToastPopup();
-        }
-    }
-
-    @SubscribeEvent
-    public static void onToast(ToastDisplaySignal event) {
-        utm.LOGGER.warn("[UTM] Toast recieved");
-        tryToastPopup();
-    }
-
     public static void tryToastPopup() {
-        utm.LOGGER.warn("[UTM] Toast popup attempted w/ flag {}", ToastTarget);
         if (ToastTarget) {
             ToastTarget = false;
 
             CompletableFuture.runAsync(() -> Minecraft.getInstance().getToasts().addToast(new UpdateToast(VersionTarget)), CompletableFuture.delayedExecutor(1000, TimeUnit.MILLISECONDS));
-            utm.LOGGER.warn("[UTM] Toast ran");
         }
-    }
-
-    @SubscribeEvent
-    public static void registerScreens(RegisterMenuScreensEvent event) {
-        event.register(utmMenus.GLINT_MENU.get(), GlintScreen::new);
     }
 
     @SubscribeEvent
@@ -101,6 +80,63 @@ public class utmClient {
         event.registerRenderBuffer(utmRenderTypes.OVERLAY_GLINT_ENTITY.get());
 
         PlanetRenderer.register();
+    }
+
+    @SubscribeEvent
+    public static void registerCurioRenderers(FMLClientSetupEvent event) {
+        CuriosRendererRegistry.register(AllItems.COPPER_BACKTANK.get(), BacktankCurioRenderer::new);
+        CuriosRendererRegistry.register(AllItems.NETHERITE_BACKTANK.get(), BacktankCurioRenderer::new);
+    }
+
+    @SubscribeEvent
+    public static void registerModels(ModelEvent.RegisterAdditional event) {
+        event.register(CitywallsBlockEntityRenderer.CWL);
+        event.register(CitywallsBlockEntityRenderer.OWM);
+        event.register(CitywallsBlockEntityRenderer.OWS);
+        event.register(CitywallsBlockEntityRenderer.CWS);
+    }
+
+    @SubscribeEvent
+    public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerBlockEntityRenderer(
+                utmBlockEntities.CITYWALLS_METAL.get(),
+                CitywallsBlockEntityRenderer::new
+        );
+    }
+
+    @SubscribeEvent
+    public static void registerDimensionEffects(RegisterDimensionSpecialEffectsEvent event) {
+        event.register(ResourceLocation.fromNamespaceAndPath("utm", "2313ag"), new DimensionSpecialEffects(Float.NaN, false, DimensionSpecialEffects.SkyType.NONE, false, false) {
+            @Override
+            public @NotNull Vec3 getBrightnessDependentFogColor(@NotNull Vec3 pos, float arg2) {
+                return Vec3.ZERO;
+
+            }
+
+            @Override
+            public boolean isFoggyAt(int x, int z) {
+                return true;
+            }
+
+            @Override
+            public float[] getSunriseColor(float timeOfDay, float partialTicks) {
+                return null;
+            }
+        });
+    }
+
+    @SubscribeEvent
+    public static void onGuiInit(ScreenEvent.Init.Post event) {
+        if (!ToastReady && event.getScreen() instanceof TitleScreen) {
+            ToastReady = true;
+            utmClient.tryToastPopup();
+        }
+    }
+
+    @SubscribeEvent
+    public static void registerScreens(RegisterMenuScreensEvent event) {
+        event.register(utmMenus.GLINT_MENU.get(), GlintScreen::new);
+        event.register(utmMenus.OXYGEN_FURNACE_MENU.get(), OxygenFurnaceScreen::new);
     }
 
     @SubscribeEvent
@@ -138,50 +174,8 @@ public class utmClient {
     }
 
     @SubscribeEvent
-    public static void registerCurioRenderers(FMLClientSetupEvent event) {
-        CuriosRendererRegistry.register(AllItems.COPPER_BACKTANK.get(), BacktankCurioRenderer::new);
-        CuriosRendererRegistry.register(AllItems.NETHERITE_BACKTANK.get(), BacktankCurioRenderer::new);
-    }
-
-    @SubscribeEvent
-    public static void registerModels(ModelEvent.RegisterAdditional event) {
-        event.register(CitywallsBlockEntityRenderer.CWL);
-        event.register(CitywallsBlockEntityRenderer.OWM);
-        event.register(CitywallsBlockEntityRenderer.OWS);
-        event.register(CitywallsBlockEntityRenderer.CWS);
-    }
-
-    @SubscribeEvent
-    public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
-        event.registerBlockEntityRenderer(
-                utmBlockEntities.CITYWALLS_METAL.get(),
-                CitywallsBlockEntityRenderer::new
-        );
-
-        event.registerBlockEntityRenderer(
-                utmBlockEntities.OXYGEN_COLLECTOR.get(),
-                OxygenCollectorRenderer::new
-        );
-    }
-
-    @SubscribeEvent
-    public static void registerDimensionEffects(RegisterDimensionSpecialEffectsEvent event) {
-        event.register(ResourceLocation.fromNamespaceAndPath("utm", "2313ag"), new DimensionSpecialEffects(Float.NaN, false, DimensionSpecialEffects.SkyType.NONE, false, false) {
-            @Override
-            public @NotNull Vec3 getBrightnessDependentFogColor(@NotNull Vec3 pos, float arg2) {
-                return Vec3.ZERO;
-            }
-
-            @Override
-            public boolean isFoggyAt(int x, int z) {
-                return true;
-            }
-
-            @Override
-            public float[] getSunriseColor(float timeOfDay, float partialTicks) {
-                return null;
-            }
-        });
+    public static void onToast(ToastDisplaySignal event) {
+        utmClient.tryToastPopup();
     }
 
     @SubscribeEvent
@@ -191,23 +185,34 @@ public class utmClient {
             private static final ResourceLocation FLOWING = ResourceLocation.fromNamespaceAndPath("minecraft", "block/water_flow");
 
             @Override
-            public @NotNull ResourceLocation getStillTexture() { return STILL; }
+            public @NotNull ResourceLocation getStillTexture() {
+                return STILL;
+            }
+
             @Override
-            public @NotNull ResourceLocation getFlowingTexture() { return FLOWING; }
+            public @NotNull ResourceLocation getFlowingTexture() {
+                return FLOWING;
+            }
+
             @Override
-            public int getTintColor() { return 0xFFB3E5FC; }
+            public int getTintColor() {
+                return 0xFFB3E5FC;
+            }
         }, utmFluids.LIQUID_OXYGEN_TYPE);
 
         event.registerFluidType(new IClientFluidTypeExtensions() {
-            private static final ResourceLocation STILL = ResourceLocation.fromNamespaceAndPath("minecraft", "block/lava_still");
-            private static final ResourceLocation FLOWING = ResourceLocation.fromNamespaceAndPath("minecraft", "block/lava_flow");
+            private static final ResourceLocation STILL = utm.key("block/molten_steel_still");
+            private static final ResourceLocation FLOWING = utm.key("block/molten_steel_flow");
 
             @Override
-            public @NotNull ResourceLocation getStillTexture() { return STILL; }
+            public @NotNull ResourceLocation getStillTexture() {
+                return STILL;
+            }
+
             @Override
-            public @NotNull ResourceLocation getFlowingTexture() { return FLOWING; }
-            @Override
-            public int getTintColor() { return 0xFFFFB278; }
+            public @NotNull ResourceLocation getFlowingTexture() {
+                return FLOWING;
+            }
         }, utmFluids.MOLTEN_STEEL_TYPE);
     }
 }

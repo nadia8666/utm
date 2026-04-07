@@ -1,5 +1,6 @@
 package com.nadia.utm.block;
 
+import com.nadia.utm.utm;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -13,8 +14,9 @@ public class InterdictorBlock extends RotatableBlock {
     }
 
     protected void neighborChanged(@NotNull BlockState state, Level level, @NotNull BlockPos pos, @NotNull Block block, @NotNull BlockPos fromPos, boolean isMoving) {
-        if (!level.isClientSide)  { // also needs redstone signal detect
+        if (!level.isClientSide && level.hasNeighborSignal(pos))  {
             // apply one stack of Interdicted! to all players nearby
+            utm.LOGGER.info("[UTM] deploy the interdicted");
         }
 
     }

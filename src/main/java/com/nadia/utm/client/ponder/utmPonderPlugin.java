@@ -21,10 +21,10 @@ public class utmPonderPlugin implements PonderPlugin {
 
     @Override
     public void registerScenes(PonderSceneRegistrationHelper<ResourceLocation> helper) {
-        helper.forComponents(utmBlocks.LAUNCH_CONTRAPTION.block.getId())
+        helper.forComponents(utmBlocks.LAUNCH_CONTRAPTION.BLOCK.getId())
                 .addStoryBoard("launch_contraption/launch_contraption", LaunchContraptionScene::scene, A23);
 
-        helper.forComponents(utmBlocks.OXYGEN_COLLECTOR.block.getId())
+        helper.forComponents(utmBlocks.OXYGEN_COLLECTOR.BLOCK.getId())
                 .addStoryBoard("oxygen_collector/oxygen_collector", OxygenCollectorScene::scene, A23, OXYGEN);
     }
 
@@ -34,22 +34,22 @@ public class utmPonderPlugin implements PonderPlugin {
 
         helper.registerTag(A23)
                 .addToIndex()
-                .item(utmBlocks.LAUNCH_CONTRAPTION.item.get(), true, false)
+                .item(utmBlocks.LAUNCH_CONTRAPTION.ITEM.get(), true, false)
                 .title("2313AG Components")
                 .description("Required components to interact with/enter 2313AG")
                 .register();
 
         helper.registerTag(OXYGEN)
                 .addToIndex()
-                .item(utmBlocks.OXYGEN_COLLECTOR.item.get(), true, false)
+                .item(utmBlocks.OXYGEN_COLLECTOR.ITEM.get(), true, false)
                 .title("Oxygen Manipulation")
                 .description("Blocks that work with Liquid Oxygen")
                 .register();
 
-        entryHelper.addToTag(A23).add(utmBlocks.LAUNCH_CONTRAPTION.block);
-        entryHelper.addToTag(A23).add(utmBlocks.OXYGEN_COLLECTOR.block);
-        entryHelper.addToTag(OXYGEN).add(utmBlocks.OXYGEN_COLLECTOR.block);
-        entryHelper.addToTag(AllCreatePonderTags.CONTRAPTION_ACTOR).add(utmBlocks.LAUNCH_CONTRAPTION.block);
+        entryHelper.addToTag(A23).add(utmBlocks.LAUNCH_CONTRAPTION.BLOCK);
+        entryHelper.addToTag(A23).add(utmBlocks.OXYGEN_COLLECTOR.BLOCK);
+        entryHelper.addToTag(OXYGEN).add(utmBlocks.OXYGEN_COLLECTOR.BLOCK);
+        entryHelper.addToTag(AllCreatePonderTags.CONTRAPTION_ACTOR).add(utmBlocks.LAUNCH_CONTRAPTION.BLOCK);
     }
 
     @Override

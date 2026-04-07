@@ -2,7 +2,6 @@ package com.nadia.utm.server;
 
 import com.nadia.utm.block.BlockChunkLoaderBlock;
 import com.nadia.utm.block.entity.ChunkLoaderBlockEntity;
-import com.nadia.utm.utm;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -41,7 +40,6 @@ public class ChunkLoadHandler {
     @SubscribeEvent
     public static void onRegisterTicketControllers(RegisterTicketControllersEvent event) {
         event.register(CONTROLLER);
-        utm.LOGGER.info("[UTM] Registered ticket controller");
     }
 
     @SubscribeEvent

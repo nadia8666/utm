@@ -43,7 +43,7 @@ public class utmRegistry {
             .register("main", () -> CreativeModeTab.builder()
                     .title(Component.translatable("itemGroup.utm"))
                     .withTabsBefore(CreativeModeTabs.COMBAT)
-                    .icon(utmItems.MUSIC_DISC_UNDERTALE.get()::getDefaultInstance)
+                    .icon(utmItems.MUSIC_DISC_UNDERTALE.ITEM().get()::getDefaultInstance)
                     .displayItems((parameters, output) -> {
                         utmRegistry.BLOCKS.getEntries().forEach(entry -> {
                             if (entry.get() instanceof LiquidBlock) return;
@@ -55,7 +55,7 @@ public class utmRegistry {
 
     public static void addCreative(BuildCreativeModeTabContentsEvent event) {
         if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
-            event.accept(utmBlocks.HEAVY_METAL_ANVIL.item);
+            event.accept(utmBlocks.HEAVY_METAL_ANVIL.ITEM);
         }
     }
 

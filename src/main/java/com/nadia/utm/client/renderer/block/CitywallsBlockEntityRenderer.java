@@ -1,24 +1,25 @@
-package com.nadia.utm.client.renderer;
+package com.nadia.utm.client.renderer.block;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.nadia.utm.block.entity.CitywallsBlockEntity;
+import com.nadia.utm.event.BoundEvent;
+import com.nadia.utm.event.utmEvents;
+import com.nadia.utm.registry.block.utmBlockEntities;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.resources.model.ModelResourceLocation;
-import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import org.jetbrains.annotations.NotNull;
 
+@BoundEvent
 public class CitywallsBlockEntityRenderer implements BlockEntityRenderer<CitywallsBlockEntity> {
     private final BlockRenderDispatcher dispatcher;
     public CitywallsBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
@@ -40,11 +41,6 @@ public class CitywallsBlockEntityRenderer implements BlockEntityRenderer<Citywal
         return 512;
     }
 
-    public int getLightLevel(Level level, BlockPos pos) {
-        int bLight = level.getBrightness(LightLayer.BLOCK, pos);
-        int sLight = level.getBrightness(LightLayer.SKY, pos);
-        return LightTexture.pack(bLight,sLight);
-    }
     public static final ModelResourceLocation CWL = ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath("utm", "block/citywalls_metal"));
     public static final ModelResourceLocation OWM = ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath("utm", "block/outpostwalls_metal"));
     public static final ModelResourceLocation OWS = ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath("utm", "block/outpostwalls_shrine"));
@@ -90,5 +86,12 @@ public class CitywallsBlockEntityRenderer implements BlockEntityRenderer<Citywal
             );
 
         stack.popPose();
+    }
+
+    static {
+        utmEvents.register(EntityRenderersEvent.RegisterRenderers.class, (event) -> event.registerBlockEntityRenderer(
+                utmBlockEntities.CITYWALLS_METAL.get(),
+                CitywallsBlockEntityRenderer::new
+        ));
     }
 }

@@ -16,7 +16,7 @@ public class RecipeEvents {
         ItemStack left = event.getLeft();
         ItemStack right = event.getRight();
         if (left.is(Items.ANVIL) && right.is(Items.NETHERITE_INGOT) && right.getCount() >= 1) {
-            event.setOutput(new ItemStack(utmBlocks.HEAVY_METAL_ANVIL.item.get()));
+            event.setOutput(new ItemStack(utmBlocks.HEAVY_METAL_ANVIL.ITEM.get()));
             event.setMaterialCost(1);
             event.setCost(HEAVY_METAL_ANVIL_LEVEL_REQUIREMENT.getAsInt());
         }

@@ -23,7 +23,7 @@ public class utmItemTagProvider extends ItemTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.@NotNull Provider provider) {
-        tag(ItemTags.ANVIL).add(utmBlocks.HEAVY_METAL_ANVIL.item.get());
+        tag(ItemTags.ANVIL).add(utmBlocks.HEAVY_METAL_ANVIL.ITEM.get());
 
         tag(Tags.Items.ENCHANTABLES).add(utmTools.OBSIDIAN_SWORD.get());
         tag(ItemTags.SWORD_ENCHANTABLE).add(utmTools.OBSIDIAN_SWORD.get());
@@ -39,7 +39,8 @@ public class utmItemTagProvider extends ItemTagsProvider {
         tag(ItemTags.WEAPON_ENCHANTABLE).add(utmTools.CYCLESWORD.get());
         tag(ItemTags.DURABILITY_ENCHANTABLE).add(utmTools.CYCLESWORD.get());
 
-        tag(Tags.Items.BUCKETS).add(utmItems.LIQUID_OXYGEN_BUCKET.get());
+        tag(Tags.Items.BUCKETS).add(utmItems.LIQUID_OXYGEN_BUCKET.ITEM().get());
+        tag(Tags.Items.BUCKETS).add(utmItems.MOLTEN_STEEL_BUCKET.ITEM().get());
 
         // copper tools
         tag(Tags.Items.ENCHANTABLES).add(utmTools.COPPER_SWORD.get());
@@ -72,25 +73,25 @@ public class utmItemTagProvider extends ItemTagsProvider {
         tag(ItemTags.DURABILITY_ENCHANTABLE).add(utmTools.NETHERYTRA.get());
         tag(ItemTags.CHEST_ARMOR_ENCHANTABLE).add(utmTools.NETHERYTRA.get()); // dont want prot but oh well
 
-        tag(utmTags.ITEMS.ELYTRA_TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_VEIN.get());
-        tag(utmTags.ITEMS.ELYTRA_TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_OUTWARD.get());
-        tag(utmTags.ITEMS.ELYTRA_TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_LESSER.get());
-        tag(utmTags.ITEMS.ELYTRA_TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_HEARTSTWINGS.get());
-        tag(utmTags.ITEMS.ELYTRA_TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_SPADES.get());
-        tag(utmTags.ITEMS.ELYTRA_TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_ROADRUNNER.get());
-        tag(utmTags.ITEMS.ELYTRA_TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_ECOLOGIST.get());
+        tag(utmTags.ITEMS.ELYTRA_TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_VEIN.ITEM().get());
+        tag(utmTags.ITEMS.ELYTRA_TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_OUTWARD.ITEM().get());
+        tag(utmTags.ITEMS.ELYTRA_TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_LESSER.ITEM().get());
+        tag(utmTags.ITEMS.ELYTRA_TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_HEARTSTWINGS.ITEM().get());
+        tag(utmTags.ITEMS.ELYTRA_TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_SPADES.ITEM().get());
+        tag(utmTags.ITEMS.ELYTRA_TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_ROADRUNNER.ITEM().get());
+        tag(utmTags.ITEMS.ELYTRA_TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_ECOLOGIST.ITEM().get());
 
-        tag(ItemTags.TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_VEIN.get());
-        tag(ItemTags.TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_OUTWARD.get());
-        tag(ItemTags.TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_LESSER.get());
-        tag(ItemTags.TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_HEARTSTWINGS.get());
-        tag(ItemTags.TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_SPADES.get());
-        tag(ItemTags.TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_ROADRUNNER.get());
-        tag(ItemTags.TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_ECOLOGIST.get());
+        tag(ItemTags.TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_VEIN.ITEM().get());
+        tag(ItemTags.TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_OUTWARD.ITEM().get());
+        tag(ItemTags.TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_LESSER.ITEM().get());
+        tag(ItemTags.TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_HEARTSTWINGS.ITEM().get());
+        tag(ItemTags.TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_SPADES.ITEM().get());
+        tag(ItemTags.TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_ROADRUNNER.ITEM().get());
+        tag(ItemTags.TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_ECOLOGIST.ITEM().get());
 
-        tag(Tags.Items.MUSIC_DISCS).add(utmItems.MUSIC_DISC_TEARS.get());
-        tag(Tags.Items.MUSIC_DISCS).add(utmItems.MUSIC_DISC_LAVA_CHICKEN.get());
-        tag(Tags.Items.MUSIC_DISCS).add(utmItems.MUSIC_DISC_UNDERTALE.get());
+        tag(Tags.Items.MUSIC_DISCS).add(utmItems.MUSIC_DISC_TEARS.ITEM().get());
+        tag(Tags.Items.MUSIC_DISCS).add(utmItems.MUSIC_DISC_LAVA_CHICKEN.ITEM().get());
+        tag(Tags.Items.MUSIC_DISCS).add(utmItems.MUSIC_DISC_UNDERTALE.ITEM().get());
 
         tag(Tags.Items.ENCHANTABLES).add(utmTools.ENCHANTED_SWORD_BLUE.get());
         tag(ItemTags.SWORD_ENCHANTABLE).add(utmTools.ENCHANTED_SWORD_BLUE.get());

@@ -29,7 +29,7 @@ public class utmEmiPlugin implements EmiPlugin {
                 ResourceLocation.fromNamespaceAndPath("utm", "/anvil_transform/heavy_metal_anvil"),
                 new ItemStack(Items.ANVIL),
                 new ItemStack(Items.NETHERITE_INGOT),
-                new ItemStack(utmBlocks.HEAVY_METAL_ANVIL.item.get())
+                new ItemStack(utmBlocks.HEAVY_METAL_ANVIL.ITEM.get())
         ));
     }
 }

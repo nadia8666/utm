@@ -34,7 +34,7 @@ public class utmFluids {
 
     protected static final BaseFlowingFluid.Properties LIQUID_OXYGEN_PROPERTIES = new BaseFlowingFluid.Properties(
             LIQUID_OXYGEN_TYPE, LIQUID_OXYGEN, FLOWING_LIQUID_OXYGEN)
-            .bucket(utmItems.LIQUID_OXYGEN_BUCKET)
+            .bucket(utmItems.LIQUID_OXYGEN_BUCKET.ITEM())
             .block(utmBlocks.LIQUID_OXYGEN_BLOCK);
 
     // molten steel
@@ -54,6 +54,6 @@ public class utmFluids {
 
     protected static final BaseFlowingFluid.Properties MOLTEN_STEEL_PROPERTIES = new BaseFlowingFluid.Properties(
             MOLTEN_STEEL_TYPE, MOLTEN_STEEL, FLOWING_MOLTEN_STEEL)
-            .bucket(utmItems.MOLTEN_STEEL_BUCKET)
+            .bucket(utmItems.MOLTEN_STEEL_BUCKET.ITEM())
             .block(utmBlocks.MOLTEN_STEEL_BLOCK);
 }

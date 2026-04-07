@@ -31,7 +31,7 @@ public class utmGlobalLootModifiersProvider extends GlobalLootModifierProvider {
                         LootTableIdCondition.builder(ResourceLocation.withDefaultNamespace("entities/zombie")).build(),
                         LootItemRandomChanceCondition.randomChance(.005f).build()
                 },
-                utmItems.ELYTRA_TRIM_SPADES.get()
+                utmItems.ELYTRA_TRIM_SPADES.ITEM().get()
         ));
 
         add("elytra_trim_roadrunner_village", new AddItemModifier(
@@ -39,7 +39,7 @@ public class utmGlobalLootModifiersProvider extends GlobalLootModifierProvider {
                         LootTableIdCondition.builder(ResourceLocation.withDefaultNamespace("chests/village/village_plains_house")).build(),
                         LootItemRandomChanceCondition.randomChance(.75f).build()
                 },
-                utmItems.ELYTRA_TRIM_ROADRUNNER.get()
+                utmItems.ELYTRA_TRIM_ROADRUNNER.ITEM().get()
         ));
 
         add("elytra_trim_ecologist_trail_ruins", new ReplaceItemModifier(
@@ -47,7 +47,7 @@ public class utmGlobalLootModifiersProvider extends GlobalLootModifierProvider {
                         LootTableIdCondition.builder(ResourceLocation.withDefaultNamespace("archaeology/trail_ruins_common")).build(),
                         LootItemRandomChanceCondition.randomChance(.05f).build()
                 },
-                utmItems.ELYTRA_TRIM_ECOLOGIST.get()
+                utmItems.ELYTRA_TRIM_ECOLOGIST.ITEM().get()
         ));
 
         add("elytra_trim_heartstwings_end_city", new AddItemModifier(
@@ -55,7 +55,7 @@ public class utmGlobalLootModifiersProvider extends GlobalLootModifierProvider {
                         LootTableIdCondition.builder(ResourceLocation.withDefaultNamespace("chests/end_city_treasure")).build(),
                         LootItemRandomChanceCondition.randomChance(.20f).build()
                 },
-                utmItems.ELYTRA_TRIM_HEARTSTWINGS.get()
+                utmItems.ELYTRA_TRIM_HEARTSTWINGS.ITEM().get()
         ));
 
         add("elytra_trim_lesser_fortress", new AddItemModifier(
@@ -63,7 +63,7 @@ public class utmGlobalLootModifiersProvider extends GlobalLootModifierProvider {
                         LootTableIdCondition.builder(ResourceLocation.withDefaultNamespace("chests/nether_bridge")).build(),
                         LootItemRandomChanceCondition.randomChance(.30f).build()
                 },
-                utmItems.ELYTRA_TRIM_LESSER.get()
+                utmItems.ELYTRA_TRIM_LESSER.ITEM().get()
         ));
 
         add("elytra_trim_outward_dungeon", new AddItemModifier(
@@ -71,7 +71,7 @@ public class utmGlobalLootModifiersProvider extends GlobalLootModifierProvider {
                         LootTableIdCondition.builder(ResourceLocation.withDefaultNamespace("chests/simple_dungeon")).build(),
                         LootItemRandomChanceCondition.randomChance(.20f).build()
                 },
-                utmItems.ELYTRA_TRIM_OUTWARD.get()
+                utmItems.ELYTRA_TRIM_OUTWARD.ITEM().get()
         ));
 
         add("elytra_trim_vein_mansion", new AddItemModifier(
@@ -79,7 +79,7 @@ public class utmGlobalLootModifiersProvider extends GlobalLootModifierProvider {
                         LootTableIdCondition.builder(ResourceLocation.withDefaultNamespace("chests/woodland_mansion")).build(),
                         LootItemRandomChanceCondition.randomChance(.50f).build()
                 },
-                utmItems.ELYTRA_TRIM_VEIN.get()
+                utmItems.ELYTRA_TRIM_VEIN.ITEM().get()
         ));
 
         // this is completley untested i just fumbled my way trhough it
@@ -91,7 +91,7 @@ public class utmGlobalLootModifiersProvider extends GlobalLootModifierProvider {
                                 EntityPredicate.Builder.entity().of(EntityType.FIREBALL)
                         ).build()
                 },
-                utmItems.MUSIC_DISC_TEARS.get()
+                utmItems.MUSIC_DISC_TEARS.ITEM().get()
         ));
 
         add("music_disc_lava_chicken_zombie", new AddItemModifier(
@@ -105,7 +105,7 @@ public class utmGlobalLootModifiersProvider extends GlobalLootModifierProvider {
                                                 .setIsBaby(true))
                         ).build()
                 },
-                utmItems.MUSIC_DISC_LAVA_CHICKEN.get()
+                utmItems.MUSIC_DISC_LAVA_CHICKEN.ITEM().get()
         ));
 
         add("music_disc_undertale_creeper", new AddItemModifier(
@@ -123,7 +123,7 @@ public class utmGlobalLootModifiersProvider extends GlobalLootModifierProvider {
                                 EntityPredicate.Builder.entity().of(EntityType.SPECTRAL_ARROW)
                         ).build()
                 },
-                utmItems.MUSIC_DISC_UNDERTALE.get()
+                utmItems.MUSIC_DISC_UNDERTALE.ITEM().get()
         ));
     }
 }

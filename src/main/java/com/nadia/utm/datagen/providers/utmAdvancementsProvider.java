@@ -33,8 +33,8 @@ public class utmAdvancementsProvider extends net.neoforged.neoforge.common.data.
             builder.parent(AdvancementSubProvider.createPlaceholder("minecraft:adventure/play_jukebox_in_meadows"));
             builder.display(
                     Items.MUSIC_DISC_STAL,
-                    Component.translatable("advancements.utm.all_discs.title"),
-                    Component.translatable("advancements.utm.all_discs.description"),
+                    Component.literal("Quite Compact Disc"),
+                    Component.literal("Collect all music discs"),
                     null,
                     AdvancementType.GOAL,
                     true,

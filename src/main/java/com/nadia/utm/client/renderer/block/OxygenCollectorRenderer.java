@@ -1,7 +1,10 @@
-package com.nadia.utm.client.renderer;
+package com.nadia.utm.client.renderer.block;
 
 import com.nadia.utm.block.entity.OxygenCollectorBlockEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.nadia.utm.event.BoundEvent;
+import com.nadia.utm.event.utmEvents;
+import com.nadia.utm.registry.block.utmBlockEntities;
 import com.nadia.utm.registry.model.utmPartialModels;
 import com.simibubi.create.AllPartialModels;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntityRenderer;
@@ -11,7 +14,9 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.Direction;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 
+@BoundEvent
 public class OxygenCollectorRenderer extends KineticBlockEntityRenderer<OxygenCollectorBlockEntity> {
     public OxygenCollectorRenderer(BlockEntityRendererProvider.Context context) {
         super(context);
@@ -36,5 +41,12 @@ public class OxygenCollectorRenderer extends KineticBlockEntityRenderer<OxygenCo
     @Override
     protected SuperByteBuffer getRotatedModel(OxygenCollectorBlockEntity be, net.minecraft.world.level.block.state.BlockState state) {
         return CachedBuffers.partial(utmPartialModels.OXYGEN_FAN, state);
+    }
+
+    static {
+        utmEvents.register(EntityRenderersEvent.RegisterRenderers.class, (event) -> event.registerBlockEntityRenderer(
+                utmBlockEntities.OXYGEN_COLLECTOR.get(),
+                OxygenCollectorRenderer::new
+        ));
     }
 }
