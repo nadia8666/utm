@@ -25,6 +25,10 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
+import static com.nadia.utm.client.ponder.utmPonderPlugin.A23;
+import static com.nadia.utm.client.ponder.utmPonderPlugin.OXYGEN;
+import static com.simibubi.create.infrastructure.ponder.AllCreatePonderTags.CONTRAPTION_ACTOR;
+
 public class utmBlocks {
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks("utm");
 
@@ -74,7 +78,8 @@ public class utmBlocks {
             .requiresCorrectToolForDrops()
             .noOcclusion()
             .isViewBlocking((state, level, pos) -> false)
-            .isSuffocating((state, level, pos) -> false)).drops().bModel();
+            .isSuffocating((state, level, pos) -> false))
+            .drops().bModel().ponder(A23, CONTRAPTION_ACTOR);
 
     public static final utmBlockContainer<OxygenCollectorBlock, BlockItem> OXYGEN_COLLECTOR = dualRegister("oxygen_collector", OxygenCollectorBlock::new, BlockBehaviour.Properties.of()
             .destroyTime(3.0f)
@@ -82,12 +87,14 @@ public class utmBlocks {
             .requiresCorrectToolForDrops()
             .noOcclusion()
             .isViewBlocking((state, level, pos) -> false)
-            .isSuffocating((state, level, pos) -> false)).stress(8).drops();
+            .isSuffocating((state, level, pos) -> false))
+            .stress(8).drops().ponder(A23, OXYGEN);
 
     public static final utmBlockContainer<OxygenFurnaceBlock, BlockItem> OXYGEN_FURNACE = dualRegister("oxygen_furnace", OxygenFurnaceBlock::new, BlockBehaviour.Properties.of()
             .destroyTime(5.0f)
             .explosionResistance(50f).sound(SoundType.METAL)
-            .noOcclusion()).drops().bModel();
+            .noOcclusion())
+            .drops().bModel().ponder(A23, OXYGEN);
 
     public static final utmBlockContainer<BlockChunkLoaderBlock, BlockItem> CHUNK_LOADER = dualRegister("chunk_loader", BlockChunkLoaderBlock::new, BlockBehaviour.Properties.of()
             .destroyTime(5.0f)

@@ -2,6 +2,8 @@ package com.nadia.utm.client.ponder;
 
 import com.nadia.utm.client.ponder.scenes.LaunchContraptionScene;
 import com.nadia.utm.client.ponder.scenes.OxygenCollectorScene;
+import com.nadia.utm.client.ponder.scenes.OxygenFurnaceScene;
+import com.nadia.utm.registry.block.utmBlockContainer;
 import com.nadia.utm.registry.block.utmBlocks;
 import com.nadia.utm.utm;
 import com.simibubi.create.infrastructure.ponder.AllCreatePonderTags;
@@ -15,10 +17,14 @@ import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class utmPonderPlugin implements PonderPlugin {
     public static final ResourceLocation A23 = utm.key("2313ag_reqs");
     public static final ResourceLocation OXYGEN = utm.key("oxygen");
 
+    @OnlyIn(Dist.CLIENT)
     @Override
     public void registerScenes(PonderSceneRegistrationHelper<ResourceLocation> helper) {
         helper.forComponents(utmBlocks.LAUNCH_CONTRAPTION.BLOCK.getId())
@@ -26,8 +32,12 @@ public class utmPonderPlugin implements PonderPlugin {
 
         helper.forComponents(utmBlocks.OXYGEN_COLLECTOR.BLOCK.getId())
                 .addStoryBoard("oxygen_collector/oxygen_collector", OxygenCollectorScene::scene, A23, OXYGEN);
+
+        helper.forComponents(utmBlocks.OXYGEN_FURNACE.BLOCK.getId())
+                .addStoryBoard("oxygen_furnace/oxygen_furnace", OxygenFurnaceScene::scene, A23, OXYGEN);
     }
 
+    @OnlyIn(Dist.CLIENT)
     @Override
     public void registerTags(PonderTagRegistrationHelper<ResourceLocation> helper) {
         PonderTagRegistrationHelper<DeferredHolder<?, ?>> entryHelper = helper.withKeyFunction(DeferredHolder::getId);
@@ -46,10 +56,21 @@ public class utmPonderPlugin implements PonderPlugin {
                 .description("Blocks that work with Liquid Oxygen")
                 .register();
 
-        entryHelper.addToTag(A23).add(utmBlocks.LAUNCH_CONTRAPTION.BLOCK);
-        entryHelper.addToTag(A23).add(utmBlocks.OXYGEN_COLLECTOR.BLOCK);
-        entryHelper.addToTag(OXYGEN).add(utmBlocks.OXYGEN_COLLECTOR.BLOCK);
-        entryHelper.addToTag(AllCreatePonderTags.CONTRAPTION_ACTOR).add(utmBlocks.LAUNCH_CONTRAPTION.BLOCK);
+        utmBlockContainer.DATAGEN_TAGS.forEach((c, tags) -> {
+            for (String tag : tags) {
+                if (tag.startsWith("ponderTags")) {
+                    List<String> ponderTags = Arrays.stream(Arrays.stream(tag.split(":")).toList().getLast().split(",")).toList();
+                    for (String path : ponderTags) {
+                        switch (path) {
+                            case "2313ag_reqs":
+                                entryHelper.addToTag(A23).add(c.BLOCK);
+                            case "oxygen":
+                                entryHelper.addToTag(OXYGEN).add(c.BLOCK);
+                        }
+                    }
+                }
+            }
+        });
     }
 
     @Override

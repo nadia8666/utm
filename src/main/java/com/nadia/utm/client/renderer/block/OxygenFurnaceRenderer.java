@@ -2,12 +2,16 @@ package com.nadia.utm.client.renderer.block;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.nadia.utm.block.entity.OxygenFurnaceBlockEntity;
+import com.nadia.utm.client.renderer.utmRenderTypes;
 import com.nadia.utm.event.ForceLoad;
 import com.nadia.utm.event.utmEvents;
 import com.nadia.utm.registry.block.utmBlockEntities;
+import com.nadia.utm.registry.model.utmPartialModels;
 import com.nadia.utm.util.PoseUtil;
 import com.simibubi.create.foundation.blockEntity.renderer.SafeBlockEntityRenderer;
 import net.createmod.catnip.platform.NeoForgeCatnipServices;
+import net.createmod.catnip.render.CachedBuffers;
+import net.createmod.catnip.render.SuperByteBuffer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
@@ -25,6 +29,9 @@ public class OxygenFurnaceRenderer extends SafeBlockEntityRenderer<OxygenFurnace
 
         drawTank(oxygenStack, buffer, ms, light, 11, 1 / 128f, 16 - 1 / 128f, 6 - 1 / 128f);
         drawTank(steelStack, buffer, ms, light, 1 / 128f, 6 + 1 / 128f, 4 - 1 / 128f, 16 - 1 / 128f);
+
+        SuperByteBuffer tanks = CachedBuffers.partial(utmPartialModels.OXYGEN_FURNACE_TANKS, be.getBlockState());
+        tanks.light(light).nudge(1).renderInto(ms, buffer.getBuffer(utmRenderTypes.TRANSLUCENT_NO_CULL));
     }
 
     private void drawTank(FluidStack stack, MultiBufferSource buffer, PoseStack ms, int light, float x1, float z1, float y2, float z2) {

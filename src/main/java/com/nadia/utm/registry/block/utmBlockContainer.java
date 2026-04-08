@@ -1,6 +1,7 @@
 package com.nadia.utm.registry.block;
 
 import com.simibubi.create.api.stress.BlockStressValues;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.registries.DeferredBlock;
@@ -58,6 +59,17 @@ public class utmBlockContainer<B extends Block, I extends BlockItem> {
      */
     public utmBlockContainer<B, I> bModel() {
         getForDatagen().add("blockModel");
+        return this;
+    }
+
+    /**
+     * set the ponder tags
+     * @return block container
+     * @datagen
+     */
+    public utmBlockContainer<B, I> ponder(ResourceLocation... ponderTags) {
+        List<ResourceLocation> tags = new ArrayList<>(List.of(ponderTags));
+        getForDatagen().add("ponderTags:" + String.join(",",tags.stream().map(ResourceLocation::getPath).toList()));
         return this;
     }
 

@@ -189,4 +189,21 @@ public class utmRenderTypes {
             return "CUSTOM";
         }
     });
+
+    public static final RenderType TRANSLUCENT_NO_CULL = RenderType.create(
+            "utm_translucent_no_cull",
+            DefaultVertexFormat.BLOCK,
+            VertexFormat.Mode.QUADS,
+            1536,
+            true,
+            true,
+            RenderType.CompositeState.builder()
+                    .setLightmapState(RenderStateShard.LIGHTMAP)
+                    .setShaderState(RenderStateShard.RENDERTYPE_TRANSLUCENT_SHADER)
+                    .setTextureState(RenderStateShard.BLOCK_SHEET_MIPPED)
+                    .setTransparencyState(RenderStateShard.TRANSLUCENT_TRANSPARENCY)
+                    .setOutputState(RenderStateShard.TRANSLUCENT_TARGET)
+                    .setCullState(RenderStateShard.NO_CULL)
+                    .createCompositeState(true)
+    );
 }
