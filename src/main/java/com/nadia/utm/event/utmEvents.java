@@ -14,7 +14,6 @@ public class utmEvents {
     private static IEventBus BUS;
     private static final Set<Class<? extends Event>> HOOKED_EVENTS = Collections.newSetFromMap(new ConcurrentHashMap<>());
     private static final Map<Class<? extends Event>, List<Consumer<?>>> CALLBACKS = new ConcurrentHashMap<>();
-    private static final Map<Class<? extends Event>, Event> STICKY_EVENTS = new ConcurrentHashMap<>();
 
     public static void setup(IEventBus bus) {
         utmEvents.BUS = bus;
@@ -25,11 +24,6 @@ public class utmEvents {
             addEvent(eventClass);
 
         CALLBACKS.computeIfAbsent(eventClass, k -> new ArrayList<>()).add(callback);
-
-        if (STICKY_EVENTS.containsKey(eventClass)) {
-            E cachedEvent = eventClass.cast(STICKY_EVENTS.get(eventClass));
-            callback.accept(cachedEvent);
-        }
     }
 
     private static <E extends Event> void addEvent(Class<E> eventClass) {
@@ -44,13 +38,9 @@ public class utmEvents {
 
     @SuppressWarnings("unchecked")
     public static <E extends Event> void fire(E event) {
-        STICKY_EVENTS.put(event.getClass(), event);
-
         List<Consumer<?>> targets = CALLBACKS.get(event.getClass());
-        if (targets != null) {
-            for (Consumer<?> consumer : targets) {
+        if (targets != null)
+            for (Consumer<?> consumer : targets)
                 ((Consumer<E>) consumer).accept(event);
-            }
-        }
     }
 }

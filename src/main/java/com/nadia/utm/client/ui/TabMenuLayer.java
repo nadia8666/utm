@@ -1,7 +1,7 @@
 package com.nadia.utm.client.ui;
 
 import com.nadia.utm.Config;
-import com.nadia.utm.networking.TabLayerPayload;
+import com.nadia.utm.networking.payloads.TabLayerPayload;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.PlayerFaceRenderer;

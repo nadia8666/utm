@@ -1,6 +1,7 @@
 package com.nadia.utm.gui;
 
 import com.nadia.utm.block.entity.GlintTableBlockEntity;
+import com.nadia.utm.networking.payloads.GlintSyncPayload;
 import com.nadia.utm.registry.block.utmBlocks;
 import com.nadia.utm.registry.data.utmDataComponents;
 import com.nadia.utm.registry.ui.utmMenus;
@@ -253,5 +254,15 @@ public class GlintMenu extends AbstractContainerMenu {
     public void removed(@NotNull Player player) {
         super.removed(player);
         this.clearContainer(player, container);
+    }
+
+    public void unpack(GlintSyncPayload payload) {
+        this.COLOR = payload.color();
+        this.ADDITIVE = payload.additive();
+        this.SPEED = new Vector2f(payload.speed());
+        this.SCALE = new Vector2f(payload.scale());
+        this.TYPE = payload.glintType();
+
+        broadcastChanges();
     }
 }

@@ -2,9 +2,9 @@ package com.nadia.utm.server;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.nadia.utm.event.BoundEvent;
+import com.nadia.utm.event.ForceLoad;
 import com.nadia.utm.event.utmEvents;
-import com.nadia.utm.networking.TabLayerPayload;
+import com.nadia.utm.networking.payloads.TabLayerPayload;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.storage.LevelResource;
@@ -23,7 +23,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
 
-@BoundEvent
+@ForceLoad
 public class TabMenuServer {
     private static final Map<UUID, String> PLAYER_CACHE = new HashMap<>();
     private static final Path SAVE_PATH = Path.of("world/utm_tab_history.json");

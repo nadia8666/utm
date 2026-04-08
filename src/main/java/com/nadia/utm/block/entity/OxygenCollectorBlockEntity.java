@@ -1,7 +1,7 @@
 package com.nadia.utm.block.entity;
 
 import com.nadia.utm.block.entity.components.OutputOnlyTank;
-import com.nadia.utm.event.BoundEvent;
+import com.nadia.utm.event.ForceLoad;
 import com.nadia.utm.event.utmEvents;
 import com.nadia.utm.registry.block.utmBlockEntities;
 import com.nadia.utm.registry.fluid.utmFluids;
@@ -34,7 +34,7 @@ import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 
 import java.util.List;
 
-@BoundEvent
+@ForceLoad
 public class OxygenCollectorBlockEntity extends SplitShaftBlockEntity implements IHaveGoggleInformation {
     public static final int MAX_AIR = 1000;
     public double FILL_SPEED = 0;

@@ -1,6 +1,6 @@
 package com.nadia.utm.block.entity;
 
-import com.nadia.utm.event.BoundEvent;
+import com.nadia.utm.event.ForceLoad;
 import com.nadia.utm.event.utmEvents;
 import com.nadia.utm.gui.OxygenFurnaceMenu;
 import com.nadia.utm.registry.block.utmBlockEntities;
@@ -36,7 +36,7 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-@BoundEvent
+@ForceLoad
 public class OxygenFurnaceBlockEntity extends SmartBlockEntity implements MenuProvider, IHaveGoggleInformation {
     public SmartFluidTankBehaviour LOX;
     public SmartFluidTankBehaviour STEEL;

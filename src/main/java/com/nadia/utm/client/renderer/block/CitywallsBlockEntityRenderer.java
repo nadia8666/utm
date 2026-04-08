@@ -2,7 +2,7 @@ package com.nadia.utm.client.renderer.block;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.nadia.utm.block.entity.CitywallsBlockEntity;
-import com.nadia.utm.event.BoundEvent;
+import com.nadia.utm.event.ForceLoad;
 import com.nadia.utm.event.utmEvents;
 import com.nadia.utm.registry.block.utmBlockEntities;
 import net.minecraft.client.Minecraft;
@@ -19,7 +19,7 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import org.jetbrains.annotations.NotNull;
 
-@BoundEvent
+@ForceLoad
 public class CitywallsBlockEntityRenderer implements BlockEntityRenderer<CitywallsBlockEntity> {
     private final BlockRenderDispatcher dispatcher;
     public CitywallsBlockEntityRenderer(BlockEntityRendererProvider.Context context) {

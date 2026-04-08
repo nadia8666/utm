@@ -1,5 +1,7 @@
-package com.nadia.utm.networking;
+package com.nadia.utm.networking.payloads;
 
+import com.nadia.utm.networking.PacketDef;
+import com.nadia.utm.networking.utmCodecs;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -27,7 +29,9 @@ public record GlintSyncPayload(
     );
 
     @Override
-    public @NotNull Type<? extends CustomPacketPayload> type() {
+    public @NotNull Type<GlintSyncPayload> type() {
         return TYPE;
     }
+
+    public static PacketDef<GlintSyncPayload> DEF = new PacketDef<>(TYPE, STREAM_CODEC);
 }

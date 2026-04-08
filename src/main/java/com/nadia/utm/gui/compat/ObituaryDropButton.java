@@ -1,6 +1,6 @@
 package com.nadia.utm.gui.compat;
 
-import com.nadia.utm.networking.DropGravePayload;
+import com.nadia.utm.networking.payloads.DropGravePayload;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;

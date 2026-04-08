@@ -2,7 +2,7 @@ package com.nadia.utm.client.renderer.block;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.nadia.utm.block.entity.OxygenFurnaceBlockEntity;
-import com.nadia.utm.event.BoundEvent;
+import com.nadia.utm.event.ForceLoad;
 import com.nadia.utm.event.utmEvents;
 import com.nadia.utm.registry.block.utmBlockEntities;
 import com.nadia.utm.util.PoseUtil;
@@ -13,7 +13,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.fluids.FluidStack;
 
-@BoundEvent
+@ForceLoad
 public class OxygenFurnaceRenderer extends SafeBlockEntityRenderer<OxygenFurnaceBlockEntity> {
     public OxygenFurnaceRenderer(BlockEntityRendererProvider.Context context) {
     }

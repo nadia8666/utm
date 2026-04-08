@@ -1,9 +1,11 @@
 package com.nadia.utm;
 
-import com.nadia.utm.event.BoundEvent;
+import com.nadia.utm.event.ForceLoad;
 import com.nadia.utm.event.utmEvents;
 import net.minecraft.resources.ResourceLocation;
+import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.fml.loading.FMLPaths;
+import net.neoforged.neoforgespi.language.ModFileScanData;
 import org.objectweb.asm.Type;
 import org.slf4j.Logger;
 
@@ -24,6 +26,8 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
+import java.util.List;
+import java.util.Objects;
 
 @Mod(utm.MODID)
 public class utm {
@@ -31,33 +35,40 @@ public class utm {
     public static final Logger LOGGER = LogUtils.getLogger();
     public static String VERSION = "";
 
-    public utm(IEventBus modEventBus, ModContainer modContainer) {
-        utmEvents.setup(modEventBus);
-        bindEvents(modContainer);
+    public utm(IEventBus bus, ModContainer container) {
+        utmEvents.setup(bus);
+        loadClasses(container);
 
-        VERSION = modContainer.getModInfo().getVersion().toString();
+        VERSION = container.getModInfo().getVersion().toString();
         AutoUpdater.CURRENT_VERSION = VERSION;
-        modEventBus.addListener(this::commonSetup);
+        bus.addListener(this::commonSetup);
 
-        utmRegistry.registerAll(modEventBus);
+        utmRegistry.registerAll(bus);
         NeoForge.EVENT_BUS.register(this);
-        modEventBus.addListener(utmRegistry::addCreative);
+        bus.addListener(utmRegistry::addCreative);
 
-        modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
-
+        container.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
 
-    public static void bindEvents(ModContainer container) {
-        var scanData = container.getModInfo().getOwningFile().getFile().getScanResult();
-        var annotationType = Type.getDescriptor(BoundEvent.class);
+    private static void loadClasses(ModContainer container) {
+        ModFileScanData scan = container.getModInfo().getOwningFile().getFile().getScanResult();
+        String annotation = Type.getDescriptor(ForceLoad.class);
+        String currentDist = FMLEnvironment.dist.name();
 
-        scanData.getAnnotations().stream()
-                .filter(data -> annotationType.equals(data.annotationType().getDescriptor()))
+        scan.getAnnotations().stream()
+                .filter(data -> annotation.equals(data.annotationType().getDescriptor()))
                 .forEach(data -> {
+                    String dist = "COMMON";
+
+                    if (data.annotationData().get("dist") instanceof List<?> list && list.size() == 2)
+                        dist = list.get(1).toString();
+
+                    if (Objects.equals(dist, "CLIENT")) return;
+
                     try {
                         Class.forName(data.clazz().getClassName(), true, utmEvents.class.getClassLoader());
                     } catch (ClassNotFoundException e) {
-                        utm.LOGGER.error("[UTM] Failed to load class {}, there WILL be problems!", data.clazz().getClassName());
+                        utm.LOGGER.error("[UTM] Failed to load class {} on {}, there WILL be problems!", data.clazz().getClassName(), dist);
                     }
                 });
     }

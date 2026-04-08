@@ -1,7 +1,7 @@
 package com.nadia.utm.mixin.compat;
 
 import com.nadia.utm.gui.compat.ObituaryDropButton;
-import com.nadia.utm.networking.DropGravePayload;
+import com.nadia.utm.networking.payloads.DropGravePayload;
 import de.maxhenkel.gravestone.corelib.death.Death;
 import de.maxhenkel.gravestone.gui.ObituaryScreen;
 import net.minecraft.client.gui.screens.Screen;

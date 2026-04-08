@@ -1,5 +1,6 @@
-package com.nadia.utm.networking;
+package com.nadia.utm.networking.payloads;
 
+import com.nadia.utm.networking.PacketDef;
 import net.minecraft.core.UUIDUtil;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -20,12 +21,13 @@ public record TabLayerPayload(List<PlayerData> players) implements CustomPacketP
     );
 
     @Override
-    public @NotNull Type<? extends CustomPacketPayload> type() {
+    public @NotNull Type<TabLayerPayload> type() {
         return TYPE;
     }
 
-    public record PlayerData(UUID id, String name, boolean online, float health, float maxHealth, String dimension, int ping) {
+    public static PacketDef<TabLayerPayload> DEF = new PacketDef<>(TYPE, STREAM_CODEC);
 
+    public record PlayerData(UUID id, String name, boolean online, float health, float maxHealth, String dimension, int ping) {
         public static final StreamCodec<RegistryFriendlyByteBuf, PlayerData> STREAM_CODEC = new StreamCodec<>() {
             @Override
             public void encode(@NotNull RegistryFriendlyByteBuf buf, PlayerData val) {
