@@ -16,12 +16,12 @@ public class OxygenCollectorScene {
         CreateSceneBuilder.WorldInstructions world = scene.world();
         scene.configureBasePlate(0, 0, 6);
 
+        world.setKineticSpeed(util.select().layersFrom(0), 128);
         for (int layer = 0; layer < 6; layer++) {
             world.showSection(util.select().layer(layer), Direction.DOWN);
             scene.idle(1);
         }
         scene.idle(10);
-        world.setKineticSpeed(util.select().layersFrom(0), 128);
 
         scene.overlay().showText(100)
                 .attachKeyFrame()

@@ -94,8 +94,6 @@ public class utmClientEvents {
                 event.registerRenderBuffer(utmRenderTypes.OVERLAY_GLINT_ITEM.get());
                 event.registerRenderBuffer(utmRenderTypes.ADDITIVE_GLINT_ENTITY.get());
                 event.registerRenderBuffer(utmRenderTypes.OVERLAY_GLINT_ENTITY.get());
-
-                PlanetRenderer.register();
             });
 
             utmEvents.register(FMLClientSetupEvent.class, event -> {

@@ -76,12 +76,9 @@ public class utmCommands {
                         .suggests((context, builder) -> SharedSuggestionProvider.suggest(new String[]{"update_toast"}, builder)).executes(context -> {
                             switch (StringArgumentType.getString(context, "test_type")) {
                                 case "update_toast": {
-                                    utm.LOGGER.info("[UTM] Testing toast!");
-
                                     ToastTarget = true;
                                     VersionTarget = "TEST VERSION";
                                     NeoForge.EVENT_BUS.post(new ToastDisplaySignal());
-                                    utm.LOGGER.info("[UTM] Test toast sent!");
                                 }
                             }
 

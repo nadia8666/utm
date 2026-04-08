@@ -27,11 +27,11 @@ public class OxygenFurnaceRenderer extends SafeBlockEntityRenderer<OxygenFurnace
         FluidStack oxygenStack = be.LOX.getPrimaryHandler().getFluid();
         FluidStack steelStack = be.STEEL.getPrimaryHandler().getFluid();
 
-        drawTank(oxygenStack, buffer, ms, light, 11, 1 / 128f, 16 - 1 / 128f, 6 - 1 / 128f);
-        drawTank(steelStack, buffer, ms, light, 1 / 128f, 6 + 1 / 128f, 4 - 1 / 128f, 16 - 1 / 128f);
+        drawTank(oxygenStack, buffer, ms, light, 11, 1 / 64f, 16 - 1 / 64f, 6 - 1 / 64f);
+        drawTank(steelStack, buffer, ms, light, 1 / 64f, 6 + 1 / 64f, 4 - 1 / 64f, 16 - 1 / 64f);
 
         SuperByteBuffer tanks = CachedBuffers.partial(utmPartialModels.OXYGEN_FURNACE_TANKS, be.getBlockState());
-        tanks.light(light).nudge(1).renderInto(ms, buffer.getBuffer(utmRenderTypes.TRANSLUCENT_NO_CULL));
+        tanks.light(light).translate(0, 1/128f, 0).renderInto(ms, buffer.getBuffer(utmRenderTypes.TRANSLUCENT_NO_CULL));
     }
 
     private void drawTank(FluidStack stack, MultiBufferSource buffer, PoseStack ms, int light, float x1, float z1, float y2, float z2) {

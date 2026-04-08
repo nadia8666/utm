@@ -1,5 +1,6 @@
 package com.nadia.utm.registry.item.tool;
 
+import com.nadia.utm.event.ForceLoad;
 import com.nadia.utm.item.FiddleheadItem;
 import com.nadia.utm.item.NetherytraItem;
 import com.nadia.utm.registry.item.utmItems;
@@ -12,6 +13,7 @@ import net.neoforged.neoforge.common.Tags;
 
 import java.util.function.Supplier;
 
+@ForceLoad
 public class utmTools {
     // tool set
     public static final Tier TIER_COPPER = utmToolBuilder.buildTier(
@@ -96,7 +98,4 @@ public class utmTools {
                         SwordItem.createAttributes(Tier, 6.5f, 6)));
             }
     );
-    public static void doNothing() {
-        utm.LOGGER.info("[UTM] Tools class loaded, so that it shows up!");
-    }
 }

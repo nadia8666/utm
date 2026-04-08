@@ -59,10 +59,7 @@ public class OxygenFurnaceBlockEntity extends SmartBlockEntity implements MenuPr
         }
 
         @Override
-        public void set(int index, int value) {
-            if (index == 0) progress = value;
-            else maxProgress = value;
-        }
+        public void set(int index, int value) {}
 
         @Override
         public int getCount() {

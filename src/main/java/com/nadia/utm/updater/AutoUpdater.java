@@ -55,8 +55,6 @@ public class AutoUpdater {
                 JsonObject json = JsonParser.parseString(response.body()).getAsJsonObject();
                 String version = json.get("tag_name").getAsString();
 
-                utm.LOGGER.warn("[UTM] Version check: {} {} {}", version, CURRENT_VERSION, Objects.equals(version, CURRENT_VERSION));
-
                 try {
                     tryMigrateVersion();
                 } catch (Exception e) {
@@ -73,7 +71,6 @@ public class AutoUpdater {
                         }
                     });
 
-                    utm.LOGGER.warn("[UTM] Starting update!");
                     startUpdate(element.get().get("browser_download_url").getAsString(), version);
                 }
             } else {
@@ -141,21 +138,19 @@ public class AutoUpdater {
                     VersionTarget = "FAILED";
                     ToastTarget = true;
 
-                    utm.LOGGER.warn("[UTM] Sending error toast!");
                     NeoForge.EVENT_BUS.post(new ToastDisplaySignal());
                 }
 
                 return;
             }
 
-            utm.LOGGER.warn("[UTM] Update installed, please restart Minecraft!");
+            utm.LOGGER.info("[UTM] Update installed, please restart Minecraft!");
             CURRENT_VERSION = latest;
 
             if (getDist() == Dist.CLIENT) {
                 VersionTarget = "v" + latest;
                 ToastTarget = true;
 
-                utm.LOGGER.warn("[UTM] Sending toast!");
                 NeoForge.EVENT_BUS.post(new ToastDisplaySignal());
             }
         });
@@ -189,14 +184,11 @@ public class AutoUpdater {
     });
 
     public static void startAutoUpdateLoop() {
-        utm.LOGGER.info("[UTM] Starting auto updater loop");
         if (!FMLEnvironment.production) return;
-        utm.LOGGER.info("[UTM] Scheduling...");
 
         SCHEDULER.scheduleAtFixedRate(() -> {
             try {
                 if (!Config.AUTO_UPDATE_ENABLED.get()) return;
-                utm.LOGGER.info("[UTM] Checking for updates.");
                 AutoUpdater.checkForUpdate();
             } catch (Exception e) {
                 utm.LOGGER.info("[UTM] Auto update failed: {}", e.getMessage());

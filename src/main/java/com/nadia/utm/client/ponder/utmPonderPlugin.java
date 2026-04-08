@@ -64,8 +64,13 @@ public class utmPonderPlugin implements PonderPlugin {
                         switch (path) {
                             case "2313ag_reqs":
                                 entryHelper.addToTag(A23).add(c.BLOCK);
+                                break;
                             case "oxygen":
                                 entryHelper.addToTag(OXYGEN).add(c.BLOCK);
+                                break;
+                            case "contraption_actor":
+                                entryHelper.addToTag(AllCreatePonderTags.CONTRAPTION_ACTOR);
+                                break;
                         }
                     }
                 }

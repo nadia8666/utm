@@ -79,7 +79,7 @@ public class utm {
         event.enqueueWork(() -> {
             try {
                 Path schematicDir = FMLPaths.GAMEDIR.get().resolve("schematics\\uploaded\\SERVER");
-                if (!Files.exists(schematicDir)) Files.createDirectories(schematicDir); // is this needed?
+                if (!Files.exists(schematicDir)) Files.createDirectories(schematicDir);
 
                 Path targetPath = schematicDir.resolve("incredipak.nbt");
                 String sourcePath = "/assets/utm/schematics/incredipak.nbt";

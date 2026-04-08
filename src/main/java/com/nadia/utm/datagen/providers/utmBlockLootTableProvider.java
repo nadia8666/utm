@@ -39,7 +39,6 @@ public class utmBlockLootTableProvider extends BlockLootSubProvider {
             for (String tag : tags) {
                 if (tag.equals("dropSelf"))
                     dropSelf(c.BLOCK.get());
-                utm.LOGGER.info("[UTM] REGISTERING TAGS FOR {}:{}", c.toString(), tag);
             }
         });
     }

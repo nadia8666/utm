@@ -4,6 +4,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import com.nadia.utm.Config;
+import com.nadia.utm.event.ForceLoad;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.level.Level;
 import net.neoforged.api.distmarker.Dist;
@@ -16,6 +17,7 @@ import org.lwjgl.opengl.GL11;
 import java.util.ArrayList;
 import java.util.List;
 
+@ForceLoad(dist = Dist.CLIENT)
 @EventBusSubscriber(modid = "utm", value = Dist.CLIENT)
 public class PlanetRenderer {
     public static final List<Planet> PLANET_REGISTRY = new ArrayList<>();
@@ -114,9 +116,5 @@ public class PlanetRenderer {
             planet.onRenderSky(time, mc, event);
 
         RenderSystem.clear(GL11.GL_DEPTH_BUFFER_BIT, Minecraft.ON_OSX);
-    }
-
-    public static void register() {
-        utm.LOGGER.info("[UTM] Initialized planets, {}!", PLANETS.EARTH); // don't remove this or java never initializes the classes :DDD
     }
 }

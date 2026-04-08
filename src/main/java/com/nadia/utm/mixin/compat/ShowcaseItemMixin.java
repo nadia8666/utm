@@ -31,8 +31,6 @@ public class ShowcaseItemMixin {
             at = @At(value = "MIXINEXTRAS:EXPRESSION", shift = At.Shift.AFTER),
             cancellable = true)
     private static void utm$showcaseCompat(CallbackInfo ci) {
-        utm.LOGGER.info("[UTM] check share");
-
         Minecraft mc = Minecraft.getInstance();
         double mouseX = mc.mouseHandler.xpos() * (double)mc.getWindow().getGuiScaledWidth() / (double)mc.getWindow().getWidth();
         double mouseY = mc.mouseHandler.ypos() * (double)mc.getWindow().getGuiScaledHeight() / (double)mc.getWindow().getHeight();
@@ -62,7 +60,5 @@ public class ShowcaseItemMixin {
             Slot slot = slots.get(slotIndex);
             stack = slot.getItem();
         }
-
-        utm.LOGGER.info("[UTM] ok: {}", stack.getDisplayName());
     }
 }

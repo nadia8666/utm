@@ -110,6 +110,9 @@
 
   "utm.ponder.tag.2313ag_reqs": "2313AG Components",
   "utm.ponder.tag.2313ag_reqs.description": "Required components to interact with/enter 2313AG",
+  "utm.ponder.tag.oxygen": "Oxygen Manipulation",
+  "utm.ponder.tag.oxygen.description": "Blocks that work with Liquid Oxygen",
+
   "utm.ponder.launch_contraption.intro.header": "Using the Launch Contraption",
   "utm.ponder.launch_contraption.intro.text_1": "The Launch Contraption is the core component required to leave for space",
   "utm.ponder.launch_contraption.intro.text_2": "When attached to a minecart contraption, it gains a functional interface",
@@ -117,14 +120,17 @@
   "utm.ponder.launch_contraption.intro.text_4": "All entities sat on the contraption will be transported with it",
   "utm.ponder.launch_contraption.intro.text_5": "Goodbye parrot!",
 
-  "utm.ponder.tag.oxygen": "Oxygen Manipulation",
-  "utm.ponder.tag.oxygen.description": "Blocks that work with Liquid Oxygen",
   "utm.ponder.oxygen_collector.intro.header": "Collecting Oxygen",
   "utm.ponder.oxygen_collector.intro.text_1": "The Oxygen Collector condenses oxygen from the surrounding area",
   "utm.ponder.oxygen_collector.intro.text_2": "You can pump LOX from its internal tank",
   "utm.ponder.oxygen_collector.intro.text_3": "On planets without oxygen the collector can be surrounded in up to 7³ leaves",
   "utm.ponder.oxygen_collector.intro.text_4": "The more leaves and the higher the RPM, the more efficient it is!",
   "utm.ponder.oxygen_collector.intro.text_5": "* This functionality is shared with the backtank",
+
+  "utm.ponder.oxygen_furnace.intro.header": "Creating Steel",
+  "utm.ponder.oxygen_furnace.intro.text_1": "The Oxygen Furnace produces molten steel when provided with the right inputs",
+  "utm.ponder.oxygen_furnace.intro.text_2": "The Oxygen Furnace requires coal, iron, and LOX",
+  "utm.ponder.oxygen_furnace.intro.text_3": "The resulting molten steel can then be pressed into steel ingots and sheets",
 
   "fluid.utm.liquid_oxygen": "Liquid Oxygen",
   "fluid.utm.molten_steel": "Molten Steel",

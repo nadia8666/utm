@@ -67,7 +67,6 @@ public class utmRegistry {
         BLOCK_ENTITIES.register(modEventBus);
         SOUNDS.register(modEventBus);
         BUFFS.register(modEventBus);
-        utmTools.doNothing();
         TABS.register(modEventBus);
         RECIPE_SERIALIZERS.register(modEventBus);
         PARTICLE_TYPES.register(modEventBus);

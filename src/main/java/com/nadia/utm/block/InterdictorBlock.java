@@ -18,6 +18,5 @@ public class InterdictorBlock extends RotatableBlock {
             // apply one stack of Interdicted! to all players nearby
             utm.LOGGER.info("[UTM] deploy the interdicted");
         }
-
     }
 }
