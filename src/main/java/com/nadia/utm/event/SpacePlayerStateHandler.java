@@ -90,6 +90,9 @@ public class SpacePlayerStateHandler {
                 sPlayer.setRespawnPosition(utmDimensions.AG_KEY, sPlayer.blockPosition(), sPlayer.getYRot(), true, true);
             }
 
+            if (inAG)
+                AdvancementUtil.AwardAdvancement(sPlayer, utm.key("2313ag/root"));
+
             if (!OxyUtil.canBreathe(sPlayer) && level != null && !sPlayer.getAbilities().instabuild) {
                 ItemStack helmet = sPlayer.getItemBySlot(EquipmentSlot.HEAD);
                 ItemStack chestplate = sPlayer.getItemBySlot(EquipmentSlot.CHEST);

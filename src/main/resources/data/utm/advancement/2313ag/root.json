@@ -17,20 +17,11 @@
       "conditions": {
         "to": "utm:2313ag"
       }
-    },
-    "in_2313ag": {
-      "trigger": "minecraft:location",
-      "conditions": {
-        "location": {
-          "dimension": "utm:2313ag"
-        }
-      }
     }
   },
   "requirements": [
     [
-      "entered_2313ag",
-      "in_2313ag"
+      "entered_2313ag"
     ]
   ]
 }
