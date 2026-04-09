@@ -5,6 +5,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import com.nadia.utm.Config;
 import com.nadia.utm.event.ForceLoad;
+import com.nadia.utm.event.utmEvents;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.level.Level;
 import net.neoforged.api.distmarker.Dist;
@@ -23,6 +24,7 @@ public class PlanetRenderer {
     public static final List<Planet> PLANET_REGISTRY = new ArrayList<>();
 
     // ordered by relative distance, moon renders over the earth which renders over the sun
+    @ForceLoad(dist = Dist.CLIENT)
     public static class PLANETS {
         public static final Planet SUN = new Planet(300, 15, utm.key("textures/misc/sun.png")) {
             @Override
@@ -40,16 +42,16 @@ public class PlanetRenderer {
                 poseStack.mulPose(Axis.ZP.rotationDegrees(offset));
             }
         };
-        public static final Planet EARTH = new Planet(150, 25/3f, utm.key("textures/misc/earth.png")) {
+        public static final Planet EARTH = new Planet(150, 25 / 3f, utm.key("textures/misc/earth.png")) {
             @Override
             public void transform(PoseStack poseStack, float partialTicks) {
                 poseStack.mulPose(Axis.XP.rotationDegrees(11.2F));
             }
         };
-        public static final Planet MOON = new Planet(150, 12.5f/3f, utm.key("textures/misc/moon.png")) {
+        public static final Planet MOON = new Planet(150, 12.5f / 3f, utm.key("textures/misc/moon.png")) {
             @Override
             public float[] getColor(long time, float partialTicks) {
-                float brightness = .25f + PLANETS.EARTH.getColor(time, partialTicks)[0]/3;
+                float brightness = .25f + PLANETS.EARTH.getColor(time, partialTicks)[0] / 3;
 
                 return new float[]{brightness, brightness, brightness};
             }
@@ -103,18 +105,19 @@ public class PlanetRenderer {
         };
     }
 
-    @SubscribeEvent
-    public static void onRenderSky(RenderLevelStageEvent event) {
-        if (!Config.RENDER_PLANETS.getAsBoolean()) return;
-        if (event.getStage() != RenderLevelStageEvent.Stage.AFTER_SKY) return;
-        Minecraft mc = Minecraft.getInstance();
-        if (mc.level == null) return;
+    static {
+        utmEvents.register(RenderLevelStageEvent.class, event -> {
+            if (!Config.RENDER_PLANETS.getAsBoolean()) return;
+            if (event.getStage() != RenderLevelStageEvent.Stage.AFTER_SKY) return;
+            Minecraft mc = Minecraft.getInstance();
+            if (mc.level == null) return;
 
-        long time = mc.level.dayTime() % 24000;
+            long time = mc.level.dayTime() % 24000;
 
-        for (Planet planet : PLANET_REGISTRY)
-            planet.onRenderSky(time, mc, event);
+            for (Planet planet : PLANET_REGISTRY)
+                planet.onRenderSky(time, mc, event);
 
-        RenderSystem.clear(GL11.GL_DEPTH_BUFFER_BIT, Minecraft.ON_OSX);
+            RenderSystem.clear(GL11.GL_DEPTH_BUFFER_BIT, Minecraft.ON_OSX);
+        });
     }
 }
