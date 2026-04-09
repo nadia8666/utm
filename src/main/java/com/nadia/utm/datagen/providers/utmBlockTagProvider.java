@@ -1,9 +1,13 @@
 package com.nadia.utm.datagen.providers;
 
+import com.nadia.utm.event.SpacePlayerStateHandler;
+import com.nadia.utm.registry.block.utmBlockContainer;
 import com.nadia.utm.registry.block.utmBlocks;
+import com.nadia.utm.registry.tags.utmTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
@@ -17,22 +21,28 @@ public class utmBlockTagProvider extends BlockTagsProvider {
     @Override
     protected void addTags(HolderLookup.@NotNull Provider provider) {
         tag(BlockTags.ANVIL).add(utmBlocks.HEAVY_METAL_ANVIL.BLOCK.get());
+        tag(utmTags.BLOCK.A23_ORE_REPLACEABLE).add(SpacePlayerStateHandler.UNMODIFIED_BLOCKS.toArray(Block[]::new));
 
-        tag(BlockTags.NEEDS_DIAMOND_TOOL).add(utmBlocks.HEAVY_METAL_ANVIL.BLOCK.get());
-        tag(BlockTags.MINEABLE_WITH_PICKAXE).add(utmBlocks.HEAVY_METAL_ANVIL.BLOCK.get());
-        tag(BlockTags.MINEABLE_WITH_PICKAXE).add(utmBlocks.LAUNCH_CONTRAPTION.BLOCK.get());
-        tag(BlockTags.MINEABLE_WITH_PICKAXE).add(utmBlocks.OXYGEN_COLLECTOR.BLOCK.get());
-        tag(BlockTags.MINEABLE_WITH_PICKAXE).add(utmBlocks.GRATE.BLOCK.get());
+        utmBlockContainer.DATAGEN_TAGS.forEach((container, tags) -> {
+            Block block = container.BLOCK.get();
 
-        tag(BlockTags.NEEDS_STONE_TOOL).add(utmBlocks.CHUNK_LOADER.BLOCK.get());
-        tag(BlockTags.MINEABLE_WITH_AXE).add(utmBlocks.CHUNK_LOADER.BLOCK.get());
+            for (String tag : tags) {
+                switch (tag) {
+                    case "mine:pickaxe" -> tag(BlockTags.MINEABLE_WITH_PICKAXE).add(block);
+                    case "mine:axe"     -> tag(BlockTags.MINEABLE_WITH_AXE).add(block);
+                    case "mine:shovel"  -> tag(BlockTags.MINEABLE_WITH_SHOVEL).add(block);
+                    case "mine:hoe"     -> tag(BlockTags.MINEABLE_WITH_HOE).add(block);
+                }
 
-        tag(BlockTags.NEEDS_STONE_TOOL).add(utmBlocks.PLAYER_CHUNK_LOADER.BLOCK.get());
-        tag(BlockTags.MINEABLE_WITH_AXE).add(utmBlocks.PLAYER_CHUNK_LOADER.BLOCK.get());
-
-        tag(BlockTags.MINEABLE_WITH_AXE).add(utmBlocks.GLINT_TABLE.BLOCK.get());
-
-        tag(BlockTags.MINEABLE_WITH_SHOVEL).add(utmBlocks.FLINT_BLOCK.BLOCK.get());
-        tag(BlockTags.MINEABLE_WITH_SHOVEL).add(utmBlocks.FLINT_BLOCK_BLOCK.BLOCK.get());
+                if (tag.startsWith("tier:")) {
+                    String tier = tag.split(":")[1];
+                    switch (tier) {
+                        case "1" -> tag(BlockTags.NEEDS_STONE_TOOL).add(block);
+                        case "2" -> tag(BlockTags.NEEDS_IRON_TOOL).add(block);
+                        case "3" -> tag(BlockTags.NEEDS_DIAMOND_TOOL).add(block);
+                    }
+                }
+            }
+        });
     }
 }

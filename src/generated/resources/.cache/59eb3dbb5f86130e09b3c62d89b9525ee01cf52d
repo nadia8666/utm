@@ -1,4 +1,5 @@
-// 1.21.1	2026-04-06T20:30:33.8265649	Loot Tables
+// 1.21.1	2026-04-08T20:04:59.094613	Loot Tables
+f8c417ff60baca7c6796b4b11326f96ca35b0f99 data/utm/loot_table/blocks/aluminum_ore.json
 bbbc267fdb298806c35bae4a14b95045887620fa data/utm/loot_table/blocks/chunk_loader.json
 cffc805801ca90da8fc3022b03b2f653dff81aed data/utm/loot_table/blocks/citywalls_metal.json
 b9f7d9fec92a5f6dcb1f82471c980169900928b9 data/utm/loot_table/blocks/citywalls_shrine.json
@@ -9,6 +10,7 @@ bd2b22b9652c80441bc5b1f717eddec48ad69841 data/utm/loot_table/blocks/grate.json
 5b79fc9e6175902b985a60f308e9fbb32425351b data/utm/loot_table/blocks/heavy_metal_anvil.json
 c712d654f16dad4a772a2233fb23c0c84bf0afab data/utm/loot_table/blocks/interdictor.json
 98202610f57353b2176453da0256c983dfb6d163 data/utm/loot_table/blocks/launch_contraption.json
+31f82a8cf17b10bf61ab499e53c6fae21b4f965c data/utm/loot_table/blocks/magnesium_ore.json
 8eab6f100e95097032f670f3af0ee869a5388847 data/utm/loot_table/blocks/outpostwalls_metal.json
 497cc2f69bcb6dd6ad878d6dd25ff4367ce06a41 data/utm/loot_table/blocks/outpostwalls_shrine.json
 3e50d5aa6eb9417fc98f62094f7a375b5effac30 data/utm/loot_table/blocks/oxygen_collector.json

@@ -187,7 +187,7 @@ public class SpacePlayerStateHandler {
         utmEvents.register(PlayerEvent.PlayerChangedDimensionEvent.class, SpacePlayerStateHandler::onDimensionChange);
     }
 
-    private static final Set<Block> UNMODIFIED_BLOCKS = Set.of(
+    public static final Set<Block> UNMODIFIED_BLOCKS = Set.of(
             Blocks.STONE,
             Blocks.COBBLESTONE,
             Blocks.ANDESITE,

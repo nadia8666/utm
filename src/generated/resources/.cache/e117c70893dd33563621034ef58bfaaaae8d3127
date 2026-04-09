@@ -1,1 +1,5 @@
-// 1.21.1	2026-01-27T22:57:01.4592447	Block States: utm
+// 1.21.1	2026-04-08T20:04:59.0976167	Block States: utm
+340a7d991c794d89c976d5329715b1df653a0f8f assets/utm/blockstates/aluminum_ore.json
+ca0e2a49a87918e52906edb9d0726fea54911838 assets/utm/blockstates/magnesium_ore.json
+bc1bcfcba4581919b2300079c4b9f2dee6daccc1 assets/utm/models/block/aluminum_ore.json
+aac97c445c90a6ff90adcaa515c2560d935ec707 assets/utm/models/block/magnesium_ore.json

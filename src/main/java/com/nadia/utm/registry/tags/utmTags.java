@@ -1,14 +1,22 @@
 package com.nadia.utm.registry.tags;
 
 import com.nadia.utm.registry.utmRegistry;
-import net.minecraft.resources.ResourceLocation;
+import com.nadia.utm.utm;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 
 public class utmTags {
-    public static class ITEMS {
+    public static class ITEM {
         public static final TagKey<Item> ELYTRA_TRIM_TEMPLATES = TagKey.create(
                 utmRegistry.ITEMS.getRegistryKey(),
-                ResourceLocation.fromNamespaceAndPath("utm", "elytra_trim_templates"));
+                utm.key("elytra_trim_templates"));
+    }
+
+    public static class BLOCK {
+        public static final TagKey<Block> A23_ORE_REPLACEABLE = TagKey.create(
+                Registries.BLOCK,
+                utm.key("a23_ore_replaceable"));
     }
 }

@@ -2,11 +2,11 @@ package com.nadia.utm.event;
 
 import com.nadia.utm.client.renderer.BacktankCurioRenderer;
 import com.nadia.utm.client.renderer.block.CitywallsBlockEntityRenderer;
-import com.nadia.utm.client.renderer.planets.PlanetRenderer;
 import com.nadia.utm.client.renderer.utmRenderTypes;
 import com.nadia.utm.client.ui.glint.GlintScreen;
 import com.nadia.utm.client.ui.oxygen_furnace.OxygenFurnaceScreen;
 import com.nadia.utm.registry.data.utmDataComponents;
+import com.nadia.utm.registry.dimension.utmDimensions;
 import com.nadia.utm.registry.fluid.utmFluids;
 import com.nadia.utm.registry.ui.utmMenus;
 import com.nadia.utm.updater.ToastDisplaySignal;
@@ -14,16 +14,19 @@ import com.nadia.utm.utm;
 import com.nadia.utm.utmClient;
 import com.simibubi.create.AllItems;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.TitleScreen;
 import net.minecraft.client.renderer.DimensionSpecialEffects;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextColor;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.*;
+import net.neoforged.neoforge.client.event.sound.PlaySoundEvent;
 import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
@@ -108,25 +111,25 @@ public class utmClientEvents {
                 event.register(CitywallsBlockEntityRenderer.CWS);
             });
 
-            utmEvents.register(RegisterDimensionSpecialEffectsEvent.class, event -> {
-                event.register(ResourceLocation.fromNamespaceAndPath("utm", "2313ag"), new DimensionSpecialEffects(Float.NaN, false, DimensionSpecialEffects.SkyType.NONE, false, false) {
-                    @Override
-                    public @NotNull Vec3 getBrightnessDependentFogColor(@NotNull Vec3 pos, float arg2) {
-                        return Vec3.ZERO;
+            utmEvents.register(RegisterDimensionSpecialEffectsEvent.class, event -> event.register(
+                    ResourceLocation.fromNamespaceAndPath("utm", "2313ag"),
+                    new DimensionSpecialEffects(Float.NaN, false, DimensionSpecialEffects.SkyType.NONE, false, false) {
+                @Override
+                public @NotNull Vec3 getBrightnessDependentFogColor(@NotNull Vec3 pos, float arg2) {
+                    return Vec3.ZERO;
 
-                    }
+                }
 
-                    @Override
-                    public boolean isFoggyAt(int x, int z) {
-                        return true;
-                    }
+                @Override
+                public boolean isFoggyAt(int x, int z) {
+                    return true;
+                }
 
-                    @Override
-                    public float[] getSunriseColor(float timeOfDay, float partialTicks) {
-                        return null;
-                    }
-                });
-            });
+                @Override
+                public float[] getSunriseColor(float timeOfDay, float partialTicks) {
+                    return null;
+                }
+            }));
         }
     }
 
@@ -166,6 +169,14 @@ public class utmClientEvents {
                     return FLOWING;
                 }
             }, utmFluids.MOLTEN_STEEL_TYPE);
+        });
+
+        utmEvents.register(PlaySoundEvent.class, event -> {
+            Minecraft mc = Minecraft.getInstance();
+            if (mc.level == null || event.getSound() == null) return;
+
+            if (mc.level.dimension().equals(utmDimensions.AG_KEY) && event.getSound().getSource() == SoundSource.MUSIC && event.getSound().getLocation().getNamespace().equals("utm"))
+                event.setSound(null);
         });
     }
 }

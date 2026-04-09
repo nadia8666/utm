@@ -1,8 +1,11 @@
 {
   "values": [
-    "utm:heavy_metal_anvil",
     "utm:launch_contraption",
+    "utm:heavy_metal_anvil",
+    "utm:aluminum_ore",
+    "utm:oxygen_furnace",
+    "utm:grate",
     "utm:oxygen_collector",
-    "utm:grate"
+    "utm:magnesium_ore"
   ]
 }

@@ -1,7 +1,9 @@
-// 1.21.1	2026-04-04T11:12:35.3866146	Tags for minecraft:block mod id utm
+// 1.21.1	2026-04-08T20:43:07.8885627	Tags for minecraft:block mod id utm
 6cd88e214573b659c707666abea9d2e53d37d1ef data/minecraft/tags/block/anvil.json
 ce044679a77463fa97cf7399c1619d051513113b data/minecraft/tags/block/mineable/axe.json
-9a81869be3baf24421235a6a125c69864328c9a6 data/minecraft/tags/block/mineable/pickaxe.json
+19d4c0dab48a8ca59f389970f03bee29737c6cf2 data/minecraft/tags/block/mineable/pickaxe.json
 49c587577aa7effe1d58a338d982138e2aa25f7a data/minecraft/tags/block/mineable/shovel.json
 6cd88e214573b659c707666abea9d2e53d37d1ef data/minecraft/tags/block/needs_diamond_tool.json
+714bb497a037c4fceba26f28c5e6f517c5e67677 data/minecraft/tags/block/needs_iron_tool.json
 f7fed015091bdac2ce4cd1727187c0e7742e89d8 data/minecraft/tags/block/needs_stone_tool.json
+2ebe67a2259e0b7c1864cea9201bca46b7f86d42 data/utm/tags/block/a23_ore_replaceable.json

@@ -7,6 +7,8 @@ import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Rarity;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Supplier;
@@ -15,21 +17,29 @@ public class utmItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems("utm");
 
     public static <I extends Item> utmItemContainer<I> register(String name, Supplier<I> func) {
-        var item = ITEMS.register(name, func);
+        DeferredItem<I> item = ITEMS.register(name, func);
 
         return new utmItemContainer<>(name, item);
     }
 
     public static utmItemContainer<Item> register(String name, Item.Properties properties) {
-        var item = ITEMS.registerItem(name, Item::new, properties);
+        DeferredItem<Item> item = ITEMS.registerItem(name, Item::new, properties);
 
         return new utmItemContainer<>(name, item);
     }
 
     public static utmItemContainer<Item> register(String name) {
-        var item = ITEMS.registerItem(name, Item::new, new Item.Properties());
+        DeferredItem<Item> item = ITEMS.registerItem(name, Item::new, new Item.Properties());
 
         return new utmItemContainer<>(name, item);
+    }
+
+    public static Item fromName(String name) throws Exception {
+        for (DeferredHolder<Item, ? extends Item> item : ITEMS.getEntries().stream().toList()) {
+            if (item.getId().getPath().equals(name))
+                return item.get();
+        }
+        throw new Exception("[UTM] Unable to find item with name: " + name);
     }
 
     // ingredients

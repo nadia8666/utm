@@ -73,13 +73,13 @@ public class utmItemTagProvider extends ItemTagsProvider {
         tag(ItemTags.DURABILITY_ENCHANTABLE).add(utmTools.NETHERYTRA.get());
         tag(ItemTags.CHEST_ARMOR_ENCHANTABLE).add(utmTools.NETHERYTRA.get()); // dont want prot but oh well
 
-        tag(utmTags.ITEMS.ELYTRA_TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_VEIN.ITEM().get());
-        tag(utmTags.ITEMS.ELYTRA_TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_OUTWARD.ITEM().get());
-        tag(utmTags.ITEMS.ELYTRA_TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_LESSER.ITEM().get());
-        tag(utmTags.ITEMS.ELYTRA_TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_HEARTSTWINGS.ITEM().get());
-        tag(utmTags.ITEMS.ELYTRA_TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_SPADES.ITEM().get());
-        tag(utmTags.ITEMS.ELYTRA_TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_ROADRUNNER.ITEM().get());
-        tag(utmTags.ITEMS.ELYTRA_TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_ECOLOGIST.ITEM().get());
+        tag(utmTags.ITEM.ELYTRA_TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_VEIN.ITEM().get());
+        tag(utmTags.ITEM.ELYTRA_TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_OUTWARD.ITEM().get());
+        tag(utmTags.ITEM.ELYTRA_TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_LESSER.ITEM().get());
+        tag(utmTags.ITEM.ELYTRA_TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_HEARTSTWINGS.ITEM().get());
+        tag(utmTags.ITEM.ELYTRA_TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_SPADES.ITEM().get());
+        tag(utmTags.ITEM.ELYTRA_TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_ROADRUNNER.ITEM().get());
+        tag(utmTags.ITEM.ELYTRA_TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_ECOLOGIST.ITEM().get());
 
         tag(ItemTags.TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_VEIN.ITEM().get());
         tag(ItemTags.TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_OUTWARD.ITEM().get());

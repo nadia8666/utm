@@ -1,0 +1,6 @@
+// 1.21.1	2026-04-08T20:43:07.886347	Registries
+252458f8b73a1d90b0bda74c398c08303fcad3a8 data/utm/neoforge/biome_modifier/2313ag_ores.json
+8c9ea8a73b7032873a40abbb75b210a4b7e2803f data/utm/worldgen/configured_feature/aluminum_ore.json
+e1f13802bc88ff4aad22f08f1a07a33935ca4afe data/utm/worldgen/configured_feature/magnesium_ore.json
+3240d3765495f0c272d5d883d583065f741e36e7 data/utm/worldgen/placed_feature/aluminum_ore_placed.json
+491448010d9950b06a5e1db09e9762bd61d5ee86 data/utm/worldgen/placed_feature/magnesium_ore_placed.json

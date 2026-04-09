@@ -40,11 +40,12 @@ public class utmDataGen {
                         List.of(new LootTableProvider.SubProviderEntry(utmBlockLootTableProvider::new, LootContextParamSets.BLOCK)), lookupProvider)
         );
 
-        generator.addProvider(event.includeClient(), new utmModelProvider(output, existingFileHelper));
+        generator.addProvider(event.includeClient(), new utmBlockModelProvider(output, existingFileHelper));
         generator.addProvider(event.includeServer(), new utmRecipeProvider(output, lookupProvider));
         generator.addProvider(event.includeClient(), new utmSoundDefsProvider(output, existingFileHelper));
         generator.addProvider(event.includeClient(), new utmItemModelProvider(output, existingFileHelper));
         generator.addProvider(event.includeServer(), new utmGlobalLootModifiersProvider(output, lookupProvider));
         generator.addProvider(event.includeServer(), new utmAdvancementsProvider(output, lookupProvider, existingFileHelper));
+        generator.addProvider(event.includeServer(), new utmDatapackProvider(output, lookupProvider));
     }
 }

@@ -1,0 +1,9 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "utm:2313ag_cliffs",
+  "features": [
+    "utm:aluminum_ore_placed",
+    "utm:magnesium_ore_placed"
+  ],
+  "step": "underground_ores"
+}
