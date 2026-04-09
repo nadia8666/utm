@@ -9,8 +9,6 @@ import com.nadia.utm.event.utmEvents;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.level.Level;
 import net.neoforged.api.distmarker.Dist;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
 import com.nadia.utm.utm;
 import org.lwjgl.opengl.GL11;
@@ -19,7 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @ForceLoad(dist = Dist.CLIENT)
-@EventBusSubscriber(modid = "utm", value = Dist.CLIENT)
 public class PlanetRenderer {
     public static final List<Planet> PLANET_REGISTRY = new ArrayList<>();
 
