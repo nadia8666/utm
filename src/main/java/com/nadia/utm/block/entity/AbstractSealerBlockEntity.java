@@ -28,7 +28,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
-@ForceLoad()
+@ForceLoad
 public abstract class AbstractSealerBlockEntity extends SplitShaftBlockEntity implements IHaveGoggleInformation {
     public SmartFluidTankBehaviour TANK;
     public CombinedTankWrapper CAPABILITY;
@@ -94,7 +94,7 @@ public abstract class AbstractSealerBlockEntity extends SplitShaftBlockEntity im
 
         int processed = 0;
 
-        while (!QUEUE.isEmpty() && processed < 200) {
+        while (!QUEUE.isEmpty() && processed < 500) {
             BlockPos current = QUEUE.poll();
             processed++;
 

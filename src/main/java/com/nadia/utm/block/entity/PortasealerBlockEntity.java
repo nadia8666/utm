@@ -8,7 +8,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 
-@ForceLoad()
+@ForceLoad
 public class PortasealerBlockEntity extends AbstractSealerBlockEntity {
     @Override
     public int getMaxVolume() {
