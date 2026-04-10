@@ -58,7 +58,7 @@ public class utmFeatures {
 
     public static class BIOME {
         public static final ResourceKey<BiomeModifier> ORES = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, utm.key("2313ag_ores"));
-        public static final ResourceKey<Biome> A23_CLIFFS = ResourceKey.create(Registries.BIOME, utm.key("2313ag_cliffs"));
+        public static final ResourceKey<Biome> A23_CLIFFS = ResourceKey.create(Registries.BIOME, utm.key("2313ag_stone"));
 
         public static void bootstrap(BootstrapContext<BiomeModifier> context) {
             HolderGetter<PlacedFeature> feats = context.lookup(Registries.PLACED_FEATURE);

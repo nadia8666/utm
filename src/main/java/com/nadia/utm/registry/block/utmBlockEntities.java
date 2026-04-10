@@ -33,4 +33,12 @@ public class utmBlockEntities {
     public static final Supplier<BlockEntityType<OxygenFurnaceBlockEntity>> OXYGEN_FURNACE = BLOCK_ENTITIES.register("oxygen_furnace", () ->
             BlockEntityType.Builder.of(OxygenFurnaceBlockEntity::new, utmBlocks.OXYGEN_FURNACE.BLOCK.get())
                     .build((Type<?>) null));
+
+    public static final Supplier<BlockEntityType<PortasealerBlockEntity>> PORTASEALER = BLOCK_ENTITIES.register("portasealer", () ->
+            BlockEntityType.Builder.of(PortasealerBlockEntity::new, utmBlocks.PORTASEALER.BLOCK.get())
+                    .build((Type<?>) null));
+
+    public static final Supplier<BlockEntityType<BiomeSealerBlockEntity>> BIOME_SEALER = BLOCK_ENTITIES.register("biome_sealer", () ->
+            BlockEntityType.Builder.of(BiomeSealerBlockEntity::new, utmBlocks.BIOME_SEALER.BLOCK.get())
+                    .build((Type<?>) null));
 }

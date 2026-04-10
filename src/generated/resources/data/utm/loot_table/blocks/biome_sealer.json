@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "utm:biome_sealer"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "utm:blocks/biome_sealer"
+}

@@ -7,6 +7,7 @@ import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.player.Player;
@@ -72,7 +73,10 @@ public class OxygenFurnaceBlock extends BaseEntityBlock implements IBE<OxygenFur
     @Override
     protected void onRemove(BlockState state, @NotNull Level level, @NotNull BlockPos pos, BlockState newState, boolean movedByPiston) {
         if(state.getBlock() != newState.getBlock()) {
-            if(level.getBlockEntity(pos) instanceof OxygenFurnaceBlockEntity) {
+            if(level.getBlockEntity(pos) instanceof OxygenFurnaceBlockEntity furnace) {
+                for (int i = 0; i < furnace.INVENTORY.getSlots(); i++) {
+                    Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), furnace.INVENTORY.getStackInSlot(i));
+                }
                 level.updateNeighbourForOutputSignal(pos, this);
             }
         }

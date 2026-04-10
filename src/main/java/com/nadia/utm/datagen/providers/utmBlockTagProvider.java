@@ -1,6 +1,6 @@
 package com.nadia.utm.datagen.providers;
 
-import com.nadia.utm.event.SpacePlayerStateHandler;
+import com.nadia.utm.behavior.space.SpaceStateHandler;
 import com.nadia.utm.registry.block.utmBlockContainer;
 import com.nadia.utm.registry.block.utmBlocks;
 import com.nadia.utm.registry.tags.utmTags;
@@ -21,7 +21,7 @@ public class utmBlockTagProvider extends BlockTagsProvider {
     @Override
     protected void addTags(HolderLookup.@NotNull Provider provider) {
         tag(BlockTags.ANVIL).add(utmBlocks.HEAVY_METAL_ANVIL.BLOCK.get());
-        tag(utmTags.BLOCK.A23_ORE_REPLACEABLE).add(SpacePlayerStateHandler.UNMODIFIED_BLOCKS.toArray(Block[]::new));
+        tag(utmTags.BLOCK.A23_ORE_REPLACEABLE).add(SpaceStateHandler.UNMODIFIED_BLOCKS.toArray(Block[]::new));
 
         utmBlockContainer.DATAGEN_TAGS.forEach((container, tags) -> {
             Block block = container.BLOCK.get();

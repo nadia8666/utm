@@ -1,5 +1,6 @@
-// 1.21.1	2026-04-08T20:04:59.094613	Loot Tables
+// 1.21.1	2026-04-09T23:22:30.8708196	Loot Tables
 f8c417ff60baca7c6796b4b11326f96ca35b0f99 data/utm/loot_table/blocks/aluminum_ore.json
+d4e8775a0bc83dce60dc1d83731b77333a4fed3b data/utm/loot_table/blocks/biome_sealer.json
 bbbc267fdb298806c35bae4a14b95045887620fa data/utm/loot_table/blocks/chunk_loader.json
 cffc805801ca90da8fc3022b03b2f653dff81aed data/utm/loot_table/blocks/citywalls_metal.json
 b9f7d9fec92a5f6dcb1f82471c980169900928b9 data/utm/loot_table/blocks/citywalls_shrine.json
@@ -16,3 +17,4 @@ c712d654f16dad4a772a2233fb23c0c84bf0afab data/utm/loot_table/blocks/interdictor.
 3e50d5aa6eb9417fc98f62094f7a375b5effac30 data/utm/loot_table/blocks/oxygen_collector.json
 b6a5d5d588720f296dfc0c60771d38331c0f791a data/utm/loot_table/blocks/oxygen_furnace.json
 e2264ed9fd039e249e3f3223618d23320ae3e14e data/utm/loot_table/blocks/player_chunk_loader.json
+9f8e615a1f199cf068992d32a53212e18b1e6401 data/utm/loot_table/blocks/portasealer.json

@@ -1,4 +1,4 @@
-// 1.21.1	2026-04-08T20:04:59.0910888	Item Models: utm
+// 1.21.1	2026-04-09T23:22:30.8683213	Item Models: utm
 0c35c7686bdc2e520fa2ede79bfa3e5855ad5ffc assets/utm/models/item/air_compressor.json
 9d13b4b18c25ee3c81b1cc65fd86954c95187339 assets/utm/models/item/aluminum_ingot.json
 8be274730d1ff844e99a3948cef3e6ec5d0d1e1c assets/utm/models/item/aluminum_ore.json
@@ -6,6 +6,7 @@ ac40583efcb0098da55da342d789a331c75c5c1a assets/utm/models/item/aluminum_sheet.j
 679773fb2dc807de14de241f634f4748c3b5e0e4 assets/utm/models/item/arid_axe.json
 27e2ddb57591da009a7d2abd5330e7a3d8baa304 assets/utm/models/item/arid_ingot.json
 e8c545b67cd72e79158a9dcc2a75ccc4d13232ac assets/utm/models/item/arid_sword.json
+805f5ab690adf26ccd877c944984eb1ff16f667f assets/utm/models/item/biome_sealer.json
 f2e9775563c86f68d71b06bb62045008a975a3de assets/utm/models/item/chunk_loader.json
 336758cbcbfdf58cdfae0d301428baacb9e69221 assets/utm/models/item/copper_axe.json
 b461f6062f97a9a4f36e2c003164cd40afbf068d assets/utm/models/item/copper_hoe.json
@@ -45,6 +46,7 @@ a951d96a793876f77a37a1d469861589165ec946 assets/utm/models/item/netherytra.json
 aaed7d47793a03535e0fc1e59b89f24ea056bb7d assets/utm/models/item/obsidian_sword.json
 3374c572cdd962361be3dcbe6d1f9a1542cd36c3 assets/utm/models/item/oxygen_furnace.json
 2e991b169a46604733a459264944f9b6d47893bb assets/utm/models/item/player_chunk_loader.json
+222d633b6564a532e01c7d3ca1a2745f4424f305 assets/utm/models/item/portasealer.json
 e1ff107dcc5ce5152dee20b1c2a4eedb64eb79dc assets/utm/models/item/raw_aluminum.json
 c94908a0de5dcb69056c5d24ba34e844e921b2d1 assets/utm/models/item/raw_magnesium.json
 8f6135cda73a6471dace0ba2ffa8efc61234709c assets/utm/models/item/steel_ingot.json

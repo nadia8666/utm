@@ -42,20 +42,20 @@ public class OxygenFurnaceBlockEntity extends SmartBlockEntity implements MenuPr
     public SmartFluidTankBehaviour STEEL;
     public CombinedTankWrapper CAPABILITY;
 
-    public final ItemStackHandler inventory = new ItemStackHandler(2) {
+    public final ItemStackHandler INVENTORY = new ItemStackHandler(2) {
         @Override
         protected void onContentsChanged(int slot) {
             setChanged();
         }
     };
 
-    public int progress = 0;
-    public int maxProgress = 200;
+    public int PROGRESS = 0;
+    public int MAX_PROGRESS = 200;
 
     public final ContainerData data = new ContainerData() {
         @Override
         public int get(int index) {
-            return index == 0 ? progress : maxProgress;
+            return index == 0 ? PROGRESS : MAX_PROGRESS;
         }
 
         @Override
@@ -78,22 +78,22 @@ public class OxygenFurnaceBlockEntity extends SmartBlockEntity implements MenuPr
         Level level = this.getLevel();
         if (level == null || level.isClientSide) return;
 
-        boolean hasIron = this.inventory.getStackInSlot(0).is(Items.IRON_INGOT) && this.inventory.getStackInSlot(0).getCount() >= 10;
-        boolean hasFuel = this.inventory.getStackInSlot(1).is(ItemTags.COALS);
+        boolean hasIron = this.INVENTORY.getStackInSlot(0).is(Items.IRON_INGOT) && this.INVENTORY.getStackInSlot(0).getCount() >= 10;
+        boolean hasFuel = this.INVENTORY.getStackInSlot(1).is(ItemTags.COALS);
         boolean hasOxygen = this.LOX.getPrimaryHandler().getFluidAmount() >= 1000 && this.STEEL.getPrimaryHandler().getSpace() >= 1000;
 
-        if (this.progress == 0 && hasIron && hasOxygen && hasFuel) {
-            this.inventory.getStackInSlot(1).shrink(1);
-            this.progress = this.maxProgress;
+        if (this.PROGRESS == 0 && hasIron && hasOxygen && hasFuel) {
+            this.INVENTORY.getStackInSlot(1).shrink(1);
+            this.PROGRESS = this.MAX_PROGRESS;
             this.setChanged();
         }
 
-        if (this.progress > 0) {
-            this.progress--;
+        if (this.PROGRESS > 0) {
+            this.PROGRESS--;
 
-            if (this.progress == 0) {
+            if (this.PROGRESS == 0) {
                 if (this.STEEL.getCapability() instanceof SmartFluidTankBehaviour.InternalFluidHandler handler) {
-                    this.inventory.getStackInSlot(0).shrink(10);
+                    this.INVENTORY.getStackInSlot(0).shrink(10);
                     this.LOX.getPrimaryHandler().drain(1000, IFluidHandler.FluidAction.EXECUTE);
 
                     handler.forceFill(new FluidStack(utmFluids.MOLTEN_STEEL.get(), 1000), IFluidHandler.FluidAction.EXECUTE);
@@ -120,15 +120,15 @@ public class OxygenFurnaceBlockEntity extends SmartBlockEntity implements MenuPr
     @Override
     protected void read(@NotNull CompoundTag tag, HolderLookup.@NotNull Provider registries, boolean clientPacket) {
         super.read(tag, registries, clientPacket);
-        inventory.deserializeNBT(registries, tag.getCompound("Inventory"));
-        progress = tag.getInt("Progress");
+        INVENTORY.deserializeNBT(registries, tag.getCompound("Inventory"));
+        PROGRESS = tag.getInt("Progress");
     }
 
     @Override
     public void write(@NotNull CompoundTag tag, HolderLookup.@NotNull Provider registries, boolean clientPacket) {
         super.write(tag, registries, clientPacket);
-        tag.put("Inventory", inventory.serializeNBT(registries));
-        tag.putInt("Progress", progress);
+        tag.put("Inventory", INVENTORY.serializeNBT(registries));
+        tag.putInt("Progress", PROGRESS);
     }
 
     @Override
@@ -170,7 +170,7 @@ public class OxygenFurnaceBlockEntity extends SmartBlockEntity implements MenuPr
             event.registerBlockEntity(
                     Capabilities.ItemHandler.BLOCK,
                     utmBlockEntities.OXYGEN_FURNACE.get(),
-                    (be, side) -> be.inventory
+                    (be, side) -> be.INVENTORY
             );
         });
     }

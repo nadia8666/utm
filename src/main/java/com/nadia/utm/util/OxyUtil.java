@@ -1,15 +1,23 @@
 package com.nadia.utm.util;
 
+import com.nadia.utm.behavior.space.SealedChunkData;
+import com.nadia.utm.registry.attachment.utmAttachments;
 import com.nadia.utm.registry.dimension.utmDimensions;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.chunk.LevelChunk;
+import net.minecraft.world.level.chunk.status.ChunkStatus;
 
 import javax.annotation.Nullable;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 public class OxyUtil {
@@ -92,5 +100,43 @@ public class OxyUtil {
      */
     public static boolean canBreathe(Entity entity) {
         return !UNBREATHABLE_DIMENSIONS.contains(entity.level().dimension());
+    }
+
+    /**
+     * set sealed status of block pos
+     * @param level target level
+     * @param targetPos block pos
+     * @param controllerPos nullable controller position
+     */
+    public static void setBlockSealed(ServerLevel level, BlockPos targetPos, @Nullable BlockPos controllerPos) {
+        ChunkPos chunkPos = new ChunkPos(targetPos);
+        LevelChunk chunk = (LevelChunk) level.getChunk(chunkPos.x, chunkPos.z, ChunkStatus.FULL, true);
+        if (chunk == null) return;
+
+        SealedChunkData currentData = chunk.getData(utmAttachments.SEALED_AIR);
+        Map<BlockPos, BlockPos> updatedMap = new HashMap<>(currentData.sealedBlocks());
+
+        if (controllerPos != null)
+            updatedMap.put(targetPos, controllerPos);
+        else
+            updatedMap.remove(targetPos);
+
+        chunk.setData(utmAttachments.SEALED_AIR, new SealedChunkData(updatedMap));
+        chunk.setUnsaved(true);
+    }
+
+    /**
+     * check if target block is sealed
+     * @param level target level to check
+     * @param targetPos block pos
+     * @return controller position
+     */
+    @Nullable
+    public static BlockPos isSealed(ServerLevel level, BlockPos targetPos) {
+        ChunkPos chunkPos = new ChunkPos(targetPos);
+        LevelChunk chunk = (LevelChunk) level.getChunk(chunkPos.x, chunkPos.z, ChunkStatus.FULL, true);
+        if (chunk == null) return null;
+
+        return chunk.getData(utmAttachments.SEALED_AIR).sealedBlocks().get(targetPos);
     }
 }

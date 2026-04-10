@@ -34,13 +34,13 @@ public class OxygenFurnaceMenu extends AbstractContainerMenu {
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
 
-        this.addSlot(new SlotItemHandler(this.blockEntity.inventory, 0, 34, 24) {
+        this.addSlot(new SlotItemHandler(this.blockEntity.INVENTORY, 0, 34, 24) {
             @Override
             public boolean mayPlace(@NotNull ItemStack stack) {
                 return stack.is(Items.IRON_INGOT);
             }
         });
-        this.addSlot(new SlotItemHandler(this.blockEntity.inventory, 1, 34, 46) {
+        this.addSlot(new SlotItemHandler(this.blockEntity.INVENTORY, 1, 34, 46) {
             @Override
             public boolean mayPlace(@NotNull ItemStack stack) {
                 return stack.is(ItemTags.COALS);
