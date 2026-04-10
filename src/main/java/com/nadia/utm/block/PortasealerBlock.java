@@ -22,8 +22,8 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nullable;
 
 public class PortasealerBlock extends BaseEntityBlock implements IBE<PortasealerBlockEntity>, IWrenchable {
-    public static final VoxelShape SHAPE = Block.box(2, 0, 2, 14, 13, 14);
-    public static final MapCodec<OxygenFurnaceBlock> CODEC = simpleCodec(OxygenFurnaceBlock::new);
+    public static final VoxelShape SHAPE = Block.box(2, 2, 2, 14, 14, 14);
+    public static final MapCodec<PortasealerBlock> CODEC = simpleCodec(PortasealerBlock::new);
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
     public PortasealerBlock(Properties properties) {
@@ -35,6 +35,11 @@ public class PortasealerBlock extends BaseEntityBlock implements IBE<Portasealer
     @Override
     protected @NotNull VoxelShape getShape(@NotNull BlockState state, @NotNull BlockGetter level, @NotNull BlockPos pos, @NotNull CollisionContext context) {
         return SHAPE;
+    }
+
+    @Override
+    public @NotNull VoxelShape getCollisionShape(@NotNull BlockState state, @NotNull BlockGetter level, @NotNull BlockPos pos, @NotNull CollisionContext context) {
+        return Shapes.empty();
     }
 
     @Override

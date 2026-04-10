@@ -98,7 +98,7 @@ public class utmBlocks {
     public static final utmBlockContainer<PortasealerBlock, BlockItem> PORTASEALER = dualRegister("portasealer", PortasealerBlock::new, BlockBehaviour.Properties.of()
             .destroyTime(2.0f)
             .explosionResistance(50f).sound(SoundType.METAL)
-            .noOcclusion().noCollission().isSuffocating((s, l, p) -> false)
+            .noOcclusion().isSuffocating((s, l, p) -> false)
             .isViewBlocking((s, l, p) -> false))
             .drops().copyItemModel().ponder(A23, OXYGEN).minePick();
 

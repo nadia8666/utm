@@ -25,7 +25,7 @@ import javax.annotation.Nullable;
 
 public class BiomeSealerBlock extends KineticBlock implements IBE<BiomeSealerBlockEntity> {
     public static final VoxelShape SHAPE = Shapes.block();
-    public static final MapCodec<OxygenFurnaceBlock> CODEC = simpleCodec(OxygenFurnaceBlock::new);
+    public static final MapCodec<BiomeSealerBlock> CODEC = simpleCodec(BiomeSealerBlock::new);
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
     public BiomeSealerBlock(Properties properties) {
@@ -55,7 +55,7 @@ public class BiomeSealerBlock extends KineticBlock implements IBE<BiomeSealerBlo
     }
 
     @Override
-    protected @NotNull MapCodec<? extends BaseEntityBlock> codec() {
+    protected @NotNull MapCodec<BiomeSealerBlock> codec() {
         return CODEC;
     }
 
