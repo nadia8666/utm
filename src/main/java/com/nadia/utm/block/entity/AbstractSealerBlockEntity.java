@@ -131,6 +131,7 @@ public abstract class AbstractSealerBlockEntity extends SplitShaftBlockEntity im
         ATTACHED_POSITIONS.addAll(VISITED);
         SYNCED_VOLUME = ATTACHED_POSITIONS.size();
         RECALC = false;
+        QUEUE.clear();
 
         this.setChanged();
         this.sendData();
