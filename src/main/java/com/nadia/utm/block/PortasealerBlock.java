@@ -22,7 +22,7 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nullable;
 
 public class PortasealerBlock extends BaseEntityBlock implements IBE<PortasealerBlockEntity>, IWrenchable {
-    public static final VoxelShape SHAPE = Shapes.block();
+    public static final VoxelShape SHAPE = Shapes.empty();
     public static final MapCodec<OxygenFurnaceBlock> CODEC = simpleCodec(OxygenFurnaceBlock::new);
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
