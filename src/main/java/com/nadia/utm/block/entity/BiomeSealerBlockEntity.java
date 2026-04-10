@@ -3,12 +3,19 @@ package com.nadia.utm.block.entity;
 import com.nadia.utm.event.ForceLoad;
 import com.nadia.utm.event.utmEvents;
 import com.nadia.utm.registry.block.utmBlockEntities;
+import com.nadia.utm.util.utmLang;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 
-@ForceLoad()
+import java.util.List;
+
+@ForceLoad
 public class BiomeSealerBlockEntity extends AbstractSealerBlockEntity {
     @Override
     public int getMaxVolume() {
@@ -35,7 +42,7 @@ public class BiomeSealerBlockEntity extends AbstractSealerBlockEntity {
 
     @Override
     public void tick() {
-        if (getSpeed() < 64) {
+        if (Math.abs(getSpeed()) < 128) {
             if (ACTIVE) {
                 ACTIVE = false;
                 sendData();
@@ -43,6 +50,16 @@ public class BiomeSealerBlockEntity extends AbstractSealerBlockEntity {
             return;
         }
         super.tick();
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
+        super.addToGoggleTooltip(tooltip, isPlayerSneaking);
+
+        if (Math.abs(getSpeed()) < 128)
+            utmLang.text("RPM TOO LOW").style(ChatFormatting.YELLOW).forGoggles(tooltip);
+
+        return true;
     }
 
     static {
