@@ -3,11 +3,13 @@ package com.nadia.utm.block;
 import com.mojang.serialization.MapCodec;
 import com.nadia.utm.block.entity.BiomeSealerBlockEntity;
 import com.nadia.utm.registry.block.utmBlockEntities;
-import com.simibubi.create.content.equipment.wrench.IWrenchable;
+import com.simibubi.create.content.kinetics.base.KineticBlock;
 import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -21,7 +23,7 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
-public class BiomeSealerBlock extends BaseEntityBlock implements IBE<BiomeSealerBlockEntity>, IWrenchable {
+public class BiomeSealerBlock extends KineticBlock implements IBE<BiomeSealerBlockEntity> {
     public static final VoxelShape SHAPE = Shapes.block();
     public static final MapCodec<OxygenFurnaceBlock> CODEC = simpleCodec(OxygenFurnaceBlock::new);
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
@@ -66,11 +68,22 @@ public class BiomeSealerBlock extends BaseEntityBlock implements IBE<BiomeSealer
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getClockWise());
     }
+
     protected @NotNull BlockState rotate(BlockState state, Rotation rot) {
         return state.setValue(FACING, rot.rotate(state.getValue(FACING)));
     }
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(FACING);
+    }
+
+    @Override
+    public boolean hasShaftTowards(LevelReader world, BlockPos pos, BlockState state, Direction face) {
+        return face == Direction.DOWN;
+    }
+
+    @Override
+    public Direction.Axis getRotationAxis(BlockState blockState) {
+        return Direction.Axis.Y;
     }
 }

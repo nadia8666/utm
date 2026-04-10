@@ -6,12 +6,13 @@ import com.nadia.utm.registry.fluid.utmFluids;
 import com.nadia.utm.util.OxyUtil;
 import com.nadia.utm.util.utmLang;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
-import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
+import com.simibubi.create.content.kinetics.transmission.SplitShaftBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
 import com.simibubi.create.foundation.fluid.CombinedTankWrapper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -28,7 +29,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.*;
 
 @ForceLoad()
-public abstract class AbstractSealerBlockEntity extends SmartBlockEntity implements IHaveGoggleInformation {
+public abstract class AbstractSealerBlockEntity extends SplitShaftBlockEntity implements IHaveGoggleInformation {
     public SmartFluidTankBehaviour TANK;
     public CombinedTankWrapper CAPABILITY;
 
@@ -44,8 +45,17 @@ public abstract class AbstractSealerBlockEntity extends SmartBlockEntity impleme
         super(type, pos, state);
     }
 
+    @Override
+    public float getRotationSpeedModifier(Direction direction) {
+        return 1;
+    }
+
     public int getMaxVolume() {
         return 67;
+    }
+
+    public int getDraw() {
+        return 2;
     }
 
     @Override
@@ -57,7 +67,8 @@ public abstract class AbstractSealerBlockEntity extends SmartBlockEntity impleme
 
         if (hasOxygen != ACTIVE) {
             ACTIVE = hasOxygen;
-            if (ACTIVE) seal(); else unseal();
+            if (ACTIVE) seal();
+            else unseal();
             this.sendData();
         }
 
@@ -65,7 +76,7 @@ public abstract class AbstractSealerBlockEntity extends SmartBlockEntity impleme
             if (RECALC)
                 process();
 
-            TANK.getPrimaryHandler().drain(2, IFluidHandler.FluidAction.EXECUTE);
+            TANK.getPrimaryHandler().drain(getDraw(), IFluidHandler.FluidAction.EXECUTE);
         }
     }
 
@@ -190,6 +201,7 @@ public abstract class AbstractSealerBlockEntity extends SmartBlockEntity impleme
         utmLang.text("Sealing Info:").style(ChatFormatting.WHITE).forGoggles(tooltip);
         utmLang.text("SEALING " + (ACTIVE ? "ACTIVE" : "INACTIVE")).style(ACTIVE ? ChatFormatting.GREEN : ChatFormatting.DARK_RED).forGoggles(tooltip);
         utmLang.text(SYNCED_VOLUME + "/" + getMaxVolume()).style(ChatFormatting.AQUA).space().add(utmLang.text("Sealed Blocks").style(ChatFormatting.GRAY)).forGoggles(tooltip);
+        utmLang.text(String.valueOf(getDraw() * 20)).style(ChatFormatting.AQUA).space().add(utmLang.text("Oxygen used per second").style(ChatFormatting.GRAY)).forGoggles(tooltip);
         return true;
     }
 
