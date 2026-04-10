@@ -18,6 +18,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.event.level.BlockEvent;
@@ -89,7 +90,8 @@ public abstract class AbstractSealerBlockEntity extends SmartBlockEntity impleme
             if (VISITED.size() >= getMaxVolume()) break;
             if (VISITED.contains(current)) continue;
 
-            if (sLevel.getBlockState(current).isAir()) {
+            BlockState state = sLevel.getBlockState(current);
+            if (state.isAir() || !state.getCollisionShape(sLevel, current).equals(Shapes.block())) {
                 VISITED.add(current);
 
                 if (!worldPosition.equals(OxyUtil.isSealed(sLevel, current)))
