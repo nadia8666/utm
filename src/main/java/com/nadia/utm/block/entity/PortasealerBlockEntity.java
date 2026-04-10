@@ -19,7 +19,7 @@ public class PortasealerBlockEntity extends AbstractSealerBlockEntity {
     static {
         utmEvents.register(RegisterCapabilitiesEvent.class, (event) -> event.registerBlockEntity(
                 Capabilities.FluidHandler.BLOCK,
-                utmBlockEntities.OXYGEN_FURNACE.get(),
+                utmBlockEntities.PORTASEALER.get(),
                 (be, side) -> be.CAPABILITY
         ));
     }

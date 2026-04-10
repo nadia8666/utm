@@ -19,7 +19,7 @@ public class BiomeSealerBlockEntity extends AbstractSealerBlockEntity {
     static {
         utmEvents.register(RegisterCapabilitiesEvent.class, (event) -> event.registerBlockEntity(
                 Capabilities.FluidHandler.BLOCK,
-                utmBlockEntities.OXYGEN_FURNACE.get(),
+                utmBlockEntities.BIOME_SEALER.get(),
                 (be, side) -> be.CAPABILITY
         ));
     }
