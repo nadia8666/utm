@@ -14,10 +14,11 @@ import net.createmod.catnip.render.CachedBuffers;
 import net.createmod.catnip.render.SuperByteBuffer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.neoforged.api.distmarker.Dist;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.fluids.FluidStack;
 
-@ForceLoad
+@ForceLoad(dist = Dist.CLIENT)
 public class OxygenFurnaceRenderer extends SafeBlockEntityRenderer<OxygenFurnaceBlockEntity> {
     public OxygenFurnaceRenderer(BlockEntityRendererProvider.Context context) {
     }

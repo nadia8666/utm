@@ -16,10 +16,11 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.api.distmarker.Dist;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import org.jetbrains.annotations.NotNull;
 
-@ForceLoad
+@ForceLoad(dist = Dist.CLIENT)
 public class CitywallsBlockEntityRenderer implements BlockEntityRenderer<CitywallsBlockEntity> {
     private final BlockRenderDispatcher dispatcher;
     public CitywallsBlockEntityRenderer(BlockEntityRendererProvider.Context context) {

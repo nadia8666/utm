@@ -14,9 +14,10 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.Direction;
+import net.neoforged.api.distmarker.Dist;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 
-@ForceLoad
+@ForceLoad(dist = Dist.CLIENT)
 public class OxygenCollectorRenderer extends KineticBlockEntityRenderer<OxygenCollectorBlockEntity> {
     public OxygenCollectorRenderer(BlockEntityRendererProvider.Context context) {
         super(context);

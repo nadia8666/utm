@@ -6,20 +6,25 @@ import com.nadia.utm.util.OxyUtil;
 import com.nadia.utm.utm;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.content.equipment.armor.BacktankUtil;
-import net.minecraft.server.level.ServerLevel;
+import com.simibubi.create.content.kinetics.base.KineticBlock;
+import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.List;
 
 @ForceLoad
 class Breathability {
-    public static void checkSuffocating(ServerPlayer sPlayer, ServerLevel level, boolean inAG) {
-        if (!OxyUtil.canBreathe(sPlayer) && level != null && !sPlayer.getAbilities().instabuild) {
-            if (OxyUtil.isSealed(level, sPlayer.blockPosition()) != null) return;
-
+    public static void checkSuffocating(ServerPlayer sPlayer, boolean inAG) {
+        boolean sealed = OxyUtil.isSealed(sPlayer.serverLevel(), sPlayer.blockPosition()) != null;
+        boolean breathable = OxyUtil.canBreathe(sPlayer);
+        if (!breathable && !sealed && !sPlayer.getAbilities().instabuild) {
             ItemStack helmet = sPlayer.getItemBySlot(EquipmentSlot.HEAD);
             ItemStack chestplate = sPlayer.getItemBySlot(EquipmentSlot.CHEST);
             ItemStack leggings = sPlayer.getItemBySlot(EquipmentSlot.LEGS);
@@ -32,7 +37,7 @@ class Breathability {
                             !BacktankUtil.getAllWithAir(sPlayer).isEmpty()
             ) {
                 List<ItemStack> tanks = BacktankUtil.getAllWithAir(sPlayer);
-                if (level.getGameTime() % 20 == 0) {
+                if (sPlayer.serverLevel().getGameTime() % 20 == 0) {
                     BacktankUtil.consumeAir(sPlayer, tanks.getFirst(), 1);
 
                     if (helmet.is(AllItems.COPPER_DIVING_HELMET))
@@ -42,9 +47,35 @@ class Breathability {
                         boots.setDamageValue(boots.getDamageValue() + 1);
                 }
             } else {
-                sPlayer.hurt(level.damageSources().source(DamageTypes.IN_WALL), 1f);
+                sPlayer.hurt(sPlayer.serverLevel().damageSources().source(DamageTypes.IN_WALL), 1f);
 
                 if (inAG) AdvancementUtil.AwardAdvancement(sPlayer, utm.key("2313ag/suffocate"));
+            }
+        }
+
+        checkRefillBacktank(sPlayer, sealed);
+    }
+
+    public static void checkRefillBacktank(ServerPlayer sPlayer, boolean sealed) {
+        List<ItemStack> tanks = BacktankUtil.getAllWithAir(sPlayer);
+        if (!tanks.isEmpty()) {
+            double headLevel = sPlayer.getBoundingBox().maxY + 0.4;
+            BlockPos pos = BlockPos.containing(sPlayer.getX(), headLevel, sPlayer.getZ());
+            BlockState tank = sPlayer.level().getBlockState(pos);
+            if (tank.getBlock() instanceof KineticBlock block) {
+                if (block.hasShaftTowards(sPlayer.level(), pos, tank, Direction.DOWN) && sPlayer.level().getBlockEntity(pos) instanceof KineticBlockEntity be) {
+                    ItemStack target = tanks.getFirst();
+                    int max = BacktankUtil.maxAir(target);
+                    int air = BacktankUtil.getAir(target);
+                    if (air < max) {
+                        double strength = OxyUtil.getCollectionStrength(sPlayer.level(), pos);
+                        float abs = Math.abs(be.getSpeed());
+                        int increment = Mth.clamp(((int) abs - 100) / 20, 1, 5);
+                        BacktankUtil.consumeAir(sPlayer, target, -Math.max(Mth.floor(increment * strength), 0));
+                    }
+                }
+            } else if (sealed) {
+                BacktankUtil.consumeAir(sPlayer, tanks.getFirst(), -1);
             }
         }
     }

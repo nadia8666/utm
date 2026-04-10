@@ -5,13 +5,8 @@ import com.nadia.utm.event.utmEvents;
 import com.nadia.utm.networking.payloads.LaunchContraptionPayload;
 import com.nadia.utm.registry.dimension.utmDimensions;
 import com.nadia.utm.registry.enchantment.utmEnchantments;
-import com.nadia.utm.util.OxyUtil;
 import com.simibubi.create.content.contraptions.AbstractContraptionEntity;
-import com.simibubi.create.content.equipment.armor.BacktankUtil;
-import com.simibubi.create.content.kinetics.base.KineticBlock;
-import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.MinecraftServer;
@@ -50,30 +45,10 @@ public class SpaceStateHandler {
             MinecraftServer server = sPlayer.getServer();
             if (server == null) return;
 
-            ServerLevel level = server.getLevel(utmDimensions.AG_KEY);
             boolean inAG = sPlayer.serverLevel().dimension().equals(utmDimensions.AG_KEY);
             boolean enteredAG = sPlayer.getData(ENTERED_2313AG);
-            Persistance.checkPersistance(sPlayer, level, enteredAG, inAG);
-
-            List<ItemStack> tanks = BacktankUtil.getAllWithAir(sPlayer);
-            if (!tanks.isEmpty()) {
-                double headLevel = sPlayer.getBoundingBox().maxY + 0.4;
-                BlockPos pos = BlockPos.containing(sPlayer.getX(), headLevel, sPlayer.getZ());
-                BlockState tank = sPlayer.level().getBlockState(pos);
-                if (tank.getBlock() instanceof KineticBlock block) {
-                    if (block.hasShaftTowards(sPlayer.level(), pos, tank, Direction.DOWN) && sPlayer.level().getBlockEntity(pos) instanceof KineticBlockEntity be) {
-                        ItemStack target = tanks.getFirst();
-                        int max = BacktankUtil.maxAir(target);
-                        int air = BacktankUtil.getAir(target);
-                        if (air < max) {
-                            double strength = OxyUtil.getCollectionStrength(sPlayer.level(), pos);
-                            float abs = Math.abs(be.getSpeed());
-                            int increment = Mth.clamp(((int) abs - 100) / 20, 1, 5);
-                            BacktankUtil.consumeAir(sPlayer, target, -Math.max(Mth.floor(increment * strength), 0));
-                        }
-                    }
-                }
-            }
+            Persistance.checkPersistance(sPlayer, server.getLevel(utmDimensions.AG_KEY), enteredAG, inAG);
+            Breathability.checkSuffocating(sPlayer, inAG);
         }
     }
 

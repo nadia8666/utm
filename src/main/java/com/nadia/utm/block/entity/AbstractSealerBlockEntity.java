@@ -1,5 +1,7 @@
 package com.nadia.utm.block.entity;
 
+import com.nadia.utm.event.ForceLoad;
+import com.nadia.utm.event.utmEvents;
 import com.nadia.utm.registry.fluid.utmFluids;
 import com.nadia.utm.util.OxyUtil;
 import com.nadia.utm.util.utmLang;
@@ -18,11 +20,13 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.neoforge.event.level.BlockEvent;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
+@ForceLoad()
 public abstract class AbstractSealerBlockEntity extends SmartBlockEntity implements IHaveGoggleInformation {
     public SmartFluidTankBehaviour TANK;
     public CombinedTankWrapper CAPABILITY;
@@ -97,12 +101,14 @@ public abstract class AbstractSealerBlockEntity extends SmartBlockEntity impleme
         boolean shouldExecute = TANK.getPrimaryHandler().getFluidAmount() > 0;
         if (shouldExecute != ACTIVE) {
             ACTIVE = shouldExecute;
-            this.setChanged();
 
             if (ACTIVE)
                 seal();
             else
                 unseal();
+
+            this.setChanged();
+            this.sendData();
         }
 
         if (ACTIVE) {
@@ -157,5 +163,18 @@ public abstract class AbstractSealerBlockEntity extends SmartBlockEntity impleme
         utmLang.text(SYNCED_VOLUME + "/" + MAX_VOLUME).style(ChatFormatting.AQUA).space().add(utmLang.text("Sealed Blocks").style(ChatFormatting.GRAY)).forGoggles(tooltip);
 
         return true;
+    }
+
+    static {
+        utmEvents.register(BlockEvent.EntityPlaceEvent.class, event -> {
+            if (!(event.getLevel() instanceof ServerLevel level)) return;
+
+            BlockPos pos = event.getPos();
+            BlockPos controllerPos = OxyUtil.isSealed(level, pos);
+
+            if (controllerPos != null && level.getBlockEntity(controllerPos) instanceof AbstractSealerBlockEntity be) {
+
+            }
+        });
     }
 }

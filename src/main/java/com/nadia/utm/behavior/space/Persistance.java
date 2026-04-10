@@ -11,18 +11,18 @@ import net.minecraft.world.level.block.Blocks;
 import static com.nadia.utm.registry.attachment.utmAttachments.ENTERED_2313AG;
 
 class Persistance {
-    public static void checkPersistance(ServerPlayer sPlayer, ServerLevel level, boolean enteredAG, boolean inAG) {
+    public static void checkPersistance(ServerPlayer sPlayer, ServerLevel a23Level, boolean enteredAG, boolean inAG) {
         if (enteredAG && !inAG) {
-            if (level != null) {
+            if (a23Level != null) {
                 int x = sPlayer.blockPosition().getX();
                 int z = sPlayer.blockPosition().getZ();
-                int height = Positioning.getSurface(level, x, z);
+                int height = Positioning.getSurface(a23Level, x, z);
 
                 if (height == -13579) {
                     height = -63;
-                    level.setBlock(new BlockPos(x, -64, z), Blocks.COBBLESTONE.defaultBlockState(), 3);
+                    a23Level.setBlock(new BlockPos(x, -64, z), Blocks.COBBLESTONE.defaultBlockState(), 3);
                 }
-                sPlayer.teleportTo(level, sPlayer.getX(), height, sPlayer.getZ(), sPlayer.getYRot(), sPlayer.getXRot());
+                sPlayer.teleportTo(a23Level, sPlayer.getX(), height, sPlayer.getZ(), sPlayer.getYRot(), sPlayer.getXRot());
             }
         } else if (!enteredAG && inAG) {
             sPlayer.setData(ENTERED_2313AG, true);
