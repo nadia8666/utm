@@ -57,7 +57,7 @@ class Breathability {
     }
 
     public static void checkRefillBacktank(ServerPlayer sPlayer, boolean sealed) {
-        List<ItemStack> tanks = BacktankUtil.getAllWithAir(sPlayer);
+        List<ItemStack> tanks = OxyUtil.getAllBacktanks(sPlayer);
         if (!tanks.isEmpty()) {
             double headLevel = sPlayer.getBoundingBox().maxY + 0.4;
             BlockPos pos = BlockPos.containing(sPlayer.getX(), headLevel, sPlayer.getZ());

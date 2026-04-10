@@ -3,8 +3,10 @@ package com.nadia.utm.block.entity;
 import com.nadia.utm.event.ForceLoad;
 import com.nadia.utm.event.utmEvents;
 import com.nadia.utm.registry.fluid.utmFluids;
+import com.nadia.utm.util.AdvancementUtil;
 import com.nadia.utm.util.OxyUtil;
 import com.nadia.utm.util.utmLang;
+import com.nadia.utm.utm;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.kinetics.transmission.SplitShaftBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
@@ -17,8 +19,10 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -77,6 +81,10 @@ public abstract class AbstractSealerBlockEntity extends SplitShaftBlockEntity im
                 process();
 
             TANK.getPrimaryHandler().drain(getDraw(), IFluidHandler.FluidAction.EXECUTE);
+
+            List<ServerPlayer> players = level.getEntitiesOfClass(ServerPlayer.class, new AABB(worldPosition).inflate(8.0));
+            for (ServerPlayer player : players)
+                AdvancementUtil.AwardAdvancement(player, utm.key("2313ag/sealed"));
         }
     }
 

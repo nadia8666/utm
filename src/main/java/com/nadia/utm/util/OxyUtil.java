@@ -1,6 +1,7 @@
 package com.nadia.utm.util;
 
 import com.nadia.utm.behavior.space.SealedChunkData;
+import com.nadia.utm.mixin.BacktankUtilAccessor;
 import com.nadia.utm.registry.attachment.utmAttachments;
 import com.nadia.utm.registry.dimension.utmDimensions;
 import net.minecraft.core.BlockPos;
@@ -8,6 +9,8 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -15,10 +18,11 @@ import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.chunk.status.ChunkStatus;
 
 import javax.annotation.Nullable;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
+import java.util.function.Function;
+
+import static com.simibubi.create.content.equipment.armor.BacktankUtil.getAir;
+import static com.simibubi.create.content.equipment.armor.BacktankUtil.hasAirRemaining;
 
 public class OxyUtil {
     /**
@@ -137,5 +141,23 @@ public class OxyUtil {
         if (chunk == null) return null;
 
         return chunk.getData(utmAttachments.SEALED_AIR).sealedBlocks().get(targetPos);
+    }
+
+    /**
+     * get all backtanks an entity is wearing
+     * @param entity target entity
+     * @return list of tank stacks
+     */
+    public static List<ItemStack> getAllBacktanks(LivingEntity entity) {
+        List<ItemStack> all = new ArrayList<>();
+
+        for (Function<LivingEntity, List<ItemStack>> supplier : BacktankUtilAccessor.getSuppliers()) {
+            List<ItemStack> result = supplier.apply(entity);
+            all.addAll(result);
+        }
+
+        all.sort((a, b) -> Float.compare(getAir(a), getAir(b)));
+
+        return all;
     }
 }

@@ -1,11 +1,11 @@
 {
-  "parent": "utm:2313ag/root",
+  "parent": "utm:2313ag/oxygen_collector",
   "display": {
     "icon": {
-      "id": "utm:oxygen_collector"
+      "id": "utm:portasealer"
     },
-    "title": "Certified Retro",
-    "description": "Activate an Oxygen Collector and watch it work! why does this work?",
+    "title": "what do i even call this one",
+    "description": "Activate a sealer-type block. You can breathe now!",
     "frame": "goal",
     "show_toast": true,
     "announce_to_chat": true,

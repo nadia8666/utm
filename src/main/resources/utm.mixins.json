@@ -5,6 +5,7 @@
   "plugin": "com.nadia.utm.mixin.ConfigPlugin",
   "mixins": [
     "BacktankBlockEntityMixin",
+    "BacktankUtilAccessor",
     "FreeAnvilMixin",
     "HitboxMixin",
     "SchematicPlacePacketMixin",
