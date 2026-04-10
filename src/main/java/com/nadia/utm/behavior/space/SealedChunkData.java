@@ -9,12 +9,22 @@ import java.util.HashMap;
 import java.util.Map;
 
 public record SealedChunkData(Map<BlockPos, BlockPos> sealedBlocks) {
-    public static final Codec<SealedChunkData> CODEC = RecordCodecBuilder.create(instance ->
-            instance.group(
-                    Codec.unboundedMap(BlockPos.CODEC, BlockPos.CODEC)
-                            .fieldOf("sealed_blocks")
-                            .forGetter(SealedChunkData::sealedBlocks)
-            ).apply(instance, SealedChunkData::new)
+    private record Entry(BlockPos key, BlockPos value) {
+        static final Codec<Entry> CODEC = RecordCodecBuilder.create(i -> i.group(
+                BlockPos.CODEC.fieldOf("k").forGetter(Entry::key),
+                BlockPos.CODEC.fieldOf("v").forGetter(Entry::value)
+        ).apply(i, Entry::new));
+    }
+
+    public static final Codec<SealedChunkData> CODEC = Entry.CODEC.listOf().xmap(
+            list -> {
+                Map<BlockPos, BlockPos> map = new HashMap<>();
+                list.forEach(e -> map.put(e.key(), e.value()));
+                return new SealedChunkData(map);
+            },
+            data -> data.sealedBlocks().entrySet().stream()
+                    .map(e -> new Entry(e.getKey(), e.getValue()))
+                    .toList()
     );
 
     public SealedChunkData(IAttachmentHolder holder) {

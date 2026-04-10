@@ -10,7 +10,10 @@ import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 
 @ForceLoad()
 public class BiomeSealerBlockEntity extends AbstractSealerBlockEntity {
-    public static int MAX_VOLUME = 10000;
+    @Override
+    public int getMaxVolume() {
+        return 10000;
+    }
 
     public BiomeSealerBlockEntity(BlockPos pos, BlockState state) {
         super(utmBlockEntities.BIOME_SEALER.get(), pos, state);

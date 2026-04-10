@@ -10,7 +10,10 @@ import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 
 @ForceLoad()
 public class PortasealerBlockEntity extends AbstractSealerBlockEntity {
-    public static int MAX_VOLUME = 100;
+    @Override
+    public int getMaxVolume() {
+        return 100;
+    }
 
     public PortasealerBlockEntity(BlockPos pos, BlockState state) {
         super(utmBlockEntities.PORTASEALER.get(), pos, state);
