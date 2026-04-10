@@ -33,6 +33,10 @@
   "block.utm.launch_contraption": "Launch Contraption",
   "block.utm.oxygen_collector": "Oxygen Collector",
   "block.utm.oxygen_furnace": "Oxygen Furnace",
+  "block.utm.aluminum_ore": "Aluminum Ore",
+  "block.utm.magnesium_ore": "Magnesium Ore",
+  "block.utm.portasealer": "Portasealer",
+  "block.utm.biome_sealer": "Biome Sealer",
 
   "item.utm.copper_sword": "Copper Sword",
   "item.utm.copper_pickaxe": "Copper Pickaxe",
