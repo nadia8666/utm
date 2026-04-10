@@ -122,7 +122,6 @@ public class OxyUtil {
             updatedMap.remove(targetPos);
 
         chunk.setData(utmAttachments.SEALED_AIR, new SealedChunkData(updatedMap));
-        chunk.setUnsaved(true);
     }
 
     /**
