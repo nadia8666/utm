@@ -196,6 +196,7 @@ public abstract class AbstractSealerBlockEntity extends SmartBlockEntity impleme
     static {
         utmEvents.register(BlockEvent.EntityPlaceEvent.class, event -> handleWorldChange(event, event.getPos()));
         utmEvents.register(BlockEvent.BreakEvent.class, event -> handleWorldChange(event, event.getPos()));
+        utmEvents.register(BlockEvent.FluidPlaceBlockEvent.class, event -> handleWorldChange(event, event.getPos()));
     }
 
     private static void handleWorldChange(BlockEvent event, BlockPos pos) {
