@@ -93,7 +93,7 @@ public class utmBlocks {
             .destroyTime(5.0f)
             .explosionResistance(50f).sound(SoundType.METAL)
             .noOcclusion())
-            .drops().copyItemModel().ponder(A23, OXYGEN).minePick().stress(2);
+            .drops().copyItemModel().ponder(A23, OXYGEN).minePick();
 
     public static final utmBlockContainer<PortasealerBlock, BlockItem> PORTASEALER = dualRegister("portasealer", PortasealerBlock::new, BlockBehaviour.Properties.of()
             .destroyTime(2.0f)
@@ -105,7 +105,7 @@ public class utmBlocks {
     public static final utmBlockContainer<BiomeSealerBlock, BlockItem> BIOME_SEALER = dualRegister("biome_sealer", BiomeSealerBlock::new, BlockBehaviour.Properties.of()
             .destroyTime(5.0f)
             .explosionResistance(50f).sound(SoundType.METAL))
-            .drops().copyItemModel().ponder(A23, OXYGEN).minePick();
+            .drops().copyItemModel().ponder(A23, OXYGEN).minePick().stress(2);
 
     public static final utmBlockContainer<BlockChunkLoaderBlock, BlockItem> CHUNK_LOADER = dualRegister("chunk_loader", BlockChunkLoaderBlock::new, BlockBehaviour.Properties.of()
             .destroyTime(5.0f)
