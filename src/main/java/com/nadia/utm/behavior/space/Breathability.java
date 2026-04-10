@@ -74,7 +74,9 @@ class Breathability {
                         BacktankUtil.consumeAir(sPlayer, target, -Math.max(Mth.floor(increment * strength), 0));
                     }
                 }
-            } else if (sealed) {
+            }
+
+            if (sealed) {
                 BacktankUtil.consumeAir(sPlayer, tanks.getFirst(), -1);
             }
         }
