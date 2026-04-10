@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "utm_space",
+  "ingredients": [
+    {
+      "item": "create:nozzle"
+    },
+    {
+      "item": "create:fluid_tank"
+    },
+    {
+      "item": "create:electron_tube"
+    },
+    {
+      "item": "utm:steel_sheet"
+    },
+    {
+      "item": "utm:steel_sheet"
+    },
+    {
+      "item": "utm:steel_sheet"
+    }
+  ],
+  "result": {
+    "id": "utm:portasealer",
+    "count": 4
+  }
+}

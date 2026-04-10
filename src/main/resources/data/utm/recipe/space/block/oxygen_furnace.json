@@ -1,0 +1,34 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "utm_space",
+  "pattern": [
+    "mSt",
+    "mfa",
+    "tba"
+  ],
+  "key": {
+    "b": {
+      "item": "create:blaze_burner"
+    },
+    "m": {
+      "item": "utm:magnesium_sheet"
+    },
+    "a": {
+      "item": "utm:aluminum_sheet"
+    },
+    "t": {
+      "item": "create:fluid_tank"
+    },
+    "f": {
+      "item": "minecraft:blast_furnace"
+    },
+    "S": {
+      "item": "create:sturdy_sheet"
+    }
+  },
+  "result": {
+    "id": "utm:oxygen_furnace",
+    "count": 1
+  }
+}

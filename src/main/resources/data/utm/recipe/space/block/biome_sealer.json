@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "utm_space",
+  "pattern": [
+    "sns",
+    "sts",
+    "sSs"
+  ],
+  "key": {
+    "s": {
+      "item": "utm:steel_sheet"
+    },
+    "S": {
+      "item": "create:shaft"
+    },
+    "t": {
+      "item": "create:fluid_tank"
+    },
+    "n": {
+      "item": "create:nozzle"
+    }
+  },
+  "result": {
+    "id": "utm:biome_sealer",
+    "count": 1
+  }
+}
