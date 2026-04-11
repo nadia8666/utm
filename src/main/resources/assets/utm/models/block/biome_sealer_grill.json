@@ -1,0 +1,19 @@
+{
+	"format_version": "1.9.0",
+	"credit": "Made with Blockbench",
+	"texture_size": [64, 64],
+	"textures": {
+		"0": "utm:block/biome_sealer",
+		"particle": "utm:block/biome_sealer"
+	},
+	"elements": [
+		{
+			"from": [15, 1, 1],
+			"to": [16, 15, 15],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8.25, 8, 8]},
+			"faces": {
+				"east": {"uv": [4, 0, 7.5, 3.5], "texture": "#0"}
+			}
+		}
+	]
+}

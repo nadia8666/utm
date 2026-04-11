@@ -2,9 +2,12 @@ package com.nadia.utm.client.renderer.block;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.nadia.utm.block.entity.BiomeSealerBlockEntity;
+import com.nadia.utm.client.renderer.IBlockstateRotatedRenderer;
 import com.nadia.utm.event.ForceLoad;
 import com.nadia.utm.event.utmEvents;
 import com.nadia.utm.registry.block.utmBlockEntities;
+import com.nadia.utm.registry.model.utmPartialModels;
+import com.nadia.utm.util.PoseUtil;
 import com.simibubi.create.AllPartialModels;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntityRenderer;
 import net.createmod.catnip.render.CachedBuffers;
@@ -17,7 +20,7 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 
 @ForceLoad(dist = Dist.CLIENT)
-public class BiomeSealerRenderer extends KineticBlockEntityRenderer<BiomeSealerBlockEntity> {
+public class BiomeSealerRenderer extends KineticBlockEntityRenderer<BiomeSealerBlockEntity> implements IBlockstateRotatedRenderer {
     public BiomeSealerRenderer(BlockEntityRendererProvider.Context context) {
         super(context);
     }
@@ -28,7 +31,10 @@ public class BiomeSealerRenderer extends KineticBlockEntityRenderer<BiomeSealerB
         float ang = getAngleForBe(be, be.getBlockPos(), Direction.Axis.Y);
 
         SuperByteBuffer shaft = CachedBuffers.partial(AllPartialModels.SHAFT_HALF, be.getBlockState()).rotateCentered((float) Math.toRadians(90), Direction.Axis.X);
+        SuperByteBuffer grill = CachedBuffers.partial(utmPartialModels.BIOME_SEALER_GRILL, be.getBlockState());
         kineticRotationTransform(shaft, be, Direction.Axis.Z, -ang, light).renderInto(ms, buffer.getBuffer(RenderType.solid()));
+
+        new PoseUtil(ms).push().run(() -> rotateByState(be, ms)).run(() -> grill.light(light).renderInto(ms, buffer.getBuffer(RenderType.TRANSLUCENT))).pop();
     }
 
     static {

@@ -30,7 +30,7 @@ public class OxygenCollectorRenderer extends KineticBlockEntityRenderer<OxygenCo
         float ang = getAngleForBe(be, be.getBlockPos(), Direction.Axis.Y);
 
         SuperByteBuffer shaft = CachedBuffers.partial(AllPartialModels.SHAFT_HALF, be.getBlockState()).rotateCentered((float) Math.toRadians(90), Direction.Axis.X);
-        SuperByteBuffer fan = CachedBuffers.partial(utmPartialModels.OXYGEN_FAN, be.getBlockState()).translate(0,0.365,0);
+        SuperByteBuffer fan = CachedBuffers.partial(utmPartialModels.OXYGEN_FAN, be.getBlockState()).translate(0, 0.365, 0);
         SuperByteBuffer grill = CachedBuffers.partial(utmPartialModels.OXYGEN_COLLECTOR_GRILL, be.getBlockState());
 
         // shaft is z forward apparnetly.
