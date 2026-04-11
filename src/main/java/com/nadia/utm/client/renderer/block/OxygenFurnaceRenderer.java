@@ -2,6 +2,7 @@ package com.nadia.utm.client.renderer.block;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.nadia.utm.block.entity.OxygenFurnaceBlockEntity;
+import com.nadia.utm.client.renderer.IBlockstateRotatedRenderer;
 import com.nadia.utm.client.renderer.utmRenderTypes;
 import com.nadia.utm.event.ForceLoad;
 import com.nadia.utm.event.utmEvents;
@@ -19,7 +20,7 @@ import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.fluids.FluidStack;
 
 @ForceLoad(dist = Dist.CLIENT)
-public class OxygenFurnaceRenderer extends SafeBlockEntityRenderer<OxygenFurnaceBlockEntity> {
+public class OxygenFurnaceRenderer extends SafeBlockEntityRenderer<OxygenFurnaceBlockEntity> implements IBlockstateRotatedRenderer {
     public OxygenFurnaceRenderer(BlockEntityRendererProvider.Context context) {
     }
 
@@ -27,12 +28,14 @@ public class OxygenFurnaceRenderer extends SafeBlockEntityRenderer<OxygenFurnace
     protected void renderSafe(OxygenFurnaceBlockEntity be, float partialTicks, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
         FluidStack oxygenStack = be.LOX.getPrimaryHandler().getFluid();
         FluidStack steelStack = be.STEEL.getPrimaryHandler().getFluid();
-
-        drawTank(oxygenStack, buffer, ms, light, 11, 1 / 64f, 16 - 1 / 64f, 6 - 1 / 64f);
-        drawTank(steelStack, buffer, ms, light, 1 / 64f, 6 + 1 / 64f, 4 - 1 / 64f, 16 - 1 / 64f);
-
         SuperByteBuffer tanks = CachedBuffers.partial(utmPartialModels.OXYGEN_FURNACE_TANKS, be.getBlockState());
-        tanks.light(light).translate(0, 1/128f, 0).renderInto(ms, buffer.getBuffer(utmRenderTypes.TRANSLUCENT_NO_CULL));
+
+        new PoseUtil(ms).push().run(() -> rotateByState(be, ms)).run(() -> {
+            drawTank(oxygenStack, buffer, ms, light, 11, 1 / 64f, 16 - 1 / 64f, 6 - 1 / 64f);
+            drawTank(steelStack, buffer, ms, light, 1 / 64f, 6 + 1 / 64f, 4 - 1 / 64f, 16 - 1 / 64f);
+
+            tanks.light(light).translate(0, 1/128f, 0).renderInto(ms, buffer.getBuffer(utmRenderTypes.TRANSLUCENT_NO_CULL));
+        }).pop();
     }
 
     private void drawTank(FluidStack stack, MultiBufferSource buffer, PoseStack ms, int light, float x1, float z1, float y2, float z2) {

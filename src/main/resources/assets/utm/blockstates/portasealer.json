@@ -1,8 +1,8 @@
 {
   "variants": {
-    "facing=north": { "model": "utm:block/portasealer" },
-    "facing=south": { "model": "utm:block/portasealer", "y": 180 },
-    "facing=east": { "model": "utm:block/portasealer", "y": 90 },
-    "facing=west": { "model": "utm:block/portasealer", "y": 270 }
+    "facing=north": { "model": "utm:block/portasealer", "y": 270 },
+    "facing=south": { "model": "utm:block/portasealer", "y": 90 },
+    "facing=east": { "model": "utm:block/portasealer", "y": 0 },
+    "facing=west": { "model": "utm:block/portasealer", "y": 180 }
   }
 }

@@ -5,7 +5,9 @@ import com.nadia.utm.block.entity.PortasealerBlockEntity;
 import com.nadia.utm.registry.block.utmBlockEntities;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.foundation.block.IBE;
+import net.createmod.catnip.math.VoxelShaper;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -24,7 +26,7 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nullable;
 
 public class PortasealerBlock extends BaseEntityBlock implements IBE<PortasealerBlockEntity>, IWrenchable, SimpleWaterloggedBlock {
-    public static final VoxelShape SHAPE = Block.box(2, 2, 2, 14, 14, 14);
+    public static final VoxelShaper SHAPE = VoxelShaper.forHorizontal(Block.box(6, 5, 0, 10, 13, 2.4), Direction.NORTH);
     public static final MapCodec<PortasealerBlock> CODEC = simpleCodec(PortasealerBlock::new);
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
@@ -41,7 +43,7 @@ public class PortasealerBlock extends BaseEntityBlock implements IBE<Portasealer
 
     @Override
     protected @NotNull VoxelShape getShape(@NotNull BlockState state, @NotNull BlockGetter level, @NotNull BlockPos pos, @NotNull CollisionContext context) {
-        return SHAPE;
+        return SHAPE.get(state.getValue(FACING));
     }
 
     @Override
