@@ -175,7 +175,7 @@ public class utmClientEvents {
             Minecraft mc = Minecraft.getInstance();
             if (mc.level == null || event.getSound() == null) return;
 
-            if (mc.level.dimension().equals(utmDimensions.AG_KEY) && event.getSound().getSource() == SoundSource.MUSIC && event.getSound().getLocation().getNamespace().equals("utm"))
+            if (mc.level.dimension().equals(utmDimensions.AG_KEY) && event.getSound().getSource() == SoundSource.MUSIC && !event.getSound().getLocation().getNamespace().equals("utm"))
                 event.setSound(null);
         });
     }
