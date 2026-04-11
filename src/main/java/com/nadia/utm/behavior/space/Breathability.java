@@ -61,7 +61,7 @@ class Breathability {
         if (forceOxygen > 0)
             sPlayer.setData(utmAttachments.TEMPORARY_OXYGEN, forceOxygen - 1);
 
-        checkRefillBacktank(sPlayer, sealed);
+        checkRefillBacktank(sPlayer, sealed, controller);
 
         // sometimes it will bug and not clear out the attached air blocks. this is the method
         if (sealed && sPlayer.level().getGameTime() % 20 == 0) {
@@ -89,7 +89,7 @@ class Breathability {
         }
     }
 
-    public static void checkRefillBacktank(ServerPlayer sPlayer, boolean sealed) {
+    public static void checkRefillBacktank(ServerPlayer sPlayer, boolean sealed, BlockPos controller) {
         List<ItemStack> tanks = OxyUtil.getAllBacktanks(sPlayer);
         if (!tanks.isEmpty()) {
             double headLevel = sPlayer.getBoundingBox().maxY + 0.4;
@@ -110,7 +110,13 @@ class Breathability {
             }
 
             if (sealed) {
-                BacktankUtil.consumeAir(sPlayer, tanks.getFirst(), -1);
+                int ticks = 5;
+                if (sPlayer.level().getBlockEntity(controller) instanceof AbstractSealerBlockEntity be) {
+                    ticks = Math.clamp((be.SYNCED_VOLUME / be.getMaxVolume()) * 5L, 1, 5);
+                }
+
+                if (sPlayer.level().getGameTime() % ticks == 0)
+                    BacktankUtil.consumeAir(sPlayer, tanks.getFirst(), -1);
             }
         }
     }
