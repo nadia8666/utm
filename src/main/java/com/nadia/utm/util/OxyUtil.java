@@ -181,4 +181,13 @@ public class OxyUtil {
 
         return all;
     }
+
+    /**
+     * give a player temporary breathability in space
+     * @param player target player
+     * @param duration duration in ticks
+     */
+    public static void giveTemporaryAir(ServerPlayer player, int duration) {
+        player.setData(utmAttachments.TEMPORARY_OXYGEN, duration);
+    }
 }

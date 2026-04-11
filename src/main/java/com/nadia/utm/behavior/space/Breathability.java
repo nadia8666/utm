@@ -1,6 +1,7 @@
 package com.nadia.utm.behavior.space;
 
 import com.nadia.utm.event.ForceLoad;
+import com.nadia.utm.registry.attachment.utmAttachments;
 import com.nadia.utm.util.AdvancementUtil;
 import com.nadia.utm.util.OxyUtil;
 import com.nadia.utm.utm;
@@ -23,8 +24,9 @@ import java.util.List;
 class Breathability {
     public static void checkSuffocating(ServerPlayer sPlayer, boolean inAG) {
         boolean sealed = OxyUtil.canBreatheFromSealed(sPlayer);
+        int forceOxygen = sPlayer.getData(utmAttachments.TEMPORARY_OXYGEN);
         boolean breathable = OxyUtil.canBreathe(sPlayer);
-        if (!breathable && !sealed && !sPlayer.getAbilities().instabuild) {
+        if (!breathable && !sealed && forceOxygen <= 0 && !sPlayer.getAbilities().instabuild) {
             ItemStack helmet = sPlayer.getItemBySlot(EquipmentSlot.HEAD);
             ItemStack chestplate = sPlayer.getItemBySlot(EquipmentSlot.CHEST);
             ItemStack leggings = sPlayer.getItemBySlot(EquipmentSlot.LEGS);
@@ -52,6 +54,9 @@ class Breathability {
                 if (inAG) AdvancementUtil.AwardAdvancement(sPlayer, utm.key("2313ag/suffocate"));
             }
         }
+
+        if (forceOxygen > 0)
+            sPlayer.setData(utmAttachments.TEMPORARY_OXYGEN, forceOxygen - 1);
 
         checkRefillBacktank(sPlayer, sealed);
     }

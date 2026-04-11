@@ -16,6 +16,11 @@ public class utmAttachments {
             () -> AttachmentType.builder(() -> false).serialize(Codec.BOOL).copyOnDeath().build()
     );
 
+    public static final Supplier<AttachmentType<Integer>> TEMPORARY_OXYGEN = ATTACHMENTS.register(
+            "temporary_oxygen",
+            () -> AttachmentType.builder(() -> 0).serialize(Codec.INT).build()
+    );
+
     public static final Supplier<AttachmentType<SealedChunkData>> SEALED_AIR = ATTACHMENTS.register(
             "sealed_air",
             () -> AttachmentType.builder(SealedChunkData::new).serialize(SealedChunkData.CODEC).build()

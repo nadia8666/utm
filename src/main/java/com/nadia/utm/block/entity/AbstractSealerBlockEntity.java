@@ -259,6 +259,12 @@ public abstract class AbstractSealerBlockEntity extends SplitShaftBlockEntity im
             }
 
         if (controllerPos != null && sLevel.getBlockEntity(controllerPos) instanceof AbstractSealerBlockEntity be)
-            if (be.ACTIVE) be.seal();
+            if (be.ACTIVE) {
+                be.seal();
+
+                List<ServerPlayer> players = level.getEntitiesOfClass(ServerPlayer.class, new AABB(pos).inflate(8.0));
+                for (ServerPlayer player : players)
+                    OxyUtil.giveTemporaryAir(player, 5 * 20); // turns out making it work with trapdoors also means you will accidentally suffocate yourself often. Oops.
+            };
     }
 }
