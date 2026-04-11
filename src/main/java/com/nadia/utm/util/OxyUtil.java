@@ -7,6 +7,7 @@ import com.nadia.utm.registry.dimension.utmDimensions;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -22,7 +23,6 @@ import java.util.*;
 import java.util.function.Function;
 
 import static com.simibubi.create.content.equipment.armor.BacktankUtil.getAir;
-import static com.simibubi.create.content.equipment.armor.BacktankUtil.hasAirRemaining;
 
 public class OxyUtil {
     /**
@@ -36,10 +36,11 @@ public class OxyUtil {
     /**
      * Collects nearby leaves and returns a strength alpha accordingly
      * Always assumes 100% leaf coverage while in {@link #hasOxygen(Level) breathable} levels
-     * @param level target level
-     * @param pos target position
+     *
+     * @param level  target level
+     * @param pos    target position
      * @param radius amount of blocks to check, default 3 = 7x7x7 area
-     * @param raw modifies the output to return the raw amount of leaves nearby instead of
+     * @param raw    modifies the output to return the raw amount of leaves nearby instead of
      * @return collection strength
      */
     public static double getCollectionStrength(Level level, BlockPos pos, @Nullable Integer radius, boolean raw) {
@@ -71,18 +72,21 @@ public class OxyUtil {
     }
 
     public static final Set<ResourceKey<Level>> UNBREATHABLE_DIMENSIONS = new HashSet<>();
+
     static {
         UNBREATHABLE_DIMENSIONS.add(utmDimensions.AG_KEY);
     }
 
     /**
      * Checks if a level has oxygen or not
+     *
      * @param level target level
      * @return if the level is breathable (has oxygen)
-     *
      * @see #hasOxygen(Level)
      * @see #hasOxygen(ResourceKey)
      * @see #canBreathe(Entity)
+     * @see #canBreatheFromSealed(ServerPlayer)
+     * @see #isSealed(ServerLevel, BlockPos)
      */
     public static boolean hasOxygen(Level level) {
         return !UNBREATHABLE_DIMENSIONS.contains(level.dimension());
@@ -92,6 +96,8 @@ public class OxyUtil {
      * @see #hasOxygen(Level)
      * @see #hasOxygen(ResourceKey)
      * @see #canBreathe(Entity)
+     * @see #canBreatheFromSealed(ServerPlayer)
+     * @see #isSealed(ServerLevel, BlockPos)
      */
     public static boolean hasOxygen(ResourceKey<Level> dimension) {
         return !UNBREATHABLE_DIMENSIONS.contains(dimension);
@@ -101,15 +107,29 @@ public class OxyUtil {
      * @see #hasOxygen(Level)
      * @see #hasOxygen(ResourceKey)
      * @see #canBreathe(Entity)
+     * @see #canBreatheFromSealed(ServerPlayer)
+     * @see #isSealed(ServerLevel, BlockPos)
      */
     public static boolean canBreathe(Entity entity) {
         return !UNBREATHABLE_DIMENSIONS.contains(entity.level().dimension());
     }
 
     /**
+     * @see #hasOxygen(Level)
+     * @see #hasOxygen(ResourceKey)
+     * @see #canBreathe(Entity)
+     * @see #canBreatheFromSealed(ServerPlayer)
+     * @see #isSealed(ServerLevel, BlockPos)
+     */
+    public static boolean canBreatheFromSealed(ServerPlayer player) {
+        return isSealed(player.serverLevel(), player.blockPosition()) != null;
+    }
+
+    /**
      * set sealed status of block pos
-     * @param level target level
-     * @param targetPos block pos
+     *
+     * @param level         target level
+     * @param targetPos     block pos
      * @param controllerPos nullable controller position
      */
     public static void setBlockSealed(ServerLevel level, BlockPos targetPos, @Nullable BlockPos controllerPos) {
@@ -130,7 +150,8 @@ public class OxyUtil {
 
     /**
      * check if target block is sealed
-     * @param level target level to check
+     *
+     * @param level     target level to check
      * @param targetPos block pos
      * @return controller position
      */
@@ -145,6 +166,7 @@ public class OxyUtil {
 
     /**
      * get all backtanks an entity is wearing
+     *
      * @param entity target entity
      * @return list of tank stacks
      */

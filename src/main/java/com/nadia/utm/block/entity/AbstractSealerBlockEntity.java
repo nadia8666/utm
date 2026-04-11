@@ -20,6 +20,9 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.TrapDoorBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
@@ -44,6 +47,12 @@ public abstract class AbstractSealerBlockEntity extends SplitShaftBlockEntity im
     public int SYNCED_VOLUME = 0;
     public boolean ACTIVE = false;
     protected boolean RECALC = false; // stands for calculating
+
+    public enum SEAL_TYPE {
+        UNSEALED,
+        SEALED,
+        SEAL_NO_PROP // sealed w/o propagation
+    }
 
     public AbstractSealerBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
@@ -101,6 +110,7 @@ public abstract class AbstractSealerBlockEntity extends SplitShaftBlockEntity im
         if (sLevel == null) return;
 
         int processed = 0;
+        BlockPos lastPos = worldPosition;
 
         while (!QUEUE.isEmpty() && processed < 500) {
             BlockPos current = QUEUE.poll();
@@ -110,20 +120,35 @@ public abstract class AbstractSealerBlockEntity extends SplitShaftBlockEntity im
             if (VISITED.contains(current)) continue;
 
             BlockState state = sLevel.getBlockState(current);
-            if (state.isAir() || !state.getCollisionShape(sLevel, current).equals(Shapes.block())) {
+            SEAL_TYPE sealable = canSeal(state, sLevel, current, lastPos);
+            lastPos = current;
+            if (sealable != SEAL_TYPE.UNSEALED) {
                 VISITED.add(current);
 
-                if (!worldPosition.equals(OxyUtil.isSealed(sLevel, current)))
-                    OxyUtil.setBlockSealed(sLevel, current, worldPosition);
+                OxyUtil.setBlockSealed(sLevel, current, worldPosition);
 
-                for (BlockPos neighbor : getAdjacent(current))
-                    if (!VISITED.contains(neighbor)) QUEUE.add(neighbor);
+                if (sealable == SEAL_TYPE.SEALED)
+                    for (BlockPos neighbor : getAdjacent(current))
+                        if (!VISITED.contains(neighbor)) QUEUE.add(neighbor);
             }
         }
 
         if (QUEUE.isEmpty() || VISITED.size() >= getMaxVolume()) {
             finalizeR();
         }
+    }
+
+    public static SEAL_TYPE canSeal(BlockState state, Level level, BlockPos pos, BlockPos lastPos) {
+        if (state.is(BlockTags.TRAPDOORS)) {
+            boolean open = state.getValue(TrapDoorBlock.OPEN);
+
+            // stupid trapdoors. sideways and vertical open dont mean the same thing _, | -> y closed, x/z closed
+            if (lastPos.getY() == pos.getY())
+                open = !open;
+
+            return open ? SEAL_TYPE.SEAL_NO_PROP : SEAL_TYPE.SEALED;
+        }
+        return (state.isAir() || !state.getCollisionShape(level, pos).equals(Shapes.block())) ? SEAL_TYPE.SEALED : SEAL_TYPE.UNSEALED;
     }
 
     // i wanted to make this finalize but.. it overrides.. java 9 object arg??? wtf./
@@ -218,6 +243,7 @@ public abstract class AbstractSealerBlockEntity extends SplitShaftBlockEntity im
         utmEvents.register(BlockEvent.EntityPlaceEvent.class, event -> handleWorldChange(event, event.getPos()));
         utmEvents.register(BlockEvent.BreakEvent.class, event -> handleWorldChange(event, event.getPos()));
         utmEvents.register(BlockEvent.FluidPlaceBlockEvent.class, event -> handleWorldChange(event, event.getPos()));
+        utmEvents.register(BlockEvent.NeighborNotifyEvent.class, event -> handleWorldChange(event, event.getPos()));
     }
 
     private static void handleWorldChange(BlockEvent event, BlockPos pos) {

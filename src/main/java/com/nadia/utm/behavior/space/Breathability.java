@@ -22,7 +22,7 @@ import java.util.List;
 @ForceLoad
 class Breathability {
     public static void checkSuffocating(ServerPlayer sPlayer, boolean inAG) {
-        boolean sealed = OxyUtil.isSealed(sPlayer.serverLevel(), sPlayer.blockPosition()) != null;
+        boolean sealed = OxyUtil.canBreatheFromSealed(sPlayer);
         boolean breathable = OxyUtil.canBreathe(sPlayer);
         if (!breathable && !sealed && !sPlayer.getAbilities().instabuild) {
             ItemStack helmet = sPlayer.getItemBySlot(EquipmentSlot.HEAD);
