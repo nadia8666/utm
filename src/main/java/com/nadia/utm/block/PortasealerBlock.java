@@ -6,6 +6,7 @@ import com.nadia.utm.registry.block.utmBlockEntities;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.*;
@@ -22,7 +23,7 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
-public class PortasealerBlock extends BaseEntityBlock implements IBE<PortasealerBlockEntity>, IWrenchable {
+public class PortasealerBlock extends BaseEntityBlock implements IBE<PortasealerBlockEntity>, IWrenchable, SimpleWaterloggedBlock {
     public static final VoxelShape SHAPE = Block.box(2, 2, 2, 14, 14, 14);
     public static final MapCodec<PortasealerBlock> CODEC = simpleCodec(PortasealerBlock::new);
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
@@ -34,7 +35,7 @@ public class PortasealerBlock extends BaseEntityBlock implements IBE<Portasealer
     }
 
     @Override
-    protected boolean canBeReplaced(@NotNull BlockState state, @NotNull Fluid fluid) {
+    public boolean canBeReplaced(@NotNull BlockState state, @NotNull Fluid fluid) {
         return false;
     }
 
@@ -83,6 +84,11 @@ public class PortasealerBlock extends BaseEntityBlock implements IBE<Portasealer
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(FACING);
+    }
+
+    @Override
+    public boolean canPlaceLiquid(@Nullable Player player, @NotNull BlockGetter level, @NotNull BlockPos pos, @NotNull BlockState state, @NotNull Fluid fluid) {
+        return false;
     }
 }
 
