@@ -120,12 +120,12 @@ public abstract class AbstractSealerBlockEntity extends SplitShaftBlockEntity im
 
             if (VISITED.size() >= getMaxVolume()) break;
             if (VISITED.contains(current)) continue;
+            VISITED.add(current);
 
             BlockState state = sLevel.getBlockState(current);
             SEAL_TYPE sealable = canSeal(state, sLevel, current, lastPos);
             lastPos = current;
             if (sealable != SEAL_TYPE.UNSEALED) {
-                VISITED.add(current);
 
                 OxyUtil.setBlockSealed(sLevel, current, worldPosition);
 
@@ -226,7 +226,7 @@ public abstract class AbstractSealerBlockEntity extends SplitShaftBlockEntity im
         return tag;
     }
 
-    protected static List<BlockPos> getAdjacent(BlockPos pos) {
+    public static List<BlockPos> getAdjacent(BlockPos pos) {
         return List.of(pos.above(), pos.below(), pos.north(), pos.east(), pos.south(), pos.west());
     }
 

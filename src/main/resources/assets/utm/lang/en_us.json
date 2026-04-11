@@ -18,6 +18,9 @@
   "utm.configuration.renderPlanets": "Render Planets",
   "utm.configuration.renderPlanets.tooltip": "Should planets and moons be visible? Does not affect Minecraft's overworld sun and moon.",
 
+  "utm.configuration.debugSealedAir": "DEBUG: SEALED AIR",
+  "utm.configuration.debugSealedAir.tooltip": "!!DEBUG!! View sealed air configuration.",
+
   "block.utm.heavy_metal_anvil": "Heavy-Metal Anvil",
   "block.utm.grate": "Grating",
   "block.utm.glint_table": "Glint Augmenter",

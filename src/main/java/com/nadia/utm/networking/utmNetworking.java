@@ -9,12 +9,16 @@ import com.nadia.utm.networking.payloads.DropGravePayload;
 import com.nadia.utm.networking.payloads.GlintSyncPayload;
 import com.nadia.utm.networking.payloads.LaunchContraptionPayload;
 import com.nadia.utm.networking.payloads.TabLayerPayload;
+import com.nadia.utm.networking.payloads.debug.RequestSealedDataPayload;
+import com.nadia.utm.networking.payloads.debug.SyncSealedDataPayload;
+import com.nadia.utm.registry.attachment.utmAttachments;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.chunk.ChunkAccess;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.handling.IPayloadHandler;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 
-// TODO: refactor
 @ForceLoad
 public class utmNetworking {
     private static PayloadRegistrar REGISTRAR;
@@ -38,6 +42,22 @@ public class utmNetworking {
 
         server(LaunchContraptionPayload.DEF, (payload, context) -> context.enqueueWork(() -> SpaceStateHandler.launchRecieved(payload, context)));
         client(TabLayerPayload.DEF, (payload, context) -> context.enqueueWork(() -> TabMenuLayer.CACHE = payload.players()));
+
+        server(RequestSealedDataPayload.DEF, (payload, context) -> context.enqueueWork(() -> {
+            Level level = context.player().level();
+            ChunkAccess chunk = level.getChunk(payload.pos().x, payload.pos().z);
+            if (chunk.hasData(utmAttachments.SEALED_AIR)) {
+                context.reply(new SyncSealedDataPayload(payload.pos(), chunk.getData(utmAttachments.SEALED_AIR)));
+            }
+        }));
+
+        client(SyncSealedDataPayload.DEF, (payload, context) -> context.enqueueWork(() -> {
+            Level level = net.minecraft.client.Minecraft.getInstance().level;
+            if (level != null) {
+                var chunk = level.getChunk(payload.pos().x, payload.pos().z);
+                chunk.setData(utmAttachments.SEALED_AIR, payload.data());
+            }
+        }));
     }
 
     static {

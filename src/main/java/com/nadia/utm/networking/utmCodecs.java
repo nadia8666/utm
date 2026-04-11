@@ -5,6 +5,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.phys.Vec3;
 import org.joml.Vector2f;
 
@@ -28,4 +29,7 @@ public class utmCodecs {
             ByteBufCodecs.DOUBLE, Vec3::z,
             Vec3::new
     );
+
+    public static final StreamCodec<ByteBuf, ChunkPos> CHUNK_POS_STREAM =
+            ByteBufCodecs.VAR_LONG.map(ChunkPos::new, ChunkPos::toLong);
 }

@@ -1,5 +1,6 @@
 package com.nadia.utm.behavior.space;
 
+import com.nadia.utm.block.entity.AbstractSealerBlockEntity;
 import com.nadia.utm.event.ForceLoad;
 import com.nadia.utm.registry.attachment.utmAttachments;
 import com.nadia.utm.util.AdvancementUtil;
@@ -11,6 +12,7 @@ import com.simibubi.create.content.kinetics.base.KineticBlock;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageTypes;
@@ -18,12 +20,13 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 
-import java.util.List;
+import java.util.*;
 
 @ForceLoad
 class Breathability {
     public static void checkSuffocating(ServerPlayer sPlayer, boolean inAG) {
-        boolean sealed = OxyUtil.canBreatheFromSealed(sPlayer);
+        BlockPos controller = OxyUtil.isSealed(sPlayer.serverLevel(), sPlayer.blockPosition());
+        boolean sealed = controller != null;
         int forceOxygen = sPlayer.getData(utmAttachments.TEMPORARY_OXYGEN);
         boolean breathable = OxyUtil.canBreathe(sPlayer);
         if (!breathable && !sealed && forceOxygen <= 0 && !sPlayer.getAbilities().instabuild) {
@@ -59,6 +62,31 @@ class Breathability {
             sPlayer.setData(utmAttachments.TEMPORARY_OXYGEN, forceOxygen - 1);
 
         checkRefillBacktank(sPlayer, sealed);
+
+        // sometimes it will bug and not clear out the attached air blocks. this is the method
+        if (sealed && sPlayer.level().getGameTime() % 20 == 0) {
+            if (!(sPlayer.serverLevel().getBlockEntity(controller) instanceof AbstractSealerBlockEntity)) {
+                ServerLevel sLevel = sPlayer.serverLevel();
+                Set<BlockPos> VISITED = new HashSet<>();
+                Queue<BlockPos> QUEUE = new LinkedList<>(AbstractSealerBlockEntity.getAdjacent(controller));
+
+                while (!QUEUE.isEmpty()) {
+                    BlockPos current = QUEUE.poll();
+
+                    if (VISITED.contains(current)) continue;
+                    VISITED.add(current);
+
+                    BlockPos otherController = OxyUtil.isSealed(sLevel, current);
+                    if (controller.equals(otherController)) {
+                        OxyUtil.setBlockSealed(sLevel, current, null);
+                        for (BlockPos neighbor : AbstractSealerBlockEntity.getAdjacent(current))
+                            if (!VISITED.contains(neighbor)) QUEUE.add(neighbor);
+                    }
+                }
+
+                OxyUtil.setBlockSealed(sLevel, controller, null);
+            }
+        }
     }
 
     public static void checkRefillBacktank(ServerPlayer sPlayer, boolean sealed) {
