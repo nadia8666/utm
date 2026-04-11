@@ -140,7 +140,7 @@ public abstract class AbstractSealerBlockEntity extends SplitShaftBlockEntity im
 
     public static SEAL_TYPE canSeal(BlockState state, Level level, BlockPos pos, BlockPos lastPos) {
         if (state.is(BlockTags.TRAPDOORS)) {
-            boolean open = state.getValue(TrapDoorBlock.OPEN);
+            boolean open = !state.getValue(TrapDoorBlock.OPEN);
 
             // stupid trapdoors. sideways and vertical open dont mean the same thing _, | -> y closed, x/z closed
             if (lastPos.getY() == pos.getY())
