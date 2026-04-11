@@ -26,7 +26,7 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nullable;
 
 public class PortasealerBlock extends BaseEntityBlock implements IBE<PortasealerBlockEntity>, IWrenchable, SimpleWaterloggedBlock {
-    public static final VoxelShaper SHAPE = VoxelShaper.forHorizontal(Block.box(6, 5, 0, 10, 13, 2.4), Direction.NORTH);
+    public static final VoxelShaper SHAPE = VoxelShaper.forHorizontal(Block.box(6, 5, 0, 10, 13, 2.4), Direction.EAST);
     public static final MapCodec<PortasealerBlock> CODEC = simpleCodec(PortasealerBlock::new);
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
