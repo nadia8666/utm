@@ -8,6 +8,7 @@
     "BacktankUtilAccessor",
     "FreeAnvilMixin",
     "HitboxMixin",
+    "LevelMixin",
     "SchematicPlacePacketMixin",
     "compat.GraveBlockEntityMixin",
     "compat.GraveBlockMixin",

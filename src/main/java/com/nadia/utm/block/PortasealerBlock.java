@@ -14,6 +14,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -30,6 +31,11 @@ public class PortasealerBlock extends BaseEntityBlock implements IBE<Portasealer
         super(properties);
 
         registerDefaultState(this.stateDefinition.any());
+    }
+
+    @Override
+    protected boolean canBeReplaced(@NotNull BlockState state, @NotNull Fluid fluid) {
+        return false;
     }
 
     @Override

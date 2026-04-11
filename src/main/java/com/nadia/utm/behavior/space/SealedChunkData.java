@@ -5,6 +5,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.neoforged.neoforge.attachment.IAttachmentHolder;
 
+import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,6 +27,11 @@ public record SealedChunkData(Map<BlockPos, BlockPos> sealedBlocks) {
                     .map(e -> new Entry(e.getKey(), e.getValue()))
                     .toList()
     );
+
+    @Nullable
+    public BlockPos get(BlockPos target) {
+        return sealedBlocks.get(target);
+    }
 
     public SealedChunkData(IAttachmentHolder holder) {
         this(new HashMap<>());

@@ -1,6 +1,7 @@
 package com.nadia.utm.block.entity;
 
 import com.nadia.utm.event.ForceLoad;
+import com.nadia.utm.event.events.BlockStateChangedEvent;
 import com.nadia.utm.event.utmEvents;
 import com.nadia.utm.registry.fluid.utmFluids;
 import com.nadia.utm.util.AdvancementUtil;
@@ -22,6 +23,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.TrapDoorBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -240,24 +242,23 @@ public abstract class AbstractSealerBlockEntity extends SplitShaftBlockEntity im
     }
 
     static {
-        utmEvents.register(BlockEvent.EntityPlaceEvent.class, event -> handleWorldChange(event, event.getPos()));
-        utmEvents.register(BlockEvent.BreakEvent.class, event -> handleWorldChange(event, event.getPos()));
-        utmEvents.register(BlockEvent.FluidPlaceBlockEvent.class, event -> handleWorldChange(event, event.getPos()));
-        utmEvents.register(BlockEvent.NeighborNotifyEvent.class, event -> handleWorldChange(event, event.getPos()));
+        utmEvents.register(BlockEvent.EntityPlaceEvent.class, event -> handleWorldChange(event.getLevel(), event.getPos()));
+        utmEvents.register(BlockEvent.BreakEvent.class, event -> handleWorldChange(event.getLevel(), event.getPos()));
+        utmEvents.register(BlockEvent.FluidPlaceBlockEvent.class, event -> handleWorldChange(event.getLevel(), event.getPos()));
+        utmEvents.register(BlockStateChangedEvent.class, event -> handleWorldChange(event.Level, event.Pos));
     }
 
-    private static void handleWorldChange(BlockEvent event, BlockPos pos) {
-        if (!(event.getLevel() instanceof ServerLevel level)) return;
-
-        BlockPos controllerPos = OxyUtil.isSealed(level, pos);
+    private static void handleWorldChange(LevelAccessor level, BlockPos pos) {
+        if (!(level instanceof ServerLevel sLevel)) return;
+        BlockPos controllerPos = OxyUtil.isSealed(sLevel, pos);
 
         if (controllerPos == null)
             for (BlockPos neighbor : List.of(pos.above(), pos.below(), pos.north(), pos.south(), pos.east(), pos.west())) {
-                controllerPos = OxyUtil.isSealed(level, neighbor);
+                controllerPos = OxyUtil.isSealed(sLevel, neighbor);
                 if (controllerPos != null) break;
             }
 
-        if (controllerPos != null && level.getBlockEntity(controllerPos) instanceof AbstractSealerBlockEntity be)
+        if (controllerPos != null && sLevel.getBlockEntity(controllerPos) instanceof AbstractSealerBlockEntity be)
             if (be.ACTIVE) be.seal();
     }
 }
