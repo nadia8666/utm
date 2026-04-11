@@ -5,6 +5,7 @@ import com.nadia.utm.event.utmEvents;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.fml.loading.FMLPaths;
+import net.neoforged.fml.loading.modscan.ModAnnotation;
 import net.neoforged.neoforgespi.language.ModFileScanData;
 import org.objectweb.asm.Type;
 import org.slf4j.Logger;
@@ -26,7 +27,6 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
-import java.util.List;
 import java.util.Objects;
 
 @Mod(utm.MODID)
@@ -60,8 +60,8 @@ public class utm {
                 .forEach(data -> {
                     String dist = "COMMON";
 
-                    if (data.annotationData().get("dist") instanceof List<?> list && list.size() == 2)
-                        dist = list.get(1).toString();
+                    if (data.annotationData().get("dist") instanceof ModAnnotation.EnumHolder targ)
+                        dist = targ.value();
 
                     if (Objects.equals(dist, "CLIENT")) return;
 

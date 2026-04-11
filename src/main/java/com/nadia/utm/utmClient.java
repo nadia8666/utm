@@ -6,7 +6,6 @@ import com.nadia.utm.client.renderer.glint.utmGlintContainer;
 import com.nadia.utm.client.updater.UpdateToast;
 import com.nadia.utm.event.ForceLoad;
 import com.nadia.utm.event.utmEvents;
-import com.nadia.utm.registry.model.utmPartialModels;
 import com.simibubi.create.content.contraptions.wrench.RadialWrenchMenu;
 import net.minecraft.client.Minecraft;
 import net.neoforged.api.distmarker.Dist;
@@ -16,6 +15,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.loading.FMLEnvironment;
+import net.neoforged.fml.loading.modscan.ModAnnotation;
 import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
@@ -49,8 +49,8 @@ public class utmClient {
                 .forEach(data -> {
                     String dist = "COMMON";
 
-                    if (data.annotationData().get("dist") instanceof List<?> list && list.size() == 2)
-                        dist = list.get(1).toString();
+                    if (data.annotationData().get("dist") instanceof ModAnnotation.EnumHolder targ)
+                        dist = targ.value();
 
                     if (Objects.equals(dist, "DEDICATED_SERVER")) return;
 
