@@ -5,6 +5,8 @@ import com.nadia.utm.client.renderer.block.CitywallsBlockEntityRenderer;
 import com.nadia.utm.client.renderer.utmRenderTypes;
 import com.nadia.utm.client.ui.glint.GlintScreen;
 import com.nadia.utm.client.ui.oxygen_furnace.OxygenFurnaceScreen;
+import com.nadia.utm.event.events.SyncSealedDataEvent;
+import com.nadia.utm.registry.attachment.utmAttachments;
 import com.nadia.utm.registry.data.utmDataComponents;
 import com.nadia.utm.registry.dimension.utmDimensions;
 import com.nadia.utm.registry.fluid.utmFluids;
@@ -22,6 +24,7 @@ import net.minecraft.network.chat.TextColor;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
@@ -177,6 +180,14 @@ public class utmClientEvents {
 
             if (mc.level.dimension().equals(utmDimensions.AG_KEY) && event.getSound().getSource() == SoundSource.MUSIC && !event.getSound().getLocation().getNamespace().equals("utm"))
                 event.setSound(null);
+        });
+
+        utmEvents.register(SyncSealedDataEvent.class, event -> {
+            Level level = net.minecraft.client.Minecraft.getInstance().level;
+            if (level != null) {
+                var chunk = level.getChunk(event.PAYLOAD.pos().x, event.PAYLOAD.pos().z);
+                chunk.setData(utmAttachments.SEALED_AIR, event.PAYLOAD.data());
+            }
         });
     }
 }

@@ -66,6 +66,7 @@ public class utm {
                     if (Objects.equals(dist, "CLIENT")) return;
 
                     try {
+                        utm.LOGGER.info("[UTM] Initializing class {}!", data.clazz().getClassName());
                         Class.forName(data.clazz().getClassName(), true, utmEvents.class.getClassLoader());
                     } catch (ClassNotFoundException e) {
                         utm.LOGGER.error("[UTM] Failed to load class {} on {}, there WILL be problems!", data.clazz().getClassName(), dist);
