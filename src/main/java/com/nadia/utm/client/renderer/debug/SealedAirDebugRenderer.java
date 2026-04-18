@@ -28,7 +28,7 @@ public class SealedAirDebugRenderer {
 
     static {
         utmEvents.register(RenderLevelStageEvent.class, event -> {
-            if (!Config.DEBUG_SEALED_AIR.get() || event.getStage() != RenderLevelStageEvent.Stage.AFTER_PARTICLES) return;
+            if (!Config.DEBUG_SEALED_AIR.getAsBoolean() || event.getStage() != RenderLevelStageEvent.Stage.AFTER_PARTICLES) return;
 
             Minecraft mc = Minecraft.getInstance();
             if (mc.player == null || mc.level == null) return;
@@ -46,7 +46,7 @@ public class SealedAirDebugRenderer {
 
                     long tick = mc.player.level().getGameTime();
                     long lastTick = LAST_CHECKED.getOrDefault(chunk, -1L);
-                    if (lastTick == -1L || tick - lastTick >= 200) {
+                    if (lastTick == -1L || tick - lastTick >= 200L) {
                         LAST_CHECKED.put(chunk, tick);
                         PacketDistributor.sendToServer(new RequestSealedDataPayload(chunk.getPos()));
                     }

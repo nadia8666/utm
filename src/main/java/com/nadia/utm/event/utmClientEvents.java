@@ -183,7 +183,7 @@ public class utmClientEvents {
         });
 
         utmEvents.register(SyncSealedDataEvent.class, event -> {
-            Level level = net.minecraft.client.Minecraft.getInstance().level;
+            Level level = Minecraft.getInstance().level;
             if (level != null) {
                 var chunk = level.getChunk(event.PAYLOAD.pos().x, event.PAYLOAD.pos().z);
                 chunk.setData(utmAttachments.SEALED_AIR, event.PAYLOAD.data());
