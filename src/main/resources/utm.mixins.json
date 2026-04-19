@@ -17,6 +17,7 @@
   ],
   "client": [
     "AnvilScreenMixin",
+    "CameraMixin",
     "GameRendererMixin",
     "RemainingAirOverlayMixin",
     "SchematicHandlerMixin",

@@ -52,6 +52,14 @@ repositories {
     }
 
     flatDir { dirs 'src/jij' }
+
+    maven {
+        name = "RyanHCode Maven"
+        url = "https://maven.ryanhcode.dev/releases"
+    }
+
+    maven { url = "https://maven.bawnorton.com/releases" } // mixin squared
+    maven { url = "https://maven.enjarai.dev/mirrors" } // mixin squared
 }
 
 neoForge {
@@ -112,9 +120,15 @@ dependencies {
     compileOnly("mezz.jei:jei-1.21.1-neoforge-api:19.27.0.340")
     runtimeOnly("maven.modrinth:jei:YAcQ6elZ")
 
+    // curios
+    compileOnly "top.theillusivec4.curios:curios-neoforge:9.5.1+1.21.1:api"
+    runtimeOnly "top.theillusivec4.curios:curios-neoforge:9.5.1+1.21.1"
+
+    compileOnly("maven.modrinth:figura:yXFi1fed") // figura
+
+
     implementation("maven.modrinth:backported-spears:uUy23VAp") // backported spears
     implementation("maven.modrinth:showcase-item:AD6eBCKn") // showcase item
-    compileOnly("maven.modrinth:figura:yXFi1fed") // figura
     implementation("maven.modrinth:gravestone-mod:AZm51eX1") // gravestones
     implementation("maven.modrinth:sophisticated-backpacks:ovVp31Ci") // sophisticated backpacks
     implementation("maven.modrinth:sophisticated-core:23alQult") // sophisticated core
@@ -123,10 +137,17 @@ dependencies {
     jarJar(implementation("maven.modrinth:extreme_sound_muffler:KXmiEin1")) // extreme sound muffler
     jarJar(implementation("maven.modrinth:sophisticated-backpacks-create-integration:bWd7B59k")) // sophisticated backpacks x create
     jarJar(implementation('local:grimble_mod:1.0.0')) // bluebibbob's grimble mod
+    jarJar(api("dev.ryanhcode.sable-companion:sable-companion-common-${project.minecraft_version}:[${project.sable_companion_version},)")) {
+        version {
+            prefer project.sable_companion_version
+        }
+    } // sable compat
+    jarJar(runtimeOnly("maven.modrinth:create-aeronautics:HY8u0JqC")) // create aeronautics
+    jarJar(runtimeOnly("maven.modrinth:sable:2e8wmM3Q")) // sable
 
-    // curios
-    compileOnly "top.theillusivec4.curios:curios-neoforge:9.5.1+1.21.1:api"
-    runtimeOnly "top.theillusivec4.curios:curios-neoforge:9.5.1+1.21.1"
+    // mixin squared
+    compileOnly(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-common:0.3.7-beta.1"))
+    implementation(jarJar("com.github.bawnorton.mixinsquared:mixinsquared-neoforge:0.3.7-beta.1"))
 }
 
 def replaceProperties = [
