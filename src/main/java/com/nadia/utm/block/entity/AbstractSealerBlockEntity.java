@@ -13,6 +13,8 @@ import com.simibubi.create.content.kinetics.transmission.SplitShaftBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
 import com.simibubi.create.foundation.fluid.CombinedTankWrapper;
+import dev.ryanhcode.sable.companion.SableCompanion;
+import dev.ryanhcode.sable.sublevel.SubLevel;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -22,12 +24,14 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.TrapDoorBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -77,6 +81,7 @@ public abstract class AbstractSealerBlockEntity extends SplitShaftBlockEntity im
     public void tick() {
         super.tick();
         if (level == null || level.isClientSide) return;
+        utm.LOGGER.info("[UTM] pos {}, lev {}", worldPosition, level);
 
         boolean hasOxygen = TANK.getPrimaryHandler().getFluidAmount() > 0;
 
@@ -114,6 +119,11 @@ public abstract class AbstractSealerBlockEntity extends SplitShaftBlockEntity im
         int processed = 0;
         BlockPos lastPos = worldPosition;
 
+        var subAccess = SableCompanion.INSTANCE.getContaining(this);
+        SubLevel level = null;
+        if (subAccess instanceof SubLevel slevel)
+            level = slevel;
+
         while (!QUEUE.isEmpty() && processed < 500) {
             BlockPos current = QUEUE.poll();
             processed++;
@@ -122,12 +132,14 @@ public abstract class AbstractSealerBlockEntity extends SplitShaftBlockEntity im
             if (VISITED.contains(current)) continue;
             VISITED.add(current);
 
-            BlockState state = sLevel.getBlockState(current);
+            BlockState state = level != null ? level.getPlot().getChunk(new ChunkPos(BlockPos.containing(level.logicalPose().transformPosition(Vec3.atLowerCornerOf(current))))).getBlockState(current) : sLevel.getBlockState(current);
             SEAL_TYPE sealable = canSeal(state, sLevel, current, lastPos);
             lastPos = current;
             if (sealable != SEAL_TYPE.UNSEALED) {
-
-                OxyUtil.setBlockSealed(sLevel, current, worldPosition);
+                if (level != null)
+                    OxyUtil.setBlockSealed(level, current, worldPosition);
+                else
+                    OxyUtil.setBlockSealed(sLevel, current, worldPosition);
 
                 if (sealable == SEAL_TYPE.SEALED)
                     for (BlockPos neighbor : getAdjacent(current))
@@ -136,7 +148,7 @@ public abstract class AbstractSealerBlockEntity extends SplitShaftBlockEntity im
         }
 
         if (QUEUE.isEmpty() || VISITED.size() >= getMaxVolume()) {
-            finalizeR();
+            finishSeal();
         }
     }
 
@@ -153,14 +165,21 @@ public abstract class AbstractSealerBlockEntity extends SplitShaftBlockEntity im
         return (state.isAir() || !state.getCollisionShape(level, pos).equals(Shapes.block())) ? SEAL_TYPE.SEALED : SEAL_TYPE.UNSEALED;
     }
 
-    // i wanted to make this finalize but.. it overrides.. java 9 object arg??? wtf./
-    protected void finalizeR() {
+    protected void finishSeal() {
         ServerLevel sLevel = (ServerLevel) level;
         if (sLevel == null) return;
 
+        var subAccess = SableCompanion.INSTANCE.getContaining(this);
+        SubLevel level = null;
+        if (subAccess instanceof SubLevel slevel)
+            level = slevel;
+
         for (BlockPos oldPos : ATTACHED_POSITIONS)
             if (!VISITED.contains(oldPos))
-                OxyUtil.setBlockSealed(sLevel, oldPos, null);
+                if (level != null)
+                    OxyUtil.setBlockSealed(level, oldPos, null);
+                else
+                    OxyUtil.setBlockSealed(sLevel, oldPos, null);
 
         ATTACHED_POSITIONS.clear();
         ATTACHED_POSITIONS.addAll(VISITED);

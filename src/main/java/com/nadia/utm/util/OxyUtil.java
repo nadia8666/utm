@@ -4,6 +4,8 @@ import com.nadia.utm.behavior.space.SealedChunkData;
 import com.nadia.utm.mixin.BacktankUtilAccessor;
 import com.nadia.utm.registry.attachment.utmAttachments;
 import com.nadia.utm.registry.dimension.utmDimensions;
+import dev.ryanhcode.sable.api.entity.EntitySubLevelUtil;
+import dev.ryanhcode.sable.sublevel.SubLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
@@ -16,7 +18,9 @@ import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkAccess;
+import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.chunk.status.ChunkStatus;
+import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
 import java.util.*;
@@ -148,6 +152,29 @@ public class OxyUtil {
     }
 
     /**
+     * set sealed status of block pos in sable
+     *
+     * @param level         target sub level
+     * @param targetPos     block pos
+     * @param controllerPos nullable controller position
+     */
+    public static void setBlockSealed(SubLevel level, BlockPos targetPos, @Nullable BlockPos controllerPos) {
+        ChunkPos chunkPos = new ChunkPos(BlockPos.containing(level.logicalPose().transformPosition(Vec3.atLowerCornerOf(targetPos))));
+        LevelChunk chunk = level.getPlot().getChunk(chunkPos);
+        if (chunk == null) return;
+
+        SealedChunkData currentData = chunk.getData(utmAttachments.SEALED_AIR);
+        Map<BlockPos, BlockPos> updatedMap = new HashMap<>(currentData.sealedBlocks());
+
+        if (controllerPos != null)
+            updatedMap.put(targetPos, controllerPos);
+        else
+            updatedMap.remove(targetPos);
+
+        chunk.setData(utmAttachments.SEALED_AIR, new SealedChunkData(updatedMap));
+    }
+
+    /**
      * check if target block is sealed
      *
      * @param level     target level to check
@@ -158,6 +185,22 @@ public class OxyUtil {
     public static BlockPos isSealed(ServerLevel level, BlockPos targetPos) {
         ChunkPos chunkPos = new ChunkPos(targetPos);
         ChunkAccess chunk = level.getChunk(chunkPos.x, chunkPos.z, ChunkStatus.EMPTY, false);
+        if (chunk == null) return null;
+
+        return chunk.getData(utmAttachments.SEALED_AIR).get(targetPos);
+    }
+
+    /**
+     * check if target block is sealed via sable
+     *
+     * @param level     target sublevel to check
+     * @param targetPos block pos
+     * @return controller position
+     */
+    @Nullable
+    public static BlockPos isSealed(SubLevel level, BlockPos targetPos) {
+        ChunkPos chunkPos = new ChunkPos(BlockPos.containing(level.logicalPose().transformPosition(Vec3.atLowerCornerOf(targetPos))));
+        ChunkAccess chunk = level.getPlot().getChunk(chunkPos);
         if (chunk == null) return null;
 
         return chunk.getData(utmAttachments.SEALED_AIR).get(targetPos);
