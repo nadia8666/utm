@@ -142,8 +142,8 @@ dependencies {
             prefer project.sable_companion_version
         }
     } // sable compat
-    jarJar(runtimeOnly("maven.modrinth:create-aeronautics:HY8u0JqC")) // create aeronautics
-    jarJar(implementation("maven.modrinth:sable:2e8wmM3Q")) // sable
+    jarJar(runtimeOnly("maven.modrinth:create-aeronautics:1sv6OtSz")) // create aeronautics
+    jarJar(implementation("maven.modrinth:sable:g8CObHcP")) // sable
 
     // mixin squared
     compileOnly(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-common:0.3.7-beta.1"))

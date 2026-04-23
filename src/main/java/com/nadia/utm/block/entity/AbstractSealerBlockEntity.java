@@ -132,7 +132,7 @@ public abstract class AbstractSealerBlockEntity extends SplitShaftBlockEntity im
             if (VISITED.contains(current)) continue;
             VISITED.add(current);
 
-            BlockState state = level != null ? level.getPlot().getChunk(new ChunkPos(BlockPos.containing(level.logicalPose().transformPosition(Vec3.atLowerCornerOf(current))))).getBlockState(current) : sLevel.getBlockState(current);
+            BlockState state = sLevel.getBlockState(current);
             SEAL_TYPE sealable = canSeal(state, sLevel, current, lastPos);
             lastPos = current;
             if (sealable != SEAL_TYPE.UNSEALED) {

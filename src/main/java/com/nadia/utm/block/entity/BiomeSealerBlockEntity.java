@@ -3,10 +3,9 @@ package com.nadia.utm.block.entity;
 import com.nadia.utm.event.ForceLoad;
 import com.nadia.utm.event.utmEvents;
 import com.nadia.utm.registry.block.utmBlockEntities;
-import com.nadia.utm.util.utmLang;
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.util.Mth;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -56,10 +55,12 @@ public class BiomeSealerBlockEntity extends AbstractSealerBlockEntity {
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
         super.addToGoggleTooltip(tooltip, isPlayerSneaking);
 
-        if (Math.abs(getSpeed()) < 128)
-            utmLang.text("RPM TOO LOW").style(ChatFormatting.YELLOW).forGoggles(tooltip);
-
         return true;
+    }
+
+    @Override
+    public boolean isSpeedRequirementFulfilled() {
+        return Mth.abs(getSpeed()) >= 128;
     }
 
     static {
