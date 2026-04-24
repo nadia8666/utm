@@ -130,7 +130,7 @@ public abstract class AbstractSealerBlockEntity extends SplitShaftBlockEntity im
             BlockPos current = QUEUE.poll();
             processed++;
 
-            if (VISITED.size() >= getMaxVolume()) break;
+            if (SEALED.size() >= getMaxVolume()) break;
             if (VISITED.contains(current)) continue;
             VISITED.add(current);
 

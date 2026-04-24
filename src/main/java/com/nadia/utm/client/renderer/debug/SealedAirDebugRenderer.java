@@ -7,8 +7,8 @@ import com.nadia.utm.event.ForceLoad;
 import com.nadia.utm.event.utmEvents;
 import com.nadia.utm.networking.payloads.debug.RequestSealedDataPayload;
 import com.nadia.utm.registry.attachment.utmAttachments;
+import com.nadia.utm.util.PoseUtil;
 import com.nadia.utm.util.SableUtil;
-import com.nadia.utm.utm;
 import dev.ryanhcode.sable.companion.SableCompanion;
 import dev.ryanhcode.sable.sublevel.SubLevel;
 import net.minecraft.client.Minecraft;
@@ -39,7 +39,8 @@ public class SealedAirDebugRenderer {
 
     static {
         utmEvents.register(RenderLevelStageEvent.class, event -> {
-            if (!Config.DEBUG_SEALED_AIR.getAsBoolean() || event.getStage() != RenderLevelStageEvent.Stage.AFTER_PARTICLES) return;
+            if (!Config.DEBUG_SEALED_AIR.getAsBoolean() || event.getStage() != RenderLevelStageEvent.Stage.AFTER_PARTICLES)
+                return;
 
             Minecraft mc = Minecraft.getInstance();
             if (mc.player == null || mc.level == null) return;
@@ -65,32 +66,29 @@ public class SealedAirDebugRenderer {
                         BlockPos worldPos = SableUtil.toWorldPos(level.logicalPose(), p);
                         BlockPos worldController = SableUtil.toWorldPos(level.logicalPose(), c);
 
-                        Vec3 pCenter = Vec3.atCenterOf(worldPos).subtract(cam);
-                        Vec3 cCenter = Vec3.atCenterOf(worldController).subtract(cam);
+                        Vec3 posCenter = Vec3.atCenterOf(worldPos).subtract(cam);
+                        Vec3 controllerCenter = Vec3.atCenterOf(worldController).subtract(cam);
 
                         double dist = Math.sqrt(p.distSqr(c));
                         float alpha = Math.max(0.1F, 1.0F - ((float) dist / 15.0F));
                         int alphaInt = (int) (alpha * 255.0F);
 
-                        pose.pushPose();
-                        Matrix4f matrix = pose.last().pose();
-                        bufferSource.getBuffer(RenderType.lines()).addVertex(matrix, (float) cCenter.x, (float) cCenter.y, (float) cCenter.z).setColor(0, 255, 0, alphaInt).setNormal(pose.last(), 0, 1, 0);
-                        bufferSource.getBuffer(RenderType.lines()).addVertex(matrix, (float) pCenter.x, (float) pCenter.y, (float) pCenter.z).setColor(0, 255, 0, alphaInt).setNormal(pose.last(), 0, 1, 0);
-                        pose.popPose();
-
                         BlockState state = SableUtil.getState(level, p);
-                        utm.LOGGER.info("[UTM] state: {}", state);
-                        if (state != null) {
-                            String id = BuiltInRegistries.BLOCK.getKey(state.getBlock()).getPath();
-                            pose.pushPose();
-                            pose.translate(pCenter.x, pCenter.y, pCenter.z);
-                            pose.mulPose(mc.getEntityRenderDispatcher().cameraOrientation());
-                            pose.scale(-0.015F, -0.015F, 0.015F);
-                            font.drawInBatch(id, -font.width(id) / 2.0F, 0, 0xFFFFFFFF, false, pose.last().pose(), bufferSource, Font.DisplayMode.NORMAL, 0xFF000000, 15728880);
-                            pose.popPose();
-                        }
+                        String id = state != null ? BuiltInRegistries.BLOCK.getKey(state.getBlock()).getPath() : "NULL";
+
+                        new PoseUtil(pose).push().run(() -> {
+                                    Matrix4f matrix = pose.last().pose();
+                                    bufferSource.getBuffer(RenderType.lines()).addVertex(matrix, (float) controllerCenter.x, (float) controllerCenter.y, (float) controllerCenter.z).setColor(0, 255, 0, alphaInt).setNormal(pose.last(), 0, 1, 0);
+                                    bufferSource.getBuffer(RenderType.lines()).addVertex(matrix, (float) posCenter.x, (float) posCenter.y, (float) posCenter.z).setColor(0, 255, 0, alphaInt).setNormal(pose.last(), 0, 1, 0);
+                                }).pop()
+                                .push().translate(posCenter.x, posCenter.y, posCenter.z).scale(-0.015F, -0.015F, 0.015F).run(() -> {
+                                    pose.mulPose(mc.getEntityRenderDispatcher().cameraOrientation());
+                                    font.drawInBatch(id, (float) -font.width(id) / 2, 0, 0xFFFFFFFF, false, pose.last().pose(), bufferSource, Font.DisplayMode.NORMAL, 0, 15728880);
+                                }).pop();
 
                         controllers.add(worldController);
+
+                        bufferSource.endLastBatch();
                     });
                 });
             } else {
