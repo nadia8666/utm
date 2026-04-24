@@ -30,8 +30,6 @@ import java.util.*;
 class Breathability {
     public static void checkSuffocating(ServerPlayer sPlayer, boolean inAG) {
         SubLevel level = (SubLevel) SableCompanion.INSTANCE.getTrackingOrVehicleSubLevel(sPlayer);
-        utm.LOGGER.info("[UTM] level {}", level);
-
         BlockPos controller = level != null ? OxyUtil.isSealed(level, sPlayer.blockPosition()) : OxyUtil.isSealed(sPlayer.serverLevel(), sPlayer.blockPosition());
         boolean sealed = controller != null;
         int forceOxygen = sPlayer.getData(utmAttachments.TEMPORARY_OXYGEN);

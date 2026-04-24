@@ -158,7 +158,8 @@ public class OxyUtil {
      * @param controllerPos nullable controller position
      */
     public static void setBlockSealed(SubLevel level, BlockPos targetPos, @Nullable BlockPos controllerPos) {
-        LevelChunk chunk = SableUtil.getChunkWorldPos(level, targetPos);
+        utm.LOGGER.warn("[UTM] seal data {} {} {} {}", targetPos, controllerPos, new ChunkPos(targetPos), level.getPlot().toLocal(new ChunkPos(targetPos)));
+        LevelChunk chunk = SableUtil.getChunkLocalPos(level, targetPos);
         if (chunk == null) return;
 
         SealedChunkData currentData = chunk.getData(utmAttachments.SEALED_AIR);
@@ -168,7 +169,7 @@ public class OxyUtil {
             updatedMap.put(SableUtil.localize(level.logicalPose(), targetPos), SableUtil.localize(level.logicalPose(), controllerPos));
         else
             updatedMap.remove(SableUtil.localize(level.logicalPose(), targetPos));
-
+        utm.LOGGER.info("[UTM] dat {}", updatedMap);
         chunk.setData(utmAttachments.SEALED_AIR, new SealedChunkData(updatedMap));
     }
 
@@ -197,14 +198,10 @@ public class OxyUtil {
      */
     @Nullable
     public static BlockPos isSealed(SubLevel level, BlockPos targetPos) {
-        utm.LOGGER.info("[UTM] call plotsealed {}", targetPos);
-        ChunkAccess chunk = SableUtil.getChunkLocalPos(level, targetPos);
+        ChunkAccess chunk = SableUtil.getChunkWorldPos(level, targetPos);
         if (chunk == null) return null;
 
-        BlockPos controller = chunk.getData(utmAttachments.SEALED_AIR).get(SableUtil.localize(level.logicalPose(), targetPos));
-        utm.LOGGER.warn("[UTM] SEAL INFO AT {}: {}\nLOCALIZED: {}", targetPos, controller, SableUtil.localize(level.logicalPose(), targetPos));
-
-        return controller;
+        return chunk.getData(utmAttachments.SEALED_AIR).get(SableUtil.globalize(level.logicalPose(), targetPos));
     }
 
     /**
