@@ -8,6 +8,7 @@ import com.nadia.utm.event.utmEvents;
 import com.nadia.utm.networking.payloads.debug.RequestSealedDataPayload;
 import com.nadia.utm.registry.attachment.utmAttachments;
 import com.nadia.utm.util.SableUtil;
+import com.nadia.utm.utm;
 import dev.ryanhcode.sable.companion.SableCompanion;
 import dev.ryanhcode.sable.sublevel.SubLevel;
 import net.minecraft.client.Minecraft;
@@ -78,6 +79,7 @@ public class SealedAirDebugRenderer {
                         pose.popPose();
 
                         BlockState state = SableUtil.getState(level, p);
+                        utm.LOGGER.info("[UTM] state: {}", state);
                         if (state != null) {
                             String id = BuiltInRegistries.BLOCK.getKey(state.getBlock()).getPath();
                             pose.pushPose();

@@ -5,7 +5,6 @@ import com.nadia.utm.event.ForceLoad;
 import com.nadia.utm.registry.attachment.utmAttachments;
 import com.nadia.utm.util.AdvancementUtil;
 import com.nadia.utm.util.OxyUtil;
-import com.nadia.utm.util.SableUtil;
 import com.nadia.utm.utm;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.content.equipment.armor.BacktankUtil;
@@ -72,7 +71,7 @@ class Breathability {
         if (sealed && sPlayer.level().getGameTime() % 20 == 0) {
             BlockEntity be = sPlayer.serverLevel().getBlockEntity(controller);
             if (level != null) {
-                be = level.getLevel().getBlockEntity(SableUtil.toWorldPos(level.logicalPose(), controller));
+                be = level.getLevel().getBlockEntity(controller);
             }
 
             if (!(be instanceof AbstractSealerBlockEntity)) {
