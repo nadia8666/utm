@@ -128,3 +128,19 @@ type="required"
 versionRange=","
 ordering="AFTER"
 side="CLIENT"
+
+# SABLE
+[[dependencies.${mod_id}]]
+modId="sable"
+type="required"
+versionRange=","
+ordering="AFTER"
+side="CLIENT"
+
+# CREATE AERONAUTICS
+[[dependencies.${mod_id}]]
+modId="aeronautics"
+type="required"
+versionRange=","
+ordering="AFTER"
+side="CLIENT"
