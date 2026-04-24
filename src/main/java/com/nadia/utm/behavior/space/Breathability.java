@@ -5,6 +5,7 @@ import com.nadia.utm.event.ForceLoad;
 import com.nadia.utm.registry.attachment.utmAttachments;
 import com.nadia.utm.util.AdvancementUtil;
 import com.nadia.utm.util.OxyUtil;
+import com.nadia.utm.util.SableUtil;
 import com.nadia.utm.utm;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.content.equipment.armor.BacktankUtil;
@@ -20,6 +21,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.*;
@@ -68,7 +70,12 @@ class Breathability {
 
         // sometimes it will bug and not clear out the attached air blocks. this is the method
         if (sealed && sPlayer.level().getGameTime() % 20 == 0) {
-            if (!(sPlayer.serverLevel().getBlockEntity(controller) instanceof AbstractSealerBlockEntity)) {
+            BlockEntity be = sPlayer.serverLevel().getBlockEntity(controller);
+            if (level != null) {
+                be = level.getLevel().getBlockEntity(SableUtil.toWorldPos(level.logicalPose(), controller));
+            }
+
+            if (!(be instanceof AbstractSealerBlockEntity)) {
                 ServerLevel sLevel = sPlayer.serverLevel();
                 Set<BlockPos> VISITED = new HashSet<>();
                 Queue<BlockPos> QUEUE = new LinkedList<>(AbstractSealerBlockEntity.getAdjacent(controller));
@@ -81,13 +88,15 @@ class Breathability {
 
                     BlockPos otherController = OxyUtil.isSealed(sLevel, current);
                     if (controller.equals(otherController)) {
-                        OxyUtil.setBlockSealed(sLevel, current, null);
+                        if (level != null) OxyUtil.setBlockSealed(level, current, null);
+                        else OxyUtil.setBlockSealed(sLevel, current, null);
                         for (BlockPos neighbor : AbstractSealerBlockEntity.getAdjacent(current))
                             if (!VISITED.contains(neighbor)) QUEUE.add(neighbor);
                     }
                 }
 
-                OxyUtil.setBlockSealed(sLevel, controller, null);
+                if (level != null) OxyUtil.setBlockSealed(level, controller, null);
+                else OxyUtil.setBlockSealed(sLevel, controller, null);
             }
         }
     }

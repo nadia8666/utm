@@ -1,12 +1,10 @@
 package com.nadia.utm.util;
 
-import com.nadia.utm.utm;
 import dev.ryanhcode.sable.companion.math.Pose3d;
 import dev.ryanhcode.sable.sublevel.SubLevel;
 import dev.ryanhcode.sable.sublevel.plot.LevelPlot;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.ChunkPos;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.level.chunk.LevelChunk;
@@ -30,7 +28,7 @@ public class SableUtil {
     }
 
     public static Vec3 toVec(BlockPos pos) {
-        return Vec3.atLowerCornerOf(pos);
+        return Vec3.atCenterOf(pos);
     }
 
     public static BlockPos toSublevelPos(Pose3d pose, BlockPos pos) {

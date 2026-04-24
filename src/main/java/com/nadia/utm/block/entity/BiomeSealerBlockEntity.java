@@ -41,14 +41,20 @@ public class BiomeSealerBlockEntity extends AbstractSealerBlockEntity {
 
     @Override
     public void tick() {
+        super.tick();
+
+        if (level == null || level.isClientSide) return;
+
         if (Math.abs(getSpeed()) < 128) {
             if (ACTIVE) {
                 ACTIVE = false;
                 sendData();
+                unseal();
             }
             return;
         }
-        super.tick();
+
+        step();
     }
 
     @OnlyIn(Dist.CLIENT)

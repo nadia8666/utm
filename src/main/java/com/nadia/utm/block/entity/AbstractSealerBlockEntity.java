@@ -48,6 +48,7 @@ public abstract class AbstractSealerBlockEntity extends SplitShaftBlockEntity im
     public Set<BlockPos> ATTACHED_POSITIONS = new HashSet<>();
     protected final Queue<BlockPos> QUEUE = new LinkedList<>();
     protected final Set<BlockPos> VISITED = new HashSet<>();
+    protected final Set<BlockPos> SEALED = new HashSet<>();
 
     public int SYNCED_VOLUME = 0;
     public boolean ACTIVE = false;
@@ -79,6 +80,10 @@ public abstract class AbstractSealerBlockEntity extends SplitShaftBlockEntity im
     @Override
     public void tick() {
         super.tick();
+        step();
+    }
+
+    public void step() {
         if (level == null || level.isClientSide) return;
         boolean hasOxygen = TANK.getPrimaryHandler().getFluidAmount() > 0;
 
@@ -86,7 +91,7 @@ public abstract class AbstractSealerBlockEntity extends SplitShaftBlockEntity im
             ACTIVE = hasOxygen;
             if (ACTIVE) seal();
             else unseal();
-            this.sendData();
+            sendData();
         }
 
         if (ACTIVE) {
@@ -103,10 +108,11 @@ public abstract class AbstractSealerBlockEntity extends SplitShaftBlockEntity im
 
     public void seal() {
         if (!(level instanceof ServerLevel)) return;
-        this.RECALC = true;
-        this.QUEUE.clear();
-        this.VISITED.clear();
-        this.QUEUE.addAll(getAdjacent(worldPosition));
+        RECALC = true;
+        QUEUE.clear();
+        VISITED.clear();
+        SEALED.clear();
+        QUEUE.addAll(getAdjacent(worldPosition));
     }
 
     protected void process() {
@@ -132,6 +138,7 @@ public abstract class AbstractSealerBlockEntity extends SplitShaftBlockEntity im
             SEAL_TYPE sealable = state == null ? SEAL_TYPE.UNSEALED : canSeal(state, sLevel, current, lastPos);
             lastPos = current;
             if (sealable != SEAL_TYPE.UNSEALED) {
+                SEALED.add(current);
                 if (level != null)
                     OxyUtil.setBlockSealed(level, current, worldPosition);
                 else
@@ -179,12 +186,13 @@ public abstract class AbstractSealerBlockEntity extends SplitShaftBlockEntity im
 
         ATTACHED_POSITIONS.clear();
         ATTACHED_POSITIONS.addAll(VISITED);
-        SYNCED_VOLUME = ATTACHED_POSITIONS.size();
+        SYNCED_VOLUME = SEALED.size();
         RECALC = false;
         QUEUE.clear();
+        SEALED.clear();
 
-        this.setChanged();
-        this.sendData();
+        setChanged();
+        sendData();
     }
 
     public void unseal() {
@@ -195,15 +203,16 @@ public abstract class AbstractSealerBlockEntity extends SplitShaftBlockEntity im
         SYNCED_VOLUME = 0;
         RECALC = false;
         QUEUE.clear();
-        this.setChanged();
+        SEALED.clear();
+        setChanged();
     }
 
     @Override
     public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
-        this.TANK = new SmartFluidTankBehaviour(SmartFluidTankBehaviour.INPUT, this, 1, 1000, true);
-        this.TANK.getPrimaryHandler().setValidator((fluid) -> fluid.is(utmFluids.LIQUID_OXYGEN));
-        CAPABILITY = new CombinedTankWrapper(this.TANK.getCapability());
-        behaviours.add(this.TANK);
+        TANK = new SmartFluidTankBehaviour(SmartFluidTankBehaviour.INPUT, this, 1, 1000, true);
+        TANK.getPrimaryHandler().setValidator((fluid) -> fluid.is(utmFluids.LIQUID_OXYGEN));
+        CAPABILITY = new CombinedTankWrapper(TANK.getCapability());
+        behaviours.add(TANK);
     }
 
     @Override
@@ -247,7 +256,7 @@ public abstract class AbstractSealerBlockEntity extends SplitShaftBlockEntity im
 
     @OnlyIn(Dist.CLIENT)
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
-        containedFluidTooltip(tooltip, isPlayerSneaking, this.TANK.getCapability());
+        containedFluidTooltip(tooltip, isPlayerSneaking, TANK.getCapability());
         tooltip.add(Component.empty());
         utmLang.text("Sealing Info:").style(ChatFormatting.WHITE).forGoggles(tooltip);
         utmLang.text("SEALING " + (ACTIVE ? "ACTIVE" : "INACTIVE")).style(ACTIVE ? ChatFormatting.GREEN : ChatFormatting.DARK_RED).forGoggles(tooltip);

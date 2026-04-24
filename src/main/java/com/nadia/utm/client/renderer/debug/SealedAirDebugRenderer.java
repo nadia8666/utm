@@ -1,7 +1,6 @@
 package com.nadia.utm.client.renderer.debug;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.nadia.utm.Config;
 import com.nadia.utm.behavior.space.SealedChunkData;
 import com.nadia.utm.event.ForceLoad;
@@ -12,15 +11,20 @@ import com.nadia.utm.util.SableUtil;
 import dev.ryanhcode.sable.companion.SableCompanion;
 import dev.ryanhcode.sable.sublevel.SubLevel;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
 import net.minecraft.client.renderer.LevelRenderer;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
+import org.joml.Matrix4f;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -30,6 +34,7 @@ import java.util.Set;
 @ForceLoad(dist = Dist.CLIENT)
 public class SealedAirDebugRenderer {
     private static final Map<LevelChunk, Long> LAST_CHECKED = new HashMap<>();
+    private static final long REFRESH_RATE = 20L;
 
     static {
         utmEvents.register(RenderLevelStageEvent.class, event -> {
@@ -40,23 +45,50 @@ public class SealedAirDebugRenderer {
 
             PoseStack pose = event.getPoseStack();
             Vec3 cam = event.getCamera().getPosition();
-            VertexConsumer consumer = mc.renderBuffers().bufferSource().getBuffer(RenderType.lines());
+            MultiBufferSource.BufferSource bufferSource = mc.renderBuffers().bufferSource();
+
+            Font font = mc.font;
 
             Set<BlockPos> controllers = new HashSet<>();
             long tick = mc.player.level().getGameTime();
+
             if (SableCompanion.INSTANCE.getTrackingOrVehicleSubLevel(mc.player) instanceof SubLevel level) {
                 level.getPlot().getLoadedChunks().forEach(chunk -> {
                     long lastTick = LAST_CHECKED.getOrDefault(chunk.getChunk(), -1L);
-                    if (lastTick == -1L || tick - lastTick >= 200L) {
+                    if (lastTick == -1L || tick - lastTick >= REFRESH_RATE) {
                         LAST_CHECKED.put(chunk.getChunk(), tick);
                         PacketDistributor.sendToServer(new RequestSealedDataPayload(chunk.getPos()));
                     }
 
-                    chunk.getChunk().getData(utmAttachments.SEALED_AIR).sealedBlocks().forEach((p,c) -> {
-                        AABB sealedBox = new AABB(SableUtil.toWorldPos(level.logicalPose(), p)).move(-cam.x, -cam.y, -cam.z);
-                        LevelRenderer.renderLineBox(pose, consumer, sealedBox, 0.0F, 1.0F, 0.0F, 0.25F);
+                    chunk.getChunk().getData(utmAttachments.SEALED_AIR).sealedBlocks().forEach((p, c) -> {
+                        BlockPos worldPos = SableUtil.toWorldPos(level.logicalPose(), p);
+                        BlockPos worldController = SableUtil.toWorldPos(level.logicalPose(), c);
 
-                        controllers.add(c);
+                        Vec3 pCenter = Vec3.atCenterOf(worldPos).subtract(cam);
+                        Vec3 cCenter = Vec3.atCenterOf(worldController).subtract(cam);
+
+                        double dist = Math.sqrt(p.distSqr(c));
+                        float alpha = Math.max(0.1F, 1.0F - ((float) dist / 15.0F));
+                        int alphaInt = (int) (alpha * 255.0F);
+
+                        pose.pushPose();
+                        Matrix4f matrix = pose.last().pose();
+                        bufferSource.getBuffer(RenderType.lines()).addVertex(matrix, (float) cCenter.x, (float) cCenter.y, (float) cCenter.z).setColor(0, 255, 0, alphaInt).setNormal(pose.last(), 0, 1, 0);
+                        bufferSource.getBuffer(RenderType.lines()).addVertex(matrix, (float) pCenter.x, (float) pCenter.y, (float) pCenter.z).setColor(0, 255, 0, alphaInt).setNormal(pose.last(), 0, 1, 0);
+                        pose.popPose();
+
+                        BlockState state = SableUtil.getState(level, p);
+                        if (state != null) {
+                            String id = BuiltInRegistries.BLOCK.getKey(state.getBlock()).getPath();
+                            pose.pushPose();
+                            pose.translate(pCenter.x, pCenter.y, pCenter.z);
+                            pose.mulPose(mc.getEntityRenderDispatcher().cameraOrientation());
+                            pose.scale(-0.015F, -0.015F, 0.015F);
+                            font.drawInBatch(id, -font.width(id) / 2.0F, 0, 0xFFFFFFFF, false, pose.last().pose(), bufferSource, Font.DisplayMode.NORMAL, 0xFF000000, 15728880);
+                            pose.popPose();
+                        }
+
+                        controllers.add(worldController);
                     });
                 });
             } else {
@@ -68,7 +100,7 @@ public class SealedAirDebugRenderer {
                         LevelChunk chunk = mc.level.getChunk(x, z);
 
                         long lastTick = LAST_CHECKED.getOrDefault(chunk, -1L);
-                        if (lastTick == -1L || tick - lastTick >= 200L) {
+                        if (lastTick == -1L || tick - lastTick >= REFRESH_RATE) {
                             LAST_CHECKED.put(chunk, tick);
                             PacketDistributor.sendToServer(new RequestSealedDataPayload(chunk.getPos()));
                         }
@@ -79,15 +111,14 @@ public class SealedAirDebugRenderer {
 
                         data.sealedBlocks().forEach((p, c) -> {
                             AABB sealedBox = new AABB(p).move(-cam.x, -cam.y, -cam.z);
-                            LevelRenderer.renderLineBox(pose, consumer, sealedBox, 0.0F, 1.0F, 0.0F, 0.25F);
-
+                            LevelRenderer.renderLineBox(pose, bufferSource.getBuffer(RenderType.lines()), sealedBox, 0.0F, 1.0F, 0.0F, 0.25F);
                             controllers.add(c);
                         });
                     }
                 }
             }
 
-            controllers.forEach(c -> LevelRenderer.renderLineBox(pose, consumer, new AABB(c).move(-cam.x, -cam.y, -cam.z), 1.0F, 0.0F, 0.0F, 1.0F));
+            controllers.forEach(c -> LevelRenderer.renderLineBox(pose, bufferSource.getBuffer(RenderType.lines()), new AABB(c).move(-cam.x, -cam.y, -cam.z), 1.0F, 0.0F, 0.0F, 1.0F));
         });
     }
 }
