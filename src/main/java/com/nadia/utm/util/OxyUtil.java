@@ -4,7 +4,6 @@ import com.nadia.utm.behavior.space.SealedChunkData;
 import com.nadia.utm.mixin.BacktankUtilAccessor;
 import com.nadia.utm.registry.attachment.utmAttachments;
 import com.nadia.utm.registry.dimension.utmDimensions;
-import com.nadia.utm.utm;
 import dev.ryanhcode.sable.sublevel.SubLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceKey;
@@ -13,6 +12,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
@@ -154,11 +154,10 @@ public class OxyUtil {
      * set sealed status of block pos in sable
      *
      * @param level         target sub level
-     * @param targetPos     block pos
+     * @param targetPos     sable-local block pos
      * @param controllerPos nullable controller position
      */
     public static void setBlockSealed(SubLevel level, BlockPos targetPos, @Nullable BlockPos controllerPos) {
-        utm.LOGGER.warn("[UTM] seal data {} {} {} {}", targetPos, controllerPos, new ChunkPos(targetPos), level.getPlot().toLocal(new ChunkPos(targetPos)));
         LevelChunk chunk = SableUtil.getChunkLocalPos(level, targetPos);
         if (chunk == null) return;
 
@@ -166,10 +165,9 @@ public class OxyUtil {
         Map<BlockPos, BlockPos> updatedMap = new HashMap<>(currentData.sealedBlocks());
 
         if (controllerPos != null)
-            updatedMap.put(SableUtil.localize(level.logicalPose(), targetPos), SableUtil.localize(level.logicalPose(), controllerPos));
+            updatedMap.put(targetPos, controllerPos);
         else
-            updatedMap.remove(SableUtil.localize(level.logicalPose(), targetPos));
-        utm.LOGGER.info("[UTM] dat {}", updatedMap);
+            updatedMap.remove(targetPos);
         chunk.setData(utmAttachments.SEALED_AIR, new SealedChunkData(updatedMap));
     }
 
@@ -190,18 +188,49 @@ public class OxyUtil {
     }
 
     /**
+     * @see #isSealed(ServerLevel, BlockPos)
+     */
+    @Nullable
+    public static BlockPos isSealed(ServerLevel level, BlockPos... posList) {
+        Map<BlockPos, BlockPos> hash = new HashMap<>();
+        Set<ChunkPos> chunks = new HashSet<>();
+
+        for (BlockPos pos : posList) {
+            chunks.add(new ChunkPos(pos));
+        }
+
+        for (ChunkPos pos : chunks) {
+            ChunkAccess chunk = level.getChunk(pos.x, pos.z, ChunkStatus.EMPTY, false);
+            if (chunk != null)
+                hash.putAll(chunk.getData(utmAttachments.SEALED_AIR).sealedBlocks());
+        }
+
+        for (BlockPos p : posList) {
+            BlockPos controller = hash.get(p);
+            if (controller != null) return controller;
+        }
+
+        return null;
+    }
+
+    /**
      * check if target block is sealed via sable
      *
      * @param level     target sublevel to check
-     * @param targetPos block pos
+     * @param posList various block positions
      * @return controller position
      */
     @Nullable
-    public static BlockPos isSealed(SubLevel level, BlockPos targetPos) {
-        ChunkAccess chunk = SableUtil.getChunkWorldPos(level, targetPos);
-        if (chunk == null) return null;
+    public static BlockPos isSealed(SubLevel level, BlockPos... posList) {
+        Map<BlockPos, BlockPos> hash = new HashMap<>();
+        level.getPlot().getLoadedChunks().forEach(c -> hash.putAll(c.getChunk().getData(utmAttachments.SEALED_AIR).sealedBlocks()));
 
-        return chunk.getData(utmAttachments.SEALED_AIR).get(SableUtil.globalize(level.logicalPose(), targetPos));
+        for (BlockPos p : posList) {
+            BlockPos controller = hash.get(SableUtil.toSublevelPos(level.logicalPose(), p));
+            if (controller != null) return controller;
+        }
+
+        return null;
     }
 
     /**
@@ -230,5 +259,9 @@ public class OxyUtil {
      */
     public static void giveTemporaryAir(ServerPlayer player, int duration) {
         player.setData(utmAttachments.TEMPORARY_OXYGEN, duration);
+    }
+
+    public static List<BlockPos> getSealCheckPositions(Player player) {
+        return BlockPos.betweenClosedStream(player.getBoundingBox().inflate(1)).map(BlockPos::immutable).toList();
     }
 }

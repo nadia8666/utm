@@ -1,9 +1,9 @@
 package com.nadia.utm.util;
 
+import com.nadia.utm.utm;
 import dev.ryanhcode.sable.companion.math.Pose3d;
 import dev.ryanhcode.sable.sublevel.SubLevel;
 import dev.ryanhcode.sable.sublevel.plot.LevelPlot;
-import dev.ryanhcode.sable.sublevel.plot.PlotChunkHolder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.block.Blocks;
@@ -12,10 +12,12 @@ import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.phys.Vec3;
 
+import javax.annotation.Nullable;
+
 public class SableUtil {
     public static LevelChunk getChunkWorldPos(SubLevel level, BlockPos pos) {
         LevelPlot plot = level.getPlot();
-        return plot.getChunk(plot.toLocal(new ChunkPos(globalize(level.logicalPose(), pos))));
+        return plot.getChunk(plot.toLocal(new ChunkPos(toSublevelPos(level.logicalPose(), pos))));
     }
 
     public static LevelChunk getChunkLocalPos(SubLevel level, BlockPos pos) {
@@ -31,19 +33,21 @@ public class SableUtil {
         return Vec3.atLowerCornerOf(pos);
     }
 
-    public static BlockPos globalize(Pose3d pose, BlockPos pos) {
+    public static BlockPos toSublevelPos(Pose3d pose, BlockPos pos) {
         return toBlockPos(pose.transformPositionInverse(toVec(pos)));
     }
 
-    public static BlockPos localize(Pose3d pose, BlockPos pos) {
+    public static BlockPos toWorldPos(Pose3d pose, BlockPos pos) {
         return toBlockPos(pose.transformPosition(toVec(pos)));
     }
 
+    @Nullable
     public static BlockState getState(SubLevel level, BlockPos pos) {
-        ChunkAccess chunk = SableUtil.getChunkWorldPos(level, pos);
-        if (chunk != null)
-            return chunk.getBlockState(globalize(level.logicalPose(), pos));
+        ChunkAccess chunk = SableUtil.getChunkLocalPos(level, pos);
+        if (chunk != null) {
+            return chunk.getBlockState(pos);
+        }
 
-        return Blocks.AIR.defaultBlockState();
+        return null;
     }
 }

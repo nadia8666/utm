@@ -15,7 +15,6 @@ import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
 import com.simibubi.create.foundation.fluid.CombinedTankWrapper;
 import dev.ryanhcode.sable.companion.SableCompanion;
-import dev.ryanhcode.sable.companion.SubLevelAccess;
 import dev.ryanhcode.sable.sublevel.SubLevel;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -130,7 +129,7 @@ public abstract class AbstractSealerBlockEntity extends SplitShaftBlockEntity im
             VISITED.add(current);
 
             BlockState state = level != null ? SableUtil.getState(level, current) : sLevel.getBlockState(current);
-            SEAL_TYPE sealable = canSeal(state, sLevel, current, lastPos);
+            SEAL_TYPE sealable = state == null ? SEAL_TYPE.UNSEALED : canSeal(state, sLevel, current, lastPos);
             lastPos = current;
             if (sealable != SEAL_TYPE.UNSEALED) {
                 if (level != null)
