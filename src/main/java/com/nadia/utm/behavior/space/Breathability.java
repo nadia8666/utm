@@ -10,6 +10,10 @@ import com.simibubi.create.AllItems;
 import com.simibubi.create.content.equipment.armor.BacktankUtil;
 import com.simibubi.create.content.kinetics.base.KineticBlock;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
+import dev.ryanhcode.sable.Sable;
+import dev.ryanhcode.sable.api.entity.EntitySubLevelUtil;
+import dev.ryanhcode.sable.companion.SableCompanion;
+import dev.ryanhcode.sable.sublevel.SubLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -25,9 +29,10 @@ import java.util.*;
 @ForceLoad
 class Breathability {
     public static void checkSuffocating(ServerPlayer sPlayer, boolean inAG) {
-        //SubLevel level = EntitySubLevelUtil.getTrackingOrVehicleSubLevel(sPlayer);
+        SubLevel level = (SubLevel) SableCompanion.INSTANCE.getTrackingOrVehicleSubLevel(sPlayer);
+        utm.LOGGER.info("[UTM] level {}", level);
 
-        BlockPos controller = /*level != null ? OxyUtil.isSealed(level, sPlayer.blockPosition()) : */OxyUtil.isSealed(sPlayer.serverLevel(), sPlayer.blockPosition());
+        BlockPos controller = level != null ? OxyUtil.isSealed(level, sPlayer.blockPosition()) : OxyUtil.isSealed(sPlayer.serverLevel(), sPlayer.blockPosition());
         boolean sealed = controller != null;
         int forceOxygen = sPlayer.getData(utmAttachments.TEMPORARY_OXYGEN);
         boolean breathable = OxyUtil.canBreathe(sPlayer);

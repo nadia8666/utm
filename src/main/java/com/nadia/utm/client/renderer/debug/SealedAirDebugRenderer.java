@@ -8,6 +8,8 @@ import com.nadia.utm.event.ForceLoad;
 import com.nadia.utm.event.utmEvents;
 import com.nadia.utm.networking.payloads.debug.RequestSealedDataPayload;
 import com.nadia.utm.registry.attachment.utmAttachments;
+import dev.ryanhcode.sable.companion.SableCompanion;
+import dev.ryanhcode.sable.sublevel.SubLevel;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.RenderType;
@@ -36,31 +38,34 @@ public class SealedAirDebugRenderer {
             PoseStack pose = event.getPoseStack();
             Vec3 cam = event.getCamera().getPosition();
             VertexConsumer consumer = mc.renderBuffers().bufferSource().getBuffer(RenderType.lines());
+            if (SableCompanion.INSTANCE.getTrackingOrVehicleSubLevel(mc.player) instanceof SubLevel level) {
 
-            int cx = mc.player.chunkPosition().x;
-            int cz = mc.player.chunkPosition().z;
+            } else {
+                int cx = mc.player.chunkPosition().x;
+                int cz = mc.player.chunkPosition().z;
 
-            for (int x = cx - 2; x <= cx + 2; x++) {
-                for (int z = cz - 2; z <= cz + 2; z++) {
-                    LevelChunk chunk = mc.level.getChunk(x, z);
+                for (int x = cx - 2; x <= cx + 2; x++) {
+                    for (int z = cz - 2; z <= cz + 2; z++) {
+                        LevelChunk chunk = mc.level.getChunk(x, z);
 
-                    long tick = mc.player.level().getGameTime();
-                    long lastTick = LAST_CHECKED.getOrDefault(chunk, -1L);
-                    if (lastTick == -1L || tick - lastTick >= 200L) {
-                        LAST_CHECKED.put(chunk, tick);
-                        PacketDistributor.sendToServer(new RequestSealedDataPayload(chunk.getPos()));
-                    }
+                        long tick = mc.player.level().getGameTime();
+                        long lastTick = LAST_CHECKED.getOrDefault(chunk, -1L);
+                        if (lastTick == -1L || tick - lastTick >= 200L) {
+                            LAST_CHECKED.put(chunk, tick);
+                            PacketDistributor.sendToServer(new RequestSealedDataPayload(chunk.getPos()));
+                        }
 
-                    if (!chunk.hasData(utmAttachments.SEALED_AIR)) continue;
+                        if (!chunk.hasData(utmAttachments.SEALED_AIR)) continue;
 
-                    SealedChunkData data = chunk.getData(utmAttachments.SEALED_AIR);
+                        SealedChunkData data = chunk.getData(utmAttachments.SEALED_AIR);
 
-                    for (Map.Entry<BlockPos, BlockPos> entry : data.sealedBlocks().entrySet()) {
-                        AABB sealedBox = new AABB(entry.getKey()).move(-cam.x, -cam.y, -cam.z);
-                        LevelRenderer.renderLineBox(pose, consumer, sealedBox, 0.0F, 1.0F, 0.0F, 0.25F);
+                        for (Map.Entry<BlockPos, BlockPos> entry : data.sealedBlocks().entrySet()) {
+                            AABB sealedBox = new AABB(entry.getKey()).move(-cam.x, -cam.y, -cam.z);
+                            LevelRenderer.renderLineBox(pose, consumer, sealedBox, 0.0F, 1.0F, 0.0F, 0.25F);
 
-                        AABB controllerBox = new AABB(entry.getValue()).move(-cam.x, -cam.y, -cam.z);
-                        LevelRenderer.renderLineBox(pose, consumer, controllerBox, 1.0F, 0.0F, 0.0F, 1.0F);
+                            AABB controllerBox = new AABB(entry.getValue()).move(-cam.x, -cam.y, -cam.z);
+                            LevelRenderer.renderLineBox(pose, consumer, controllerBox, 1.0F, 0.0F, 0.0F, 1.0F);
+                        }
                     }
                 }
             }

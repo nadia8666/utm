@@ -4,7 +4,7 @@ import com.nadia.utm.behavior.space.SealedChunkData;
 import com.nadia.utm.mixin.BacktankUtilAccessor;
 import com.nadia.utm.registry.attachment.utmAttachments;
 import com.nadia.utm.registry.dimension.utmDimensions;
-import dev.ryanhcode.sable.api.entity.EntitySubLevelUtil;
+import com.nadia.utm.utm;
 import dev.ryanhcode.sable.sublevel.SubLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceKey;
@@ -20,7 +20,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.chunk.status.ChunkStatus;
-import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
 import java.util.*;
@@ -159,17 +158,16 @@ public class OxyUtil {
      * @param controllerPos nullable controller position
      */
     public static void setBlockSealed(SubLevel level, BlockPos targetPos, @Nullable BlockPos controllerPos) {
-        ChunkPos chunkPos = new ChunkPos(BlockPos.containing(level.logicalPose().transformPosition(Vec3.atLowerCornerOf(targetPos))));
-        LevelChunk chunk = level.getPlot().getChunk(chunkPos);
+        LevelChunk chunk = SableUtil.getChunkWorldPos(level, targetPos);
         if (chunk == null) return;
 
         SealedChunkData currentData = chunk.getData(utmAttachments.SEALED_AIR);
         Map<BlockPos, BlockPos> updatedMap = new HashMap<>(currentData.sealedBlocks());
 
         if (controllerPos != null)
-            updatedMap.put(targetPos, controllerPos);
+            updatedMap.put(SableUtil.localize(level.logicalPose(), targetPos), SableUtil.localize(level.logicalPose(), controllerPos));
         else
-            updatedMap.remove(targetPos);
+            updatedMap.remove(SableUtil.localize(level.logicalPose(), targetPos));
 
         chunk.setData(utmAttachments.SEALED_AIR, new SealedChunkData(updatedMap));
     }
@@ -199,11 +197,14 @@ public class OxyUtil {
      */
     @Nullable
     public static BlockPos isSealed(SubLevel level, BlockPos targetPos) {
-        ChunkPos chunkPos = new ChunkPos(BlockPos.containing(level.logicalPose().transformPosition(Vec3.atLowerCornerOf(targetPos))));
-        ChunkAccess chunk = level.getPlot().getChunk(chunkPos);
+        utm.LOGGER.info("[UTM] call plotsealed {}", targetPos);
+        ChunkAccess chunk = SableUtil.getChunkLocalPos(level, targetPos);
         if (chunk == null) return null;
 
-        return chunk.getData(utmAttachments.SEALED_AIR).get(targetPos);
+        BlockPos controller = chunk.getData(utmAttachments.SEALED_AIR).get(SableUtil.localize(level.logicalPose(), targetPos));
+        utm.LOGGER.warn("[UTM] SEAL INFO AT {}: {}\nLOCALIZED: {}", targetPos, controller, SableUtil.localize(level.logicalPose(), targetPos));
+
+        return controller;
     }
 
     /**
