@@ -60,6 +60,15 @@ repositories {
 
     maven { url = "https://maven.bawnorton.com/releases" } // mixin squared
     maven { url = "https://maven.enjarai.dev/mirrors" } // mixin squared
+
+    maven { url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/" } // ForgeConfigAPIPort
+
+    maven {
+        url = "https://maven.squiddev.cc"
+        content {
+            includeGroup("cc.tweaked")
+        }
+    } // computercraft for aero
 }
 
 neoForge {
@@ -142,8 +151,13 @@ dependencies {
             prefer project.sable_companion_version
         }
     } // sable compat
+
+    // sable & aeronautics
+    jarJar(implementation("dev.ryanhcode.sable:sable-neoforge-${minecraft_version}:${sable_version}"))
+    implementation("dev.ryanhcode.offroad:offroad-neoforge-${minecraft_version}:${offroad_version}")
+    implementation("dev.simulated_team.simulated:simulated-neoforge-${minecraft_version}:${simulated_version}")
+    implementation("dev.eriksonn.aeronautics:aeronautics-neoforge-${minecraft_version}:${aeronautics_version}")
     jarJar(runtimeOnly("maven.modrinth:create-aeronautics:1sv6OtSz")) // create aeronautics
-    jarJar(implementation("maven.modrinth:sable:g8CObHcP")) // sable
 
     // mixin squared
     compileOnly(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-common:0.3.7-beta.1"))

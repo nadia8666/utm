@@ -23,6 +23,7 @@
     "SchematicHandlerMixin",
     "compat.ObituaryScreenMixin",
     "compat.ShowcaseItemMixin",
+    "compat.WheelMountRendererMixin",
     "renderer.BacktankArmorLayerMixin",
     "renderer.LayeredArmorItemMixin",
     "renderer.MultiBufferSourceMixin",

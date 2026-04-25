@@ -8,7 +8,6 @@ import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Debug(export = true)
@@ -21,8 +20,7 @@ public abstract class CameraMixin {
     @Inject(
             method = "@MixinSquared:Handler",
             at = @At("HEAD"),
-            cancellable = true,
-            remap = false
+            cancellable = true // this is REQUIRED. do not believe its lies.
     )
     private void utm$cancelFiguraSetupRot(BlockGetter area, Entity focusedEntity, boolean thirdPerson, boolean inverseView, float tickDelta, CallbackInfo originalCi, CallbackInfo ci) {
         ci.cancel();

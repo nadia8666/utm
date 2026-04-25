@@ -77,7 +77,12 @@ public abstract class ItemRendererMixin {
                 setGlintColor(color != -1 ? color : DEFAULT_COLOR, GLINT_ADDITIVE.THREAD.get() ? utmShaders.GLINT_ADDITIVE : utmShaders.GLINT_OVERLAY);
             }
 
-            if (timeUpdated && !changed) bufferSource.endBatch();
+            if (timeUpdated && !changed) {
+                bufferSource.endBatch(utmRenderTypes.ADDITIVE_GLINT_ITEM.get());
+                bufferSource.endBatch(utmRenderTypes.OVERLAY_GLINT_ITEM.get());
+                bufferSource.endBatch(utmRenderTypes.ADDITIVE_GLINT_ENTITY.get());
+                bufferSource.endBatch(utmRenderTypes.OVERLAY_GLINT_ENTITY.get());
+            }
         }
     }
 
