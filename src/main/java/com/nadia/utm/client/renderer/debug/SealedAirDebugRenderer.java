@@ -51,7 +51,7 @@ public class SealedAirDebugRenderer {
             Set<BlockPos> controllers = new HashSet<>();
             long tick = mc.player.level().getGameTime();
 
-            if (SableCompanion.INSTANCE.getTrackingOrVehicleSubLevel(mc.player) instanceof SubLevel level) {
+            if (SableUtil.getSublevel(mc.player) instanceof SubLevel level) {
                 level.getPlot().getLoadedChunks().forEach(chunk -> {
                     long lastTick = LAST_CHECKED.getOrDefault(chunk.getChunk(), -1L);
                     if (lastTick == -1L || tick - lastTick >= REFRESH_RATE) {
