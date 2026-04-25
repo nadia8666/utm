@@ -49,6 +49,7 @@ public abstract class AbstractSealerBlockEntity extends SplitShaftBlockEntity im
     protected final Queue<BlockPos> QUEUE = new LinkedList<>();
     protected final Set<BlockPos> VISITED = new HashSet<>();
     protected final Set<BlockPos> SEALED = new HashSet<>();
+    protected boolean IS_SABLE = false;
 
     public int SYNCED_VOLUME = 0;
     public boolean ACTIVE = false;
@@ -77,10 +78,19 @@ public abstract class AbstractSealerBlockEntity extends SplitShaftBlockEntity im
         return 2;
     }
 
+    public boolean shouldStep() {
+        return true;
+    }
+
     @Override
     public void tick() {
         super.tick();
-        step();
+
+        if (shouldStep())
+            step();
+
+        if (level != null && level.getGameTime() % 40 == 0)
+            IS_SABLE = SableCompanion.INSTANCE.isInPlotGrid(this);
     }
 
     public void step() {
@@ -134,6 +144,9 @@ public abstract class AbstractSealerBlockEntity extends SplitShaftBlockEntity im
             if (VISITED.contains(current)) continue;
             VISITED.add(current);
 
+            // dont seal outside of ship borders because i want it to match sublevel water behavior
+            if (level != null && !level.getPlot().contains(SableUtil.toVec(current))) continue;
+
             BlockState state = level != null ? SableUtil.getState(level, current) : sLevel.getBlockState(current);
             SEAL_TYPE sealable = state == null ? SEAL_TYPE.UNSEALED : canSeal(state, sLevel, current, lastPos);
             lastPos = current;
@@ -185,7 +198,7 @@ public abstract class AbstractSealerBlockEntity extends SplitShaftBlockEntity im
                     OxyUtil.setBlockSealed(sLevel, oldPos, null);
 
         ATTACHED_POSITIONS.clear();
-        ATTACHED_POSITIONS.addAll(VISITED);
+        ATTACHED_POSITIONS.addAll(SEALED);
         SYNCED_VOLUME = SEALED.size();
         RECALC = false;
         QUEUE.clear();
@@ -220,9 +233,17 @@ public abstract class AbstractSealerBlockEntity extends SplitShaftBlockEntity im
         super.read(tag, registries, clientPacket);
         ACTIVE = tag.getBoolean("Active");
         SYNCED_VOLUME = tag.getInt("SyncedVolume");
+        IS_SABLE = tag.getBoolean("IsSable");
         if (!clientPacket) {
             ATTACHED_POSITIONS.clear();
             for (long p : tag.getLongArray("Positions")) ATTACHED_POSITIONS.add(BlockPos.of(p));
+        }
+
+        if (clientPacket) return;
+
+        if (IS_SABLE && (ACTIVE || !ATTACHED_POSITIONS.isEmpty())) {
+            ACTIVE = false;
+            this.unseal();
         }
     }
 
@@ -231,8 +252,10 @@ public abstract class AbstractSealerBlockEntity extends SplitShaftBlockEntity im
         super.write(tag, registries, clientPacket);
         tag.putBoolean("Active", ACTIVE);
         tag.putInt("SyncedVolume", SYNCED_VOLUME);
-        if (!clientPacket)
+        if (!clientPacket) {
+            tag.putBoolean("IsSable", IS_SABLE);
             tag.putLongArray("Positions", ATTACHED_POSITIONS.stream().map(BlockPos::asLong).toList());
+        }
     }
 
     @Override
@@ -272,8 +295,10 @@ public abstract class AbstractSealerBlockEntity extends SplitShaftBlockEntity im
         utmEvents.register(BlockStateChangedEvent.class, event -> handleWorldChange(event.Level, event.Pos));
     }
 
-    private static void handleWorldChange(LevelAccessor level, BlockPos pos) {
-        if (!(level instanceof ServerLevel sLevel)) return;
+    private static void handleWorldChange(LevelAccessor accessor, BlockPos pos) {
+        if (!(accessor instanceof ServerLevel sLevel)) return;
+
+        SubLevel level = (SubLevel) SableCompanion.INSTANCE.getContaining(sLevel, pos);
         BlockPos controllerPos = OxyUtil.isSealed(sLevel, pos);
 
         if (controllerPos == null)
@@ -282,11 +307,21 @@ public abstract class AbstractSealerBlockEntity extends SplitShaftBlockEntity im
                 if (controllerPos != null) break;
             }
 
-        if (controllerPos != null && sLevel.getBlockEntity(controllerPos) instanceof AbstractSealerBlockEntity be)
+        if (controllerPos == null && level != null) {
+            controllerPos = OxyUtil.isSealed(level, pos);
+
+            if (controllerPos == null)
+                for (BlockPos neighbor : List.of(pos.above(), pos.below(), pos.north(), pos.south(), pos.east(), pos.west())) {
+                    controllerPos = OxyUtil.isSealed(level, neighbor);
+                    if (controllerPos != null) break;
+                }
+        }
+
+        if (controllerPos != null && (level != null ? level.getLevel().getBlockEntity(controllerPos) : sLevel.getBlockEntity(controllerPos)) instanceof AbstractSealerBlockEntity be)
             if (be.ACTIVE) {
                 be.seal();
 
-                List<ServerPlayer> players = level.getEntitiesOfClass(ServerPlayer.class, new AABB(pos).inflate(8.0));
+                List<ServerPlayer> players = accessor.getEntitiesOfClass(ServerPlayer.class, new AABB(pos).inflate(8.0));
                 for (ServerPlayer player : players)
                     OxyUtil.giveTemporaryAir(player, 5 * 20); // turns out making it work with trapdoors also means you will accidentally suffocate yourself often. Oops.
             }

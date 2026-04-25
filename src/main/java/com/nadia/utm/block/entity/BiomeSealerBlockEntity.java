@@ -35,26 +35,23 @@ public class BiomeSealerBlockEntity extends AbstractSealerBlockEntity {
 
         return (int) Math.min(draw, 1000);
     }
+
     public BiomeSealerBlockEntity(BlockPos pos, BlockState state) {
         super(utmBlockEntities.BIOME_SEALER.get(), pos, state);
     }
 
     @Override
-    public void tick() {
-        super.tick();
-
-        if (level == null || level.isClientSide) return;
-
+    public boolean shouldStep() {
         if (Math.abs(getSpeed()) < 128) {
             if (ACTIVE) {
                 ACTIVE = false;
                 sendData();
                 unseal();
             }
-            return;
+            return false;
         }
 
-        step();
+        return true;
     }
 
     @OnlyIn(Dist.CLIENT)
