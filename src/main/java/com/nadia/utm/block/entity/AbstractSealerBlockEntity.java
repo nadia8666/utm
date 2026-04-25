@@ -96,7 +96,7 @@ public abstract class AbstractSealerBlockEntity extends SplitShaftBlockEntity im
 
     public void step() {
         if (level == null || level.isClientSide) return;
-        boolean hasOxygen = TANK.getPrimaryHandler().getFluidAmount() > 0 && !level.hasNeighborSignal(worldPosition);
+        boolean hasOxygen = TANK.getPrimaryHandler().getFluidAmount() > getDraw() && !level.hasNeighborSignal(worldPosition);
 
         if (hasOxygen != ACTIVE) {
             ACTIVE = hasOxygen;

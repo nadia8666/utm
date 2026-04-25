@@ -6,23 +6,21 @@ import com.nadia.utm.networking.payloads.LaunchContraptionPayload;
 import com.nadia.utm.registry.dimension.utmDimensions;
 import com.nadia.utm.registry.enchantment.utmEnchantments;
 import com.simibubi.create.content.contraptions.AbstractContraptionEntity;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.TickTask;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.portal.DimensionTransition;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
@@ -31,8 +29,8 @@ import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -93,6 +91,12 @@ public class SpaceStateHandler {
 
     public static void launchRecieved(LaunchContraptionPayload payload, IPayloadContext context) {
         Player player = context.player();
+        MinecraftServer server = player.getServer();
+        if (server == null) return;
+
+        ServerLevel ag = server.getLevel(utmDimensions.AG_KEY);
+        ServerLevel overworld = server.getLevel(Level.OVERWORLD);
+        if (ag == null || overworld == null) return;
 
         AbstractContraptionEntity contraption = null;
         Entity vehicle = player.level().getEntity(payload.id());
@@ -101,63 +105,19 @@ public class SpaceStateHandler {
 
         if (contraption == null) return;
 
-        ServerLevel target = Objects.requireNonNull(Objects.requireNonNull(player.getServer()).getLevel(utmDimensions.AG_KEY));
-        if (player.level().dimension().equals(utmDimensions.AG_KEY)) {
-            contraption.disassemble();
+        ServerLevel target = vehicle.level() == overworld ? ag : overworld;
+        if (vehicle.level() == target) return;
 
-            return;
-        }
+        if (player.level() == ag && player.getVehicle() == vehicle)
+            player.unRide();
 
-        List<Entity> passengers = List.copyOf(contraption.getPassengers());
+        List<Entity> passengers = new ArrayList<>(List.copyOf(contraption.getPassengers()));
+
+        if (player.level() == ag)
+            passengers.remove(player);
 
         AABB bounds = contraption.getBoundingBox();
-        int minX = Mth.floor(bounds.minX);
-        int maxX = Mth.ceil(bounds.maxX);
-        int minZ = Mth.floor(bounds.minZ);
-        int maxZ = Mth.ceil(bounds.maxZ);
-
-        int highestHeight = -13579;
-        for (int x = minX; x <= maxX; x++) {
-            for (int z = minZ; z <= maxZ; z++) {
-                int surfaceY = Positioning.getSurface(target, x, z);
-                if (surfaceY > highestHeight) {
-                    highestHeight = surfaceY;
-                }
-            }
-        }
-
-        if (highestHeight == -13579) {
-            highestHeight = -63;
-            target.setBlock(new BlockPos(contraption.blockPosition().getX(), -64, contraption.blockPosition().getZ()), Blocks.COBBLESTONE.defaultBlockState(), 3);
-        }
-
-        double yOffset = Math.min(highestHeight, 319 - (bounds.getYsize())) - contraption.getY();
-
-        AABB targetBounds = bounds.move(0, yOffset, 0);
-        int tMinX = Mth.floor(targetBounds.minX);
-        int tMaxX = Mth.ceil(targetBounds.maxX);
-        int tMinY = Mth.floor(targetBounds.minY);
-        int tMaxY = Mth.ceil(targetBounds.maxY);
-        int tMinZ = Mth.floor(targetBounds.minZ);
-        int tMaxZ = Mth.ceil(targetBounds.maxZ);
-
-        BlockPos.MutableBlockPos mPos = new BlockPos.MutableBlockPos();
-        for (int x = tMinX; x <= tMaxX; x++) {
-            for (int y = tMinY; y <= tMaxY; y++) {
-                for (int z = tMinZ; z <= tMaxZ; z++) {
-                    mPos.set(x, y, z);
-                    BlockState state = target.getBlockState(mPos);
-
-                    if (!state.isAir() && UNMODIFIED_BLOCKS.contains(state.getBlock()) && !state.hasBlockEntity()) {
-                        target.setBlock(mPos, Blocks.AIR.defaultBlockState(), 3);
-                    }
-
-                    if (y == tMinY && target.getBlockState(mPos).isAir() && target.getBlockState(mPos.below()).isAir()) {
-                        target.setBlock(mPos.below(), Blocks.COBBLESTONE.defaultBlockState(), 3);
-                    }
-                }
-            }
-        }
+        double yOffset = (319 + bounds.getYsize()) - contraption.getY();
 
         CompoundTag nbt = contraption.getContraption().writeNBT(contraption.registryAccess(), false);
 
@@ -172,8 +132,7 @@ public class SpaceStateHandler {
                 contraption.getXRot(),
                 (newEntity) -> {
                     if (newEntity instanceof AbstractContraptionEntity newContraption) {
-
-                        newContraption.getContraption().readNBT(target, nbt, true);
+                        newContraption.getContraption().readNBT(ag, nbt, true);
                         player.getServer().tell(new TickTask(player.getServer().getTickCount() + 20, () -> {
                             Entity targVehicle = finalVehicle.get();
                             if (targVehicle != null) {
@@ -190,12 +149,12 @@ public class SpaceStateHandler {
                                 newContraption.getContraption().invalidateColliders();
                                 newContraption.getContraption().resetClientContraption();
                             } else {
+                                for (Entity pass : List.copyOf(newContraption.getPassengers())) {
+                                    pass.stopRiding();
+                                }
+
                                 newContraption.stopRiding();
                                 newContraption.discard();
-                            }
-
-                            for (Entity pass : List.copyOf(newContraption.getPassengers())) {
-                                pass.stopRiding();
                             }
                         }));
                     }
