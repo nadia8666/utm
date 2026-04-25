@@ -60,9 +60,9 @@ public class SealedAirDebugRenderer {
                     }
 
                     chunk.getChunk().getData(utmAttachments.SEALED_AIR).sealedBlocks().forEach((p, c) -> {
-                        new PoseUtil(pose).push().run(() -> LevelRenderer.renderLineBox(pose, bufferSource.getBuffer(RenderType.lines()), new AABB(SableUtil.toWorldPos(level.logicalPose(), p)).move(-cam.x, -cam.y, -cam.z).inflate(-0.25), 0.0F, 1.0F, 0.0F, 0.35F)).pop();
+                        new PoseUtil(pose).push().run(() -> LevelRenderer.renderLineBox(pose, bufferSource.getBuffer(RenderType.lines()), new AABB(SableUtil.toGlobalPos(level.logicalPose(), p)).move(-cam.x, -cam.y, -cam.z).inflate(-0.25), 0.0F, 1.0F, 0.0F, 0.35F)).pop();
 
-                        controllers.add(SableUtil.toWorldPos(level.logicalPose(), c));
+                        controllers.add(SableUtil.toGlobalPos(level.logicalPose(), c));
                     });
                 });
             } else {

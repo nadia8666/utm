@@ -226,7 +226,7 @@ public class OxyUtil {
         level.getPlot().getLoadedChunks().forEach(c -> hash.putAll(c.getChunk().getData(utmAttachments.SEALED_AIR).sealedBlocks()));
 
         for (BlockPos p : posList) {
-            BlockPos controller = hash.get(SableUtil.toSublevelPos(level.logicalPose(), p));
+            BlockPos controller = hash.get(SableUtil.toLocalPos(level.logicalPose(), p));
             if (controller != null) return controller;
         }
 
