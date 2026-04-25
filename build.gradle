@@ -135,7 +135,6 @@ dependencies {
 
     compileOnly("maven.modrinth:figura:yXFi1fed") // figura
 
-
     implementation("maven.modrinth:backported-spears:uUy23VAp") // backported spears
     implementation("maven.modrinth:showcase-item:AD6eBCKn") // showcase item
     implementation("maven.modrinth:gravestone-mod:AZm51eX1") // gravestones
