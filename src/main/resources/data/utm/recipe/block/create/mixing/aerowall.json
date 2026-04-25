@@ -1,0 +1,25 @@
+{
+  "type": "create:mixing",
+  "heat_requirement": "heated",
+  "ingredients": [
+    {
+      "fluid": "utm:liquid_oxygen",
+      "type": "fluid_stack",
+      "amount": 1000
+    },
+    {
+      "item": "minecraft:slime_ball",
+      "count": 1
+    },
+    {
+      "item": "minecraft:string",
+      "count": 10
+    }
+  ],
+  "results": [
+    {
+      "id": "utm:aerowall",
+      "count": 6
+    }
+  ]
+}
