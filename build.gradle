@@ -145,18 +145,15 @@ dependencies {
     jarJar(implementation("maven.modrinth:extreme_sound_muffler:KXmiEin1")) // extreme sound muffler
     jarJar(implementation("maven.modrinth:sophisticated-backpacks-create-integration:bWd7B59k")) // sophisticated backpacks x create
     jarJar(implementation('local:grimble_mod:1.0.0')) // bluebibbob's grimble mod
-    jarJar(api("dev.ryanhcode.sable-companion:sable-companion-common-${project.minecraft_version}:[${project.sable_companion_version},)")) {
-        version {
-            prefer project.sable_companion_version
-        }
-    } // sable compat
 
     // sable & aeronautics
-    jarJar(implementation("dev.ryanhcode.sable:sable-neoforge-${minecraft_version}:${sable_version}"))
+    jarJar(api("dev.ryanhcode.sable-companion:sable-companion-common-${minecraft_version}:${sable_companion_version}"))
+    implementation("dev.ryanhcode.sable:sable-neoforge-${minecraft_version}:${sable_version}")
     implementation("dev.ryanhcode.offroad:offroad-neoforge-${minecraft_version}:${offroad_version}")
     implementation("dev.simulated_team.simulated:simulated-neoforge-${minecraft_version}:${simulated_version}")
     implementation("dev.eriksonn.aeronautics:aeronautics-neoforge-${minecraft_version}:${aeronautics_version}")
-    jarJar(runtimeOnly("maven.modrinth:create-aeronautics:1sv6OtSz")) // create aeronautics
+    jarJar(runtimeOnly("maven.modrinth:create-aeronautics:1sv6OtSz"))
+    jarJar(runtimeOnly("maven.modrinth:sable:g8CObHcP"))
 
     // mixin squared
     compileOnly(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-common:0.3.7-beta.1"))
