@@ -1,31 +1,19 @@
 package com.nadia.utm;
 
-import com.mojang.brigadier.arguments.StringArgumentType;
-import com.nadia.utm.registry.attachment.utmAttachments;
+import com.nadia.utm.event.ForceLoad;
+import com.nadia.utm.event.utmEvents;
 import com.nadia.utm.updater.AutoUpdater;
-import com.nadia.utm.updater.ToastDisplaySignal;
-import dev.ryanhcode.sable.companion.SableCompanion;
-import dev.ryanhcode.sable.sublevel.SubLevel;
-import net.minecraft.client.Minecraft;
 import net.minecraft.commands.Commands;
-import net.minecraft.commands.SharedSuggestionProvider;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.player.Player;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.client.event.RegisterClientCommandsEvent;
-import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
 
-import static com.nadia.utm.updater.AutoUpdater.ToastTarget;
 import static com.nadia.utm.updater.AutoUpdater.VersionTarget;
 
-@EventBusSubscriber(modid = "utm")
+@ForceLoad()
 public class utmCommands {
-    @SubscribeEvent
-    public static void onRegisterCommands(RegisterCommandsEvent event) {
-        event.getDispatcher().register(Commands.literal("utm_server")
+    static {
+        utmEvents.register(RegisterCommandsEvent.class, event -> event.getDispatcher().register(Commands.literal("utm_server")
                 .then(Commands.literal("update").executes(context -> {
                     AutoUpdater.checkForUpdate();
 
@@ -53,49 +41,6 @@ public class utmCommands {
 
                     return 1;
                 }))
-        );
-    }
-
-    @SubscribeEvent
-    public static void onRegisterClientCommands(RegisterClientCommandsEvent event) {
-        event.getDispatcher().register(Commands.literal("utm")
-                .then(Commands.literal("update").executes(context -> {
-                    AutoUpdater.checkForUpdate();
-
-                    return 1;
-                }))
-                .then(Commands.literal("reinstall").executes(context -> {
-                    AutoUpdater.checkForUpdate(true);
-
-                    return 1;
-                }))
-                .then(Commands.literal("stop").executes(context -> {
-                    var mc = Minecraft.getInstance();
-                    Minecraft.getInstance().execute(mc::stop);
-
-                    return 1;
-                }))
-                .then(Commands.literal("test").then(Commands.argument("test_type", StringArgumentType.word())
-                        .suggests((context, builder) -> SharedSuggestionProvider.suggest(new String[]{"update_toast", "sable_seal_test"}, builder)).executes(context -> {
-                            switch (StringArgumentType.getString(context, "test_type")) {
-                                case "update_toast": {
-                                    ToastTarget = true;
-                                    VersionTarget = "TEST VERSION";
-                                    NeoForge.EVENT_BUS.post(new ToastDisplaySignal());
-                                }
-                                case "sable_seal_test": {
-                                    Player player = Minecraft.getInstance().player;
-                                    SubLevel level = (SubLevel) SableCompanion.INSTANCE.getTrackingOrVehicleSubLevel(player);
-
-                                    if (level != null) {
-                                        level.getPlot().getLoadedChunks().forEach(c -> utm.LOGGER.info("[UTM] Chunk Data @{}: {}", c.getPos(), c.getChunk().getData(utmAttachments.SEALED_AIR).sealedBlocks()));
-                                    }
-                                }
-                            }
-
-                            return 1;
-                        }))
-                )
-        );
+        ));
     }
 }
