@@ -8,11 +8,11 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 
-public record LaunchContraptionPayload(int i) implements CustomPacketPayload{
+public record LaunchContraptionPayload(int id) implements CustomPacketPayload{
     public static final Type<LaunchContraptionPayload> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath("utm", "launch_contraption"));
 
     public static final StreamCodec<ByteBuf, LaunchContraptionPayload> STREAM_CODEC = StreamCodec.composite(
-            ByteBufCodecs.INT, LaunchContraptionPayload::i,
+            ByteBufCodecs.INT, LaunchContraptionPayload::id,
             LaunchContraptionPayload::new
     );
 

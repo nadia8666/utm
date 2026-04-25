@@ -1,6 +1,16 @@
 {
   "parent": "minecraft:adventure/play_jukebox_in_meadows",
   "criteria": {
+    "has_aeronautics:music_disc_cloud_skipper": {
+      "conditions": {
+        "items": [
+          {
+            "items": "aeronautics:music_disc_cloud_skipper"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
     "has_minecraft:music_disc_11": {
       "conditions": {
         "items": [
@@ -249,6 +259,9 @@
     ],
     [
       "has_minecraft:music_disc_11"
+    ],
+    [
+      "has_aeronautics:music_disc_cloud_skipper"
     ],
     [
       "has_minecraft:music_disc_cat"

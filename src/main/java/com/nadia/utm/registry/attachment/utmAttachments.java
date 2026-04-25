@@ -23,6 +23,6 @@ public class utmAttachments {
 
     public static final Supplier<AttachmentType<SealedChunkData>> SEALED_AIR = ATTACHMENTS.register(
             "sealed_air",
-            () -> AttachmentType.builder(SealedChunkData::new).serialize(SealedChunkData.CODEC).build()
+            () -> AttachmentType.builder(SealedChunkData::new).build()
     );
 }

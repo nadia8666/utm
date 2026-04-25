@@ -34,7 +34,7 @@ public class CitywallsBlockEntityRenderer implements BlockEntityRenderer<Citywal
 
     @Override
     public @NotNull AABB getRenderBoundingBox(@NotNull CitywallsBlockEntity blockEntity) {
-        return AABB.ofSize(Vec3.atLowerCornerOf(blockEntity.getBlockPos()), 140, 140, 140); // i checked the size manually (its diameter). so . i think it's too big but idc
+        return AABB.ofSize(Vec3.atLowerCornerOf(blockEntity.getBlockPos()), 140, 140, 140); // id checked the size manually (its diameter). so . id think it's too big but idc
     }
 
     @Override

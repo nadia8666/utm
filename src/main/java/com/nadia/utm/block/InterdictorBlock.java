@@ -8,7 +8,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 
 
-public class InterdictorBlock extends RotatableBlock {
+public class InterdictorBlock extends HorizontalBlock {
     public InterdictorBlock(Properties properties) {
         super(properties);
     }

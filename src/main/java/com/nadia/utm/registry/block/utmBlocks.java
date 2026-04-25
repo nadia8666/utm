@@ -3,11 +3,13 @@ package com.nadia.utm.registry.block;
 import com.nadia.utm.block.*;
 import com.nadia.utm.registry.fluid.utmFluids;
 import com.nadia.utm.registry.item.utmItems;
+import com.nadia.utm.registry.tags.utmTags;
 import com.nadia.utm.registry.utmRegistry;
 import com.simibubi.create.foundation.item.ItemDescription;
 import com.simibubi.create.foundation.item.KineticStats;
 import com.simibubi.create.foundation.item.TooltipModifier;
 import net.createmod.catnip.lang.FontHelper;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -67,7 +69,7 @@ public class utmBlocks {
 
     public static final utmBlockContainer<HeavyMetalAnvilBlock, BlockItem> HEAVY_METAL_ANVIL = dualRegister("heavy_metal_anvil", HeavyMetalAnvilBlock::new, BlockBehaviour.Properties.of()
             .destroyTime(7.0f)
-            .explosionResistance(2500f).sound(SoundType.ANVIL)).drops().copyItemModel().minePick().mineTier(3);
+            .explosionResistance(2500f).sound(SoundType.ANVIL)).drops().copyItemModel().minePick().mineTier(3).tags(BlockTags.ANVIL);
 
     public static final utmBlockContainer<GlintTableBlock, BlockItem> GLINT_TABLE = dualRegister("glint_table", GlintTableBlock::new, BlockBehaviour.Properties.of()
             .destroyTime(3.0f)
@@ -123,6 +125,14 @@ public class utmBlocks {
             .noOcclusion()
             .isViewBlocking((state, level, pos) -> false)
             .isSuffocating((state, level, pos) -> false)).drops().copyItemModel().minePick();
+
+    public static final utmBlockContainer<RotatableBlock, BlockItem> AERO_WALL = dualRegister("aerowall", RotatableBlock::new, BlockBehaviour.Properties.of()
+            .instabreak()
+            .sound(SoundType.SLIME_BLOCK)
+            .noOcclusion()
+            .noCollission()
+            .isViewBlocking((state, level, pos) -> false)
+            .isSuffocating((state, level, pos) -> false)).drops().copyItemModel().tags(utmTags.BLOCK.SEAL_NOPROP);
 
     public static final utmBlockContainer<CitywallsBlock, BlockItem> CITYWALLS_METAL = dualRegister("citywalls_metal", CitywallsBlock::new, BlockBehaviour.Properties.of()
             .destroyTime(1.0f)

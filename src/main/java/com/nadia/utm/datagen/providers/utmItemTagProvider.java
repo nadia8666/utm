@@ -116,6 +116,22 @@ public class utmItemTagProvider extends ItemTagsProvider {
         tag(ItemTags.SWORD_ENCHANTABLE).add(utmTools.ARID_SWORD.get());
         tag(ItemTags.WEAPON_ENCHANTABLE).add(utmTools.ARID_SWORD.get());
         tag(ItemTags.FIRE_ASPECT_ENCHANTABLE).add(utmTools.ARID_SWORD.get());
-        // it is purposefully not durability enchant-able.
+
+        tag(ItemTags.SWORDS).add(utmTools.OBSIDIAN_SWORD.get());
+        tag(ItemTags.SWORDS).add(utmTools.ARID_SWORD.get());
+        tag(ItemTags.SWORDS).add(utmTools.COPPER_SWORD.get());
+        tag(ItemTags.SWORDS).add(utmTools.ENCHANTED_SWORD_RED.get());
+        tag(ItemTags.SWORDS).add(utmTools.ENCHANTED_SWORD_BLUE.get());
+        tag(ItemTags.SWORDS).add(utmTools.ENCHANTED_SWORD_GREEN.get());
+        tag(ItemTags.SWORDS).add(utmTools.CYCLESWORD.get());
+
+        tag(ItemTags.AXES).add(utmTools.ARID_AXE.get());
+        tag(ItemTags.AXES).add(utmTools.COPPER_AXE.get());
+
+        tag(ItemTags.PICKAXES).add(utmTools.COPPER_PICKAXE.get());
+
+        tag(ItemTags.HOES).add(utmTools.COPPER_HOE.get());
+
+        tag(ItemTags.SHOVELS).add(utmTools.COPPER_SHOVEL.get());
     }
 }

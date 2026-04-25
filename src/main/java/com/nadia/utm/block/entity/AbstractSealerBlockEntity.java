@@ -4,6 +4,7 @@ import com.nadia.utm.event.ForceLoad;
 import com.nadia.utm.event.events.BlockStateChangedEvent;
 import com.nadia.utm.event.utmEvents;
 import com.nadia.utm.registry.fluid.utmFluids;
+import com.nadia.utm.registry.tags.utmTags;
 import com.nadia.utm.util.AdvancementUtil;
 import com.nadia.utm.util.OxyUtil;
 import com.nadia.utm.util.SableUtil;
@@ -144,7 +145,7 @@ public abstract class AbstractSealerBlockEntity extends SplitShaftBlockEntity im
             if (VISITED.contains(current)) continue;
             VISITED.add(current);
 
-            // dont seal outside of ship borders because i want it to match sublevel water behavior
+            // dont seal outside of ship borders because id want it to match sublevel water behavior
             if (level != null && !level.getPlot().getBoundingBox().contains(current.getX(), current.getY(), current.getZ())) continue;
 
             BlockState state = level != null ? SableUtil.getState(level, current) : sLevel.getBlockState(current);
@@ -178,6 +179,10 @@ public abstract class AbstractSealerBlockEntity extends SplitShaftBlockEntity im
 
             return open ? SEAL_TYPE.SEAL_NO_PROP : SEAL_TYPE.SEALED;
         }
+
+        if (state.is(utmTags.BLOCK.SEAL_NOPROP))
+            return SEAL_TYPE.SEAL_NO_PROP;
+
         return (state.isAir() || !state.getCollisionShape(level, pos).equals(Shapes.block())) ? SEAL_TYPE.SEALED : SEAL_TYPE.UNSEALED;
     }
 

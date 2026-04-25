@@ -9,7 +9,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 
-public class LaunchContraptionBlock extends RotatableBlock {
+public class LaunchContraptionBlock extends HorizontalBlock {
     public static final VoxelShape SHAPE = Shapes.block();
 
     public LaunchContraptionBlock(Properties properties) {

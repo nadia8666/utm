@@ -3,6 +3,7 @@ package com.nadia.utm.registry.block;
 import com.nadia.utm.registry.item.utmItemContainer;
 import com.simibubi.create.api.stress.BlockStressValues;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.registries.DeferredBlock;
@@ -15,17 +16,22 @@ import java.util.Map;
 import java.util.function.Consumer;
 
 public class utmBlockContainer<B extends Block, I extends BlockItem> {
+    public static final List<utmBlockContainer<?, ?>> ALL_BLOCKS = new ArrayList<>();
     public static final Map<utmBlockContainer<?, ?>, List<String>> DATAGEN_TAGS = new HashMap<>();
+    public final List<TagKey<Block>> DATAGEN_BLOCK_TAGS = new ArrayList<>();
 
     public final String NAME;
     public final DeferredBlock<B> BLOCK;
     public final DeferredItem<I> ITEM;
     private final List<Consumer<? super B>> callbacks;
+
     public utmBlockContainer(String name, DeferredBlock<B> block, DeferredItem<I> item, List<Consumer<? super B>> callbacks) {
         NAME = name;
         BLOCK = block;
         ITEM = item;
         this.callbacks = callbacks;
+
+        ALL_BLOCKS.add(this);
     }
 
     public void onRegister(Consumer<? super B> callback) {
@@ -34,6 +40,7 @@ public class utmBlockContainer<B extends Block, I extends BlockItem> {
 
     /**
      * sets the output stress
+     *
      * @return block container
      */
     public utmBlockContainer<B, I> stress(double stress) {
@@ -43,6 +50,7 @@ public class utmBlockContainer<B extends Block, I extends BlockItem> {
 
     /**
      * makes the block drop itself
+     *
      * @return block container
      * @datagen
      */
@@ -53,16 +61,18 @@ public class utmBlockContainer<B extends Block, I extends BlockItem> {
 
     /**
      * makes the block drop an item
+     *
      * @return block container
      * @datagen
      */
     public utmBlockContainer<B, I> dropOre(utmItemContainer<?> item) {
-        getForDatagen().add("dropOre:"+item.ITEM().getId().getPath());
+        getForDatagen().add("dropOre:" + item.ITEM().getId().getPath());
         return this;
     }
 
     /**
      * makes the block's item model mirror the block model
+     *
      * @return block container
      * @datagen
      */
@@ -73,6 +83,7 @@ public class utmBlockContainer<B extends Block, I extends BlockItem> {
 
     /**
      * automatically generates block model and state as a child of block/block
+     *
      * @return block container
      * @datagen
      */
@@ -83,20 +94,22 @@ public class utmBlockContainer<B extends Block, I extends BlockItem> {
 
     /**
      * set the ponder tags
+     *
      * @return block container
      * @datagen
      */
     public utmBlockContainer<B, I> ponder(ResourceLocation... ponderTags) {
         List<ResourceLocation> tags = new ArrayList<>(List.of(ponderTags));
-        getForDatagen().add("ponderTags:" + String.join(",",tags.stream().map(ResourceLocation::getPath).toList()));
+        getForDatagen().add("ponderTags:" + String.join(",", tags.stream().map(ResourceLocation::getPath).toList()));
         return this;
     }
 
     /**
      * requires pickaxe to break
-     * @see #mineTier(int)
+     *
      * @return block container
      * @datagen
+     * @see #mineTier(int)
      */
     public utmBlockContainer<B, I> minePick() {
         getForDatagen().add("mine:pickaxe");
@@ -105,9 +118,10 @@ public class utmBlockContainer<B extends Block, I extends BlockItem> {
 
     /**
      * requires axe to break
-     * @see #mineTier(int)
+     *
      * @return block container
      * @datagen
+     * @see #mineTier(int)
      */
     public utmBlockContainer<B, I> mineAxe() {
         getForDatagen().add("mine:axe");
@@ -116,9 +130,10 @@ public class utmBlockContainer<B extends Block, I extends BlockItem> {
 
     /**
      * requires shovel to break
-     * @see #mineTier(int)
+     *
      * @return block container
      * @datagen
+     * @see #mineTier(int)
      */
     public utmBlockContainer<B, I> mineShovel() {
         getForDatagen().add("mine:shovel");
@@ -127,9 +142,10 @@ public class utmBlockContainer<B extends Block, I extends BlockItem> {
 
     /**
      * requires how to break
-     * @see #mineTier(int)
+     *
      * @return block container
      * @datagen
+     * @see #mineTier(int)
      */
     public utmBlockContainer<B, I> mineHoe() {
         getForDatagen().add("mine:hoe");
@@ -138,11 +154,24 @@ public class utmBlockContainer<B extends Block, I extends BlockItem> {
 
     /**
      * combined with {@link #minePick()}/{@link #mineAxe()}/{@link #mineShovel()}/{@link #mineHoe()} ()} to require a tool of tier x or higher
+     *
      * @param tier 1, 2, 3 : stone, iron, diamond
      * @datagen
      */
     public utmBlockContainer<B, I> mineTier(int tier) {
         getForDatagen().add("tier:" + tier);
+        return this;
+    }
+
+    /**
+     * add tags
+     *
+     * @param tags tags
+     * @datagen
+     */
+    @SafeVarargs
+    public final utmBlockContainer<B, I> tags(TagKey<Block>... tags) {
+        this.DATAGEN_BLOCK_TAGS.addAll(List.of(tags));
         return this;
     }
 

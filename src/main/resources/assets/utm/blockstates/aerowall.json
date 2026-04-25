@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "facing=north": { "model": "utm:block/aerowall", "y": 0 },
+    "facing=east": { "model": "utm:block/aerowall", "y": 90 },
+    "facing=south": { "model": "utm:block/aerowall", "y": 180 },
+    "facing=west": { "model": "utm:block/aerowall", "y": 270 },
+    "facing=up": { "model": "utm:block/aerowall", "y": 0, "x": 90 },
+    "facing=down": { "model": "utm:block/aerowall", "y": 0, "x": 90 }
+  }
+}

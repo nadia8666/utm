@@ -1,13 +1,13 @@
 {
   "values": [
-    "utm:heavy_metal_anvil",
-    "utm:oxygen_furnace",
-    "utm:biome_sealer",
-    "utm:aluminum_ore",
-    "utm:portasealer",
-    "utm:launch_contraption",
     "utm:grate",
+    "utm:oxygen_furnace",
+    "utm:heavy_metal_anvil",
+    "utm:aluminum_ore",
+    "utm:biome_sealer",
+    "utm:portasealer",
     "utm:oxygen_collector",
-    "utm:magnesium_ore"
+    "utm:magnesium_ore",
+    "utm:launch_contraption"
   ]
 }

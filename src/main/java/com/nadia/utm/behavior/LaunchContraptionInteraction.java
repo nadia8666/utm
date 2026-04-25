@@ -15,7 +15,7 @@ public class LaunchContraptionInteraction extends SimpleBlockMovingInteraction {
     @OnlyIn(Dist.CLIENT)
     protected BlockState handle(Player player, Contraption contraption, BlockPos pos, BlockState currentState) {
         if (player.level().isClientSide())
-            Minecraft.getInstance().setScreen(new LaunchScreen(Component.translatable("utm.gui.launch_contraption_menu")));
+            Minecraft.getInstance().setScreen(new LaunchScreen(Component.translatable("utm.gui.launch_contraption_menu"), contraption.entity.getId()));
 
         return currentState;
     }

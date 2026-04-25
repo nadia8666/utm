@@ -1,9 +1,5 @@
-// 1.21.1	2026-04-09T23:22:30.8728572	Block States: utm
+// 1.21.1	2026-04-25T12:52:10.2201079	Block States: utm
 340a7d991c794d89c976d5329715b1df653a0f8f assets/utm/blockstates/aluminum_ore.json
-ed101f6fac1f58ead43f23c15a8d7d9418d2858b assets/utm/blockstates/biome_sealer.json
 ca0e2a49a87918e52906edb9d0726fea54911838 assets/utm/blockstates/magnesium_ore.json
-07e0a54cb353ae57091016fe6583681aec3e682e assets/utm/blockstates/portasealer.json
 bc1bcfcba4581919b2300079c4b9f2dee6daccc1 assets/utm/models/block/aluminum_ore.json
-5a6a2b25189f8a8866f014ba2e95571f29ea348a assets/utm/models/block/biome_sealer.json
 aac97c445c90a6ff90adcaa515c2560d935ec707 assets/utm/models/block/magnesium_ore.json
-655abfe7bb3364c09f4a499b84dfa84756f20a8a assets/utm/models/block/portasealer.json

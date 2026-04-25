@@ -93,120 +93,124 @@ public class SpaceStateHandler {
 
     public static void launchRecieved(LaunchContraptionPayload payload, IPayloadContext context) {
         Player player = context.player();
-        Entity vehicle = player.getVehicle();
+
+        AbstractContraptionEntity contraption = null;
+        Entity vehicle = player.level().getEntity(payload.id());
+        if (vehicle instanceof AbstractContraptionEntity c)
+            contraption = c;
+
+        if (contraption == null) return;
+
         ServerLevel target = Objects.requireNonNull(Objects.requireNonNull(player.getServer()).getLevel(utmDimensions.AG_KEY));
         if (player.level().dimension().equals(utmDimensions.AG_KEY)) {
-            if (vehicle instanceof AbstractContraptionEntity contraption)
-                contraption.disassemble();
+            contraption.disassemble();
 
             return;
         }
 
-        if (vehicle instanceof AbstractContraptionEntity contraption) {
-            List<Entity> passengers = List.copyOf(contraption.getPassengers());
+        List<Entity> passengers = List.copyOf(contraption.getPassengers());
 
-            AABB bounds = contraption.getBoundingBox();
-            int minX = Mth.floor(bounds.minX);
-            int maxX = Mth.ceil(bounds.maxX);
-            int minZ = Mth.floor(bounds.minZ);
-            int maxZ = Mth.ceil(bounds.maxZ);
+        AABB bounds = contraption.getBoundingBox();
+        int minX = Mth.floor(bounds.minX);
+        int maxX = Mth.ceil(bounds.maxX);
+        int minZ = Mth.floor(bounds.minZ);
+        int maxZ = Mth.ceil(bounds.maxZ);
 
-            int highestHeight = -13579;
-            for (int x = minX; x <= maxX; x++) {
-                for (int z = minZ; z <= maxZ; z++) {
-                    int surfaceY = Positioning.getSurface(target, x, z);
-                    if (surfaceY > highestHeight) {
-                        highestHeight = surfaceY;
+        int highestHeight = -13579;
+        for (int x = minX; x <= maxX; x++) {
+            for (int z = minZ; z <= maxZ; z++) {
+                int surfaceY = Positioning.getSurface(target, x, z);
+                if (surfaceY > highestHeight) {
+                    highestHeight = surfaceY;
+                }
+            }
+        }
+
+        if (highestHeight == -13579) {
+            highestHeight = -63;
+            target.setBlock(new BlockPos(contraption.blockPosition().getX(), -64, contraption.blockPosition().getZ()), Blocks.COBBLESTONE.defaultBlockState(), 3);
+        }
+
+        double yOffset = Math.min(highestHeight, 319 - (bounds.getYsize())) - contraption.getY();
+
+        AABB targetBounds = bounds.move(0, yOffset, 0);
+        int tMinX = Mth.floor(targetBounds.minX);
+        int tMaxX = Mth.ceil(targetBounds.maxX);
+        int tMinY = Mth.floor(targetBounds.minY);
+        int tMaxY = Mth.ceil(targetBounds.maxY);
+        int tMinZ = Mth.floor(targetBounds.minZ);
+        int tMaxZ = Mth.ceil(targetBounds.maxZ);
+
+        BlockPos.MutableBlockPos mPos = new BlockPos.MutableBlockPos();
+        for (int x = tMinX; x <= tMaxX; x++) {
+            for (int y = tMinY; y <= tMaxY; y++) {
+                for (int z = tMinZ; z <= tMaxZ; z++) {
+                    mPos.set(x, y, z);
+                    BlockState state = target.getBlockState(mPos);
+
+                    if (!state.isAir() && UNMODIFIED_BLOCKS.contains(state.getBlock()) && !state.hasBlockEntity()) {
+                        target.setBlock(mPos, Blocks.AIR.defaultBlockState(), 3);
+                    }
+
+                    if (y == tMinY && target.getBlockState(mPos).isAir() && target.getBlockState(mPos.below()).isAir()) {
+                        target.setBlock(mPos.below(), Blocks.COBBLESTONE.defaultBlockState(), 3);
                     }
                 }
             }
+        }
 
-            if (highestHeight == -13579) {
-                highestHeight = -63;
-                target.setBlock(new BlockPos(contraption.blockPosition().getX(), -64, contraption.blockPosition().getZ()), Blocks.COBBLESTONE.defaultBlockState(), 3);
-            }
+        CompoundTag nbt = contraption.getContraption().writeNBT(contraption.registryAccess(), false);
 
-            double yOffset = Math.min(highestHeight, 319 - (bounds.getYsize())) - contraption.getY();
+        Entity cVehicle = contraption.getVehicle();
+        AtomicReference<Entity> finalVehicle = new AtomicReference<>(null);
+        contraption.getContraption().getBlocks().clear();
+        contraption.changeDimension(new DimensionTransition(
+                target,
+                contraption.position().add(0, yOffset, 0),
+                contraption.getDeltaMovement(),
+                contraption.getYRot(),
+                contraption.getXRot(),
+                (newEntity) -> {
+                    if (newEntity instanceof AbstractContraptionEntity newContraption) {
 
-            AABB targetBounds = bounds.move(0, yOffset, 0);
-            int tMinX = Mth.floor(targetBounds.minX);
-            int tMaxX = Mth.ceil(targetBounds.maxX);
-            int tMinY = Mth.floor(targetBounds.minY);
-            int tMaxY = Mth.ceil(targetBounds.maxY);
-            int tMinZ = Mth.floor(targetBounds.minZ);
-            int tMaxZ = Mth.ceil(targetBounds.maxZ);
+                        newContraption.getContraption().readNBT(target, nbt, true);
+                        player.getServer().tell(new TickTask(player.getServer().getTickCount() + 20, () -> {
+                            Entity targVehicle = finalVehicle.get();
+                            if (targVehicle != null) {
+                                newContraption.startRiding(targVehicle);
 
-            BlockPos.MutableBlockPos mPos = new BlockPos.MutableBlockPos();
-            for (int x = tMinX; x <= tMaxX; x++) {
-                for (int y = tMinY; y <= tMaxY; y++) {
-                    for (int z = tMinZ; z <= tMaxZ; z++) {
-                        mPos.set(x, y, z);
-                        BlockState state = target.getBlockState(mPos);
+                                int index = 0;
+                                for (Entity pass : passengers) {
+                                    newContraption.addSittingPassenger(pass, index);
+                                    index++;
+                                }
 
-                        if (!state.isAir() && UNMODIFIED_BLOCKS.contains(state.getBlock()) && !state.hasBlockEntity()) {
-                            target.setBlock(mPos, Blocks.AIR.defaultBlockState(), 3);
-                        }
+                                newContraption.getContraption().invalidateClientContraptionStructure();
+                                newContraption.getContraption().invalidateClientContraptionChildren();
+                                newContraption.getContraption().invalidateColliders();
+                                newContraption.getContraption().resetClientContraption();
+                            } else {
+                                newContraption.stopRiding();
+                                newContraption.discard();
+                            }
 
-                        if (y == tMinY && target.getBlockState(mPos).isAir() && target.getBlockState(mPos.below()).isAir()) {
-                            target.setBlock(mPos.below(), Blocks.COBBLESTONE.defaultBlockState(), 3);
-                        }
+                            for (Entity pass : List.copyOf(newContraption.getPassengers())) {
+                                pass.stopRiding();
+                            }
+                        }));
                     }
                 }
-            }
+        ));
 
-            CompoundTag nbt = contraption.getContraption().writeNBT(contraption.registryAccess(), false);
-
-            Entity cVehicle = contraption.getVehicle();
-            AtomicReference<Entity> finalVehicle = new AtomicReference<>(null);
-            contraption.getContraption().getBlocks().clear();
-            contraption.changeDimension(new DimensionTransition(
+        if (cVehicle != null) {
+            cVehicle.changeDimension(new DimensionTransition(
                     target,
-                    contraption.position().add(0, yOffset, 0),
-                    contraption.getDeltaMovement(),
-                    contraption.getYRot(),
-                    contraption.getXRot(),
-                    (newEntity) -> {
-                        if (newEntity instanceof AbstractContraptionEntity newContraption) {
-
-                            newContraption.getContraption().readNBT(target, nbt, true);
-                            player.getServer().tell(new TickTask(player.getServer().getTickCount() + 20, () -> {
-                                Entity targVehicle = finalVehicle.get();
-                                if (targVehicle != null) {
-                                    newContraption.startRiding(targVehicle);
-
-                                    int index = 0;
-                                    for (Entity pass : passengers) {
-                                        newContraption.addSittingPassenger(pass, index);
-                                        index++;
-                                    }
-
-                                    newContraption.getContraption().invalidateClientContraptionStructure();
-                                    newContraption.getContraption().invalidateClientContraptionChildren();
-                                    newContraption.getContraption().invalidateColliders();
-                                    newContraption.getContraption().resetClientContraption();
-                                } else {
-                                    newContraption.stopRiding();
-                                    newContraption.discard();
-                                }
-
-                                for (Entity pass : List.copyOf(newContraption.getPassengers())) {
-                                    pass.stopRiding();
-                                }
-                            }));
-                        }
-                    }
+                    cVehicle.position().add(0, yOffset, 0),
+                    cVehicle.getDeltaMovement(),
+                    cVehicle.getYRot(),
+                    cVehicle.getXRot(),
+                    finalVehicle::set
             ));
-
-            if (cVehicle != null) {
-                cVehicle.changeDimension(new DimensionTransition(
-                        target,
-                        cVehicle.position().add(0, yOffset, 0),
-                        cVehicle.getDeltaMovement(),
-                        cVehicle.getYRot(),
-                        cVehicle.getXRot(),
-                        finalVehicle::set
-                ));
-            }
         }
     }
 }

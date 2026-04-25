@@ -2,11 +2,11 @@ package com.nadia.utm.datagen.providers;
 
 import com.nadia.utm.behavior.space.SpaceStateHandler;
 import com.nadia.utm.registry.block.utmBlockContainer;
-import com.nadia.utm.registry.block.utmBlocks;
 import com.nadia.utm.registry.tags.utmTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
@@ -18,10 +18,16 @@ public class utmBlockTagProvider extends BlockTagsProvider {
     public utmBlockTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, ExistingFileHelper existingFileHelper) {
         super(output, lookupProvider, "utm", existingFileHelper);
     }
+
     @Override
     protected void addTags(HolderLookup.@NotNull Provider provider) {
-        tag(BlockTags.ANVIL).add(utmBlocks.HEAVY_METAL_ANVIL.BLOCK.get());
         tag(utmTags.BLOCK.A23_ORE_REPLACEABLE).add(SpaceStateHandler.UNMODIFIED_BLOCKS.toArray(Block[]::new));
+
+        utmBlockContainer.ALL_BLOCKS.forEach(c -> {
+            for (TagKey<Block> targ : c.DATAGEN_BLOCK_TAGS) {
+                tag(targ).add(c.BLOCK.get());
+            }
+        });
 
         utmBlockContainer.DATAGEN_TAGS.forEach((container, tags) -> {
             Block block = container.BLOCK.get();

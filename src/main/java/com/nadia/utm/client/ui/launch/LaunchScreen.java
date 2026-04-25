@@ -13,9 +13,11 @@ import org.jetbrains.annotations.NotNull;
 
 public class LaunchScreen extends Screen {
     public static final ResourceLocation GUI_TEXTURE = ResourceLocation.fromNamespaceAndPath("utm", "textures/gui/launch_contraption.png");
+    public final int CONTRAPTION_ID;
 
-    public LaunchScreen(Component title) {
+    public LaunchScreen(Component title, int contraptionID) {
         super(title);
+        CONTRAPTION_ID = contraptionID;
     }
 
     @Override
@@ -26,7 +28,7 @@ public class LaunchScreen extends Screen {
         this.addRenderableWidget(new LaunchButton(x + 71, y + 34, 34, 34, Component.empty(), pressed -> {
             if (!pressed) return;
 
-            PacketDistributor.sendToServer(new LaunchContraptionPayload(0));
+            PacketDistributor.sendToServer(new LaunchContraptionPayload(CONTRAPTION_ID));
         }));
     }
 

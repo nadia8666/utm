@@ -18,5 +18,9 @@ public class utmTags {
         public static final TagKey<Block> A23_ORE_REPLACEABLE = TagKey.create(
                 Registries.BLOCK,
                 utm.key("a23_ore_replaceable"));
+
+        public static final TagKey<Block> SEAL_NOPROP = TagKey.create(
+                Registries.BLOCK,
+                utm.key("seal_noprop"));
     }
 }
