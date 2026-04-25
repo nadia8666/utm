@@ -1,9 +1,11 @@
 package com.nadia.utm.util;
 
+import dev.ryanhcode.sable.companion.SableCompanion;
 import dev.ryanhcode.sable.companion.math.Pose3d;
 import dev.ryanhcode.sable.sublevel.SubLevel;
 import dev.ryanhcode.sable.sublevel.plot.LevelPlot;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkAccess;
@@ -80,5 +82,14 @@ public class SableUtil {
         }
 
         return null;
+    }
+
+    @Nullable
+    public static SubLevel getSublevel(Entity e) {
+        SubLevel level = (SubLevel) SableCompanion.INSTANCE.getTrackingOrVehicleSubLevel(e);
+        if (level == null)
+            level = (SubLevel) SableCompanion.INSTANCE.getContaining(e);
+
+        return level;
     }
 }

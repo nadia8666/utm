@@ -113,6 +113,9 @@ public abstract class AbstractSealerBlockEntity extends SplitShaftBlockEntity im
             List<ServerPlayer> players = level.getEntitiesOfClass(ServerPlayer.class, new AABB(worldPosition).inflate(8.0));
             for (ServerPlayer player : players)
                 AdvancementUtil.AwardAdvancement(player, utm.key("2313ag/sealed"));
+
+            if (level.hasNeighborSignal(worldPosition))
+                ACTIVE = false;
         }
     }
 

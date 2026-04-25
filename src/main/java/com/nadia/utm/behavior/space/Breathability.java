@@ -5,12 +5,12 @@ import com.nadia.utm.event.ForceLoad;
 import com.nadia.utm.registry.attachment.utmAttachments;
 import com.nadia.utm.util.AdvancementUtil;
 import com.nadia.utm.util.OxyUtil;
+import com.nadia.utm.util.SableUtil;
 import com.nadia.utm.utm;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.content.equipment.armor.BacktankUtil;
 import com.simibubi.create.content.kinetics.base.KineticBlock;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
-import dev.ryanhcode.sable.companion.SableCompanion;
 import dev.ryanhcode.sable.sublevel.SubLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -28,7 +28,7 @@ import java.util.*;
 @ForceLoad
 class Breathability {
     public static void checkSuffocating(ServerPlayer sPlayer, boolean inAG) {
-        SubLevel level = (SubLevel) SableCompanion.INSTANCE.getTrackingOrVehicleSubLevel(sPlayer);
+        SubLevel level = SableUtil.getSublevel(sPlayer);
         BlockPos controller = level != null ? OxyUtil.isSealed(level, OxyUtil.getSealCheckPositions(sPlayer).toArray(new BlockPos[0])) : OxyUtil.isSealed(sPlayer.serverLevel(), sPlayer.blockPosition());
         boolean sealed = controller != null;
         int forceOxygen = sPlayer.getData(utmAttachments.TEMPORARY_OXYGEN);
@@ -105,9 +105,19 @@ class Breathability {
         if (!tanks.isEmpty()) {
             double headLevel = sPlayer.getBoundingBox().maxY + 0.4;
             BlockPos pos = BlockPos.containing(sPlayer.getX(), headLevel, sPlayer.getZ());
-            BlockState tank = sPlayer.level().getBlockState(pos); // TODO: sable
-            if (tank.getBlock() instanceof KineticBlock block) {
-                if (block.hasShaftTowards(sPlayer.level(), pos, tank, Direction.DOWN) && sPlayer.level().getBlockEntity(pos) instanceof KineticBlockEntity be) {
+            SubLevel level = SableUtil.getSublevel(sPlayer);
+
+            BlockState shaft = null;
+            if (level != null) {
+                pos = SableUtil.toLocalPos(level.logicalPose(), pos);
+                shaft = SableUtil.getState(level, pos);
+            }
+
+            if (shaft == null)
+                shaft = sPlayer.level().getBlockState(pos);
+
+            if (shaft.getBlock() instanceof KineticBlock block) {
+                if (block.hasShaftTowards(sPlayer.level(), pos, shaft, Direction.DOWN) && sPlayer.level().getBlockEntity(pos) instanceof KineticBlockEntity be) {
                     ItemStack target = tanks.getFirst();
                     int max = BacktankUtil.maxAir(target);
                     int air = BacktankUtil.getAir(target);
