@@ -21,14 +21,6 @@ automatically updates from github, disablable in config (though, if working with
 [[mixins]]
 config="utm.mixins.json"
 
-# The [[accessTransformers]] block allows you to declare where your AT file is.
-# If this block is omitted, a fallback attempt will be made to load an AT from META-INF/accesstransformer.cfg
-#[[accessTransformers]]
-#file="META-INF/accesstransformer.cfg"
-
-# The coremods config file path is not configurable and is always loaded from META-INF/coremods.json
-
-# A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
 [[dependencies.${mod_id}]]
     modId="neoforge"
     type="required"
@@ -36,7 +28,6 @@ config="utm.mixins.json"
     ordering="NONE"
     side="BOTH"
 
-# Here's another dependency
 [[dependencies.${mod_id}]]
     modId="minecraft"
     type="required"

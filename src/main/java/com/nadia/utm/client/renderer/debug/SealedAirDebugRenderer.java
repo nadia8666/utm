@@ -17,15 +17,12 @@ import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
-import org.joml.Matrix4f;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -63,32 +60,9 @@ public class SealedAirDebugRenderer {
                     }
 
                     chunk.getChunk().getData(utmAttachments.SEALED_AIR).sealedBlocks().forEach((p, c) -> {
-                        BlockPos worldPos = SableUtil.toWorldPos(level.logicalPose(), p);
-                        BlockPos worldController = SableUtil.toWorldPos(level.logicalPose(), c);
+                        new PoseUtil(pose).push().run(() -> LevelRenderer.renderLineBox(pose, bufferSource.getBuffer(RenderType.lines()), new AABB(SableUtil.toWorldPos(level.logicalPose(), p)).move(-cam.x, -cam.y, -cam.z).inflate(-0.25), 0.0F, 1.0F, 0.0F, 0.35F)).pop();
 
-                        Vec3 posCenter = Vec3.atCenterOf(worldPos).subtract(cam);
-                        Vec3 controllerCenter = Vec3.atCenterOf(worldController).subtract(cam);
-
-                        double dist = Math.sqrt(p.distSqr(c));
-                        float alpha = Math.max(0.1F, 1.0F - ((float) dist / 15.0F));
-                        int alphaInt = (int) (alpha * 255.0F);
-
-                        BlockState state = SableUtil.getState(level, p);
-                        String id = state != null ? BuiltInRegistries.BLOCK.getKey(state.getBlock()).getPath() : "NULL";
-
-                        new PoseUtil(pose).push().run(() -> {
-                                    Matrix4f matrix = pose.last().pose();
-                                    bufferSource.getBuffer(RenderType.lines()).addVertex(matrix, (float) controllerCenter.x, (float) controllerCenter.y, (float) controllerCenter.z).setColor(0, 255, 0, alphaInt).setNormal(pose.last(), 0, 1, 0);
-                                    bufferSource.getBuffer(RenderType.lines()).addVertex(matrix, (float) posCenter.x, (float) posCenter.y, (float) posCenter.z).setColor(0, 255, 0, alphaInt).setNormal(pose.last(), 0, 1, 0);
-                                }).pop()
-                                .push().translate(posCenter.x, posCenter.y, posCenter.z).scale(-0.015F, -0.015F, 0.015F).run(() -> {
-                                    pose.mulPose(mc.getEntityRenderDispatcher().cameraOrientation());
-                                    font.drawInBatch(id, (float) -font.width(id) / 2, 0, 0xFFFFFFFF, false, pose.last().pose(), bufferSource, Font.DisplayMode.NORMAL, 0, 15728880);
-                                }).pop();
-
-                        controllers.add(worldController);
-
-                        bufferSource.endLastBatch();
+                        controllers.add(SableUtil.toWorldPos(level.logicalPose(), c));
                     });
                 });
             } else {
@@ -110,8 +84,7 @@ public class SealedAirDebugRenderer {
                         SealedChunkData data = chunk.getData(utmAttachments.SEALED_AIR);
 
                         data.sealedBlocks().forEach((p, c) -> {
-                            AABB sealedBox = new AABB(p).move(-cam.x, -cam.y, -cam.z);
-                            LevelRenderer.renderLineBox(pose, bufferSource.getBuffer(RenderType.lines()), sealedBox, 0.0F, 1.0F, 0.0F, 0.25F);
+                            LevelRenderer.renderLineBox(pose, bufferSource.getBuffer(RenderType.lines()), new AABB(p).move(-cam.x, -cam.y, -cam.z), 0.0F, 1.0F, 0.0F, 0.25F);
                             controllers.add(c);
                         });
                     }
