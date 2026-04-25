@@ -118,7 +118,7 @@ modId="grimble_mod"
 type="required"
 versionRange=","
 ordering="AFTER"
-side="CLIENT"
+side="BOTH"
 
 # SABLE
 [[dependencies.${mod_id}]]
@@ -126,7 +126,7 @@ modId="sable"
 type="required"
 versionRange=","
 ordering="AFTER"
-side="CLIENT"
+side="BOTH"
 
 # CREATE AERONAUTICS
 [[dependencies.${mod_id}]]
@@ -134,4 +134,4 @@ modId="aeronautics"
 type="required"
 versionRange=","
 ordering="AFTER"
-side="CLIENT"
+side="BOTH"

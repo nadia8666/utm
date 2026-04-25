@@ -32,7 +32,7 @@ public class ConfigPlugin implements IMixinConfigPlugin {
         }
 
         // figura compat
-        if (mixinClassName.contains("FiguraCompatMixin")) {
+        if (mixinClassName.contains("FiguraCompatMixin") || mixinClassName.contains("CameraMixin")) {
             return LoadingModList.get().getModFileById("figura") != null;
         }
 
