@@ -3,6 +3,7 @@ package com.nadia.utm.mixin.compat;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.nadia.utm.Config;
+import com.nadia.utm.client.renderer.IAvatarRendererExtensions;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.PlayerModel;
 import net.minecraft.client.model.geom.ModelPart;
@@ -67,16 +68,16 @@ public abstract class PunchyArmRendererMixin {
      */
     @Overwrite
     private static void renderArm(PlayerModel<?> playerModel, AbstractClientPlayer player, HumanoidArm arm, PoseStack poseStack, MultiBufferSource buffer, int combinedLight, ResourceLocation texture, boolean slim, float partialTicks) {
-        ModelPart armPart = cloneModelPart(arm == HumanoidArm.LEFT ? playerModel.leftArm : playerModel.rightArm);
-        ModelPart sleevePart = cloneModelPart(arm == HumanoidArm.LEFT ? playerModel.leftSleeve : playerModel.rightSleeve);
+        boolean lefty = arm == HumanoidArm.LEFT;
+        ModelPart armPart = cloneModelPart(lefty ? playerModel.leftArm : playerModel.rightArm);
+        ModelPart sleevePart = cloneModelPart(lefty ? playerModel.leftSleeve : playerModel.rightSleeve);
         if (armPart != null && sleevePart != null) {
-            boolean isLeft = arm == HumanoidArm.LEFT;
             poseStack.pushPose();
             if (slim) {
-                poseStack.translate((isLeft ? 1.0F : -1.0F) * 0.5F / 16.0F, 0.0F, 0.0F);
+                poseStack.translate((lefty ? 1.0F : -1.0F) * 0.5F / 16.0F, 0.0F, 0.0F);
             }
 
-            applyArmMeshOffsets(poseStack, isLeft);
+            applyArmMeshOffsets(poseStack, lefty);
             applyFreezeShake(poseStack, player, partialTicks);
             copyMatrixToSleeve(armPart, sleevePart);
 
@@ -89,9 +90,10 @@ public abstract class PunchyArmRendererMixin {
                         poseStack.pushPose();
 
                         armPart.translateAndRotate(poseStack);
-                        poseStack.translate((isLeft ? 8F : 5F) / 16F, -2F / 16F, 0);
+                        poseStack.translate((lefty ? -5F : 5F) / 16F, -2F / 16F, 0);
 
-                        avatar.firstPersonRender(poseStack, buffer, player, pRenderer, armPart, combinedLight, partialTicks);
+                        if (avatar instanceof IAvatarRendererExtensions iAv)
+                            iAv.utm$firstPersonRender(poseStack, buffer, player, pRenderer, armPart, combinedLight, partialTicks, lefty);
                         figura = true;
 
                         poseStack.popPose();
@@ -107,10 +109,10 @@ public abstract class PunchyArmRendererMixin {
                 }
             }
 
-            renderLavaHandOverlay(armPart, poseStack, buffer, combinedLight, player, isLeft ? HumanoidArm.LEFT : HumanoidArm.RIGHT, partialTicks);
-            renderFreezeOverlay(armPart, isLeft, slim, poseStack, buffer, combinedLight, player, partialTicks);
-            renderMudOverlay(armPart, isLeft, slim, poseStack, buffer, combinedLight);
-            renderSweatOverlay(armPart, isLeft, slim, poseStack, buffer, combinedLight);
+            renderLavaHandOverlay(armPart, poseStack, buffer, combinedLight, player, lefty ? HumanoidArm.LEFT : HumanoidArm.RIGHT, partialTicks);
+            renderFreezeOverlay(armPart, lefty, slim, poseStack, buffer, combinedLight, player, partialTicks);
+            renderMudOverlay(armPart, lefty, slim, poseStack, buffer, combinedLight);
+            renderSweatOverlay(armPart, lefty, slim, poseStack, buffer, combinedLight);
             if (player.isOnFire()) {
                 poseStack.pushPose();
                 armPart.translateAndRotate(poseStack);

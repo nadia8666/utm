@@ -32,7 +32,8 @@
     "renderer.glint.FiguraCompatMixin",
     "renderer.glint.HumanoidArmorLayerMixin",
     "renderer.glint.ItemRendererMixin",
-    "compat.PunchyArmRendererMixin"
+    "compat.PunchyArmRendererMixin",
+    "AvatarMixinExtensions"
   ],
   "injectors": {
     "defaultRequire": 1
