@@ -98,4 +98,12 @@ public class utmTools {
                         SwordItem.createAttributes(Tier, 6.5f, 6)));
             }
     );
+    public static final Supplier<SwordItem> SHART = utmItems.ITEMS.register("shart", () -> {
+                var Tier = utmToolBuilder.buildTier(
+                        BlockTags.INCORRECT_FOR_WOODEN_TOOL, 500, 1f, 0f, 15, () -> Ingredient.of(Tags.Items.INGOTS_IRON)
+                );
+                return new SwordItem(Tier, new Item.Properties().attributes(
+                        SwordItem.createAttributes(Tier, 5, -2.4f)));
+            }
+    );
 }

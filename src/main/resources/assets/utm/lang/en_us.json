@@ -146,5 +146,7 @@
 
   "fluid.utm.liquid_oxygen": "Liquid Oxygen",
   "fluid.utm.molten_steel": "Molten Steel",
-  "utm.gui.oxygen_furnace_menu": "Oxygen Furnace"
+  "utm.gui.oxygen_furnace_menu": "Oxygen Furnace",
+
+  "item.utm.shart": "Defensible Thesis :D"
 }

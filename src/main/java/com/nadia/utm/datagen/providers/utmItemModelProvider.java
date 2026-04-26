@@ -51,6 +51,7 @@ public class utmItemModelProvider extends ItemModelProvider {
         basicItem(utmTools.NETHERYTRA.get());
         handheldItem(utmTools.ARID_AXE.get());
         handheldItem(utmTools.ARID_SWORD.get());
+        handheldItem(utmTools.SHART.get());
     }
 
     public void musicDisc(ResourceLocation item) {

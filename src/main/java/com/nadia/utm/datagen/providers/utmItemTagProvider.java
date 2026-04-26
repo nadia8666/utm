@@ -133,5 +133,13 @@ public class utmItemTagProvider extends ItemTagsProvider {
         tag(ItemTags.HOES).add(utmTools.COPPER_HOE.get());
 
         tag(ItemTags.SHOVELS).add(utmTools.COPPER_SHOVEL.get());
+
+        tag(ItemTags.SWORDS).add(utmTools.SHART.get());
+        tag(Tags.Items.ENCHANTABLES).add(utmTools.SHART.get());
+        tag(ItemTags.SWORD_ENCHANTABLE).add(utmTools.SHART.get());
+        tag(ItemTags.WEAPON_ENCHANTABLE).add(utmTools.SHART.get());
+        tag(ItemTags.DURABILITY_ENCHANTABLE).add(utmTools.SHART.get());
+
+
     }
 }
