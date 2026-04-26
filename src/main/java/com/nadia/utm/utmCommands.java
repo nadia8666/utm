@@ -29,11 +29,11 @@ public class utmCommands {
                     var server = context.getSource().getServer();
                     context.getSource().sendSuccess(() -> Component.literal("[UTM] Closing server..."), true);
 
+                    server.execute(() -> server.halt(false));
+
                     for (ServerPlayer player : server.getPlayerList().getPlayers()) {
                         player.connection.disconnect(Component.literal("Restarting server!"));
                     }
-
-                    server.halt(false);
 
                     return 1;
                 }))
