@@ -2,7 +2,6 @@ modLoader="javafml" #mandatory
 loaderVersion="${loader_version_range}" #mandatory
 license="${mod_license}"
 issueTrackerURL="https://github.com/nadia8666/utm/issues/"
-gitHash="${git_hash}"
 
 [[mods]]
 modId="${mod_id}"
@@ -18,6 +17,9 @@ all the small things.
 utility & compat mod between various mods (see deps.)
 automatically updates from github, disablable in config (though, if working with servers I wouldn't recommend it.
 '''
+
+[mods.${mod_id}.properties]
+gitHash="${git_hash}"
 
 [[mixins]]
 config="utm.mixins.json"

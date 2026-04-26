@@ -191,16 +191,13 @@ def replaceProperties = [
         git_hash               : gitHash()
 ]
 
-def generateMainMetadata = tasks.register("generateMainMetadata", ProcessResources) {
+tasks.named('processResources', ProcessResources).configure {
     inputs.properties replaceProperties
-    expand replaceProperties
-    from "src/main/templates"
-    into "build/generated/sources/modMetadata/main"
+
+    filesMatching("META-INF/neoforge.mods.toml") {
+        expand replaceProperties
+    }
 }
-
-sourceSets.main.resources.srcDir generateMainMetadata
-neoForge.ideSyncTask generateMainMetadata
-
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
