@@ -36,6 +36,10 @@ public class ConfigPlugin implements IMixinConfigPlugin {
             return LoadingModList.get().getModFileById("figura") != null;
         }
 
+        if (mixinClassName.contains("PunchhyArmRendererMixin")) {
+            return LoadingModList.get().getModFileById("figura") != null && LoadingModList.get().getModFileById("punchy") != null;
+        }
+
         // gravestones compat
         if (mixinClassName.contains("ObituaryScreenMixin")) {
             return LoadingModList.get().getModFileById("gravestone") != null;

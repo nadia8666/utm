@@ -18,6 +18,7 @@ sophisticated backpacks guy & backported spears guy - makign a very difficult to
 figura team - adding many mod incompatabilties i have had to mixin to fix
 neoforge - making a great modloader
 minecraft - making a bad game goodish
+punchy developer - for making a closed source all rights reserved mod that i had to mixn to add figura compat. for
 '''
 authors="nadiarr, rblxpikmin"
 description='''
@@ -146,3 +147,11 @@ type="required"
 versionRange=","
 ordering="AFTER"
 side="BOTH"
+
+# PUNCHY
+[[dependencies.utm]]
+modId="punchy"
+type="optional"
+versionRange=","
+ordering="AFTER"
+side="CLIENT"

@@ -19,6 +19,9 @@ public class Config {
     public static final ModConfigSpec.BooleanValue RENDER_PLANETS = BUILDER
             .define("renderPlanets", true);
 
+    public static final ModConfigSpec.BooleanValue FIGURA_PUNCHY = BUILDER
+            .define("figuraPunchy", false);
+
     public static final ModConfigSpec.BooleanValue DEBUG_SEALED_AIR = BUILDER
             .define("debugSealedAir", false);
 

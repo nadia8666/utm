@@ -31,7 +31,8 @@
     "renderer.glint.ElytraLayerMixin",
     "renderer.glint.FiguraCompatMixin",
     "renderer.glint.HumanoidArmorLayerMixin",
-    "renderer.glint.ItemRendererMixin"
+    "renderer.glint.ItemRendererMixin",
+    "compat.PunchyArmRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

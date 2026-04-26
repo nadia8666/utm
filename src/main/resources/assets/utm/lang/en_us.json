@@ -18,6 +18,9 @@
   "utm.configuration.renderPlanets": "Render Planets",
   "utm.configuration.renderPlanets.tooltip": "Should planets and moons be visible? Does not affect Minecraft's overworld sun and moon.",
 
+  "utm.configuration.figuraPunchy": "Figura Punchy Compatability",
+  "utm.configuration.figuraPunchy.tooltip": "Renders figura arms w/ Punchy!, requires 'First Person Hands' to be OFF",
+
   "utm.configuration.debugSealedAir": "DEBUG: SEALED AIR",
   "utm.configuration.debugSealedAir.tooltip": "!!DEBUG!! View sealed air configuration.",
 
