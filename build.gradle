@@ -156,7 +156,7 @@ dependencies {
     jarJar(runtimeOnly("maven.modrinth:create-aeronautics:1sv6OtSz"))
     jarJar(runtimeOnly("maven.modrinth:sable:g8CObHcP"))
 
-    implementation("local:punchy:2.5") // punchy support
+    implementation("maven.modrinth:punchy-fpa:NhhrvhDb") // punchy
 
     // mixin squared
     compileOnly(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-common:0.3.7-beta.1"))
