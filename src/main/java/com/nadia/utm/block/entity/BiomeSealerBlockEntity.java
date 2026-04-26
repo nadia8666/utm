@@ -23,17 +23,14 @@ public class BiomeSealerBlockEntity extends AbstractSealerBlockEntity {
 
     @Override
     public int getDraw() {
-        double draw;
+        double draw = (int) Math.pow(1.0007, SYNCED_VOLUME);
 
-        if (SYNCED_VOLUME <= 500) {
-            draw = 4 + (SYNCED_VOLUME / 500.0) * 16;
-        } else if (SYNCED_VOLUME <= 1500) {
-            draw = 20 + ((SYNCED_VOLUME - 500) / 1000.0) * 180;
-        } else {
-            draw = 200 + ((SYNCED_VOLUME - 1500) / 8500.0) * 800;
+        if (SYNCED_VOLUME < 1500) {
+            double alpha = 0.5 * (Math.cos((Math.PI * SYNCED_VOLUME) / 1500.0) + 1.0);
+            draw = (10 - Math.pow(SYNCED_VOLUME, 2) / 150000) * alpha + draw * (1 - alpha);
         }
 
-        return (int) Math.min(draw, 1000);
+        return (int) Math.min(draw + 20, 1000);
     }
 
     public BiomeSealerBlockEntity(BlockPos pos, BlockState state) {
