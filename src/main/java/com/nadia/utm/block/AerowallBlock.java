@@ -1,9 +1,6 @@
 package com.nadia.utm.block;
 
-import com.google.common.collect.Iterables;
-import com.nadia.utm.block.entity.AbstractSealerBlockEntity;
 import com.nadia.utm.util.PosUtil;
-import net.createmod.catnip.data.Iterate;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -20,15 +17,20 @@ public class AerowallBlock extends RotatableBlock {
         Level level = context.getLevel();
         Direction dir = context.getNearestLookingDirection();
 
-        assert context.getPlayer() != null;
-        if (!context.getPlayer().isShiftKeyDown())
-            for (BlockPos pos : PosUtil.forAdjacent(context.getClickedPos().relative(context.getClickedFace()))) {
-                BlockState block = level.getBlockState(pos);
-                if (block.is(this)) {
-                    dir = block.getValue(FACING);
-                    break;
+        BlockPos origin = context.getClickedPos();
+        if (!level.getBlockState(origin).canBeReplaced(context))
+            origin = origin.relative(context.getClickedFace());
+
+        if (context.getPlayer() != null)
+            if (!context.getPlayer().isShiftKeyDown())
+                for (BlockPos pos : PosUtil.forAdjacent(origin)) {
+                    BlockState block = level.getBlockState(pos);
+                    if (block.is(this)) {
+                        dir = block.getValue(FACING);
+                        break;
+                    }
                 }
-            }
+
 
         return this.defaultBlockState().setValue(FACING, dir);
     }
