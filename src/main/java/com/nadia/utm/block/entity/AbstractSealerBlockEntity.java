@@ -145,7 +145,7 @@ public abstract class AbstractSealerBlockEntity extends SplitShaftBlockEntity im
             if (VISITED.contains(current)) continue;
             VISITED.add(current);
 
-            // dont seal outside of ship borders because id want it to match sublevel water behavior
+            // dont seal outside of ship borders because i want it to match sublevel water behavior
             if (level != null && !level.getPlot().getBoundingBox().contains(current.getX(), current.getY(), current.getZ())) continue;
 
             BlockState state = level != null ? SableUtil.getState(level, current) : sLevel.getBlockState(current);

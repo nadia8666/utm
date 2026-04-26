@@ -33,7 +33,7 @@ public class ElytraTrimRecipe extends SmithingTransformRecipe {
     public @NotNull ItemStack assemble(SmithingRecipeInput input, HolderLookup.@NotNull Provider registries) {
         ItemStack result = input.base().copy();
 
-        // see you can do utmItems.ELYTRA_TRIM_VEIN.get() == input.template().getItem() etc but id dont really want to do that.
+        // see you can do utmItems.ELYTRA_TRIM_VEIN.get() == input.template().getItem() etc but i dont really want to do that.
         result.set(utmDataComponents.ELYRA_TRIM_TYPE.get(), switch(input.template().getItem().toString()) {
             case "utm:elytra_trim_vein" -> "vein";
             case "utm:elytra_trim_outward" -> "outward";

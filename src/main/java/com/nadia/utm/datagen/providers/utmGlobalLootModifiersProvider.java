@@ -82,7 +82,7 @@ public class utmGlobalLootModifiersProvider extends GlobalLootModifierProvider {
                 utmItems.ELYTRA_TRIM_VEIN.ITEM().get()
         ));
 
-        // this is completley untested id just fumbled my way trhough it
+        // this is completley untested i just fumbled my way trhough it
         add("music_disc_tears_ghast", new AddItemModifier(
                 new LootItemCondition[]{
                         LootTableIdCondition.builder(ResourceLocation.withDefaultNamespace("entities/ghast")).build(),

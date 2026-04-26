@@ -34,7 +34,7 @@ public abstract class SimpleRecipeBuilder implements RecipeBuilder {
     }
 
     // This method adds a recipe book group. If you do not want to use recipe book groups,
-    // remove the this.group field and make this method no-op (id.e. return this).
+    // remove the this.group field and make this method no-op (i.e. return this).
     @Override
     public @NotNull SimpleRecipeBuilder group(@Nullable String group) {
         this.group = group;
