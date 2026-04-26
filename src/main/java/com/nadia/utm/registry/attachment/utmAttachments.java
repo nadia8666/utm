@@ -6,6 +6,7 @@ import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
+import java.util.Map;
 import java.util.function.Supplier;
 
 public class utmAttachments {
@@ -23,6 +24,6 @@ public class utmAttachments {
 
     public static final Supplier<AttachmentType<SealedChunkData>> SEALED_AIR = ATTACHMENTS.register(
             "sealed_air",
-            () -> AttachmentType.builder(SealedChunkData::new).build()
+            () -> AttachmentType.builder(SealedChunkData::new).serialize(Codec.unit(() -> new SealedChunkData(Map.of()))).build()
     );
 }
