@@ -51,6 +51,7 @@ public abstract class AbstractSealerBlockEntity extends SplitShaftBlockEntity im
     protected final Set<BlockPos> VISITED = new HashSet<>();
     protected final Set<BlockPos> SEALED = new HashSet<>();
     protected boolean IS_SABLE = false;
+    protected boolean HAS_LOADED = false;
 
     public int SYNCED_VOLUME = 0;
     public boolean ACTIVE = false;
@@ -61,6 +62,14 @@ public abstract class AbstractSealerBlockEntity extends SplitShaftBlockEntity im
         SEALED,
         SEAL_NO_PROP // sealed w/o propagation
     }
+
+    public enum PENDING_ACTION_TYPE {
+        NONE,
+        SEAL,
+        UNSEAL
+    }
+
+    protected PENDING_ACTION_TYPE PENDING_ACTION = PENDING_ACTION_TYPE.NONE;
 
     public AbstractSealerBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
@@ -95,12 +104,8 @@ public abstract class AbstractSealerBlockEntity extends SplitShaftBlockEntity im
     }
 
     public void step() {
-        if (RECALC) {
-            process();
-            return;
-        }
-
         if (level == null || level.isClientSide) return;
+
         boolean hasOxygen = TANK.getPrimaryHandler().getFluidAmount() > getDraw() && !level.hasNeighborSignal(worldPosition);
 
         if (hasOxygen != ACTIVE) {
@@ -108,6 +113,11 @@ public abstract class AbstractSealerBlockEntity extends SplitShaftBlockEntity im
             if (ACTIVE) seal();
             else unseal();
             sendData();
+        }
+
+        if (RECALC) {
+            process();
+            return;
         }
 
         if (ACTIVE) {
@@ -121,6 +131,12 @@ public abstract class AbstractSealerBlockEntity extends SplitShaftBlockEntity im
 
     public void seal() {
         if (!(level instanceof ServerLevel)) return;
+
+        if (RECALC) {
+            PENDING_ACTION = PENDING_ACTION_TYPE.SEAL;
+            return;
+        }
+
         RECALC = true;
         QUEUE.clear();
         VISITED.clear();
@@ -193,11 +209,7 @@ public abstract class AbstractSealerBlockEntity extends SplitShaftBlockEntity im
         ServerLevel sLevel = (ServerLevel) level;
         if (sLevel == null) return;
 
-        var subAccess = SableCompanion.INSTANCE.getContaining(this);
-        SubLevel level = null;
-        if (subAccess instanceof SubLevel slevel)
-            level = slevel;
-
+        SubLevel level = (SubLevel) SableCompanion.INSTANCE.getContaining(this);
         for (BlockPos oldPos : ATTACHED_POSITIONS)
             if (!VISITED.contains(oldPos))
                 if (level != null)
@@ -214,9 +226,15 @@ public abstract class AbstractSealerBlockEntity extends SplitShaftBlockEntity im
 
         setChanged();
         sendData();
+        checkQueue();
     }
 
     public void unseal() {
+        if (RECALC) {
+            PENDING_ACTION = PENDING_ACTION_TYPE.UNSEAL;
+            return;
+        }
+
         RECALC = true;
         if (level instanceof ServerLevel slevel)
             for (BlockPos pos : ATTACHED_POSITIONS)
@@ -227,6 +245,20 @@ public abstract class AbstractSealerBlockEntity extends SplitShaftBlockEntity im
         SEALED.clear();
         setChanged();
         RECALC = false;
+        checkQueue();
+    }
+
+    protected void checkQueue() {
+        if (PENDING_ACTION == PENDING_ACTION_TYPE.NONE) return;
+
+        PENDING_ACTION_TYPE action = PENDING_ACTION;
+        PENDING_ACTION = PENDING_ACTION_TYPE.NONE;
+
+        if (action == PENDING_ACTION_TYPE.SEAL) {
+            seal();
+        } else if (action == PENDING_ACTION_TYPE.UNSEAL) {
+            unseal();
+        }
     }
 
     @Override
@@ -250,7 +282,8 @@ public abstract class AbstractSealerBlockEntity extends SplitShaftBlockEntity im
 
         if (clientPacket) return;
 
-        if (ACTIVE || !ATTACHED_POSITIONS.isEmpty()) {
+        if ((ACTIVE || !ATTACHED_POSITIONS.isEmpty()) && !HAS_LOADED) {
+            HAS_LOADED = true;
             ACTIVE = false;
             this.unseal();
         }
