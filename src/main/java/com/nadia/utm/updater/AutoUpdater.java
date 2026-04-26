@@ -108,10 +108,10 @@ public class AutoUpdater {
                 });
     }
 
-
     public static boolean ToastReady = false;
     public static boolean ToastTarget = false;
     public static String VersionTarget = "unchecked";
+
     private static void startUpdate(String downloadUrl, String latest) {
         Path modsFolder = FMLPaths.MODSDIR.get();
 
@@ -132,7 +132,8 @@ public class AutoUpdater {
                 utm.LOGGER.warn("[UTM] Failed to override utm jar! {}", e.getMessage());
                 try {
                     Files.move(modsFolder.resolve("utm.jar.utm_update.old"), currentPath, StandardCopyOption.REPLACE_EXISTING);
-                } catch (Exception ignored) {}
+                } catch (Exception ignored) {
+                }
 
                 if (getDist() == Dist.CLIENT) {
                     VersionTarget = "FAILED";
@@ -172,7 +173,8 @@ public class AutoUpdater {
             try {
                 Files.deleteIfExists(oldFile.get());
 
-            } catch (Exception ignored) {}
+            } catch (Exception ignored) {
+            }
         }
 
     }
