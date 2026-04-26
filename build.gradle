@@ -162,9 +162,21 @@ dependencies {
 }
 
 def gitHash = {
-    return providers.exec {
-        commandLine 'git', 'rev-parse', '--short', 'HEAD'
-    }.standardOutput.asText.get().trim() ?: "UNKNOWN"
+    def githubSha = System.getenv("GITHUB_SHA")
+    if (githubSha != null && !githubSha.trim().isEmpty()) {
+        return githubSha.substring(0, 7)
+    }
+
+    try {
+        def result = providers.exec {
+            commandLine 'git', 'rev-parse', '--short', 'HEAD'
+            ignoreExitValue = true
+        }.standardOutput.asText.get().trim()
+
+        return (result != null && !result.isEmpty()) ? result : "UNKNOWN"
+    } catch (Exception ignored) {
+        return "UNKNOWN"
+    }
 }
 
 def replaceProperties = [
