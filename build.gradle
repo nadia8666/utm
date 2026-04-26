@@ -191,6 +191,11 @@ def replaceProperties = [
         git_hash               : gitHash()
 ]
 
+// hey so warning if we ever decide to use private maven things or environment variables rewrite this to exclude them because otherwise they become public in every log.
+replaceProperties.each { key, value ->
+    logger.lifecycle("remapping ${key} -> ${value}")
+}
+
 tasks.named('processResources', ProcessResources).configure {
     inputs.properties replaceProperties
 
