@@ -126,7 +126,7 @@ public class utmBlocks {
             .isViewBlocking((state, level, pos) -> false)
             .isSuffocating((state, level, pos) -> false)).drops().copyItemModel().minePick();
 
-    public static final utmBlockContainer<RotatableBlock, BlockItem> AERO_WALL = dualRegister("aerowall", RotatableBlock::new, BlockBehaviour.Properties.of()
+    public static final utmBlockContainer<AerowallBlock, BlockItem> AERO_WALL = dualRegister("aerowall", AerowallBlock::new, BlockBehaviour.Properties.of()
             .instabreak()
             .sound(SoundType.SLIME_BLOCK)
             .noOcclusion()

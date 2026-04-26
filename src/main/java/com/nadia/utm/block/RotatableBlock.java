@@ -12,6 +12,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class RotatableBlock extends Block implements IWrenchable {
     public static final DirectionProperty FACING;
+
     public RotatableBlock(Properties properties) {
         super(properties);
 
@@ -21,6 +22,7 @@ public class RotatableBlock extends Block implements IWrenchable {
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         return this.defaultBlockState().setValue(FACING, context.getNearestLookingDirection());
     }
+
     protected @NotNull BlockState rotate(BlockState state, Rotation rot) {
         return state.setValue(FACING, rot.rotate(state.getValue(FACING)));
     }
@@ -28,6 +30,7 @@ public class RotatableBlock extends Block implements IWrenchable {
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(FACING);
     }
+
     static {
         FACING = DirectionalBlock.FACING;
     }

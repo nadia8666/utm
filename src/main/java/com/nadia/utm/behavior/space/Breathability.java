@@ -5,6 +5,7 @@ import com.nadia.utm.event.ForceLoad;
 import com.nadia.utm.registry.attachment.utmAttachments;
 import com.nadia.utm.util.AdvancementUtil;
 import com.nadia.utm.util.OxyUtil;
+import com.nadia.utm.util.PosUtil;
 import com.nadia.utm.util.SableUtil;
 import com.nadia.utm.utm;
 import com.simibubi.create.AllItems;
@@ -77,7 +78,7 @@ class Breathability {
             if (!(be instanceof AbstractSealerBlockEntity)) {
                 ServerLevel sLevel = sPlayer.serverLevel();
                 Set<BlockPos> VISITED = new HashSet<>();
-                Queue<BlockPos> QUEUE = new LinkedList<>(AbstractSealerBlockEntity.getAdjacent(controller));
+                Queue<BlockPos> QUEUE = new LinkedList<>(PosUtil.getAdjacent(controller));
 
                 while (!QUEUE.isEmpty()) {
                     BlockPos current = QUEUE.poll();
@@ -89,7 +90,7 @@ class Breathability {
                     if (controller.equals(otherController)) {
                         if (level != null) OxyUtil.setBlockSealed(level, current, null);
                         else OxyUtil.setBlockSealed(sLevel, current, null);
-                        for (BlockPos neighbor : AbstractSealerBlockEntity.getAdjacent(current))
+                        for (BlockPos neighbor : PosUtil.forAdjacent(current))
                             if (!VISITED.contains(neighbor)) QUEUE.add(neighbor);
                     }
                 }

@@ -5,10 +5,7 @@ import com.nadia.utm.event.events.BlockStateChangedEvent;
 import com.nadia.utm.event.utmEvents;
 import com.nadia.utm.registry.fluid.utmFluids;
 import com.nadia.utm.registry.tags.utmTags;
-import com.nadia.utm.util.AdvancementUtil;
-import com.nadia.utm.util.OxyUtil;
-import com.nadia.utm.util.SableUtil;
-import com.nadia.utm.util.utmLang;
+import com.nadia.utm.util.*;
 import com.nadia.utm.utm;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.kinetics.transmission.SplitShaftBlockEntity;
@@ -141,7 +138,7 @@ public abstract class AbstractSealerBlockEntity extends SplitShaftBlockEntity im
         QUEUE.clear();
         VISITED.clear();
         SEALED.clear();
-        QUEUE.addAll(getAdjacent(worldPosition));
+        QUEUE.addAll(PosUtil.getAdjacent(worldPosition));
     }
 
     protected void process() {
@@ -178,7 +175,7 @@ public abstract class AbstractSealerBlockEntity extends SplitShaftBlockEntity im
                     OxyUtil.setBlockSealed(sLevel, current, worldPosition);
 
                 if (sealable == SEAL_TYPE.SEALED)
-                    for (BlockPos neighbor : getAdjacent(current))
+                    for (BlockPos neighbor : PosUtil.forAdjacent(current))
                         if (!VISITED.contains(neighbor)) QUEUE.add(neighbor);
             }
         }
@@ -313,10 +310,6 @@ public abstract class AbstractSealerBlockEntity extends SplitShaftBlockEntity im
         tag.putInt("SyncedVolume", SYNCED_VOLUME);
         tag.putBoolean("Active", ACTIVE);
         return tag;
-    }
-
-    public static List<BlockPos> getAdjacent(BlockPos pos) {
-        return List.of(pos.above(), pos.below(), pos.north(), pos.east(), pos.south(), pos.west());
     }
 
     @OnlyIn(Dist.CLIENT)
