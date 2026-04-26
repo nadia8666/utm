@@ -23,7 +23,7 @@ public class AerowallBlock extends RotatableBlock {
 
         if (context.getPlayer() != null)
             if (!context.getPlayer().isShiftKeyDown())
-                for (BlockPos pos : PosUtil.forAdjacent(origin)) {
+                for (BlockPos.MutableBlockPos pos : PosUtil.forAdjacent(origin)) {
                     BlockState block = level.getBlockState(pos);
                     if (block.is(this)) {
                         dir = block.getValue(FACING);

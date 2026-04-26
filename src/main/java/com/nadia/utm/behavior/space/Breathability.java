@@ -90,8 +90,8 @@ class Breathability {
                     if (controller.equals(otherController)) {
                         if (level != null) OxyUtil.setBlockSealed(level, current, null);
                         else OxyUtil.setBlockSealed(sLevel, current, null);
-                        for (BlockPos neighbor : PosUtil.forAdjacent(current))
-                            if (!VISITED.contains(neighbor)) QUEUE.add(neighbor);
+                        for (BlockPos.MutableBlockPos neighbor : PosUtil.forAdjacent(current))
+                            if (!VISITED.contains(neighbor)) QUEUE.add(neighbor.immutable());
                     }
                 }
 

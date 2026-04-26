@@ -175,8 +175,8 @@ public abstract class AbstractSealerBlockEntity extends SplitShaftBlockEntity im
                     OxyUtil.setBlockSealed(sLevel, current, worldPosition);
 
                 if (sealable == SEAL_TYPE.SEALED)
-                    for (BlockPos neighbor : PosUtil.forAdjacent(current))
-                        if (!VISITED.contains(neighbor)) QUEUE.add(neighbor);
+                    for (BlockPos.MutableBlockPos neighbor : PosUtil.forAdjacent(current))
+                        if (!VISITED.contains(neighbor)) QUEUE.add(neighbor.immutable());
             }
         }
 
