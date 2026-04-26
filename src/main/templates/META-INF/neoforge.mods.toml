@@ -2,6 +2,7 @@ modLoader="javafml" #mandatory
 loaderVersion="${loader_version_range}" #mandatory
 license="${mod_license}"
 issueTrackerURL="https://github.com/nadia8666/utm/issues/"
+gitHash="${git_hash}"
 
 [[mods]]
 modId="${mod_id}"

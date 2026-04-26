@@ -3,6 +3,7 @@ package com.nadia.utm;
 import com.nadia.utm.event.ForceLoad;
 import com.nadia.utm.event.utmEvents;
 import com.nadia.utm.updater.AutoUpdater;
+import com.nadia.utm.updater.VersionInfo;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -37,7 +38,7 @@ public class utmCommands {
                     return 1;
                 }))
                 .then(Commands.literal("version").executes(context -> {
-                    context.getSource().sendSystemMessage(Component.literal("[UTM] utm Version " + utm.VERSION + " Pending version " + VersionTarget));
+                    context.getSource().sendSystemMessage(Component.literal("[UTM] utm Version " + utm.VERSION + "-" + VersionInfo.commit() + " Pending version " + VersionTarget));
 
                     return 1;
                 }))

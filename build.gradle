@@ -161,6 +161,12 @@ dependencies {
     implementation(jarJar("com.github.bawnorton.mixinsquared:mixinsquared-neoforge:0.3.7-beta.1"))
 }
 
+def gitHash = {
+    return providers.exec {
+        commandLine 'git', 'rev-parse', '--short', 'HEAD'
+    }.standardOutput.asText.get().trim() ?: "UNKNOWN"
+}
+
 def replaceProperties = [
         minecraft_version      : minecraft_version,
         minecraft_version_range: minecraft_version_range,
@@ -170,6 +176,7 @@ def replaceProperties = [
         mod_name               : mod_name,
         mod_license            : mod_license,
         mod_version            : mod_version,
+        git_hash               : gitHash()
 ]
 
 def generateMainMetadata = tasks.register("generateMainMetadata", ProcessResources) {

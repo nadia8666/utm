@@ -6,11 +6,13 @@ import com.nadia.utm.event.utmEvents;
 import com.nadia.utm.registry.attachment.utmAttachments;
 import com.nadia.utm.updater.AutoUpdater;
 import com.nadia.utm.updater.ToastDisplaySignal;
+import com.nadia.utm.updater.VersionInfo;
 import dev.ryanhcode.sable.companion.SableCompanion;
 import dev.ryanhcode.sable.sublevel.SubLevel;
 import net.minecraft.client.Minecraft;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.SharedSuggestionProvider;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.neoforge.client.event.RegisterClientCommandsEvent;
@@ -36,6 +38,11 @@ public class utmClientCommands {
                 .then(Commands.literal("stop").executes(context -> {
                     var mc = Minecraft.getInstance();
                     Minecraft.getInstance().execute(mc::stop);
+
+                    return 1;
+                }))
+                .then(Commands.literal("version").executes(context -> {
+                    context.getSource().sendSystemMessage(Component.literal("[UTM] utm Version " + utm.VERSION + "-" + VersionInfo.commit() + " Pending version " + VersionTarget));
 
                     return 1;
                 }))
