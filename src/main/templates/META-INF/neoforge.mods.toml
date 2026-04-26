@@ -4,12 +4,21 @@ license="${mod_license}"
 issueTrackerURL="https://github.com/nadia8666/utm/issues/"
 
 [[mods]]
-modId="${mod_id}"
+modId="utm"
 version="${mod_version}"
 displayName="${mod_name}"
 displayURL="https://github.com/nadia8666/utm/"
 logoFile="utm_icon.png"
-credits=""
+credits='''
+the people behin tcreate
+the ones who made create aeronautics & sable
+all of the jijed mods
+bry - grimble mod (a wonderful contribution)
+sophisticated backpacks guy & backported spears guy - makign a very difficult to expand mod
+figura team - adding many mod incompatabilties i have had to mixin to fix
+neoforge - making a great modloader
+minecraft - making a bad game goodish
+'''
 authors="nadiarr, rblxpikmin"
 description='''
 all the small things.
@@ -18,33 +27,32 @@ utility & compat mod between various mods (see deps.)
 automatically updates from github, disablable in config (though, if working with servers I wouldn't recommend it.
 '''
 
-[mods.${mod_id}.properties]
+[modproperties.utm]
 gitHash="${git_hash}"
 
 [[mixins]]
 config="utm.mixins.json"
 
-[[dependencies.${mod_id}]]
+[[dependencies.utm]]
     modId="neoforge"
     type="required"
     versionRange="[21.1.218,)"
     ordering="NONE"
     side="BOTH"
 
-[[dependencies.${mod_id}]]
+[[dependencies.utm]]
     modId="minecraft"
     type="required"
-    # This version range declares a minimum of the current minecraft version up to but not including the next major version
     versionRange="${minecraft_version_range}"
     ordering="NONE"
     side="BOTH"
 
 
-#[features.${mod_id}]
+#[features.utm]
 #openGLVersion="[3.2,)"
 
 # CREATE
-[[dependencies.${mod_id}]]
+[[dependencies.utm]]
 modId="create"
 type="required"
 versionRange="[6.0.9,6.1.0)"
@@ -52,14 +60,14 @@ ordering="AFTER"
 side="BOTH"
 
 # EMI
-[[dependencies.${mod_id}]]
+[[dependencies.utm]]
 modId="emi"
 type="required"
 versionRange=","
 ordering="AFTER"
 side="CLIENT"
 
-[[dependencies.${mod_id}]]
+[[dependencies.utm]]
 modId="jei"
 type="required"
 versionRange=","
@@ -68,7 +76,7 @@ side="CLIENT"
 
 
 # SOPHISTICATED BACKPACKS
-[[dependencies.${mod_id}]]
+[[dependencies.utm]]
 modId="sophisticatedbackpacks"
 type="optional"
 versionRange=","
@@ -76,7 +84,7 @@ ordering="AFTER"
 side="BOTH"
 
 # SPEARS
-[[dependencies.${mod_id}]]
+[[dependencies.utm]]
 modId="spears"
 type="optional"
 versionRange=","
@@ -84,7 +92,7 @@ ordering="AFTER"
 side="BOTH"
 
 # SHOWCASE ITEM
-[[dependencies.${mod_id}]]
+[[dependencies.utm]]
 modId="showcaseitem"
 type="required"
 versionRange=","
@@ -92,7 +100,7 @@ ordering="AFTER"
 side="BOTH"
 
 # FIGURA
-[[dependencies.${mod_id}]]
+[[dependencies.utm]]
 modId="figura"
 type="optional"
 versionRange=","
@@ -100,7 +108,7 @@ ordering="AFTER"
 side="CLIENT"
 
 # GRAVESTONES
-[[dependencies.${mod_id}]]
+[[dependencies.utm]]
 modId="gravestone"
 type="optional"
 versionRange=","
@@ -108,7 +116,7 @@ ordering="AFTER"
 side="BOTH"
 
 # EXTREME SOUND MUFFLER
-[[dependencies.${mod_id}]]
+[[dependencies.utm]]
 modId="extremesoundmuffler"
 type="required"
 versionRange=","
@@ -116,7 +124,7 @@ ordering="AFTER"
 side="CLIENT"
 
 # GRIMBLE MOD
-[[dependencies.${mod_id}]]
+[[dependencies.utm]]
 modId="grimble_mod"
 type="required"
 versionRange=","
@@ -124,7 +132,7 @@ ordering="AFTER"
 side="BOTH"
 
 # SABLE
-[[dependencies.${mod_id}]]
+[[dependencies.utm]]
 modId="sable"
 type="required"
 versionRange=","
@@ -132,7 +140,7 @@ ordering="AFTER"
 side="BOTH"
 
 # CREATE AERONAUTICS
-[[dependencies.${mod_id}]]
+[[dependencies.utm]]
 modId="aeronautics"
 type="required"
 versionRange=","
