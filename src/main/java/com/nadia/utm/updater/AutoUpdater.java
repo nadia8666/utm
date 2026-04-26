@@ -111,7 +111,7 @@ public class AutoUpdater {
 
     public static boolean ToastReady = false;
     public static boolean ToastTarget = false;
-    public static String VersionTarget = "v-0.0.0";
+    public static String VersionTarget = "unchecked";
     private static void startUpdate(String downloadUrl, String latest) {
         Path modsFolder = FMLPaths.MODSDIR.get();
 
@@ -146,9 +146,9 @@ public class AutoUpdater {
 
             utm.LOGGER.info("[UTM] Update installed, please restart Minecraft!");
             CURRENT_VERSION = latest;
+            VersionTarget = latest;
 
             if (getDist() == Dist.CLIENT) {
-                VersionTarget = "v" + latest;
                 ToastTarget = true;
 
                 NeoForge.EVENT_BUS.post(new ToastDisplaySignal());
