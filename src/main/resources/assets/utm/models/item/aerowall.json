@@ -1,0 +1,4 @@
+{
+  "parent": "utm:block/aerowall",
+  "render_type": "cutout"
+}

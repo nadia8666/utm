@@ -132,7 +132,7 @@ public class utmBlocks {
             .noOcclusion()
             .noCollission()
             .isViewBlocking((state, level, pos) -> false)
-            .isSuffocating((state, level, pos) -> false)).drops().copyItemModel().tags(utmTags.BLOCK.SEAL_NOPROP);
+            .isSuffocating((state, level, pos) -> false)).drops().tags(utmTags.BLOCK.SEAL_NOPROP);
 
     public static final utmBlockContainer<CitywallsBlock, BlockItem> CITYWALLS_METAL = dualRegister("citywalls_metal", CitywallsBlock::new, BlockBehaviour.Properties.of()
             .destroyTime(1.0f)
