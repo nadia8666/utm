@@ -95,6 +95,11 @@ public abstract class AbstractSealerBlockEntity extends SplitShaftBlockEntity im
     }
 
     public void step() {
+        if (RECALC) {
+            process();
+            return;
+        }
+
         if (level == null || level.isClientSide) return;
         boolean hasOxygen = TANK.getPrimaryHandler().getFluidAmount() > getDraw() && !level.hasNeighborSignal(worldPosition);
 
@@ -106,9 +111,6 @@ public abstract class AbstractSealerBlockEntity extends SplitShaftBlockEntity im
         }
 
         if (ACTIVE) {
-            if (RECALC)
-                process();
-
             TANK.getPrimaryHandler().drain(getDraw(), IFluidHandler.FluidAction.EXECUTE);
 
             List<ServerPlayer> players = level.getEntitiesOfClass(ServerPlayer.class, new AABB(worldPosition).inflate(8.0));
@@ -214,15 +216,16 @@ public abstract class AbstractSealerBlockEntity extends SplitShaftBlockEntity im
     }
 
     public void unseal() {
+        RECALC = true;
         if (level instanceof ServerLevel slevel)
             for (BlockPos pos : ATTACHED_POSITIONS)
                 OxyUtil.setBlockSealed(slevel, pos, null);
         ATTACHED_POSITIONS.clear();
         SYNCED_VOLUME = 0;
-        RECALC = false;
         QUEUE.clear();
         SEALED.clear();
         setChanged();
+        RECALC = false;
     }
 
     @Override
@@ -246,7 +249,7 @@ public abstract class AbstractSealerBlockEntity extends SplitShaftBlockEntity im
 
         if (clientPacket) return;
 
-        if (IS_SABLE && (ACTIVE || !ATTACHED_POSITIONS.isEmpty())) {
+        if ((ACTIVE || !ATTACHED_POSITIONS.isEmpty())) {
             ACTIVE = false;
             this.unseal();
         }
