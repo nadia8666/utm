@@ -140,5 +140,5 @@ public class utmTools {
                 return new SwordItem(Tier, new Item.Properties().attributes(
                         SwordItem.createAttributes(Tier, 5, -2.4f)));
             }
-    ).tags(Tags.Items.ENCHANTABLES, ItemTags.SWORD_ENCHANTABLE, ItemTags.WEAPON_ENCHANTABLE, ItemTags.DURABILITY_ENCHANTABLE, ItemTags.SWORDS).handheld();
+    ).tags(Tags.Items.ENCHANTABLES, ItemTags.SWORD_ENCHANTABLE, ItemTags.WEAPON_ENCHANTABLE, ItemTags.DURABILITY_ENCHANTABLE, ItemTags.SWORDS, Tags.Items.TOOLS_SHIELD).handheld();
 }

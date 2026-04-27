@@ -21,5 +21,13 @@ public class utmTags {
         public static final TagKey<Block> SEAL_NOPROP = TagKey.create(
                 Registries.BLOCK,
                 utm.key("seal_noprop"));
+
+        public static final TagKey<Block> UNSEALED = TagKey.create(
+                Registries.BLOCK,
+                utm.key("unsealed"));
+
+        public static final TagKey<Block> SEALED = TagKey.create(
+                Registries.BLOCK,
+                utm.key("sealed"));
     }
 }

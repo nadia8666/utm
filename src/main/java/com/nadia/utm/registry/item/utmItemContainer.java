@@ -19,6 +19,8 @@ public class utmItemContainer<I extends Item> {
     public utmItemContainer(String name, DeferredItem<I> item) {
         NAME = name;
         ITEM = item;
+
+        ALL_ITEMS.add(this);
     }
 
     public String NAME() {

@@ -1,0 +1,20 @@
+{
+  "values": [
+    "create:portable_fluid_interface",
+    "create:portable_storage_interface",
+    "create:water_wheel",
+    "create:large_water_wheel",
+    "create:crushing_wheel",
+    "create:clockwork_bearing",
+    "create:mechanical_bearing",
+    "create:windmill_bearing",
+    "simulated:redstone_magnet",
+    "simulated:laser_pointer",
+    "simulated:laser_sensor",
+    "simulated:swivel_bearing",
+    "simulated:analog_transmission",
+    "simulated:docking_connector",
+    "offroad:borehead_bearing",
+    "offroad:wheel_mount"
+  ]
+}

@@ -1,18 +1,18 @@
 {
   "values": [
-    "utm:obsidian_sword",
-    "utm:cyclesword",
-    "utm:cyclesword",
     "utm:copper_sword",
-    "utm:copper_pickaxe",
-    "utm:copper_axe",
     "utm:copper_shovel",
+    "utm:copper_axe",
+    "utm:copper_pickaxe",
     "utm:copper_hoe",
     "utm:netherytra",
-    "utm:enchanted_sword_blue",
-    "utm:enchanted_sword_green",
+    "utm:obsidian_sword",
     "utm:enchanted_sword_red",
+    "utm:enchanted_sword_green",
+    "utm:enchanted_sword_blue",
+    "utm:cyclesword",
     "utm:arid_axe",
-    "utm:arid_sword"
+    "utm:arid_sword",
+    "utm:shart"
   ]
 }

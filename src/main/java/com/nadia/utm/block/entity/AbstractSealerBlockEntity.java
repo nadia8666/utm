@@ -9,6 +9,7 @@ import com.nadia.utm.util.*;
 import com.nadia.utm.utm;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.kinetics.transmission.SplitShaftBlockEntity;
+import com.simibubi.create.content.logistics.funnel.BeltFunnelBlock;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
 import com.simibubi.create.foundation.fluid.CombinedTankWrapper;
@@ -186,6 +187,15 @@ public abstract class AbstractSealerBlockEntity extends SplitShaftBlockEntity im
     }
 
     public static SEAL_TYPE canSeal(BlockState state, Level level, BlockPos pos, BlockPos lastPos) {
+        if (state.is(utmTags.BLOCK.SEAL_NOPROP))
+            return SEAL_TYPE.SEAL_NO_PROP;
+
+        if (state.is(utmTags.BLOCK.SEALED))
+            return SEAL_TYPE.SEALED;
+
+        if (state.is(utmTags.BLOCK.UNSEALED))
+            return SEAL_TYPE.UNSEALED;
+
         if (state.is(BlockTags.TRAPDOORS)) {
             boolean open = !state.getValue(TrapDoorBlock.OPEN);
 
@@ -196,8 +206,11 @@ public abstract class AbstractSealerBlockEntity extends SplitShaftBlockEntity im
             return open ? SEAL_TYPE.SEAL_NO_PROP : SEAL_TYPE.SEALED;
         }
 
-        if (state.is(utmTags.BLOCK.SEAL_NOPROP))
-            return SEAL_TYPE.SEAL_NO_PROP;
+        if (state.getBlock() instanceof BeltFunnelBlock funnel)
+            return state.getValue(BeltFunnelBlock.SHAPE).equals(BeltFunnelBlock.Shape.EXTENDED) ? SEAL_TYPE.UNSEALED : SEAL_TYPE.SEALED;
+
+        if (state.is(BlockTags.LEAVES))
+            return SEAL_TYPE.SEALED;
 
         return (state.isAir() || !state.getCollisionShape(level, pos).equals(Shapes.block())) ? SEAL_TYPE.SEALED : SEAL_TYPE.UNSEALED;
     }
