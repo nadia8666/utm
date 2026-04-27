@@ -56,7 +56,7 @@ public class utmPonderPlugin implements PonderPlugin {
                 .description("Blocks that work with Liquid Oxygen")
                 .register();
 
-        utmBlockContainer.DATAGEN_TAGS.forEach((c, tags) -> {
+        utmBlockContainer.DATAGEN_TARGETS.forEach((c, tags) -> {
             for (String tag : tags) {
                 if (tag.startsWith("ponderTags")) {
                     List<String> ponderTags = Arrays.stream(Arrays.stream(tag.split(":")).toList().getLast().split(",")).toList();

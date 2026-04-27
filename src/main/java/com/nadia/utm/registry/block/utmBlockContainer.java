@@ -2,9 +2,11 @@ package com.nadia.utm.registry.block;
 
 import com.nadia.utm.registry.item.utmItemContainer;
 import com.simibubi.create.api.stress.BlockStressValues;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -17,8 +19,9 @@ import java.util.function.Consumer;
 
 public class utmBlockContainer<B extends Block, I extends BlockItem> {
     public static final List<utmBlockContainer<?, ?>> ALL_BLOCKS = new ArrayList<>();
-    public static final Map<utmBlockContainer<?, ?>, List<String>> DATAGEN_TAGS = new HashMap<>();
+    public static final Map<utmBlockContainer<?, ?>, List<String>> DATAGEN_TARGETS = new HashMap<>();
     public final List<TagKey<Block>> DATAGEN_BLOCK_TAGS = new ArrayList<>();
+    public final List<TagKey<Item>> DATAGEN_ITEM_TAGS = new ArrayList<>();
 
     public final String NAME;
     public final DeferredBlock<B> BLOCK;
@@ -169,13 +172,19 @@ public class utmBlockContainer<B extends Block, I extends BlockItem> {
      * @param tags tags
      * @datagen
      */
-    @SafeVarargs
-    public final utmBlockContainer<B, I> tags(TagKey<Block>... tags) {
-        this.DATAGEN_BLOCK_TAGS.addAll(List.of(tags));
+    @SuppressWarnings("unchecked")
+    public final utmBlockContainer<B, I> tags(TagKey<?>... tags) {
+        for (TagKey<?> tag : tags) {
+            if (tag.isFor(Registries.BLOCK)) {
+                this.DATAGEN_BLOCK_TAGS.add((TagKey<Block>) tag);
+            } else if (tag.isFor(Registries.ITEM)) {
+                this.DATAGEN_ITEM_TAGS.add((TagKey<Item>) tag);
+            }
+        }
         return this;
     }
 
     public List<String> getForDatagen() {
-        return DATAGEN_TAGS.computeIfAbsent(this, k -> new ArrayList<>());
+        return DATAGEN_TARGETS.computeIfAbsent(this, k -> new ArrayList<>());
     }
 }

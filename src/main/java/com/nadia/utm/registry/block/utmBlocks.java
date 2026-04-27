@@ -10,6 +10,7 @@ import com.simibubi.create.foundation.item.KineticStats;
 import com.simibubi.create.foundation.item.TooltipModifier;
 import net.createmod.catnip.lang.FontHelper;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -69,7 +70,7 @@ public class utmBlocks {
 
     public static final utmBlockContainer<HeavyMetalAnvilBlock, BlockItem> HEAVY_METAL_ANVIL = dualRegister("heavy_metal_anvil", HeavyMetalAnvilBlock::new, BlockBehaviour.Properties.of()
             .destroyTime(7.0f)
-            .explosionResistance(2500f).sound(SoundType.ANVIL)).drops().copyItemModel().minePick().mineTier(3).tags(BlockTags.ANVIL);
+            .explosionResistance(2500f).sound(SoundType.ANVIL)).drops().copyItemModel().minePick().mineTier(3).tags(BlockTags.ANVIL, ItemTags.ANVIL);
 
     public static final utmBlockContainer<GlintTableBlock, BlockItem> GLINT_TABLE = dualRegister("glint_table", GlintTableBlock::new, BlockBehaviour.Properties.of()
             .destroyTime(3.0f)

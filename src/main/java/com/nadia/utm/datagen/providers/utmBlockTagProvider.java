@@ -29,7 +29,7 @@ public class utmBlockTagProvider extends BlockTagsProvider {
             }
         });
 
-        utmBlockContainer.DATAGEN_TAGS.forEach((container, tags) -> {
+        utmBlockContainer.DATAGEN_TARGETS.forEach((container, tags) -> {
             Block block = container.BLOCK.get();
 
             for (String tag : tags) {

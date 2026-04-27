@@ -1,15 +1,13 @@
 package com.nadia.utm.datagen.providers;
 
-import com.nadia.utm.registry.block.utmBlocks;
-import com.nadia.utm.registry.item.tool.utmTools;
-import com.nadia.utm.registry.item.utmItems;
-import com.nadia.utm.registry.tags.utmTags;
+import com.nadia.utm.registry.block.utmBlockContainer;
+import com.nadia.utm.registry.item.utmItemContainer;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
-import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -23,123 +21,16 @@ public class utmItemTagProvider extends ItemTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.@NotNull Provider provider) {
-        tag(ItemTags.ANVIL).add(utmBlocks.HEAVY_METAL_ANVIL.ITEM.get());
+        utmBlockContainer.ALL_BLOCKS.forEach(c -> {
+            for (TagKey<Item> targ : c.DATAGEN_ITEM_TAGS) {
+                tag(targ).add(c.ITEM.get());
+            }
+        });
 
-        tag(Tags.Items.ENCHANTABLES).add(utmTools.OBSIDIAN_SWORD.get());
-        tag(ItemTags.SWORD_ENCHANTABLE).add(utmTools.OBSIDIAN_SWORD.get());
-        tag(ItemTags.WEAPON_ENCHANTABLE).add(utmTools.OBSIDIAN_SWORD.get()); //need both
-        tag(ItemTags.DURABILITY_ENCHANTABLE).add(utmTools.OBSIDIAN_SWORD.get());
-
-        tag(Tags.Items.ENCHANTABLES).add(utmTools.CYCLESWORD.get());
-        tag(ItemTags.SWORD_ENCHANTABLE).add(utmTools.CYCLESWORD.get());
-        tag(ItemTags.WEAPON_ENCHANTABLE).add(utmTools.CYCLESWORD.get());
-        tag(ItemTags.DURABILITY_ENCHANTABLE).add(utmTools.CYCLESWORD.get());
-
-        tag(Tags.Items.ENCHANTABLES).add(utmTools.CYCLESWORD.get());
-        tag(ItemTags.WEAPON_ENCHANTABLE).add(utmTools.CYCLESWORD.get());
-        tag(ItemTags.DURABILITY_ENCHANTABLE).add(utmTools.CYCLESWORD.get());
-
-        tag(Tags.Items.BUCKETS).add(utmItems.LIQUID_OXYGEN_BUCKET.ITEM().get());
-        tag(Tags.Items.BUCKETS).add(utmItems.MOLTEN_STEEL_BUCKET.ITEM().get());
-
-        // copper tools
-        tag(Tags.Items.ENCHANTABLES).add(utmTools.COPPER_SWORD.get());
-        tag(ItemTags.SWORD_ENCHANTABLE).add(utmTools.COPPER_SWORD.get());
-        tag(ItemTags.WEAPON_ENCHANTABLE).add(utmTools.COPPER_SWORD.get());
-        tag(ItemTags.DURABILITY_ENCHANTABLE).add(utmTools.COPPER_SWORD.get());
-
-        tag(Tags.Items.ENCHANTABLES).add(utmTools.COPPER_PICKAXE.get());
-        tag(ItemTags.SWORD_ENCHANTABLE).add(utmTools.COPPER_PICKAXE.get());
-        tag(ItemTags.WEAPON_ENCHANTABLE).add(utmTools.COPPER_PICKAXE.get());
-        tag(ItemTags.DURABILITY_ENCHANTABLE).add(utmTools.COPPER_PICKAXE.get());
-
-        tag(Tags.Items.ENCHANTABLES).add(utmTools.COPPER_AXE.get());
-        tag(ItemTags.SWORD_ENCHANTABLE).add(utmTools.COPPER_AXE.get());
-        tag(ItemTags.WEAPON_ENCHANTABLE).add(utmTools.COPPER_AXE.get());
-        tag(ItemTags.DURABILITY_ENCHANTABLE).add(utmTools.COPPER_AXE.get());
-
-        tag(Tags.Items.ENCHANTABLES).add(utmTools.COPPER_SHOVEL.get());
-        tag(ItemTags.SWORD_ENCHANTABLE).add(utmTools.COPPER_SHOVEL.get());
-        tag(ItemTags.WEAPON_ENCHANTABLE).add(utmTools.COPPER_SHOVEL.get());
-        tag(ItemTags.DURABILITY_ENCHANTABLE).add(utmTools.COPPER_SHOVEL.get());
-
-        tag(Tags.Items.ENCHANTABLES).add(utmTools.COPPER_HOE.get());
-        tag(ItemTags.SWORD_ENCHANTABLE).add(utmTools.COPPER_HOE.get());
-        tag(ItemTags.WEAPON_ENCHANTABLE).add(utmTools.COPPER_HOE.get());
-        tag(ItemTags.DURABILITY_ENCHANTABLE).add(utmTools.COPPER_HOE.get());
-
-        tag(Tags.Items.ENCHANTABLES).add(utmTools.NETHERYTRA.get());
-        tag(ItemTags.EQUIPPABLE_ENCHANTABLE).add(utmTools.NETHERYTRA.get());
-        tag(ItemTags.DURABILITY_ENCHANTABLE).add(utmTools.NETHERYTRA.get());
-        tag(ItemTags.CHEST_ARMOR_ENCHANTABLE).add(utmTools.NETHERYTRA.get()); // dont want prot but oh well
-
-        tag(utmTags.ITEM.ELYTRA_TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_VEIN.ITEM().get());
-        tag(utmTags.ITEM.ELYTRA_TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_OUTWARD.ITEM().get());
-        tag(utmTags.ITEM.ELYTRA_TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_LESSER.ITEM().get());
-        tag(utmTags.ITEM.ELYTRA_TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_HEARTSTWINGS.ITEM().get());
-        tag(utmTags.ITEM.ELYTRA_TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_SPADES.ITEM().get());
-        tag(utmTags.ITEM.ELYTRA_TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_ROADRUNNER.ITEM().get());
-        tag(utmTags.ITEM.ELYTRA_TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_ECOLOGIST.ITEM().get());
-
-        tag(ItemTags.TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_VEIN.ITEM().get());
-        tag(ItemTags.TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_OUTWARD.ITEM().get());
-        tag(ItemTags.TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_LESSER.ITEM().get());
-        tag(ItemTags.TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_HEARTSTWINGS.ITEM().get());
-        tag(ItemTags.TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_SPADES.ITEM().get());
-        tag(ItemTags.TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_ROADRUNNER.ITEM().get());
-        tag(ItemTags.TRIM_TEMPLATES).add(utmItems.ELYTRA_TRIM_ECOLOGIST.ITEM().get());
-
-        tag(Tags.Items.MUSIC_DISCS).add(utmItems.MUSIC_DISC_TEARS.ITEM().get());
-        tag(Tags.Items.MUSIC_DISCS).add(utmItems.MUSIC_DISC_LAVA_CHICKEN.ITEM().get());
-        tag(Tags.Items.MUSIC_DISCS).add(utmItems.MUSIC_DISC_UNDERTALE.ITEM().get());
-
-        tag(Tags.Items.ENCHANTABLES).add(utmTools.ENCHANTED_SWORD_BLUE.get());
-        tag(ItemTags.SWORD_ENCHANTABLE).add(utmTools.ENCHANTED_SWORD_BLUE.get());
-        tag(ItemTags.WEAPON_ENCHANTABLE).add(utmTools.ENCHANTED_SWORD_BLUE.get());
-        tag(ItemTags.DURABILITY_ENCHANTABLE).add(utmTools.ENCHANTED_SWORD_BLUE.get());
-        tag(Tags.Items.ENCHANTABLES).add(utmTools.ENCHANTED_SWORD_GREEN.get());
-        tag(ItemTags.SWORD_ENCHANTABLE).add(utmTools.ENCHANTED_SWORD_GREEN.get());
-        tag(ItemTags.WEAPON_ENCHANTABLE).add(utmTools.ENCHANTED_SWORD_GREEN.get());
-        tag(ItemTags.DURABILITY_ENCHANTABLE).add(utmTools.ENCHANTED_SWORD_GREEN.get());
-        tag(Tags.Items.ENCHANTABLES).add(utmTools.ENCHANTED_SWORD_RED.get());
-        tag(ItemTags.SWORD_ENCHANTABLE).add(utmTools.ENCHANTED_SWORD_RED.get());
-        tag(ItemTags.WEAPON_ENCHANTABLE).add(utmTools.ENCHANTED_SWORD_RED.get());
-        tag(ItemTags.DURABILITY_ENCHANTABLE).add(utmTools.ENCHANTED_SWORD_RED.get());
-
-
-        tag(Tags.Items.ENCHANTABLES).add(utmTools.ARID_AXE.get());
-        tag(ItemTags.SWORD_ENCHANTABLE).add(utmTools.ARID_AXE.get());
-        tag(ItemTags.WEAPON_ENCHANTABLE).add(utmTools.ARID_AXE.get());
-        tag(ItemTags.FIRE_ASPECT_ENCHANTABLE).add(utmTools.ARID_AXE.get());
-        tag(ItemTags.MINING_ENCHANTABLE).add(utmTools.ARID_AXE.get());
-        tag(Tags.Items.ENCHANTABLES).add(utmTools.ARID_SWORD.get());
-        tag(ItemTags.SWORD_ENCHANTABLE).add(utmTools.ARID_SWORD.get());
-        tag(ItemTags.WEAPON_ENCHANTABLE).add(utmTools.ARID_SWORD.get());
-        tag(ItemTags.FIRE_ASPECT_ENCHANTABLE).add(utmTools.ARID_SWORD.get());
-
-        tag(ItemTags.SWORDS).add(utmTools.OBSIDIAN_SWORD.get());
-        tag(ItemTags.SWORDS).add(utmTools.ARID_SWORD.get());
-        tag(ItemTags.SWORDS).add(utmTools.COPPER_SWORD.get());
-        tag(ItemTags.SWORDS).add(utmTools.ENCHANTED_SWORD_RED.get());
-        tag(ItemTags.SWORDS).add(utmTools.ENCHANTED_SWORD_BLUE.get());
-        tag(ItemTags.SWORDS).add(utmTools.ENCHANTED_SWORD_GREEN.get());
-        tag(ItemTags.SWORDS).add(utmTools.CYCLESWORD.get());
-
-        tag(ItemTags.AXES).add(utmTools.ARID_AXE.get());
-        tag(ItemTags.AXES).add(utmTools.COPPER_AXE.get());
-
-        tag(ItemTags.PICKAXES).add(utmTools.COPPER_PICKAXE.get());
-
-        tag(ItemTags.HOES).add(utmTools.COPPER_HOE.get());
-
-        tag(ItemTags.SHOVELS).add(utmTools.COPPER_SHOVEL.get());
-
-        tag(ItemTags.SWORDS).add(utmTools.SHART.get());
-        tag(Tags.Items.ENCHANTABLES).add(utmTools.SHART.get());
-        tag(ItemTags.SWORD_ENCHANTABLE).add(utmTools.SHART.get());
-        tag(ItemTags.WEAPON_ENCHANTABLE).add(utmTools.SHART.get());
-        tag(ItemTags.DURABILITY_ENCHANTABLE).add(utmTools.SHART.get());
-
-
+        utmItemContainer.ALL_ITEMS.forEach(c -> {
+            for (TagKey<Item> targ : c.DATAGEN_TAGS) {
+                tag(targ).add(c.ITEM.get());
+            }
+        });
     }
 }

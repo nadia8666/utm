@@ -1,7 +1,6 @@
 package com.nadia.utm.datagen.providers;
 
 import com.nadia.utm.registry.block.utmBlockContainer;
-import com.nadia.utm.registry.item.tool.utmTools;
 import com.nadia.utm.registry.item.utmItemContainer;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
@@ -20,38 +19,23 @@ public class utmItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        utmBlockContainer.DATAGEN_TAGS.forEach((c, tags) -> {
+        utmBlockContainer.DATAGEN_TARGETS.forEach((c, tags) -> {
             for (String tag : tags) {
                 if (tag.equals("blockModel"))
                     withExistingParent(c.ITEM.getId().toString(), modLoc("block/" + c.NAME));
             }
         });
 
-        utmItemContainer.DATAGEN_TAGS.forEach((c, tags) -> {
+        utmItemContainer.DATAGEN_TARGETS.forEach((c, tags) -> {
             for (String tag : tags) {
                 if (tag.equals("generated"))
                     basicItem(c.ITEM().get());
+                if (tag.equals("handheld"))
+                    handheldItem(c.ITEM().get());
                 if (tag.equals("disc"))
                     musicDisc(c.ITEM().get());
             }
         });
-
-        handheldItem(utmTools.COPPER_SWORD.get());
-        handheldItem(utmTools.COPPER_PICKAXE.get());
-        handheldItem(utmTools.COPPER_AXE.get());
-        handheldItem(utmTools.COPPER_SHOVEL.get());
-        handheldItem(utmTools.COPPER_HOE.get());
-
-        handheldItem(utmTools.ENCHANTED_SWORD_BLUE.get());
-        handheldItem(utmTools.ENCHANTED_SWORD_RED.get());
-        handheldItem(utmTools.ENCHANTED_SWORD_GREEN.get());
-
-        handheldItem(utmTools.OBSIDIAN_SWORD.get());
-        handheldItem(utmTools.CYCLESWORD.get());
-        basicItem(utmTools.NETHERYTRA.get());
-        handheldItem(utmTools.ARID_AXE.get());
-        handheldItem(utmTools.ARID_SWORD.get());
-        handheldItem(utmTools.SHART.get());
     }
 
     public void musicDisc(ResourceLocation item) {

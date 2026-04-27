@@ -13,7 +13,7 @@ public class utmBlockModelProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        utmBlockContainer.DATAGEN_TAGS.forEach((container, tags) -> {
+        utmBlockContainer.DATAGEN_TARGETS.forEach((container, tags) -> {
             Block block = container.BLOCK.get();
 
             if (tags.contains("blockModelState"))
