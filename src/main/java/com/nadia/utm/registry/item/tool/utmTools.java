@@ -19,7 +19,7 @@ import java.util.function.Supplier;
 
 @ForceLoad(deps = {utmRegistry.class, utmTags.class})
 public class utmTools {
-    public static final DeferredRegister.Items TOOLS = DeferredRegister.createItems("utm");
+    public static final DeferredRegister.Items TOOLS = utmRegistry.ITEMS;
 
     public static <I extends Item> utmItemContainer<I> register(String name, Supplier<I> func) {
         DeferredItem<I> item = TOOLS.register(name, func);
