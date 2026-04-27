@@ -38,7 +38,7 @@ public class utm {
 
     public utm(IEventBus bus, ModContainer container) {
         utmEvents.setup(bus);
-        loadClasses(container, "COMMON");
+        loadClasses(container, FMLEnvironment.dist.name());
 
         VERSION = container.getModInfo().getVersion().toString();
         AutoUpdater.CURRENT_VERSION = VERSION;
