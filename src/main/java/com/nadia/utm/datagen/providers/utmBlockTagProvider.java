@@ -11,6 +11,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
@@ -35,6 +36,9 @@ public class utmBlockTagProvider extends BlockTagsProvider {
                 , AllBlocks.MECHANICAL_BEARING.get()
                 , AllBlocks.WINDMILL_BEARING.get()
                 , AllBlocks.BELT.get()
+                , AllBlocks.CHUTE.get()
+
+                , Blocks.HOPPER
 
                 , SimBlocks.REDSTONE_MAGNET.get()
                 , SimBlocks.LASER_POINTER.get()

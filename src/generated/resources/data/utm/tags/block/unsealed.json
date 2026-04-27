@@ -9,6 +9,8 @@
     "create:mechanical_bearing",
     "create:windmill_bearing",
     "create:belt",
+    "create:chute",
+    "minecraft:hopper",
     "simulated:redstone_magnet",
     "simulated:laser_pointer",
     "simulated:laser_sensor",
