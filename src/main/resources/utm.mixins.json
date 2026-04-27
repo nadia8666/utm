@@ -10,30 +10,30 @@
     "HitboxMixin",
     "LevelMixin",
     "SchematicPlacePacketMixin",
-    "compat.GraveBlockEntityMixin",
-    "compat.GraveBlockMixin",
-    "compat.PumpUpgradeWrapperMixin",
-    "compat.SpearsMixin"
+    "compat.gravestone.GraveBlockEntityMixin",
+    "compat.gravestone.GraveBlockMixin",
+    "compat.sophisticatedcore$sophisticatedbackpacks.PumpUpgradeWrapperMixin",
+    "compat.spears.SpearsMixin"
   ],
   "client": [
     "AnvilScreenMixin",
-    "CameraMixin",
+    "compat.figura.CameraMixin",
     "GameRendererMixin",
     "RemainingAirOverlayMixin",
     "SchematicHandlerMixin",
-    "compat.ObituaryScreenMixin",
-    "compat.ShowcaseItemMixin",
-    "compat.WheelMountRendererMixin",
+    "compat.gravestone.ObituaryScreenMixin",
+    "compat.showcaseitem$jei.ShowcaseItemMixin",
+    "compat.offroad.WheelMountRendererMixin",
     "renderer.BacktankArmorLayerMixin",
     "renderer.LayeredArmorItemMixin",
     "renderer.MultiBufferSourceMixin",
     "renderer.NetheriteBacktankFirstPersonRendererMixin",
     "renderer.glint.ElytraLayerMixin",
-    "renderer.glint.FiguraCompatMixin",
+    "compat.figura.FiguraCompatMixin",
     "renderer.glint.HumanoidArmorLayerMixin",
     "renderer.glint.ItemRendererMixin",
-    "compat.PunchyArmRendererMixin",
-    "AvatarMixinExtensions"
+    "compat.figura$punchy.PunchyArmRendererMixin",
+    "compat.figura.AvatarMixinExtensions"
   ],
   "injectors": {
     "defaultRequire": 1

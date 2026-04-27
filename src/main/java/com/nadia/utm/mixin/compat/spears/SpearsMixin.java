@@ -1,4 +1,4 @@
-package com.nadia.utm.mixin.compat;
+package com.nadia.utm.mixin.compat.spears;
 
 import com.nadia.utm.hitbox.HitboxOverride;
 import com.notunanancyowen.spears.Spears;

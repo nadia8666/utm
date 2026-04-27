@@ -1,4 +1,4 @@
-package com.nadia.utm.mixin;
+package com.nadia.utm.mixin.compat.figura;
 
 import com.bawnorton.mixinsquared.TargetHandler;
 import net.minecraft.client.Camera;

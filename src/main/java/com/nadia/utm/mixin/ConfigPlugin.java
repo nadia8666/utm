@@ -1,5 +1,6 @@
 package com.nadia.utm.mixin;
 
+import com.nadia.utm.utm;
 import net.neoforged.fml.loading.LoadingModList;
 import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
@@ -21,28 +22,16 @@ public class ConfigPlugin implements IMixinConfigPlugin {
 
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
-        // spears compat
-        if (mixinClassName.contains("SpearsMixin")) {
-            return LoadingModList.get().getModFileById("spears") != null;
-        }
+        if (mixinClassName.contains("com.nadia.utm.mixin.compat")) {
+            String path = mixinClassName.split("\\.")[5];
+            String[] ids = path.split("\\$");
 
-        // showcase item x jei compat
-        if (mixinClassName.contains("ClientShowcaseMixin")) {
-            return LoadingModList.get().getModFileById("showcaseitem") != null && LoadingModList.get().getModFileById("jei") != null;
-        }
+            for (String id : ids) {
+                if (LoadingModList.get().getModFileById(id) == null)
+                    return false;
+            }
 
-        // figura compat
-        if (mixinClassName.contains("FiguraCompatMixin") || mixinClassName.contains("CameraMixin") || mixinClassName.contains("AvatarMixin")) {
-            return LoadingModList.get().getModFileById("figura") != null;
-        }
-
-        if (mixinClassName.contains("PunchhyArmRendererMixin")) {
-            return LoadingModList.get().getModFileById("figura") != null && LoadingModList.get().getModFileById("punchy") != null;
-        }
-
-        // gravestones compat
-        if (mixinClassName.contains("ObituaryScreenMixin")) {
-            return LoadingModList.get().getModFileById("gravestone") != null;
+            return true;
         }
 
         return true;

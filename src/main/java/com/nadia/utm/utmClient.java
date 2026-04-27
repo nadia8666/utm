@@ -34,32 +34,9 @@ import static com.nadia.utm.updater.AutoUpdater.*;
 public class utmClient {
     public utmClient(ModContainer container) {
         container.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
-        loadClasses(container);
+        utm.loadClasses(container, "CLIENT");
 
         RadialWrenchMenu.registerRotationProperty(GrateBlock.VERTICAL_DIRECTION, "Vertical Direction");
-    }
-
-    private static void loadClasses(ModContainer container) {
-        ModFileScanData scan = container.getModInfo().getOwningFile().getFile().getScanResult();
-        String annotation = Type.getDescriptor(ForceLoad.class);
-        String currentDist = FMLEnvironment.dist.name();
-
-        scan.getAnnotations().stream()
-                .filter(data -> annotation.equals(data.annotationType().getDescriptor()))
-                .forEach(data -> {
-                    String dist = "COMMON";
-
-                    if (data.annotationData().get("dist") instanceof ModAnnotation.EnumHolder targ)
-                        dist = targ.value();
-
-                    if (Objects.equals(dist, "DEDICATED_SERVER")) return;
-
-                    try {
-                        Class.forName(data.clazz().getClassName(), true, utmEvents.class.getClassLoader());
-                    } catch (ClassNotFoundException e) {
-                        utm.LOGGER.error("[UTM] Failed to load class {} on {}, there WILL be problems!", data.clazz().getClassName(), dist);
-                    }
-                });
     }
 
     @SubscribeEvent

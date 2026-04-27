@@ -1,4 +1,4 @@
-package com.nadia.utm.mixin.renderer.glint;
+package com.nadia.utm.mixin.compat.figura;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.nadia.utm.client.renderer.utmShaders;

@@ -1,6 +1,5 @@
 package com.nadia.utm.registry.tags;
 
-import com.nadia.utm.registry.utmRegistry;
 import com.nadia.utm.utm;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.TagKey;
@@ -10,7 +9,7 @@ import net.minecraft.world.level.block.Block;
 public class utmTags {
     public static class ITEM {
         public static final TagKey<Item> ELYTRA_TRIM_TEMPLATES = TagKey.create(
-                utmRegistry.ITEMS.getRegistryKey(),
+                Registries.ITEM,
                 utm.key("elytra_trim_templates"));
     }
 

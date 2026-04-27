@@ -1,4 +1,4 @@
-package com.nadia.utm.mixin.compat;
+package com.nadia.utm.mixin.compat.figura$punchy;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;

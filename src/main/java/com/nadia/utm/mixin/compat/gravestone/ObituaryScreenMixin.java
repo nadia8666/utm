@@ -1,4 +1,4 @@
-package com.nadia.utm.mixin.compat;
+package com.nadia.utm.mixin.compat.gravestone;
 
 import com.nadia.utm.gui.compat.ObituaryDropButton;
 import com.nadia.utm.networking.payloads.DropGravePayload;

@@ -1,4 +1,4 @@
-package com.nadia.utm.mixin.compat;
+package com.nadia.utm.mixin.compat.sophisticatedcore$sophisticatedbackpacks;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

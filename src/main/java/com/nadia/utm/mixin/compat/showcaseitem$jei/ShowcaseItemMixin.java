@@ -1,9 +1,8 @@
-package com.nadia.utm.mixin.compat;
+package com.nadia.utm.mixin.compat.showcaseitem$jei;
 
 import com.llamalad7.mixinextras.expression.Definition;
 import com.llamalad7.mixinextras.expression.Expression;
 import com.nadia.utm.compat.ShareJeiItem;
-import com.nadia.utm.utm;
 import com.ultramega.showcaseitem.ShowcaseItemFeature;
 import dev.emi.emi.api.EmiApi;
 import dev.emi.emi.api.stack.EmiIngredient;

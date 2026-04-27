@@ -1,4 +1,4 @@
-package com.nadia.utm.mixin.compat;
+package com.nadia.utm.mixin.compat.gravestone;
 
 import com.nadia.utm.compat.GraveInterface;
 import de.maxhenkel.gravestone.blocks.GraveStoneBlock;

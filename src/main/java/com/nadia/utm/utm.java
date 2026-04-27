@@ -27,7 +27,8 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
-import java.util.Objects;
+import java.util.*;
+import java.util.function.Function;
 
 @Mod(utm.MODID)
 public class utm {
@@ -37,7 +38,7 @@ public class utm {
 
     public utm(IEventBus bus, ModContainer container) {
         utmEvents.setup(bus);
-        loadClasses(container);
+        loadClasses(container, "COMMON");
 
         VERSION = container.getModInfo().getVersion().toString();
         AutoUpdater.CURRENT_VERSION = VERSION;
@@ -50,28 +51,40 @@ public class utm {
         container.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
 
-    private static void loadClasses(ModContainer container) {
+    private static final Set<String> LOADED_CLASSES = new HashSet<>();
+    public static void loadClasses(ModContainer container, String sideDist) {
         ModFileScanData scan = container.getModInfo().getOwningFile().getFile().getScanResult();
         String annotation = Type.getDescriptor(ForceLoad.class);
         String currentDist = FMLEnvironment.dist.name();
 
-        scan.getAnnotations().stream()
-                .filter(data -> annotation.equals(data.annotationType().getDescriptor()))
-                .forEach(data -> {
-                    String dist = "COMMON";
+        Function<String, Boolean> validDist = (String dist) -> {
+            if (sideDist.equals("CLIENT"))
+                return !dist.equals("DEDICATED_SERVER");
+            else if (sideDist.equals("DEDICATED_SERVER"))
+                return !dist.equals("CLIENT");
 
-                    if (data.annotationData().get("dist") instanceof ModAnnotation.EnumHolder targ)
-                        dist = targ.value();
+            return true;
+        };
 
-                    if (Objects.equals(dist, "CLIENT")) return;
+        for (ModFileScanData.AnnotationData data : scan.getAnnotations()) {
+            if (annotation.equals(data.annotationType().getDescriptor())) {
+                if (LOADED_CLASSES.contains(data.clazz().getClassName())) continue;
+                String dist = "COMMON";
 
-                    try {
-                        utm.LOGGER.info("[UTM] Initializing class {}!", data.clazz().getClassName());
-                        Class.forName(data.clazz().getClassName(), true, utmEvents.class.getClassLoader());
-                    } catch (ClassNotFoundException e) {
-                        utm.LOGGER.error("[UTM] Failed to load class {} on {}, there WILL be problems!", data.clazz().getClassName(), dist);
-                    }
-                });
+                if (data.annotationData().get("dist") instanceof ModAnnotation.EnumHolder targ)
+                    dist = targ.value();
+
+                if (!validDist.apply(dist)) continue;
+
+                try {
+                    utm.LOGGER.info("[UTM] Initializing class {}!", data.clazz().getClassName());
+                    LOADED_CLASSES.add(data.clazz().getClassName());
+                    Class.forName(data.clazz().getClassName(), true, utmEvents.class.getClassLoader());
+                } catch (ClassNotFoundException e) {
+                    utm.LOGGER.error("[UTM] Failed to load class {} on {}, there WILL be problems!", data.clazz().getClassName(), dist);
+                }
+            }
+        }
     }
 
     private void commonSetup(FMLCommonSetupEvent event) {
