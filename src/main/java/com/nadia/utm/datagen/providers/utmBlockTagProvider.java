@@ -26,24 +26,26 @@ public class utmBlockTagProvider extends BlockTagsProvider {
     protected void addTags(HolderLookup.@NotNull Provider provider) {
         tag(utmTags.BLOCK.A23_ORE_REPLACEABLE).add(SpaceStateHandler.UNMODIFIED_BLOCKS.toArray(Block[]::new));
 
-        tag(utmTags.BLOCK.UNSEALED).add(AllBlocks.PORTABLE_FLUID_INTERFACE.get());
-        tag(utmTags.BLOCK.UNSEALED).add(AllBlocks.PORTABLE_STORAGE_INTERFACE.get());
-        tag(utmTags.BLOCK.UNSEALED).add(AllBlocks.WATER_WHEEL.get());
-        tag(utmTags.BLOCK.UNSEALED).add(AllBlocks.LARGE_WATER_WHEEL.get());
-        tag(utmTags.BLOCK.UNSEALED).add(AllBlocks.CRUSHING_WHEEL.get());
-        tag(utmTags.BLOCK.UNSEALED).add(AllBlocks.CLOCKWORK_BEARING.get());
-        tag(utmTags.BLOCK.UNSEALED).add(AllBlocks.MECHANICAL_BEARING.get());
-        tag(utmTags.BLOCK.UNSEALED).add(AllBlocks.WINDMILL_BEARING.get());
+        tag(utmTags.BLOCK.UNSEALED).add(AllBlocks.PORTABLE_FLUID_INTERFACE.get()
+                , AllBlocks.PORTABLE_STORAGE_INTERFACE.get()
+                , AllBlocks.WATER_WHEEL.get()
+                , AllBlocks.LARGE_WATER_WHEEL.get()
+                , AllBlocks.CRUSHING_WHEEL.get()
+                , AllBlocks.CLOCKWORK_BEARING.get()
+                , AllBlocks.MECHANICAL_BEARING.get()
+                , AllBlocks.WINDMILL_BEARING.get()
+                , AllBlocks.BELT.get()
 
-        tag(utmTags.BLOCK.UNSEALED).add(SimBlocks.REDSTONE_MAGNET.get());
-        tag(utmTags.BLOCK.UNSEALED).add(SimBlocks.LASER_POINTER.get());
-        tag(utmTags.BLOCK.UNSEALED).add(SimBlocks.LASER_SENSOR.get());
-        tag(utmTags.BLOCK.UNSEALED).add(SimBlocks.SWIVEL_BEARING.get());
-        tag(utmTags.BLOCK.UNSEALED).add(SimBlocks.ANALOG_TRANSMISSION.get());
-        tag(utmTags.BLOCK.UNSEALED).add(SimBlocks.DOCKING_CONNECTOR.get());
+                , SimBlocks.REDSTONE_MAGNET.get()
+                , SimBlocks.LASER_POINTER.get()
+                , SimBlocks.LASER_SENSOR.get()
+                , SimBlocks.SWIVEL_BEARING.get()
+                , SimBlocks.ANALOG_TRANSMISSION.get()
+                , SimBlocks.DOCKING_CONNECTOR.get()
 
-        tag(utmTags.BLOCK.UNSEALED).add(OffroadBlocks.BOREHEAD_BEARING_BLOCK.get());
-        tag(utmTags.BLOCK.UNSEALED).add(OffroadBlocks.WHEEL_MOUNT.get());
+                , OffroadBlocks.BOREHEAD_BEARING_BLOCK.get()
+                , OffroadBlocks.WHEEL_MOUNT.get()
+        );
 
         utmBlockContainer.ALL_BLOCKS.forEach(c -> {
             for (TagKey<Block> targ : c.DATAGEN_BLOCK_TAGS) {
@@ -57,9 +59,9 @@ public class utmBlockTagProvider extends BlockTagsProvider {
             for (String tag : tags) {
                 switch (tag) {
                     case "mine:pickaxe" -> tag(BlockTags.MINEABLE_WITH_PICKAXE).add(block);
-                    case "mine:axe"     -> tag(BlockTags.MINEABLE_WITH_AXE).add(block);
-                    case "mine:shovel"  -> tag(BlockTags.MINEABLE_WITH_SHOVEL).add(block);
-                    case "mine:hoe"     -> tag(BlockTags.MINEABLE_WITH_HOE).add(block);
+                    case "mine:axe" -> tag(BlockTags.MINEABLE_WITH_AXE).add(block);
+                    case "mine:shovel" -> tag(BlockTags.MINEABLE_WITH_SHOVEL).add(block);
+                    case "mine:hoe" -> tag(BlockTags.MINEABLE_WITH_HOE).add(block);
                 }
 
                 if (tag.startsWith("tier:")) {

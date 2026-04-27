@@ -8,6 +8,7 @@
     "create:clockwork_bearing",
     "create:mechanical_bearing",
     "create:windmill_bearing",
+    "create:belt",
     "simulated:redstone_magnet",
     "simulated:laser_pointer",
     "simulated:laser_sensor",
