@@ -44,12 +44,12 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build
 
-      - name: update tag
+      - name: Update tag
         run: |
           git tag -f ${{ env.MOD_VERSION }} ${{ github.sha }}
           git push -f origin refs/tags/${{ env.MOD_VERSION }}
 
-      - name: Update Release
+      - name: Update release
         uses: ncipollo/release-action@v1
         with:
           tag: ${{ env.MOD_VERSION }}
