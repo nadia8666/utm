@@ -31,9 +31,7 @@ public class AerowallRenderer implements BlockEntityRenderer<AerowallBlockEntity
         if (rt == null) return;
         SuperByteBuffer wall = CachedBuffers.partial(utmModels.AEROWALL, be.getBlockState());
 
-        new PoseUtil(ms).push().run(() -> rotateByFacing(be, ms)).run(() -> {
-            wall.light(light).renderInto(ms, buffer.getBuffer(rt));
-        }).pop();
+        new PoseUtil(ms).push().run(() -> rotateByFacing(be, ms)).run(() -> wall.light(light).renderInto(ms, buffer.getBuffer(rt))).pop();
     }
 
     static {
