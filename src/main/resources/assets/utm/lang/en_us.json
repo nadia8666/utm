@@ -44,6 +44,7 @@
   "block.utm.portasealer": "Portasealer",
   "block.utm.biome_sealer": "Biome Sealer",
   "block.utm.aerowall": "Aero-wall",
+  "block.utm.ion_jet": "Ion Jet",
 
   "item.utm.copper_sword": "Copper Sword",
   "item.utm.copper_pickaxe": "Copper Pickaxe",
@@ -82,6 +83,7 @@
   "item.utm.aluminum_sheet": "Aluminum Sheet",
   "item.utm.magnesium_sheet": "Magnesium Sheet",
   "item.utm.steel_sheet": "Steel Sheet",
+  "item.utm.adv_goggles": "Advanced Goggles",
 
   "item.utm.enchanted_sword_red": "Enchanted Sword",
   "item.utm.enchanted_sword_green": "Enchanted Sword",
@@ -98,6 +100,8 @@
 
   "utm.gui.launch_contraption_head": "WARNING:",
   "utm.gui.launch_contraption_desc": "THIS ACTION IS IRREVERSIBLE!",
+
+  "utm.display_source.sealer_display_source": "Seal information",
 
   "subtitles.utm.slider_drag": "Slider drag",
 

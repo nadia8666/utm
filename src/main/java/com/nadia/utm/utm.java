@@ -106,7 +106,7 @@ public class utm {
             }
         });
 
-        event.enqueueWork(utmRegistry::lateRegister);
+        event.enqueueWork(utmRegistry::postRegister);
     }
 
     // dont delete this apprently. this is core to utm working.

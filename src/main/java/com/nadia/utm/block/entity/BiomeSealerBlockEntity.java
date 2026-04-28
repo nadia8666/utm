@@ -3,6 +3,7 @@ package com.nadia.utm.block.entity;
 import com.nadia.utm.event.ForceLoad;
 import com.nadia.utm.event.utmEvents;
 import com.nadia.utm.registry.block.utmBlockEntities;
+import com.nadia.utm.utm;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
@@ -23,6 +24,8 @@ public class BiomeSealerBlockEntity extends AbstractSealerBlockEntity {
 
     @Override
     public int getDraw() {
+        if (SYNCED_VOLUME <= 0) return 0;
+
         double draw = (int) Math.pow(1.0007, SYNCED_VOLUME);
 
         if (SYNCED_VOLUME < 1500) {
@@ -40,10 +43,13 @@ public class BiomeSealerBlockEntity extends AbstractSealerBlockEntity {
     @Override
     public boolean shouldStep() {
         if (Math.abs(getSpeed()) < 128) {
+            if (RECALC)
+                process();
+
             if (ACTIVE) {
                 ACTIVE = false;
-                sendData();
                 unseal();
+                sendData();
             }
             return false;
         }

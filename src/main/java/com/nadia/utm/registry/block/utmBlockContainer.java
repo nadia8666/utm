@@ -1,6 +1,8 @@
 package com.nadia.utm.registry.block;
 
+import com.nadia.utm.block.displaylink.utmDisplaySources;
 import com.nadia.utm.registry.item.utmItemContainer;
+import com.simibubi.create.api.behaviour.display.DisplaySource;
 import com.simibubi.create.api.stress.BlockStressValues;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -16,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 public class utmBlockContainer<B extends Block, I extends BlockItem> {
     public static final List<utmBlockContainer<?, ?>> ALL_BLOCKS = new ArrayList<>();
@@ -181,6 +184,20 @@ public class utmBlockContainer<B extends Block, I extends BlockItem> {
                 this.DATAGEN_ITEM_TAGS.add((TagKey<Item>) tag);
             }
         }
+        return this;
+    }
+
+    /**
+     * mark a block as valid display source, will automatically attach all related blockentities.
+     *
+     * @param source source factory
+     */
+    public final utmBlockContainer<B, I> displaySource(Supplier<DisplaySource> source, boolean entity) {
+        utmDisplaySources.ALL_SOURCES_BLOCK.put(this, () -> List.of(source.get()));
+
+        if (entity)
+            utmDisplaySources.ALL_SOURCES_ENTITY.put(this, () -> List.of(source.get()));
+
         return this;
     }
 

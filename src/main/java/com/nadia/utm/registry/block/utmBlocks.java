@@ -1,6 +1,7 @@
 package com.nadia.utm.registry.block;
 
 import com.nadia.utm.block.*;
+import com.nadia.utm.block.displaylink.utmDisplaySources;
 import com.nadia.utm.registry.fluid.utmFluids;
 import com.nadia.utm.registry.item.utmItems;
 import com.nadia.utm.registry.tags.utmTags;
@@ -108,7 +109,7 @@ public class utmBlocks {
     public static final utmBlockContainer<BiomeSealerBlock, BlockItem> BIOME_SEALER = dualRegister("biome_sealer", BiomeSealerBlock::new, BlockBehaviour.Properties.of()
             .destroyTime(5.0f)
             .explosionResistance(50f).sound(SoundType.METAL))
-            .dropSelf().inheritModel().ponder(A23, OXYGEN).minePick().stress(2);
+            .dropSelf().inheritModel().ponder(A23, OXYGEN).minePick().stress(2).displaySource(utmDisplaySources.SEALER::get, false);
 
     public static final utmBlockContainer<BlockChunkLoaderBlock, BlockItem> CHUNK_LOADER = dualRegister("chunk_loader", BlockChunkLoaderBlock::new, BlockBehaviour.Properties.of()
             .destroyTime(5.0f)
