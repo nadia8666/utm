@@ -117,22 +117,22 @@ public class utmClientEvents {
             utmEvents.register(RegisterDimensionSpecialEffectsEvent.class, event -> event.register(
                     ResourceLocation.fromNamespaceAndPath("utm", "2313ag"),
                     new DimensionSpecialEffects(Float.NaN, false, DimensionSpecialEffects.SkyType.NONE, false, false) {
-                @Override
-                public @NotNull Vec3 getBrightnessDependentFogColor(@NotNull Vec3 pos, float arg2) {
-                    return Vec3.ZERO;
+                        @Override
+                        public @NotNull Vec3 getBrightnessDependentFogColor(@NotNull Vec3 pos, float arg2) {
+                            return Vec3.ZERO;
 
-                }
+                        }
 
-                @Override
-                public boolean isFoggyAt(int x, int z) {
-                    return true;
-                }
+                        @Override
+                        public boolean isFoggyAt(int x, int z) {
+                            return true;
+                        }
 
-                @Override
-                public float[] getSunriseColor(float timeOfDay, float partialTicks) {
-                    return null;
-                }
-            }));
+                        @Override
+                        public float[] getSunriseColor(float timeOfDay, float partialTicks) {
+                            return null;
+                        }
+                    }));
         }
     }
 

@@ -1,4 +1,4 @@
 {
-  "parent": "utm:block/aerowall",
+  "parent": "utm:block/aerowall_mesh",
   "render_type": "cutout"
 }

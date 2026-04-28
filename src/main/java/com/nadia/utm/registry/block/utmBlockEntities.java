@@ -41,4 +41,8 @@ public class utmBlockEntities {
     public static final Supplier<BlockEntityType<BiomeSealerBlockEntity>> BIOME_SEALER = BLOCK_ENTITIES.register("biome_sealer", () ->
             BlockEntityType.Builder.of(BiomeSealerBlockEntity::new, utmBlocks.BIOME_SEALER.BLOCK.get())
                     .build((Type<?>) null));
+
+    public static final Supplier<BlockEntityType<AerowallBlockEntity>> AEROWALL = BLOCK_ENTITIES.register("aerowall", () ->
+            BlockEntityType.Builder.of(AerowallBlockEntity::new, utmBlocks.AERO_WALL.BLOCK.get())
+                    .build((Type<?>) null));
 }

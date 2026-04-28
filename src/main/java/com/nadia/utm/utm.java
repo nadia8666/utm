@@ -116,6 +116,6 @@ public class utm {
     }
 
     public static ResourceLocation key(String path) {
-        return ResourceLocation.fromNamespaceAndPath("utm", path);
+        return ResourceLocation.tryBuild("utm", path);
     }
 }
