@@ -1,6 +1,6 @@
 package com.nadia.utm.block;
 
-import com.nadia.utm.block.entity.IonJetBlockEntity;
+import com.nadia.utm.block.entity.RegenDiscBlockEntity;
 import com.nadia.utm.registry.block.utmBlockEntities;
 import com.simibubi.create.content.kinetics.base.KineticBlock;
 import com.simibubi.create.foundation.block.IBE;
@@ -17,13 +17,11 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import org.jetbrains.annotations.NotNull;
 
-public class IonJetBlock extends KineticBlock implements IBE<IonJetBlockEntity> {
+public class RegenDiscBlock extends KineticBlock implements IBE<RegenDiscBlockEntity> {
     public static final DirectionProperty FACING = BlockStateProperties.FACING;
 
-    public IonJetBlock(Properties properties) {
+    public RegenDiscBlock(Properties properties) {
         super(properties);
-
-        registerDefaultState(this.stateDefinition.any()); // apprently might NPE withotu facing but i dont believe what intellij.ai tells me
     }
 
     @Override
@@ -38,13 +36,13 @@ public class IonJetBlock extends KineticBlock implements IBE<IonJetBlockEntity> 
 
 
     @Override
-    public Class<IonJetBlockEntity> getBlockEntityClass() {
-        return IonJetBlockEntity.class;
+    public Class<RegenDiscBlockEntity> getBlockEntityClass() {
+        return RegenDiscBlockEntity.class;
     }
 
     @Override
     public boolean hasShaftTowards(LevelReader world, BlockPos pos, BlockState state, Direction face) {
-        return face.equals(state.getValue(FACING));
+        return face.equals(state.getValue(FACING).getOpposite()) || face.equals(state.getValue(FACING));
     }
 
     @Override
@@ -53,8 +51,8 @@ public class IonJetBlock extends KineticBlock implements IBE<IonJetBlockEntity> 
     }
 
     @Override
-    public BlockEntityType<IonJetBlockEntity> getBlockEntityType() {
-        return utmBlockEntities.ION_JET.get();
+    public BlockEntityType<RegenDiscBlockEntity> getBlockEntityType() {
+        return utmBlockEntities.REGEN_DISC.get();
     }
 
     protected @NotNull BlockState rotate(BlockState state, Rotation rot) {

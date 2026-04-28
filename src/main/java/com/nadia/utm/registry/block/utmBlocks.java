@@ -136,6 +136,11 @@ public class utmBlocks {
             .isViewBlocking((state, level, pos) -> false)
             .isSuffocating((state, level, pos) -> false)).dropSelf().tags(utmTags.BLOCK.SEAL_NOPROP);
 
+    public static final utmBlockContainer<RegenDiscBlock, BlockItem> REGEN_DISC = dualRegister("regen_disc", RegenDiscBlock::new, BlockBehaviour.Properties.of()
+            .instabreak()
+            .sound(SoundType.METAL)
+            ).inheritModel().cube().dropSelf().tags(utmTags.BLOCK.BYPASS_RPM).stress(32, true);
+
     public static final utmBlockContainer<CitywallsBlock, BlockItem> CITYWALLS_METAL = dualRegister("citywalls_metal", CitywallsBlock::new, BlockBehaviour.Properties.of()
             .destroyTime(1.0f)
             .sound(SoundType.ANCIENT_DEBRIS)
@@ -194,5 +199,5 @@ public class utmBlocks {
     // propulsion
     public static final utmBlockContainer<IonJetBlock, BlockItem> ION_JET = dualRegister("ion_jet", IonJetBlock::new, BlockBehaviour.Properties.of()
             .destroyTime(3)
-            .sound(SoundType.METAL)).dropSelf().cube().inheritModel().minePick().mineTier(2);
+            .sound(SoundType.METAL)).dropSelf().cube().inheritModel().minePick().mineTier(2).stress(8).tags(utmTags.BLOCK.BYPASS_RPM);
 }

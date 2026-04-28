@@ -49,4 +49,6 @@ public class utmBlockEntities {
     public static final Supplier<BlockEntityType<IonJetBlockEntity>> ION_JET = register("ion_jet", IonJetBlockEntity::new, utmBlocks.ION_JET);
 
     public static final Supplier<BlockEntityType<AerowallBlockEntity>> AEROWALL = register("aerowall", AerowallBlockEntity::new, utmBlocks.AERO_WALL);
+
+    public static final Supplier<BlockEntityType<RegenDiscBlockEntity>> REGEN_DISC = register("regen_disc", RegenDiscBlockEntity::new, utmBlocks.REGEN_DISC);
 }

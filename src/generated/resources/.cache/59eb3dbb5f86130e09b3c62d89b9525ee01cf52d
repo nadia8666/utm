@@ -1,4 +1,4 @@
-// 1.21.1	2026-04-27T13:28:53.2762651	Loot Tables
+// 1.21.1	2026-04-28T10:29:01.4135516	Loot Tables
 79f8f9dea0c7cdb725e30638071b2e6216a483ed data/utm/loot_table/blocks/aerowall.json
 f8c417ff60baca7c6796b4b11326f96ca35b0f99 data/utm/loot_table/blocks/aluminum_ore.json
 d4e8775a0bc83dce60dc1d83731b77333a4fed3b data/utm/loot_table/blocks/biome_sealer.json
@@ -20,3 +20,4 @@ c712d654f16dad4a772a2233fb23c0c84bf0afab data/utm/loot_table/blocks/interdictor.
 b6a5d5d588720f296dfc0c60771d38331c0f791a data/utm/loot_table/blocks/oxygen_furnace.json
 e2264ed9fd039e249e3f3223618d23320ae3e14e data/utm/loot_table/blocks/player_chunk_loader.json
 9f8e615a1f199cf068992d32a53212e18b1e6401 data/utm/loot_table/blocks/portasealer.json
+9f509bc075cd533e9caada0e6e1be805d17a0170 data/utm/loot_table/blocks/regen_disc.json

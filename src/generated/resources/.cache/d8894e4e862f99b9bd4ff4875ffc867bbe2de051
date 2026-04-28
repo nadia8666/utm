@@ -1,4 +1,4 @@
-// 1.21.1	2026-04-27T13:28:53.2733358	Item Models: utm
+// 1.21.1	2026-04-28T10:29:01.4100594	Item Models: utm
 6d60e0d2b0873e138bcfa8f5db0ca9cb6d7cd4fa assets/utm/models/item/adv_goggles.json
 0c35c7686bdc2e520fa2ede79bfa3e5855ad5ffc assets/utm/models/item/air_compressor.json
 9d13b4b18c25ee3c81b1cc65fd86954c95187339 assets/utm/models/item/aluminum_ingot.json
@@ -51,6 +51,7 @@ aaed7d47793a03535e0fc1e59b89f24ea056bb7d assets/utm/models/item/obsidian_sword.j
 222d633b6564a532e01c7d3ca1a2745f4424f305 assets/utm/models/item/portasealer.json
 e1ff107dcc5ce5152dee20b1c2a4eedb64eb79dc assets/utm/models/item/raw_aluminum.json
 c94908a0de5dcb69056c5d24ba34e844e921b2d1 assets/utm/models/item/raw_magnesium.json
+dfa92cda8882516d5dcd729379b1da768d248a36 assets/utm/models/item/regen_disc.json
 cfaef45a7658c7b8ce65e855b1bd38a3c44113da assets/utm/models/item/shart.json
 8f6135cda73a6471dace0ba2ffa8efc61234709c assets/utm/models/item/steel_ingot.json
 97b31be7aa7fb4f3a9024c82df7b130c4ac1156f assets/utm/models/item/steel_sheet.json

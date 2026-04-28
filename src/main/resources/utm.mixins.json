@@ -10,6 +10,7 @@
     "HitboxMixin",
     "LevelMixin",
     "SchematicPlacePacketMixin",
+    "compat.create.RotationPropagatorMixin",
     "compat.gravestone.GraveBlockEntityMixin",
     "compat.gravestone.GraveBlockMixin",
     "compat.sophisticatedcore$sophisticatedbackpacks.PumpUpgradeWrapperMixin",

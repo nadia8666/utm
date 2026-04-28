@@ -1,7 +1,9 @@
-// 1.21.1	2026-04-27T13:28:53.2783368	Block States: utm
+// 1.21.1	2026-04-28T10:29:01.4165584	Block States: utm
 340a7d991c794d89c976d5329715b1df653a0f8f assets/utm/blockstates/aluminum_ore.json
 e6bf5ff99606a1b051414aa0455ecc169754b674 assets/utm/blockstates/ion_jet.json
 ca0e2a49a87918e52906edb9d0726fea54911838 assets/utm/blockstates/magnesium_ore.json
+ca5c0ebbab076b08ad12194cb4237fddee46dcea assets/utm/blockstates/regen_disc.json
 bc1bcfcba4581919b2300079c4b9f2dee6daccc1 assets/utm/models/block/aluminum_ore.json
 7ea83442c3c71ab0cc5445bc8cdcdd9b390cd1d8 assets/utm/models/block/ion_jet.json
 aac97c445c90a6ff90adcaa515c2560d935ec707 assets/utm/models/block/magnesium_ore.json
+8b8448307d27093c67eadf3247c11b72acf4f276 assets/utm/models/block/regen_disc.json

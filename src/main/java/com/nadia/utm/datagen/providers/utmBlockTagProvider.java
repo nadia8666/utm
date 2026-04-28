@@ -51,6 +51,11 @@ public class utmBlockTagProvider extends BlockTagsProvider {
                 , OffroadBlocks.WHEEL_MOUNT.get()
         );
 
+        tag(utmTags.BLOCK.BYPASS_RPM).add(
+                SimBlocks.SWIVEL_BEARING.get(),
+                SimBlocks.SWIVEL_BEARING_LINK_BLOCK.get()
+        );
+
         utmBlockContainer.ALL_BLOCKS.forEach(c -> {
             for (TagKey<Block> targ : c.DATAGEN_BLOCK_TAGS) {
                 tag(targ).add(c.BLOCK.get());

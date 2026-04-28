@@ -49,8 +49,13 @@ public class utmBlockContainer<B extends Block, I extends BlockItem> {
      *
      * @return block container
      */
+    public utmBlockContainer<B, I> stress(double stress, boolean capacity) {
+        onRegister(b -> (capacity ? BlockStressValues.CAPACITIES : BlockStressValues.IMPACTS).register(b, () -> stress));
+        return this;
+    }
+
     public utmBlockContainer<B, I> stress(double stress) {
-        onRegister(b -> BlockStressValues.IMPACTS.register(b, () -> stress));
+        stress(stress, false);
         return this;
     }
 

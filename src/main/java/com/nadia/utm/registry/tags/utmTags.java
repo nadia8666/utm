@@ -29,5 +29,9 @@ public class utmTags {
         public static final TagKey<Block> SEALED = TagKey.create(
                 Registries.BLOCK,
                 utm.key("sealed"));
+
+        public static final TagKey<Block> BYPASS_RPM = TagKey.create(
+                Registries.BLOCK,
+                utm.key("bypass_max_rpm"));
     }
 }

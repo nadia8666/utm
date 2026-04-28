@@ -1,11 +1,12 @@
-// 1.21.1	2026-04-27T13:28:53.2772636	Tags for minecraft:block mod id utm
+// 1.21.1	2026-04-28T12:27:51.5439532	Tags for minecraft:block mod id utm
 6cd88e214573b659c707666abea9d2e53d37d1ef data/minecraft/tags/block/anvil.json
-811166995d69932a266dc1ef949652b6079341f7 data/minecraft/tags/block/mineable/axe.json
-c261d308dc208aa6ceca5e02bfde1b453ff1890f data/minecraft/tags/block/mineable/pickaxe.json
+99370b002297eaabd86f0624c2e7780a04051eb9 data/minecraft/tags/block/mineable/axe.json
+50d851da98d0e8dc4765767671eae749249eaae4 data/minecraft/tags/block/mineable/pickaxe.json
 68ed7314494739cde5140e278aeea025be141f8b data/minecraft/tags/block/mineable/shovel.json
 6cd88e214573b659c707666abea9d2e53d37d1ef data/minecraft/tags/block/needs_diamond_tool.json
 966bacc64a9783e998e9ceab8684b2ed4e234c0c data/minecraft/tags/block/needs_iron_tool.json
 646c01c52ddfeb4c6493351c489cc8d4b42278ff data/minecraft/tags/block/needs_stone_tool.json
-c71ba91893ceaf9d83b298f21e242bec759a8af6 data/utm/tags/block/a23_ore_replaceable.json
+e58118d971da4de3043a330dc9116af7c8370a41 data/utm/tags/block/a23_ore_replaceable.json
+28ae5cf8a761cc72d589d5e16738bf8341fa535c data/utm/tags/block/bypass_max_rpm.json
 556295546ef05ae1299f39407fe5dd5f58b1a20b data/utm/tags/block/seal_noprop.json
 ea461a6839d2e150a182c278a3be791480ffec3d data/utm/tags/block/unsealed.json
