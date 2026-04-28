@@ -3,7 +3,6 @@ package com.nadia.utm.block.entity;
 import com.nadia.utm.event.ForceLoad;
 import com.nadia.utm.event.utmEvents;
 import com.nadia.utm.registry.block.utmBlockEntities;
-import com.nadia.utm.utm;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;

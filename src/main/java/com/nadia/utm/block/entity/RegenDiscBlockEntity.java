@@ -28,8 +28,8 @@ public class RegenDiscBlockEntity extends GeneratingKineticBlockEntity implement
 
     @Override
     public void sable$physicsTick(ServerSubLevel subLevel, RigidBodyHandle handle, double timeStep) {
-        Vector3d speed = handle.getAngularVelocity(new Vector3d());
-        SPEED = (float) (Math.abs(speed.y) * 30 / Math.PI);
+        Vector3d localSpeed = subLevel.logicalPose().transformNormalInverse(handle.getAngularVelocity(new Vector3d()));
+        SPEED = (float) (Math.abs(localSpeed.y) * (Math.min(30, Math.abs(localSpeed.y))) / Math.PI);
 
         setChanged();
         sendData();
@@ -46,8 +46,13 @@ public class RegenDiscBlockEntity extends GeneratingKineticBlockEntity implement
     }
 
     @Override
+    public boolean isSpeedRequirementFulfilled() {
+        return SPEED >= 1024;
+    }
+
+    @Override
     public float getGeneratedSpeed() {
-        return convertToDirection(SPEED, getBlockState().getValue(RegenDiscBlock.FACING));
+        return convertToDirection(SPEED < 1024 ? 0 : SPEED, getBlockState().getValue(RegenDiscBlock.FACING));
     }
 
     @Override
