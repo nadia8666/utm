@@ -53,7 +53,9 @@ public class utmBlockTagProvider extends BlockTagsProvider {
 
         tag(utmTags.BLOCK.BYPASS_RPM).add(
                 SimBlocks.SWIVEL_BEARING.get(),
-                SimBlocks.SWIVEL_BEARING_LINK_BLOCK.get()
+                SimBlocks.SWIVEL_BEARING_LINK_BLOCK.get(),
+
+                AllBlocks.FLYWHEEL.get()
         );
 
         utmBlockContainer.ALL_BLOCKS.forEach(c -> {
