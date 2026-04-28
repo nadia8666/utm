@@ -1,5 +1,6 @@
 package com.nadia.utm.registry.item;
 
+import com.nadia.utm.item.AdvancedGogglesItem;
 import com.nadia.utm.item.LockedSchematicItem;
 import com.nadia.utm.registry.fluid.utmFluids;
 import com.nadia.utm.registry.song.utmSongs;
@@ -59,6 +60,9 @@ public class utmItems {
     public static final utmItemContainer<Item> FIDDLECORE = register("fiddlecore").generated(),
             FLOATINGCORE = register("floatingcore").generated();
     public static final utmItemContainer<LockedSchematicItem> INCREDI = register("incredipak", () -> new LockedSchematicItem("incredipak.nbt")).generated();
+
+    public static final utmItemContainer<AdvancedGogglesItem> GOGGLES = register("adv_goggles", () -> new AdvancedGogglesItem(new Item.Properties().stacksTo(1)))
+            .generated().tags();
 
     // discs
     public static final utmItemContainer<Item> MUSIC_DISC_TEARS = register("music_disc_tears", new Item.Properties()

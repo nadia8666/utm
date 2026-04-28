@@ -7,7 +7,7 @@ import com.nadia.utm.client.renderer.utmRenderTypes;
 import com.nadia.utm.event.ForceLoad;
 import com.nadia.utm.event.utmEvents;
 import com.nadia.utm.registry.block.utmBlockEntities;
-import com.nadia.utm.registry.model.utmPartialModels;
+import com.nadia.utm.registry.model.utmModels;
 import com.nadia.utm.util.PoseUtil;
 import com.simibubi.create.foundation.blockEntity.renderer.SafeBlockEntityRenderer;
 import net.createmod.catnip.platform.NeoForgeCatnipServices;
@@ -28,9 +28,9 @@ public class OxygenFurnaceRenderer extends SafeBlockEntityRenderer<OxygenFurnace
     protected void renderSafe(OxygenFurnaceBlockEntity be, float partialTicks, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
         FluidStack oxygenStack = be.LOX.getPrimaryHandler().getFluid();
         FluidStack steelStack = be.STEEL.getPrimaryHandler().getFluid();
-        SuperByteBuffer tanks = CachedBuffers.partial(utmPartialModels.OXYGEN_FURNACE_TANKS, be.getBlockState());
+        SuperByteBuffer tanks = CachedBuffers.partial(utmModels.OXYGEN_FURNACE_TANKS, be.getBlockState());
 
-        new PoseUtil(ms).push().run(() -> rotateByState(be, ms)).run(() -> {
+        new PoseUtil(ms).push().run(() -> rotateByHoriz(be, ms)).run(() -> {
             drawTank(oxygenStack, buffer, ms, light, 11, 1 / 64f, 16 - 1 / 64f, 6 - 1 / 64f);
             drawTank(steelStack, buffer, ms, light, 1 / 64f, 6 + 1 / 64f, 4 - 1 / 64f, 16 - 1 / 64f);
 

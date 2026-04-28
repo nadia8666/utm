@@ -57,7 +57,7 @@ public class utmBlockContainer<B extends Block, I extends BlockItem> {
      * @return block container
      * @datagen
      */
-    public utmBlockContainer<B, I> drops() {
+    public utmBlockContainer<B, I> dropSelf() {
         getForDatagen().add("dropSelf");
         return this;
     }
@@ -79,7 +79,7 @@ public class utmBlockContainer<B extends Block, I extends BlockItem> {
      * @return block container
      * @datagen
      */
-    public utmBlockContainer<B, I> copyItemModel() {
+    public utmBlockContainer<B, I> inheritModel() {
         getForDatagen().add("blockModel");
         return this;
     }
@@ -90,7 +90,7 @@ public class utmBlockContainer<B extends Block, I extends BlockItem> {
      * @return block container
      * @datagen
      */
-    public utmBlockContainer<B, I> bModel() {
+    public utmBlockContainer<B, I> cube() {
         getForDatagen().add("blockModelState");
         return this;
     }

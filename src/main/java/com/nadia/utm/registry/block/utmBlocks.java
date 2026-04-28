@@ -70,11 +70,11 @@ public class utmBlocks {
 
     public static final utmBlockContainer<HeavyMetalAnvilBlock, BlockItem> HEAVY_METAL_ANVIL = dualRegister("heavy_metal_anvil", HeavyMetalAnvilBlock::new, BlockBehaviour.Properties.of()
             .destroyTime(7.0f)
-            .explosionResistance(2500f).sound(SoundType.ANVIL)).drops().copyItemModel().minePick().mineTier(3).tags(BlockTags.ANVIL, ItemTags.ANVIL);
+            .explosionResistance(2500f).sound(SoundType.ANVIL)).dropSelf().inheritModel().minePick().mineTier(3).tags(BlockTags.ANVIL, ItemTags.ANVIL);
 
     public static final utmBlockContainer<GlintTableBlock, BlockItem> GLINT_TABLE = dualRegister("glint_table", GlintTableBlock::new, BlockBehaviour.Properties.of()
             .destroyTime(3.0f)
-            .explosionResistance(25f).sound(SoundType.WOOD)).drops().copyItemModel().mineAxe();
+            .explosionResistance(25f).sound(SoundType.WOOD)).dropSelf().inheritModel().mineAxe();
 
     public static final utmBlockContainer<LaunchContraptionBlock, BlockItem> LAUNCH_CONTRAPTION = dualRegister("launch_contraption", LaunchContraptionBlock::new, BlockBehaviour.Properties.of()
             .destroyTime(3.0f)
@@ -82,7 +82,7 @@ public class utmBlocks {
             .noOcclusion()
             .isViewBlocking((state, level, pos) -> false)
             .isSuffocating((state, level, pos) -> false))
-            .drops().copyItemModel().ponder(A23, CONTRAPTION_ACTOR).minePick();
+            .dropSelf().inheritModel().ponder(A23, CONTRAPTION_ACTOR).minePick();
 
     public static final utmBlockContainer<OxygenCollectorBlock, BlockItem> OXYGEN_COLLECTOR = dualRegister("oxygen_collector", OxygenCollectorBlock::new, BlockBehaviour.Properties.of()
             .destroyTime(3.0f)
@@ -90,42 +90,42 @@ public class utmBlocks {
             .noOcclusion()
             .isViewBlocking((state, level, pos) -> false)
             .isSuffocating((state, level, pos) -> false))
-            .stress(8).drops().ponder(A23, OXYGEN).minePick();
+            .stress(8).dropSelf().ponder(A23, OXYGEN).minePick();
 
     public static final utmBlockContainer<OxygenFurnaceBlock, BlockItem> OXYGEN_FURNACE = dualRegister("oxygen_furnace", OxygenFurnaceBlock::new, BlockBehaviour.Properties.of()
             .destroyTime(5.0f)
             .explosionResistance(50f).sound(SoundType.METAL)
             .noOcclusion())
-            .drops().copyItemModel().ponder(A23, OXYGEN).minePick();
+            .dropSelf().inheritModel().ponder(A23, OXYGEN).minePick();
 
     public static final utmBlockContainer<PortasealerBlock, BlockItem> PORTASEALER = dualRegister("portasealer", PortasealerBlock::new, BlockBehaviour.Properties.of()
             .destroyTime(2.0f)
             .explosionResistance(50f).sound(SoundType.METAL)
             .noOcclusion().isSuffocating((s, l, p) -> false)
             .isViewBlocking((s, l, p) -> false))
-            .drops().copyItemModel().ponder(A23, OXYGEN).minePick();
+            .dropSelf().inheritModel().ponder(A23, OXYGEN).minePick();
 
     public static final utmBlockContainer<BiomeSealerBlock, BlockItem> BIOME_SEALER = dualRegister("biome_sealer", BiomeSealerBlock::new, BlockBehaviour.Properties.of()
             .destroyTime(5.0f)
             .explosionResistance(50f).sound(SoundType.METAL))
-            .drops().copyItemModel().ponder(A23, OXYGEN).minePick().stress(2);
+            .dropSelf().inheritModel().ponder(A23, OXYGEN).minePick().stress(2);
 
     public static final utmBlockContainer<BlockChunkLoaderBlock, BlockItem> CHUNK_LOADER = dualRegister("chunk_loader", BlockChunkLoaderBlock::new, BlockBehaviour.Properties.of()
             .destroyTime(5.0f)
             .explosionResistance(25f).sound(SoundType.WOOD)
-            .noOcclusion()).drops().copyItemModel().mineAxe().mineTier(1);
+            .noOcclusion()).dropSelf().inheritModel().mineAxe().mineTier(1);
 
     public static final utmBlockContainer<PlayerChunkLoaderBlock, BlockItem> PLAYER_CHUNK_LOADER = dualRegister("player_chunk_loader", PlayerChunkLoaderBlock::new, BlockBehaviour.Properties.of()
             .destroyTime(5.0f)
             .explosionResistance(25f).sound(SoundType.WOOD)
-            .noOcclusion()).drops().copyItemModel().mineAxe().mineTier(1);
+            .noOcclusion()).dropSelf().inheritModel().mineAxe().mineTier(1);
 
     public static final utmBlockContainer<GrateBlock, BlockItem> GRATE = dualRegister("grate", GrateBlock::new, BlockBehaviour.Properties.of()
             .destroyTime(1.0f)
             .sound(SoundType.CHAIN)
             .noOcclusion()
             .isViewBlocking((state, level, pos) -> false)
-            .isSuffocating((state, level, pos) -> false)).drops().copyItemModel().minePick();
+            .isSuffocating((state, level, pos) -> false)).dropSelf().inheritModel().minePick();
 
     public static final utmBlockContainer<AerowallBlock, BlockItem> AERO_WALL = dualRegister("aerowall", AerowallBlock::new, BlockBehaviour.Properties.of()
             .instabreak()
@@ -133,44 +133,44 @@ public class utmBlocks {
             .noOcclusion()
             .noCollission()
             .isViewBlocking((state, level, pos) -> false)
-            .isSuffocating((state, level, pos) -> false)).drops().tags(utmTags.BLOCK.SEAL_NOPROP);
+            .isSuffocating((state, level, pos) -> false)).dropSelf().tags(utmTags.BLOCK.SEAL_NOPROP);
 
     public static final utmBlockContainer<CitywallsBlock, BlockItem> CITYWALLS_METAL = dualRegister("citywalls_metal", CitywallsBlock::new, BlockBehaviour.Properties.of()
             .destroyTime(1.0f)
             .sound(SoundType.ANCIENT_DEBRIS)
             .noOcclusion()
             .isViewBlocking((state, level, pos) -> false)
-            .isSuffocating((state, level, pos) -> false)).drops(),
+            .isSuffocating((state, level, pos) -> false)).dropSelf(),
             OUTPOSTWALLS_METAL = dualRegister("outpostwalls_metal", CitywallsBlock::new, BlockBehaviour.Properties.of()
                     .destroyTime(1.0f)
                     .sound(SoundType.ANCIENT_DEBRIS)
                     .noOcclusion()
                     .isViewBlocking((state, level, pos) -> false)
-                    .isSuffocating((state, level, pos) -> false)).drops(),
+                    .isSuffocating((state, level, pos) -> false)).dropSelf(),
             OUTPOSTWALLS_SHRINE = dualRegister("outpostwalls_shrine", CitywallsBlock::new, BlockBehaviour.Properties.of()
                     .destroyTime(1.0f)
                     .sound(SoundType.ANCIENT_DEBRIS)
                     .noOcclusion()
                     .isViewBlocking((state, level, pos) -> false)
-                    .isSuffocating((state, level, pos) -> false)).drops(),
+                    .isSuffocating((state, level, pos) -> false)).dropSelf(),
             CITYWALLS_SHRINE = dualRegister("citywalls_shrine", CitywallsBlock::new, BlockBehaviour.Properties.of()
                     .destroyTime(1.0f)
                     .sound(SoundType.ANCIENT_DEBRIS)
                     .noOcclusion()
                     .isViewBlocking((state, level, pos) -> false)
-                    .isSuffocating((state, level, pos) -> false)).drops();
+                    .isSuffocating((state, level, pos) -> false)).dropSelf();
     public static final utmBlockContainer<InterdictorBlock, BlockItem> INTERDICTOR = dualRegister("interdictor", InterdictorBlock::new, BlockBehaviour.Properties.of()
             .destroyTime(10.0f)
             .sound(SoundType.NETHERITE_BLOCK)
             .noOcclusion()
             .isViewBlocking((state, level, pos) -> false)
-            .isSuffocating((state, level, pos) -> false)).drops().copyItemModel();
+            .isSuffocating((state, level, pos) -> false)).dropSelf().inheritModel();
     public static final utmBlockContainer<Block, BlockItem> FLINT_BLOCK = dualRegister("flint_block", Block::new, BlockBehaviour.Properties.of()
             .destroyTime(10.0f)
-            .sound(SoundType.GRAVEL)).drops().copyItemModel().mineShovel();
+            .sound(SoundType.GRAVEL)).dropSelf().inheritModel().mineShovel();
     public static final utmBlockContainer<Block, BlockItem> FLINT_BLOCK_BLOCK = dualRegister("flint_block_block", Block::new, BlockBehaviour.Properties.of()
             .destroyTime(100.0f)
-            .sound(SoundType.GRAVEL)).drops().copyItemModel().mineShovel();
+            .sound(SoundType.GRAVEL)).dropSelf().inheritModel().mineShovel();
 
     public static final DeferredBlock<LiquidBlock> LIQUID_OXYGEN_BLOCK = BLOCKS.register("liquid_oxygen",
             () -> new LiquidBlock(utmFluids.LIQUID_OXYGEN.get(),
@@ -183,10 +183,15 @@ public class utmBlocks {
     public static final utmBlockContainer<Block, BlockItem> ALUMINUM_ORE = dualRegister("aluminum_ore", Block::new, BlockBehaviour.Properties.of()
             .destroyTime(3)
             .requiresCorrectToolForDrops()
-            .sound(SoundType.STONE)).dropOre(utmItems.RAW_ALUMINUM).bModel().copyItemModel().minePick().mineTier(2);
+            .sound(SoundType.STONE)).dropOre(utmItems.RAW_ALUMINUM).cube().inheritModel().minePick().mineTier(2);
 
     public static final utmBlockContainer<Block, BlockItem> MAGNESIUM_ORE = dualRegister("magnesium_ore", Block::new, BlockBehaviour.Properties.of()
             .destroyTime(3)
             .requiresCorrectToolForDrops()
-            .sound(SoundType.STONE)).dropOre(utmItems.RAW_MAGNESIUM).bModel().copyItemModel().minePick().mineTier(2);
+            .sound(SoundType.STONE)).dropOre(utmItems.RAW_MAGNESIUM).cube().inheritModel().minePick().mineTier(2);
+
+    // propulsion
+    public static final utmBlockContainer<IonJetBlock, BlockItem> ION_JET = dualRegister("ion_jet", IonJetBlock::new, BlockBehaviour.Properties.of()
+            .destroyTime(3)
+            .sound(SoundType.METAL)).dropSelf().cube().inheritModel().minePick().mineTier(2);
 }

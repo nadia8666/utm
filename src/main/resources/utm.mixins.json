@@ -17,23 +17,23 @@
   ],
   "client": [
     "AnvilScreenMixin",
-    "compat.figura.CameraMixin",
     "GameRendererMixin",
     "RemainingAirOverlayMixin",
     "SchematicHandlerMixin",
+    "compat.figura.AvatarMixinExtensions",
+    "compat.figura.CameraMixin",
+    "compat.figura.FiguraCompatMixin",
+    "compat.figura$punchy.PunchyArmRendererMixin",
     "compat.gravestone.ObituaryScreenMixin",
-    "compat.showcaseitem$jei.ShowcaseItemMixin",
     "compat.offroad.WheelMountRendererMixin",
+    "compat.showcaseitem$jei.ShowcaseItemMixin",
     "renderer.BacktankArmorLayerMixin",
     "renderer.LayeredArmorItemMixin",
     "renderer.MultiBufferSourceMixin",
     "renderer.NetheriteBacktankFirstPersonRendererMixin",
     "renderer.glint.ElytraLayerMixin",
-    "compat.figura.FiguraCompatMixin",
     "renderer.glint.HumanoidArmorLayerMixin",
-    "renderer.glint.ItemRendererMixin",
-    "compat.figura$punchy.PunchyArmRendererMixin",
-    "compat.figura.AvatarMixinExtensions"
+    "renderer.glint.ItemRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -42,6 +42,10 @@ public class utmBlockEntities {
             BlockEntityType.Builder.of(BiomeSealerBlockEntity::new, utmBlocks.BIOME_SEALER.BLOCK.get())
                     .build((Type<?>) null));
 
+    public static final Supplier<BlockEntityType<IonJetBlockEntity>> ION_JET = BLOCK_ENTITIES.register("ion_jet", () ->
+            BlockEntityType.Builder.of(IonJetBlockEntity::new, utmBlocks.ION_JET.BLOCK.get())
+                    .build((Type<?>) null));
+
     public static final Supplier<BlockEntityType<AerowallBlockEntity>> AEROWALL = BLOCK_ENTITIES.register("aerowall", () ->
             BlockEntityType.Builder.of(AerowallBlockEntity::new, utmBlocks.AERO_WALL.BLOCK.get())
                     .build((Type<?>) null));

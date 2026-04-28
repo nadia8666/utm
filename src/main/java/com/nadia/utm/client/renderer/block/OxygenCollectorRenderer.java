@@ -5,7 +5,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.nadia.utm.event.ForceLoad;
 import com.nadia.utm.event.utmEvents;
 import com.nadia.utm.registry.block.utmBlockEntities;
-import com.nadia.utm.registry.model.utmPartialModels;
+import com.nadia.utm.registry.model.utmModels;
 import com.simibubi.create.AllPartialModels;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntityRenderer;
 import net.createmod.catnip.render.CachedBuffers;
@@ -30,8 +30,8 @@ public class OxygenCollectorRenderer extends KineticBlockEntityRenderer<OxygenCo
         float ang = getAngleForBe(be, be.getBlockPos(), Direction.Axis.Y);
 
         SuperByteBuffer shaft = CachedBuffers.partial(AllPartialModels.SHAFT_HALF, be.getBlockState()).rotateCentered((float) Math.toRadians(90), Direction.Axis.X);
-        SuperByteBuffer fan = CachedBuffers.partial(utmPartialModels.OXYGEN_FAN, be.getBlockState()).translate(0, 0.365, 0);
-        SuperByteBuffer grill = CachedBuffers.partial(utmPartialModels.OXYGEN_COLLECTOR_GRILL, be.getBlockState());
+        SuperByteBuffer fan = CachedBuffers.partial(utmModels.OXYGEN_FAN, be.getBlockState()).translate(0, 0.365, 0);
+        SuperByteBuffer grill = CachedBuffers.partial(utmModels.OXYGEN_COLLECTOR_GRILL, be.getBlockState());
 
         // shaft is z forward apparnetly.
         kineticRotationTransform(shaft, be, Direction.Axis.Z, -ang, light).renderInto(ms, buffer.getBuffer(RenderType.solid()));
@@ -41,7 +41,7 @@ public class OxygenCollectorRenderer extends KineticBlockEntityRenderer<OxygenCo
 
     @Override
     protected SuperByteBuffer getRotatedModel(OxygenCollectorBlockEntity be, net.minecraft.world.level.block.state.BlockState state) {
-        return CachedBuffers.partial(utmPartialModels.OXYGEN_FAN, state);
+        return CachedBuffers.partial(utmModels.OXYGEN_FAN, state);
     }
 
     static {
