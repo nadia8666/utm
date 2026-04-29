@@ -12,4 +12,9 @@ public class utmModels {
     public static final PartialModel OXYGEN_FURNACE_TANKS = PartialModel.of(utm.key("block/oxygen_furnace_tanks"));
     public static final PartialModel BIOME_SEALER_GRILL = PartialModel.of(utm.key("block/biome_sealer_grill"));
     public static final PartialModel AEROWALL = PartialModel.of(utm.key("block/aerowall_mesh"));
+
+    public static final PartialModel ION_JET_BOTTOM_1 = PartialModel.of(utm.key("block/ion_jet_b1"));
+    public static final PartialModel ION_JET_BOTTOM_2 = PartialModel.of(utm.key("block/ion_jet_b2"));
+    public static final PartialModel ION_JET_COGS = PartialModel.of(utm.key("block/ion_jet_cogs"));
+    public static final PartialModel ION_JET_VENT = PartialModel.of(utm.key("block/ion_jet_vent"));
 }

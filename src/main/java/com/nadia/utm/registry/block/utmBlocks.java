@@ -199,5 +199,6 @@ public class utmBlocks {
     // propulsion
     public static final utmBlockContainer<IonJetBlock, BlockItem> ION_JET = dualRegister("ion_jet", IonJetBlock::new, BlockBehaviour.Properties.of()
             .destroyTime(3)
-            .sound(SoundType.METAL)).dropSelf().cube().inheritModel().minePick().mineTier(2).stress(8).tags(utmTags.BLOCK.BYPASS_RPM);
+            .noOcclusion()
+            .sound(SoundType.METAL)).dropSelf().inheritModel().minePick().mineTier(2).stress(8).tags(utmTags.BLOCK.BYPASS_RPM);
 }
