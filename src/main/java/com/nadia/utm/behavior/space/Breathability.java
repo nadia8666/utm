@@ -30,7 +30,13 @@ import java.util.*;
 class Breathability {
     public static void checkSuffocating(ServerPlayer sPlayer, boolean inAG) {
         SubLevel level = SableUtil.getSublevel(sPlayer);
-        BlockPos controller = level != null ? OxyUtil.isSealed(level, OxyUtil.getSealCheckPositions(sPlayer).toArray(new BlockPos[0])) : OxyUtil.isSealed(sPlayer.serverLevel(), sPlayer.blockPosition());
+        BlockPos controller = null;
+        if (level != null)
+            controller = OxyUtil.isSealed(level, OxyUtil.getSealCheckPositions(sPlayer).toArray(new BlockPos[0]));
+
+        if (controller == null)
+            controller = OxyUtil.isSealed(sPlayer.serverLevel(), sPlayer.blockPosition());
+
         boolean sealed = controller != null;
         int forceOxygen = sPlayer.getData(utmAttachments.TEMPORARY_OXYGEN);
         boolean breathable = OxyUtil.canBreathe(sPlayer);
