@@ -271,11 +271,11 @@ public class OxyUtil {
      * @param entity target player
      * @param duration duration in ticks
      */
-    public static void giveTemporaryAir(LivingEntity entity, int duration) {
+    public static void giveTemporaryAir(Entity entity, int duration) {
         entity.setData(utmAttachments.TEMPORARY_OXYGEN, duration);
     }
 
-    public static List<BlockPos> getSealCheckPositions(LivingEntity entity) {
+    public static List<BlockPos> getSealCheckPositions(Entity entity) {
         return BlockPos.betweenClosedStream(entity.getBoundingBox().inflate(1)).map(BlockPos::immutable).toList();
     }
 }
