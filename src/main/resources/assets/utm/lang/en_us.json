@@ -96,7 +96,10 @@
   "itemGroup.utm": "utm Items",
 
   "emi.category.utm.anvil_transformation": "Anvil Reinforcement",
+  "emi.category.utm.oxygen_furnace": "Oxygen Furnace Production",
   "utm.emi.requires_levels": "Enchantment Cost: %s",
+  "utm.emi.oxygen_furnace_duration": "+%ss",
+
   "utm.gui.glint_table_menu": "Glint Augmenter",
 
   "utm.gui.launch_contraption_head": "WARNING:",
