@@ -21,7 +21,6 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -46,8 +45,10 @@ class Breathability {
             if (!sealed) {
                 if (entity.hasData(utmAttachments.TEMPORARY_OXYGEN)) {
                     int forceOxygen = entity.getData(utmAttachments.TEMPORARY_OXYGEN);
-                    if (forceOxygen > 0)
-                        entity.setData(utmAttachments.TEMPORARY_OXYGEN, forceOxygen--);
+                    if (forceOxygen > 0) {
+                        forceOxygen--;
+                        entity.setData(utmAttachments.TEMPORARY_OXYGEN, forceOxygen);
+                    };
 
                     if (forceOxygen <= 0)
                         entity.hurt(entity.level().damageSources().source(DamageTypes.IN_WALL), 1f);
