@@ -5,6 +5,7 @@ import com.nadia.utm.event.utmEvents;
 import com.nadia.utm.networking.payloads.LaunchContraptionPayload;
 import com.nadia.utm.registry.dimension.utmDimensions;
 import com.nadia.utm.registry.enchantment.utmEnchantments;
+import com.nadia.utm.registry.planets.utmPlanets;
 import com.nadia.utm.utm;
 import com.simibubi.create.content.contraptions.AbstractContraptionEntity;
 import io.netty.buffer.Unpooled;
@@ -17,6 +18,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -56,11 +58,11 @@ public class SpaceStateHandler {
     public static void onEntityTick(EntityTickEvent.Post event) {
         Entity entity = event.getEntity();
         if (entity instanceof LivingEntity living && !entity.level().isClientSide) {
-            if (entity.level().dimension().equals(utmDimensions.AG_KEY)) {
-                var gravity = living.getAttribute(Attributes.GRAVITY);
-                if (gravity != null && gravity.getBaseValue() != 0.12) {
-                    gravity.setBaseValue(0.12);
-                }
+            utmPlanets.Planet planet = utmPlanets.KEY_SET.get(entity.level().dimension());
+            if (planet != null) {
+                AttributeInstance gravity = living.getAttribute(Attributes.GRAVITY);
+                if (gravity != null && gravity.getBaseValue() != planet.getGravity())
+                    gravity.setBaseValue(planet.getGravity());
             }
         }
     }
