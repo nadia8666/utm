@@ -102,6 +102,8 @@
   "utm.gui.launch_contraption_head": "WARNING:",
   "utm.gui.launch_contraption_desc": "THIS ACTION IS IRREVERSIBLE!",
 
+  "utm.gui.empty_grid_backpack": "Empty Crafting Grid",
+
   "utm.display_source.sealer_display_source": "Seal information",
 
   "subtitles.utm.slider_drag": "Slider drag",
