@@ -6,9 +6,14 @@ import com.nadia.utm.networking.payloads.LaunchContraptionPayload;
 import com.nadia.utm.registry.dimension.utmDimensions;
 import com.nadia.utm.registry.enchantment.utmEnchantments;
 import com.nadia.utm.registry.planets.utmPlanets;
+import com.nadia.utm.util.OxyUtil;
+import com.nadia.utm.util.SableUtil;
 import com.nadia.utm.utm;
 import com.simibubi.create.content.contraptions.AbstractContraptionEntity;
+import dev.ryanhcode.sable.companion.SableCompanion;
+import dev.ryanhcode.sable.sublevel.SubLevel;
 import io.netty.buffer.Unpooled;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.server.MinecraftServer;
@@ -23,6 +28,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.portal.DimensionTransition;
@@ -30,6 +36,8 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.event.entity.living.LivingEvent;
 import net.neoforged.neoforge.event.entity.living.LivingFallEvent;
+import net.neoforged.neoforge.event.entity.player.BonemealEvent;
+import net.neoforged.neoforge.event.level.block.CropGrowEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.network.connection.ConnectionType;
@@ -64,6 +72,9 @@ public class SpaceStateHandler {
                 if (gravity != null && gravity.getBaseValue() != planet.getGravity())
                     gravity.setBaseValue(planet.getGravity());
             }
+
+            if (!(living instanceof Player))
+                Breathability.checkSuffocatingEntity(living);
         }
     }
 
@@ -215,6 +226,46 @@ public class SpaceStateHandler {
                 event.setDistance(0);
                 event.setCanceled(true);
                 entity.removeTag("utm_reentry_landing");
+            }
+        });
+
+        utmEvents.register(BonemealEvent.class, event -> {
+            LevelAccessor accessor = event.getLevel();
+            BlockPos pos = event.getPos();
+
+            if (accessor instanceof Level level) {
+                if (!OxyUtil.hasOxygen(level)) {
+                    SubLevel sublevel = (SubLevel) SableCompanion.INSTANCE.getContaining(level, SableUtil.toVec(pos));
+                    BlockPos controller;
+
+                    if (sublevel != null)
+                        controller = OxyUtil.isSealedLocalPos(sublevel, pos);
+                    else
+                        controller = OxyUtil.isSealed(level, pos);
+
+                    if (controller == null)
+                        event.setCanceled(false);
+                }
+            }
+        });
+
+        utmEvents.register(CropGrowEvent.Pre.class, event -> {
+            LevelAccessor accessor = event.getLevel();
+            BlockPos pos = event.getPos();
+
+            if (accessor instanceof Level level) {
+                if (!OxyUtil.hasOxygen(level)) {
+                    SubLevel sublevel = (SubLevel) SableCompanion.INSTANCE.getContaining(level, SableUtil.toVec(pos));
+                    BlockPos controller;
+
+                    if (sublevel != null)
+                        controller = OxyUtil.isSealedLocalPos(sublevel, pos);
+                    else
+                        controller = OxyUtil.isSealed(level, pos);
+
+                    if (controller == null)
+                        event.setResult(CropGrowEvent.Pre.Result.DO_NOT_GROW);
+                }
             }
         });
     }

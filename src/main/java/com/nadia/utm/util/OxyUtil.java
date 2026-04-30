@@ -12,7 +12,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
@@ -88,7 +87,7 @@ public class OxyUtil {
      * @see #hasOxygen(ResourceKey)
      * @see #canBreathe(Entity)
      * @see #canBreatheFromSealed(ServerPlayer)
-     * @see #isSealed(ServerLevel, BlockPos)
+     * @see #isSealed(Level, BlockPos)
      */
     public static boolean hasOxygen(Level level) {
         return !UNBREATHABLE_DIMENSIONS.contains(level.dimension());
@@ -99,7 +98,7 @@ public class OxyUtil {
      * @see #hasOxygen(ResourceKey)
      * @see #canBreathe(Entity)
      * @see #canBreatheFromSealed(ServerPlayer)
-     * @see #isSealed(ServerLevel, BlockPos)
+     * @see #isSealed(Level, BlockPos)
      */
     public static boolean hasOxygen(ResourceKey<Level> dimension) {
         return !UNBREATHABLE_DIMENSIONS.contains(dimension);
@@ -110,7 +109,7 @@ public class OxyUtil {
      * @see #hasOxygen(ResourceKey)
      * @see #canBreathe(Entity)
      * @see #canBreatheFromSealed(ServerPlayer)
-     * @see #isSealed(ServerLevel, BlockPos)
+     * @see #isSealed(Level, BlockPos)
      */
     public static boolean canBreathe(Entity entity) {
         return !UNBREATHABLE_DIMENSIONS.contains(entity.level().dimension());
@@ -121,7 +120,7 @@ public class OxyUtil {
      * @see #hasOxygen(ResourceKey)
      * @see #canBreathe(Entity)
      * @see #canBreatheFromSealed(ServerPlayer)
-     * @see #isSealed(ServerLevel, BlockPos)
+     * @see #isSealed(Level, BlockPos)
      */
     public static boolean canBreatheFromSealed(ServerPlayer player) {
         return isSealed(player.serverLevel(), player.blockPosition()) != null;
@@ -179,7 +178,7 @@ public class OxyUtil {
      * @return controller position
      */
     @Nullable
-    public static BlockPos isSealed(ServerLevel level, BlockPos targetPos) {
+    public static BlockPos isSealed(Level level, BlockPos targetPos) {
         ChunkPos chunkPos = new ChunkPos(targetPos);
         ChunkAccess chunk = level.getChunk(chunkPos.x, chunkPos.z, ChunkStatus.EMPTY, false);
         if (chunk == null) return null;
@@ -188,10 +187,10 @@ public class OxyUtil {
     }
 
     /**
-     * @see #isSealed(ServerLevel, BlockPos)
+     * @see #isSealed(Level, BlockPos)
      */
     @Nullable
-    public static BlockPos isSealed(ServerLevel level, BlockPos... posList) {
+    public static BlockPos isSealed(Level level, BlockPos... posList) {
         Map<BlockPos, BlockPos> hash = new HashMap<>();
         Set<ChunkPos> chunks = new HashSet<>();
 
@@ -234,6 +233,21 @@ public class OxyUtil {
     }
 
     /**
+     * check if target block is sealed via sable
+     *
+     * @param level     target sublevel to check
+     * @param p target pos in sable space
+     * @return controller position
+     */
+    @Nullable
+    public static BlockPos isSealedLocalPos(SubLevel level, BlockPos p) {
+        Map<BlockPos, BlockPos> hash = new HashMap<>();
+        level.getPlot().getLoadedChunks().forEach(c -> hash.putAll(c.getChunk().getData(utmAttachments.SEALED_AIR).sealedBlocks()));
+
+        return hash.get(p);
+    }
+
+    /**
      * get all backtanks an entity is wearing
      *
      * @param entity target entity
@@ -254,14 +268,14 @@ public class OxyUtil {
 
     /**
      * give a player temporary breathability in space
-     * @param player target player
+     * @param entity target player
      * @param duration duration in ticks
      */
-    public static void giveTemporaryAir(ServerPlayer player, int duration) {
-        player.setData(utmAttachments.TEMPORARY_OXYGEN, duration);
+    public static void giveTemporaryAir(LivingEntity entity, int duration) {
+        entity.setData(utmAttachments.TEMPORARY_OXYGEN, duration);
     }
 
-    public static List<BlockPos> getSealCheckPositions(Player player) {
-        return BlockPos.betweenClosedStream(player.getBoundingBox().inflate(1)).map(BlockPos::immutable).toList();
+    public static List<BlockPos> getSealCheckPositions(LivingEntity entity) {
+        return BlockPos.betweenClosedStream(entity.getBoundingBox().inflate(1)).map(BlockPos::immutable).toList();
     }
 }
