@@ -157,6 +157,7 @@ dependencies {
     jarJar(runtimeOnly("maven.modrinth:sable:g8CObHcP"))
     jarJar(runtimeOnly("maven.modrinth:create-aeronautics-lift-patch:b5GqYXEI")) // aero lift patch for better flight phys
     jarJar(runtimeOnly("maven.modrinth:create-link-relays:QzWAvFbP"))
+    jarJar(runtimeOnly("local:climbable_ropes:1.1.0"))
 
     compileOnly("maven.modrinth:punchy-fpa:NhhrvhDb") // punchy
 
