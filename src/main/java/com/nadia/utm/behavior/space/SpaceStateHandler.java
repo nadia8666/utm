@@ -65,16 +65,16 @@ public class SpaceStateHandler {
 
     public static void onEntityTick(EntityTickEvent.Post event) {
         Entity entity = event.getEntity();
-        if (!entity.level().isClientSide) {
+        if (!entity.level().isClientSide && entity instanceof LivingEntity living) {
             utmPlanets.Planet planet = utmPlanets.KEY_SET.get(entity.level().dimension());
-            if (planet != null && entity instanceof LivingEntity living) {
+            if (planet != null) {
                 AttributeInstance gravity = living.getAttribute(Attributes.GRAVITY);
                 if (gravity != null && gravity.getBaseValue() != planet.getGravity())
                     gravity.setBaseValue(planet.getGravity());
             }
 
-            if (!(entity instanceof Player))
-                Breathability.checkSuffocatingEntity(entity);
+            if (!(living instanceof Player))
+                Breathability.checkSuffocatingEntity(living);
         }
     }
 
