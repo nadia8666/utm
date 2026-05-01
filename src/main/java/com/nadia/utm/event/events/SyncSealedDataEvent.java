@@ -1,6 +1,6 @@
 package com.nadia.utm.event.events;
 
-import com.nadia.utm.networking.payloads.debug.SyncSealedDataPayload;
+import com.nadia.utm.networking.payloads.SyncSealedDataPayload;
 import net.neoforged.bus.api.Event;
 
 public class SyncSealedDataEvent extends Event {

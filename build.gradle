@@ -145,7 +145,7 @@ dependencies {
     jarJar(implementation("maven.modrinth:extreme_sound_muffler:KXmiEin1")) // extreme sound muffler
     jarJar(implementation("maven.modrinth:sophisticated-backpacks-create-integration:bWd7B59k")) // sophisticated backpacks x create
     jarJar(implementation('local:grimble_mod:1.0.0')) // bluebibbob's grimble mod
-    jarJar(implementation('local:drivebywire:0.2.6')) // bluebibbob's grimble mod
+    jarJar(implementation('local:drivebywire:0.2.6')) // drive by wire
 
     // sable & aeronautics
     jarJar(api("dev.ryanhcode.sable-companion:sable-companion-common-${minecraft_version}:${sable_companion_version}"))
@@ -156,7 +156,17 @@ dependencies {
     jarJar(runtimeOnly("maven.modrinth:create-aeronautics:1sv6OtSz"))
     jarJar(runtimeOnly("maven.modrinth:sable:g8CObHcP"))
 
+    jarJar(runtimeOnly("maven.modrinth:create-aeronautics-lift-patch:b5GqYXEI")) // aero lift patch for better flight phys
+    jarJar(runtimeOnly("maven.modrinth:create-link-relays:QzWAvFbP")) // create link relays
+    jarJar(runtimeOnly("local:climbable_ropes:1.1.0")) // climbable ropes
+    jarJar(runtimeOnly("maven.modrinth:create-connected:ffuMPkho")) // create connected
+
     compileOnly("maven.modrinth:punchy-fpa:NDU7HRVN") // punchy
+
+    implementation("foundry.veil:veil-neoforge-${project.minecraft_version}:${project.veil_version}") {
+        exclude group: "maven.modrinth"
+        exclude group: "me.fallenbreath"
+    }
 
     // mixin squared
     compileOnly(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-common:0.3.7-beta.1"))

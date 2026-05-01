@@ -25,11 +25,16 @@ public class utmEmiPlugin implements EmiPlugin {
         registry.addCategory(AnvilTransformCategory.CATEGORY);
         registry.addWorkstation(AnvilTransformCategory.CATEGORY, EmiStack.of(Items.ANVIL));
 
+        registry.addCategory(OxygenFurnaceCategory.CATEGORY);
+        registry.addWorkstation(OxygenFurnaceCategory.CATEGORY, EmiStack.of(utmBlocks.OXYGEN_FURNACE.ITEM.get()));
+
         registry.addRecipe(new AnvilTransformCategory(
                 ResourceLocation.fromNamespaceAndPath("utm", "/anvil_transform/heavy_metal_anvil"),
                 new ItemStack(Items.ANVIL),
                 new ItemStack(Items.NETHERITE_INGOT),
                 new ItemStack(utmBlocks.HEAVY_METAL_ANVIL.ITEM.get())
         ));
+
+        registry.addRecipe(new OxygenFurnaceCategory());
     }
 }

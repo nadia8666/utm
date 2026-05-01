@@ -23,7 +23,7 @@ public class PortasealerRenderer extends SafeBlockEntityRenderer<PortasealerBloc
     @Override
     protected void renderSafe(PortasealerBlockEntity be, float partialTicks, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
         FluidStack oxygenStack = be.TANK.getPrimaryHandler().getFluid();
-        new PoseUtil(ms).push().run(() -> rotateByState(be, ms, -90f)).run(() -> drawTank(oxygenStack, buffer, ms, light)).pop();
+        new PoseUtil(ms).push().run(() -> rotateByHoriz(be, ms, -90f)).run(() -> drawTank(oxygenStack, buffer, ms, light)).pop();
     }
 
     private void drawTank(FluidStack stack, MultiBufferSource buffer, PoseStack ms, int light) {

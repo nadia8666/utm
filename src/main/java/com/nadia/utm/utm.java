@@ -106,7 +106,7 @@ public class utm {
             }
         });
 
-        event.enqueueWork(utmRegistry::lateRegister);
+        event.enqueueWork(utmRegistry::postRegister);
     }
 
     // dont delete this apprently. this is core to utm working.
@@ -116,6 +116,6 @@ public class utm {
     }
 
     public static ResourceLocation key(String path) {
-        return ResourceLocation.fromNamespaceAndPath("utm", path);
+        return ResourceLocation.tryBuild("utm", path);
     }
 }

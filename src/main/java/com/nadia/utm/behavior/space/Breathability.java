@@ -19,6 +19,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageTypes;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -28,9 +29,48 @@ import java.util.*;
 
 @ForceLoad
 class Breathability {
+    public static void checkSuffocatingEntity(Entity entity) {
+        SubLevel level = SableUtil.getSublevel(entity);
+        BlockPos controller = null;
+        if (level != null)
+            controller = OxyUtil.isSealed(level, OxyUtil.getSealCheckPositions(entity).toArray(new BlockPos[0]));
+
+        if (controller == null)
+            controller = OxyUtil.isSealed(entity.level(), entity.blockPosition());
+
+        boolean sealed = controller != null;
+        boolean breathable = OxyUtil.canBreathe(entity);
+
+        if (!breathable) {
+            if (!sealed) {
+                if (entity.hasData(utmAttachments.TEMPORARY_OXYGEN)) {
+                    int forceOxygen = entity.getData(utmAttachments.TEMPORARY_OXYGEN);
+                    if (forceOxygen > 0) {
+                        forceOxygen--;
+                        entity.setData(utmAttachments.TEMPORARY_OXYGEN, forceOxygen);
+                    };
+
+                    if (forceOxygen <= 0)
+                        entity.hurt(entity.level().damageSources().source(DamageTypes.IN_WALL), 1f);
+                } else {
+                    OxyUtil.giveTemporaryAir(entity, 5 * 60 * 20);
+                }
+            } else if (entity.hasData(utmAttachments.TEMPORARY_OXYGEN))
+                entity.removeData(utmAttachments.TEMPORARY_OXYGEN);
+
+        } else if (entity.hasData(utmAttachments.TEMPORARY_OXYGEN))
+            entity.removeData(utmAttachments.TEMPORARY_OXYGEN);
+    }
+
     public static void checkSuffocating(ServerPlayer sPlayer, boolean inAG) {
         SubLevel level = SableUtil.getSublevel(sPlayer);
-        BlockPos controller = level != null ? OxyUtil.isSealed(level, OxyUtil.getSealCheckPositions(sPlayer).toArray(new BlockPos[0])) : OxyUtil.isSealed(sPlayer.serverLevel(), sPlayer.blockPosition());
+        BlockPos controller = null;
+        if (level != null)
+            controller = OxyUtil.isSealed(level, OxyUtil.getSealCheckPositions(sPlayer).toArray(new BlockPos[0]));
+
+        if (controller == null)
+            controller = OxyUtil.isSealed(sPlayer.serverLevel(), sPlayer.blockPosition());
+
         boolean sealed = controller != null;
         int forceOxygen = sPlayer.getData(utmAttachments.TEMPORARY_OXYGEN);
         boolean breathable = OxyUtil.canBreathe(sPlayer);
@@ -63,8 +103,12 @@ class Breathability {
             }
         }
 
-        if (forceOxygen > 0)
-            sPlayer.setData(utmAttachments.TEMPORARY_OXYGEN, forceOxygen - 1);
+        if (forceOxygen > 0) {
+            if (forceOxygen - 1 <= 0)
+                sPlayer.removeData(utmAttachments.TEMPORARY_OXYGEN);
+            else
+                sPlayer.setData(utmAttachments.TEMPORARY_OXYGEN, forceOxygen - 1);
+        }
 
         checkRefillBacktank(sPlayer, sealed, controller);
 
@@ -75,7 +119,7 @@ class Breathability {
                 be = level.getLevel().getBlockEntity(controller);
             }
 
-            if (!(be instanceof AbstractSealerBlockEntity)) {
+            if (!(be instanceof AbstractSealerBlockEntity) || (be instanceof AbstractSealerBlockEntity sealer && !sealer.ACTIVE)) {
                 ServerLevel sLevel = sPlayer.serverLevel();
                 Set<BlockPos> VISITED = new HashSet<>();
                 Queue<BlockPos> QUEUE = new LinkedList<>(PosUtil.getAdjacent(controller));

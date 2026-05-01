@@ -1,12 +1,12 @@
 package com.nadia.utm.registry;
 
+import com.nadia.utm.block.displaylink.utmDisplaySources;
 import com.nadia.utm.registry.attachment.utmAttachments;
 import com.nadia.utm.registry.behavior.utmMovingInteractions;
 import com.nadia.utm.registry.block.utmBlockEntities;
 import com.nadia.utm.registry.block.utmBlocks;
 import com.nadia.utm.registry.data.utmDataComponents;
 import com.nadia.utm.registry.fluid.utmFluids;
-import com.nadia.utm.registry.item.tool.utmTools;
 import com.nadia.utm.registry.item.utmItems;
 import com.nadia.utm.registry.loot.utmLoot;
 import com.nadia.utm.registry.particle.utmParticles;
@@ -38,6 +38,7 @@ public class utmRegistry {
     public static final DeferredRegister<?> ATTACHMENTS = utmAttachments.ATTACHMENTS;
     public static final DeferredRegister<?> FLUID_TYPES = utmFluids.FLUID_TYPES;
     public static final DeferredRegister<?> FLUIDS = utmFluids.FLUIDS;
+    public static final DeferredRegister<?> DISPLAY_SOURCES = utmDisplaySources.DISPLAY_SOURCES;
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> MAIN = TABS
             .register("main", () -> CreativeModeTab.builder()
@@ -62,9 +63,10 @@ public class utmRegistry {
     public static void registerAll(IEventBus modEventBus) {
         BLOCKS.register(modEventBus);
         ITEMS.register(modEventBus);
+        BLOCK_ENTITIES.register(modEventBus);
+        DISPLAY_SOURCES.register(modEventBus);
         COMPONENTS.register(modEventBus);
         MENUS.register(modEventBus);
-        BLOCK_ENTITIES.register(modEventBus);
         SOUNDS.register(modEventBus);
         BUFFS.register(modEventBus);
         TABS.register(modEventBus);
@@ -76,7 +78,8 @@ public class utmRegistry {
         FLUIDS.register(modEventBus);
     }
 
-    public static void lateRegister() {
+    public static void postRegister() {
         utmMovingInteractions.register();
+        utmDisplaySources.registerSources();
     }
 }

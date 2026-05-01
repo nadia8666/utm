@@ -331,7 +331,7 @@ public abstract class AbstractSealerBlockEntity extends SplitShaftBlockEntity im
         tooltip.add(Component.empty());
         utmLang.text("Sealing Info:").style(ChatFormatting.WHITE).forGoggles(tooltip);
         utmLang.text("SEALING " + (ACTIVE ? "ACTIVE" : "INACTIVE")).style(ACTIVE ? ChatFormatting.GREEN : ChatFormatting.DARK_RED).forGoggles(tooltip);
-        utmLang.text(SYNCED_VOLUME + "/" + getMaxVolume()).style(ChatFormatting.AQUA).space().add(utmLang.text("Sealed Blocks").style(ChatFormatting.GRAY)).forGoggles(tooltip);
+        utmLang.text(SYNCED_VOLUME + "/" + getMaxVolume()).style(ChatFormatting.AQUA).space().add(utmLang.text("Sealed bocks").style(ChatFormatting.GRAY)).forGoggles(tooltip);
         utmLang.text(String.valueOf(getDraw() * 20)).style(ChatFormatting.AQUA).space().add(utmLang.text("Oxygen used per second").style(ChatFormatting.GRAY)).forGoggles(tooltip);
         return true;
     }

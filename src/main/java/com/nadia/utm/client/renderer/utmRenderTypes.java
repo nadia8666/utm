@@ -8,6 +8,7 @@ import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.Tesselator;
 import com.mojang.blaze3d.vertex.VertexFormat;
 import com.nadia.utm.client.renderer.glint.utmGlintContainer;
+import com.nadia.utm.utm;
 import net.minecraft.Util;
 import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.client.renderer.GameRenderer;
@@ -169,6 +170,8 @@ public class utmRenderTypes {
                             .setDepthTestState(EQUAL_DEPTH_TEST)
                             .createCompositeState(true)
     ));
+
+    public static final ResourceLocation AEROWALL = utm.key("aerowall");
 
     private static final ResourceLocation PARTICLE_ATLAS = ResourceLocation.withDefaultNamespace("textures/atlas/particles.png");
     public static final Supplier<ParticleRenderType> EMISSIVE_PARTICLE = Suppliers.memoize(() -> new ParticleRenderType() {

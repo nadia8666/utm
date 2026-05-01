@@ -44,6 +44,8 @@
   "block.utm.portasealer": "Portasealer",
   "block.utm.biome_sealer": "Biome Sealer",
   "block.utm.aerowall": "Aero-wall",
+  "block.utm.ion_jet": "Ion Jet",
+  "block.utm.regen_disc": "Regenerative Disc",
 
   "item.utm.copper_sword": "Copper Sword",
   "item.utm.copper_pickaxe": "Copper Pickaxe",
@@ -82,6 +84,7 @@
   "item.utm.aluminum_sheet": "Aluminum Sheet",
   "item.utm.magnesium_sheet": "Magnesium Sheet",
   "item.utm.steel_sheet": "Steel Sheet",
+  "item.utm.adv_goggles": "Advanced Goggles",
 
   "item.utm.enchanted_sword_red": "Enchanted Sword",
   "item.utm.enchanted_sword_green": "Enchanted Sword",
@@ -93,11 +96,20 @@
   "itemGroup.utm": "utm Items",
 
   "emi.category.utm.anvil_transformation": "Anvil Reinforcement",
+  "emi.category.utm.oxygen_furnace": "Oxygen Furnace Production",
   "utm.emi.requires_levels": "Enchantment Cost: %s",
+  "utm.emi.oxygen_furnace_duration": "+%ss",
+
   "utm.gui.glint_table_menu": "Glint Augmenter",
 
   "utm.gui.launch_contraption_head": "WARNING:",
   "utm.gui.launch_contraption_desc": "THIS ACTION IS IRREVERSIBLE!",
+
+  "utm.gui.empty_grid_backpack": "Empty Crafting Grid",
+  "key.utm.pin_panel": "Pin Advanced Panel",
+  "key.categories.utm": "utm",
+
+  "utm.display_source.sealer_display_source": "Seal information",
 
   "subtitles.utm.slider_drag": "Slider drag",
 

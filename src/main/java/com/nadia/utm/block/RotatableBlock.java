@@ -11,7 +11,7 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import org.jetbrains.annotations.NotNull;
 
 public class RotatableBlock extends Block implements IWrenchable {
-    public static final DirectionProperty FACING;
+    public static final DirectionProperty FACING = DirectionalBlock.FACING;
 
     public RotatableBlock(Properties properties) {
         super(properties);
@@ -29,9 +29,5 @@ public class RotatableBlock extends Block implements IWrenchable {
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(FACING);
-    }
-
-    static {
-        FACING = DirectionalBlock.FACING;
     }
 }

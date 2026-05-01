@@ -23,6 +23,8 @@ public class BiomeSealerBlockEntity extends AbstractSealerBlockEntity {
 
     @Override
     public int getDraw() {
+        if (SYNCED_VOLUME <= 0) return 0;
+
         double draw = (int) Math.pow(1.0007, SYNCED_VOLUME);
 
         if (SYNCED_VOLUME < 1500) {
@@ -40,10 +42,13 @@ public class BiomeSealerBlockEntity extends AbstractSealerBlockEntity {
     @Override
     public boolean shouldStep() {
         if (Math.abs(getSpeed()) < 128) {
+            if (RECALC)
+                process();
+
             if (ACTIVE) {
                 ACTIVE = false;
-                sendData();
                 unseal();
+                sendData();
             }
             return false;
         }

@@ -2,6 +2,7 @@ package com.nadia.utm.registry.item;
 
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.registries.DeferredItem;
 
 import java.util.ArrayList;
@@ -33,6 +34,14 @@ public class utmItemContainer<I extends Item> {
 
     public I get() {
         return ITEM.get();
+    }
+
+    public boolean isIn(ItemStack stack) {
+        return is(stack.getItem());
+    }
+
+    public boolean is(Item item) {
+        return get().asItem() == item;
     }
 
     /**

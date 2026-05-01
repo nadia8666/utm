@@ -1,4 +1,5 @@
-// 1.21.1	2026-04-26T20:55:56.5979434	Item Models: utm
+// 1.21.1	2026-04-28T10:29:01.4100594	Item Models: utm
+6d60e0d2b0873e138bcfa8f5db0ca9cb6d7cd4fa assets/utm/models/item/adv_goggles.json
 0c35c7686bdc2e520fa2ede79bfa3e5855ad5ffc assets/utm/models/item/air_compressor.json
 9d13b4b18c25ee3c81b1cc65fd86954c95187339 assets/utm/models/item/aluminum_ingot.json
 8be274730d1ff844e99a3948cef3e6ec5d0d1e1c assets/utm/models/item/aluminum_ore.json
@@ -33,6 +34,7 @@ fc48134fda3d120191f6a58897d1bb3fd5632f78 assets/utm/models/item/grate.json
 487ba2c00f30efd980d0a646b53d75f69fc4fafe assets/utm/models/item/heavy_metal_anvil.json
 d4548f73a49b6ccf687c599fdf5db4032d1b3fc0 assets/utm/models/item/incredipak.json
 1beffc85c61be34cb43493ffabd9c1930107d759 assets/utm/models/item/interdictor.json
+cf45503b2e70be31136ad4d4f4f9e8716900bf6a assets/utm/models/item/ion_jet.json
 71198b608184285307f8f0d3743ba3d24d7a4001 assets/utm/models/item/launch_contraption.json
 6f0003000446e54f9b0dbaefd4e82ff8e8fa8d56 assets/utm/models/item/liquid_oxygen_bucket.json
 b6874dc12931d9a72815a83720c39c7232a5ca02 assets/utm/models/item/magnesium_ingot.json
@@ -49,6 +51,7 @@ aaed7d47793a03535e0fc1e59b89f24ea056bb7d assets/utm/models/item/obsidian_sword.j
 222d633b6564a532e01c7d3ca1a2745f4424f305 assets/utm/models/item/portasealer.json
 e1ff107dcc5ce5152dee20b1c2a4eedb64eb79dc assets/utm/models/item/raw_aluminum.json
 c94908a0de5dcb69056c5d24ba34e844e921b2d1 assets/utm/models/item/raw_magnesium.json
+dfa92cda8882516d5dcd729379b1da768d248a36 assets/utm/models/item/regen_disc.json
 cfaef45a7658c7b8ce65e855b1bd38a3c44113da assets/utm/models/item/shart.json
 8f6135cda73a6471dace0ba2ffa8efc61234709c assets/utm/models/item/steel_ingot.json
 97b31be7aa7fb4f3a9024c82df7b130c4ac1156f assets/utm/models/item/steel_sheet.json

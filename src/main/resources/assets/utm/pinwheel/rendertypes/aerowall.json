@@ -1,0 +1,39 @@
+{
+  "format": "BLOCK",
+  "mode": "QUADS",
+  "bufferSize": "TRANSIENT",
+  "sort": true,
+  "affectsCrumbling": true,
+  "outline": false,
+  "layers": [
+    {
+      "type": "minecraft:texture",
+      "texture": "minecraft:textures/atlas/blocks.png",
+      "blur": false,
+      "mipmap": false
+    },
+    {
+      "type": "veil:shader",
+      "name": "utm:aerowall"
+    },
+    {
+      "type": "minecraft:transparency",
+      "mode": "translucent"
+    },
+    {
+      "type": "minecraft:cull"
+    },
+    {
+      "type": "minecraft:lightmap"
+    },
+    {
+      "type": "minecraft:write_mask",
+      "color": true,
+      "depth": true
+    },
+    {
+      "type": "minecraft:depth_test",
+      "mode": "lequal"
+    }
+  ]
+}

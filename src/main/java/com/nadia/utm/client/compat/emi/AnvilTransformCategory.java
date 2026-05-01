@@ -1,5 +1,6 @@
 package com.nadia.utm.client.compat.emi;
 
+import com.nadia.utm.utm;
 import dev.emi.emi.api.recipe.EmiRecipe;
 import dev.emi.emi.api.recipe.EmiRecipeCategory;
 import dev.emi.emi.api.render.EmiTexture;
@@ -16,35 +17,34 @@ import java.util.List;
 
 import static com.nadia.utm.Config.HEAVY_METAL_ANVIL_LEVEL_REQUIREMENT;
 
-@SuppressWarnings("unused")
 public class AnvilTransformCategory implements EmiRecipe {
     public static final EmiRecipeCategory CATEGORY = new EmiRecipeCategory(
-            ResourceLocation.fromNamespaceAndPath("utm", "anvil_transformation"),
+            utm.key("anvil_transformation"),
             EmiStack.of(Items.ANVIL)
     );
 
-    private final EmiIngredient left, right;
-    private final EmiStack output;
-    private final ResourceLocation id;
+    private final EmiIngredient INPUT1, INPUT2;
+    private final EmiStack OUTPUT;
+    private final ResourceLocation ID;
 
     public AnvilTransformCategory(ResourceLocation id, ItemStack left, ItemStack right, ItemStack output) {
-        this.id = id;
-        this.left = EmiStack.of(left);
-        this.right = EmiStack.of(right);
-        this.output = EmiStack.of(output);
+        this.ID = id;
+        this.INPUT1 = EmiStack.of(left);
+        this.INPUT2 = EmiStack.of(right);
+        this.OUTPUT = EmiStack.of(output);
     }
 
     @Override
     public EmiRecipeCategory getCategory() { return CATEGORY; }
 
     @Override
-    public ResourceLocation getId() { return this.id; }
+    public ResourceLocation getId() { return this.ID; }
 
     @Override
-    public List<EmiIngredient> getInputs() { return List.of(left, right); }
+    public List<EmiIngredient> getInputs() { return List.of(INPUT1, INPUT2); }
 
     @Override
-    public List<EmiStack> getOutputs() { return List.of(output); }
+    public List<EmiStack> getOutputs() { return List.of(OUTPUT); }
 
     @Override
     public int getDisplayWidth() {
@@ -60,11 +60,11 @@ public class AnvilTransformCategory implements EmiRecipe {
     public void addWidgets(WidgetHolder widgets) {
         var levelTarget = HEAVY_METAL_ANVIL_LEVEL_REQUIREMENT.getAsInt();
 
-        widgets.addSlot(left, 5, 0);
+        widgets.addSlot(INPUT1, 5, 0);
         widgets.addTexture(EmiTexture.PLUS, 29, 2);
-        widgets.addSlot(right, 50, 0);
+        widgets.addSlot(INPUT2, 50, 0);
         widgets.addTexture(EmiTexture.EMPTY_ARROW, 72, 0);
-        widgets.addSlot(output, 100, 0).recipeContext(this);
+        widgets.addSlot(OUTPUT, 100, 0).recipeContext(this);
 
         if (levelTarget > 0) {
             boolean requirementSatisfied = Minecraft.getInstance().player != null &&

@@ -1,0 +1,10 @@
+{
+  "parent": "block/block",
+  "loader": "neoforge:obj",
+  "flip_v": true,
+  "model": "utm:models/block/ion_jet_b2.obj",
+  "textures": {
+    "1": "utm:block/ion_jet",
+    "particle": "#1"
+  }
+}

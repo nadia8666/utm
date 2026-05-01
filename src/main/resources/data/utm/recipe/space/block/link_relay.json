@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "utm_space",
+  "pattern": [
+    " n ",
+    "hSh",
+    "sts"
+  ],
+  "key": {
+    "s": {
+      "item": "utm:steel_sheet"
+    },
+    "S": {
+      "item": "minecraft:blaze_rod"
+    },
+    "t": {
+      "item": "create:brass_casing"
+    },
+    "n": {
+      "item": "minecraft:ender_pearl"
+    },
+    "h": {
+      "item": "create:powdered_obsidian"
+    }
+  },
+  "result": {
+    "id": "createlinkrelays:link_relay_block",
+    "count": 1
+  }
+}
