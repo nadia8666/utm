@@ -26,11 +26,6 @@ import punchy.config.PunchyConfig;
 @Mixin(value = PunchyArmRenderer.class, remap = false)
 public abstract class PunchyArmRendererMixin {
     @Shadow
-    private static ModelPart cloneModelPart(ModelPart source) {
-        return null;
-    }
-
-    @Shadow
     private static void applyArmMeshOffsets(PoseStack poseStack, boolean leftArm) {
     }
 
@@ -69,61 +64,60 @@ public abstract class PunchyArmRendererMixin {
     @Overwrite
     private static void renderArm(PlayerModel<?> playerModel, AbstractClientPlayer player, HumanoidArm arm, PoseStack poseStack, MultiBufferSource buffer, int combinedLight, ResourceLocation texture, boolean slim, float partialTicks) {
         boolean lefty = arm == HumanoidArm.LEFT;
-        ModelPart armPart = cloneModelPart(lefty ? playerModel.leftArm : playerModel.rightArm);
-        ModelPart sleevePart = cloneModelPart(lefty ? playerModel.leftSleeve : playerModel.rightSleeve);
-        if (armPart != null && sleevePart != null) {
+        ModelPart armPart = lefty ? playerModel.leftArm : playerModel.rightArm;
+        ModelPart sleevePart = lefty ? playerModel.leftSleeve : playerModel.rightSleeve;
+
+        copyMatrixToSleeve(armPart, sleevePart);
+        poseStack.pushPose();
+        if (slim) {
+            poseStack.translate((lefty ? 1.0F : -1.0F) * 0.5F / 16.0F, 0.0F, 0.0F);
+        }
+
+        applyArmMeshOffsets(poseStack, lefty);
+        applyFreezeShake(poseStack, player, partialTicks);
+
+        boolean figura = false;
+        if (Config.FIGURA_PUNCHY.getAsBoolean()) {
+            Avatar avatar = AvatarManager.getAvatar(player);
+            EntityRenderer<?> renderer = Minecraft.getInstance().getEntityRenderDispatcher().getRenderer(player);
+            if (renderer instanceof PlayerRenderer pRenderer) {
+                if (avatar != null) {
+                    poseStack.pushPose();
+
+                    armPart.translateAndRotate(poseStack);
+                    poseStack.translate((lefty ? -5F : 5F) / 16F, -2F / 16F, 0);
+
+                    if (avatar instanceof IAvatarRendererExtensions iAv)
+                        iAv.utm$firstPersonRender(poseStack, buffer, player, pRenderer, armPart, combinedLight, partialTicks, lefty);
+                    figura = true;
+
+                    poseStack.popPose();
+                }
+            }
+        }
+
+        if (!figura) {
+            VertexConsumer consumer = buffer.getBuffer(RenderType.entityTranslucent(texture));
+            armPart.render(poseStack, consumer, combinedLight, OverlayTexture.NO_OVERLAY);
+            if (sleevePart.visible) {
+                sleevePart.render(poseStack, consumer, combinedLight, OverlayTexture.NO_OVERLAY);
+            }
+        }
+
+        renderLavaHandOverlay(armPart, poseStack, buffer, combinedLight, player, lefty ? HumanoidArm.LEFT : HumanoidArm.RIGHT, partialTicks);
+        renderFreezeOverlay(armPart, lefty, slim, poseStack, buffer, combinedLight, player, partialTicks);
+        renderMudOverlay(armPart, lefty, slim, poseStack, buffer, combinedLight);
+        renderSweatOverlay(armPart, lefty, slim, poseStack, buffer, combinedLight);
+        if (player.isOnFire()) {
             poseStack.pushPose();
-            if (slim) {
-                poseStack.translate((lefty ? 1.0F : -1.0F) * 0.5F / 16.0F, 0.0F, 0.0F);
-            }
-
-            applyArmMeshOffsets(poseStack, lefty);
-            applyFreezeShake(poseStack, player, partialTicks);
-            copyMatrixToSleeve(armPart, sleevePart);
-
-            boolean figura = false;
-            if (Config.FIGURA_PUNCHY.getAsBoolean()) {
-                Avatar avatar = AvatarManager.getAvatar(player);
-                EntityRenderer<?> renderer = Minecraft.getInstance().getEntityRenderDispatcher().getRenderer(player);
-                if (renderer instanceof PlayerRenderer pRenderer) {
-                    if (avatar != null) {
-                        poseStack.pushPose();
-
-                        armPart.translateAndRotate(poseStack);
-                        poseStack.translate((lefty ? -5F : 5F) / 16F, -2F / 16F, 0);
-
-                        if (avatar instanceof IAvatarRendererExtensions iAv)
-                            iAv.utm$firstPersonRender(poseStack, buffer, player, pRenderer, armPart, combinedLight, partialTicks, lefty);
-                        figura = true;
-
-                        poseStack.popPose();
-                    }
-                }
-            }
-
-            if (!figura) {
-                VertexConsumer consumer = buffer.getBuffer(RenderType.entityTranslucent(texture));
-                armPart.render(poseStack, consumer, combinedLight, OverlayTexture.NO_OVERLAY);
-                if (sleevePart.visible) {
-                    sleevePart.render(poseStack, consumer, combinedLight, OverlayTexture.NO_OVERLAY);
-                }
-            }
-
-            renderLavaHandOverlay(armPart, poseStack, buffer, combinedLight, player, lefty ? HumanoidArm.LEFT : HumanoidArm.RIGHT, partialTicks);
-            renderFreezeOverlay(armPart, lefty, slim, poseStack, buffer, combinedLight, player, partialTicks);
-            renderMudOverlay(armPart, lefty, slim, poseStack, buffer, combinedLight);
-            renderSweatOverlay(armPart, lefty, slim, poseStack, buffer, combinedLight);
-            if (player.isOnFire()) {
-                poseStack.pushPose();
-                armPart.translateAndRotate(poseStack);
-                if (!PunchyConfig.disableEnhancedFireArmEffects()) {
-                    renderFlameOnArm(poseStack, buffer);
-                }
-
-                poseStack.popPose();
+            armPart.translateAndRotate(poseStack);
+            if (!PunchyConfig.disableEnhancedFireArmEffects()) {
+                renderFlameOnArm(poseStack, buffer);
             }
 
             poseStack.popPose();
         }
+
+        poseStack.popPose();
     }
 }
