@@ -1,10 +1,34 @@
 {
   "variants": {
-    "facing=north": { "model": "utm:block/ion_jet", "y": 0 },
-    "facing=east": { "model": "utm:block/ion_jet", "y": 0 },
-    "facing=south": { "model": "utm:block/ion_jet", "y": 0 },
-    "facing=west": { "model": "utm:block/ion_jet", "y": 0 },
-    "facing=up": { "model": "utm:block/ion_jet", "y": 0, "x": 0 },
-    "facing=down": { "model": "utm:block/ion_jet", "y": 0, "x": -180 }
+    "facing=north": {
+      "model": "utm:block/ion_jet",
+      "y": 180,
+      "x": -90
+    },
+    "facing=east": {
+      "model": "utm:block/ion_jet",
+      "y": -90,
+      "x": -90
+    },
+    "facing=south": {
+      "model": "utm:block/ion_jet",
+      "y": 0,
+      "x": -90
+    },
+    "facing=west": {
+      "model": "utm:block/ion_jet",
+      "y": 90,
+      "x": -90
+    },
+    "facing=up": {
+      "model": "utm:block/ion_jet",
+      "y": 0,
+      "x": 0
+    },
+    "facing=down": {
+      "model": "utm:block/ion_jet",
+      "y": 0,
+      "x": -180
+    }
   }
 }

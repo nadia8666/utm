@@ -1,6 +1,7 @@
 package com.nadia.utm.client.renderer.block;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.nadia.utm.block.IonJetBlock;
 import com.nadia.utm.block.entity.IonJetBlockEntity;
 import com.nadia.utm.client.renderer.IBlockstateRotatedRenderer;
 import com.nadia.utm.event.ForceLoad;
@@ -38,9 +39,15 @@ public class IonJetRenderer extends KineticBlockEntityRenderer<IonJetBlockEntity
         SuperByteBuffer vent = CachedBuffers.partial(utmModels.ION_JET_VENT, be.getBlockState());
         SuperByteBuffer cogs = CachedBuffers.partial(utmModels.ION_JET_COGS, be.getBlockState());
 
-        float ang = getAngleForBe(be, be.getBlockPos(), Direction.Axis.Y);
 
         new PoseUtil(ms).push().run(() -> rotateByFacing(be, ms)).run(() -> {
+            Direction facing = be.getBlockState().getValue(IonJetBlock.FACING);
+            Direction.Axis axis = facing.getAxis();
+            float ang = getAngleForBe(be, be.getBlockPos(), axis);
+            if (facing == Direction.DOWN || facing == Direction.NORTH || facing == Direction.WEST) {
+                ang = -ang;
+            }
+
             shaft.rotateCentered((float) Math.toRadians(90), Direction.Axis.X);
             bottom1.rotateCentered((float) Math.toRadians(90), Direction.Axis.X);
             bottom2.rotateCentered((float) Math.toRadians(90), Direction.Axis.X);
@@ -48,8 +55,8 @@ public class IonJetRenderer extends KineticBlockEntityRenderer<IonJetBlockEntity
             cogs.rotateCentered((float) Math.toRadians(90), Direction.Axis.X);
 
             kineticRotationTransform(shaft, be, Direction.Axis.Z, ang, light).renderInto(ms, buffer.getBuffer(RenderType.solid()));
-            bottom1.light(light).translate(0, Math.sin((double) level.getGameTime() / 3 * be.getThrust() + partialTicks) / 40, 0).renderInto(ms, buffer.getBuffer(RenderType.solid()));
-            bottom2.light(light).translate(0, Math.sin((level.getGameTime() + (partialTicks/20)) *3* be.getThrust()) / 60, 0).renderInto(ms, buffer.getBuffer(RenderType.solid()));
+            bottom1.light(light).translate(0, Math.sin(((double) level.getGameTime() / 3 + partialTicks / 20) * be.getThrust()) / 40, 0).renderInto(ms, buffer.getBuffer(RenderType.solid()));
+            bottom2.light(light).translate(0, Math.sin((level.getGameTime() + partialTicks / 20) * 3 * be.getThrust()) / 60, 0).renderInto(ms, buffer.getBuffer(RenderType.solid()));
             vent.light(light).renderInto(ms, buffer.getBuffer(RenderType.translucent()));
             cogs.light(light).rotateCentered(ang, Direction.Axis.Y).renderInto(ms, buffer.getBuffer(RenderType.solid()));
         }).pop();

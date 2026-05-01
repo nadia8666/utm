@@ -30,9 +30,9 @@ public interface IBlockstateRotatedRenderer {
             case UP -> ms.mulPose(Axis.XP.rotationDegrees(-90f));
             case DOWN -> ms.mulPose(Axis.XP.rotationDegrees(90f));
             case NORTH -> ms.mulPose(Axis.YP.rotationDegrees(180f));
-            case EAST -> ms.mulPose(Axis.YP.rotationDegrees(270f));
+            case EAST -> ms.mulPose(Axis.YP.rotationDegrees(90f));
             case SOUTH -> ms.mulPose(Axis.YP.rotationDegrees(0f));
-            case WEST -> ms.mulPose(Axis.YP.rotationDegrees(90f));
+            case WEST -> ms.mulPose(Axis.YP.rotationDegrees(270f));
         }
 
         ms.translate(-0.5f, -0.5f, -0.5f);
