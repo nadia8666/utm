@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "utm_space",
+  "pattern": [
+    "sss",
+    "gGg",
+    "sps"
+  ],
+  "key": {
+    "g": {
+      "item": "minecraft:tinted_glass"
+    },
+    "s": {
+      "item": "utm:steel_sheet"
+    },
+    "G": {
+      "item": "create:goggles"
+    },
+    "p": {
+      "item": "create:precision_mechanism"
+    }
+  },
+  "result": {
+    "id": "utm:adv_goggles",
+    "count": 1
+  }
+}

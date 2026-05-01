@@ -10,6 +10,7 @@ import com.nadia.utm.item.AdvancedGogglesItem;
 import com.nadia.utm.networking.payloads.GetOxygenPayload;
 import com.nadia.utm.networking.utmNetworking;
 import com.nadia.utm.registry.attachment.utmAttachments;
+import com.nadia.utm.registry.item.utmItems;
 import com.nadia.utm.util.utmLang;
 import com.nadia.utm.utm;
 import com.simibubi.create.AllBlocks;
@@ -87,7 +88,7 @@ public class AdvancedGogglesRenderer {
 
         HitResult objectMouseOver = mc.hitResult;
         List<Component> tooltip = new ArrayList<>();
-        ItemStack item = AllItems.GOGGLES.asStack();
+        ItemStack item = utmItems.GOGGLES.ITEM.toStack();
 
         if (objectMouseOver instanceof BlockHitResult result) {
             LAST_HOVERED_ENTITY = null;
@@ -103,6 +104,8 @@ public class AdvancedGogglesRenderer {
 
             if (be instanceof IHaveCustomOverlayIcon customOverlayIcon) {
                 item = customOverlayIcon.getIcon(crouching);
+                if (item.is(AllItems.GOGGLES))
+                    item = utmItems.GOGGLES.ITEM.toStack();
             }
 
             if (!blockTooltip(world, pos, be, tooltip, crouching)) {
@@ -143,12 +146,12 @@ public class AdvancedGogglesRenderer {
         drawTooltip(guiGraphics, mc, tooltip, item, posX, posY, fade, false, null);
     }
 
-    private static void renderPanels(GuiGraphics guiGraphics, Minecraft mc, ClientLevel world, boolean isShifting) {
+    private static void renderPanels(GuiGraphics guiGraphics, Minecraft mc, ClientLevel world, boolean crouching) {
         List<PinnedPanel> forRemoval = new ArrayList<>();
 
         for (PinnedPanel panel : PINNED_PANELS) {
             List<Component> tooltip = new ArrayList<>();
-            ItemStack item = AllItems.GOGGLES.asStack();
+            ItemStack item = utmItems.GOGGLES.ITEM().toStack();
 
             if (panel.IS_ENTITY) {
                 Entity entity = getEntity(world, panel.ENTITY_ID);
@@ -156,7 +159,7 @@ public class AdvancedGogglesRenderer {
                     forRemoval.add(panel);
                     continue;
                 }
-                entityTooltip(entity, tooltip, isShifting);
+                entityTooltip(entity, tooltip, crouching);
             } else {
                 BlockPos pos = getPos(world, panel.POS);
                 BlockEntity be = world.getBlockEntity(pos);
@@ -165,9 +168,11 @@ public class AdvancedGogglesRenderer {
                     continue;
                 }
                 if (be instanceof IHaveCustomOverlayIcon customOverlayIcon) {
-                    item = customOverlayIcon.getIcon(isShifting);
+                    item = customOverlayIcon.getIcon(crouching);
+                    if (item.is(AllItems.GOGGLES))
+                        item = utmItems.GOGGLES.ITEM.toStack();
                 }
-                blockTooltip(world, pos, be, tooltip, isShifting);
+                blockTooltip(world, pos, be, tooltip, crouching);
             }
 
             if (tooltip.isEmpty()) continue;
