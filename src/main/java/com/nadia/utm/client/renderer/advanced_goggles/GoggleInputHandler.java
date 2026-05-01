@@ -50,7 +50,6 @@ public class GoggleInputHandler {
 
     private static boolean changed(int button, int action, int mouseX, int mouseY) {
         Minecraft mc = Minecraft.getInstance();
-        utm.LOGGER.warn("{}",mc.screen);
         if (mc.player == null || (mc.screen != null && !(mc.screen instanceof ChatScreen))) return false;
         if (!AdvancedGogglesItem.isWearingAdvancedGoggles(mc.player)) return false;
 
