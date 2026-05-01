@@ -29,6 +29,7 @@
     "compat.offroad.WheelMountRendererMixin",
     "compat.showcaseitem$jei.ShowcaseItemMixin",
     "compat.sophisticatedcore.CraftingUpgradeTabMixin",
+    "compat.create.GoggleOverlayRendererMixin",
     "renderer.BacktankArmorLayerMixin",
     "renderer.LayeredArmorItemMixin",
     "renderer.MultiBufferSourceMixin",

@@ -6,7 +6,7 @@ import com.nadia.utm.behavior.space.SealedChunkData;
 import com.nadia.utm.event.ForceLoad;
 import com.nadia.utm.event.utmEvents;
 import com.nadia.utm.item.AdvancedGogglesItem;
-import com.nadia.utm.networking.payloads.debug.RequestSealedDataPayload;
+import com.nadia.utm.networking.payloads.RequestSealedDataPayload;
 import com.nadia.utm.registry.attachment.utmAttachments;
 import com.nadia.utm.util.PoseUtil;
 import com.nadia.utm.util.SableUtil;

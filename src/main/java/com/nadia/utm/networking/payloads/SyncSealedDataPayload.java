@@ -1,4 +1,4 @@
-package com.nadia.utm.networking.payloads.debug;
+package com.nadia.utm.networking.payloads;
 
 import com.nadia.utm.behavior.space.SealedChunkData;
 import com.nadia.utm.networking.PacketDef;
