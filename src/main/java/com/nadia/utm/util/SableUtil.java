@@ -25,6 +25,7 @@ import dev.ryanhcode.sable.sublevel.system.SubLevelPhysicsSystem;
 import dev.simulated_team.simulated.content.blocks.rope.RopeStrandHolderBlockEntity;
 import dev.simulated_team.simulated.content.blocks.rope.strand.server.RopeAttachmentPoint;
 import dev.simulated_team.simulated.content.blocks.rope.strand.server.ServerRopeStrand;
+import dev.simulated_team.simulated.content.blocks.spring.SpringBlockEntity;
 import dev.simulated_team.simulated.content.blocks.swivel_bearing.SwivelBearingBlockEntity;
 import dev.simulated_team.simulated.content.blocks.swivel_bearing.link_block.SwivelBearingPlateBlockEntity;
 import io.netty.buffer.Unpooled;
@@ -218,6 +219,7 @@ public class SableUtil {
             List<Pair<RopeStrandHolderBlockEntity, RopeStrandHolderBlockEntity>> ropeMap = new ArrayList<>();
             Set<RopeStrandHolderBlockEntity> ropesUsed = new HashSet<>();
             Map<SwivelBearingBlockEntity, SwivelBearingPlateBlockEntity> swivelMap = new HashMap<>();
+            Map<SpringBlockEntity, SpringBlockEntity> springMap = new HashMap<>();
 
             final BoundingBox3i[] oldBounds = {null};
             for (ServerSubLevel level : processed) {
@@ -379,6 +381,14 @@ public class SableUtil {
                                 tag.remove("SwivelPlate");
                             }
 
+                            case SpringBlockEntity spring -> {
+                                if (spring.isController())
+                                    springMap.put(spring, spring.getPairedSpring());
+
+                                tag.remove("GoalSubLevel");
+                                tag.remove("Goal");
+                            }
+
                             default -> {
                             }
                         }
@@ -456,6 +466,18 @@ public class SableUtil {
                     newSwivel.setSubLevelID(targetLevel.getUniqueId());
                     newSwivel.setPlatePos(newPlate.getBlockPos());
                     newSwivel.reattachConstraint(targetLevel, true);
+                }
+            }
+
+            for (Map.Entry<SpringBlockEntity, SpringBlockEntity> entry : springMap.entrySet()) {
+                SpringBlockEntity old1 = entry.getKey(), old2 = entry.getValue();
+                SpringBlockEntity new1 = (SpringBlockEntity) beMap.get(old1), new2 = (SpringBlockEntity) beMap.get(old2);
+
+                if (new1 != null && new2 != null) {
+                    ServerSubLevel partnerLevel = (ServerSubLevel) SableCompanion.INSTANCE.getContaining(new2);
+                    if (partnerLevel == null) continue;
+
+                    new1.setPartnerPos(new2.getBlockPos(), partnerLevel.getUniqueId());
                 }
             }
 
