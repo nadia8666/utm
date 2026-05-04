@@ -13,6 +13,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
+import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
 
 import static com.nadia.utm.updater.AutoUpdater.VersionTarget;
@@ -50,7 +51,7 @@ public class utmCommands {
                 }))
                 .then(Commands.literal("to_space").executes(context -> {
                     Player player = context.getSource().getPlayer();
-                    if (player == null) return 0;
+                    if (player == null || FMLEnvironment.production) return 0;
 
                     ServerSubLevel level = (ServerSubLevel) SableUtil.getSublevel(player);
                     MinecraftServer server = player.getServer();
