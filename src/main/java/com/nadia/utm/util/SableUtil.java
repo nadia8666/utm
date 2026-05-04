@@ -267,7 +267,6 @@ public class SableUtil {
             Map<DockingConnectorBlockEntity, DockingConnectorBlockEntity> dockMap = new HashMap<>();
             Set<DockingConnectorBlockEntity> docksUsed = new HashSet<>();
 
-
             for (ServerSubLevel level : processed) {
                 Pair<List<BlockPos>, BoundingBox3i> sublevelData = allBlocks.getOrDefault(level, new Pair<>(List.of(), new BoundingBox3i()));
                 List<BlockPos> blocks = sublevelData.getA();
