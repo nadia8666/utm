@@ -2,7 +2,6 @@ package com.nadia.utm.networking;
 
 import com.nadia.utm.client.ui.TabMenuLayer;
 import com.nadia.utm.event.ForceLoad;
-import com.nadia.utm.behavior.space.SpaceStateHandler;
 import com.nadia.utm.event.events.OxygenPayloadEvent;
 import com.nadia.utm.event.events.SyncSealedDataEvent;
 import com.nadia.utm.event.utmEvents;
@@ -47,7 +46,6 @@ public class utmNetworking {
             if (context.player().containerMenu instanceof GlintMenu menu) menu.unpack(payload);
         }));
 
-        server(LaunchContraptionPayload.DEF, (payload, context) -> context.enqueueWork(() -> SpaceStateHandler.launchRecieved(payload, context)));
         client(TabLayerPayload.DEF, (payload, context) -> context.enqueueWork(() -> TabMenuLayer.CACHE = payload.players()));
 
         server(RequestSealedDataPayload.DEF, (payload, context) -> context.enqueueWork(() -> {

@@ -2,9 +2,9 @@ package com.nadia.utm.registry;
 
 import com.nadia.utm.block.displaylink.utmDisplaySources;
 import com.nadia.utm.registry.attachment.utmAttachments;
-import com.nadia.utm.registry.behavior.utmMovingInteractions;
 import com.nadia.utm.registry.block.utmBlockEntities;
 import com.nadia.utm.registry.block.utmBlocks;
+import com.nadia.utm.registry.buffs.utmBuffs;
 import com.nadia.utm.registry.data.utmDataComponents;
 import com.nadia.utm.registry.fluid.utmFluids;
 import com.nadia.utm.registry.item.utmItems;
@@ -15,13 +15,13 @@ import com.nadia.utm.registry.sound.utmSounds;
 import com.nadia.utm.registry.ui.utmMenus;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import com.nadia.utm.registry.buffs.utmBuffs;
 
 public class utmRegistry {
     public static final DeferredRegister<CreativeModeTab> TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, "utm");
@@ -79,7 +79,6 @@ public class utmRegistry {
     }
 
     public static void postRegister() {
-        utmMovingInteractions.register();
         utmDisplaySources.registerSources();
     }
 }

@@ -3,11 +3,9 @@ package com.nadia.utm.behavior.space;
 import com.nadia.utm.block.entity.AbstractSealerBlockEntity;
 import com.nadia.utm.event.ForceLoad;
 import com.nadia.utm.registry.attachment.utmAttachments;
-import com.nadia.utm.util.AdvancementUtil;
 import com.nadia.utm.util.OxyUtil;
 import com.nadia.utm.util.PosUtil;
 import com.nadia.utm.util.SableUtil;
-import com.nadia.utm.utm;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.content.equipment.armor.BacktankUtil;
 import com.simibubi.create.content.kinetics.base.KineticBlock;
@@ -48,7 +46,7 @@ class Breathability {
                     if (forceOxygen > 0) {
                         forceOxygen--;
                         entity.setData(utmAttachments.TEMPORARY_OXYGEN, forceOxygen);
-                    };
+                    }
 
                     if (forceOxygen <= 0)
                         entity.hurt(entity.level().damageSources().source(DamageTypes.IN_WALL), 1f);
@@ -62,7 +60,7 @@ class Breathability {
             entity.removeData(utmAttachments.TEMPORARY_OXYGEN);
     }
 
-    public static void checkSuffocating(ServerPlayer sPlayer, boolean inAG) {
+    public static void checkSuffocating(ServerPlayer sPlayer) {
         SubLevel level = SableUtil.getSublevel(sPlayer);
         BlockPos controller = null;
         if (level != null)
@@ -96,11 +94,8 @@ class Breathability {
                     if (boots.is(AllItems.COPPER_DIVING_BOOTS))
                         boots.setDamageValue(boots.getDamageValue() + 1);
                 }
-            } else {
+            } else
                 sPlayer.hurt(sPlayer.serverLevel().damageSources().source(DamageTypes.IN_WALL), 1f);
-
-                if (inAG) AdvancementUtil.AwardAdvancement(sPlayer, utm.key("2313ag/suffocate"));
-            }
         }
 
         if (forceOxygen > 0) {

@@ -12,9 +12,9 @@ import java.util.function.Supplier;
 public class utmAttachments {
     public static final DeferredRegister<AttachmentType<?>> ATTACHMENTS = DeferredRegister.create(NeoForgeRegistries.Keys.ATTACHMENT_TYPES, "utm");
 
-    public static final Supplier<AttachmentType<Boolean>> ENTERED_2313AG = ATTACHMENTS.register(
-            "entered_2313ag",
-            () -> AttachmentType.builder(() -> false).serialize(Codec.BOOL).copyOnDeath().build()
+    public static final Supplier<AttachmentType<String>> REGISTERED_PLANET = ATTACHMENTS.register(
+            "registered_planet",
+            () -> AttachmentType.builder(() -> "earth").serialize(Codec.STRING).copyOnDeath().build()
     );
 
     public static final Supplier<AttachmentType<Integer>> TEMPORARY_OXYGEN = ATTACHMENTS.register(

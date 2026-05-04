@@ -52,7 +52,8 @@ import net.minecraft.world.level.chunk.status.ChunkStatus;
 import net.minecraft.world.level.portal.DimensionTransition;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.network.connection.ConnectionType;
-import org.joml.*;
+import org.joml.Vector2i;
+import org.joml.Vector3d;
 import oshi.util.tuples.Pair;
 
 import javax.annotation.Nullable;
@@ -60,8 +61,6 @@ import java.util.*;
 import java.util.function.Consumer;
 
 public class SableUtil {
-    //TODO: replace all usage of chunks for getting blocks to just directly reference the level since.. thats a lot easier
-
     /**
      * get sable sublevel chunk via world (global) pos
      *
@@ -204,8 +203,20 @@ public class SableUtil {
             // utility refmaps
             Map<ServerSubLevel, ServerSubLevel> levelMap = new HashMap<>();
             for (ServerSubLevel level : processed) {
-                ServerSubLevel next = (ServerSubLevel) container.allocateNewSubLevel(level.logicalPose());
+                Pose3d pose = level.logicalPose();
+                ServerSubLevel next = (ServerSubLevel) container.allocateNewSubLevel(pose);
                 levelMap.put(level, next);
+            }
+
+            // load chunks
+            Set<ChunkPos> chunks = new HashSet<>();
+            for (ServerSubLevel level : processed) {
+                Vector3d pos = level.logicalPose().position();
+                chunks.addAll(ChunkPos.rangeClosed(new ChunkPos(BlockPos.containing(pos.x, pos.y, pos.z)), 2).toList());
+            }
+
+            for (ChunkPos pos : chunks) {
+                target.getChunk(pos.x, pos.z, ChunkStatus.FULL, true);
             }
 
             // old be -> new be
@@ -233,8 +244,7 @@ public class SableUtil {
                         int sY = chunk.getSectionYFromSectionIndex(i);
                         ChunkPos cPos = chunk.getPos();
 
-                        BlockPos.betweenClosedStream(0, 0, 0, 15, 15, 15).forEach(mut -> {
-                            BlockPos bPos = new BlockPos(mut);
+                        BlockPos.betweenClosedStream(0, 0, 0, 15, 15, 15).forEach(bPos   -> {
                             if (!section.getBlockState(bPos.getX(), bPos.getY(), bPos.getZ()).isAir()) {
                                 BlockPos pos = SectionPos.of(cPos, sY).origin().offset(bPos);
                                 blocks.add(pos);
@@ -421,8 +431,6 @@ public class SableUtil {
                 }
 
                 next.getTrackingPlayers().addAll(level.getTrackingPlayers());
-
-                // TODO: fix center of mass positioning. whenever a sublevel transitions dimensions it moves half the bounding box size in the direction blocks are in (COM issues?)
                 next.updateBoundingBox();
 
                 Vector3d vel = new Vector3d(), ang = new Vector3d();
@@ -431,7 +439,10 @@ public class SableUtil {
 
                 pipeline.addLinearAndAngularVelocity(next, vel, ang);
 
-                pipeline.teleport(next, next.logicalPose().position(), next.logicalPose().orientation());
+                Vector3d pos = next.logicalPose().position();
+                pos.add(level.logicalPose().position().sub(next.logicalPose().position()));
+
+                pipeline.teleport(next, pos, next.logicalPose().orientation());
 
                 next.updateLastPose();
 
