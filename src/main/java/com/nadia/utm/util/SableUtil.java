@@ -3,6 +3,8 @@ package com.nadia.utm.util;
 import com.nadia.utm.compat.IContraptionNBTAccessor;
 import com.nadia.utm.utm;
 import com.simibubi.create.content.contraptions.AbstractContraptionEntity;
+import com.simibubi.create.content.contraptions.actors.seat.SeatBlock;
+import com.simibubi.create.content.contraptions.actors.seat.SeatEntity;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import dev.ryanhcode.sable.Sable;
 import dev.ryanhcode.sable.api.SubLevelAssemblyHelper;
@@ -36,9 +38,12 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtAccounter;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.TickTask;
 import net.minecraft.server.level.FullChunkStatus;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -238,7 +243,11 @@ public class SableUtil {
                 chunks.addAll(ChunkPos.rangeClosed(new ChunkPos(BlockPos.containing(pos.x, pos.y, pos.z)), 2).toList());
             }
 
+            // TODO: use expirable chunk tickets instead of This (Bad Implementation that Overrides other Forced Loads)
             for (ChunkPos pos : chunks) {
+                target.setChunkForced(pos.x, pos.z, true);
+                if (target.getServer() instanceof MinecraftServer server)
+                    server.tell(new TickTask(server.getTickCount()+80, () -> target.setChunkForced(pos.x, pos.z, false)));
                 target.getChunk(pos.x, pos.z, ChunkStatus.FULL, true);
             }
 
@@ -250,6 +259,7 @@ public class SableUtil {
             Set<BlockEntity> toRecalc = new HashSet<>();
 
             // TODO: see if thsi can be refactored into a per object approach by adding onto blockentitysublevelactor and mixing into these bes instead of post processing
+            // TODO: in the future a sable provided method that takes in an old -> new sublevel map & an assembly transform would be awesome.
             // be compat maps
             List<Pair<RopeStrandHolderBlockEntity, RopeStrandHolderBlockEntity>> ropeMap = new ArrayList<>();
             Map<SwivelBearingBlockEntity, SwivelBearingPlateBlockEntity> swivelMap = new HashMap<>();
@@ -441,7 +451,8 @@ public class SableUtil {
                 for (UUID uuid : level.getTrackingPlayers()) {
                     Entity pass = origin.getEntity(uuid);
                     if (pass != null) {
-                        Vec3 localPos = next.logicalPose().transformPositionInverse(pass.position());
+                        Vec3 localPos = level.logicalPose().transformPositionInverse(pass.position());
+                        BlockPos seatPos = pass.getVehicle() instanceof SeatEntity seat ? seat.blockPosition() : null;
 
                         pass.changeDimension(new DimensionTransition(
                                 target,
@@ -451,8 +462,17 @@ public class SableUtil {
                                 pass.getXRot(),
                                 (newPass) -> {
                                     newPass.addTag("utm_reentry_landing");
-                                    next.getTrackingPlayers().add(newPass.getUUID());
-                                    newPass.setPos(next.logicalPose().transformPosition(localPos));
+                                    boolean didReseat = false;
+
+                                    if (seatPos != null) {
+                                        SeatBlock.sitDown(target, transform.apply(seatPos), newPass instanceof Player player ? SeatBlock.getLeashed(target, player).or(player) : newPass);
+                                        didReseat = true;
+                                    }
+
+                                    if (!didReseat) {
+                                        next.getTrackingPlayers().add(newPass.getUUID());
+                                        newPass.setPos(next.logicalPose().transformPosition(localPos));
+                                    }
                                 }
                         ));
                     }
