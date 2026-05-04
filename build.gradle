@@ -158,7 +158,7 @@ dependencies {
 
     jarJar(runtimeOnly("maven.modrinth:create-aeronautics-lift-patch:b5GqYXEI")) // aero lift patch for better flight phys
     jarJar(runtimeOnly("maven.modrinth:create-link-relays:QzWAvFbP")) // create link relays
-    jarJar(runtimeOnly("maven.modrinth:create-aeronautics-climbable-rope:Clue7DBs")) // climbable ropes
+    jarJar(runtimeOnly("maven.modrinth:create-aeronautics-climbable-rope:beFXNNkF")) // climbable ropes
 
     compileOnly("maven.modrinth:punchy-fpa:NDU7HRVN") // punchy
 
