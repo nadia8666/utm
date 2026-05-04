@@ -1,13 +1,12 @@
 package com.nadia.utm.util;
 
-import com.nadia.utm.compat.ConstraintData;
-import com.nadia.utm.compat.IConstraintAccessor;
 import com.nadia.utm.compat.IContraptionNBTAccessor;
 import com.nadia.utm.utm;
 import com.simibubi.create.content.contraptions.AbstractContraptionEntity;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import dev.ryanhcode.sable.Sable;
 import dev.ryanhcode.sable.api.SubLevelAssemblyHelper;
+import dev.ryanhcode.sable.api.block.BlockEntitySubLevelActor;
 import dev.ryanhcode.sable.api.physics.PhysicsPipeline;
 import dev.ryanhcode.sable.api.sublevel.KinematicContraption;
 import dev.ryanhcode.sable.api.sublevel.ServerSubLevelContainer;
@@ -21,7 +20,9 @@ import dev.ryanhcode.sable.sublevel.ServerSubLevel;
 import dev.ryanhcode.sable.sublevel.SubLevel;
 import dev.ryanhcode.sable.sublevel.plot.LevelPlot;
 import dev.ryanhcode.sable.sublevel.plot.PlotChunkHolder;
+import dev.ryanhcode.sable.sublevel.storage.SubLevelRemovalReason;
 import dev.ryanhcode.sable.sublevel.system.SubLevelPhysicsSystem;
+import dev.simulated_team.simulated.content.blocks.docking_connector.DockingConnectorBlockEntity;
 import dev.simulated_team.simulated.content.blocks.rope.RopeStrandHolderBlockEntity;
 import dev.simulated_team.simulated.content.blocks.rope.strand.server.RopeAttachmentPoint;
 import dev.simulated_team.simulated.content.blocks.rope.strand.server.ServerRopeStrand;
@@ -58,7 +59,6 @@ import oshi.util.tuples.Pair;
 
 import javax.annotation.Nullable;
 import java.util.*;
-import java.util.function.Consumer;
 
 public class SableUtil {
     /**
@@ -176,29 +176,52 @@ public class SableUtil {
             PhysicsPipeline pipeline = container.physicsSystem().getPipeline();
             if (!(oPipeline instanceof RapierPhysicsPipeline rapier)) return;
 
-            Set<ConstraintData<?>> allConstraints = new HashSet<>();
+            Queue<ServerSubLevel> levelQueue = new LinkedList<>();
             Set<ServerSubLevel> processed = new HashSet<>();
+            Map<ServerSubLevel, Pair<List<BlockPos>, BoundingBox3i>> allBlocks = new HashMap<>();
 
-            if (rapier instanceof IConstraintAccessor accessor) {
-                new Consumer<ServerSubLevel>() {
-                    @Override
-                    public void accept(ServerSubLevel sub) {
-                        if (processed.contains(sub)) return;
-                        processed.add(sub);
-                        var constraints = accessor.utm$getForLevel(sub);
-                        for (ConstraintData<?> constraint : constraints) {
-                            if (constraint.sublevelA() == constraint.sublevelB())
-                                continue; // self connecting ropes n stuff will translate 1:1
+            levelQueue.add(originLevel);
 
-                            allConstraints.add(constraint);
-                            this.accept(constraint.sublevelA());
-                            this.accept(constraint.sublevelB());
-                        }
+            while (!levelQueue.isEmpty()) {
+                ServerSubLevel level = levelQueue.poll();
+                if (processed.contains(level)) continue;
+                processed.add(level);
+
+                final BoundingBox3i[] bounds = {null};
+                List<BlockPos> blocks = new ArrayList<>();
+                for (PlotChunkHolder chunkHolder : level.getPlot().getLoadedChunks()) {
+                    LevelChunk chunk = chunkHolder.getChunk();
+                    for (int i = 0; i < chunk.getSections().length; i++) {
+                        LevelChunkSection section = chunk.getSection(i);
+                        if (section.hasOnlyAir()) continue;
+
+                        int sY = chunk.getSectionYFromSectionIndex(i);
+                        ChunkPos cPos = chunk.getPos();
+
+                        BlockPos.betweenClosedStream(0, 0, 0, 15, 15, 15).forEach(bPos -> {
+                            if (!section.getBlockState(bPos.getX(), bPos.getY(), bPos.getZ()).isAir()) {
+                                BlockPos pos = SectionPos.of(cPos, sY).origin().offset(bPos);
+                                blocks.add(pos);
+
+                                if (bounds[0] == null)
+                                    bounds[0] = new BoundingBox3i(pos, pos);
+                                else
+                                    bounds[0].expandTo(pos.getX(), pos.getY(), pos.getZ());
+
+                                if (chunk.getBlockEntity(pos) instanceof BlockEntitySubLevelActor actor) {
+                                    Iterable<SubLevel> deps = actor.sable$getConnectionDependencies();
+                                    if (deps != null)
+                                        for (SubLevel dep : deps)
+                                            if (dep instanceof ServerSubLevel sDep)
+                                                levelQueue.add(sDep);
+                                }
+                            }
+                        });
                     }
-                }.accept(originLevel);
-            }
+                }
 
-            if (allConstraints.isEmpty()) processed.add(originLevel);
+                allBlocks.put(level, new Pair<>(blocks, bounds[0]));
+            }
 
             // utility refmaps
             Map<ServerSubLevel, ServerSubLevel> levelMap = new HashMap<>();
@@ -226,37 +249,19 @@ public class SableUtil {
             Map<Long, Long> networkMap = new HashMap<>();
             Set<BlockEntity> toRecalc = new HashSet<>();
 
+            // TODO: see if thsi can be refactored into a per object approach by adding onto blockentitysublevelactor and mixing into these bes instead of post processing
             // be compat maps
             List<Pair<RopeStrandHolderBlockEntity, RopeStrandHolderBlockEntity>> ropeMap = new ArrayList<>();
-            Set<RopeStrandHolderBlockEntity> ropesUsed = new HashSet<>();
             Map<SwivelBearingBlockEntity, SwivelBearingPlateBlockEntity> swivelMap = new HashMap<>();
             Map<SpringBlockEntity, SpringBlockEntity> springMap = new HashMap<>();
+            Map<DockingConnectorBlockEntity, DockingConnectorBlockEntity> dockMap = new HashMap<>();
+            Set<DockingConnectorBlockEntity> docksUsed = new HashSet<>();
 
-            final BoundingBox3i[] oldBounds = {null};
+
             for (ServerSubLevel level : processed) {
-                List<BlockPos> blocks = new ArrayList<>();
-                for (PlotChunkHolder chunkHolder : level.getPlot().getLoadedChunks()) {
-                    LevelChunk chunk = chunkHolder.getChunk();
-                    for (int i = 0; i < chunk.getSections().length; i++) {
-                        LevelChunkSection section = chunk.getSection(i);
-                        if (section.hasOnlyAir()) continue;
-
-                        int sY = chunk.getSectionYFromSectionIndex(i);
-                        ChunkPos cPos = chunk.getPos();
-
-                        BlockPos.betweenClosedStream(0, 0, 0, 15, 15, 15).forEach(bPos   -> {
-                            if (!section.getBlockState(bPos.getX(), bPos.getY(), bPos.getZ()).isAir()) {
-                                BlockPos pos = SectionPos.of(cPos, sY).origin().offset(bPos);
-                                blocks.add(pos);
-
-                                if (oldBounds[0] == null)
-                                    oldBounds[0] = new BoundingBox3i(pos, pos);
-                                else
-                                    oldBounds[0].expandTo(pos.getX(), pos.getY(), pos.getZ());
-                            }
-                        });
-                    }
-                }
+                Pair<List<BlockPos>, BoundingBox3i> sublevelData = allBlocks.getOrDefault(level, new Pair<>(List.of(), new BoundingBox3i()));
+                List<BlockPos> blocks = sublevelData.getA();
+                BoundingBox3i bounds = sublevelData.getB();
 
                 if (blocks.isEmpty()) continue;
 
@@ -270,7 +275,7 @@ public class SableUtil {
 
                 next.setName(level.getName());
 
-                SubLevelAssemblyHelper.moveOtherStuff(target, transform, blocks, oldBounds[0]);
+                SubLevelAssemblyHelper.moveOtherStuff(target, transform, blocks, bounds);
                 moveBlocksWithoutUpdate(origin, transform, blocks);
                 next.getPlot().updateBoundingBox();
 
@@ -354,20 +359,17 @@ public class SableUtil {
                         BlockEntity oldBE = origin.getBlockEntity(oldPos);
                         assert oldBE != null;
 
-                        CompoundTag tag = be.saveWithFullMetadata(target.registryAccess());
+                        CompoundTag tag = oldBE.saveWithFullMetadata(target.registryAccess());
                         switch (oldBE) {
                             case RopeStrandHolderBlockEntity rope -> {
-                                if (rope.getBehavior().ownsRope() && !ropesUsed.contains(rope)) {
+                                if (rope.getBehavior().ownsRope()) {
                                     ServerRopeStrand strand = rope.getBehavior().getOwnedStrand();
                                     if (strand != null) {
                                         RopeStrandHolderBlockEntity startBE = (RopeStrandHolderBlockEntity) origin.getBlockEntity(strand.getAttachment(RopeAttachmentPoint.START).blockAttachment());
                                         RopeStrandHolderBlockEntity endBE = (RopeStrandHolderBlockEntity) origin.getBlockEntity(strand.getAttachment(RopeAttachmentPoint.END).blockAttachment());
 
-                                        if (startBE != null && endBE != null) {
+                                        if (startBE != null && endBE != null)
                                             ropeMap.add(new Pair<>(startBE, endBE));
-                                            ropesUsed.add(startBE);
-                                            ropesUsed.add(endBE);
-                                        }
                                     }
                                 }
 
@@ -391,12 +393,33 @@ public class SableUtil {
                                 tag.remove("SwivelPlate");
                             }
 
+                            case SwivelBearingPlateBlockEntity plate -> {
+                                tag.remove("ParentPos");
+                                tag.remove("ParentSubLevelId");
+                            }
+
                             case SpringBlockEntity spring -> {
                                 if (spring.isController())
                                     springMap.put(spring, spring.getPairedSpring());
 
                                 tag.remove("GoalSubLevel");
                                 tag.remove("Goal");
+                                //tag.putDouble("DesiredLength", 3);
+                            }
+
+                            case DockingConnectorBlockEntity dock -> {
+                                if (dock.hasOtherConnector() && !docksUsed.contains(dock)) {
+                                    DockingConnectorBlockEntity other = dock.getOtherConnector();
+
+                                    if (other != null) {
+                                        dockMap.put(dock, other);
+                                        docksUsed.add(dock);
+                                        docksUsed.add(other);
+                                    }
+                                }
+
+                                tag.remove("OtherConnector");
+                                tag.remove("OtherConnectorSubLevelId");
                             }
 
                             default -> {
@@ -408,8 +431,6 @@ public class SableUtil {
                             tag.putLong("Network", nextID);
                         }
 
-                        utm.LOGGER.warn("[UTM] tag {}", tag);
-
                         be.loadWithComponents(tag, target.registryAccess());
 
                         toRecalc.add(be);
@@ -419,18 +440,24 @@ public class SableUtil {
 
                 for (UUID uuid : level.getTrackingPlayers()) {
                     Entity pass = origin.getEntity(uuid);
-                    if (pass != null)
+                    if (pass != null) {
+                        Vec3 localPos = next.logicalPose().transformPositionInverse(pass.position());
+
                         pass.changeDimension(new DimensionTransition(
                                 target,
                                 pass.position(),
                                 pass.getDeltaMovement(),
                                 pass.getYRot(),
                                 pass.getXRot(),
-                                (newPass) -> newPass.addTag("utm_reentry_landing")
+                                (newPass) -> {
+                                    newPass.addTag("utm_reentry_landing");
+                                    next.getTrackingPlayers().add(newPass.getUUID());
+                                    newPass.setPos(next.logicalPose().transformPosition(localPos));
+                                }
                         ));
+                    }
                 }
 
-                next.getTrackingPlayers().addAll(level.getTrackingPlayers());
                 next.updateBoundingBox();
 
                 Vector3d vel = new Vector3d(), ang = new Vector3d();
@@ -446,9 +473,8 @@ public class SableUtil {
 
                 next.updateLastPose();
 
-                SubLevelAssemblyHelper.moveTrackingPoints(target, oldBounds[0], next, transform);
+                SubLevelAssemblyHelper.moveTrackingPoints(target, bounds, next, transform);
             }
-
 
             List<ServerSubLevel> inLevels = levelMap.keySet().stream().toList();
             List<ServerSubLevel> outLevels = levelMap.values().stream().toList();
@@ -484,18 +510,27 @@ public class SableUtil {
                 SpringBlockEntity old1 = entry.getKey(), old2 = entry.getValue();
                 SpringBlockEntity new1 = (SpringBlockEntity) beMap.get(old1), new2 = (SpringBlockEntity) beMap.get(old2);
 
-                if (new1 != null && new2 != null) {
-                    ServerSubLevel partnerLevel = (ServerSubLevel) SableCompanion.INSTANCE.getContaining(new2);
-                    if (partnerLevel == null) continue;
-
-                    new1.setPartnerPos(new2.getBlockPos(), partnerLevel.getUniqueId());
+                if (new1 != null && new2 != null) { // unsafe?
+                    new1.setPartnerPos(new2.getBlockPos(), Objects.requireNonNull((ServerSubLevel) SableCompanion.INSTANCE.getContaining(new2)).getUniqueId());
+                    new2.setPartnerPos(new1.getBlockPos(), Objects.requireNonNull((ServerSubLevel) SableCompanion.INSTANCE.getContaining(new1)).getUniqueId());
                 }
+            }
+
+            for (Map.Entry<DockingConnectorBlockEntity, DockingConnectorBlockEntity> entry : dockMap.entrySet()) {
+                DockingConnectorBlockEntity old1 = entry.getKey(), old2 = entry.getValue();
+                DockingConnectorBlockEntity new1 = (DockingConnectorBlockEntity) beMap.get(old1), new2 = (DockingConnectorBlockEntity) beMap.get(old2);
+
+                if (new1 != null && new2 != null)
+                    new1.pairTo(new2);
             }
 
             for (BlockEntity be : toRecalc)
                 if (be instanceof KineticBlockEntity kbe) kbe.attachKinetics();
 
-            for (ServerSubLevel lev : inLevels) lev.markRemoved();
+            for (ServerSubLevel lev : inLevels) {
+                lev.markRemoved();
+                oContainer.removeSubLevel(lev, SubLevelRemovalReason.REMOVED);
+            }
         }
 
         @SuppressWarnings("UnstableApiUsage")
