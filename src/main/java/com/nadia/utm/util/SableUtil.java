@@ -1,5 +1,6 @@
 package com.nadia.utm.util;
 
+import com.nadia.utm.compat.BlockEntitySubLevelActorExtensions;
 import com.nadia.utm.compat.IContraptionNBTAccessor;
 import com.nadia.utm.utm;
 import com.simibubi.create.content.contraptions.AbstractContraptionEntity;
@@ -28,7 +29,6 @@ import dev.simulated_team.simulated.content.blocks.docking_connector.DockingConn
 import dev.simulated_team.simulated.content.blocks.rope.RopeStrandHolderBlockEntity;
 import dev.simulated_team.simulated.content.blocks.rope.strand.server.RopeAttachmentPoint;
 import dev.simulated_team.simulated.content.blocks.rope.strand.server.ServerRopeStrand;
-import dev.simulated_team.simulated.content.blocks.spring.SpringBlockEntity;
 import dev.simulated_team.simulated.content.blocks.swivel_bearing.SwivelBearingBlockEntity;
 import dev.simulated_team.simulated.content.blocks.swivel_bearing.link_block.SwivelBearingPlateBlockEntity;
 import io.netty.buffer.Unpooled;
@@ -247,7 +247,7 @@ public class SableUtil {
             for (ChunkPos pos : chunks) {
                 target.setChunkForced(pos.x, pos.z, true);
                 if (target.getServer() instanceof MinecraftServer server)
-                    server.tell(new TickTask(server.getTickCount()+80, () -> target.setChunkForced(pos.x, pos.z, false)));
+                    server.tell(new TickTask(server.getTickCount() + 80, () -> target.setChunkForced(pos.x, pos.z, false)));
                 target.getChunk(pos.x, pos.z, ChunkStatus.FULL, true);
             }
 
@@ -256,14 +256,12 @@ public class SableUtil {
 
             // old net -> new net
             Map<Long, Long> networkMap = new HashMap<>();
-            Set<BlockEntity> toRecalc = new HashSet<>();
+            Map<ServerSubLevel, SubLevelAssemblyHelper.AssemblyTransform> transformMap = new HashMap<>();
 
-            // TODO: see if thsi can be refactored into a per object approach by adding onto blockentitysublevelactor and mixing into these bes instead of post processing
             // TODO: in the future a sable provided method that takes in an old -> new sublevel map & an assembly transform would be awesome.
             // be compat maps
             List<Pair<RopeStrandHolderBlockEntity, RopeStrandHolderBlockEntity>> ropeMap = new ArrayList<>();
             Map<SwivelBearingBlockEntity, SwivelBearingPlateBlockEntity> swivelMap = new HashMap<>();
-            Map<SpringBlockEntity, SpringBlockEntity> springMap = new HashMap<>();
             Map<DockingConnectorBlockEntity, DockingConnectorBlockEntity> dockMap = new HashMap<>();
             Set<DockingConnectorBlockEntity> docksUsed = new HashSet<>();
 
@@ -281,6 +279,9 @@ public class SableUtil {
                 SubLevelAssemblyHelper.AssemblyTransform transform = new SubLevelAssemblyHelper.AssemblyTransform(
                         anchor, nextAnchor, 0, Rotation.NONE, target
                 );
+
+                transformMap.put(next, transform);
+                transformMap.put(level, transform);
 
                 next.setName(level.getName());
 
@@ -407,15 +408,6 @@ public class SableUtil {
                                 tag.remove("ParentSubLevelId");
                             }
 
-                            case SpringBlockEntity spring -> {
-                                if (spring.isController())
-                                    springMap.put(spring, spring.getPairedSpring());
-
-                                tag.remove("GoalSubLevel");
-                                tag.remove("Goal");
-                                //tag.putDouble("DesiredLength", 3);
-                            }
-
                             case DockingConnectorBlockEntity dock -> {
                                 if (dock.hasOtherConnector() && !docksUsed.contains(dock)) {
                                     DockingConnectorBlockEntity other = dock.getOtherConnector();
@@ -431,6 +423,10 @@ public class SableUtil {
                                 tag.remove("OtherConnectorSubLevelId");
                             }
 
+                            case BlockEntitySubLevelActorExtensions<?> actor -> {
+                                actor.sable$cleanLevelNBT(tag);
+                            }
+
                             default -> {
                             }
                         }
@@ -441,8 +437,6 @@ public class SableUtil {
                         }
 
                         be.loadWithComponents(tag, target.registryAccess());
-
-                        toRecalc.add(be);
                         beMap.put(oldBE, be);
                     }
                 }
@@ -525,16 +519,6 @@ public class SableUtil {
                 }
             }
 
-            for (Map.Entry<SpringBlockEntity, SpringBlockEntity> entry : springMap.entrySet()) {
-                SpringBlockEntity old1 = entry.getKey(), old2 = entry.getValue();
-                SpringBlockEntity new1 = (SpringBlockEntity) beMap.get(old1), new2 = (SpringBlockEntity) beMap.get(old2);
-
-                if (new1 != null && new2 != null) { // unsafe?
-                    new1.setPartnerPos(new2.getBlockPos(), Objects.requireNonNull((ServerSubLevel) SableCompanion.INSTANCE.getContaining(new2)).getUniqueId());
-                    new2.setPartnerPos(new1.getBlockPos(), Objects.requireNonNull((ServerSubLevel) SableCompanion.INSTANCE.getContaining(new1)).getUniqueId());
-                }
-            }
-
             for (Map.Entry<DockingConnectorBlockEntity, DockingConnectorBlockEntity> entry : dockMap.entrySet()) {
                 DockingConnectorBlockEntity old1 = entry.getKey(), old2 = entry.getValue();
                 DockingConnectorBlockEntity new1 = (DockingConnectorBlockEntity) beMap.get(old1), new2 = (DockingConnectorBlockEntity) beMap.get(old2);
@@ -543,13 +527,30 @@ public class SableUtil {
                     new1.pairTo(new2);
             }
 
-            for (BlockEntity be : toRecalc)
+            for (Map.Entry<BlockEntity, BlockEntity> entry : beMap.entrySet()) {
+                BlockEntity be = entry.getValue();
+                BlockEntity oldBE = entry.getKey();
+
+                if (be instanceof BlockEntitySubLevelActorExtensions<?> actor)
+                    migrate(actor, levelMap, entry.getKey(), transformMap);
+
                 if (be instanceof KineticBlockEntity kbe) kbe.attachKinetics();
+            }
 
             for (ServerSubLevel lev : inLevels) {
                 lev.markRemoved();
                 oContainer.removeSubLevel(lev, SubLevelRemovalReason.REMOVED);
             }
+        }
+
+        @SuppressWarnings("unchecked")
+        public static <T extends BlockEntity & BlockEntitySubLevelActor> void migrate(
+                BlockEntitySubLevelActorExtensions<T> actor,
+                Map<ServerSubLevel, ServerSubLevel> levelMap,
+                BlockEntity oldBE,
+                Map<ServerSubLevel, SubLevelAssemblyHelper.AssemblyTransform> transforms
+        ) {
+            actor.sable$migrateData(levelMap, (T) oldBE, transforms);
         }
 
         @SuppressWarnings("UnstableApiUsage")
