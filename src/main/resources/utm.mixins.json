@@ -14,6 +14,7 @@
     "compat.create.RotationPropagatorMixin",
     "compat.gravestone.GraveBlockEntityMixin",
     "compat.gravestone.GraveBlockMixin",
+    "compat.sable.DockingConnectorBlockEntityMixin",
     "compat.sable.SpringBlockEntityMixin",
     "compat.sophisticatedcore$sophisticatedbackpacks.PumpUpgradeWrapperMixin",
     "compat.spears.SpearsMixin"

@@ -4,7 +4,6 @@ import com.nadia.utm.compat.BlockEntitySubLevelActorExtensions;
 import com.nadia.utm.compat.IContraptionNBTAccessor;
 import com.nadia.utm.utm;
 import com.simibubi.create.content.contraptions.AbstractContraptionEntity;
-import com.simibubi.create.content.contraptions.actors.seat.SeatBlock;
 import com.simibubi.create.content.contraptions.actors.seat.SeatEntity;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import dev.ryanhcode.sable.Sable;
@@ -25,7 +24,6 @@ import dev.ryanhcode.sable.sublevel.plot.LevelPlot;
 import dev.ryanhcode.sable.sublevel.plot.PlotChunkHolder;
 import dev.ryanhcode.sable.sublevel.storage.SubLevelRemovalReason;
 import dev.ryanhcode.sable.sublevel.system.SubLevelPhysicsSystem;
-import dev.simulated_team.simulated.content.blocks.docking_connector.DockingConnectorBlockEntity;
 import dev.simulated_team.simulated.content.blocks.rope.RopeStrandHolderBlockEntity;
 import dev.simulated_team.simulated.content.blocks.rope.strand.server.RopeAttachmentPoint;
 import dev.simulated_team.simulated.content.blocks.rope.strand.server.ServerRopeStrand;
@@ -43,7 +41,6 @@ import net.minecraft.server.TickTask;
 import net.minecraft.server.level.FullChunkStatus;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -262,8 +259,6 @@ public class SableUtil {
             // be compat maps
             List<Pair<RopeStrandHolderBlockEntity, RopeStrandHolderBlockEntity>> ropeMap = new ArrayList<>();
             Map<SwivelBearingBlockEntity, SwivelBearingPlateBlockEntity> swivelMap = new HashMap<>();
-            Map<DockingConnectorBlockEntity, DockingConnectorBlockEntity> dockMap = new HashMap<>();
-            Set<DockingConnectorBlockEntity> docksUsed = new HashSet<>();
 
             for (ServerSubLevel level : processed) {
                 Pair<List<BlockPos>, BoundingBox3i> sublevelData = allBlocks.getOrDefault(level, new Pair<>(List.of(), new BoundingBox3i()));
@@ -408,21 +403,6 @@ public class SableUtil {
                                 tag.remove("ParentSubLevelId");
                             }
 
-                            case DockingConnectorBlockEntity dock -> {
-                                if (dock.hasOtherConnector() && !docksUsed.contains(dock)) {
-                                    DockingConnectorBlockEntity other = dock.getOtherConnector();
-
-                                    if (other != null) {
-                                        dockMap.put(dock, other);
-                                        docksUsed.add(dock);
-                                        docksUsed.add(other);
-                                    }
-                                }
-
-                                tag.remove("OtherConnector");
-                                tag.remove("OtherConnectorSubLevelId");
-                            }
-
                             case BlockEntitySubLevelActorExtensions<?> actor -> {
                                 actor.sable$cleanLevelNBT(tag);
                             }
@@ -458,7 +438,7 @@ public class SableUtil {
                                     boolean didReseat = false;
 
                                     if (seatPos != null) {
-                                        SeatBlock.sitDown(target, transform.apply(seatPos), newPass instanceof Player player ? SeatBlock.getLeashed(target, player).or(player) : newPass);
+                                        //SeatBlock.sitDown(target, transform.apply(seatPos), newPass);
                                         didReseat = true;
                                     }
 
@@ -517,14 +497,6 @@ public class SableUtil {
                     newSwivel.setPlatePos(newPlate.getBlockPos());
                     newSwivel.reattachConstraint(targetLevel, true);
                 }
-            }
-
-            for (Map.Entry<DockingConnectorBlockEntity, DockingConnectorBlockEntity> entry : dockMap.entrySet()) {
-                DockingConnectorBlockEntity old1 = entry.getKey(), old2 = entry.getValue();
-                DockingConnectorBlockEntity new1 = (DockingConnectorBlockEntity) beMap.get(old1), new2 = (DockingConnectorBlockEntity) beMap.get(old2);
-
-                if (new1 != null && new2 != null)
-                    new1.pairTo(new2);
             }
 
             for (Map.Entry<BlockEntity, BlockEntity> entry : beMap.entrySet()) {
