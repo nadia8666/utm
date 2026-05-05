@@ -23,21 +23,22 @@ public abstract class DockingConnectorBlockEntityMixin implements BlockEntitySub
     public abstract void pairTo(DockingConnectorBlockEntity other);
 
     @Override
-    public boolean sable$migrateData(Map<ServerSubLevel, ServerSubLevel> conversions, DockingConnectorBlockEntity oldBE, Map<ServerSubLevel, SubLevelAssemblyHelper.AssemblyTransform> transforms) {
-        if (oldBE.hasOtherConnector() && oldBE.getOtherConnector() instanceof DockingConnectorBlockEntity other && SableCompanion.INSTANCE.getContaining(other) instanceof ServerSubLevel oldLevel) {
+    public boolean sable$migrateData(final Map<ServerSubLevel, ServerSubLevel> conversions, final DockingConnectorBlockEntity oldBE, final Map<ServerSubLevel, SubLevelAssemblyHelper.AssemblyTransform> transforms) {
+        if (oldBE.hasOtherConnector() && oldBE.getOtherConnector() instanceof final DockingConnectorBlockEntity other
+                && SableCompanion.INSTANCE.getContaining(other) instanceof final ServerSubLevel oldLevel) {
             if (utm$usedDocks.remove(oldBE)) return false;
-
             utm$usedDocks.add(other);
 
-            ServerSubLevel nextLevel = conversions.get(oldLevel);
+            final ServerSubLevel nextLevel = conversions.get(oldLevel);
             pairTo((DockingConnectorBlockEntity) nextLevel.getLevel().getBlockEntity(transforms.get(nextLevel).apply(other.getBlockPos())));
+
             return true;
         }
 
         return false;
     }
 
-    public void sable$cleanLevelNBT(CompoundTag tag) {
+    public void sable$cleanLevelNBT(final CompoundTag tag) {
         tag.remove("OtherConnector");
         tag.remove("OtherConnectorSubLevelId");
     }

@@ -18,12 +18,12 @@ public abstract class SpringBlockEntityMixin implements BlockEntitySubLevelActor
     public abstract void setPartnerPos(BlockPos pos, UUID subLevel);
 
     @Override
-    public boolean sable$migrateData(Map<ServerSubLevel, ServerSubLevel> conversions, SpringBlockEntity oldBE, Map<ServerSubLevel, SubLevelAssemblyHelper.AssemblyTransform> transforms) {
-        SpringBlockEntity pair = oldBE.getPairedSpring();
-        UUID partnerID = oldBE.getPartnerSubLevelID();
+    public boolean sable$migrateData(final Map<ServerSubLevel, ServerSubLevel> conversions, final SpringBlockEntity oldBE, final Map<ServerSubLevel, SubLevelAssemblyHelper.AssemblyTransform> transforms) {
+        final SpringBlockEntity pair = oldBE.getPairedSpring();
+        final UUID partnerID = oldBE.getPartnerSubLevelID();
 
         if (pair != null && partnerID != null) {
-            ServerSubLevel newLevel = conversions.entrySet().stream()
+            final ServerSubLevel newLevel = conversions.entrySet().stream()
                     .filter((e) -> e.getKey().getUniqueId().equals(partnerID))
                     .map(Map.Entry::getValue).findFirst().orElseThrow();
 
@@ -34,7 +34,7 @@ public abstract class SpringBlockEntityMixin implements BlockEntitySubLevelActor
         return false;
     }
 
-    public void sable$cleanLevelNBT(CompoundTag tag) {
+    public void sable$cleanLevelNBT(final CompoundTag tag) {
         tag.remove("GoalSubLevel");
         tag.remove("Goal");
     }

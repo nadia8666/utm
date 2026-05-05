@@ -15,7 +15,10 @@
     "compat.gravestone.GraveBlockEntityMixin",
     "compat.gravestone.GraveBlockMixin",
     "compat.sable.DockingConnectorBlockEntityMixin",
+    "compat.sable.RopeStrandHolderBlockEntityMixin",
     "compat.sable.SpringBlockEntityMixin",
+    "compat.sable.SwivelBearingBlockEntityMixin",
+    "compat.sable.SwivelBearingPlateBlockEntityMixin",
     "compat.sophisticatedcore$sophisticatedbackpacks.PumpUpgradeWrapperMixin",
     "compat.spears.SpearsMixin"
   ],

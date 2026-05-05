@@ -24,11 +24,6 @@ import dev.ryanhcode.sable.sublevel.plot.LevelPlot;
 import dev.ryanhcode.sable.sublevel.plot.PlotChunkHolder;
 import dev.ryanhcode.sable.sublevel.storage.SubLevelRemovalReason;
 import dev.ryanhcode.sable.sublevel.system.SubLevelPhysicsSystem;
-import dev.simulated_team.simulated.content.blocks.rope.RopeStrandHolderBlockEntity;
-import dev.simulated_team.simulated.content.blocks.rope.strand.server.RopeAttachmentPoint;
-import dev.simulated_team.simulated.content.blocks.rope.strand.server.ServerRopeStrand;
-import dev.simulated_team.simulated.content.blocks.swivel_bearing.SwivelBearingBlockEntity;
-import dev.simulated_team.simulated.content.blocks.swivel_bearing.link_block.SwivelBearingPlateBlockEntity;
 import io.netty.buffer.Unpooled;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.SectionPos;
@@ -168,6 +163,7 @@ public class SableUtil {
             return null;
         }
 
+        // TODO: final spam
         public static void changeDimension(ServerSubLevel originLevel, ServerLevel origin, ServerLevel target) {
             ServerSubLevelContainer oContainer = SubLevelContainer.getContainer(origin);
             ServerSubLevelContainer container = SubLevelContainer.getContainer(target);
@@ -248,17 +244,10 @@ public class SableUtil {
                 target.getChunk(pos.x, pos.z, ChunkStatus.FULL, true);
             }
 
-            // old be -> new be
-            Map<BlockEntity, BlockEntity> beMap = new HashMap<>();
-
-            // old net -> new net
-            Map<Long, Long> networkMap = new HashMap<>();
-            Map<ServerSubLevel, SubLevelAssemblyHelper.AssemblyTransform> transformMap = new HashMap<>();
-
-            // TODO: in the future a sable provided method that takes in an old -> new sublevel map & an assembly transform would be awesome.
-            // be compat maps
-            List<Pair<RopeStrandHolderBlockEntity, RopeStrandHolderBlockEntity>> ropeMap = new ArrayList<>();
-            Map<SwivelBearingBlockEntity, SwivelBearingPlateBlockEntity> swivelMap = new HashMap<>();
+            // old -> new
+            final Map<BlockEntity, BlockEntity> beMap = new HashMap<>();
+            final Map<Long, Long> networkMap = new HashMap<>();
+            final Map<ServerSubLevel, SubLevelAssemblyHelper.AssemblyTransform> transformMap = new HashMap<>();
 
             for (ServerSubLevel level : processed) {
                 Pair<List<BlockPos>, BoundingBox3i> sublevelData = allBlocks.getOrDefault(level, new Pair<>(List.of(), new BoundingBox3i()));
@@ -349,11 +338,9 @@ public class SableUtil {
                     level.getPlot().removeContraption(contraption);
                 }
 
-                //TODO: test literally every other be
                 /*
                  * nonstandard blockentities
-                 * its okay to serialize the majority of blocks BUT blocks with positional/uuid data will have trouble with the moving plot positions
-                 * so. me. dont forget to mitigate that here.
+                 * its okay to serialize the majority of blocks BUT blocks with positional/uuid data will have trouble with the changing of plots
                  */
                 for (BlockPos oldPos : blocks) {
                     BlockPos newPos = transform.apply(oldPos);
@@ -365,53 +352,10 @@ public class SableUtil {
                         assert oldBE != null;
 
                         CompoundTag tag = oldBE.saveWithFullMetadata(target.registryAccess());
-                        switch (oldBE) {
-                            case RopeStrandHolderBlockEntity rope -> {
-                                if (rope.getBehavior().ownsRope()) {
-                                    ServerRopeStrand strand = rope.getBehavior().getOwnedStrand();
-                                    if (strand != null) {
-                                        RopeStrandHolderBlockEntity startBE = (RopeStrandHolderBlockEntity) origin.getBlockEntity(strand.getAttachment(RopeAttachmentPoint.START).blockAttachment());
-                                        RopeStrandHolderBlockEntity endBE = (RopeStrandHolderBlockEntity) origin.getBlockEntity(strand.getAttachment(RopeAttachmentPoint.END).blockAttachment());
+                        if (oldBE instanceof BlockEntitySubLevelActorExtensions<?> actor)
+                            actor.sable$cleanLevelNBT(tag);
 
-                                        if (startBE != null && endBE != null)
-                                            ropeMap.add(new Pair<>(startBE, endBE));
-                                    }
-                                }
-
-                                tag.remove("HasRopeAttached");
-                                tag.remove("Strand");
-                                tag.putBoolean("OwnStrand", false);
-                            }
-
-                            case SwivelBearingBlockEntity swivel -> {
-                                if (swivel.isAssembled()) {
-                                    BlockPos platePos = swivel.getPlatePos();
-                                    ServerSubLevel connected = (ServerSubLevel) oContainer.getSubLevel(swivel.getSubLevelID());
-
-                                    if (platePos != null && connected != null) {
-                                        SwivelBearingPlateBlockEntity plate = (SwivelBearingPlateBlockEntity) origin.getBlockEntity(platePos);
-                                        swivelMap.put(swivel, plate);
-                                    }
-                                }
-
-                                tag.remove("SubLevelID");
-                                tag.remove("SwivelPlate");
-                            }
-
-                            case SwivelBearingPlateBlockEntity plate -> {
-                                tag.remove("ParentPos");
-                                tag.remove("ParentSubLevelId");
-                            }
-
-                            case BlockEntitySubLevelActorExtensions<?> actor -> {
-                                actor.sable$cleanLevelNBT(tag);
-                            }
-
-                            default -> {
-                            }
-                        }
-
-                        if (tag.contains("Network")) {
+                        if (tag.contains("Network")) { // TODO: do this better, what if another mod uses Network!. see if all create networkables share a single interface
                             long nextID = networkMap.computeIfAbsent(tag.getLong("Network"), k -> java.util.concurrent.ThreadLocalRandom.current().nextLong());
                             tag.putLong("Network", nextID);
                         }
@@ -437,10 +381,12 @@ public class SableUtil {
                                     newPass.addTag("utm_reentry_landing");
                                     boolean didReseat = false;
 
+                                    /* TODO: fix. bug: ranndomly decides to sit you at the actual local blockpos coords instead of the 80% chance for the correct pos. what.
                                     if (seatPos != null) {
-                                        //SeatBlock.sitDown(target, transform.apply(seatPos), newPass);
+                                        SeatBlock.sitDown(target, transform.apply(seatPos), newPass);
                                         didReseat = true;
                                     }
+                                    */
 
                                     if (!didReseat) {
                                         next.getTrackingPlayers().add(newPass.getUUID());
@@ -469,39 +415,9 @@ public class SableUtil {
                 SubLevelAssemblyHelper.moveTrackingPoints(target, bounds, next, transform);
             }
 
-            List<ServerSubLevel> inLevels = levelMap.keySet().stream().toList();
-            List<ServerSubLevel> outLevels = levelMap.values().stream().toList();
-
-            for (Pair<RopeStrandHolderBlockEntity, RopeStrandHolderBlockEntity> ropes : ropeMap) {
-                RopeStrandHolderBlockEntity old1 = ropes.getA(),
-                        old2 = ropes.getB();
-                RopeStrandHolderBlockEntity new1 = (RopeStrandHolderBlockEntity) beMap.get((BlockEntity) ropes.getA()),
-                        new2 = (RopeStrandHolderBlockEntity) beMap.get((BlockEntity) ropes.getB());
-
-                if (new1 != null & new2 != null)
-                    new1.getBehavior().createRope(new2.getBehavior());
-            }
-
-            for (Map.Entry<SwivelBearingBlockEntity, SwivelBearingPlateBlockEntity> entry : swivelMap.entrySet()) {
-                SwivelBearingBlockEntity swivel = entry.getKey();
-                SwivelBearingPlateBlockEntity plate = entry.getValue();
-
-                SwivelBearingBlockEntity newSwivel = (SwivelBearingBlockEntity) beMap.get(swivel);
-                SwivelBearingPlateBlockEntity newPlate = (SwivelBearingPlateBlockEntity) beMap.get(plate);
-
-                if (newSwivel != null && newPlate != null) {
-                    ServerSubLevel targetLevel = (ServerSubLevel) SableCompanion.INSTANCE.getContaining(newPlate);
-                    if (targetLevel == null) continue;
-
-                    newSwivel.setSubLevelID(targetLevel.getUniqueId());
-                    newSwivel.setPlatePos(newPlate.getBlockPos());
-                    newSwivel.reattachConstraint(targetLevel, true);
-                }
-            }
-
             for (Map.Entry<BlockEntity, BlockEntity> entry : beMap.entrySet()) {
-                BlockEntity be = entry.getValue();
-                BlockEntity oldBE = entry.getKey();
+                final BlockEntity be = entry.getValue();
+                final BlockEntity oldBE = entry.getKey();
 
                 if (be instanceof BlockEntitySubLevelActorExtensions<?> actor)
                     migrate(actor, levelMap, entry.getKey(), transformMap);
@@ -509,14 +425,14 @@ public class SableUtil {
                 if (be instanceof KineticBlockEntity kbe) kbe.attachKinetics();
             }
 
-            for (ServerSubLevel lev : inLevels) {
+            for (ServerSubLevel lev : levelMap.keySet()) {
                 lev.markRemoved();
                 oContainer.removeSubLevel(lev, SubLevelRemovalReason.REMOVED);
             }
         }
 
         @SuppressWarnings("unchecked")
-        public static <T extends BlockEntity & BlockEntitySubLevelActor> void migrate(
+        public static <T extends BlockEntitySubLevelActor> void migrate(
                 BlockEntitySubLevelActorExtensions<T> actor,
                 Map<ServerSubLevel, ServerSubLevel> levelMap,
                 BlockEntity oldBE,
