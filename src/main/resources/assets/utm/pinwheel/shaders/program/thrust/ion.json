@@ -1,0 +1,8 @@
+{
+  "fragment": "utm:thrust/ion",
+  "vertex": "utm:thrust/ion",
+  "attributes": [
+    "Position",
+    "UV0"
+  ]
+}

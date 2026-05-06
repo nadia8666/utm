@@ -172,6 +172,9 @@ public class utmRenderTypes {
     ));
 
     public static final ResourceLocation AEROWALL = utm.key("aerowall");
+    public static final ResourceLocation THRUST_ION = utm.key("thrust_ion");
+    public static final ResourceLocation THRUST_LARGE_1 = utm.key("thrust_large1");
+    public static final ResourceLocation THRUST_LARGE_2 = utm.key("thrust_large2");
 
     private static final ResourceLocation PARTICLE_ATLAS = ResourceLocation.withDefaultNamespace("textures/atlas/particles.png");
     public static final Supplier<ParticleRenderType> EMISSIVE_PARTICLE = Suppliers.memoize(() -> new ParticleRenderType() {

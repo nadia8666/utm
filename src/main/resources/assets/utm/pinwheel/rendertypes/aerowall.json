@@ -14,7 +14,7 @@
     },
     {
       "type": "veil:shader",
-      "name": "utm:aerowall"
+      "name": "utm:aerowall/aerowall"
     },
     {
       "type": "minecraft:transparency",

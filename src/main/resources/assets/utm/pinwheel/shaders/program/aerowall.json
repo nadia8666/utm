@@ -1,8 +1,0 @@
-{
-  "fragment": "utm:aerowall",
-  "vertex": "utm:aerowall",
-  "attributes": [
-    "Position",
-    "UV0"
-  ]
-}

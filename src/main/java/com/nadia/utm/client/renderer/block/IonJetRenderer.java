@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.nadia.utm.block.IonJetBlock;
 import com.nadia.utm.block.entity.IonJetBlockEntity;
 import com.nadia.utm.client.renderer.IBlockstateRotatedRenderer;
+import com.nadia.utm.client.renderer.utmRenderTypes;
 import com.nadia.utm.event.ForceLoad;
 import com.nadia.utm.event.utmEvents;
 import com.nadia.utm.registry.block.utmBlockEntities;
@@ -11,6 +12,7 @@ import com.nadia.utm.registry.model.utmModels;
 import com.nadia.utm.util.PoseUtil;
 import com.simibubi.create.AllPartialModels;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntityRenderer;
+import foundry.veil.api.client.render.rendertype.VeilRenderType;
 import net.createmod.catnip.render.CachedBuffers;
 import net.createmod.catnip.render.SuperByteBuffer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -18,6 +20,8 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import org.jetbrains.annotations.NotNull;
@@ -26,6 +30,16 @@ import org.jetbrains.annotations.NotNull;
 public class IonJetRenderer extends KineticBlockEntityRenderer<IonJetBlockEntity> implements IBlockstateRotatedRenderer {
     public IonJetRenderer(BlockEntityRendererProvider.Context context) {
         super(context);
+    }
+
+    @Override
+    public boolean shouldRenderOffScreen(@NotNull IonJetBlockEntity blockEntity) {
+        return true;
+    }
+
+    @Override
+    public @NotNull AABB getRenderBoundingBox(@NotNull IonJetBlockEntity blockEntity) {
+        return AABB.ofSize(Vec3.atCenterOf(blockEntity.getBlockPos()), 6, 6, 6);
     }
 
     @Override
@@ -39,6 +53,7 @@ public class IonJetRenderer extends KineticBlockEntityRenderer<IonJetBlockEntity
         SuperByteBuffer vent = CachedBuffers.partial(utmModels.ION_JET_VENT, be.getBlockState());
         SuperByteBuffer cogs = CachedBuffers.partial(utmModels.ION_JET_COGS, be.getBlockState());
 
+        SuperByteBuffer thrustMain = CachedBuffers.partial(utmModels.THRUST_ION, be.getBlockState());
 
         new PoseUtil(ms).push().run(() -> rotateByFacing(be, ms)).run(() -> {
             Direction facing = be.getBlockState().getValue(IonJetBlock.FACING);
@@ -54,11 +69,33 @@ public class IonJetRenderer extends KineticBlockEntityRenderer<IonJetBlockEntity
             vent.rotateCentered((float) Math.toRadians(90), Direction.Axis.X);
             cogs.rotateCentered((float) Math.toRadians(90), Direction.Axis.X);
 
+            double scalar = ((double) level.getGameTime() + partialTicks / 20) * be.getThrust() / 4;
+            float alpha = be.getThrust() / IonJetBlockEntity.THRUST_MAX;
+            float scale = .6f * ((float) Math.sin(scalar / 10) / 100 + 1) * alpha;
+
             kineticRotationTransform(shaft, be, Direction.Axis.Z, ang, light).renderInto(ms, buffer.getBuffer(RenderType.solid()));
-            bottom1.light(light).translate(0, Math.sin(((double) level.getGameTime() / 3 + partialTicks / 20) * be.getThrust()) / 40, 0).renderInto(ms, buffer.getBuffer(RenderType.solid()));
-            bottom2.light(light).translate(0, Math.sin((level.getGameTime() + partialTicks / 20) * 3 * be.getThrust()) / 60, 0).renderInto(ms, buffer.getBuffer(RenderType.solid()));
+            bottom1.light(light).translate(0, Math.sin(scalar / 3) / 40, 0).renderInto(ms, buffer.getBuffer(RenderType.solid()));
+            bottom2.light(light).translate(0, Math.sin(scalar) / 60, 0).renderInto(ms, buffer.getBuffer(RenderType.solid()));
             vent.light(light).renderInto(ms, buffer.getBuffer(RenderType.translucent()));
             cogs.light(light).rotateCentered(ang, Direction.Axis.Y).renderInto(ms, buffer.getBuffer(RenderType.solid()));
+
+            RenderType rt = VeilRenderType.get(utmRenderTypes.THRUST_ION);
+
+            if (rt != null) {
+                thrustMain.light(light)
+                        .translate(0.5f, 0.5f, 0.0f)
+                        .scale(scale)
+                        .scaleZ(2.0f * alpha)
+                        .translate(-0.5f, -0.5f, 0.0f)
+                        .renderInto(ms, buffer.getBuffer(rt));
+
+                thrustMain.light(light)
+                        .translate(0.5f, 0.5f, 0.0f)
+                        .scale(scale * .8f)
+                        .scaleZ(2.0f * alpha)
+                        .translate(-0.5f, -0.5f, 0.0f)
+                        .renderInto(ms, buffer.getBuffer(rt));
+            }
         }).pop();
     }
 

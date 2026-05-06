@@ -1,0 +1,7 @@
+{
+  "parent": "block/block",
+  "loader": "neoforge:obj",
+  "flip_v": true,
+  "model": "utm:models/block/thrust_large2.obj",
+  "textures": {}
+}

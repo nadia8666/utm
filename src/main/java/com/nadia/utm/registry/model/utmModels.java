@@ -17,4 +17,8 @@ public class utmModels {
     public static final PartialModel ION_JET_BOTTOM_2 = PartialModel.of(utm.key("block/ion_jet_b2"));
     public static final PartialModel ION_JET_COGS = PartialModel.of(utm.key("block/ion_jet_cogs"));
     public static final PartialModel ION_JET_VENT = PartialModel.of(utm.key("block/ion_jet_vent"));
+
+    public static final PartialModel THRUST_ION = PartialModel.of(utm.key("block/thrust_ion"));
+    public static final PartialModel THRUST_LARGE_1 = PartialModel.of(utm.key("block/thrust_large1"));
+    public static final PartialModel THRUST_LARGE_2 = PartialModel.of(utm.key("block/thrust_large2"));
 }

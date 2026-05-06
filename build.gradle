@@ -160,6 +160,8 @@ dependencies {
     jarJar(runtimeOnly("maven.modrinth:create-link-relays:QzWAvFbP")) // create link relays
     jarJar(runtimeOnly("maven.modrinth:create-aeronautics-climbable-rope:beFXNNkF")) // climbable ropes
 
+    implementation("foundry.imguimc:imguimc-neoforge-${minecraft_version}:$imguimc_version")
+
     compileOnly("maven.modrinth:punchy-fpa:NDU7HRVN") // punchy
 
     implementation("foundry.veil:veil-neoforge-${project.minecraft_version}:${project.veil_version}") {
