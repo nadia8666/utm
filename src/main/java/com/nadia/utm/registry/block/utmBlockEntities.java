@@ -2,6 +2,9 @@ package com.nadia.utm.registry.block;
 
 import com.mojang.datafixers.types.Type;
 import com.nadia.utm.block.entity.*;
+import com.nadia.utm.block.propulsion.ion.IonJetBlockEntity;
+import com.nadia.utm.block.propulsion.liquid.LiquidFuelThrusterBlockEntity;
+import com.nadia.utm.block.propulsion.solid.SolidThrusterBlockEntity;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -47,6 +50,10 @@ public class utmBlockEntities {
     public static final Supplier<BlockEntityType<BiomeSealerBlockEntity>> BIOME_SEALER = register("biome_sealer", BiomeSealerBlockEntity::new, utmBlocks.BIOME_SEALER);
 
     public static final Supplier<BlockEntityType<IonJetBlockEntity>> ION_JET = register("ion_jet", IonJetBlockEntity::new, utmBlocks.ION_JET);
+
+    public static final Supplier<BlockEntityType<LiquidFuelThrusterBlockEntity>> LIQUID_THRUSTER = register("liquid_thruster", LiquidFuelThrusterBlockEntity::new, utmBlocks.LIQUID_THRUSTER);
+
+    public static final Supplier<BlockEntityType<SolidThrusterBlockEntity>> SOLID_THRUSTER = register("solid_thruster", SolidThrusterBlockEntity::new, utmBlocks.SOLID_THRUSTER);
 
     public static final Supplier<BlockEntityType<AerowallBlockEntity>> AEROWALL = register("aerowall", AerowallBlockEntity::new, utmBlocks.AERO_WALL);
 

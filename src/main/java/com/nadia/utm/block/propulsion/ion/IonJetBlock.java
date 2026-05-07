@@ -1,6 +1,5 @@
-package com.nadia.utm.block;
+package com.nadia.utm.block.propulsion.ion;
 
-import com.nadia.utm.block.entity.IonJetBlockEntity;
 import com.nadia.utm.registry.block.utmBlockEntities;
 import com.simibubi.create.content.kinetics.base.KineticBlock;
 import com.simibubi.create.foundation.block.IBE;
@@ -23,7 +22,7 @@ public class IonJetBlock extends KineticBlock implements IBE<IonJetBlockEntity> 
     public IonJetBlock(Properties properties) {
         super(properties);
 
-        registerDefaultState(this.stateDefinition.any()); // apprently might NPE withotu facing but i dont believe what intellij.ai tells me
+        registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
     }
 
     @Override

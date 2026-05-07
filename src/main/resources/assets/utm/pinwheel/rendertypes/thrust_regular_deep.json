@@ -1,0 +1,54 @@
+{
+  "format": "POSITION_TEX",
+  "mode": "QUADS",
+  "bufferSize": "TRANSIENT",
+  "sort": true,
+  "affectsCrumbling": false,
+  "outline": false,
+  "layers": [
+    [
+      {
+        "type": "minecraft:texture",
+        "texture": "utm:textures/block/thrust_bloom.png",
+        "blur": false,
+        "mipmap": false
+      },
+      {
+        "type": "veil:shader",
+        "name": "utm:thrust/regular_deep"
+      },
+      {
+        "type": "minecraft:transparency",
+        "mode": "translucent"
+      },
+      {
+        "type": "minecraft:lightmap"
+      },
+      {
+        "type": "minecraft:write_mask",
+        "color": true,
+        "depth": false
+      },
+      {
+        "type": "minecraft:depth_test",
+        "mode": "lequal"
+      }
+    ],
+    [
+      {
+        "type": "minecraft:texture",
+        "texture": "utm:textures/block/thrust.png",
+        "blur": false,
+        "mipmap": false
+      },
+      {
+        "type": "veil:shader",
+        "name": "utm:thrust/regular_deep"
+      },
+      {
+        "type": "minecraft:output",
+        "framebuffer": "veil:bloom"
+      }
+    ]
+  ]
+}

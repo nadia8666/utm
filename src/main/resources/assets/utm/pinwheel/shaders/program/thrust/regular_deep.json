@@ -1,0 +1,8 @@
+{
+  "fragment": "utm:thrust/regular_deep",
+  "vertex": "utm:thrust/thrust_deep",
+  "attributes": [
+    "Position",
+    "UV0"
+  ]
+}

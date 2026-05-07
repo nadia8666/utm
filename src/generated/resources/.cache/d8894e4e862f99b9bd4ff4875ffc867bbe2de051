@@ -1,4 +1,4 @@
-// 1.21.1	2026-04-28T10:29:01.4100594	Item Models: utm
+// 1.21.1	2026-05-07T10:23:15.2293263	Item Models: utm
 6d60e0d2b0873e138bcfa8f5db0ca9cb6d7cd4fa assets/utm/models/item/adv_goggles.json
 0c35c7686bdc2e520fa2ede79bfa3e5855ad5ffc assets/utm/models/item/air_compressor.json
 9d13b4b18c25ee3c81b1cc65fd86954c95187339 assets/utm/models/item/aluminum_ingot.json
@@ -37,6 +37,7 @@ d4548f73a49b6ccf687c599fdf5db4032d1b3fc0 assets/utm/models/item/incredipak.json
 cf45503b2e70be31136ad4d4f4f9e8716900bf6a assets/utm/models/item/ion_jet.json
 71198b608184285307f8f0d3743ba3d24d7a4001 assets/utm/models/item/launch_contraption.json
 6f0003000446e54f9b0dbaefd4e82ff8e8fa8d56 assets/utm/models/item/liquid_oxygen_bucket.json
+d9b591e9cc2c687a56bdd31f1728599e97ae2bb8 assets/utm/models/item/liquid_thruster.json
 b6874dc12931d9a72815a83720c39c7232a5ca02 assets/utm/models/item/magnesium_ingot.json
 255886452a338d59bc9af8671142e737dabc5092 assets/utm/models/item/magnesium_ore.json
 bd336db203dd4ba9dc1df68464cc90aa6d912160 assets/utm/models/item/magnesium_sheet.json
@@ -53,6 +54,7 @@ e1ff107dcc5ce5152dee20b1c2a4eedb64eb79dc assets/utm/models/item/raw_aluminum.jso
 c94908a0de5dcb69056c5d24ba34e844e921b2d1 assets/utm/models/item/raw_magnesium.json
 dfa92cda8882516d5dcd729379b1da768d248a36 assets/utm/models/item/regen_disc.json
 cfaef45a7658c7b8ce65e855b1bd38a3c44113da assets/utm/models/item/shart.json
+af1e629fbeb59dec7607fbae2d305b3d5cdeffdd assets/utm/models/item/solid_thruster.json
 8f6135cda73a6471dace0ba2ffa8efc61234709c assets/utm/models/item/steel_ingot.json
 97b31be7aa7fb4f3a9024c82df7b130c4ac1156f assets/utm/models/item/steel_sheet.json
 4bb429556d32c018342d162fceee88326f55c9a6 assets/utm/models/item/unfinished_arid_ingot.json

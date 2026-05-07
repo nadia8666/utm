@@ -111,7 +111,7 @@ public class OxygenCollectorBlockEntity extends SplitShaftBlockEntity implements
         String efficiency = String.format("%.1f", FILL_SPEED * 100);
 
         tooltip.add(Component.empty());
-        utmLang.text("Collection Info:").style(ChatFormatting.WHITE).forGoggles(tooltip);
+        utmLang.text("Collection Info:").style(ChatFormatting.WHITE).forGoggles(tooltip, 0);
         utmLang.text(TANK.getFluidAmount() + "/" + MAX_AIR).style(ChatFormatting.AQUA).space().add(utmLang.text("Oxygen").style(ChatFormatting.GRAY)).forGoggles(tooltip);
         utmLang.text(String.valueOf(COLLECTION_RATE * 20)).style(ChatFormatting.AQUA).space().add(utmLang.text("Oxygen per second").style(ChatFormatting.GRAY)).forGoggles(tooltip);
         utmLang.text(efficiency + "% Efficiency").style(

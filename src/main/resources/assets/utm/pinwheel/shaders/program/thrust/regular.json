@@ -1,5 +1,5 @@
 {
-  "fragment": "utm:thrust/ion",
+  "fragment": "utm:thrust/regular",
   "vertex": "utm:thrust/thrust",
   "attributes": [
     "Position",

@@ -1,4 +1,4 @@
-// 1.21.1	2026-04-28T10:29:01.4135516	Loot Tables
+// 1.21.1	2026-05-07T10:23:15.232826	Loot Tables
 79f8f9dea0c7cdb725e30638071b2e6216a483ed data/utm/loot_table/blocks/aerowall.json
 f8c417ff60baca7c6796b4b11326f96ca35b0f99 data/utm/loot_table/blocks/aluminum_ore.json
 d4e8775a0bc83dce60dc1d83731b77333a4fed3b data/utm/loot_table/blocks/biome_sealer.json
@@ -13,6 +13,7 @@ bd2b22b9652c80441bc5b1f717eddec48ad69841 data/utm/loot_table/blocks/grate.json
 c712d654f16dad4a772a2233fb23c0c84bf0afab data/utm/loot_table/blocks/interdictor.json
 1efb0f35624263dccd27a3c30e7acafb1521f59b data/utm/loot_table/blocks/ion_jet.json
 98202610f57353b2176453da0256c983dfb6d163 data/utm/loot_table/blocks/launch_contraption.json
+c6bc955e3e3daeebdf31f685d0e734c73f522638 data/utm/loot_table/blocks/liquid_thruster.json
 31f82a8cf17b10bf61ab499e53c6fae21b4f965c data/utm/loot_table/blocks/magnesium_ore.json
 8eab6f100e95097032f670f3af0ee869a5388847 data/utm/loot_table/blocks/outpostwalls_metal.json
 497cc2f69bcb6dd6ad878d6dd25ff4367ce06a41 data/utm/loot_table/blocks/outpostwalls_shrine.json
@@ -21,3 +22,4 @@ b6a5d5d588720f296dfc0c60771d38331c0f791a data/utm/loot_table/blocks/oxygen_furna
 e2264ed9fd039e249e3f3223618d23320ae3e14e data/utm/loot_table/blocks/player_chunk_loader.json
 9f8e615a1f199cf068992d32a53212e18b1e6401 data/utm/loot_table/blocks/portasealer.json
 9f509bc075cd533e9caada0e6e1be805d17a0170 data/utm/loot_table/blocks/regen_disc.json
+d63c08e7ff86517a2bb3612d202ef2c8e8cc3895 data/utm/loot_table/blocks/solid_thruster.json

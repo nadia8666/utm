@@ -1,8 +1,6 @@
-package com.nadia.utm.client.renderer.block;
+package com.nadia.utm.block.propulsion.ion;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.nadia.utm.block.IonJetBlock;
-import com.nadia.utm.block.entity.IonJetBlockEntity;
 import com.nadia.utm.client.renderer.IBlockstateRotatedRenderer;
 import com.nadia.utm.client.renderer.utmRenderTypes;
 import com.nadia.utm.event.ForceLoad;

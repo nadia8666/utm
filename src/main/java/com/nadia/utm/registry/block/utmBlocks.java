@@ -2,6 +2,9 @@ package com.nadia.utm.registry.block;
 
 import com.nadia.utm.block.*;
 import com.nadia.utm.block.displaylink.utmDisplaySources;
+import com.nadia.utm.block.propulsion.ion.IonJetBlock;
+import com.nadia.utm.block.propulsion.liquid.LiquidFuelThrusterBlock;
+import com.nadia.utm.block.propulsion.solid.SolidThrusterBlock;
 import com.nadia.utm.registry.fluid.utmFluids;
 import com.nadia.utm.registry.item.utmItems;
 import com.nadia.utm.registry.tags.utmTags;
@@ -201,4 +204,14 @@ public class utmBlocks {
             .destroyTime(3)
             .noOcclusion()
             .sound(SoundType.METAL)).dropSelf().inheritModel().minePick().mineTier(2).stress(8).tags(utmTags.BLOCK.BYPASS_RPM);
+
+    public static final utmBlockContainer<LiquidFuelThrusterBlock, BlockItem> LIQUID_THRUSTER = dualRegister("liquid_thruster", LiquidFuelThrusterBlock::new, BlockBehaviour.Properties.of()
+            .destroyTime(3)
+            .noOcclusion()
+            .sound(SoundType.METAL)).dropSelf().inheritModel().minePick().mineTier(2);
+
+    public static final utmBlockContainer<SolidThrusterBlock, BlockItem> SOLID_THRUSTER = dualRegister("solid_thruster", SolidThrusterBlock::new, BlockBehaviour.Properties.of()
+            .destroyTime(3)
+            .noOcclusion()
+            .sound(SoundType.METAL)).dropSelf().inheritModel().minePick().mineTier(2);
 }

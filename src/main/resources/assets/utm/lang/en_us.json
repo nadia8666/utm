@@ -45,6 +45,8 @@
   "block.utm.biome_sealer": "Biome Sealer",
   "block.utm.aerowall": "Aero-wall",
   "block.utm.ion_jet": "Ion Jet",
+  "block.utm.liquid_thruster": "Liquid Fuel Thruster",
+  "block.utm.solid_thruster": "Solid Rocket Thruster",
   "block.utm.regen_disc": "Regenerative Disc",
 
   "item.utm.copper_sword": "Copper Sword",

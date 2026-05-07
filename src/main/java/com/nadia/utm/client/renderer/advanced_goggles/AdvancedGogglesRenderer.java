@@ -1,7 +1,5 @@
 package com.nadia.utm.client.renderer.advanced_goggles;
 
-import java.util.*;
-
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.nadia.utm.event.ForceLoad;
 import com.nadia.utm.event.events.OxygenPayloadEvent;
@@ -27,7 +25,6 @@ import com.simibubi.create.foundation.gui.RemovedGuiUtils;
 import com.simibubi.create.foundation.utility.CreateLang;
 import com.simibubi.create.infrastructure.config.AllConfigs;
 import com.simibubi.create.infrastructure.config.CClient;
-
 import net.createmod.catnip.data.Iterate;
 import net.createmod.catnip.gui.element.BoxElement;
 import net.createmod.catnip.gui.element.GuiGameElement;
@@ -56,6 +53,8 @@ import net.minecraft.world.phys.HitResult;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
+
+import java.util.*;
 
 @ForceLoad(dist = Dist.CLIENT, deps = {utmNetworking.class})
 public class AdvancedGogglesRenderer {
@@ -205,7 +204,9 @@ public class AdvancedGogglesRenderer {
         int height = guiGraphics.guiHeight();
 
         posX = Math.min(posX, width - tooltipTextWidth - 20);
-        posY = Math.min(posY, height - tooltipHeight - 20);
+        posY = Math.min(posY, height - tooltipHeight);
+        posX = Math.max(posX, -5);
+        posY = Math.max(posY, 20);
 
         if (pinned && panel != null) {
             panel.WIDTH = tooltipTextWidth;
