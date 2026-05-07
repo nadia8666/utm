@@ -159,6 +159,7 @@ dependencies {
     jarJar(runtimeOnly("maven.modrinth:create-aeronautics-lift-patch:b5GqYXEI")) // aero lift patch for better flight phys
     jarJar(runtimeOnly("maven.modrinth:create-link-relays:QzWAvFbP")) // create link relays
     jarJar(runtimeOnly("maven.modrinth:create-aeronautics-climbable-rope:beFXNNkF")) // climbable ropes
+    jarJar(runtimeOnly("maven.modrinth:create-tweaked-controllers:csCe2v7f")) // advanced controllers for gimbals
 
     implementation("foundry.imguimc:imguimc-neoforge-${minecraft_version}:$imguimc_version")
 

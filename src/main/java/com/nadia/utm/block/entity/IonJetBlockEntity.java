@@ -1,9 +1,14 @@
 package com.nadia.utm.block.entity;
 
+import com.nadia.utm.event.ForceLoad;
+import com.nadia.utm.event.utmEvents;
 import com.nadia.utm.registry.block.utmBlockEntities;
+import com.nadia.utm.registry.fluid.utmFluids;
 import com.nadia.utm.util.utmLang;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
+import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
+import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
 import dev.eriksonn.aeronautics.content.particle.HotAirEmberParticleData;
 import dev.ryanhcode.sable.api.block.BlockEntitySubLevelActor;
 import dev.ryanhcode.sable.api.physics.force.ForceGroups;
@@ -11,31 +16,55 @@ import dev.ryanhcode.sable.api.physics.force.QueuedForceGroup;
 import dev.ryanhcode.sable.api.physics.handle.RigidBodyHandle;
 import dev.ryanhcode.sable.companion.math.JOMLConversion;
 import dev.ryanhcode.sable.sublevel.ServerSubLevel;
+import net.createmod.catnip.animation.LerpedFloat;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import org.joml.Vector3d;
 
 import java.util.List;
 
+@ForceLoad
 public class IonJetBlockEntity extends KineticBlockEntity implements BlockEntitySubLevelActor, IHaveGoggleInformation {
+    public SmartFluidTankBehaviour LOX;
     public static float THRUST_MAX = 400;
+    public LerpedFloat THRUST_ALPHA = LerpedFloat.linear();
 
     public IonJetBlockEntity(BlockPos pos, BlockState blockState) {
         super(utmBlockEntities.ION_JET.get(), pos, blockState);
+
+        THRUST_ALPHA.chase(0, 10, LerpedFloat.Chaser.LINEAR);
+    }
+
+    @Override
+    public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
+        this.LOX = new SmartFluidTankBehaviour(SmartFluidTankBehaviour.INPUT, this, 1, 1000, true);
+        this.LOX.getPrimaryHandler().setValidator((fluid) -> fluid.is(utmFluids.LIQUID_OXYGEN));
+
+        behaviours.add(this.LOX);
+    }
+
+    public void updateThrust() {
+        THRUST_ALPHA.updateChaseTarget(getThrustRaw());
     }
 
     public float getThrust() {
+        return THRUST_ALPHA.getValue();
+    }
+
+    public float getThrustRaw() {
+        if (this.LOX.getPrimaryHandler().getFluidAmount() <= 250) return 0;
+
         float speed = Math.abs(this.getSpeed()) / 256;
 
         return speed * THRUST_MAX;
@@ -43,7 +72,14 @@ public class IonJetBlockEntity extends KineticBlockEntity implements BlockEntity
 
     @Override
     public void tick() {
+        super.tick();
+
+        updateThrust();
+        THRUST_ALPHA.tickChaser();
+
         if (this.level == null || this.getThrust() <= 0) return;
+
+        this.LOX.getPrimaryHandler().drain(5, IFluidHandler.FluidAction.EXECUTE);
 
         final BlockPos pos = this.getBlockPos();
         final RandomSource random = this.level.getRandom();
@@ -53,29 +89,6 @@ public class IonJetBlockEntity extends KineticBlockEntity implements BlockEntity
 
         final double speed = getThrust() / 100;
         final float alpha = getThrust() / THRUST_MAX;
-
-        //TODO: maybe a little laggy.
-        this.level.addParticle(ParticleTypes.LARGE_SMOKE, true,
-                pos.getX() + 0.5 + random.nextDouble() / 5.0 * (random.nextBoolean() ? 1 : -1),
-                pos.getY() + 0.5,
-                pos.getZ() + 0.5 + random.nextDouble() / 5.0 * (random.nextBoolean() ? 1 : -1),
-                facing.getStepX() * speed + ((random.nextDouble() - 0.5) * .2),
-                facing.getStepY() * speed + ((random.nextDouble() - 0.5) * .2),
-                facing.getStepZ() * speed + ((random.nextDouble() - 0.5) * .2));
-
-        this.level.addParticle(ParticleTypes.SMOKE, true,
-                pos.getX() + 0.5 + random.nextDouble() / 5.0 * (random.nextBoolean() ? 1 : -1),
-                pos.getY() + 0.5,
-                pos.getZ() + 0.5 + random.nextDouble() / 5.0 * (random.nextBoolean() ? 1 : -1),
-                facing.getStepX() * speed + ((random.nextDouble() - 0.5) * .2) * alpha,
-                facing.getStepY() * speed + ((random.nextDouble() - 0.5) * .2) * alpha,
-                facing.getStepZ() * speed + ((random.nextDouble() - 0.5) * .2) * alpha);
-
-        if (random.nextInt(20) == 0) {
-            this.level.playLocalSound(pos.getX() + 0.5, pos.getY() + 0.5,
-                    pos.getZ() + 0.5, SoundEvents.CAMPFIRE_CRACKLE, SoundSource.BLOCKS,
-                    0.25F + random.nextFloat() * .25f, random.nextFloat() * 0.7F + 0.6F, false);
-        }
 
         for (int i = 0; i < Math.floor(getThrust() / THRUST_MAX * 5); i++) {
             this.level.addParticle(new HotAirEmberParticleData(true),
@@ -99,10 +112,23 @@ public class IonJetBlockEntity extends KineticBlockEntity implements BlockEntity
 
     @OnlyIn(Dist.CLIENT)
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
+        containedFluidTooltip(tooltip, isPlayerSneaking, this.LOX.getCapability());
+        tooltip.add(Component.empty());
         boolean modified = super.addToGoggleTooltip(tooltip, isPlayerSneaking);
-
+        tooltip.add(Component.empty());
         utmLang.text(getSpeed() + " rpm").style(ChatFormatting.WHITE).forGoggles(tooltip);
+        utmLang.text(getThrust() + " thrust").style(ChatFormatting.AQUA).forGoggles(tooltip);
 
         return true;
+    }
+
+    static {
+        utmEvents.register(RegisterCapabilitiesEvent.class, (event) -> {
+            event.registerBlockEntity(
+                    Capabilities.FluidHandler.BLOCK,
+                    utmBlockEntities.ION_JET.get(),
+                    (be, side) -> be.LOX.getCapability()
+            );
+        });
     }
 }

@@ -71,7 +71,7 @@ public class IonJetRenderer extends KineticBlockEntityRenderer<IonJetBlockEntity
 
             double scalar = ((double) level.getGameTime() + partialTicks / 20) * be.getThrust() / 4;
             float alpha = be.getThrust() / IonJetBlockEntity.THRUST_MAX;
-            float scale = .6f * ((float) Math.sin(scalar / 10) / 100 + 1) * alpha;
+            float scale = .4f * ((float) Math.sin(scalar / 10) / 100 + 1) * alpha;
 
             kineticRotationTransform(shaft, be, Direction.Axis.Z, ang, light).renderInto(ms, buffer.getBuffer(RenderType.solid()));
             bottom1.light(light).translate(0, Math.sin(scalar / 3) / 40, 0).renderInto(ms, buffer.getBuffer(RenderType.solid()));

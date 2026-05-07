@@ -3,10 +3,12 @@ package com.nadia.utm.block.entity;
 import com.nadia.utm.block.RegenDiscBlock;
 import com.nadia.utm.client.renderer.IBypassRPM;
 import com.nadia.utm.registry.block.utmBlockEntities;
+import com.nadia.utm.util.utmLang;
 import com.simibubi.create.content.kinetics.base.GeneratingKineticBlockEntity;
 import dev.ryanhcode.sable.api.block.BlockEntitySubLevelActor;
 import dev.ryanhcode.sable.api.physics.handle.RigidBodyHandle;
 import dev.ryanhcode.sable.sublevel.ServerSubLevel;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -41,6 +43,8 @@ public class RegenDiscBlockEntity extends GeneratingKineticBlockEntity implement
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
         boolean modified = super.addToGoggleTooltip(tooltip, isPlayerSneaking);
         useTooltip(tooltip, this);
+        utmLang.text("Generating " + Math.abs(getGeneratedSpeed()) + " RPM").style(ChatFormatting.WHITE).forGoggles(tooltip);
+        utmLang.text((int) Math.abs(SPEED) + "/1024 Speed").style(ChatFormatting.WHITE).forGoggles(tooltip);
 
         return true;
     }
