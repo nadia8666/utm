@@ -36,7 +36,12 @@ public class LiquidFuelThrusterRenderer extends SmartBlockEntityRenderer<LiquidF
 
     @Override
     public @NotNull AABB getRenderBoundingBox(@NotNull LiquidFuelThrusterBlockEntity blockEntity) {
-        return AABB.ofSize(Vec3.atCenterOf(blockEntity.getBlockPos()), 6, 6, 6);
+        return AABB.ofSize(Vec3.atCenterOf(blockEntity.getBlockPos()), 12, 12, 12);
+    }
+
+    @Override
+    public int getViewDistance() {
+        return 512;
     }
 
     @Override

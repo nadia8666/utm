@@ -37,7 +37,12 @@ public class SolidThrusterRenderer extends SmartBlockEntityRenderer<SolidThruste
 
     @Override
     public @NotNull AABB getRenderBoundingBox(@NotNull SolidThrusterBlockEntity blockEntity) {
-        return AABB.ofSize(Vec3.atCenterOf(blockEntity.getBlockPos()), 6, 6, 6);
+        return AABB.ofSize(Vec3.atCenterOf(blockEntity.getBlockPos()), 18, 18, 18);
+    }
+
+    @Override
+    public int getViewDistance() {
+        return 512;
     }
 
     @Override

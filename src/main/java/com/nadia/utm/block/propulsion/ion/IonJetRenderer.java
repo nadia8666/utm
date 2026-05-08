@@ -41,6 +41,11 @@ public class IonJetRenderer extends KineticBlockEntityRenderer<IonJetBlockEntity
     }
 
     @Override
+    public int getViewDistance() {
+        return 128;
+    }
+
+    @Override
     public void renderSafe(@NotNull IonJetBlockEntity be, float partialTicks, @NotNull PoseStack ms, @NotNull MultiBufferSource buffer, int light, int overlay) {
         Level level = be.getLevel();
         if (level == null) return;
