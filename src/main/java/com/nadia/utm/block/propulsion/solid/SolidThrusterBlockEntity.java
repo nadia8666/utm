@@ -22,6 +22,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.RandomSource;
@@ -51,7 +52,7 @@ public class SolidThrusterBlockEntity extends SmartBlockEntity implements BlockE
     }
 
     public static float getThrustMax() {
-        return Config.ION_THRUSTER_FORCE.get();
+        return Config.SOLID_THRUSTER_FORCE.get();
     }
 
     public void updateThrust() {
@@ -125,7 +126,6 @@ public class SolidThrusterBlockEntity extends SmartBlockEntity implements BlockE
 
         if (this.level == null || this.getThrust() <= 0) return;
 
-        final BlockPos pos = this.getBlockPos();
         final RandomSource random = this.level.getRandom();
         final BlockState state = this.getBlockState();
 

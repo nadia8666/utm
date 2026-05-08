@@ -49,7 +49,7 @@ public class LiquidFuelThrusterBlockEntity extends SmartBlockEntity implements B
     }
 
     public static float getThrustMax() {
-        return Config.ION_THRUSTER_FORCE.get();
+        return Config.LIQUID_THRUSTER_FORCE.get();
     }
 
     @Override
