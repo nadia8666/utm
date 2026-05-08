@@ -11,10 +11,11 @@ import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import dev.eriksonn.aeronautics.content.particle.HotAirEmberParticleData;
-import dev.ryanhcode.sable.api.block.BlockEntitySubLevelActor;
+import dev.ryanhcode.sable.api.SubLevelAssemblyHelper;
 import dev.ryanhcode.sable.api.physics.force.ForceGroups;
 import dev.ryanhcode.sable.api.physics.force.QueuedForceGroup;
 import dev.ryanhcode.sable.api.physics.handle.RigidBodyHandle;
+import dev.ryanhcode.sable.companion.SableCompanion;
 import dev.ryanhcode.sable.companion.math.JOMLConversion;
 import dev.ryanhcode.sable.sublevel.ServerSubLevel;
 import net.createmod.catnip.animation.LerpedFloat;
@@ -34,12 +35,10 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import org.joml.Vector3d;
 
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
-public class SolidThrusterBlockEntity extends SmartBlockEntity implements BlockEntitySubLevelActor, BlockEntitySubLevelActorExtensions<SolidThrusterBlockEntity>, IHaveGoggleInformation, IProduceThrust<SolidThrusterBlockEntity> {
+public class SolidThrusterBlockEntity extends SmartBlockEntity implements BlockEntitySubLevelActorExtensions<SolidThrusterBlockEntity>, IHaveGoggleInformation, IProduceThrust<SolidThrusterBlockEntity> {
     public Set<BlockPos> FUEL = new HashSet<>();
     public Set<BlockPos> READ = new HashSet<>();
     public boolean ACTIVATED = false;
@@ -179,5 +178,20 @@ public class SolidThrusterBlockEntity extends SmartBlockEntity implements BlockE
         utmLang.text((int) getThrust() + "N").style(ChatFormatting.AQUA).space().add(utmLang.text("per tick").style(ChatFormatting.GRAY)).forGoggles(tooltip);
 
         return true;
+    }
+
+    public boolean sable$migrateData(final Map<ServerSubLevel, ServerSubLevel> conversions, final SolidThrusterBlockEntity oldBE, final Map<ServerSubLevel, SubLevelAssemblyHelper.AssemblyTransform> transforms) {
+        if (!oldBE.FUEL.isEmpty() && SableCompanion.INSTANCE.getContaining(oldBE) instanceof ServerSubLevel sublevel) {
+            SubLevelAssemblyHelper.AssemblyTransform transform = transforms.get(sublevel);
+            FUEL = oldBE.FUEL.stream().map(transform::apply).collect(Collectors.toSet());
+
+            return true;
+        }
+
+        return false;
+    }
+
+    public void sable$cleanLevelNBT(final CompoundTag tag) {
+        tag.remove("FuelList");
     }
 }
