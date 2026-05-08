@@ -2,7 +2,6 @@ package com.nadia.utm.block.propulsion.solid;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.nadia.utm.block.propulsion.liquid.LiquidFuelThrusterBlock;
-import com.nadia.utm.block.propulsion.liquid.LiquidFuelThrusterBlockEntity;
 import com.nadia.utm.client.renderer.IBlockstateRotatedRenderer;
 import com.nadia.utm.client.renderer.utmRenderTypes;
 import com.nadia.utm.event.ForceLoad;
@@ -26,23 +25,23 @@ import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import org.jetbrains.annotations.NotNull;
 
 @ForceLoad(dist = Dist.CLIENT)
-public class SolidThrusterRenderer extends SmartBlockEntityRenderer<LiquidFuelThrusterBlockEntity> implements IBlockstateRotatedRenderer {
+public class SolidThrusterRenderer extends SmartBlockEntityRenderer<SolidThrusterBlockEntity> implements IBlockstateRotatedRenderer {
     public SolidThrusterRenderer(BlockEntityRendererProvider.Context context) {
         super(context);
     }
 
     @Override
-    public boolean shouldRenderOffScreen(@NotNull LiquidFuelThrusterBlockEntity blockEntity) {
+    public boolean shouldRenderOffScreen(@NotNull SolidThrusterBlockEntity blockEntity) {
         return true;
     }
 
     @Override
-    public @NotNull AABB getRenderBoundingBox(@NotNull LiquidFuelThrusterBlockEntity blockEntity) {
+    public @NotNull AABB getRenderBoundingBox(@NotNull SolidThrusterBlockEntity blockEntity) {
         return AABB.ofSize(Vec3.atCenterOf(blockEntity.getBlockPos()), 6, 6, 6);
     }
 
     @Override
-    public void renderSafe(@NotNull LiquidFuelThrusterBlockEntity be, float partialTicks, @NotNull PoseStack ms, @NotNull MultiBufferSource buffer, int light, int overlay) {
+    public void renderSafe(@NotNull SolidThrusterBlockEntity be, float partialTicks, @NotNull PoseStack ms, @NotNull MultiBufferSource buffer, int light, int overlay) {
         Level level = be.getLevel();
         if (level == null) return;
 
@@ -54,7 +53,7 @@ public class SolidThrusterRenderer extends SmartBlockEntityRenderer<LiquidFuelTh
             Direction.Axis axis = facing.getAxis();
 
             double scalar = ((double) level.getGameTime() + partialTicks / 20) * be.getThrust() / 4;
-            float alpha = be.getThrust() / LiquidFuelThrusterBlockEntity.THRUST_MAX;
+            float alpha = be.getThrust() / SolidThrusterBlockEntity.THRUST_MAX;
             float scale = 1f * ((float) Math.sin(scalar / 10) / 100 + 1) * alpha;
 
             RenderType rt = VeilRenderType.get(utmRenderTypes.THRUST_REGULAR);
@@ -80,7 +79,7 @@ public class SolidThrusterRenderer extends SmartBlockEntityRenderer<LiquidFuelTh
 
     static {
         utmEvents.register(EntityRenderersEvent.RegisterRenderers.class, (event) -> event.registerBlockEntityRenderer(
-                utmBlockEntities.LIQUID_THRUSTER.get(),
+                utmBlockEntities.SOLID_THRUSTER.get(),
                 SolidThrusterRenderer::new
         ));
     }
