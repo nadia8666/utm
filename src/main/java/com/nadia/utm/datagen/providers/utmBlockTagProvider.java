@@ -51,6 +51,10 @@ public class utmBlockTagProvider extends BlockTagsProvider {
                 , OffroadBlocks.WHEEL_MOUNT.get()
         );
 
+        tag(utmTags.BLOCK.SOLID_ROCKET_FUEL).add(
+                Blocks.COAL_BLOCK
+        );
+
         tag(utmTags.BLOCK.BYPASS_RPM).add(
                 SimBlocks.SWIVEL_BEARING.get(),
                 SimBlocks.SWIVEL_BEARING_LINK_BLOCK.get(),

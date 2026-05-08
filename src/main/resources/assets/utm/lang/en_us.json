@@ -20,9 +20,12 @@
 
   "utm.configuration.figuraPunchy": "Figura Punchy Compatability",
   "utm.configuration.figuraPunchy.tooltip": "Renders figura arms w/ Punchy!, requires 'First Person Hands' to be OFF",
-
-  "utm.configuration.debugSealedAir": "DEBUG: SEALED AIR",
-  "utm.configuration.debugSealedAir.tooltip": "!!DEBUG!! View sealed air configuration.",
+  "utm.configuration.ionThrusterForce": "Ion Jet Force",
+  "utm.configuration.ionThrusterForce.tooltip": "Full power thruster velocity.",
+  "utm.configuration.liquidThrusterForce": "Liquid Fuel Thruster Force",
+  "utm.configuration.liquidThrusterForce.tooltip": "Full power thruster velocity.",
+  "utm.configuration.solidThrusterForce": "Solid Rocket Booster Force",
+  "utm.configuration.solidThrusterForce.tooltip": "Full power thruster velocity.",
 
   "block.utm.heavy_metal_anvil": "Heavy-Metal Anvil",
   "block.utm.grate": "Grating",

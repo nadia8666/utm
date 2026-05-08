@@ -1,5 +1,6 @@
 package com.nadia.utm.block.propulsion.liquid;
 
+import com.nadia.utm.Config;
 import com.nadia.utm.block.propulsion.IProduceThrust;
 import com.nadia.utm.event.ForceLoad;
 import com.nadia.utm.event.utmEvents;
@@ -38,7 +39,6 @@ import java.util.List;
 @ForceLoad
 public class LiquidFuelThrusterBlockEntity extends SmartBlockEntity implements BlockEntitySubLevelActor, IHaveGoggleInformation, IProduceThrust<LiquidFuelThrusterBlockEntity> {
     public SmartFluidTankBehaviour FUEL;
-    public static float THRUST_MAX = 850; // TODO: make configurable on ionjet, liquid fuel, and solid fuel
     public float REDSTONE = 0;
     public LerpedFloat THRUST_FORCE = LerpedFloat.linear();
 
@@ -46,6 +46,10 @@ public class LiquidFuelThrusterBlockEntity extends SmartBlockEntity implements B
         super(utmBlockEntities.LIQUID_THRUSTER.get(), pos, blockState);
 
         THRUST_FORCE.chase(0, 8, LerpedFloat.Chaser.LINEAR);
+    }
+
+    public static float getThrustMax() {
+        return Config.ION_THRUSTER_FORCE.get();
     }
 
     @Override
@@ -79,7 +83,7 @@ public class LiquidFuelThrusterBlockEntity extends SmartBlockEntity implements B
     public float getThrustRaw() {
         if (this.FUEL.getPrimaryHandler().getFluidAmount() <= 250) return 0;
 
-        return REDSTONE * THRUST_MAX;
+        return REDSTONE * getThrustMax();
     }
 
     @Override
@@ -92,9 +96,9 @@ public class LiquidFuelThrusterBlockEntity extends SmartBlockEntity implements B
         THRUST_FORCE.tickChaser();
 
         if (this.level == null || this.getThrust() <= 0) return;
-        this.FUEL.getPrimaryHandler().drain((int) ((THRUST_FORCE.getValue() / THRUST_MAX) * 50), IFluidHandler.FluidAction.EXECUTE);
+        this.FUEL.getPrimaryHandler().drain((int) ((THRUST_FORCE.getValue() / getThrustMax()) * 50), IFluidHandler.FluidAction.EXECUTE);
 
-        tick(this, worldPosition, getThrust(), THRUST_MAX, level, () -> new HotAirEmberParticleData(false), 20);
+        tick(this, worldPosition, getThrust(), getThrustMax(), level, () -> new HotAirEmberParticleData(false), 20);
     }
 
     @Override

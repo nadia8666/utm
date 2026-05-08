@@ -33,5 +33,9 @@ public class utmTags {
         public static final TagKey<Block> BYPASS_RPM = TagKey.create(
                 Registries.BLOCK,
                 utm.key("bypass_max_rpm"));
+
+        public static final TagKey<Block> SOLID_ROCKET_FUEL = TagKey.create(
+                Registries.BLOCK,
+                utm.key("solid_rocket_fuel"));
     }
 }

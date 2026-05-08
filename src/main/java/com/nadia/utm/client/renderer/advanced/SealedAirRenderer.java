@@ -1,7 +1,6 @@
 package com.nadia.utm.client.renderer.advanced;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.nadia.utm.Config;
 import com.nadia.utm.behavior.space.SealedChunkData;
 import com.nadia.utm.event.ForceLoad;
 import com.nadia.utm.event.utmEvents;
@@ -37,9 +36,6 @@ public class SealedAirRenderer {
     private static final long REFRESH_RATE = 20L;
 
     public static boolean shouldRender() {
-        if (Config.DEBUG_SEALED_AIR.getAsBoolean())
-            return true;
-
         Minecraft mc = Minecraft.getInstance();
         if (mc.player == null || mc.level == null) return false;
 

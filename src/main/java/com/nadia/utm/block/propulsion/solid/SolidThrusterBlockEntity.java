@@ -1,8 +1,11 @@
 package com.nadia.utm.block.propulsion.solid;
 
+import com.nadia.utm.Config;
 import com.nadia.utm.block.propulsion.IProduceThrust;
 import com.nadia.utm.compat.BlockEntitySubLevelActorExtensions;
 import com.nadia.utm.registry.block.utmBlockEntities;
+import com.nadia.utm.registry.tags.utmTags;
+import com.nadia.utm.util.PosUtil;
 import com.nadia.utm.util.utmLang;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
@@ -22,6 +25,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.Vec3;
@@ -29,11 +33,14 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import org.joml.Vector3d;
 
+import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class SolidThrusterBlockEntity extends SmartBlockEntity implements BlockEntitySubLevelActor, BlockEntitySubLevelActorExtensions<SolidThrusterBlockEntity>, IHaveGoggleInformation, IProduceThrust<SolidThrusterBlockEntity> {
-    public static float THRUST_MAX = 1670; // TODO: make configurable on ionjet, liquid fuel, and solid fuel
-
+    public Set<BlockPos> FUEL = new HashSet<>();
+    public Set<BlockPos> READ = new HashSet<>();
     public boolean ACTIVATED = false;
     public LerpedFloat THRUST_FORCE = LerpedFloat.linear();
 
@@ -41,6 +48,10 @@ public class SolidThrusterBlockEntity extends SmartBlockEntity implements BlockE
         super(utmBlockEntities.SOLID_THRUSTER.get(), pos, blockState);
 
         THRUST_FORCE.chase(0, 65, LerpedFloat.Chaser.LINEAR);
+    }
+
+    public static float getThrustMax() {
+        return Config.ION_THRUSTER_FORCE.get();
     }
 
     public void updateThrust() {
@@ -52,7 +63,14 @@ public class SolidThrusterBlockEntity extends SmartBlockEntity implements BlockE
     }
 
     public float getThrustRaw() {
-        return ACTIVATED ? THRUST_MAX : 0;
+        if (ACTIVATED) {
+            if (FUEL.isEmpty())
+                return 0;
+
+            return getThrustMax();
+        }
+
+        return 0;
     }
 
     @Override
@@ -73,12 +91,34 @@ public class SolidThrusterBlockEntity extends SmartBlockEntity implements BlockE
         compound.putBoolean("Activated", ACTIVATED);
     }
 
+
+    public void updateFuel() {
+        deepScan(worldPosition);
+    }
+
+    public void deepScan(BlockPos pos) {
+        if (level == null || READ.contains(pos)) return;
+
+        PosUtil.forAdjacent(pos).forEach(p -> {
+            READ.add(p);
+
+            BlockState state = level.getBlockState(p);
+            if (state.is(utmTags.BLOCK.SOLID_ROCKET_FUEL)) {
+                FUEL.add(p);
+                deepScan(p);
+            }
+        });
+    }
+
     @Override
     public void tick() {
         super.tick();
 
-        if (this.level != null && !ACTIVATED)
+        if (this.level != null && !ACTIVATED && !level.isClientSide()) {
             ACTIVATED = level.hasNeighborSignal(worldPosition);
+
+            if (ACTIVATED) updateFuel();
+        }
 
         updateThrust();
         THRUST_FORCE.tickChaser();
@@ -92,9 +132,21 @@ public class SolidThrusterBlockEntity extends SmartBlockEntity implements BlockE
         final Direction facing = state.getValue(BlockStateProperties.FACING).getOpposite();
 
         final double speed = getThrust() / 100;
-        final float alpha = getThrust() / THRUST_MAX;
+        final float alpha = getThrust() / getThrustMax();
 
-        tick(this, worldPosition, getThrust(), THRUST_MAX, level, () -> new HotAirEmberParticleData(false), 30);
+        if (!level.isClientSide()) {
+            FUEL.stream()
+                    .max(Comparator.comparingDouble(p -> p.distSqr(worldPosition)))
+                    .ifPresent(block -> {
+                        if (level.getGameTime() % 100 == 0) {
+                            level.setBlock(block, Blocks.AIR.defaultBlockState(), 3);
+                            FUEL.remove(block);
+                        }
+                    });
+
+        }
+
+        tick(this, worldPosition, getThrust(), getThrustMax(), level, () -> new HotAirEmberParticleData(false), 30);
     }
 
     @Override

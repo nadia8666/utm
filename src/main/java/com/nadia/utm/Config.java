@@ -22,8 +22,14 @@ public class Config {
     public static final ModConfigSpec.BooleanValue FIGURA_PUNCHY = BUILDER
             .define("figuraPunchy", true);
 
-    public static final ModConfigSpec.BooleanValue DEBUG_SEALED_AIR = BUILDER
-            .define("debugSealedAir", false);
+    public static final ModConfigSpec.IntValue ION_THRUSTER_FORCE = BUILDER
+            .defineInRange("ionThrusterForce", 125, 0, 1500);
+
+    public static final ModConfigSpec.IntValue LIQUID_THRUSTER_FORCE = BUILDER
+            .defineInRange("liquidThrusterForce", 850, 0, 4000);
+
+    public static final ModConfigSpec.IntValue SOLID_THRUSTER_FORCE = BUILDER
+            .defineInRange("solidThrusterForce", 1670, 0, 14000);
 
     static final ModConfigSpec SPEC = BUILDER.build();
 }

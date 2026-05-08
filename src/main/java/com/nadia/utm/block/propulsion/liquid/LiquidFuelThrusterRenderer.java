@@ -57,7 +57,7 @@ public class LiquidFuelThrusterRenderer extends SmartBlockEntityRenderer<LiquidF
             Direction.Axis axis = facing.getAxis();
 
             double scalar = ((double) level.getGameTime() + partialTicks / 20) * be.getThrust() / 4;
-            float alpha = be.getThrust() / LiquidFuelThrusterBlockEntity.THRUST_MAX;
+            float alpha = be.getThrust() / LiquidFuelThrusterBlockEntity.getThrustMax();
             float scale = 1f * ((float) Math.sin(scalar / 10) / 100 + 1) * alpha;
 
             RenderType rt = VeilRenderType.get(utmRenderTypes.THRUST_REGULAR);

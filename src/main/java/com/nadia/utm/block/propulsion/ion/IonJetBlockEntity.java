@@ -1,5 +1,6 @@
 package com.nadia.utm.block.propulsion.ion;
 
+import com.nadia.utm.Config;
 import com.nadia.utm.block.propulsion.IProduceThrust;
 import com.nadia.utm.event.ForceLoad;
 import com.nadia.utm.event.utmEvents;
@@ -38,13 +39,16 @@ import java.util.List;
 @ForceLoad
 public class IonJetBlockEntity extends KineticBlockEntity implements BlockEntitySubLevelActor, IHaveGoggleInformation, IProduceThrust<IonJetBlockEntity> {
     public SmartFluidTankBehaviour LOX;
-    public static float THRUST_MAX = 250;
     public LerpedFloat THRUST_FORCE = LerpedFloat.linear();
 
     public IonJetBlockEntity(BlockPos pos, BlockState blockState) {
         super(utmBlockEntities.ION_JET.get(), pos, blockState);
 
         THRUST_FORCE.chase(0, 10, LerpedFloat.Chaser.LINEAR);
+    }
+
+    public static float getThrustMax() {
+        return Config.ION_THRUSTER_FORCE.get();
     }
 
     @Override
@@ -80,7 +84,7 @@ public class IonJetBlockEntity extends KineticBlockEntity implements BlockEntity
 
         float speed = Math.abs(this.getSpeed()) / 256;
 
-        return speed * THRUST_MAX;
+        return speed * getThrustMax();
     }
 
     @Override
@@ -94,7 +98,7 @@ public class IonJetBlockEntity extends KineticBlockEntity implements BlockEntity
 
         this.LOX.getPrimaryHandler().drain(5, IFluidHandler.FluidAction.EXECUTE);
 
-        tick(this, worldPosition, getThrust(), THRUST_MAX, level, () -> new HotAirEmberParticleData(true), 10);
+        tick(this, worldPosition, getThrust(), getThrustMax(), level, () -> new HotAirEmberParticleData(true), 10);
     }
 
     @Override
