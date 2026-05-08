@@ -90,10 +90,16 @@ public class LiquidFuelThrusterBlockEntity extends SmartBlockEntity implements B
     public void tick() {
         super.tick();
 
-        if (this.level != null) REDSTONE = this.level.getBestNeighborSignal(worldPosition) / 15F;
+        if (this.level != null) {
+            REDSTONE = this.level.getBestNeighborSignal(worldPosition) / 15F;
 
-        updateThrust();
-        THRUST_FORCE.tickChaser();
+            if (!level.isClientSide()) {
+                updateThrust();
+                THRUST_FORCE.tickChaser();
+
+                sendData();
+            }
+        }
 
         if (this.level == null || this.getThrust() <= 0) return;
         this.FUEL.getPrimaryHandler().drain((int) ((THRUST_FORCE.getValue() / getThrustMax()) * 50), IFluidHandler.FluidAction.EXECUTE);

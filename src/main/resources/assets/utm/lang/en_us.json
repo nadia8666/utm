@@ -2,22 +2,16 @@
   "utm.configuration.title": "undertale mod Configs",
   "utm.configuration.section.utm.common.toml": "undertale mod Configs",
   "utm.configuration.section.utm.common.toml.title": "undertale mod Configs",
-
   "utm.configuration.altTabMenu": "Alternate Playerlist",
   "utm.configuration.altTabMenu.tooltip": "Should utm replace the tab menu with a more detailed varaint?",
-
   "utm.configuration.autoUpdate": "Auto Update Enabled",
   "utm.configuration.autoUpdate.tooltip": "Should utm automatically update.",
-
   "utm.configuration.heavyMetalAnvilLV": "Heavy-Metal Anvil Reinforcement Req.",
   "utm.configuration.heavyMetalAnvilLV.tooltip": "Level require to reinforce an anvil into a heavy-metal anvil.",
-
   "utm.configuration.netheriteBacktankArm": "Netherite Backtank Arm",
   "utm.configuration.netheriteBacktankArm.tooltip": "Should Create's Netherite Backtank have its custom first person arm?",
-
   "utm.configuration.renderPlanets": "Render Planets",
   "utm.configuration.renderPlanets.tooltip": "Should planets and moons be visible? Does not affect Minecraft's overworld sun and moon.",
-
   "utm.configuration.figuraPunchy": "Figura Punchy Compatability",
   "utm.configuration.figuraPunchy.tooltip": "Renders figura arms w/ Punchy!, requires 'First Person Hands' to be OFF",
   "utm.configuration.ionThrusterForce": "Ion Jet Force",

@@ -91,8 +91,11 @@ public class IonJetBlockEntity extends KineticBlockEntity implements BlockEntity
     public void tick() {
         super.tick();
 
-        updateThrust();
-        THRUST_FORCE.tickChaser();
+        if (level != null && !level.isClientSide()) {
+            updateThrust();
+            THRUST_FORCE.tickChaser();
+            sendData();
+        }
 
         if (this.level == null || this.getThrust() <= 0) return;
 

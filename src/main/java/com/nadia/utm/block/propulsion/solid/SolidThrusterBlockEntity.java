@@ -43,6 +43,7 @@ public class SolidThrusterBlockEntity extends SmartBlockEntity implements BlockE
     public Set<BlockPos> FUEL = new HashSet<>();
     public Set<BlockPos> READ = new HashSet<>();
     public boolean ACTIVATED = false;
+    public int TICKS_ELAPSED = 0;
     public LerpedFloat THRUST_FORCE = LerpedFloat.linear();
 
     public SolidThrusterBlockEntity(BlockPos pos, BlockState blockState) {
@@ -83,6 +84,10 @@ public class SolidThrusterBlockEntity extends SmartBlockEntity implements BlockE
         super.read(compound, registries, clientPacket);
         THRUST_FORCE.setValueNoUpdate(compound.getFloat("Thrust"));
         ACTIVATED = compound.getBoolean("Activated");
+
+        FUEL.clear();
+        for (long pos : compound.getLongArray("FuelList"))
+            FUEL.add(BlockPos.of(pos));
     }
 
     @Override
@@ -90,25 +95,27 @@ public class SolidThrusterBlockEntity extends SmartBlockEntity implements BlockE
         super.write(compound, registries, clientPacket);
         compound.putFloat("Thrust", THRUST_FORCE.getValue());
         compound.putBoolean("Activated", ACTIVATED);
+        compound.putLongArray("FuelList", FUEL.stream().mapToLong(BlockPos::asLong).toArray());
     }
 
 
     public void updateFuel() {
+        READ.clear();
+        FUEL.clear();
+
         deepScan(worldPosition);
     }
 
     public void deepScan(BlockPos pos) {
         if (level == null || READ.contains(pos)) return;
 
-        PosUtil.forAdjacent(pos).forEach(p -> {
-            READ.add(p);
-
+        for (BlockPos p : PosUtil.getAdjacent(pos)) {
             BlockState state = level.getBlockState(p);
-            if (state.is(utmTags.BLOCK.SOLID_ROCKET_FUEL)) {
+            if (state.is(utmTags.BLOCK.SOLID_ROCKET_FUEL) && !FUEL.contains(p)) {
                 FUEL.add(p);
                 deepScan(p);
             }
-        });
+        }
     }
 
     @Override
@@ -121,8 +128,12 @@ public class SolidThrusterBlockEntity extends SmartBlockEntity implements BlockE
             if (ACTIVATED) updateFuel();
         }
 
-        updateThrust();
-        THRUST_FORCE.tickChaser();
+        if (level != null && !level.isClientSide()) {
+            updateThrust();
+            THRUST_FORCE.tickChaser();
+
+            sendData();
+        }
 
         if (this.level == null || this.getThrust() <= 0) return;
 
@@ -131,20 +142,23 @@ public class SolidThrusterBlockEntity extends SmartBlockEntity implements BlockE
 
         final Direction facing = state.getValue(BlockStateProperties.FACING).getOpposite();
 
-        final double speed = getThrust() / 100;
-        final float alpha = getThrust() / getThrustMax();
+        FUEL.stream()
+                .max(Comparator.comparingDouble(p -> p.distSqr(worldPosition)))
+                .ifPresent(block -> {
+                    if (!level.isClientSide()) {
+                        boolean isInvalid = !level.getBlockState(block).is(utmTags.BLOCK.SOLID_ROCKET_FUEL);
 
-        if (!level.isClientSide()) {
-            FUEL.stream()
-                    .max(Comparator.comparingDouble(p -> p.distSqr(worldPosition)))
-                    .ifPresent(block -> {
-                        if (level.getGameTime() % 100 == 0) {
-                            level.setBlock(block, Blocks.AIR.defaultBlockState(), 3);
-                            FUEL.remove(block);
-                        }
-                    });
-
-        }
+                        TICKS_ELAPSED = (TICKS_ELAPSED + 1) % 100;
+                        if (TICKS_ELAPSED == 0 || isInvalid)
+                            if (level.setBlock(block, Blocks.AIR.defaultBlockState(), 3) || isInvalid)
+                                FUEL.remove(block);
+                    } else if (level.getGameTime() % 2 == 0)
+                        level.addParticle(ParticleTypes.FLAME,
+                                block.getCenter().x + random.nextDouble() * 1.1 - 0.5,
+                                block.getCenter().y + random.nextDouble() * 1.1 - 0.5,
+                                block.getCenter().z + random.nextDouble() * 1.1 - 0.5,
+                                0, 0, 0);
+                });
 
         tick(this, worldPosition, getThrust(), getThrustMax(), level, () -> new HotAirEmberParticleData(false), 30);
     }
