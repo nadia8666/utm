@@ -19,6 +19,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.*;
+import net.neoforged.neoforge.common.Tags;
 
 import java.util.function.Supplier;
 
@@ -76,6 +77,13 @@ public interface IProduceThrust<T extends BlockEntity & BlockEntitySubLevelActor
                         targetPos.x, targetPos.y, targetPos.z,
                         slideVel.x, slideVel.y, slideVel.z
                 );
+
+                if (level.getFluidState(BlockPos.containing(worldPos).below()).is(Tags.Fluids.WATER))
+                    for (int i = 0; i < 5; i++)
+                        level.addParticle(ParticleTypes.RAIN,
+                                targetPos.x, targetPos.y, targetPos.z,
+                                slideVel.x, 15, slideVel.z
+                        );
             }
         } else {
             final AABB search = new AABB(start, end).inflate(1);
