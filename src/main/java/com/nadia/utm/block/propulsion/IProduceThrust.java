@@ -45,8 +45,8 @@ public interface IProduceThrust<T extends BlockEntity & BlockEntitySubLevelActor
         if (level.isClientSide()) {
             for (int i = 0; i < Math.floor(thrust / thrust_max * 3); i++)
                 level.addParticle(particleFactory.get(),
-                        pos.getX() + 0.5 + (random.nextDouble() - 0.5) + facing.getStepZ(),
-                        pos.getY() + 0.5 + (random.nextDouble() - 0.5) + facing.getStepZ(),
+                        pos.getX() + 0.5 + (random.nextDouble() - 0.5) + facing.getStepX(),
+                        pos.getY() + 0.5 + (random.nextDouble() - 0.5) + facing.getStepY(),
                         pos.getZ() + 0.5 + (random.nextDouble() - 0.5) + facing.getStepZ(),
                         facing.getStepX() * speed + ((random.nextDouble() - 0.5) * .3) * alpha,
                         facing.getStepY() * speed + ((random.nextDouble() - 0.5) * .3) * alpha,
