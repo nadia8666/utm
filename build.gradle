@@ -160,6 +160,7 @@ dependencies {
     jarJar(runtimeOnly("maven.modrinth:create-link-relays:QzWAvFbP")) // create link relays
     jarJar(runtimeOnly("maven.modrinth:create-aeronautics-climbable-rope:beFXNNkF")) // climbable ropes
     jarJar(runtimeOnly("maven.modrinth:create-tweaked-controllers:csCe2v7f")) // advanced controllers for gimbals
+    jarJar(runtimeOnly("maven.modrinth:vs-hose-connectors:YKvKW7mI")) // sable hose connectors
 
     implementation("foundry.imguimc:imguimc-neoforge-${minecraft_version}:$imguimc_version")
 
