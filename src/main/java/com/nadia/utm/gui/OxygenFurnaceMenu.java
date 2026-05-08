@@ -1,6 +1,6 @@
 package com.nadia.utm.gui;
 
-import com.nadia.utm.block.entity.OxygenFurnaceBlockEntity;
+import com.nadia.utm.block.misc.oxygen_furnace.OxygenFurnaceBlockEntity;
 import com.nadia.utm.registry.block.utmBlocks;
 import com.nadia.utm.registry.ui.utmMenus;
 import net.minecraft.network.FriendlyByteBuf;

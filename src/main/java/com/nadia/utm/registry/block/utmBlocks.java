@@ -1,7 +1,20 @@
 package com.nadia.utm.registry.block;
 
-import com.nadia.utm.block.*;
+import com.nadia.utm.block.GrateBlock;
+import com.nadia.utm.block.HeavyMetalAnvilBlock;
+import com.nadia.utm.block.InterdictorBlock;
+import com.nadia.utm.block.LaunchContraptionBlock;
 import com.nadia.utm.block.displaylink.utmDisplaySources;
+import com.nadia.utm.block.misc.aerowall.AerowallBlock;
+import com.nadia.utm.block.misc.citywalls.CitywallsBlock;
+import com.nadia.utm.block.misc.glint_table.GlintTableBlock;
+import com.nadia.utm.block.misc.loader.BlockChunkLoaderBlock;
+import com.nadia.utm.block.misc.loader.PlayerChunkLoaderBlock;
+import com.nadia.utm.block.misc.oxygen_collector.OxygenCollectorBlock;
+import com.nadia.utm.block.misc.oxygen_furnace.OxygenFurnaceBlock;
+import com.nadia.utm.block.misc.regen_disc.RegenDiscBlock;
+import com.nadia.utm.block.misc.sealer.biome.BiomeSealerBlock;
+import com.nadia.utm.block.misc.sealer.porta.PortasealerBlock;
 import com.nadia.utm.block.propulsion.ion.IonJetBlock;
 import com.nadia.utm.block.propulsion.liquid.LiquidFuelThrusterBlock;
 import com.nadia.utm.block.propulsion.solid.SolidThrusterBlock;

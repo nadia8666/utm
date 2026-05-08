@@ -1,6 +1,6 @@
 package com.nadia.utm.client.ponder.scenes;
 
-import com.nadia.utm.block.entity.OxygenFurnaceBlockEntity;
+import com.nadia.utm.block.misc.oxygen_furnace.OxygenFurnaceBlockEntity;
 import com.nadia.utm.registry.fluid.utmFluids;
 import com.simibubi.create.content.fluids.tank.FluidTankBlockEntity;
 import com.simibubi.create.foundation.ponder.CreateSceneBuilder;

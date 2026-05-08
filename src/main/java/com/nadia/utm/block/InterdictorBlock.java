@@ -1,5 +1,6 @@
 package com.nadia.utm.block;
 
+import com.nadia.utm.block.base.HorizontalBlock;
 import com.nadia.utm.utm;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;

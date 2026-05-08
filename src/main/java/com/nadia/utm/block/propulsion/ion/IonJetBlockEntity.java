@@ -1,5 +1,6 @@
 package com.nadia.utm.block.propulsion.ion;
 
+import com.nadia.utm.block.propulsion.IProduceThrust;
 import com.nadia.utm.event.ForceLoad;
 import com.nadia.utm.event.utmEvents;
 import com.nadia.utm.registry.block.utmBlockEntities;
@@ -10,25 +11,18 @@ import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
 import dev.eriksonn.aeronautics.content.particle.HotAirEmberParticleData;
-import dev.ryanhcode.sable.Sable;
 import dev.ryanhcode.sable.api.block.BlockEntitySubLevelActor;
 import dev.ryanhcode.sable.api.physics.force.ForceGroups;
 import dev.ryanhcode.sable.api.physics.force.QueuedForceGroup;
 import dev.ryanhcode.sable.api.physics.handle.RigidBodyHandle;
-import dev.ryanhcode.sable.companion.math.BoundingBox3d;
 import dev.ryanhcode.sable.companion.math.JOMLConversion;
 import dev.ryanhcode.sable.sublevel.ServerSubLevel;
-import dev.ryanhcode.sable.sublevel.SubLevel;
 import net.createmod.catnip.animation.LerpedFloat;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.util.RandomSource;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.Vec3;
@@ -37,13 +31,12 @@ import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
-import org.joml.Quaternionf;
 import org.joml.Vector3d;
 
 import java.util.List;
 
 @ForceLoad
-public class IonJetBlockEntity extends KineticBlockEntity implements BlockEntitySubLevelActor, IHaveGoggleInformation {
+public class IonJetBlockEntity extends KineticBlockEntity implements BlockEntitySubLevelActor, IHaveGoggleInformation, IProduceThrust<IonJetBlockEntity> {
     public SmartFluidTankBehaviour LOX;
     public static float THRUST_MAX = 250;
     public LerpedFloat THRUST_FORCE = LerpedFloat.linear();
@@ -56,7 +49,7 @@ public class IonJetBlockEntity extends KineticBlockEntity implements BlockEntity
 
     @Override
     public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
-        this.LOX = new SmartFluidTankBehaviour(SmartFluidTankBehaviour.INPUT, this, 1, 1000, true);
+        this.LOX = new SmartFluidTankBehaviour(SmartFluidTankBehaviour.INPUT, this, 1, 8000, true);
         this.LOX.getPrimaryHandler().setValidator((fluid) -> fluid.is(utmFluids.LIQUID_OXYGEN));
 
         behaviours.add(this.LOX);
@@ -101,64 +94,7 @@ public class IonJetBlockEntity extends KineticBlockEntity implements BlockEntity
 
         this.LOX.getPrimaryHandler().drain(5, IFluidHandler.FluidAction.EXECUTE);
 
-        final BlockPos pos = this.getBlockPos();
-        final RandomSource random = this.level.getRandom();
-        final BlockState state = this.getBlockState();
-
-        final Direction facing = state.getValue(BlockStateProperties.FACING).getOpposite();
-
-        final double speed = getThrust() / 100;
-        final float alpha = getThrust() / THRUST_MAX;
-
-        if (level.isClientSide())
-            for (int i = 0; i < Math.floor(getThrust() / THRUST_MAX * 5); i++)
-                this.level.addParticle(new HotAirEmberParticleData(true),
-                        pos.getX() + 0.5 + (random.nextDouble() - 0.5) * 0.5f + facing.getStepZ(),
-                        pos.getY() + 0.5 + (random.nextDouble() - 0.5) * 0.5f + facing.getStepZ(),
-                        pos.getZ() + 0.5 + (random.nextDouble() - 0.5) * 0.5f + facing.getStepZ(),
-                        facing.getStepX() * speed + ((random.nextDouble() - 0.5) * .2) * alpha,
-                        facing.getStepY() * speed + ((random.nextDouble() - 0.5) * .2) * alpha,
-                        facing.getStepZ() * speed + ((random.nextDouble() - 0.5) * .2) * alpha);
-        else {
-            final Quaternionf quat = facing.getRotation();
-
-            final double dist = 20 * alpha;
-            double radius = 0.5;
-            double offsetMin = 0;
-
-            final Vector3d max = new Vector3d(radius, dist, radius);
-            final Vector3d min = new Vector3d(-radius, offsetMin, -radius);
-
-            quat.transform(max);
-            quat.transform(min);
-
-            min.add(JOMLConversion.toJOML(this.worldPosition.getCenter()));
-            max.add(JOMLConversion.toJOML(this.worldPosition.getCenter()));
-
-            final BoundingBox3d aabb = new BoundingBox3d(min.x, min.y, min.z, max.x, max.y, max.z);
-
-            Vec3 a = Vec3.atLowerCornerOf(this.getBlockState().getValue(BlockStateProperties.FACING).getOpposite().getNormal());
-            Vector3d forceDir = new Vector3d(a.x, a.y, a.z);
-            final SubLevel subLevel = Sable.HELPER.getContaining(this);
-            if (subLevel != null) {
-                aabb.transform(subLevel.logicalPose(), aabb);
-
-                subLevel.logicalPose().transformNormal(forceDir);
-            }
-
-            final List<Entity> entities = level.getEntities(null, aabb.toMojang());
-            for (Entity entity : entities)
-                if (entity instanceof LivingEntity) {
-                    entity.setDeltaMovement(entity.getDeltaMovement().add(
-                            forceDir.x * speed / 100,
-                            forceDir.y * speed / 100,
-                            forceDir.z * speed / 100
-                    ));
-
-                    entity.hurt(level.damageSources().inFire(), 1);
-                    entity.invulnerableTime = 5;
-                }
-        }
+        tick(this, worldPosition, getThrust(), THRUST_MAX, level, () -> new HotAirEmberParticleData(true), 10);
     }
 
     @Override
@@ -184,12 +120,10 @@ public class IonJetBlockEntity extends KineticBlockEntity implements BlockEntity
     }
 
     static {
-        utmEvents.register(RegisterCapabilitiesEvent.class, (event) -> {
-            event.registerBlockEntity(
-                    Capabilities.FluidHandler.BLOCK,
-                    utmBlockEntities.ION_JET.get(),
-                    (be, side) -> be.LOX.getCapability()
-            );
-        });
+        utmEvents.register(RegisterCapabilitiesEvent.class, (event) -> event.registerBlockEntity(
+                Capabilities.FluidHandler.BLOCK,
+                utmBlockEntities.ION_JET.get(),
+                (be, side) -> be.LOX.getCapability()
+        ));
     }
 }

@@ -1,6 +1,8 @@
-package com.nadia.utm.block.propulsion.liquid;
+package com.nadia.utm.block.propulsion.solid;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.nadia.utm.block.propulsion.liquid.LiquidFuelThrusterBlock;
+import com.nadia.utm.block.propulsion.liquid.LiquidFuelThrusterBlockEntity;
 import com.nadia.utm.client.renderer.IBlockstateRotatedRenderer;
 import com.nadia.utm.client.renderer.utmRenderTypes;
 import com.nadia.utm.event.ForceLoad;
@@ -24,8 +26,8 @@ import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import org.jetbrains.annotations.NotNull;
 
 @ForceLoad(dist = Dist.CLIENT)
-public class LiquidFuelThrusterRenderer extends SmartBlockEntityRenderer<LiquidFuelThrusterBlockEntity> implements IBlockstateRotatedRenderer {
-    public LiquidFuelThrusterRenderer(BlockEntityRendererProvider.Context context) {
+public class SolidThrusterRenderer extends SmartBlockEntityRenderer<LiquidFuelThrusterBlockEntity> implements IBlockstateRotatedRenderer {
+    public SolidThrusterRenderer(BlockEntityRendererProvider.Context context) {
         super(context);
     }
 
@@ -62,14 +64,14 @@ public class LiquidFuelThrusterRenderer extends SmartBlockEntityRenderer<LiquidF
                 thrustMain.light(light)
                         .translate(0.5f, 0.5f, 0.0f)
                         .scale(scale)
-                        .scaleZ(1.5f * alpha)
+                        .scaleZ(1.8f * alpha)
                         .translate(-0.5f, -0.5f, 0.0f)
                         .renderInto(ms, buffer.getBuffer(rt));
 
                 thrustAlt.light(light)
                         .translate(0.5f, 0.5f, 0.0f)
                         .scale(scale * .7f)
-                        .scaleZ(1.93f * alpha)
+                        .scaleZ(2.23f * alpha)
                         .translate(-0.5f, -0.5f, 0.0f)
                         .renderInto(ms, buffer.getBuffer(rt2));
             }
@@ -79,7 +81,7 @@ public class LiquidFuelThrusterRenderer extends SmartBlockEntityRenderer<LiquidF
     static {
         utmEvents.register(EntityRenderersEvent.RegisterRenderers.class, (event) -> event.registerBlockEntityRenderer(
                 utmBlockEntities.LIQUID_THRUSTER.get(),
-                LiquidFuelThrusterRenderer::new
+                SolidThrusterRenderer::new
         ));
     }
 }

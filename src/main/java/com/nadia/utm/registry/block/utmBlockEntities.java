@@ -1,7 +1,15 @@
 package com.nadia.utm.registry.block;
 
 import com.mojang.datafixers.types.Type;
-import com.nadia.utm.block.entity.*;
+import com.nadia.utm.block.misc.aerowall.AerowallBlockEntity;
+import com.nadia.utm.block.misc.citywalls.CitywallsBlockEntity;
+import com.nadia.utm.block.misc.glint_table.GlintTableBlockEntity;
+import com.nadia.utm.block.misc.loader.ChunkLoaderBlockEntity;
+import com.nadia.utm.block.misc.oxygen_collector.OxygenCollectorBlockEntity;
+import com.nadia.utm.block.misc.oxygen_furnace.OxygenFurnaceBlockEntity;
+import com.nadia.utm.block.misc.regen_disc.RegenDiscBlockEntity;
+import com.nadia.utm.block.misc.sealer.biome.BiomeSealerBlockEntity;
+import com.nadia.utm.block.misc.sealer.porta.PortasealerBlockEntity;
 import com.nadia.utm.block.propulsion.ion.IonJetBlockEntity;
 import com.nadia.utm.block.propulsion.liquid.LiquidFuelThrusterBlockEntity;
 import com.nadia.utm.block.propulsion.solid.SolidThrusterBlockEntity;

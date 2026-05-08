@@ -1,6 +1,6 @@
 package com.nadia.utm.gui;
 
-import com.nadia.utm.block.entity.GlintTableBlockEntity;
+import com.nadia.utm.block.misc.glint_table.GlintTableBlockEntity;
 import com.nadia.utm.networking.payloads.GlintSyncPayload;
 import com.nadia.utm.registry.block.utmBlocks;
 import com.nadia.utm.registry.data.utmDataComponents;

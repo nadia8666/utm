@@ -1,6 +1,6 @@
 package com.nadia.utm.block.displaylink;
 
-import com.nadia.utm.block.entity.AbstractSealerBlockEntity;
+import com.nadia.utm.block.misc.sealer.AbstractSealerBlockEntity;
 import com.simibubi.create.api.behaviour.display.DisplaySource;
 import com.simibubi.create.content.redstone.displayLink.DisplayLinkContext;
 import com.simibubi.create.content.redstone.displayLink.target.DisplayTargetStats;

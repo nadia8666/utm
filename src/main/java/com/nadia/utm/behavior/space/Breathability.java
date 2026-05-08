@@ -1,6 +1,6 @@
 package com.nadia.utm.behavior.space;
 
-import com.nadia.utm.block.entity.AbstractSealerBlockEntity;
+import com.nadia.utm.block.misc.sealer.AbstractSealerBlockEntity;
 import com.nadia.utm.event.ForceLoad;
 import com.nadia.utm.registry.attachment.utmAttachments;
 import com.nadia.utm.util.OxyUtil;

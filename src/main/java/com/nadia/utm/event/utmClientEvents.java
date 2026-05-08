@@ -1,7 +1,7 @@
 package com.nadia.utm.event;
 
+import com.nadia.utm.block.misc.citywalls.CitywallsBlockEntityRenderer;
 import com.nadia.utm.client.renderer.BacktankCurioRenderer;
-import com.nadia.utm.client.renderer.block.CitywallsBlockEntityRenderer;
 import com.nadia.utm.client.renderer.utmRenderTypes;
 import com.nadia.utm.client.ui.glint.GlintScreen;
 import com.nadia.utm.client.ui.oxygen_furnace.OxygenFurnaceScreen;

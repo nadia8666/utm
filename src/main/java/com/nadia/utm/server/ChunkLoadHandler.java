@@ -1,7 +1,7 @@
 package com.nadia.utm.server;
 
-import com.nadia.utm.block.BlockChunkLoaderBlock;
-import com.nadia.utm.block.entity.ChunkLoaderBlockEntity;
+import com.nadia.utm.block.misc.loader.BlockChunkLoaderBlock;
+import com.nadia.utm.block.misc.loader.ChunkLoaderBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
