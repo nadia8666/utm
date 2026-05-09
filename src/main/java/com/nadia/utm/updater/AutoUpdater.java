@@ -1,10 +1,10 @@
 package com.nadia.utm.updater;
 
-import com.nadia.utm.Config;
-import com.nadia.utm.utm;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.nadia.utm.Config;
+import com.nadia.utm.utm;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.fml.loading.FMLPaths;
@@ -20,7 +20,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.Objects;
-import java.util.concurrent.*;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Stream;
 
@@ -187,6 +190,11 @@ public class AutoUpdater {
 
     public static void startAutoUpdateLoop() {
         if (!FMLEnvironment.production) return;
+
+        if (CURRENT_VERSION.toLowerCase().contains("dev")) {
+            utm.LOGGER.warn("[UTM] Skipping auto update on developer build, Version: {}", CURRENT_VERSION);
+            return;
+        }
 
         SCHEDULER.scheduleAtFixedRate(() -> {
             try {
