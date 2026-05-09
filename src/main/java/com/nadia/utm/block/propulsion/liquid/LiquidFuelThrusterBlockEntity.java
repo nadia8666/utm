@@ -64,12 +64,14 @@ public class LiquidFuelThrusterBlockEntity extends SmartBlockEntity implements B
     protected void read(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket) {
         super.read(compound, registries, clientPacket);
         THRUST_FORCE.setValueNoUpdate(compound.getFloat("Thrust"));
+        REDSTONE = compound.getFloat("Throttle");
     }
 
     @Override
     protected void write(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket) {
         super.write(compound, registries, clientPacket);
         compound.putFloat("Thrust", THRUST_FORCE.getValue());
+        compound.putFloat("Throttle", REDSTONE);
     }
 
     public void updateThrust() {
