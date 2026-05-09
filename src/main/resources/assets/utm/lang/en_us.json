@@ -45,6 +45,8 @@
   "block.utm.liquid_thruster": "Liquid Fuel Thruster",
   "block.utm.solid_thruster": "Solid Rocket Thruster",
   "block.utm.regen_disc": "Regenerative Disc",
+  "block.utm.gimbal": "Gimbal",
+  "block.utm.gimbal_plate": "you are not supposed to have this.",
 
   "item.utm.copper_sword": "Copper Sword",
   "item.utm.copper_pickaxe": "Copper Pickaxe",

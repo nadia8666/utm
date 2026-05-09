@@ -3,6 +3,8 @@ package com.nadia.utm.registry.block;
 import com.mojang.datafixers.types.Type;
 import com.nadia.utm.block.misc.aerowall.AerowallBlockEntity;
 import com.nadia.utm.block.misc.citywalls.CitywallsBlockEntity;
+import com.nadia.utm.block.misc.gimbal.GimbalBlockEntity;
+import com.nadia.utm.block.misc.gimbal.GimbalPlateBlockEntity;
 import com.nadia.utm.block.misc.glint_table.GlintTableBlockEntity;
 import com.nadia.utm.block.misc.loader.ChunkLoaderBlockEntity;
 import com.nadia.utm.block.misc.oxygen_collector.OxygenCollectorBlockEntity;
@@ -66,4 +68,8 @@ public class utmBlockEntities {
     public static final Supplier<BlockEntityType<AerowallBlockEntity>> AEROWALL = register("aerowall", AerowallBlockEntity::new, utmBlocks.AERO_WALL);
 
     public static final Supplier<BlockEntityType<RegenDiscBlockEntity>> REGEN_DISC = register("regen_disc", RegenDiscBlockEntity::new, utmBlocks.REGEN_DISC);
+
+    public static final Supplier<BlockEntityType<GimbalBlockEntity>> GIMBAL = register("gimbal", GimbalBlockEntity::new, utmBlocks.GIMBAL);
+
+    public static final Supplier<BlockEntityType<GimbalPlateBlockEntity>> GIMBAL_PLATE = register("gimbal_plate", GimbalPlateBlockEntity::new, utmBlocks.GIMBAL_PLATE);
 }

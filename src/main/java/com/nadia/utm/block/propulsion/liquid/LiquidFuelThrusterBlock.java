@@ -32,7 +32,6 @@ public class LiquidFuelThrusterBlock extends Block implements IBE<LiquidFuelThru
         return this.defaultBlockState().setValue(FACING, dir);
     }
 
-
     @Override
     public Class<LiquidFuelThrusterBlockEntity> getBlockEntityClass() {
         return LiquidFuelThrusterBlockEntity.class;

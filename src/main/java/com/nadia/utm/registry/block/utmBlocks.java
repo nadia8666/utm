@@ -7,6 +7,8 @@ import com.nadia.utm.block.LaunchContraptionBlock;
 import com.nadia.utm.block.displaylink.utmDisplaySources;
 import com.nadia.utm.block.misc.aerowall.AerowallBlock;
 import com.nadia.utm.block.misc.citywalls.CitywallsBlock;
+import com.nadia.utm.block.misc.gimbal.GimbalBlock;
+import com.nadia.utm.block.misc.gimbal.GimbalPlateBlock;
 import com.nadia.utm.block.misc.glint_table.GlintTableBlock;
 import com.nadia.utm.block.misc.loader.BlockChunkLoaderBlock;
 import com.nadia.utm.block.misc.loader.PlayerChunkLoaderBlock;
@@ -227,4 +229,14 @@ public class utmBlocks {
             .destroyTime(3)
             .noOcclusion()
             .sound(SoundType.METAL)).dropSelf().inheritModel().minePick().mineTier(2);
+
+    public static final utmBlockContainer<GimbalBlock, BlockItem> GIMBAL = dualRegister("gimbal", GimbalBlock::new, BlockBehaviour.Properties.of()
+            .destroyTime(3)
+            .noOcclusion()
+            .sound(SoundType.METAL)).dropSelf().inheritModel().minePick().mineTier(2);
+
+    public static final utmBlockContainer<GimbalPlateBlock, BlockItem> GIMBAL_PLATE = dualRegister("gimbal_plate", GimbalPlateBlock::new, BlockBehaviour.Properties.of()
+            .destroyTime(3)
+            .noOcclusion()
+            .sound(SoundType.METAL)).dropSelf().inheritModel().minePick().mineTier(2).hideFromTab();
 }

@@ -13,6 +13,14 @@ import org.jetbrains.annotations.NotNull;
 public class RotatableBlock extends Block implements IWrenchable {
     public static final DirectionProperty FACING = DirectionalBlock.FACING;
 
+    public RotatableBlock(Properties properties, boolean registerDefault) {
+        super(properties);
+
+        if (registerDefault) {
+            registerDefaultState(this.stateDefinition.any());
+        }
+    }
+
     public RotatableBlock(Properties properties) {
         super(properties);
 

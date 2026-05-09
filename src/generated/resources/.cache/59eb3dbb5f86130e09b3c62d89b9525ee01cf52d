@@ -1,4 +1,4 @@
-// 1.21.1	2026-05-07T10:23:15.232826	Loot Tables
+// 1.21.1	2026-05-08T23:40:35.0872249	Loot Tables
 79f8f9dea0c7cdb725e30638071b2e6216a483ed data/utm/loot_table/blocks/aerowall.json
 f8c417ff60baca7c6796b4b11326f96ca35b0f99 data/utm/loot_table/blocks/aluminum_ore.json
 d4e8775a0bc83dce60dc1d83731b77333a4fed3b data/utm/loot_table/blocks/biome_sealer.json
@@ -7,6 +7,8 @@ cffc805801ca90da8fc3022b03b2f653dff81aed data/utm/loot_table/blocks/citywalls_me
 b9f7d9fec92a5f6dcb1f82471c980169900928b9 data/utm/loot_table/blocks/citywalls_shrine.json
 9551a17be990dc3aca0490a58a3a9ca81310a0ee data/utm/loot_table/blocks/flint_block.json
 f24114035b4f6e03c7afdc7ad890cf36f90bda7f data/utm/loot_table/blocks/flint_block_block.json
+7faadb97f5400db04cf1ca150749ee48c353c4d8 data/utm/loot_table/blocks/gimbal.json
+52cc27e19f87285b72c68de6d53ace0c987681c0 data/utm/loot_table/blocks/gimbal_plate.json
 c8b4fb55f495bda3a63e2ecc474b1d059415d051 data/utm/loot_table/blocks/glint_table.json
 bd2b22b9652c80441bc5b1f717eddec48ad69841 data/utm/loot_table/blocks/grate.json
 5b79fc9e6175902b985a60f308e9fbb32425351b data/utm/loot_table/blocks/heavy_metal_anvil.json

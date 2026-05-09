@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "utm:block/gimbal_plate",
+      "y": 180,
+      "x": -90
+    },
+    "facing=east": {
+      "model": "utm:block/gimbal_plate",
+      "y": -90,
+      "x": -90
+    },
+    "facing=south": {
+      "model": "utm:block/gimbal_plate",
+      "y": 0,
+      "x": -90
+    },
+    "facing=west": {
+      "model": "utm:block/gimbal_plate",
+      "y": 90,
+      "x": -90
+    },
+    "facing=up": {
+      "model": "utm:block/gimbal_plate",
+      "y": 0,
+      "x": 0
+    },
+    "facing=down": {
+      "model": "utm:block/gimbal_plate",
+      "y": 0,
+      "x": -180
+    }
+  }
+}

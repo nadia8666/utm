@@ -13,16 +13,13 @@ import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredItem;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class utmBlockContainer<B extends Block, I extends BlockItem> {
     public static final List<utmBlockContainer<?, ?>> ALL_BLOCKS = new ArrayList<>();
-    public static final Map<utmBlockContainer<?, ?>, List<String>> DATAGEN_TARGETS = new HashMap<>();
+    public static final Map<utmBlockContainer<?, ?>, Set<String>> DATAGEN_TARGETS = new HashMap<>();
     public final List<TagKey<Block>> DATAGEN_BLOCK_TAGS = new ArrayList<>();
     public final List<TagKey<Item>> DATAGEN_ITEM_TAGS = new ArrayList<>();
 
@@ -38,6 +35,14 @@ public class utmBlockContainer<B extends Block, I extends BlockItem> {
         this.callbacks = callbacks;
 
         ALL_BLOCKS.add(this);
+    }
+
+    public static utmBlockContainer<?, ?> fromBlock(Block block) {
+        for (utmBlockContainer<?, ?> container : ALL_BLOCKS) {
+            if (container.BLOCK.get().equals(block)) return container;
+        }
+
+        throw new RuntimeException("[UTM] unable to find block " + block);
     }
 
     public void onRegister(Consumer<? super B> callback) {
@@ -181,7 +186,7 @@ public class utmBlockContainer<B extends Block, I extends BlockItem> {
      * @datagen
      */
     @SuppressWarnings("unchecked")
-    public final utmBlockContainer<B, I> tags(TagKey<?>... tags) {
+    public utmBlockContainer<B, I> tags(TagKey<?>... tags) {
         for (TagKey<?> tag : tags) {
             if (tag.isFor(Registries.BLOCK)) {
                 this.DATAGEN_BLOCK_TAGS.add((TagKey<Block>) tag);
@@ -197,7 +202,7 @@ public class utmBlockContainer<B extends Block, I extends BlockItem> {
      *
      * @param source source factory
      */
-    public final utmBlockContainer<B, I> displaySource(Supplier<DisplaySource> source, boolean entity) {
+    public utmBlockContainer<B, I> displaySource(Supplier<DisplaySource> source, boolean entity) {
         utmDisplaySources.ALL_SOURCES_BLOCK.put(this, () -> List.of(source.get()));
 
         if (entity)
@@ -206,7 +211,15 @@ public class utmBlockContainer<B extends Block, I extends BlockItem> {
         return this;
     }
 
-    public List<String> getForDatagen() {
-        return DATAGEN_TARGETS.computeIfAbsent(this, k -> new ArrayList<>());
+    /**
+     * hides block from utm creative tab
+     */
+    public utmBlockContainer<B, I> hideFromTab() {
+        getForDatagen().add("hideFromCreative");
+        return this;
+    }
+
+    public Set<String> getForDatagen() {
+        return DATAGEN_TARGETS.computeIfAbsent(this, k -> new HashSet<>());
     }
 }

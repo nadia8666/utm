@@ -2,6 +2,7 @@ package com.nadia.utm.registry;
 
 import com.nadia.utm.block.displaylink.utmDisplaySources;
 import com.nadia.utm.registry.attachment.utmAttachments;
+import com.nadia.utm.registry.block.utmBlockContainer;
 import com.nadia.utm.registry.block.utmBlockEntities;
 import com.nadia.utm.registry.block.utmBlocks;
 import com.nadia.utm.registry.buffs.utmBuffs;
@@ -23,6 +24,9 @@ import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class utmRegistry {
     public static final DeferredRegister<CreativeModeTab> TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, "utm");
     public static final DeferredRegister.DataComponents COMPONENTS = utmDataComponents.COMPONENTS;
@@ -40,6 +44,7 @@ public class utmRegistry {
     public static final DeferredRegister<?> FLUIDS = utmFluids.FLUIDS;
     public static final DeferredRegister<?> DISPLAY_SOURCES = utmDisplaySources.DISPLAY_SOURCES;
 
+    public static final Set<?> HIDDEN_BLOCKS = new HashSet<>();
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> MAIN = TABS
             .register("main", () -> CreativeModeTab.builder()
                     .title(Component.translatable("itemGroup.utm"))
@@ -47,7 +52,8 @@ public class utmRegistry {
                     .icon(utmItems.MUSIC_DISC_UNDERTALE.ITEM().get()::getDefaultInstance)
                     .displayItems((parameters, output) -> {
                         utmRegistry.BLOCKS.getEntries().forEach(entry -> {
-                            if (entry.get() instanceof LiquidBlock) return;
+                            if (entry.get() instanceof LiquidBlock || utmBlockContainer.fromBlock(entry.get()).getForDatagen().contains("hideFromCreative"))
+                                return;
 
                             output.accept(entry.get());
                         });

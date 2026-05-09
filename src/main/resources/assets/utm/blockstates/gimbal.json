@@ -1,0 +1,64 @@
+{
+  "variants": {
+    "facing=north,assembled=false": {
+      "model": "utm:block/gimbal",
+      "y": 180,
+      "x": -90
+    },
+    "facing=east,assembled=false": {
+      "model": "utm:block/gimbal",
+      "y": -90,
+      "x": -90
+    },
+    "facing=south,assembled=false": {
+      "model": "utm:block/gimbal",
+      "y": 0,
+      "x": -90
+    },
+    "facing=west,assembled=false": {
+      "model": "utm:block/gimbal",
+      "y": 90,
+      "x": -90
+    },
+    "facing=up,assembled=false": {
+      "model": "utm:block/gimbal",
+      "y": 0,
+      "x": 0
+    },
+    "facing=down,assembled=false": {
+      "model": "utm:block/gimbal",
+      "y": 0,
+      "x": -180
+    },
+    "facing=north,assembled=true": {
+      "model": "utm:block/gimbal_plateless",
+      "y": 180,
+      "x": -90
+    },
+    "facing=east,assembled=true": {
+      "model": "utm:block/gimbal_plateless",
+      "y": -90,
+      "x": -90
+    },
+    "facing=south,assembled=true": {
+      "model": "utm:block/gimbal_plateless",
+      "y": 0,
+      "x": -90
+    },
+    "facing=west,assembled=true": {
+      "model": "utm:block/gimbal_plateless",
+      "y": 90,
+      "x": -90
+    },
+    "facing=up,assembled=true": {
+      "model": "utm:block/gimbal_plateless",
+      "y": 0,
+      "x": 0
+    },
+    "facing=down,assembled=true": {
+      "model": "utm:block/gimbal_plateless",
+      "y": 0,
+      "x": -180
+    }
+  }
+}
