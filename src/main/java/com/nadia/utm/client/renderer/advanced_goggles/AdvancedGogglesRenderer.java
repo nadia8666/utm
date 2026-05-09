@@ -52,6 +52,7 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
+import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.*;
@@ -228,11 +229,10 @@ public class AdvancedGogglesRenderer {
             colorBorderBot.scaleAlpha(fade);
         }
 
-        GuiGameElement.of(item).at(posX + 10, posY - 16, 400).render(guiGraphics);
+        GuiGameElement.of(item).at(posX + 10, posY - 16, 450).render(guiGraphics);
         if (pinned)
             guiGraphics.drawString(mc.font, "x", posX + 12, posY + tooltipHeight - 19, 0xFFFF5555);
         RemovedGuiUtils.drawHoveringText(guiGraphics, tooltip, posX, posY, width, height, -1, colorBackground.getRGB(), colorBorderTop.getRGB(), colorBorderBot.getRGB(), mc.font);
-
 
         pose.popPose();
     }
@@ -357,7 +357,7 @@ public class AdvancedGogglesRenderer {
     }
 
     static {
-        utmEvents.register(RegisterGuiLayersEvent.class, event -> event.registerAboveAll(utm.key("advanced_goggle_info"), AdvancedGogglesRenderer::renderOverlay));
+        utmEvents.register(RegisterGuiLayersEvent.class, event -> event.registerAbove(VanillaGuiLayers.CROSSHAIR, utm.key("advanced_goggle_info"), AdvancedGogglesRenderer::renderOverlay));
         utmEvents.register(OxygenPayloadEvent.class, event -> {
             GetOxygenPayload payload = event.PAYLOAD;
             UUID uuid = UUID.fromString(payload.id());
