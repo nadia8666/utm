@@ -27,6 +27,10 @@ public class utmPlanets {
             ALL_PLANETS.add(this);
             KEY_SET.put(key, this);
         }
+
+        public boolean is(Planet target) {
+            return target.equals(this);
+        }
     }
 
     public static Planet EARTH = new Planet(Level.OVERWORLD, "earth", 0.08);
