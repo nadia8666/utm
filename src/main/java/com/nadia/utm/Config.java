@@ -31,5 +31,8 @@ public class Config {
     public static final ModConfigSpec.IntValue SOLID_THRUSTER_FORCE = BUILDER
             .defineInRange("solidThrusterForce", 1670, 0, 14000);
 
+    public static final ModConfigSpec.IntValue ELYTRA_DECAY_TIME = BUILDER
+            .defineInRange("elytraDecayTime", 20, 0, 60);
+
     static final ModConfigSpec SPEC = BUILDER.build();
 }

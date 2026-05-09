@@ -20,6 +20,8 @@
   "utm.configuration.liquidThrusterForce.tooltip": "Full power thruster velocity.",
   "utm.configuration.solidThrusterForce": "Solid Rocket Booster Force",
   "utm.configuration.solidThrusterForce.tooltip": "Full power thruster velocity.",
+  "utm.configuration.elytraDecayTime": "Elytra Decay Time",
+  "utm.configuration.elytraDecayTime.tooltip": "Amount of ticks per each durability point.",
 
   "block.utm.heavy_metal_anvil": "Heavy-Metal Anvil",
   "block.utm.grate": "Grating",

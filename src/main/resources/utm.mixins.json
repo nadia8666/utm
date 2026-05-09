@@ -6,6 +6,7 @@
   "mixins": [
     "BacktankBlockEntityMixin",
     "BacktankUtilAccessor",
+    "ElytraItemMixin",
     "FreeAnvilMixin",
     "HitboxMixin",
     "LevelMixin",
