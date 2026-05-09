@@ -153,7 +153,7 @@ dependencies {
     implementation("dev.ryanhcode.offroad:offroad-neoforge-${minecraft_version}:${offroad_version}")
     implementation("dev.simulated_team.simulated:simulated-neoforge-${minecraft_version}:${simulated_version}")
     implementation("dev.eriksonn.aeronautics:aeronautics-neoforge-${minecraft_version}:${aeronautics_version}")
-    jarJar(runtimeOnly("maven.modrinth:create-aeronautics:1sv6OtSz"))
+    jarJar(runtimeOnly("maven.modrinth:create-aeronautics:YhZLrAFC"))
 
     jarJar(runtimeOnly("maven.modrinth:create-aeronautics-lift-patch:b5GqYXEI")) // aero lift patch for better flight phys
     jarJar(runtimeOnly("maven.modrinth:create-link-relays:QzWAvFbP")) // create link relays
