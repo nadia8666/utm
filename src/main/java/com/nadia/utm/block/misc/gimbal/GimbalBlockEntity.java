@@ -4,6 +4,7 @@ import com.nadia.utm.block.base.RotatableBlock;
 import com.nadia.utm.compat.BlockEntitySubLevelActorExtensions;
 import com.nadia.utm.registry.block.utmBlockEntities;
 import com.nadia.utm.registry.block.utmBlocks;
+import com.nadia.utm.util.utmLang;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import com.simibubi.create.content.contraptions.AssemblyException;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
@@ -28,11 +29,13 @@ import dev.simulated_team.simulated.index.SimSoundEvents;
 import dev.simulated_team.simulated.util.SimAssemblyHelper;
 import dev.simulated_team.simulated.util.SimLevelUtil;
 import net.createmod.catnip.math.AngleHelper;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.level.ChunkPos;
@@ -41,6 +44,8 @@ import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Quaterniond;
 import org.joml.Vector3d;
@@ -521,8 +526,8 @@ public class GimbalBlockEntity extends SmartBlockEntity implements BlockEntitySu
         if (compound.contains("PlatePos"))
             PLATE_POS = NbtUtils.readBlockPos(compound, "PlatePos").orElseThrow();
 
-        if (compound.contains("AngleX"))
-            ANGLE_Z = compound.getInt("AngleX");
+        if (compound.contains("AngleY"))
+            ANGLE_Y = compound.getInt("AngleY");
 
         if (compound.contains("AngleZ"))
             ANGLE_Z = compound.getInt("AngleZ");
@@ -539,5 +544,14 @@ public class GimbalBlockEntity extends SmartBlockEntity implements BlockEntitySu
 
     public void beforeAssembly() {
         ASSEMBLING = true;
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
+        utmLang.text("Collection Info:").style(ChatFormatting.WHITE).forGoggles(tooltip, 0);
+        utmLang.text("X angle:").style(ChatFormatting.GRAY).space().add(utmLang.text(ANGLE_Y + "°").style(ChatFormatting.AQUA)).forGoggles(tooltip);
+        utmLang.text("Y angle:").style(ChatFormatting.GRAY).space().add(utmLang.text(ANGLE_Z + "°").style(ChatFormatting.AQUA)).forGoggles(tooltip);
+
+        return true;
     }
 }
