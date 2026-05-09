@@ -26,6 +26,7 @@
   "client": [
     "AnvilScreenMixin",
     "GameRendererMixin",
+    "MinecraftMixin",
     "RemainingAirOverlayMixin",
     "SchematicHandlerMixin",
     "compat.create.GoggleOverlayRendererMixin",
