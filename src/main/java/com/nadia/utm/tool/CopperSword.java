@@ -7,4 +7,5 @@ public class CopperSword extends SwordItem {
     public CopperSword(Tier tier, Properties properties) {
         super(tier, properties);
     }
+    // Add among us frame shift drive :)
 }

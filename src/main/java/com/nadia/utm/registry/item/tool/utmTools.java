@@ -7,6 +7,7 @@ import com.nadia.utm.registry.item.utmItemContainer;
 import com.nadia.utm.registry.tags.utmTags;
 import com.nadia.utm.registry.utmRegistry;
 import com.nadia.utm.tool.CopperSword;
+import com.nadia.utm.tool.ShartSword;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.*;
@@ -133,11 +134,11 @@ public class utmTools {
             }
     ).tags(Tags.Items.ENCHANTABLES, ItemTags.SWORD_ENCHANTABLE, ItemTags.WEAPON_ENCHANTABLE, ItemTags.FIRE_ASPECT_ENCHANTABLE, ItemTags.SWORDS).handheld();
 
-    public static final utmItemContainer<SwordItem> SHART = register("shart", () -> {
+    public static final utmItemContainer<ShartSword> SHART = register("shart", () -> {
                 var Tier = utmToolBuilder.buildTier(
-                        BlockTags.INCORRECT_FOR_WOODEN_TOOL, 500, 1f, 0f, 15, () -> Ingredient.of(Tags.Items.INGOTS_IRON)
+                        BlockTags.INCORRECT_FOR_WOODEN_TOOL, 100, 1f, 0f, 15, () -> Ingredient.of(Tags.Items.INGOTS_IRON)
                 );
-                return new SwordItem(Tier, new Item.Properties().attributes(
+                return new ShartSword(Tier, new Item.Properties().attributes(
                         SwordItem.createAttributes(Tier, 5, -2.4f)));
             }
     ).tags(Tags.Items.ENCHANTABLES, ItemTags.SWORD_ENCHANTABLE, ItemTags.WEAPON_ENCHANTABLE, ItemTags.DURABILITY_ENCHANTABLE, ItemTags.SWORDS, Tags.Items.TOOLS_SHIELD).handheld();
