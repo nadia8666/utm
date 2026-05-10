@@ -58,8 +58,14 @@ import java.util.Objects;
 import java.util.UUID;
 
 public class GimbalBlockEntity extends SmartBlockEntity implements BlockEntitySubLevelActorExtensions<GimbalBlockEntity>, IHaveGoggleInformation {
-    public int ANGLE_Y = 0;
-    public int ANGLE_Z = 0;
+    public static final int STIFFNESS = 50000;
+    public static final int DAMPING = 500;
+    public int ANGLE_Y_OUT = 0;
+    public int ANGLE_Z_OUT = 0;
+
+    private ConstraintJointAxis lastAxis1 = null;
+    private ConstraintJointAxis lastAxis2 = null;
+
     public boolean ASSEMBLE_NEXT_TICK;
     protected AssemblyException LAST_EXCEPTION;
     public boolean ASSEMBLED = false;
@@ -77,7 +83,6 @@ public class GimbalBlockEntity extends SmartBlockEntity implements BlockEntitySu
 
     @Override
     public void addBehaviours(List<BlockEntityBehaviour> list) {
-
     }
 
     @Override
@@ -118,8 +123,8 @@ public class GimbalBlockEntity extends SmartBlockEntity implements BlockEntitySu
             Direction facing = this.getBlockState().getValue(GimbalBlock.FACING);
             Direction zNDir = Direction.NORTH, zPDir = Direction.SOUTH, xPDir = Direction.EAST, xNDir = Direction.WEST;
 
-            ConstraintJointAxis Axis1 = ConstraintJointAxis.ANGULAR_X;
-            ConstraintJointAxis Axis2 = ConstraintJointAxis.ANGULAR_Z;
+            ConstraintJointAxis axis1 = ConstraintJointAxis.ANGULAR_X;
+            ConstraintJointAxis axis2 = ConstraintJointAxis.ANGULAR_Z;
             int mul1 = 1;
             int mul2 = 1;
 
@@ -127,17 +132,14 @@ public class GimbalBlockEntity extends SmartBlockEntity implements BlockEntitySu
                 case DOWN -> {
                     zNDir = Direction.SOUTH;
                     zPDir = Direction.NORTH;
-
-                    Axis1 = ConstraintJointAxis.ANGULAR_Z;
-                    Axis2 = ConstraintJointAxis.ANGULAR_X;
+                    axis1 = ConstraintJointAxis.ANGULAR_Z;
+                    axis2 = ConstraintJointAxis.ANGULAR_X;
                 }
                 case NORTH -> {
                     zNDir = Direction.UP;
                     zPDir = Direction.DOWN;
-
-                    Axis1 = ConstraintJointAxis.ANGULAR_Y;
-                    Axis2 = ConstraintJointAxis.ANGULAR_X;
-
+                    axis1 = ConstraintJointAxis.ANGULAR_Y;
+                    axis2 = ConstraintJointAxis.ANGULAR_X;
                     mul1 = -1;
                     mul2 = -1;
                 }
@@ -146,9 +148,7 @@ public class GimbalBlockEntity extends SmartBlockEntity implements BlockEntitySu
                     zPDir = Direction.DOWN;
                     xPDir = Direction.SOUTH;
                     xNDir = Direction.NORTH;
-
-                    Axis1 = ConstraintJointAxis.ANGULAR_Y;
-
+                    axis1 = ConstraintJointAxis.ANGULAR_Y;
                     mul1 = -1;
                     mul2 = -1;
                 }
@@ -157,10 +157,8 @@ public class GimbalBlockEntity extends SmartBlockEntity implements BlockEntitySu
                     zPDir = Direction.DOWN;
                     xPDir = Direction.WEST;
                     xNDir = Direction.EAST;
-
-                    Axis1 = ConstraintJointAxis.ANGULAR_Y;
-                    Axis2 = ConstraintJointAxis.ANGULAR_X;
-
+                    axis1 = ConstraintJointAxis.ANGULAR_Y;
+                    axis2 = ConstraintJointAxis.ANGULAR_X;
                     mul1 = -1;
                 }
                 case WEST -> {
@@ -168,34 +166,53 @@ public class GimbalBlockEntity extends SmartBlockEntity implements BlockEntitySu
                     zPDir = Direction.DOWN;
                     xPDir = Direction.NORTH;
                     xNDir = Direction.SOUTH;
-
-                    Axis1 = ConstraintJointAxis.ANGULAR_Y;
+                    axis1 = ConstraintJointAxis.ANGULAR_Y;
                     mul1 = -1;
                 }
                 case UP -> {
-                    Axis1 = ConstraintJointAxis.ANGULAR_Z;
-                    Axis2 = ConstraintJointAxis.ANGULAR_X;
-
+                    axis1 = ConstraintJointAxis.ANGULAR_Z;
+                    axis2 = ConstraintJointAxis.ANGULAR_X;
                     mul1 = -1;
                 }
             }
 
             BlockPos pos = this.getBlockPos();
 
-
             float xPPower = this.level.getSignal(pos.relative(xPDir), xPDir) / 15.0f;
             float xNPower = this.level.getSignal(pos.relative(xNDir), xNDir) / 15.0f;
             float zPPower = this.level.getSignal(pos.relative(zPDir), zPDir) / 15.0f;
             float zNPower = this.level.getSignal(pos.relative(zNDir), zNDir) / 15.0f;
 
-            HANDLE.setContactsEnabled(false);
-            HANDLE.setMotor(Axis1, AngleHelper.rad((xPPower - xNPower) * 45) * mul1, 10000, 125, false, 0.0);
-            HANDLE.setMotor(Axis2, AngleHelper.rad((zPPower - zNPower) * 45) * mul2, 10000, 125, false, 0.0);
+            int newAngleYOut = (int) ((xPPower - xNPower) * 45) * mul1;
+            int newAngleZOut = (int) ((zPPower - zNPower) * 45) * mul2;
 
-            ANGLE_Y = (int) ((xPPower - xNPower) * 45) * mul1;
-            ANGLE_Z = (int) ((zPPower - zNPower) * 45) * mul2;
+            if (newAngleYOut != ANGLE_Y_OUT || newAngleZOut != ANGLE_Z_OUT || axis1 != lastAxis1 || axis2 != lastAxis2) {
+                if (axis1 != lastAxis1 || axis2 != lastAxis2) {
+                    HANDLE.setMotor(ConstraintJointAxis.ANGULAR_X, 0, STIFFNESS, DAMPING, false, 0.0);
+                    HANDLE.setMotor(ConstraintJointAxis.ANGULAR_Y, 0, STIFFNESS, DAMPING, false, 0.0);
+                    HANDLE.setMotor(ConstraintJointAxis.ANGULAR_Z, 0, STIFFNESS, DAMPING, false, 0.0);
+                }
 
-            sendData();
+                ANGLE_Y_OUT = newAngleYOut;
+                ANGLE_Z_OUT = newAngleZOut;
+                lastAxis1 = axis1;
+                lastAxis2 = axis2;
+
+                HANDLE.setMotor(axis1, AngleHelper.rad(ANGLE_Y_OUT), STIFFNESS, DAMPING, false, 0.0);
+                HANDLE.setMotor(axis2, AngleHelper.rad(ANGLE_Z_OUT), STIFFNESS, DAMPING, false, 0.0);
+
+                final SubLevel sublevel = this.getContainingSubLevel();
+                final SubLevel attachedSubLevel = this.getAttachedSubLevel();
+                final PhysicsPipeline pipeline = ((ServerSubLevelContainer) Objects.requireNonNull(SubLevelContainer.getContainer(this.level))).physicsSystem().getPipeline();
+
+                if (sublevel instanceof final ServerSubLevel serverSubLevel)
+                    pipeline.wakeUp(serverSubLevel);
+
+                if (attachedSubLevel instanceof final ServerSubLevel serverSubLevel)
+                    pipeline.wakeUp(serverSubLevel);
+
+                sendData();
+            }
         }
     }
 
@@ -432,13 +449,15 @@ public class GimbalBlockEntity extends SmartBlockEntity implements BlockEntitySu
 
         HANDLE = pipeline.addConstraint((ServerSubLevel) Sable.HELPER.getContaining(this), (ServerSubLevel) toAttach, constraint);
 
-        HANDLE.setMotor(ConstraintJointAxis.LINEAR_X, 0, 30000, 500, false, 0.0);
-        HANDLE.setMotor(ConstraintJointAxis.LINEAR_Y, 0, 30000, 500, false, 0.0);
-        HANDLE.setMotor(ConstraintJointAxis.LINEAR_Z, 0, 30000, 500, false, 0.0);
+        HANDLE.setContactsEnabled(false);
 
-        HANDLE.setMotor(ConstraintJointAxis.ANGULAR_X, 0, 10000, 500, false, 0.0);
-        HANDLE.setMotor(ConstraintJointAxis.ANGULAR_Y, 0, 10000, 500, false, 0.0);
-        HANDLE.setMotor(ConstraintJointAxis.ANGULAR_Z, 0, 10000, 500, false, 0.0);
+        HANDLE.setMotor(ConstraintJointAxis.LINEAR_X, 0, STIFFNESS, DAMPING, false, 0.0);
+        HANDLE.setMotor(ConstraintJointAxis.LINEAR_Y, 0, STIFFNESS, DAMPING, false, 0.0);
+        HANDLE.setMotor(ConstraintJointAxis.LINEAR_Z, 0, STIFFNESS, DAMPING, false, 0.0);
+
+        HANDLE.setMotor(ConstraintJointAxis.ANGULAR_X, 0, STIFFNESS, DAMPING, false, 0.0);
+        HANDLE.setMotor(ConstraintJointAxis.ANGULAR_Y, 0, STIFFNESS, DAMPING, false, 0.0);
+        HANDLE.setMotor(ConstraintJointAxis.ANGULAR_Z, 0, STIFFNESS, DAMPING, false, 0.0);
     }
 
     public void associatePlateWithParent() {
@@ -452,12 +471,11 @@ public class GimbalBlockEntity extends SmartBlockEntity implements BlockEntitySu
         }
     }
 
-
     @Override
     public boolean sable$migrateData(Map<ServerSubLevel, ServerSubLevel> conversions, GimbalBlockEntity oldBE, Map<ServerSubLevel, SubLevelAssemblyHelper.AssemblyTransform> transforms) {
         final BlockPos platePos = oldBE.PLATE_POS;
         if (platePos != null && SableCompanion.INSTANCE.getContaining(oldBE) instanceof final ServerSubLevel oldLevel && conversions.get(oldLevel) instanceof final ServerSubLevel newLevel) {
-            final ServerSubLevel plateLevel = (ServerSubLevel) Objects.requireNonNull(SubLevelContainer.getContainer(oldLevel.getLevel())).getSubLevel(oldBE.ATTACHED_LEVEL); // TODO: not this
+            final ServerSubLevel plateLevel = (ServerSubLevel) Objects.requireNonNull(SubLevelContainer.getContainer(oldLevel.getLevel())).getSubLevel(oldBE.ATTACHED_LEVEL);
 
             ATTACHED_LEVEL = newLevel.getUniqueId();
             PLATE_POS = transforms.get(newLevel).apply(platePos);
@@ -497,8 +515,8 @@ public class GimbalBlockEntity extends SmartBlockEntity implements BlockEntitySu
         if (PLATE_POS != null)
             compound.put("PlatePos", NbtUtils.writeBlockPos(PLATE_POS));
 
-        compound.putInt("AngleY", ANGLE_Y);
-        compound.putInt("AngleZ", ANGLE_Z);
+        compound.putInt("AngleY", ANGLE_Y_OUT);
+        compound.putInt("AngleZ", ANGLE_Z_OUT);
 
         compound.putBoolean("Assembled", ASSEMBLED);
     }
@@ -527,10 +545,10 @@ public class GimbalBlockEntity extends SmartBlockEntity implements BlockEntitySu
             PLATE_POS = NbtUtils.readBlockPos(compound, "PlatePos").orElseThrow();
 
         if (compound.contains("AngleY"))
-            ANGLE_Y = compound.getInt("AngleY");
+            ANGLE_Y_OUT = compound.getInt("AngleY");
 
         if (compound.contains("AngleZ"))
-            ANGLE_Z = compound.getInt("AngleZ");
+            ANGLE_Z_OUT = compound.getInt("AngleZ");
 
         if (compound.contains("Assembled"))
             ASSEMBLED = compound.getBoolean("Assembled");
@@ -542,15 +560,19 @@ public class GimbalBlockEntity extends SmartBlockEntity implements BlockEntitySu
         return Sable.HELPER.getContaining(this);
     }
 
+    private @Nullable SubLevel getAttachedSubLevel() {
+        return ATTACHED_LEVEL != null ? Objects.requireNonNull(SubLevelContainer.getContainer(level)).getSubLevel(ATTACHED_LEVEL) : null;
+    }
+
     public void beforeAssembly() {
         ASSEMBLING = true;
     }
 
     @OnlyIn(Dist.CLIENT)
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
-        utmLang.text("Collection Info:").style(ChatFormatting.WHITE).forGoggles(tooltip, 0);
-        utmLang.text("X angle:").style(ChatFormatting.GRAY).space().add(utmLang.text(ANGLE_Y + "°").style(ChatFormatting.AQUA)).forGoggles(tooltip);
-        utmLang.text("Y angle:").style(ChatFormatting.GRAY).space().add(utmLang.text(ANGLE_Z + "°").style(ChatFormatting.AQUA)).forGoggles(tooltip);
+        utmLang.text("Orientation Info:").style(ChatFormatting.WHITE).forGoggles(tooltip, 0);
+        utmLang.text("X angle:").style(ChatFormatting.GRAY).space().add(utmLang.text(ANGLE_Y_OUT + "°").style(ChatFormatting.AQUA)).forGoggles(tooltip);
+        utmLang.text("Y angle:").style(ChatFormatting.GRAY).space().add(utmLang.text(ANGLE_Z_OUT + "°").style(ChatFormatting.AQUA)).forGoggles(tooltip);
 
         return true;
     }
