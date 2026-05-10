@@ -13,16 +13,13 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-
 public class ShartSword extends SwordItem {
-
     public ShartSword(Tier tier, Properties properties) {
         super(tier, properties);
     }
+
     public static final int EFFECTIVE_BLOCK_DELAY = 0;
     public static final float MINIMUM_DURABILITY_DAMAGE = 3.0F;
-
-
 
 
     public void appendHoverText(@NotNull ItemStack stack, Item.@NotNull TooltipContext context, @NotNull List<Component> tooltipComponents, @NotNull TooltipFlag tooltipFlag) {
@@ -33,16 +30,15 @@ public class ShartSword extends SwordItem {
         return UseAnim.BLOCK;
     }
 
-    public int getUseDuration(ItemStack stack, LivingEntity entity) {
+    public int getUseDuration(@NotNull ItemStack stack, @NotNull LivingEntity entity) {
         return 72000;
     }
 
-    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+    public @NotNull InteractionResultHolder<ItemStack> use(@NotNull Level level, Player player, @NotNull InteractionHand hand) {
         ItemStack itemstack = player.getItemInHand(hand);
         player.startUsingItem(hand);
         return InteractionResultHolder.consume(itemstack);
     }
-
 
 
     public boolean canPerformAction(@NotNull ItemStack stack, @NotNull ItemAbility itemAbility) {

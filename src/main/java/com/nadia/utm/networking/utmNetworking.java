@@ -60,17 +60,14 @@ public class utmNetworking {
 
         client(SyncSealedDataPayload.DEF, (payload, context) -> context.enqueueWork(() -> NeoForge.EVENT_BUS.post(new SyncSealedDataEvent(payload))));
 
-        server(FUCKPayload.DEF, (payload, context) -> context.enqueueWork(() -> {
+        server(MyAwesomeKarkParticlePayload.DEF, (payload, context) -> context.enqueueWork(() -> {
             Player player = context.player();
             Vector3f pos = payload.pos();
             Vector3f dir = payload.dir();
 
-
-            ((ServerLevel)player.level()).sendParticles(ParticleTypes.SWEEP_ATTACK, pos.x + payload.d0(), pos.y, pos.z + payload.d1(), 0, payload.d0(), (double)0.0F, payload.d1(), (double)0.0F);
-
+            if (player.level() instanceof ServerLevel slevel)
+                slevel.sendParticles(ParticleTypes.SWEEP_ATTACK, pos.x + payload.xOff(), pos.y, pos.z + payload.yOff(), 0, payload.xOff(), 0.0F, payload.yOff(), 0.0F);
         }));
-
-
 
         REGISTRAR.playBidirectional(
                 GetOxygenPayload.TYPE,

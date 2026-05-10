@@ -6,7 +6,6 @@ import com.nadia.utm.item.NetherytraItem;
 import com.nadia.utm.registry.item.utmItemContainer;
 import com.nadia.utm.registry.tags.utmTags;
 import com.nadia.utm.registry.utmRegistry;
-import com.nadia.utm.tool.ChorlieKarkSword;
 import com.nadia.utm.tool.CopperSword;
 import com.nadia.utm.tool.ShartSword;
 import net.minecraft.tags.BlockTags;
@@ -78,11 +77,11 @@ public class utmTools {
             .tags(Tags.Items.ENCHANTABLES, ItemTags.EQUIPPABLE_ENCHANTABLE, ItemTags.DURABILITY_ENCHANTABLE, ItemTags.CHEST_ARMOR_ENCHANTABLE).generated();
 
     public static final utmItemContainer<SwordItem> OBSIDIAN_SWORD = register("obsidian_sword", () -> {
-                var Tier = utmToolBuilder.buildTier(
+                Tier tier = utmToolBuilder.buildTier(
                         BlockTags.INCORRECT_FOR_WOODEN_TOOL, 4200, 1f, 0f, 5, () -> Ingredient.of(Tags.Items.OBSIDIANS)
                 );
-                return new SwordItem(Tier, new Item.Properties().attributes(
-                        SwordItem.createAttributes(Tier, 12, -3.75f)));
+                return new SwordItem(tier, new Item.Properties().attributes(
+                        SwordItem.createAttributes(tier, 12, -3.75f)));
             }
     ).tags(Tags.Items.ENCHANTABLES, ItemTags.SWORD_ENCHANTABLE, ItemTags.WEAPON_ENCHANTABLE, ItemTags.DURABILITY_ENCHANTABLE, ItemTags.SWORDS).handheld();
 
@@ -109,46 +108,46 @@ public class utmTools {
     ).tags(Tags.Items.ENCHANTABLES, ItemTags.SWORD_ENCHANTABLE, ItemTags.WEAPON_ENCHANTABLE, ItemTags.DURABILITY_ENCHANTABLE, ItemTags.SWORDS).handheld();
 
     public static final utmItemContainer<SwordItem> CYCLESWORD = register("cyclesword", () -> {
-                var Tier = utmToolBuilder.buildTier(
+                Tier tier = utmToolBuilder.buildTier(
                         BlockTags.INCORRECT_FOR_WOODEN_TOOL, 350, 1f, 0f, 15, () -> Ingredient.of(Tags.Items.INGOTS_IRON)
                 );
-                return new SwordItem(Tier, new Item.Properties().attributes(
-                        SwordItem.createAttributes(Tier, 4, -1.125f)));
+                return new SwordItem(tier, new Item.Properties().attributes(
+                        SwordItem.createAttributes(tier, 4, -1.125f)));
             }
     ).tags(Tags.Items.ENCHANTABLES, ItemTags.SWORD_ENCHANTABLE, ItemTags.WEAPON_ENCHANTABLE, ItemTags.DURABILITY_ENCHANTABLE, ItemTags.SWORDS).handheld();
 
     public static final utmItemContainer<AxeItem> ARID_AXE = register("arid_axe", () -> {
-                var Tier = utmToolBuilder.buildTier(
+                Tier tier = utmToolBuilder.buildTier(
                         BlockTags.INCORRECT_FOR_WOODEN_TOOL, 2500, 8f, 0f, 15, () -> Ingredient.EMPTY
                 );
-                return new AxeItem(Tier, new Item.Properties().attributes(
-                        AxeItem.createAttributes(Tier, 17, -3.4f)).rarity(Rarity.RARE));
+                return new AxeItem(tier, new Item.Properties().attributes(
+                        AxeItem.createAttributes(tier, 17, -3.4f)).rarity(Rarity.RARE));
             }
     ).tags(Tags.Items.ENCHANTABLES, ItemTags.SWORD_ENCHANTABLE, ItemTags.WEAPON_ENCHANTABLE, ItemTags.FIRE_ASPECT_ENCHANTABLE, ItemTags.MINING_ENCHANTABLE, ItemTags.AXES).handheld();
 
     public static final utmItemContainer<SwordItem> ARID_SWORD = register("arid_sword", () -> {
-                var Tier = utmToolBuilder.buildTier(
+                Tier tier = utmToolBuilder.buildTier(
                         BlockTags.INCORRECT_FOR_WOODEN_TOOL, 5000, 8f, 0f, 15, () -> Ingredient.EMPTY
                 );
-                return new SwordItem(Tier, new Item.Properties().attributes(
-                        SwordItem.createAttributes(Tier, 6.5f, 6)));
+                return new SwordItem(tier, new Item.Properties().attributes(
+                        SwordItem.createAttributes(tier, 6.5f, 6)));
             }
     ).tags(Tags.Items.ENCHANTABLES, ItemTags.SWORD_ENCHANTABLE, ItemTags.WEAPON_ENCHANTABLE, ItemTags.FIRE_ASPECT_ENCHANTABLE, ItemTags.SWORDS).handheld();
 
     public static final utmItemContainer<ShartSword> SHART = register("shart", () -> {
-                var Tier = utmToolBuilder.buildTier(
+                Tier tier = utmToolBuilder.buildTier(
                         BlockTags.INCORRECT_FOR_WOODEN_TOOL, 100, 1f, 0f, 15, () -> Ingredient.of(Tags.Items.INGOTS_IRON)
                 );
-                return new ShartSword(Tier, new Item.Properties().attributes(
-                        SwordItem.createAttributes(Tier, 5, -2.4f)));
+                return new ShartSword(tier, new Item.Properties().attributes(
+                        SwordItem.createAttributes(tier, 5, -2.4f)));
             }
     ).tags(Tags.Items.ENCHANTABLES, ItemTags.SWORD_ENCHANTABLE, ItemTags.WEAPON_ENCHANTABLE, ItemTags.DURABILITY_ENCHANTABLE, ItemTags.SWORDS, Tags.Items.TOOLS_SHIELD).handheld();
-    public static final utmItemContainer<ChorlieKarkSword> SWORD_OF_KIRK = register("sword_of_kirk", () -> {
-                var Tier = utmToolBuilder.buildTier(
+    public static final utmItemContainer<SwordItem> SWORD_OF_KIRK = register("sword_of_kirk", () -> {
+                Tier tier = utmToolBuilder.buildTier(
                         BlockTags.INCORRECT_FOR_WOODEN_TOOL, 100, 1f, 0f, 15, () -> Ingredient.of(Tags.Items.INGOTS_IRON)
                 );
-                return new ChorlieKarkSword(Tier, new Item.Properties().attributes(
-                        SwordItem.createAttributes(Tier, 5, -2.4f)));
+                return new SwordItem(tier, new Item.Properties().attributes(
+                        SwordItem.createAttributes(tier, 5, -2.4f)));
             }
     ).tags(Tags.Items.ENCHANTABLES, ItemTags.SWORD_ENCHANTABLE, ItemTags.WEAPON_ENCHANTABLE, ItemTags.DURABILITY_ENCHANTABLE, ItemTags.SWORDS).handheld();
 }
