@@ -35,6 +35,7 @@ public class utmPlanets {
     }
 
     public static Planet EARTH = new Planet(Level.OVERWORLD, "earth", 0.08);
+    public static Planet SPACE = new Planet(utmDimensions.SPACE_KEY, "space", 0);
     public static Planet AG23 = new Planet(utmDimensions.AG_KEY, "2313ag", 0.12);
 
     @Nullable

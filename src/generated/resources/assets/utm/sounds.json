@@ -1,20 +1,4 @@
 {
-  "2313ag_music": {
-    "sounds": [
-      {
-        "name": "utm:music/2313ag_1",
-        "stream": true
-      },
-      {
-        "name": "utm:music/2313ag_2",
-        "stream": true
-      },
-      {
-        "name": "utm:music/2313ag_3",
-        "stream": true
-      }
-    ]
-  },
   "music_disc_lava_chicken": {
     "sounds": [
       {
@@ -47,5 +31,21 @@
       "utm:slider_drag"
     ],
     "subtitle": "subtitles.utm.slider_drag"
+  },
+  "space_music": {
+    "sounds": [
+      {
+        "name": "utm:music/space_1",
+        "stream": true
+      },
+      {
+        "name": "utm:music/space_2",
+        "stream": true
+      },
+      {
+        "name": "utm:music/space_3",
+        "stream": true
+      }
+    ]
   }
 }

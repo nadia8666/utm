@@ -16,4 +16,14 @@ public class utmDimensions {
             Registries.DIMENSION_TYPE,
             ResourceLocation.fromNamespaceAndPath("utm", "2313ag_type")
     );
+
+    public static final ResourceKey<Level> SPACE_KEY = ResourceKey.create(
+            Registries.DIMENSION,
+            ResourceLocation.fromNamespaceAndPath("utm", "space")
+    );
+
+    public static final ResourceKey<DimensionType> SPACE_TYPE = ResourceKey.create(
+            Registries.DIMENSION_TYPE,
+            ResourceLocation.fromNamespaceAndPath("utm", "space_type")
+    );
 }

@@ -29,10 +29,10 @@ public class utmSoundDefsProvider extends SoundDefinitionsProvider {
                 sound("utm:records/undertale").stream()
         ).subtitle("jukebox_song.utm.undertale"));
 
-        add(utmSounds.AG_MUSIC, SoundDefinition.definition().with(
-                sound("utm:music/2313ag_1").stream().weight(1),
-                sound("utm:music/2313ag_2").stream().weight(1),
-                sound("utm:music/2313ag_3").stream().weight(1)
+        add(utmSounds.SPACE_MUSIC, SoundDefinition.definition().with(
+                sound("utm:music/space_1").stream().weight(1),
+                sound("utm:music/space_2").stream().weight(1),
+                sound("utm:music/space_3").stream().weight(1)
         ));
     }
 }

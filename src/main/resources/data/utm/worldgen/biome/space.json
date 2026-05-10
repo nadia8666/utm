@@ -1,6 +1,6 @@
 {
   "has_precipitation": false,
-  "temperature": 0.5,
+  "temperature": 0.0,
   "downfall": 0.0,
   "effects": {
     "sky_color": 0,
@@ -21,10 +21,7 @@
     }
   },
   "carvers": {
-    "air": [
-      "minecraft:cave",
-      "minecraft:canyon"
-    ]
+    "air": []
   },
   "features": [],
   "creature_spawn_probability": 0.0,
