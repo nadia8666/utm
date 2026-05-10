@@ -121,20 +121,19 @@ public class SolidThrusterBlockEntity extends SmartBlockEntity implements BlockE
     public void tick() {
         super.tick();
 
-        if (this.level != null && !ACTIVATED && !level.isClientSide()) {
+        if (this.level == null || level.isClientSide) return;
+
+        if (!ACTIVATED) {
             ACTIVATED = level.hasNeighborSignal(worldPosition);
 
             if (ACTIVATED) updateFuel();
         }
 
-        if (level != null && !level.isClientSide()) {
-            updateThrust();
-            THRUST_FORCE.tickChaser();
+        updateThrust();
+        THRUST_FORCE.tickChaser();
+        sendData();
 
-            sendData();
-        }
-
-        if (this.level == null || this.getThrust() <= 0) return;
+        if (this.getThrust() <= 0) return;
 
         final RandomSource random = this.level.getRandom();
         final BlockState state = this.getBlockState();

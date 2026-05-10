@@ -39,7 +39,7 @@ import java.util.List;
 @ForceLoad
 public class LiquidFuelThrusterBlockEntity extends SmartBlockEntity implements BlockEntitySubLevelActor, IHaveGoggleInformation, IProduceThrust<LiquidFuelThrusterBlockEntity> {
     public SmartFluidTankBehaviour FUEL;
-    public float REDSTONE = 0;
+    public int REDSTONE = 0;
     public LerpedFloat THRUST_FORCE = LerpedFloat.linear();
 
     public LiquidFuelThrusterBlockEntity(BlockPos pos, BlockState blockState) {
@@ -50,6 +50,10 @@ public class LiquidFuelThrusterBlockEntity extends SmartBlockEntity implements B
 
     public static float getThrustMax() {
         return Config.LIQUID_THRUSTER_FORCE.get();
+    }
+
+    public float getThrottle() {
+        return REDSTONE / 15F;
     }
 
     @Override
@@ -64,14 +68,14 @@ public class LiquidFuelThrusterBlockEntity extends SmartBlockEntity implements B
     protected void read(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket) {
         super.read(compound, registries, clientPacket);
         THRUST_FORCE.setValueNoUpdate(compound.getFloat("Thrust"));
-        REDSTONE = compound.getFloat("Throttle");
+        REDSTONE = compound.getInt("Redstone");
     }
 
     @Override
     protected void write(CompoundTag compound, HolderLookup.Provider registries, boolean clientPacket) {
         super.write(compound, registries, clientPacket);
         compound.putFloat("Thrust", THRUST_FORCE.getValue());
-        compound.putFloat("Throttle", REDSTONE);
+        compound.putInt("Redstone", REDSTONE);
     }
 
     public void updateThrust() {
@@ -85,23 +89,25 @@ public class LiquidFuelThrusterBlockEntity extends SmartBlockEntity implements B
     public float getThrustRaw() {
         if (this.FUEL.getPrimaryHandler().getFluidAmount() <= 250) return 0;
 
-        return REDSTONE * getThrustMax();
+        return getThrottle() * getThrustMax();
     }
 
     @Override
     public void tick() {
         super.tick();
 
-        if (this.level != null && !level.isClientSide()) {
-            REDSTONE = this.level.getBestNeighborSignal(worldPosition) / 15F;
+        if (this.level == null || level.isClientSide()) return;
+        int targetThrottle = this.level.getBestNeighborSignal(worldPosition);
 
-            updateThrust();
-            THRUST_FORCE.tickChaser();
-
+        if (REDSTONE != targetThrottle) {
+            REDSTONE = targetThrottle;
             sendData();
         }
 
-        if (this.level == null || this.getThrust() <= 0) return;
+        updateThrust();
+        THRUST_FORCE.tickChaser();
+
+        if (this.getThrust() <= 0) return;
         this.FUEL.getPrimaryHandler().drain((int) ((THRUST_FORCE.getValue() / getThrustMax()) * 50), IFluidHandler.FluidAction.EXECUTE);
 
         tick(this, worldPosition, getThrust(), getThrustMax(), level, () -> new HotAirEmberParticleData(false), 20);
@@ -122,7 +128,7 @@ public class LiquidFuelThrusterBlockEntity extends SmartBlockEntity implements B
         tooltip.add(Component.empty());
 
         utmLang.text("Thrust Info:").forGoggles(tooltip, 0);
-        utmLang.text((int) (REDSTONE * 100) + "%").style(ChatFormatting.AQUA).space().add(utmLang.text("throttle").style(ChatFormatting.GRAY)).forGoggles(tooltip);
+        utmLang.text((int) (getThrottle() * 100) + "%").style(ChatFormatting.AQUA).space().add(utmLang.text("throttle").style(ChatFormatting.GRAY)).forGoggles(tooltip);
         utmLang.text((int) getThrust() + "N").style(ChatFormatting.AQUA).space().add(utmLang.text("per tick").style(ChatFormatting.GRAY)).forGoggles(tooltip);
 
         return true;
