@@ -189,5 +189,15 @@ public class utmClientEvents {
                 chunk.setData(utmAttachments.SEALED_AIR, event.PAYLOAD.data());
             }
         });
+
+        utmEvents.register(ViewportEvent.ComputeFogColor.class, event -> {
+            float alpha = (float) Math.clamp((event.getCamera().getPosition().y - 5000.0) / 1000.0, 0.0, 1.0);
+            if (alpha > 0) {
+                float mult = 1.0F - alpha;
+                event.setRed(event.getRed() * mult);
+                event.setGreen(event.getGreen() * mult);
+                event.setBlue(event.getBlue() * mult);
+            }
+        });
     }
 }
