@@ -192,7 +192,7 @@ public class PlanetRenderer {
                     double y = player.position().y;
 
                     if (y > 5000) {
-                        return (float) ((y-5000)/1000);
+                        return Math.min((float) ((y-5000)/1000), 1);
                     } else
                         return 0;
                 }

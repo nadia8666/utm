@@ -45,6 +45,14 @@ public class utmBlockContainer<B extends Block, I extends BlockItem> {
         throw new RuntimeException("[UTM] unable to find block " + block);
     }
 
+    public static Optional<utmBlockContainer<?, ?>> fromItem(Item item) {
+        for (utmBlockContainer<?, ?> container : ALL_BLOCKS) {
+            if (container.ITEM.get().equals(item)) return Optional.of(container);
+        }
+
+        return Optional.empty();
+    }
+
     public void onRegister(Consumer<? super B> callback) {
         this.callbacks.add(callback);
     }

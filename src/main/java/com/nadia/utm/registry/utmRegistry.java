@@ -57,7 +57,9 @@ public class utmRegistry {
 
                             output.accept(entry.get());
                         });
-                        utmRegistry.ITEMS.getEntries().forEach(entry -> output.accept(entry.get()));
+                        utmRegistry.ITEMS.getEntries().forEach(entry -> utmBlockContainer.fromItem(entry.get()).ifPresentOrElse((c) -> {
+                            if (!c.getForDatagen().contains("hideFromCreative")) output.accept(entry.get());
+                        }, () -> output.accept(entry.get())));
                     }).build());
 
     public static void addCreative(BuildCreativeModeTabContentsEvent event) {
