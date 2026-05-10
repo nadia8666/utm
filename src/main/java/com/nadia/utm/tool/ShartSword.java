@@ -30,7 +30,7 @@ public class ShartSword extends SwordItem {
     }
 
     public @NotNull UseAnim getUseAnimation(@NotNull ItemStack stack) {
-        return UseAnim.EAT;
+        return UseAnim.BLOCK;
     }
 
     public int getUseDuration(ItemStack stack, LivingEntity entity) {

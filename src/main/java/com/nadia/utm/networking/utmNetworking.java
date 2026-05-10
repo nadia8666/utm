@@ -8,6 +8,7 @@ import com.nadia.utm.event.utmEvents;
 import com.nadia.utm.gui.GlintMenu;
 import com.nadia.utm.networking.payloads.*;
 import com.nadia.utm.registry.attachment.utmAttachments;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.protocol.PacketFlow;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.server.level.ServerLevel;
@@ -20,6 +21,7 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.handling.IPayloadHandler;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
+import org.joml.Vector3f;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,6 +59,18 @@ public class utmNetworking {
         }));
 
         client(SyncSealedDataPayload.DEF, (payload, context) -> context.enqueueWork(() -> NeoForge.EVENT_BUS.post(new SyncSealedDataEvent(payload))));
+
+        server(FUCKPayload.DEF, (payload, context) -> context.enqueueWork(() -> {
+            Player player = context.player();
+            Vector3f pos = payload.pos();
+            Vector3f dir = payload.dir();
+
+
+            ((ServerLevel)player.level()).sendParticles(ParticleTypes.SWEEP_ATTACK, pos.x + payload.d0(), pos.y, pos.z + payload.d1(), 0, payload.d0(), (double)0.0F, payload.d1(), (double)0.0F);
+
+        }));
+
+
 
         REGISTRAR.playBidirectional(
                 GetOxygenPayload.TYPE,
