@@ -2,7 +2,6 @@ package com.nadia.utm.client.renderer.planets;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
-import com.nadia.utm.registry.dimension.utmDimensions;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.resources.ResourceLocation;
@@ -11,13 +10,9 @@ import org.joml.Matrix4f;
 import org.joml.Quaternionf;
 
 public class Planet {
-    public final float DISTANCE;
-    public final float SIZE;
     public final ResourceLocation TEXTURE;
 
-    public Planet(float distance, float size, ResourceLocation texture) {
-        DISTANCE = distance;
-        SIZE = size;
+    public Planet(ResourceLocation texture) {
         TEXTURE = texture;
 
         PlanetRenderer.PLANET_REGISTRY.add(this);
@@ -46,10 +41,10 @@ public class Planet {
 
         Matrix4f matrix = poseStack.last().pose();
         BufferBuilder buffer = Tesselator.getInstance().begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX_COLOR);
-        buffer.addVertex(matrix, -SIZE, DISTANCE, -SIZE).setUv(0.0F, 0.0F).setColor(brightness[0], brightness[1], brightness[2], alpha);
-        buffer.addVertex(matrix, SIZE, DISTANCE, -SIZE).setUv(1.0F, 0.0F).setColor(brightness[0], brightness[1], brightness[2], alpha);
-        buffer.addVertex(matrix, SIZE, DISTANCE, SIZE).setUv(1.0F, 1.0F).setColor(brightness[0], brightness[1], brightness[2], alpha);
-        buffer.addVertex(matrix, -SIZE, DISTANCE, SIZE).setUv(0.0F, 1.0F).setColor(brightness[0], brightness[1], brightness[2], alpha);
+        buffer.addVertex(matrix, -getSize(), getDistance(), -getSize()).setUv(0.0F, 0.0F).setColor(brightness[0], brightness[1], brightness[2], alpha);
+        buffer.addVertex(matrix, getSize(), getDistance(), -getSize()).setUv(1.0F, 0.0F).setColor(brightness[0], brightness[1], brightness[2], alpha);
+        buffer.addVertex(matrix, getSize(), getDistance(), getSize()).setUv(1.0F, 1.0F).setColor(brightness[0], brightness[1], brightness[2], alpha);
+        buffer.addVertex(matrix, -getSize(), getDistance(), getSize()).setUv(0.0F, 1.0F).setColor(brightness[0], brightness[1], brightness[2], alpha);
 
         BufferUploader.drawWithShader(buffer.buildOrThrow());
 
@@ -58,8 +53,7 @@ public class Planet {
     }
 
     public boolean shouldPass(RenderLevelStageEvent event, Minecraft mc) {
-        if (mc.level == null) return false; // not needed in logic
-        return mc.level.dimension().equals(utmDimensions.AG_KEY);
+        return false;
     }
 
     public void transform(PoseStack poseStack, float partialTicks) {}
@@ -74,5 +68,13 @@ public class Planet {
 
     public float getAlpha(long time, float partialTick) {
         return 1;
+    }
+
+    public float getDistance() {
+        return 25;
+    }
+
+    public float getSize() {
+        return 999;
     }
 }

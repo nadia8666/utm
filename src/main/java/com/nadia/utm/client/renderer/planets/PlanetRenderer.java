@@ -6,11 +6,12 @@ import com.mojang.math.Axis;
 import com.nadia.utm.Config;
 import com.nadia.utm.event.ForceLoad;
 import com.nadia.utm.event.utmEvents;
+import com.nadia.utm.registry.planets.utmPlanets;
+import com.nadia.utm.utm;
 import net.minecraft.client.Minecraft;
-import net.minecraft.world.level.Level;
+import net.minecraft.client.player.LocalPlayer;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
-import com.nadia.utm.utm;
 import org.lwjgl.opengl.GL11;
 
 import java.util.ArrayList;
@@ -23,7 +24,17 @@ public class PlanetRenderer {
     // ordered by relative distance, moon renders over the earth which renders over the sun
     @ForceLoad(dist = Dist.CLIENT)
     public static class PLANETS {
-        public static final Planet SUN = new Planet(300, 15, utm.key("textures/misc/sun.png")) {
+        public static final Planet SUN_AG23 = new Planet(utm.key("textures/misc/sun.png")) {
+            @Override
+            public float getDistance() {
+                return 300;
+            }
+
+            @Override
+            public float getSize() {
+                return 15;
+            }
+
             @Override
             public float[] getColor(long time, float partialTicks) {
                 return new float[]{1, 1, 1};
@@ -38,17 +49,47 @@ public class PlanetRenderer {
                 poseStack.mulPose(Axis.XP.rotationDegrees(11.2F));
                 poseStack.mulPose(Axis.ZP.rotationDegrees(offset));
             }
+
+            @Override
+            public boolean shouldPass(RenderLevelStageEvent event, Minecraft mc) {
+                return mc.level != null && utmPlanets.AG23.is(utmPlanets.get(mc.level));
+            }
         };
-        public static final Planet EARTH = new Planet(150, 25 / 3f, utm.key("textures/misc/earth.png")) {
+        public static final Planet EARTH_AG23 = new Planet(utm.key("textures/misc/earth.png")) {
+            @Override
+            public float getDistance() {
+                return 150;
+            }
+
+            @Override
+            public float getSize() {
+                return 8.333333f;
+            }
+
             @Override
             public void transform(PoseStack poseStack, float partialTicks) {
                 poseStack.mulPose(Axis.XP.rotationDegrees(11.2F));
             }
+
+            @Override
+            public boolean shouldPass(RenderLevelStageEvent event, Minecraft mc) {
+                return mc.level != null && utmPlanets.AG23.is(utmPlanets.get(mc.level));
+            }
         };
-        public static final Planet MOON = new Planet(150, 12.5f / 3f, utm.key("textures/misc/moon.png")) {
+        public static final Planet MOON_AG23 = new Planet(utm.key("textures/misc/moon.png")) {
+            @Override
+            public float getDistance() {
+                return 150;
+            }
+
+            @Override
+            public float getSize() {
+                return 4.166666666666667F;
+            }
+
             @Override
             public float[] getColor(long time, float partialTicks) {
-                float brightness = .25f + PLANETS.EARTH.getColor(time, partialTicks)[0] / 3;
+                float brightness = .25f + PLANETS.EARTH_AG23.getColor(time, partialTicks)[0] / 3;
 
                 return new float[]{brightness, brightness, brightness};
             }
@@ -67,8 +108,24 @@ public class PlanetRenderer {
                 poseStack.mulPose(Axis.XP.rotationDegrees(11.2F));
                 poseStack.translate(offset, distance, 0);
             }
+
+            @Override
+            public boolean shouldPass(RenderLevelStageEvent event, Minecraft mc) {
+                return mc.level != null && utmPlanets.AG23.is(utmPlanets.get(mc.level));
+            }
         };
-        public static final Planet AG = new Planet(150, 3, utm.key("textures/misc/2313ag.png")) {
+
+        public static final Planet AG23_EARTH = new Planet(utm.key("textures/misc/2313ag.png")) {
+            @Override
+            public float getDistance() {
+                return 150;
+            }
+
+            @Override
+            public float getSize() {
+                return 3;
+            }
+
             @Override
             public float[] getColor(long time, float partialTicks) {
                 double pTime = (time % 24000L) + partialTicks;
@@ -96,8 +153,51 @@ public class PlanetRenderer {
 
             @Override
             public boolean shouldPass(RenderLevelStageEvent event, Minecraft mc) {
-                if (mc.level == null) return false;
-                return mc.level.dimension().equals(Level.OVERWORLD);
+                return mc.level != null && utmPlanets.EARTH.is(utmPlanets.get(mc.level));
+            }
+        };
+
+        public static final Planet EARTH_EARTH = new Planet(utm.key("textures/misc/earth.png")) {
+            @Override
+            public float getDistance() {
+                return 10;
+            }
+
+            @Override
+            public float getSize() {
+                return 450;
+            }
+
+            @Override
+            public void transform(PoseStack poseStack, float partialTicks) {
+                poseStack.translate(0, -50, 0);
+                poseStack.mulPose(Axis.XP.rotationDegrees(180));
+
+                Minecraft mc = Minecraft.getInstance();
+                if (mc.player instanceof LocalPlayer player) {
+                    float scalar = Math.max((float) (1 - (player.getY()/125_000)), 0);
+                    poseStack.scale(scalar, 1, scalar);
+                }
+            }
+
+            @Override
+            public boolean shouldPass(RenderLevelStageEvent event, Minecraft mc) {
+                return mc.level != null && utmPlanets.EARTH.is(utmPlanets.get(mc.level));
+            }
+
+            @Override
+            public float getAlpha(long time, float partialTick) {
+                Minecraft mc = Minecraft.getInstance();
+                if (mc.player instanceof LocalPlayer player) {
+                    double y = player.position().y;
+
+                    if (y > 5000) {
+                        return (float) ((y-5000)/1000);
+                    } else
+                        return 0;
+                }
+
+                return 0;
             }
         };
     }
