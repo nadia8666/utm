@@ -19,6 +19,8 @@ import java.util.Objects;
 class Persistance {
     public static void checkPersistance(ServerPlayer sPlayer, String currentPlanet) {
         ServerLevel level = sPlayer.serverLevel();
+        if (level.dimension().equals(ServerLevel.OVERWORLD) || level.dimension().equals(ServerLevel.NETHER) || level.dimension().equals(ServerLevel.END)) return;
+
         MinecraftServer server = sPlayer.getServer();
         if (server == null) return;
 
@@ -42,7 +44,7 @@ class Persistance {
                 currentPlanet = current.IDENTIFIER;
             }
 
-            if (current.equals(utmPlanets.AG23)) AdvancementUtil.AwardAdvancement(sPlayer, utm.key("2313ag/suffocate"));
+            if (current.is(utmPlanets.AG23)) AdvancementUtil.AwardAdvancement(sPlayer, utm.key("2313ag/suffocate"));
         }
 
         if (!Objects.equals(currentPlanet, "none")) {

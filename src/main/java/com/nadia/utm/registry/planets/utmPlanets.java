@@ -2,6 +2,7 @@ package com.nadia.utm.registry.planets;
 
 import com.nadia.utm.registry.dimension.utmDimensions;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
@@ -28,8 +29,8 @@ public class utmPlanets {
             KEY_SET.put(key, this);
         }
 
-        public boolean is(Planet target) {
-            return target.equals(this);
+        public boolean is(@Nullable Planet target) {
+            return this.equals(target);
         }
     }
 
@@ -44,6 +45,11 @@ public class utmPlanets {
     @Nullable
     public static Planet get(Level level) {
         return get(level.dimension());
+    }
+
+    @Nullable
+    public static Planet get(Entity entity) {
+        return get(entity.level().dimension());
     }
 
     @Nullable
