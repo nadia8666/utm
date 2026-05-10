@@ -92,15 +92,13 @@ public class LiquidFuelThrusterBlockEntity extends SmartBlockEntity implements B
     public void tick() {
         super.tick();
 
-        if (this.level != null) {
+        if (this.level != null && !level.isClientSide()) {
             REDSTONE = this.level.getBestNeighborSignal(worldPosition) / 15F;
 
-            if (!level.isClientSide()) {
-                updateThrust();
-                THRUST_FORCE.tickChaser();
+            updateThrust();
+            THRUST_FORCE.tickChaser();
 
-                sendData();
-            }
+            sendData();
         }
 
         if (this.level == null || this.getThrust() <= 0) return;
