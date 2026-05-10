@@ -74,7 +74,7 @@ public class utmNetworking {
                 float yaw = (float) Math.toDegrees(Math.atan2(-dir.x(), dir.z()));
 
                 proj.shootFromRotation(player, pitch, yaw, 0, 1.25F, 0);
-                proj.setPos(player.getPosition(0).add(0, 1, 0).add(dir.x, dir.y, dir.z));
+                proj.setPos(player.getEyePosition().add(dir.x, dir.y, dir.z));
                 slevel.addFreshEntity(proj);
             }
         }));
