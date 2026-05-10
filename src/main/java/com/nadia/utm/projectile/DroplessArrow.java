@@ -1,4 +1,4 @@
-package com.nadia.utm.registry.fluid;
+package com.nadia.utm.projectile;
 
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -9,20 +9,19 @@ import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class GayArrow extends Arrow {
-
-
-    public GayArrow(EntityType<? extends Arrow> entityType, Level level) {
+public class DroplessArrow extends Arrow {
+    public DroplessArrow(EntityType<? extends Arrow> entityType, Level level) {
         super(entityType, level);
     }
 
-    public GayArrow(Level level, double x, double y, double z, ItemStack pickupItemStack, @Nullable ItemStack firedFromWeapon) {
+    public DroplessArrow(Level level, double x, double y, double z, ItemStack pickupItemStack, @Nullable ItemStack firedFromWeapon) {
         super(level, x, y, z, pickupItemStack, firedFromWeapon);
     }
 
-    public GayArrow(Level level, LivingEntity owner, ItemStack pickupItemStack, @Nullable ItemStack firedFromWeapon) {
+    public DroplessArrow(Level level, LivingEntity owner, ItemStack pickupItemStack, @Nullable ItemStack firedFromWeapon) {
         super(level, owner, pickupItemStack, firedFromWeapon);
     }
+
     @Override
     protected boolean tryPickup(@NotNull Player player) {
         return false;

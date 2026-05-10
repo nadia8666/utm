@@ -7,8 +7,8 @@ import com.nadia.utm.event.events.SyncSealedDataEvent;
 import com.nadia.utm.event.utmEvents;
 import com.nadia.utm.gui.GlintMenu;
 import com.nadia.utm.networking.payloads.*;
+import com.nadia.utm.projectile.DroplessArrow;
 import com.nadia.utm.registry.attachment.utmAttachments;
-import com.nadia.utm.registry.fluid.GayArrow;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.protocol.PacketFlow;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
@@ -17,9 +17,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.AbstractArrow;
-import net.minecraft.world.entity.projectile.Arrow;
-import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.chunk.ChunkAccess;
 import net.neoforged.neoforge.common.NeoForge;
@@ -71,9 +68,13 @@ public class utmNetworking {
             Vector3f dir = payload.dir();
             if (player.level() instanceof ServerLevel slevel) {
                 slevel.sendParticles(ParticleTypes.SWEEP_ATTACK, pos.x + dir.x, pos.y + dir.y + player.getEyeHeight() - 0.25f, pos.z + dir.z, 0, payload.xOff(), 0.0F, payload.yOff(), 0.0F);
-                GayArrow proj = new GayArrow(EntityType.ARROW, slevel);
-                
-                proj.shootFromRotation(player, dir.x, dir.y, dir.z, 10, 0);
+                DroplessArrow proj = new DroplessArrow(EntityType.ARROW, slevel);
+
+                float pitch = (float) Math.toDegrees(Math.asin(-dir.y()));
+                float yaw = (float) Math.toDegrees(Math.atan2(-dir.x(), dir.z()));
+
+                proj.shootFromRotation(player, pitch, yaw, 0, 1.25F, 0);
+                proj.setPos(player.getPosition(0).add(0, 1, 0).add(dir.x, dir.y, dir.z));
                 slevel.addFreshEntity(proj);
             }
         }));
