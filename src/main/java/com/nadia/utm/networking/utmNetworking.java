@@ -8,13 +8,18 @@ import com.nadia.utm.event.utmEvents;
 import com.nadia.utm.gui.GlintMenu;
 import com.nadia.utm.networking.payloads.*;
 import com.nadia.utm.registry.attachment.utmAttachments;
+import com.nadia.utm.registry.fluid.GayArrow;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.protocol.PacketFlow;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.Arrow;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.chunk.ChunkAccess;
 import net.neoforged.neoforge.common.NeoForge;
@@ -64,11 +69,14 @@ public class utmNetworking {
             Player player = context.player();
             Vector3f pos = payload.pos();
             Vector3f dir = payload.dir();
-
-            if (player.level() instanceof ServerLevel slevel)
-                slevel.sendParticles(ParticleTypes.SWEEP_ATTACK, pos.x + payload.xOff(), pos.y, pos.z + payload.yOff(), 0, payload.xOff(), 0.0F, payload.yOff(), 0.0F);
+            if (player.level() instanceof ServerLevel slevel) {
+                slevel.sendParticles(ParticleTypes.SWEEP_ATTACK, pos.x + dir.x, pos.y + dir.y + player.getEyeHeight() - 0.25f, pos.z + dir.z, 0, payload.xOff(), 0.0F, payload.yOff(), 0.0F);
+                GayArrow proj = new GayArrow(EntityType.ARROW, slevel);
+                
+                proj.shootFromRotation(player, dir.x, dir.y, dir.z, 10, 0);
+                slevel.addFreshEntity(proj);
+            }
         }));
-
         REGISTRAR.playBidirectional(
                 GetOxygenPayload.TYPE,
                 GetOxygenPayload.CODEC,
