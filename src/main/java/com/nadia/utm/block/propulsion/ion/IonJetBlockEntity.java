@@ -99,7 +99,7 @@ public class IonJetBlockEntity extends KineticBlockEntity implements BlockEntity
 
         if (this.level == null || this.getThrust() <= 0) return;
 
-        this.LOX.getPrimaryHandler().drain(5, IFluidHandler.FluidAction.EXECUTE);
+        this.LOX.getPrimaryHandler().drain(1, IFluidHandler.FluidAction.EXECUTE);
 
         tick(this, worldPosition, getThrust(), getThrustMax(), level, () -> new HotAirEmberParticleData(true), 10);
     }
