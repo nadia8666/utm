@@ -201,7 +201,7 @@ public class PlanetRenderer {
         };
 
         public static final RenderedPhysicalPlanet SUN_SPACE = new RenderedPhysicalPlanet(
-                utm.key("textures/misc/sun.png"), utmPlanets.SUN.ORBIT(), 8720f
+                utm.key("textures/misc/sun.png"), utmPlanets.SUN.ORBIT(), 2180.0f
         ) {
             @Override
             public float[] getColor(long time, float partialTicks) {

@@ -37,10 +37,10 @@ public class utmPlanets {
     public static Planet SUN = new Planet(utmDimensions.SUN_KEY, "sun", 0, new Orbit.Static(new Vector3d(), Double.POSITIVE_INFINITY));
     public static final Planet EARTH = new Planet(Level.OVERWORLD, "earth", 0.08, new Orbit.Circular(
             SUN.ORBIT(),
-            120000.0,
+            25000.0,
             0.00005,
             new Quaternionf(),
-            30000
+            15000
     ));
     public static Planet MOON = new Planet(utmDimensions.MOON_KEY, "moon", 0, new Orbit.Circular(
             EARTH.ORBIT(),

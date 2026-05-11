@@ -107,21 +107,6 @@ public class ClientOrbiting {
             SubLevelContainer container = SubLevelContainer.getContainer(level);
             if (container == null) return;
 
-            LEVELS_TO_MOVE.forEach((body, sublevels) -> {
-                Pair<Vector3d, Vector3d> transform = TRANSFORM_LIST.get(body);
-                if (transform == null) return;
-
-                CALC.set(transform.getB()).sub(transform.getA());
-                Vec3 deltaVec = new Vec3(CALC.x, CALC.y, CALC.z);
-
-                for (SubLevel sublevel : sublevels) {
-                    if (sublevel.isRemoved()) continue;
-
-                    sublevel.logicalPose().position().add(CALC, CALC2);
-                    sublevel.logicalPose().position().set(CALC2);
-                }
-            });
-
             ENTITIES_TO_MOVE.forEach((body, entities) -> {
                 Pair<Vector3d, Vector3d> transform = TRANSFORM_LIST.get(body);
                 if (transform == null) return;
