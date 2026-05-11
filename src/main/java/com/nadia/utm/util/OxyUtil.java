@@ -3,7 +3,7 @@ package com.nadia.utm.util;
 import com.nadia.utm.behavior.space.SealedChunkData;
 import com.nadia.utm.mixin.BacktankUtilAccessor;
 import com.nadia.utm.registry.attachment.utmAttachments;
-import com.nadia.utm.registry.dimension.utmDimensions;
+import com.nadia.utm.registry.planets.utmPlanets;
 import dev.ryanhcode.sable.sublevel.SubLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceKey;
@@ -72,12 +72,6 @@ public class OxyUtil {
         return str;
     }
 
-    public static final Set<ResourceKey<Level>> UNBREATHABLE_DIMENSIONS = new HashSet<>();
-
-    static {
-        UNBREATHABLE_DIMENSIONS.add(utmDimensions.AG_KEY);
-    }
-
     /**
      * Checks if a level has oxygen or not
      *
@@ -90,7 +84,8 @@ public class OxyUtil {
      * @see #isSealed(Level, BlockPos)
      */
     public static boolean hasOxygen(Level level) {
-        return !UNBREATHABLE_DIMENSIONS.contains(level.dimension());
+        utmPlanets.Planet planet = utmPlanets.get(level);
+        return planet == null || planet.HAS_OXYGEN();
     }
 
     /**
@@ -101,7 +96,8 @@ public class OxyUtil {
      * @see #isSealed(Level, BlockPos)
      */
     public static boolean hasOxygen(ResourceKey<Level> dimension) {
-        return !UNBREATHABLE_DIMENSIONS.contains(dimension);
+        utmPlanets.Planet planet = utmPlanets.get(dimension);
+        return planet == null || planet.HAS_OXYGEN();
     }
 
     /**
@@ -112,7 +108,8 @@ public class OxyUtil {
      * @see #isSealed(Level, BlockPos)
      */
     public static boolean canBreathe(Entity entity) {
-        return !UNBREATHABLE_DIMENSIONS.contains(entity.level().dimension());
+        utmPlanets.Planet planet = utmPlanets.get(entity);
+        return planet == null || planet.HAS_OXYGEN();
     }
 
     /**
