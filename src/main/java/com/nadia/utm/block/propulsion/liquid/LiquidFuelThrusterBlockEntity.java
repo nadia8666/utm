@@ -108,7 +108,7 @@ public class LiquidFuelThrusterBlockEntity extends SmartBlockEntity implements B
         THRUST_FORCE.tickChaser();
 
         if (this.getThrust() <= 0) return;
-        this.FUEL.getPrimaryHandler().drain((int) ((THRUST_FORCE.getValue() / getThrustMax()) * 50), IFluidHandler.FluidAction.EXECUTE);
+        this.FUEL.getPrimaryHandler().drain((int) ((THRUST_FORCE.getValue() / getThrustMax()) * 5), IFluidHandler.FluidAction.EXECUTE);
 
         tick(this, worldPosition, getThrust(), getThrustMax(), level, () -> new HotAirEmberParticleData(false), 20);
     }
