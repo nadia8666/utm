@@ -1,8 +1,10 @@
-package com.nadia.utm.client.renderer.planets;
+package com.nadia.utm.registry.planets;
 
 import org.joml.Quaternionf;
 import org.joml.Vector3d;
 import org.joml.Vector3f;
+
+import javax.annotation.Nullable;
 
 public interface Orbit {
     Vector3d getPosition(long worldTime, float partialTicks);
@@ -14,7 +16,7 @@ public interface Orbit {
         }
     }
 
-    record Circular(Orbit parent, double radius, double speed, Quaternionf planeRotation) implements Orbit {
+    record Circular(@Nullable Orbit parent, double radius, double speed, Quaternionf planeRotation) implements Orbit {
         @Override
         public Vector3d getPosition(long worldTime, float partialTicks) {
             double time = (worldTime + partialTicks) * speed;

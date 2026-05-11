@@ -3,6 +3,7 @@ package com.nadia.utm.client.renderer.planets;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
 import com.nadia.utm.registry.dimension.utmDimensions;
+import com.nadia.utm.registry.planets.Orbit;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.resources.ResourceLocation;
@@ -12,11 +13,11 @@ import org.joml.Matrix4f;
 import org.joml.Quaternionf;
 import org.joml.Vector3d;
 
-public class PhysicalPlanet extends Planet {
+public class RenderedPhysicalPlanet extends RenderedPlanet {
     public final Orbit ORBIT;
     public final float SIZE;
 
-    public PhysicalPlanet(ResourceLocation texture, Orbit orbit, float physicalSize) {
+    public RenderedPhysicalPlanet(ResourceLocation texture, Orbit orbit, float physicalSize) {
         super(texture);
         this.ORBIT = orbit;
         this.SIZE = physicalSize;

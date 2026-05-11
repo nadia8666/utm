@@ -9,13 +9,13 @@ import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
 import org.joml.Matrix4f;
 import org.joml.Quaternionf;
 
-public class Planet {
+public class RenderedPlanet {
     public final ResourceLocation TEXTURE;
 
-    public Planet(ResourceLocation texture) {
+    public RenderedPlanet(ResourceLocation texture) {
         TEXTURE = texture;
 
-        PlanetRenderer.PLANET_REGISTRY.add(this);
+        PlanetRenderer.RENDERED_PLANET_REGISTRY.add(this);
     }
 
     public void onRenderSky(long time, Minecraft mc, RenderLevelStageEvent event) {

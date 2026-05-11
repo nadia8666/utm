@@ -12,8 +12,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
-import org.joml.Quaternionf;
-import org.joml.Vector3d;
 import org.lwjgl.opengl.GL11;
 
 import java.util.ArrayList;
@@ -21,12 +19,12 @@ import java.util.List;
 
 @ForceLoad(dist = Dist.CLIENT)
 public class PlanetRenderer {
-    public static final List<Planet> PLANET_REGISTRY = new ArrayList<>();
+    public static final List<RenderedPlanet> RENDERED_PLANET_REGISTRY = new ArrayList<>();
 
     // ordered by relative distance, moon renders over the earth which renders over the sun
     @ForceLoad(dist = Dist.CLIENT)
     public static class PLANETS {
-        public static final Planet SUN_AG23 = new Planet(utm.key("textures/misc/sun.png")) {
+        public static final RenderedPlanet SUN_AG23 = new RenderedPlanet(utm.key("textures/misc/sun.png")) {
             @Override
             public float getDistance() {
                 return 300;
@@ -57,7 +55,7 @@ public class PlanetRenderer {
                 return mc.level != null && utmPlanets.AG23.is(utmPlanets.get(mc.level));
             }
         };
-        public static final Planet EARTH_AG23 = new Planet(utm.key("textures/misc/earth.png")) {
+        public static final RenderedPlanet EARTH_AG23 = new RenderedPlanet(utm.key("textures/misc/earth.png")) {
             @Override
             public float getDistance() {
                 return 150;
@@ -78,7 +76,7 @@ public class PlanetRenderer {
                 return mc.level != null && utmPlanets.AG23.is(utmPlanets.get(mc.level));
             }
         };
-        public static final Planet MOON_AG23 = new Planet(utm.key("textures/misc/moon.png")) {
+        public static final RenderedPlanet MOON_AG23 = new RenderedPlanet(utm.key("textures/misc/moon.png")) {
             @Override
             public float getDistance() {
                 return 150;
@@ -117,7 +115,7 @@ public class PlanetRenderer {
             }
         };
 
-        public static final Planet AG23_EARTH = new Planet(utm.key("textures/misc/2313ag.png")) {
+        public static final RenderedPlanet AG23_EARTH = new RenderedPlanet(utm.key("textures/misc/2313ag.png")) {
             @Override
             public float getDistance() {
                 return 150;
@@ -158,7 +156,7 @@ public class PlanetRenderer {
                 return mc.level != null && utmPlanets.EARTH.is(utmPlanets.get(mc.level));
             }
         };
-        public static final Planet EARTH_EARTH = new Planet(utm.key("textures/misc/earth.png")) {
+        public static final RenderedPlanet EARTH_EARTH = new RenderedPlanet(utm.key("textures/misc/earth.png")) {
             @Override
             public float getDistance() {
                 return 10;
@@ -202,10 +200,8 @@ public class PlanetRenderer {
             }
         };
 
-        public static final PhysicalPlanet SUN_SPACE = new PhysicalPlanet(
-                utm.key("textures/misc/sun.png"),
-                new Orbit.Static(new Vector3d(0, 0, 0)),
-                8720f
+        public static final RenderedPhysicalPlanet SUN_SPACE = new RenderedPhysicalPlanet(
+                utm.key("textures/misc/sun.png"), utmPlanets.SUN.ORBIT(), 8720f
         ) {
             @Override
             public float[] getColor(long time, float partialTicks) {
@@ -213,36 +209,21 @@ public class PlanetRenderer {
             }
         };
 
-        public static final PhysicalPlanet EARTH_SPACE = new PhysicalPlanet(
+        public static final RenderedPhysicalPlanet EARTH_SPACE = new RenderedPhysicalPlanet(
                 utm.key("textures/misc/earth.png"),
-                new Orbit.Circular(
-                        SUN_SPACE.ORBIT,
-                        120000.0,
-                        0.00005,
-                        new Quaternionf().rotationXYZ(0, 0, 0)
-                ),
+                utmPlanets.EARTH.ORBIT(),
                 80.0f
         );
 
-        public static final PhysicalPlanet MOON_SPACE = new PhysicalPlanet(
+        public static final RenderedPhysicalPlanet MOON_SPACE = new RenderedPhysicalPlanet(
                 utm.key("textures/misc/moon.png"),
-                new Orbit.Circular(
-                        EARTH_SPACE.ORBIT,
-                        4000.0,
-                        0.002,
-                        new Quaternionf().rotationXYZ(0.2f, 0, 0.1f)
-                ),
+                utmPlanets.MOON.ORBIT(),
                 20.0f
         );
 
-        public static final PhysicalPlanet AG23_SPACE = new PhysicalPlanet(
+        public static final RenderedPhysicalPlanet AG23_SPACE = new RenderedPhysicalPlanet(
                 utm.key("textures/misc/2313ag.png"),
-                new Orbit.Circular(
-                        EARTH_SPACE.ORBIT,
-                        9000.0,
-                        (2.0 * Math.PI) / 24000.0,
-                        new Quaternionf().rotationXYZ(0, 0, 0)
-                ),
+                utmPlanets.AG23.ORBIT(),
                 30.0f
         );
     }
@@ -256,7 +237,7 @@ public class PlanetRenderer {
 
             long time = mc.level.dayTime() % 24000;
 
-            for (Planet planet : PLANET_REGISTRY)
+            for (RenderedPlanet planet : RENDERED_PLANET_REGISTRY)
                 planet.onRenderSky(time, mc, event);
 
             RenderSystem.clear(GL11.GL_DEPTH_BUFFER_BIT, Minecraft.ON_OSX);
