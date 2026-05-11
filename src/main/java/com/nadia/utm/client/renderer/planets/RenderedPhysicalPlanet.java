@@ -40,7 +40,7 @@ public class RenderedPhysicalPlanet extends RenderedPlanet {
         Vector3d planetPos = ORBIT.getPosition(time, partialTicks);
         Vec3 playerPos = mc.gameRenderer.getMainCamera().getPosition();
         Vector3d offset = new Vector3d();
-        planetPos.sub(playerPos.toVector3f(), offset);
+        planetPos.sub(playerPos.x, playerPos.y, playerPos.z, offset);
 
         Matrix4f originalProjection = new Matrix4f(RenderSystem.getProjectionMatrix());
 

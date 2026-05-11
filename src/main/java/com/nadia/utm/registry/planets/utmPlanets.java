@@ -33,25 +33,28 @@ public class utmPlanets {
         }
     }
 
-    public static Planet SPACE = new Planet(utmDimensions.SPACE_KEY, "space", 0, new Orbit.Static(new Vector3d(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY)));
-    public static Planet SUN = new Planet(utmDimensions.SUN_KEY, "sun", 0, new Orbit.Static(new Vector3d()));
+    public static Planet SPACE = new Planet(utmDimensions.SPACE_KEY, "space", 0, new Orbit.Static(new Vector3d(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY), 0));
+    public static Planet SUN = new Planet(utmDimensions.SUN_KEY, "sun", 0, new Orbit.Static(new Vector3d(), Double.POSITIVE_INFINITY));
     public static final Planet EARTH = new Planet(Level.OVERWORLD, "earth", 0.08, new Orbit.Circular(
             SUN.ORBIT(),
             120000.0,
             0.00005,
-            new Quaternionf()
+            new Quaternionf(),
+            30000
     ));
     public static Planet MOON = new Planet(utmDimensions.MOON_KEY, "moon", 0, new Orbit.Circular(
             EARTH.ORBIT(),
             4000.0,
             0.002,
-            new Quaternionf().rotationXYZ(0.2f, 0, 0.1f)
+            new Quaternionf().rotationXYZ(0.2f, 0, 0.1f),
+            1500
     ));
     public static final Planet AG23 = new Planet(utmDimensions.AG_KEY, "2313ag", 0.12, new Orbit.Circular(
             EARTH.ORBIT(),
             9000.0,
             (2.0 * Math.PI) / 24000.0,
-            new Quaternionf()
+            new Quaternionf(),
+            2500
     ));
 
     @Nullable

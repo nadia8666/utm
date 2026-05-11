@@ -235,7 +235,7 @@ public class PlanetRenderer {
             Minecraft mc = Minecraft.getInstance();
             if (mc.level == null) return;
 
-            long time = mc.level.dayTime() % 24000;
+            long time = mc.level.dayTime();
 
             for (RenderedPlanet planet : RENDERED_PLANET_REGISTRY)
                 planet.onRenderSky(time, mc, event);

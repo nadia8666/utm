@@ -101,6 +101,10 @@ public class SableUtil {
         return toBlockPos(pose.transformPositionInverse(toVec(pos)));
     }
 
+    public static Vector3d toVector3d(Vec3 pos) {
+        return new Vector3d(pos.x, pos.y, pos.z);
+    }
+
     /**
      * converts sable (local) space pos to world (global) space pos
      *
