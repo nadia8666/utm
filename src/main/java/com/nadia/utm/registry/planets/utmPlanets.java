@@ -12,31 +12,27 @@ import java.util.Map;
 import java.util.Set;
 
 public class utmPlanets {
-    public static Set<Planet> ALL_PLANETS = new HashSet<>();
-    public static Map<ResourceKey<Level>, Planet> KEY_SET = new HashMap<>();
+    public static final Set<Planet> ALL_PLANETS = new HashSet<>();
+    public static final Map<ResourceKey<Level>, Planet> KEY_SET = new HashMap<>();
 
-    public static class Planet {
-        public double GRAVITY;
-        public String IDENTIFIER;
-        public ResourceKey<Level> KEY;
+    public record Planet(ResourceKey<Level> KEY, String IDENTIFIER, double GRAVITY) {
+            public Planet(ResourceKey<Level> KEY, String IDENTIFIER, double GRAVITY) {
+                this.KEY = KEY;
+                this.IDENTIFIER = IDENTIFIER;
+                this.GRAVITY = GRAVITY;
 
-        public Planet(ResourceKey<Level> key, String identifier, double gravity) {
-            KEY = key;
-            IDENTIFIER = identifier;
-            GRAVITY = gravity;
+                ALL_PLANETS.add(this);
+                KEY_SET.put(KEY, this);
+            }
 
-            ALL_PLANETS.add(this);
-            KEY_SET.put(key, this);
+            public boolean is(@Nullable Planet target) {
+                return this.equals(target);
+            }
         }
 
-        public boolean is(@Nullable Planet target) {
-            return this.equals(target);
-        }
-    }
-
-    public static Planet EARTH = new Planet(Level.OVERWORLD, "earth", 0.08);
+    public static final Planet EARTH = new Planet(Level.OVERWORLD, "earth", 0.08);
     public static Planet SPACE = new Planet(utmDimensions.SPACE_KEY, "space", 0);
-    public static Planet AG23 = new Planet(utmDimensions.AG_KEY, "2313ag", 0.12);
+    public static final Planet AG23 = new Planet(utmDimensions.AG_KEY, "2313ag", 0.12);
 
     @Nullable
     public static Planet get(ResourceKey<Level> key) {

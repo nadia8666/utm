@@ -17,7 +17,7 @@ import java.util.Set;
 @Mixin(value = DockingConnectorBlockEntity.class, remap = false)
 public abstract class DockingConnectorBlockEntityMixin implements BlockEntitySubLevelActorExtensions<DockingConnectorBlockEntity> {
     @Unique
-    private static Set<DockingConnectorBlockEntity> utm$usedDocks = new HashSet<>();
+    private static final Set<DockingConnectorBlockEntity> utm$usedDocks = new HashSet<>();
 
     @Shadow
     public abstract void pairTo(DockingConnectorBlockEntity other);

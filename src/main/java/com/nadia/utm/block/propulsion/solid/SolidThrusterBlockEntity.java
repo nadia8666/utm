@@ -1,8 +1,8 @@
 package com.nadia.utm.block.propulsion.solid;
 
-import com.nadia.utm.Config;
 import com.nadia.utm.block.propulsion.IProduceThrust;
 import com.nadia.utm.compat.BlockEntitySubLevelActorExtensions;
+import com.nadia.utm.config.utmServerConfig;
 import com.nadia.utm.registry.block.utmBlockEntities;
 import com.nadia.utm.registry.tags.utmTags;
 import com.nadia.utm.util.PosUtil;
@@ -40,10 +40,10 @@ import java.util.stream.Collectors;
 
 public class SolidThrusterBlockEntity extends SmartBlockEntity implements BlockEntitySubLevelActorExtensions<SolidThrusterBlockEntity>, IHaveGoggleInformation, IProduceThrust<SolidThrusterBlockEntity> {
     public Set<BlockPos> FUEL = new HashSet<>();
-    public Set<BlockPos> READ = new HashSet<>();
+    public final Set<BlockPos> READ = new HashSet<>();
     public boolean ACTIVATED = false;
     public int TICKS_ELAPSED = 0;
-    public LerpedFloat THRUST_FORCE = LerpedFloat.linear();
+    public final LerpedFloat THRUST_FORCE = LerpedFloat.linear();
 
     public SolidThrusterBlockEntity(BlockPos pos, BlockState blockState) {
         super(utmBlockEntities.SOLID_THRUSTER.get(), pos, blockState);
@@ -52,7 +52,7 @@ public class SolidThrusterBlockEntity extends SmartBlockEntity implements BlockE
     }
 
     public static float getThrustMax() {
-        return Config.SOLID_THRUSTER_FORCE.get();
+        return utmServerConfig.SOLID_THRUSTER_FORCE.get();
     }
 
     public void updateThrust() {

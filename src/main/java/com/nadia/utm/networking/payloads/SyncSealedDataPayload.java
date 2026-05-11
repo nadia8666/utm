@@ -25,5 +25,5 @@ public record SyncSealedDataPayload(ChunkPos pos, SealedChunkData data) implemen
         return TYPE;
     }
 
-    public static PacketDef<SyncSealedDataPayload> DEF = new PacketDef<>(TYPE, CODEC);
+    public static final PacketDef<SyncSealedDataPayload> DEF = new PacketDef<>(TYPE, CODEC);
 }

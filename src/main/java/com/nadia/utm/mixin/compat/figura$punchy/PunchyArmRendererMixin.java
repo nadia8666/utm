@@ -2,8 +2,8 @@ package com.nadia.utm.mixin.compat.figura$punchy;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.nadia.utm.Config;
 import com.nadia.utm.client.renderer.IAvatarRendererExtensions;
+import com.nadia.utm.config.utmClientConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.PlayerModel;
 import net.minecraft.client.model.geom.ModelPart;
@@ -23,6 +23,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import punchy.client.render.PunchyArmRenderer;
 import punchy.config.PunchyConfig;
 
+@SuppressWarnings("EmptyMethod")
 @Mixin(value = PunchyArmRenderer.class, remap = false)
 public abstract class PunchyArmRendererMixin {
     @Shadow
@@ -77,7 +78,7 @@ public abstract class PunchyArmRendererMixin {
         applyFreezeShake(poseStack, player, partialTicks);
 
         boolean figura = false;
-        if (Config.FIGURA_PUNCHY.getAsBoolean()) {
+        if (utmClientConfig.FIGURA_PUNCHY.getAsBoolean()) {
             Avatar avatar = AvatarManager.getAvatar(player);
             EntityRenderer<?> renderer = Minecraft.getInstance().getEntityRenderDispatcher().getRenderer(player);
             if (renderer instanceof PlayerRenderer pRenderer) {

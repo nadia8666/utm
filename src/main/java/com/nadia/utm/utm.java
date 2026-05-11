@@ -1,33 +1,34 @@
 package com.nadia.utm;
 
+import com.mojang.logging.LogUtils;
+import com.nadia.utm.config.utmCommonConfig;
+import com.nadia.utm.config.utmServerConfig;
 import com.nadia.utm.event.ForceLoad;
 import com.nadia.utm.event.utmEvents;
-import net.minecraft.resources.ResourceLocation;
-import net.neoforged.fml.loading.FMLEnvironment;
-import net.neoforged.fml.loading.FMLPaths;
-import net.neoforged.fml.loading.modscan.ModAnnotation;
-import net.neoforged.neoforgespi.language.ModFileScanData;
-import org.objectweb.asm.Type;
-import org.slf4j.Logger;
-
-import com.mojang.logging.LogUtils;
 import com.nadia.utm.registry.utmRegistry;
 import com.nadia.utm.updater.AutoUpdater;
-
+import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.fml.loading.FMLEnvironment;
+import net.neoforged.fml.loading.FMLPaths;
+import net.neoforged.fml.loading.modscan.ModAnnotation;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
+import net.neoforged.neoforgespi.language.ModFileScanData;
+import org.objectweb.asm.Type;
+import org.slf4j.Logger;
 
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.function.Function;
 
 @Mod(utm.MODID)
@@ -48,7 +49,8 @@ public class utm {
         NeoForge.EVENT_BUS.register(this);
         bus.addListener(utmRegistry::addCreative);
 
-        container.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+        container.registerConfig(ModConfig.Type.COMMON, utmCommonConfig.SPEC);
+        container.registerConfig(ModConfig.Type.SERVER, utmServerConfig.SPEC);
     }
 
     private static final Set<String> LOADED_CLASSES = new HashSet<>();

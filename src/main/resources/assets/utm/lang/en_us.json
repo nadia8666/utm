@@ -1,7 +1,33 @@
 {
-  "utm.configuration.title": "undertale mod Configs",
-  "utm.configuration.section.utm.common.toml": "undertale mod Configs",
-  "utm.configuration.section.utm.common.toml.title": "undertale mod Configs",
+  "utm.configuration.title": "utm Configuration",
+
+  "utm.configuration.client_ui": "User Interface",
+  "utm.configuration.client_ui.tooltip": "UI options for things that override Minecraft's defaults",
+
+  "utm.configuration.client_visual": "Visual Options",
+  "utm.configuration.client_visual.tooltip": "Visual rendering changes",
+
+  "utm.configuration.client_compat": "Compatability",
+  "utm.configuration.client_compat.tooltip": "Optional compatability features between mods",
+
+  "utm.configuration.common_updater": "Auto Update Options",
+  "utm.configuration.common_updater.tooltip": "Auto updater configuration",
+
+  "utm.configuration.server_balance": "Balancing Options",
+  "utm.configuration.server_balance.tooltip": "you wouldn't...",
+
+  "utm.configuration.server_physics": "Physics Options",
+  "utm.configuration.server_physics.tooltip": "Change the settings of physics objects",
+
+  "utm.configuration.section.utm.client.toml": "COMMON",
+  "utm.configuration.section.utm.client.toml.title": "COMMON",
+
+  "utm.configuration.section.utm.common.toml": "CLIENT",
+  "utm.configuration.section.utm.common.toml.title": "CLIENT",
+
+  "utm.configuration.section.utm.server.toml": "SERVER",
+  "utm.configuration.section.utm.server.toml.title": "SERVER",
+
   "utm.configuration.altTabMenu": "Alternate Playerlist",
   "utm.configuration.altTabMenu.tooltip": "Should utm replace the tab menu with a more detailed varaint?",
   "utm.configuration.autoUpdate": "Auto Update Enabled",

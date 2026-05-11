@@ -22,5 +22,5 @@ public record RequestSealedDataPayload(ChunkPos pos) implements CustomPacketPayl
         return TYPE;
     }
 
-    public static PacketDef<RequestSealedDataPayload> DEF = new PacketDef<>(TYPE, CODEC);
+    public static final PacketDef<RequestSealedDataPayload> DEF = new PacketDef<>(TYPE, CODEC);
 }

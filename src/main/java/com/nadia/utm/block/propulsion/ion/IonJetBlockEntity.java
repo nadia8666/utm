@@ -1,7 +1,7 @@
 package com.nadia.utm.block.propulsion.ion;
 
-import com.nadia.utm.Config;
 import com.nadia.utm.block.propulsion.IProduceThrust;
+import com.nadia.utm.config.utmServerConfig;
 import com.nadia.utm.event.ForceLoad;
 import com.nadia.utm.event.utmEvents;
 import com.nadia.utm.registry.block.utmBlockEntities;
@@ -39,7 +39,7 @@ import java.util.List;
 @ForceLoad
 public class IonJetBlockEntity extends KineticBlockEntity implements BlockEntitySubLevelActor, IHaveGoggleInformation, IProduceThrust<IonJetBlockEntity> {
     public SmartFluidTankBehaviour LOX;
-    public LerpedFloat THRUST_FORCE = LerpedFloat.linear();
+    public final LerpedFloat THRUST_FORCE = LerpedFloat.linear();
 
     public IonJetBlockEntity(BlockPos pos, BlockState blockState) {
         super(utmBlockEntities.ION_JET.get(), pos, blockState);
@@ -48,7 +48,7 @@ public class IonJetBlockEntity extends KineticBlockEntity implements BlockEntity
     }
 
     public static float getThrustMax() {
-        return Config.ION_THRUSTER_FORCE.get();
+        return utmServerConfig.ION_THRUSTER_FORCE.get();
     }
 
     @Override

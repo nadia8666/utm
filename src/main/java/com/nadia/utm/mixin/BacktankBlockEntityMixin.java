@@ -68,8 +68,9 @@ public class BacktankBlockEntityMixin implements IHaveGoggleInformation {
         }
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     @Redirect(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/Mth;clamp(III)I", ordinal = 0))
-    private int utm$checkAir(int value, int min, int max) {
+    private int utm$checkAir(int value, @SuppressWarnings("SameParameterValue") int min, @SuppressWarnings("SameParameterValue") int max) {
         int realTarget = Mth.clamp(value, min, max);
 
         if (this.utm$noOxygen) {

@@ -27,7 +27,7 @@ class Persistance {
         utmPlanets.Planet current = utmPlanets.get(level);
 
         if (current != null) {
-            if (!Objects.equals(currentPlanet, current.IDENTIFIER) && !(FMLEnvironment.production && current.IDENTIFIER.equals("earth"))) { // dont allow backwarping to earth in prod
+            if (!Objects.equals(currentPlanet, current.IDENTIFIER()) && !(FMLEnvironment.production && current.IDENTIFIER().equals("earth"))) { // dont allow backwarping to earth in prod
                 int x = sPlayer.blockPosition().getX();
                 int z = sPlayer.blockPosition().getZ();
                 int y = Positioning.getSurface(level, x, z);
@@ -37,11 +37,11 @@ class Persistance {
                     level.setBlock(new BlockPos(x, -64, z), Blocks.COBBLESTONE.defaultBlockState(), 3);
                 }
 
-                if (!sPlayer.getRespawnDimension().equals(current.KEY))
+                if (!sPlayer.getRespawnDimension().equals(current.KEY()))
                     sPlayer.setRespawnPosition(utmDimensions.AG_KEY, new BlockPos(x, y, z), sPlayer.getYRot(), true, false);
 
-                sPlayer.setData(utmAttachments.REGISTERED_PLANET, current.IDENTIFIER);
-                currentPlanet = current.IDENTIFIER;
+                sPlayer.setData(utmAttachments.REGISTERED_PLANET, current.IDENTIFIER());
+                currentPlanet = current.IDENTIFIER();
             }
 
             if (current.is(utmPlanets.AG23)) AdvancementUtil.AwardAdvancement(sPlayer, utm.key("2313ag/suffocate"));
@@ -49,7 +49,7 @@ class Persistance {
 
         if (!Objects.equals(currentPlanet, "none")) {
             utmPlanets.Planet targetPlanet = utmPlanets.get(currentPlanet);
-            if (targetPlanet != null && !targetPlanet.equals(current) && server.getLevel(targetPlanet.KEY) instanceof ServerLevel target) {
+            if (targetPlanet != null && !targetPlanet.equals(current) && server.getLevel(targetPlanet.KEY()) instanceof ServerLevel target) {
                 int x = sPlayer.blockPosition().getX();
                 int z = sPlayer.blockPosition().getZ();
                 int y = Positioning.getSurface(target, x, z);

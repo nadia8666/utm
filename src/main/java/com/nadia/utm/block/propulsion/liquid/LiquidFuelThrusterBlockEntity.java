@@ -1,7 +1,7 @@
 package com.nadia.utm.block.propulsion.liquid;
 
-import com.nadia.utm.Config;
 import com.nadia.utm.block.propulsion.IProduceThrust;
+import com.nadia.utm.config.utmServerConfig;
 import com.nadia.utm.event.ForceLoad;
 import com.nadia.utm.event.utmEvents;
 import com.nadia.utm.registry.block.utmBlockEntities;
@@ -40,7 +40,7 @@ import java.util.List;
 public class LiquidFuelThrusterBlockEntity extends SmartBlockEntity implements BlockEntitySubLevelActor, IHaveGoggleInformation, IProduceThrust<LiquidFuelThrusterBlockEntity> {
     public SmartFluidTankBehaviour FUEL;
     public int REDSTONE = 0;
-    public LerpedFloat THRUST_FORCE = LerpedFloat.linear();
+    public final LerpedFloat THRUST_FORCE = LerpedFloat.linear();
 
     public LiquidFuelThrusterBlockEntity(BlockPos pos, BlockState blockState) {
         super(utmBlockEntities.LIQUID_THRUSTER.get(), pos, blockState);
@@ -49,7 +49,7 @@ public class LiquidFuelThrusterBlockEntity extends SmartBlockEntity implements B
     }
 
     public static float getThrustMax() {
-        return Config.LIQUID_THRUSTER_FORCE.get();
+        return utmServerConfig.LIQUID_THRUSTER_FORCE.get();
     }
 
     public float getThrottle() {

@@ -3,7 +3,7 @@ package com.nadia.utm.updater;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.nadia.utm.Config;
+import com.nadia.utm.config.utmCommonConfig;
 import com.nadia.utm.utm;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.fml.loading.FMLEnvironment;
@@ -198,7 +198,7 @@ public class AutoUpdater {
 
         SCHEDULER.scheduleAtFixedRate(() -> {
             try {
-                if (!Config.AUTO_UPDATE_ENABLED.get()) return;
+                if (!utmCommonConfig.AUTO_UPDATE_ENABLED.get()) return;
                 AutoUpdater.checkForUpdate();
             } catch (Exception e) {
                 utm.LOGGER.info("[UTM] Auto update failed: {}", e.getMessage());

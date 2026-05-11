@@ -334,7 +334,7 @@ public class AdvancedGogglesRenderer {
     }
 
     public static class PinnedPanel {
-        public boolean IS_ENTITY;
+        public final boolean IS_ENTITY;
         public BlockPos POS;
         public UUID ENTITY_ID;
         public int X, Y;

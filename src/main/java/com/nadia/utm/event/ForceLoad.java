@@ -17,6 +17,6 @@ import java.util.function.Consumer;
 @Target({ElementType.TYPE, ElementType.METHOD})
 public @interface ForceLoad {
     Class<?> value() default Object.class;
-    Dist dist() default Dist.DEDICATED_SERVER;
-    Class<?>[] deps() default {};
+    @SuppressWarnings("UnusedReturnValue") Dist dist() default Dist.DEDICATED_SERVER;
+    @SuppressWarnings("UnusedReturnValue") Class<?>[] deps() default {};
 }

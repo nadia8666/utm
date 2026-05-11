@@ -19,7 +19,7 @@ public abstract class AbstractContraptionEntityMixin extends Entity implements I
     }
 
     @Shadow
-    protected abstract void writeAdditional(CompoundTag compound, HolderLookup.Provider registries, boolean spawnPacket);
+    protected abstract void writeAdditional(CompoundTag compound, HolderLookup.Provider registries, @SuppressWarnings("SameParameterValue") boolean spawnPacket);
 
     @Override
     public void utm$writeAllData(RegistryFriendlyByteBuf buf) {
