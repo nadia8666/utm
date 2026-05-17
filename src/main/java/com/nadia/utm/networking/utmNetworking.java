@@ -16,14 +16,13 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.damagesource.DamageSources;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.chunk.ChunkAccess;
-import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.NeoForge;
@@ -84,27 +83,27 @@ public class utmNetworking {
                 proj.shootFromRotation(player, pitch, yaw, 0, 1.25F, 0);
                 proj.setPos(player.getEyePosition().add(dir.x, dir.y, dir.z));
                 slevel.addFreshEntity(proj);
-                slevel.playSound((Player)null, pos.x, pos.y, pos.z, SoundEvents.PLAYER_ATTACK_SWEEP, Objects.requireNonNull(slevel.getRandomPlayer()).getSoundSource(), 1.0F, 1.0F);
+                slevel.playSound(null, pos.x, pos.y, pos.z, SoundEvents.PLAYER_ATTACK_SWEEP, Objects.requireNonNull(slevel.getRandomPlayer()).getSoundSource(), 1.0F, 1.0F);
                 if (!player.isCreative()) {
-                    net.minecraft.world.item.ItemStack itemstack = player.getMainHandItem(); //??? why did it import like that
+                    ItemStack itemstack = player.getMainHandItem();
                     itemstack.setDamageValue(itemstack.getDamageValue() + 1);
-                };
+                }
             }
         }));
-        server(WhenBroSaysGayPayload.DEF, (payload, context) -> context.enqueueWork(() -> {
+        server(Sword2AttackPayload.DEF, (payload, context) -> context.enqueueWork(() -> {
             Player player = context.player();
             Vector3f pos = payload.pos();
             if (player.level() instanceof ServerLevel slevel) {
-                net.minecraft.world.item.ItemStack itemstack = player.getMainHandItem(); //??? why did it import like that
+                ItemStack itemstack = player.getMainHandItem();
                 boolean doom = !(itemstack.is(utmItems.SWORD2.get()));
-                if (!player.isCreative() && !doom) {//??? why did it import like that
+                if (!player.isCreative() && !doom) {
                     itemstack.setDamageValue(itemstack.getDamageValue() + 1);
-                };
+                }
                 //kill people with hamers
                 //#TEAMYELLOW
-                slevel.playSound((Player)null, pos.x, pos.y, pos.z, SoundEvents.VILLAGER_WORK_WEAPONSMITH, Objects.requireNonNull(slevel.getRandomPlayer()).getSoundSource(), 0.25F, 0.5F);
+                slevel.playSound(null, pos.x, pos.y, pos.z, SoundEvents.VILLAGER_WORK_WEAPONSMITH, Objects.requireNonNull(slevel.getRandomPlayer()).getSoundSource(), 0.25F, 0.5F);
                 if (doom)
-                    slevel.playSound((Player)null, pos.x, pos.y, pos.z, SoundEvents.ANVIL_LAND, Objects.requireNonNull(slevel.getRandomPlayer()).getSoundSource(), 0.125F, 0.5F);
+                    slevel.playSound(null, pos.x, pos.y, pos.z, SoundEvents.ANVIL_LAND, Objects.requireNonNull(slevel.getRandomPlayer()).getSoundSource(), 0.125F, 0.5F);
 
                 for(LivingEntity livingentity2 : slevel.getEntitiesOfClass(LivingEntity.class, new AABB(pos.x-1,pos.y-0.2,pos.z-1,pos.x+1,pos.y+0.2,pos.z+1).inflate(5))) {
                     if (livingentity2!=player && (livingentity2.position().distanceTo( new Vec3(pos.x,livingentity2.position().y,pos.z))) <7 ) {
@@ -116,7 +115,7 @@ public class utmNetworking {
                         }
                         Vec3 pos2 = livingentity2.position();
                         slevel.sendParticles(ParticleTypes.CRIT,pos2.x,pos2.y,pos2.z,5,0,0,0,0);
-                        slevel.playSound((Player)null, pos.x, pos.y, pos.z, SoundEvents.PLAYER_ATTACK_CRIT, Objects.requireNonNull(slevel.getRandomPlayer()).getSoundSource(), 0.20F, 1.0F);
+                        slevel.playSound(null, pos.x, pos.y, pos.z, SoundEvents.PLAYER_ATTACK_CRIT, Objects.requireNonNull(slevel.getRandomPlayer()).getSoundSource(), 0.20F, 1.0F);
 
                     }
                 }

@@ -2,7 +2,7 @@ package com.nadia.utm.mixin;
 
 import com.llamalad7.mixinextras.sugar.Local;
 import com.nadia.utm.networking.payloads.MyAwesomeKarkParticlePayload;
-import com.nadia.utm.networking.payloads.WhenBroSaysGayPayload;
+import com.nadia.utm.networking.payloads.Sword2AttackPayload;
 import com.nadia.utm.registry.item.tool.utmTools;
 import com.nadia.utm.registry.item.utmItems;
 import net.minecraft.client.Minecraft;
@@ -60,7 +60,7 @@ public class MinecraftMixin {
 
                 cir.setReturnValue(false);
             } else if ((itemStack.is(utmItems.SWORD2.get()) || (itemStack.is(utmItems.GLOOMSWORD8.get()))) && player.getAttackStrengthScale(0f) >=1) {
-                PacketDistributor.sendToServer(new WhenBroSaysGayPayload(player.position().toVector3f()));
+                PacketDistributor.sendToServer(new Sword2AttackPayload(player.position().toVector3f()));
 
                 player.resetAttackStrengthTicker();
                 if (inputEvent.shouldSwingHand())
