@@ -1,5 +1,6 @@
 package com.nadia.utm.behavior.space;
 
+import com.nadia.utm.compat.IContraptionNBTAccessor;
 import com.nadia.utm.event.ForceLoad;
 import com.nadia.utm.event.utmEvents;
 import com.nadia.utm.networking.payloads.LaunchContraptionPayload;
@@ -34,7 +35,10 @@ import net.neoforged.neoforge.network.connection.ConnectionType;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 import javax.annotation.Nullable;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 import java.util.concurrent.atomic.AtomicReference;
 
 import static com.nadia.utm.registry.attachment.utmAttachments.ENTERED_2313AG;
@@ -129,7 +133,8 @@ public class SpaceStateHandler {
 
         AtomicReference<Entity> finalVehicle = new AtomicReference<>(null);
         RegistryFriendlyByteBuf buf = new RegistryFriendlyByteBuf(Unpooled.buffer(), target.registryAccess(), ConnectionType.OTHER);
-        contraption.writeSpawnData(buf);
+        if (contraption instanceof IContraptionNBTAccessor accessor)
+            accessor.utm$writeAllData(buf);
 
         contraption.getContraption().getBlocks().clear();
         contraption.getContraption().disassembled = true;
