@@ -144,7 +144,7 @@ public class utmTools {
     ).tags(Tags.Items.ENCHANTABLES, ItemTags.SWORD_ENCHANTABLE, ItemTags.WEAPON_ENCHANTABLE, ItemTags.DURABILITY_ENCHANTABLE, ItemTags.SWORDS, Tags.Items.TOOLS_SHIELD).handheld();
     public static final utmItemContainer<SwordItem> SWORD_OF_KIRK = register("sword_of_kirk", () -> {
                 Tier tier = utmToolBuilder.buildTier(
-                        BlockTags.INCORRECT_FOR_WOODEN_TOOL, 100, 1f, 0f, 15, () -> Ingredient.of(Tags.Items.INGOTS_IRON)
+                        BlockTags.INCORRECT_FOR_WOODEN_TOOL, 256, 1f, 0f, 15, () -> Ingredient.of(Tags.Items.INGOTS_IRON)
                 );
                 return new SwordItem(tier, new Item.Properties().attributes(
                         SwordItem.createAttributes(tier, 5, -2.4f)));

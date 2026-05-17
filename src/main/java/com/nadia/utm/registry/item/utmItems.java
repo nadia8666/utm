@@ -93,7 +93,11 @@ public class utmItems {
             GLOOMSWORD8 = register("gloomsword8", new Item.Properties()
                     .attributes(SwordItem.createAttributes(utmToolBuilder.buildTier(
                             BlockTags.INCORRECT_FOR_WOODEN_TOOL, 1, 1f, 0f, 0, () -> Ingredient.EMPTY
-                    ),4,-3.6f)).rarity(Rarity.EPIC)).generated().handheld();
+                    ),4,-3.6f)).rarity(Rarity.EPIC)).generated().handheld(),
+            SABEL3 = register("sabel3", new Item.Properties()
+                    .attributes(SwordItem.createAttributes(utmToolBuilder.buildTier(
+            BlockTags.INCORRECT_FOR_WOODEN_TOOL, 1500, 1f, 0f, 0, () -> Ingredient.EMPTY
+                    ),5,-2.8f)).rarity(Rarity.EPIC)); // Do Not Datagen My Model!
     // resources
     public static final utmItemContainer<Item> RAW_ALUMINUM = register("raw_aluminum").generated(),
             RAW_MAGNESIUM = register("raw_magnesium").generated(),

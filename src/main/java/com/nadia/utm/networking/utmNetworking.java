@@ -13,8 +13,10 @@ import com.nadia.utm.registry.item.utmItems;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.protocol.PacketFlow;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.server.TickTask;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.level.TickingTracker;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -107,17 +109,41 @@ public class utmNetworking {
 
                 for(LivingEntity livingentity2 : slevel.getEntitiesOfClass(LivingEntity.class, new AABB(pos.x-1,pos.y-0.2,pos.z-1,pos.x+1,pos.y+0.2,pos.z+1).inflate(5))) {
                     if (livingentity2!=player && (livingentity2.position().distanceTo( new Vec3(pos.x,livingentity2.position().y,pos.z))) <7 ) {
-                        livingentity2.setInvulnerable(false); //looking to change IFrames :)
+                        livingentity2.invulnerableTime = 0; //looking to change IFrames :)
                         livingentity2.hurt(player.damageSources().playerAttack(player),3+(doom ? 7 : 0));
                         if (doom) {
-                            player.setInvulnerable(false); //looking to change IFrames again :) //note: it doesnt work here or above so find a fix in the morning
+                            player.invulnerableTime = 0; //looking to change IFrames again :) //note: it doesnt work here or above so find a fix in the morning
                             player.hurt(player.damageSources().cramming(), 2);
                         }
-                        Vec3 pos2 = livingentity2.position();
-                        slevel.sendParticles(ParticleTypes.CRIT,pos2.x,pos2.y,pos2.z,5,0,0,0,0);
-                        slevel.playSound(null, pos.x, pos.y, pos.z, SoundEvents.PLAYER_ATTACK_CRIT, Objects.requireNonNull(slevel.getRandomPlayer()).getSoundSource(), 0.20F, 1.0F);
+                        Vec3 pos2 = livingentity2.position(); // why don't particles spawn?
+                        slevel.sendParticles(ParticleTypes.CRIT,pos2.x,pos2.y,pos2.z,5,3,3,3,0);
+                        slevel.playSound(null, pos.x, pos.y, pos.z, SoundEvents.PLAYER_ATTACK_CRIT, Objects.requireNonNull(slevel.getRandomPlayer()).getSoundSource(), 0.25F, 1.0F);
 
                     }
+                }
+            }
+        }));
+        server(jumbo_josh.DEF, (payload, context) -> context.enqueueWork(() -> {
+            Player player = context.player();
+            Vector3f pos = payload.pos();
+            String targetUUID = payload.targetUUID();
+            if (player.level() instanceof ServerLevel slevel) {
+                ItemStack itemstack = player.getMainHandItem();
+                if (!player.isCreative()) {
+                    itemstack.setDamageValue(itemstack.getDamageValue() + 1);
+                }
+                Entity target = slevel.getEntity(UUID.fromString(targetUUID));
+                if (target instanceof LivingEntity entity) {
+                    //delay ticking by 10 seconds
+                    slevel.getServer().tell(new TickTask(slevel.getServer().getTickCount()+40, () -> {
+                        Vec3 pos2 = entity.position();
+                        entity.invulnerableTime=0;
+                        entity.hurt(player.damageSources().playerAttack(player), 4); // is there a better way to get soundsources?
+                        slevel.playSound(null, pos2.x, pos2.y, pos2.z, SoundEvents.PLAYER_ATTACK_CRIT, Objects.requireNonNull(slevel.getRandomPlayer()).getSoundSource(), 0.25F, 1.0F);
+                        slevel.sendParticles(ParticleTypes.CRIT,pos2.x,pos2.y,pos2.z,5,3,3,3,0);
+
+
+                    }));
                 }
             }
         }));

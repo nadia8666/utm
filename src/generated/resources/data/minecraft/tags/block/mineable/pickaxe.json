@@ -1,18 +1,18 @@
 {
   "values": [
     "utm:launch_contraption",
-    "utm:ion_jet",
-    "utm:magnesium_ore",
     "utm:aluminum_ore",
-    "utm:grate",
-    "utm:heavy_metal_anvil",
-    "utm:solid_thruster",
-    "utm:liquid_thruster",
+    "utm:oxygen_collector",
     "utm:oxygen_furnace",
-    "utm:gimbal_plate",
+    "utm:grate",
     "utm:biome_sealer",
-    "utm:gimbal",
+    "utm:liquid_thruster",
+    "utm:gimbal_plate",
+    "utm:solid_thruster",
+    "utm:magnesium_ore",
     "utm:portasealer",
-    "utm:oxygen_collector"
+    "utm:gimbal",
+    "utm:ion_jet",
+    "utm:heavy_metal_anvil"
   ]
 }

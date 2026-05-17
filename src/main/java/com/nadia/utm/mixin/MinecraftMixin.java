@@ -3,6 +3,7 @@ package com.nadia.utm.mixin;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.nadia.utm.networking.payloads.MyAwesomeKarkParticlePayload;
 import com.nadia.utm.networking.payloads.Sword2AttackPayload;
+import com.nadia.utm.networking.payloads.jumbo_josh;
 import com.nadia.utm.registry.item.tool.utmTools;
 import com.nadia.utm.registry.item.utmItems;
 import net.minecraft.client.Minecraft;
@@ -10,7 +11,10 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.neoforged.neoforge.client.event.InputEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -21,6 +25,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import javax.annotation.Nullable;
+
 
 @Mixin(value = Minecraft.class, remap = false)
 public class MinecraftMixin {
@@ -61,12 +66,25 @@ public class MinecraftMixin {
                 cir.setReturnValue(false);
             } else if ((itemStack.is(utmItems.SWORD2.get()) || (itemStack.is(utmItems.GLOOMSWORD8.get()))) && player.getAttackStrengthScale(0f) >=1) {
                 PacketDistributor.sendToServer(new Sword2AttackPayload(player.position().toVector3f()));
-
-                player.resetAttackStrengthTicker();
                 if (inputEvent.shouldSwingHand())
                     player.swing(InteractionHand.MAIN_HAND);
+                player.resetAttackStrengthTicker();
 
-                cir.setReturnValue(false);
+
+                //cir.setReturnValue(false);
+            } else if (itemStack.is(utmItems.SABEL3.get()) && player.getAttackStrengthScale(0f ) >=1 && hitResult.getType().equals(HitResult.Type.ENTITY)) {
+                if (hitResult instanceof EntityHitResult result) {
+                    String targetUUID = result.getEntity().getUUID().toString();
+
+                    PacketDistributor.sendToServer(new jumbo_josh(player.position().toVector3f(), targetUUID));
+                    if (inputEvent.shouldSwingHand())
+                        player.swing(InteractionHand.MAIN_HAND);
+                    player.resetAttackStrengthTicker();
+
+                    // for some reason on these special conditions it doesn't actually hit the mob.. which is somethign that is NOt good. i think removing this--
+                    //fixes that.
+                    //  cir.setReturnValue(false);
+                }
             }
         }
     }
