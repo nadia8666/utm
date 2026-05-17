@@ -78,6 +78,7 @@
   "item.utm.arid_sword": "Arid Sword",
   "item.utm.liquid_oxygen_bucket": "Liquid Oxygen Bucket",
   "item.utm.molten_steel_bucket": "Molten Steel Bucket",
+  "item.utm.antiwater_bucket": "Antiwater Bucket",
   "item.utm.air_compressor": "Air Compressor",
   "item.utm.raw_aluminum": "Raw Aluminum",
   "item.utm.raw_magnesium": "Raw Magnesium",
@@ -163,5 +164,6 @@
 
   "fluid.utm.liquid_oxygen": "Liquid Oxygen",
   "fluid.utm.molten_steel": "Molten Steel",
+  "fluid.utm.antiwater": "Antiwater",
   "utm.gui.oxygen_furnace_menu": "Oxygen Furnace"
 }

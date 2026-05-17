@@ -56,4 +56,26 @@ public class utmFluids {
             MOLTEN_STEEL_TYPE, MOLTEN_STEEL, FLOWING_MOLTEN_STEEL)
             .bucket(utmItems.MOLTEN_STEEL_BUCKET.ITEM())
             .block(utmBlocks.MOLTEN_STEEL_BLOCK);
+
+
+    // antiwater !
+    public static final DeferredHolder<FluidType, FluidType> ANTIWATER_TYPE = FLUID_TYPES.register("antiwater",
+            () -> new FluidType(FluidType.Properties.create()
+                    .descriptionId("fluid.utm.antiwater")
+                    .density(100)
+                    .viscosity(300)
+                    .temperature(900)
+                    .rarity(Rarity.EPIC)));
+
+    public static final DeferredHolder<Fluid, BaseFlowingFluid.Source> ANTIWATER = FLUIDS.register("antiwater",
+            () -> new BaseFlowingFluid.Source(utmFluids.ANTIWATER_PROPERTIES));
+
+    public static final DeferredHolder<Fluid, BaseFlowingFluid.Flowing> FLOWING_ANTIWATER = FLUIDS.register("flowing_antiwater",
+            () -> new BaseFlowingFluid.Flowing(utmFluids.ANTIWATER_PROPERTIES));
+
+    protected static final BaseFlowingFluid.Properties ANTIWATER_PROPERTIES = new BaseFlowingFluid.Properties(
+            ANTIWATER_TYPE, ANTIWATER, FLOWING_ANTIWATER)
+            .bucket(utmItems.ANTIWATER_BUCKET.ITEM())
+            .block(utmBlocks.ANTIWATER_BLOCK);
+
 }

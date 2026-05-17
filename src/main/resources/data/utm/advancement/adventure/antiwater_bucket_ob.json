@@ -1,0 +1,31 @@
+{
+  "display": {
+    "icon": {
+      "id": "utm:antiwater_bucket"
+    },
+    "title": "Good Idea",
+    "description": "Hold a bucket of Antiwater. In your hands. It's a good idea trust me. Then THREE among us shuffle to electrical together and they explode your bucket",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "minecraft:adventure/root",
+  "criteria": {
+    "has_incredi444": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "utm:antiwater_bucket"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_incredi444"
+    ]
+  ]
+}

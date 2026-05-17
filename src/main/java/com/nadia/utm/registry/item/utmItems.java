@@ -1,6 +1,7 @@
 package com.nadia.utm.registry.item;
 
 import com.nadia.utm.item.AdvancedGogglesItem;
+import com.nadia.utm.item.AntiwaterBucketItem;
 import com.nadia.utm.item.LockedSchematicItem;
 import com.nadia.utm.registry.fluid.utmFluids;
 import com.nadia.utm.registry.song.utmSongs;
@@ -78,6 +79,9 @@ public class utmItems {
                     new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1))).generated().tags(Tags.Items.BUCKETS);
     public static final utmItemContainer<BucketItem> MOLTEN_STEEL_BUCKET = register("molten_steel_bucket",
             () -> new BucketItem(utmFluids.MOLTEN_STEEL.get(),
+                    new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1))).generated().tags(Tags.Items.BUCKETS);
+    public static final utmItemContainer<AntiwaterBucketItem> ANTIWATER_BUCKET = register("antiwater_bucket",
+            () -> new AntiwaterBucketItem(utmFluids.ANTIWATER.get(),
                     new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1))).generated().tags(Tags.Items.BUCKETS);
 
     public static final utmItemContainer<Item> ARID_INGOT = register("arid_ingot").generated();
