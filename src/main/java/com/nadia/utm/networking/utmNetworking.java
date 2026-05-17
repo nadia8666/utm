@@ -78,6 +78,14 @@ public class utmNetworking {
                 slevel.addFreshEntity(proj);
             }
         }));
+        server(WhenBroSaysGayPayload.DEF, (payload, context) -> context.enqueueWork(() -> {
+            Player player = context.player();
+            Vector3f pos = payload.pos();
+            if (player.level() instanceof ServerLevel slevel) {
+                //kill people with hamers
+                //#TEAMYELLOW
+            }
+        }));
         REGISTRAR.playBidirectional(
                 GetOxygenPayload.TYPE,
                 GetOxygenPayload.CODEC,

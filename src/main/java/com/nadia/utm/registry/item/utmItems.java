@@ -85,7 +85,8 @@ public class utmItems {
                     new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1))).generated().tags(Tags.Items.BUCKETS);
 
     public static final utmItemContainer<Item> ARID_INGOT = register("arid_ingot").generated();
-
+    public static final utmItemContainer<Item> SWORD2 = register("sword2", new Item.Properties()
+            .durability(1000)).generated().handheld();
     // resources
     public static final utmItemContainer<Item> RAW_ALUMINUM = register("raw_aluminum").generated(),
             RAW_MAGNESIUM = register("raw_magnesium").generated(),

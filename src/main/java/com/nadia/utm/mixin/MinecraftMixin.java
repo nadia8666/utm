@@ -56,6 +56,13 @@ public class MinecraftMixin {
                     player.swing(InteractionHand.MAIN_HAND);
 
                 cir.setReturnValue(false);
+            } else if (itemStack.is(utmTools.ARID_SWORD.get())) {
+
+
+                if (inputEvent.shouldSwingHand())
+                    player.swing(InteractionHand.MAIN_HAND);
+
+                cir.setReturnValue(false);
             }
         }
     }
