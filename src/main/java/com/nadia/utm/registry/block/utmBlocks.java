@@ -203,6 +203,7 @@ public class utmBlocks {
     public static final DeferredBlock<LiquidBlock> MOLTEN_STEEL_BLOCK = BLOCKS.register("molten_steel",
             () -> new LiquidBlock(utmFluids.MOLTEN_STEEL.get(),
                     BlockBehaviour.Properties.ofFullCopy(Blocks.LAVA).noLootTable()));
+
     public static final DeferredBlock<LiquidBlock> ANTIWATER_BLOCK = BLOCKS.register("antiwater",
             () -> new LiquidBlock(utmFluids.ANTIWATER.get(),
                     BlockBehaviour.Properties.ofFullCopy(Blocks.WATER).noLootTable()));
