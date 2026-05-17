@@ -9,12 +9,14 @@ import com.nadia.utm.gui.GlintMenu;
 import com.nadia.utm.networking.payloads.*;
 import com.nadia.utm.projectile.DroplessArrow;
 import com.nadia.utm.registry.attachment.utmAttachments;
+import com.nadia.utm.registry.item.utmItems;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.protocol.PacketFlow;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.damagesource.DamageSources;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -93,21 +95,28 @@ public class utmNetworking {
             Player player = context.player();
             Vector3f pos = payload.pos();
             if (player.level() instanceof ServerLevel slevel) {
-                if (!player.isCreative()) {
-                    net.minecraft.world.item.ItemStack itemstack = player.getMainHandItem(); //??? why did it import like that
+                net.minecraft.world.item.ItemStack itemstack = player.getMainHandItem(); //??? why did it import like that
+                boolean doom = !(itemstack.is(utmItems.SWORD2.get()));
+                if (!player.isCreative() && !doom) {//??? why did it import like that
                     itemstack.setDamageValue(itemstack.getDamageValue() + 1);
                 };
                 //kill people with hamers
                 //#TEAMYELLOW
-                slevel.playSound((Player)null, pos.x, pos.y, pos.z, SoundEvents.LIGHTNING_BOLT_THUNDER, Objects.requireNonNull(slevel.getRandomPlayer()).getSoundSource(), 0.75F, 0.75F);
+                slevel.playSound((Player)null, pos.x, pos.y, pos.z, SoundEvents.VILLAGER_WORK_WEAPONSMITH, Objects.requireNonNull(slevel.getRandomPlayer()).getSoundSource(), 0.25F, 0.5F);
+                if (doom)
+                    slevel.playSound((Player)null, pos.x, pos.y, pos.z, SoundEvents.ANVIL_LAND, Objects.requireNonNull(slevel.getRandomPlayer()).getSoundSource(), 0.125F, 0.5F);
 
                 for(LivingEntity livingentity2 : slevel.getEntitiesOfClass(LivingEntity.class, new AABB(pos.x-1,pos.y-0.2,pos.z-1,pos.x+1,pos.y+0.2,pos.z+1).inflate(5))) {
                     if (livingentity2!=player && (livingentity2.position().distanceTo( new Vec3(pos.x,livingentity2.position().y,pos.z))) <7 ) {
                         livingentity2.setInvulnerable(false); //looking to change IFrames :)
-                        livingentity2.hurt(player.damageSources().playerAttack(player),5);
+                        livingentity2.hurt(player.damageSources().playerAttack(player),3+(doom ? 7 : 0));
+                        if (doom) {
+                            player.setInvulnerable(false); //looking to change IFrames again :) //note: it doesnt work here or above so find a fix in the morning
+                            player.hurt(player.damageSources().cramming(), 2);
+                        }
                         Vec3 pos2 = livingentity2.position();
-                        slevel.sendParticles(ParticleTypes.CRIT,pos2.x,pos2.y,pos2.z,0,0,0,0,0);
-                        slevel.playSound((Player)null, pos.x, pos.y, pos.z, SoundEvents.PLAYER_ATTACK_CRIT, Objects.requireNonNull(slevel.getRandomPlayer()).getSoundSource(), 1.0F, 1.0F);
+                        slevel.sendParticles(ParticleTypes.CRIT,pos2.x,pos2.y,pos2.z,5,0,0,0,0);
+                        slevel.playSound((Player)null, pos.x, pos.y, pos.z, SoundEvents.PLAYER_ATTACK_CRIT, Objects.requireNonNull(slevel.getRandomPlayer()).getSoundSource(), 0.20F, 1.0F);
 
                     }
                 }

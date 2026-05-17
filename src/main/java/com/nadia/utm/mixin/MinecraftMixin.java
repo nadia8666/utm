@@ -48,8 +48,8 @@ public class MinecraftMixin {
     private void utm$postClick(CallbackInfoReturnable<Boolean> cir, @Local InputEvent.InteractionKeyMappingTriggered inputEvent, @Local ItemStack itemStack) {
         if (player == null) return;
 
-        if (!inputEvent.isCanceled() && hitResult != null && (hitResult.getType().equals(HitResult.Type.BLOCK) || hitResult.getType().equals(HitResult.Type.MISS))) {
-            if (itemStack.is(utmTools.SWORD_OF_KIRK.get()) && player.getAttackStrengthScale(0f) >=1f) {
+        if (!inputEvent.isCanceled() && hitResult != null) {
+            if (itemStack.is(utmTools.SWORD_OF_KIRK.get()) && player.getAttackStrengthScale(0f) >=1f && (hitResult.getType().equals(HitResult.Type.BLOCK) || hitResult.getType().equals(HitResult.Type.MISS))) {
                 double xOff = -Mth.sin(player.getYRot() * ((float) Math.PI / 180F));
                 double yOff = Mth.cos(player.getYRot() * ((float) Math.PI / 180F));
                 PacketDistributor.sendToServer(new MyAwesomeKarkParticlePayload(player.position().toVector3f(), (player.getLookAngle()).toVector3f(), xOff, yOff));
@@ -59,10 +59,10 @@ public class MinecraftMixin {
                 player.resetAttackStrengthTicker();
 
                 cir.setReturnValue(false);
-            } else if (itemStack.is(utmItems.SWORD2.get()) && player.getAttackStrengthScale(0f) >=1) {
+            } else if ((itemStack.is(utmItems.SWORD2.get()) || (itemStack.is(utmItems.GLOOMSWORD8.get()))) && player.getAttackStrengthScale(0f) >=1) {
                 PacketDistributor.sendToServer(new WhenBroSaysGayPayload(player.position().toVector3f()));
 
-
+                player.resetAttackStrengthTicker();
                 if (inputEvent.shouldSwingHand())
                     player.swing(InteractionHand.MAIN_HAND);
 
