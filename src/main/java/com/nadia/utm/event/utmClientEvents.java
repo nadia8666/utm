@@ -193,6 +193,21 @@ public class utmClientEvents {
                     return FLOWING;
                 }
             }, utmFluids.MOLTEN_STEEL_TYPE);
+
+            event.registerFluidType(new IClientFluidTypeExtensions() {
+                private static final ResourceLocation STILL = utm.key("block/antiwater_still");
+                private static final ResourceLocation FLOWING = utm.key("block/antiwater_flow");
+
+                @Override
+                public @NotNull ResourceLocation getStillTexture() {
+                    return STILL;
+                }
+
+                @Override
+                public @NotNull ResourceLocation getFlowingTexture() {
+                    return FLOWING;
+                }
+            }, utmFluids.ANTIWATER_TYPE);
         });
 
         utmEvents.register(PlaySoundEvent.class, event -> {
