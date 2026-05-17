@@ -62,8 +62,8 @@ public class utmFluids {
     public static final DeferredHolder<FluidType, FluidType> ANTIWATER_TYPE = FLUID_TYPES.register("antiwater",
             () -> new FluidType(FluidType.Properties.create()
                     .descriptionId("fluid.utm.antiwater")
-                    .density(100)
-                    .viscosity(300)
+                    .density(1)
+                    .viscosity(1)
                     .temperature(900)
                     .rarity(Rarity.EPIC)));
 
