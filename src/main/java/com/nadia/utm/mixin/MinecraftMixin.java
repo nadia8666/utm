@@ -2,7 +2,9 @@ package com.nadia.utm.mixin;
 
 import com.llamalad7.mixinextras.sugar.Local;
 import com.nadia.utm.networking.payloads.MyAwesomeKarkParticlePayload;
+import com.nadia.utm.networking.payloads.WhenBroSaysGayPayload;
 import com.nadia.utm.registry.item.tool.utmTools;
+import com.nadia.utm.registry.item.utmItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.LocalPlayer;
@@ -47,16 +49,18 @@ public class MinecraftMixin {
         if (player == null) return;
 
         if (!inputEvent.isCanceled() && hitResult != null && (hitResult.getType().equals(HitResult.Type.BLOCK) || hitResult.getType().equals(HitResult.Type.MISS))) {
-            if (itemStack.is(utmTools.SWORD_OF_KIRK.get())) {
+            if (itemStack.is(utmTools.SWORD_OF_KIRK.get()) && player.getAttackStrengthScale(0f) >=1f) {
                 double xOff = -Mth.sin(player.getYRot() * ((float) Math.PI / 180F));
                 double yOff = Mth.cos(player.getYRot() * ((float) Math.PI / 180F));
                 PacketDistributor.sendToServer(new MyAwesomeKarkParticlePayload(player.position().toVector3f(), (player.getLookAngle()).toVector3f(), xOff, yOff));
 
                 if (inputEvent.shouldSwingHand())
                     player.swing(InteractionHand.MAIN_HAND);
+                player.resetAttackStrengthTicker();
 
                 cir.setReturnValue(false);
-            } else if (itemStack.is(utmTools.ARID_SWORD.get())) {
+            } else if (itemStack.is(utmItems.SWORD2.get()) && player.getAttackStrengthScale(0f) >=1) {
+                PacketDistributor.sendToServer(new WhenBroSaysGayPayload(player.position().toVector3f()));
 
 
                 if (inputEvent.shouldSwingHand())

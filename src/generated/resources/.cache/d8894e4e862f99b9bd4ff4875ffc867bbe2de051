@@ -1,4 +1,4 @@
-// 1.21.1	2026-05-16T19:52:51.4876929	Item Models: utm
+// 1.21.1	2026-05-17T01:31:01.5867425	Item Models: utm
 6d60e0d2b0873e138bcfa8f5db0ca9cb6d7cd4fa assets/utm/models/item/adv_goggles.json
 0c35c7686bdc2e520fa2ede79bfa3e5855ad5ffc assets/utm/models/item/air_compressor.json
 9d13b4b18c25ee3c81b1cc65fd86954c95187339 assets/utm/models/item/aluminum_ingot.json
@@ -60,6 +60,7 @@ cfaef45a7658c7b8ce65e855b1bd38a3c44113da assets/utm/models/item/shart.json
 af1e629fbeb59dec7607fbae2d305b3d5cdeffdd assets/utm/models/item/solid_thruster.json
 8f6135cda73a6471dace0ba2ffa8efc61234709c assets/utm/models/item/steel_ingot.json
 97b31be7aa7fb4f3a9024c82df7b130c4ac1156f assets/utm/models/item/steel_sheet.json
+e1ba66d20505138a6af97fb76fd16a7ea431e252 assets/utm/models/item/sword2.json
 7f2b0c2e17bf3a1beaeccf91b4bee1ea1783a1ff assets/utm/models/item/sword_of_kirk.json
 4bb429556d32c018342d162fceee88326f55c9a6 assets/utm/models/item/unfinished_arid_ingot.json
 723955985396594051586dbe811a3de8de5bf99b assets/utm/models/item/unfinished_glint_table.json

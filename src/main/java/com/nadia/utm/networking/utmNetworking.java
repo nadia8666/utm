@@ -14,11 +14,16 @@ import net.minecraft.network.protocol.PacketFlow;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.chunk.ChunkAccess;
+import net.minecraft.world.level.levelgen.structure.BoundingBox;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.handling.IPayloadHandler;
@@ -27,6 +32,7 @@ import org.joml.Vector3f;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 @ForceLoad
@@ -76,14 +82,35 @@ public class utmNetworking {
                 proj.shootFromRotation(player, pitch, yaw, 0, 1.25F, 0);
                 proj.setPos(player.getEyePosition().add(dir.x, dir.y, dir.z));
                 slevel.addFreshEntity(proj);
+                slevel.playSound((Player)null, pos.x, pos.y, pos.z, SoundEvents.PLAYER_ATTACK_SWEEP, Objects.requireNonNull(slevel.getRandomPlayer()).getSoundSource(), 1.0F, 1.0F);
+                if (!player.isCreative()) {
+                    net.minecraft.world.item.ItemStack itemstack = player.getMainHandItem(); //??? why did it import like that
+                    itemstack.setDamageValue(itemstack.getDamageValue() + 1);
+                };
             }
         }));
         server(WhenBroSaysGayPayload.DEF, (payload, context) -> context.enqueueWork(() -> {
             Player player = context.player();
             Vector3f pos = payload.pos();
             if (player.level() instanceof ServerLevel slevel) {
+                if (!player.isCreative()) {
+                    net.minecraft.world.item.ItemStack itemstack = player.getMainHandItem(); //??? why did it import like that
+                    itemstack.setDamageValue(itemstack.getDamageValue() + 1);
+                };
                 //kill people with hamers
                 //#TEAMYELLOW
+                slevel.playSound((Player)null, pos.x, pos.y, pos.z, SoundEvents.LIGHTNING_BOLT_THUNDER, Objects.requireNonNull(slevel.getRandomPlayer()).getSoundSource(), 0.75F, 0.75F);
+
+                for(LivingEntity livingentity2 : slevel.getEntitiesOfClass(LivingEntity.class, new AABB(pos.x-1,pos.y-0.2,pos.z-1,pos.x+1,pos.y+0.2,pos.z+1).inflate(5))) {
+                    if (livingentity2!=player && (livingentity2.position().distanceTo( new Vec3(pos.x,livingentity2.position().y,pos.z))) <7 ) {
+                        livingentity2.setInvulnerable(false); //looking to change IFrames :)
+                        livingentity2.hurt(player.damageSources().playerAttack(player),5);
+                        Vec3 pos2 = livingentity2.position();
+                        slevel.sendParticles(ParticleTypes.CRIT,pos2.x,pos2.y,pos2.z,0,0,0,0,0);
+                        slevel.playSound((Player)null, pos.x, pos.y, pos.z, SoundEvents.PLAYER_ATTACK_CRIT, Objects.requireNonNull(slevel.getRandomPlayer()).getSoundSource(), 1.0F, 1.0F);
+
+                    }
+                }
             }
         }));
         REGISTRAR.playBidirectional(

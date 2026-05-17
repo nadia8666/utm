@@ -4,13 +4,13 @@ import com.nadia.utm.item.AdvancedGogglesItem;
 import com.nadia.utm.item.AntiwaterBucketItem;
 import com.nadia.utm.item.LockedSchematicItem;
 import com.nadia.utm.registry.fluid.utmFluids;
+import com.nadia.utm.registry.item.tool.utmToolBuilder;
 import com.nadia.utm.registry.song.utmSongs;
 import com.nadia.utm.registry.tags.utmTags;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.world.item.BucketItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.*;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -86,7 +86,9 @@ public class utmItems {
 
     public static final utmItemContainer<Item> ARID_INGOT = register("arid_ingot").generated();
     public static final utmItemContainer<Item> SWORD2 = register("sword2", new Item.Properties()
-            .durability(1000)).generated().handheld();
+            .attributes(SwordItem.createAttributes(utmToolBuilder.buildTier(
+                    BlockTags.INCORRECT_FOR_WOODEN_TOOL, 1000, 1f, 0f, 0, () -> Ingredient.EMPTY
+            ),2,-3.5f))).generated().handheld();
     // resources
     public static final utmItemContainer<Item> RAW_ALUMINUM = register("raw_aluminum").generated(),
             RAW_MAGNESIUM = register("raw_magnesium").generated(),
