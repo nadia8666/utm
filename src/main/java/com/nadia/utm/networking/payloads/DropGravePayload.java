@@ -48,7 +48,7 @@ public record DropGravePayload(
         return TYPE;
     }
 
-    public static PacketDef<DropGravePayload> DEF = new PacketDef<>(TYPE, STREAM_CODEC);
+    public static final PacketDef<DropGravePayload> DEF = new PacketDef<>(TYPE, STREAM_CODEC);
 
     private static final Map<UUID, Boolean> DEBOUNCE = new HashMap<>();
     public static void drop(DropGravePayload payload, IPayloadContext context) {

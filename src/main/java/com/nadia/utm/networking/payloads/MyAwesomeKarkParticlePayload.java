@@ -26,6 +26,6 @@ public record MyAwesomeKarkParticlePayload(Vector3f pos, Vector3f dir, double xO
         return TYPE;
     }
 
-    public static PacketDef<MyAwesomeKarkParticlePayload> DEF = new PacketDef<>(TYPE, CODEC);
+    public static final PacketDef<MyAwesomeKarkParticlePayload> DEF = new PacketDef<>(TYPE, CODEC);
 
 }

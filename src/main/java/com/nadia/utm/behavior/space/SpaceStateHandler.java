@@ -52,8 +52,8 @@ public class SpaceStateHandler {
             utmPlanets.Planet planet = utmPlanets.get(living.level());
             if (planet != null) {
                 AttributeInstance gravity = living.getAttribute(Attributes.GRAVITY);
-                if (gravity != null && gravity.getBaseValue() != planet.GRAVITY)
-                    gravity.setBaseValue(planet.GRAVITY);
+                if (gravity != null && gravity.getBaseValue() != planet.GRAVITY())
+                    gravity.setBaseValue(planet.GRAVITY());
             }
 
             if (!(living instanceof Player))

@@ -4,12 +4,11 @@ import com.nadia.utm.event.ForceLoad;
 import com.nadia.utm.event.utmEvents;
 import com.nadia.utm.item.AdvancedGogglesItem;
 import com.nadia.utm.registry.input.utmKeyMappings;
-import com.nadia.utm.utm;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.ChatScreen;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.neoforge.client.event.InputEvent;
 import net.neoforged.neoforge.client.event.ScreenEvent;
-import net.minecraft.client.Minecraft;
 import org.lwjgl.glfw.GLFW;
 
 @ForceLoad(dist = Dist.CLIENT)

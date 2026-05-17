@@ -24,7 +24,6 @@ public class LaunchScreen extends Screen {
         int y = (height - 76) / 2;
 
         this.addRenderableWidget(new LaunchButton(x + 71, y + 34, 34, 34, Component.empty(), pressed -> {
-            if (!pressed) return;
         }));
     }
 

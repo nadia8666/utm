@@ -1,7 +1,33 @@
 {
-  "utm.configuration.title": "undertale mod Configs",
-  "utm.configuration.section.utm.common.toml": "undertale mod Configs",
-  "utm.configuration.section.utm.common.toml.title": "undertale mod Configs",
+  "utm.configuration.title": "utm Configuration",
+
+  "utm.configuration.client_ui": "User Interface",
+  "utm.configuration.client_ui.tooltip": "UI options for things that override Minecraft's defaults",
+
+  "utm.configuration.client_visual": "Visual Options",
+  "utm.configuration.client_visual.tooltip": "Visual rendering changes",
+
+  "utm.configuration.client_compat": "Compatability",
+  "utm.configuration.client_compat.tooltip": "Optional compatability features between mods",
+
+  "utm.configuration.common_updater": "Auto Update Options",
+  "utm.configuration.common_updater.tooltip": "Auto updater configuration",
+
+  "utm.configuration.server_balance": "Balancing Options",
+  "utm.configuration.server_balance.tooltip": "you wouldn't...",
+
+  "utm.configuration.server_physics": "Physics Options",
+  "utm.configuration.server_physics.tooltip": "Change the settings of physics objects",
+
+  "utm.configuration.section.utm.client.toml": "COMMON",
+  "utm.configuration.section.utm.client.toml.title": "COMMON",
+
+  "utm.configuration.section.utm.common.toml": "CLIENT",
+  "utm.configuration.section.utm.common.toml.title": "CLIENT",
+
+  "utm.configuration.section.utm.server.toml": "SERVER",
+  "utm.configuration.section.utm.server.toml.title": "SERVER",
+
   "utm.configuration.altTabMenu": "Alternate Playerlist",
   "utm.configuration.altTabMenu.tooltip": "Should utm replace the tab menu with a more detailed varaint?",
   "utm.configuration.autoUpdate": "Auto Update Enabled",
@@ -49,6 +75,7 @@
   "block.utm.regen_disc": "Regenerative Disc",
   "block.utm.gimbal": "Gimbal",
   "block.utm.gimbal_plate": "you are not supposed to have this.",
+  "block.utm.ship_sensor": "Dynamic Sensor",
 
   "item.utm.copper_sword": "Copper Sword",
   "item.utm.copper_pickaxe": "Copper Pickaxe",
@@ -108,9 +135,6 @@
 
   "utm.gui.glint_table_menu": "Glint Augmenter",
 
-  "utm.gui.launch_contraption_head": "WARNING:",
-  "utm.gui.launch_contraption_desc": "THIS ACTION IS IRREVERSIBLE!",
-
   "utm.gui.empty_grid_backpack": "Empty Crafting Grid",
   "key.utm.pin_panel": "Pin Advanced Panel",
   "key.categories.utm": "utm",
@@ -143,13 +167,6 @@
   "utm.ponder.tag.oxygen": "Oxygen Manipulation",
   "utm.ponder.tag.oxygen.description": "Blocks that work with Liquid Oxygen",
 
-  "utm.ponder.launch_contraption.intro.header": "Using the Launch Contraption",
-  "utm.ponder.launch_contraption.intro.text_1": "The Launch Contraption is the core component required to leave for space",
-  "utm.ponder.launch_contraption.intro.text_2": "When attached to a minecart contraption, it gains a functional interface",
-  "utm.ponder.launch_contraption.intro.text_3": "Pressing the button will launch the contraption into space",
-  "utm.ponder.launch_contraption.intro.text_4": "All entities sat on the contraption will be transported with it",
-  "utm.ponder.launch_contraption.intro.text_5": "Goodbye parrot!",
-
   "utm.ponder.oxygen_collector.intro.header": "Collecting Oxygen",
   "utm.ponder.oxygen_collector.intro.text_1": "The Oxygen Collector condenses oxygen from the surrounding area",
   "utm.ponder.oxygen_collector.intro.text_2": "You can pump LOX from its internal tank",
@@ -161,6 +178,23 @@
   "utm.ponder.oxygen_furnace.intro.text_1": "The Oxygen Furnace produces molten steel when provided with the right inputs",
   "utm.ponder.oxygen_furnace.intro.text_2": "The Oxygen Furnace requires coal, iron, and LOX",
   "utm.ponder.oxygen_furnace.intro.text_3": "The resulting molten steel can then be pressed into steel ingots and sheets",
+
+  "utm.ponder.ion_jet.intro.header": "Basic Rocketry - Electric Propulsion",
+  "utm.ponder.ion_jet.intro.text_1": "The Ion Jet is a low powered high efficiency thruster for long distance travel in space",
+  "utm.ponder.ion_jet.intro.text_2": "When provided with LOX and a constant RPM it will begin producing thrust",
+  "utm.ponder.ion_jet.intro.text_3": "Umlike other kinetic components the Ion Jet has no limits on maximum RPM or thrust, as long as you can keep it powered",
+
+  "utm.ponder.liquid_thruster.intro.header": "Basic Rocketry - Liquid Propulsion",
+  "utm.ponder.liquid_thruster.intro.text_1": "The Liquid Fuel Thruster is a simple device",
+  "utm.ponder.liquid_thruster.intro.text_2": "When provided with lava and redstone the thruster will activate",
+  "utm.ponder.liquid_thruster.intro.text_3": "Throttle is tied to redstone strength, but higher throttles will consume more fuel",
+
+  "utm.ponder.solid_thruster.intro.header": "Basic Rocketry - Solid Propulsion",
+  "utm.ponder.solid_thruster.intro.text_1": "The Solid Rocket Thruster is the simplest method of rocket propulsion",
+  "utm.ponder.solid_thruster.intro.text_2": "When activated with redstone all connected coal/charcoal blocks are marked as fuel",
+  "utm.ponder.solid_thruster.intro.text_3": "As the thruster burns fuel will be consumed in order of farthest to nearest",
+  "utm.ponder.solid_thruster.intro.text_4": "The more thrusters you use connected to a line of fuel, the more efficient they are",
+  "utm.ponder.solid_thruster.intro.text_5": "Happy Engineering!",
 
   "fluid.utm.liquid_oxygen": "Liquid Oxygen",
   "fluid.utm.molten_steel": "Molten Steel",

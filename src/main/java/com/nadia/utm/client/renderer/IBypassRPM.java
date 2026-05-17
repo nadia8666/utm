@@ -6,6 +6,7 @@ import net.minecraft.network.chat.Component;
 
 import java.util.List;
 
+@SuppressWarnings("EmptyMethod")
 public interface IBypassRPM extends IHaveGoggleInformation {
     default void useTooltip(List<Component> tooltip, KineticBlockEntity be) {
 

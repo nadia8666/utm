@@ -1,6 +1,6 @@
 package com.nadia.utm.mixin;
 
-import com.nadia.utm.Config;
+import com.nadia.utm.config.utmServerConfig;
 import com.nadia.utm.registry.block.utmBlocks;
 import net.minecraft.world.entity.player.Abilities;
 import net.minecraft.world.entity.player.Inventory;
@@ -27,7 +27,7 @@ public abstract class FreeAnvilMixin extends ItemCombinerMenu {
     private int utm$allowFreeAnvilCraft(int constant) {
         ItemStack outputStack = this.resultSlots.getItem(0);
 
-        if (!outputStack.isEmpty() && outputStack.is(utmBlocks.HEAVY_METAL_ANVIL.ITEM.get()) && Config.HEAVY_METAL_ANVIL_LEVEL_REQUIREMENT.getAsInt() <= 0) {
+        if (!outputStack.isEmpty() && outputStack.is(utmBlocks.HEAVY_METAL_ANVIL.ITEM.get()) && utmServerConfig.HEAVY_METAL_ANVIL_LEVEL_REQUIREMENT.getAsInt() <= 0) {
             return -1;
         }
 

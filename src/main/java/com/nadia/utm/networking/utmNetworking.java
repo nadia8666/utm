@@ -32,7 +32,7 @@ import java.util.UUID;
 @ForceLoad
 public class utmNetworking {
     public static PayloadRegistrar REGISTRAR;
-    public static List<Runnable> CALLBACKS = new ArrayList<>();
+    public static final List<Runnable> CALLBACKS = new ArrayList<>();
 
     public static <P extends CustomPacketPayload> void server(PacketDef<P> def, IPayloadHandler<P> consumer) {
         REGISTRAR.playToServer(def.type(), def.codec(), consumer);

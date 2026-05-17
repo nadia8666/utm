@@ -1,0 +1,11 @@
+{
+  "type": "utm:space_type",
+  "generator": {
+    "type": "minecraft:noise",
+    "settings": "utm:space",
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "utm:space"
+    }
+  }
+}

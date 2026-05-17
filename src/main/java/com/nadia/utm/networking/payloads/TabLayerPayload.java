@@ -25,7 +25,7 @@ public record TabLayerPayload(List<PlayerData> players) implements CustomPacketP
         return TYPE;
     }
 
-    public static PacketDef<TabLayerPayload> DEF = new PacketDef<>(TYPE, STREAM_CODEC);
+    public static final PacketDef<TabLayerPayload> DEF = new PacketDef<>(TYPE, STREAM_CODEC);
 
     public record PlayerData(UUID id, String name, boolean online, float health, float maxHealth, String dimension, int ping) {
         public static final StreamCodec<RegistryFriendlyByteBuf, PlayerData> STREAM_CODEC = new StreamCodec<>() {

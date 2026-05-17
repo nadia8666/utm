@@ -10,6 +10,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+@SuppressWarnings("CancellableInjectionUsage")
 @Debug(export = true)
 @Mixin(value = Camera.class, priority = 2000, remap = false)
 public abstract class CameraMixin {

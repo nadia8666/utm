@@ -44,7 +44,7 @@ public abstract class AbstractSealerBlockEntity extends SplitShaftBlockEntity im
     public SmartFluidTankBehaviour TANK;
     public CombinedTankWrapper CAPABILITY;
 
-    public Set<BlockPos> ATTACHED_POSITIONS = new HashSet<>();
+    public final Set<BlockPos> ATTACHED_POSITIONS = new HashSet<>();
     protected final Queue<BlockPos> QUEUE = new LinkedList<>();
     protected final Set<BlockPos> VISITED = new HashSet<>();
     protected final Set<BlockPos> SEALED = new HashSet<>();

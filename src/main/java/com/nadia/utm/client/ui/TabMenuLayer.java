@@ -1,6 +1,6 @@
 package com.nadia.utm.client.ui;
 
-import com.nadia.utm.Config;
+import com.nadia.utm.config.utmClientConfig;
 import com.nadia.utm.networking.payloads.TabLayerPayload;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -25,7 +25,7 @@ public class TabMenuLayer {
 
     @SubscribeEvent
     public static void onRenderLayer(RenderGuiLayerEvent.Pre event) {
-        if (!Config.ALTERNATE_TAB_MENU.get()) return;
+        if (!utmClientConfig.ALTERNATE_TAB_MENU.get()) return;
         if (event.getName().equals(VanillaGuiLayers.TAB_LIST)) {
             Minecraft mc = Minecraft.getInstance();
 

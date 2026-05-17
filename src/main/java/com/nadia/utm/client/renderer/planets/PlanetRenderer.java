@@ -3,7 +3,7 @@ package com.nadia.utm.client.renderer.planets;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import com.nadia.utm.Config;
+import com.nadia.utm.config.utmClientConfig;
 import com.nadia.utm.event.ForceLoad;
 import com.nadia.utm.event.utmEvents;
 import com.nadia.utm.registry.planets.utmPlanets;
@@ -19,12 +19,12 @@ import java.util.List;
 
 @ForceLoad(dist = Dist.CLIENT)
 public class PlanetRenderer {
-    public static final List<Planet> PLANET_REGISTRY = new ArrayList<>();
+    public static final List<RenderedPlanet> RENDERED_PLANET_REGISTRY = new ArrayList<>();
 
     // ordered by relative distance, moon renders over the earth which renders over the sun
     @ForceLoad(dist = Dist.CLIENT)
     public static class PLANETS {
-        public static final Planet SUN_AG23 = new Planet(utm.key("textures/misc/sun.png")) {
+        public static final RenderedPlanet SUN_AG23 = new RenderedPlanet(utm.key("textures/misc/sun.png")) {
             @Override
             public float getDistance() {
                 return 300;
@@ -55,7 +55,7 @@ public class PlanetRenderer {
                 return mc.level != null && utmPlanets.AG23.is(utmPlanets.get(mc.level));
             }
         };
-        public static final Planet EARTH_AG23 = new Planet(utm.key("textures/misc/earth.png")) {
+        public static final RenderedPlanet EARTH_AG23 = new RenderedPlanet(utm.key("textures/misc/earth.png")) {
             @Override
             public float getDistance() {
                 return 150;
@@ -76,7 +76,7 @@ public class PlanetRenderer {
                 return mc.level != null && utmPlanets.AG23.is(utmPlanets.get(mc.level));
             }
         };
-        public static final Planet MOON_AG23 = new Planet(utm.key("textures/misc/moon.png")) {
+        public static final RenderedPlanet MOON_AG23 = new RenderedPlanet(utm.key("textures/misc/moon.png")) {
             @Override
             public float getDistance() {
                 return 150;
@@ -115,7 +115,7 @@ public class PlanetRenderer {
             }
         };
 
-        public static final Planet AG23_EARTH = new Planet(utm.key("textures/misc/2313ag.png")) {
+        public static final RenderedPlanet AG23_EARTH = new RenderedPlanet(utm.key("textures/misc/2313ag.png")) {
             @Override
             public float getDistance() {
                 return 150;
@@ -156,8 +156,7 @@ public class PlanetRenderer {
                 return mc.level != null && utmPlanets.EARTH.is(utmPlanets.get(mc.level));
             }
         };
-
-        public static final Planet EARTH_EARTH = new Planet(utm.key("textures/misc/earth.png")) {
+        public static final RenderedPlanet EARTH_EARTH = new RenderedPlanet(utm.key("textures/misc/earth.png")) {
             @Override
             public float getDistance() {
                 return 10;
@@ -175,7 +174,7 @@ public class PlanetRenderer {
 
                 Minecraft mc = Minecraft.getInstance();
                 if (mc.player instanceof LocalPlayer player) {
-                    float scalar = Math.max((float) (1 - (player.getY()/125_000)), 0);
+                    float scalar = Math.max((float) (1 - (player.getY() / 125_000)), 0);
                     poseStack.scale(scalar, 1, scalar);
                 }
             }
@@ -192,7 +191,7 @@ public class PlanetRenderer {
                     double y = player.position().y;
 
                     if (y > 5000) {
-                        return Math.min((float) ((y-5000)/1000), 1);
+                        return Math.min((float) ((y - 5000) / 1000), 1);
                     } else
                         return 0;
                 }
@@ -200,18 +199,45 @@ public class PlanetRenderer {
                 return 0;
             }
         };
+
+        public static final RenderedPhysicalPlanet SUN_SPACE = new RenderedPhysicalPlanet(
+                utm.key("textures/misc/sun.png"), utmPlanets.SUN.ORBIT(), 2180.0f
+        ) {
+            @Override
+            public float[] getColor(long time, float partialTicks) {
+                return new float[]{1, 1, 1};
+            }
+        };
+
+        public static final RenderedPhysicalPlanet EARTH_SPACE = new RenderedPhysicalPlanet(
+                utm.key("textures/misc/earth.png"),
+                utmPlanets.EARTH.ORBIT(),
+                80.0f
+        );
+
+        public static final RenderedPhysicalPlanet MOON_SPACE = new RenderedPhysicalPlanet(
+                utm.key("textures/misc/moon.png"),
+                utmPlanets.MOON.ORBIT(),
+                20.0f
+        );
+
+        public static final RenderedPhysicalPlanet AG23_SPACE = new RenderedPhysicalPlanet(
+                utm.key("textures/misc/2313ag.png"),
+                utmPlanets.AG23.ORBIT(),
+                30.0f
+        );
     }
 
     static {
         utmEvents.register(RenderLevelStageEvent.class, event -> {
-            if (!Config.RENDER_PLANETS.getAsBoolean()) return;
+            if (!utmClientConfig.RENDER_PLANETS.getAsBoolean()) return;
             if (event.getStage() != RenderLevelStageEvent.Stage.AFTER_SKY) return;
             Minecraft mc = Minecraft.getInstance();
             if (mc.level == null) return;
 
-            long time = mc.level.dayTime() % 24000;
+            long time = mc.level.dayTime();
 
-            for (Planet planet : PLANET_REGISTRY)
+            for (RenderedPlanet planet : RENDERED_PLANET_REGISTRY)
                 planet.onRenderSky(time, mc, event);
 
             RenderSystem.clear(GL11.GL_DEPTH_BUFFER_BIT, Minecraft.ON_OSX);

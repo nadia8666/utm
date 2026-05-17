@@ -4,6 +4,8 @@ import com.nadia.utm.registry.dimension.utmDimensions;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
+import org.joml.Quaternionf;
+import org.joml.Vector3d;
 
 import javax.annotation.Nullable;
 import java.util.HashMap;
@@ -12,21 +14,19 @@ import java.util.Map;
 import java.util.Set;
 
 public class utmPlanets {
-    public static Set<Planet> ALL_PLANETS = new HashSet<>();
-    public static Map<ResourceKey<Level>, Planet> KEY_SET = new HashMap<>();
+    public static final Set<Planet> ALL_PLANETS = new HashSet<>();
+    public static final Map<ResourceKey<Level>, Planet> KEY_SET = new HashMap<>();
 
-    public static class Planet {
-        public double GRAVITY;
-        public String IDENTIFIER;
-        public ResourceKey<Level> KEY;
-
-        public Planet(ResourceKey<Level> key, String identifier, double gravity) {
-            KEY = key;
-            IDENTIFIER = identifier;
-            GRAVITY = gravity;
+    public record Planet(ResourceKey<Level> KEY, String IDENTIFIER, double GRAVITY, Orbit ORBIT, boolean HAS_OXYGEN) {
+        public Planet(ResourceKey<Level> KEY, String IDENTIFIER, double GRAVITY, Orbit ORBIT, boolean HAS_OXYGEN) {
+            this.KEY = KEY;
+            this.IDENTIFIER = IDENTIFIER;
+            this.GRAVITY = GRAVITY;
+            this.ORBIT = ORBIT;
+            this.HAS_OXYGEN = HAS_OXYGEN;
 
             ALL_PLANETS.add(this);
-            KEY_SET.put(key, this);
+            KEY_SET.put(KEY, this);
         }
 
         public boolean is(@Nullable Planet target) {
@@ -34,8 +34,29 @@ public class utmPlanets {
         }
     }
 
-    public static Planet EARTH = new Planet(Level.OVERWORLD, "earth", 0.08);
-    public static Planet AG23 = new Planet(utmDimensions.AG_KEY, "2313ag", 0.12);
+    public static Planet SPACE = new Planet(utmDimensions.SPACE_KEY, "space", 0, new Orbit.Static(new Vector3d(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY), 0), false);
+    public static Planet SUN = new Planet(utmDimensions.SUN_KEY, "sun", 0, new Orbit.Static(new Vector3d(), Double.POSITIVE_INFINITY), false);
+    public static final Planet EARTH = new Planet(Level.OVERWORLD, "earth", 0.08, new Orbit.Circular(
+            SUN.ORBIT(),
+            25000.0,
+            0.00005,
+            new Quaternionf(),
+            15000
+    ), true);
+    public static Planet MOON = new Planet(utmDimensions.MOON_KEY, "moon", 0, new Orbit.Circular(
+            EARTH.ORBIT(),
+            4000.0,
+            0.002,
+            new Quaternionf().rotationXYZ(0.2f, 0, 0.1f),
+            1500
+    ), false);
+    public static final Planet AG23 = new Planet(utmDimensions.AG_KEY, "2313ag", 0.12, new Orbit.Circular(
+            EARTH.ORBIT(),
+            9000.0,
+            (2.0 * Math.PI) / 24000.0,
+            new Quaternionf(),
+            2500
+    ), false);
 
     @Nullable
     public static Planet get(ResourceKey<Level> key) {

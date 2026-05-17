@@ -1,6 +1,6 @@
 package com.nadia.utm.mixin.renderer;
 
-import com.nadia.utm.Config;
+import com.nadia.utm.config.utmClientConfig;
 import com.simibubi.create.content.equipment.armor.NetheriteBacktankFirstPersonRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.PlayerModel;
@@ -41,7 +41,7 @@ public abstract class NetheriteBacktankFirstPersonRendererMixin {
     @Overwrite
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void onRenderPlayerHand(RenderArmEvent event) {
-        if (!utm$getActive() || !Config.NETHERITE_BACKTANK_ARM.get())
+        if (!utm$getActive() || !utmClientConfig.NETHERITE_BACKTANK_ARM.get())
             return;
 
         Minecraft mc = Minecraft.getInstance();

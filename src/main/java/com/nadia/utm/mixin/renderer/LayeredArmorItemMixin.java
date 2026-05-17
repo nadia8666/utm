@@ -36,7 +36,7 @@ public interface LayeredArmorItemMixin {
      */
     @Overwrite
     private void renderModel(PoseStack poseStack, MultiBufferSource bufferSource, int light, ArmorItem item,
-                             Model model, boolean glint, int color, ResourceLocation armorResource) {
+                             Model model, boolean glint, @SuppressWarnings("SameParameterValue") int color, ResourceLocation armorResource) {
         VertexConsumer vertexconsumer = bufferSource.getBuffer(RenderType.armorCutoutNoCull(armorResource));
         model.renderToBuffer(poseStack, vertexconsumer, light, OverlayTexture.NO_OVERLAY, color);
         if (glint)

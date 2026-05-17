@@ -50,7 +50,7 @@ public class OxygenFurnaceBlockEntity extends SmartBlockEntity implements MenuPr
     };
 
     public int PROGRESS = 0;
-    public int MAX_PROGRESS = 200;
+    public final int MAX_PROGRESS = 200;
 
     public final ContainerData data = new ContainerData() {
         @Override

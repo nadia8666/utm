@@ -145,7 +145,8 @@ dependencies {
     jarJar(implementation("maven.modrinth:extreme_sound_muffler:KXmiEin1")) // extreme sound muffler
     jarJar(implementation("maven.modrinth:sophisticated-backpacks-create-integration:bWd7B59k")) // sophisticated backpacks x create
     jarJar(implementation('local:grimble_mod:1.0.0')) // bluebibbob's grimble mod
-    jarJar(implementation('local:drivebywire:0.2.6')) // drive by wire
+    jarJar(implementation('local:drivebywire:0.2.8')) // drive by wire
+    jarJar(runtimeOnly('local:compactflap:1.0.0')) // compact flaps
 
     // sable & aeronautics
     jarJar(api("dev.ryanhcode.sable-companion:sable-companion-common-${minecraft_version}:${sable_companion_version}"))

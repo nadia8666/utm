@@ -33,5 +33,5 @@ public record GlintSyncPayload(
         return TYPE;
     }
 
-    public static PacketDef<GlintSyncPayload> DEF = new PacketDef<>(TYPE, STREAM_CODEC);
+    public static final PacketDef<GlintSyncPayload> DEF = new PacketDef<>(TYPE, STREAM_CODEC);
 }

@@ -16,7 +16,7 @@ import net.minecraft.world.item.Items;
 
 import java.util.List;
 
-import static com.nadia.utm.Config.HEAVY_METAL_ANVIL_LEVEL_REQUIREMENT;
+import static com.nadia.utm.config.utmServerConfig.HEAVY_METAL_ANVIL_LEVEL_REQUIREMENT;
 
 public class OxygenFurnaceCategory implements EmiRecipe {
     public static final EmiRecipeCategory CATEGORY = new EmiRecipeCategory(

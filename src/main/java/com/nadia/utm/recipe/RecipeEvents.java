@@ -7,7 +7,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.AnvilUpdateEvent;
 
-import static com.nadia.utm.Config.HEAVY_METAL_ANVIL_LEVEL_REQUIREMENT;
+import static com.nadia.utm.config.utmServerConfig.HEAVY_METAL_ANVIL_LEVEL_REQUIREMENT;
 
 @EventBusSubscriber(modid = "utm")
 public class RecipeEvents {

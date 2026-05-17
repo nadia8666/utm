@@ -1,6 +1,5 @@
 package com.nadia.utm.mixin;
 
-import com.nadia.utm.utm;
 import net.neoforged.fml.loading.LoadingModList;
 import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;

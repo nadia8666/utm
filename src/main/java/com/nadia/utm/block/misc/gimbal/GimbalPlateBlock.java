@@ -17,7 +17,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 
 public class GimbalPlateBlock extends RotatableBlock implements IBE<GimbalPlateBlockEntity>, BlockSubLevelAssemblyListener {
-    public static VoxelShaper SHAPE = VoxelShaper.forDirectional(Block.box(5, 12, 5, 11, 16, 11), Direction.UP);
+    public static final VoxelShaper SHAPE = VoxelShaper.forDirectional(Block.box(5, 12, 5, 11, 16, 11), Direction.UP);
 
     public GimbalPlateBlock(Properties properties) {
         super(properties);
