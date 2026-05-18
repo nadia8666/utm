@@ -6,13 +6,12 @@ import com.nadia.utm.networking.payloads.Sword2AttackPayload;
 import com.nadia.utm.networking.payloads.jumbo_josh;
 import com.nadia.utm.registry.item.tool.utmTools;
 import com.nadia.utm.registry.item.utmItems;
+import com.nadia.utm.util.TickUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
@@ -22,6 +21,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import javax.annotation.Nullable;
@@ -87,5 +87,23 @@ public class MinecraftMixin {
                 }
             }
         }
+    }
+
+    @Inject(method = "tick", at = @At("HEAD"))
+    private void utm$onClientTick(CallbackInfo ci) {
+        if (level == null) return;
+
+        TickUtil.TARGETS.computeIfPresent(level, (ignored, tasks) -> {
+            tasks.removeIf((task) -> {
+                boolean toRemove = task.tick() >= level.getGameTime();
+
+                if (toRemove)
+                    task.runnable().run();
+
+                return toRemove;
+            });
+
+            return tasks;
+        });
     }
 }

@@ -32,7 +32,6 @@ import net.minecraft.nbt.NbtAccounter;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.TickTask;
 import net.minecraft.server.level.FullChunkStatus;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
@@ -244,7 +243,7 @@ public class SableUtil {
             for (ChunkPos pos : chunks) {
                 target.setChunkForced(pos.x, pos.z, true);
                 if (target.getServer() instanceof MinecraftServer server)
-                    server.tell(new TickTask(server.getTickCount() + 80, () -> target.setChunkForced(pos.x, pos.z, false)));
+                    TickUtil.runIn(80, () -> target.setChunkForced(pos.x, pos.z, false), target);
                 target.getChunk(pos.x, pos.z, ChunkStatus.FULL, true);
             }
 

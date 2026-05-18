@@ -13,6 +13,7 @@
     "ItemEntityMixin",
     "LevelMixin",
     "SchematicPlacePacketMixin",
+    "ServerLevelMixin",
     "compat.create.AbstractContraptionEntityMixin",
     "compat.create.RotationPropagatorMixin",
     "compat.gravestone.GraveBlockEntityMixin",
