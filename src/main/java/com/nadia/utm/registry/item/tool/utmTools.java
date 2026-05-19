@@ -176,7 +176,7 @@ public class utmTools {
             }
     ).tags(Tags.Items.ENCHANTABLES, ItemTags.SWORD_ENCHANTABLE, ItemTags.WEAPON_ENCHANTABLE, ItemTags.FIRE_ASPECT_ENCHANTABLE, ItemTags.MINING_ENCHANTABLE, ItemTags.MINING_LOOT_ENCHANTABLE, ItemTags.HOES).handheld();
     public static final utmItemContainer<AridTridentItem> ARID_TRIDENT = register("arid_trident", () -> {
-                return new AridTridentItem(new Item.Properties().stacksTo(1)); //condense pls
+                return new AridTridentItem(new Item.Properties().stacksTo(1).attributes(AridTridentItem.createAttributes()).durability(1024)); //condense pls
             }
-    ).tags(Tags.Items.ENCHANTABLES, ItemTags.WEAPON_ENCHANTABLE, ItemTags.FIRE_ASPECT_ENCHANTABLE, ItemTags.TRIDENT_ENCHANTABLE);
+    ).tags(Tags.Items.ENCHANTABLES, ItemTags.WEAPON_ENCHANTABLE, ItemTags.FIRE_ASPECT_ENCHANTABLE);
 }
