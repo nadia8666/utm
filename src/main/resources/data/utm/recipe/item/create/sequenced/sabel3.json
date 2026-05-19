@@ -1,0 +1,129 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "minecraft:stick"
+  },
+  "loops": 1,
+  "results": [
+    {
+      "id": "utm:sabel3",
+      "chance": 25,
+      "count": 1
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "minecraft:stick"
+        },
+        {
+          "item": "create:iron_ingot"
+        }
+      ],
+      "results": [
+        {
+          "id": "utm:unassabeled"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "utm:unassabeled"
+        },
+        {
+          "item": "minecraft:iron_bar"
+        }
+      ],
+      "results": [
+        {
+          "id": "utm:unassabeled"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "utm:unassabeled"
+        },
+        {
+          "item": "minecraft:iron_bar"
+        }
+      ],
+      "results": [
+        {
+          "id": "utm:unassabeled"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "utm:unassabeled"
+        },
+        {
+          "item": "minecraft:iron_bar"
+        }
+      ],
+      "results": [
+        {
+          "id": "utm:unassabeled"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "utm:unassabeled"
+        },
+        {
+          "item": "minecraft:iron_bar"
+        }
+      ],
+      "results": [
+        {
+          "id": "utm:unassabeled"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "utm:unassabeled"
+        },
+        {
+          "item": "minecraft:iron_nugget"
+        }
+      ],
+      "results": [
+        {
+          "id": "utm:unassabeled"
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "utm:unassabeled"
+        }
+      ],
+      "results": [
+        {
+          "id": "utm:sabel3",
+          "count": 1
+        }
+      ]
+    }
+  ],
+  "transitional_item": {
+    "id": "utm:unassabeled"
+  }
+}
