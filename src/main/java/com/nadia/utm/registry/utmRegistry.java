@@ -4,9 +4,10 @@ import com.nadia.utm.registry.attachment.utmAttachments;
 import com.nadia.utm.registry.behavior.utmMovingInteractions;
 import com.nadia.utm.registry.block.utmBlockEntities;
 import com.nadia.utm.registry.block.utmBlocks;
+import com.nadia.utm.registry.buffs.utmBuffs;
 import com.nadia.utm.registry.data.utmDataComponents;
+import com.nadia.utm.registry.entity.utmEntities;
 import com.nadia.utm.registry.fluid.utmFluids;
-import com.nadia.utm.registry.item.tool.utmTools;
 import com.nadia.utm.registry.item.utmItems;
 import com.nadia.utm.registry.loot.utmLoot;
 import com.nadia.utm.registry.particle.utmParticles;
@@ -15,13 +16,13 @@ import com.nadia.utm.registry.sound.utmSounds;
 import com.nadia.utm.registry.ui.utmMenus;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import com.nadia.utm.registry.buffs.utmBuffs;
 
 public class utmRegistry {
     public static final DeferredRegister<CreativeModeTab> TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, "utm");
@@ -38,6 +39,7 @@ public class utmRegistry {
     public static final DeferredRegister<?> ATTACHMENTS = utmAttachments.ATTACHMENTS;
     public static final DeferredRegister<?> FLUID_TYPES = utmFluids.FLUID_TYPES;
     public static final DeferredRegister<?> FLUIDS = utmFluids.FLUIDS;
+    public static final DeferredRegister<?> ENTITY_TYPES = utmEntities.ENTITY_TYPES;
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> MAIN = TABS
             .register("main", () -> CreativeModeTab.builder()
@@ -65,6 +67,7 @@ public class utmRegistry {
         COMPONENTS.register(modEventBus);
         MENUS.register(modEventBus);
         BLOCK_ENTITIES.register(modEventBus);
+        ENTITY_TYPES.register(modEventBus);
         SOUNDS.register(modEventBus);
         BUFFS.register(modEventBus);
         TABS.register(modEventBus);
