@@ -11,7 +11,7 @@ public class utmEntityContainer<T extends Entity> {
         this.REGISTRY_OBJECT = reg;
     }
 
-    public DeferredHolder<EntityType<?>, EntityType<T>> get() {
-        return this.REGISTRY_OBJECT;
+    public EntityType<T> get() {
+        return this.REGISTRY_OBJECT.get();
     }
 }
