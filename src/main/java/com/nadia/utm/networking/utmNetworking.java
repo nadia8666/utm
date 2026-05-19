@@ -107,11 +107,11 @@ public class utmNetworking {
                     slevel.playSound(null, pos.x, pos.y, pos.z, SoundEvents.ANVIL_LAND, player.getSoundSource(), 0.125F, 0.5F);
 
                 for(LivingEntity livingentity2 : slevel.getEntitiesOfClass(LivingEntity.class, new AABB(pos.x-1,pos.y-0.2,pos.z-1,pos.x+1,pos.y+0.2,pos.z+1).inflate(5))) {
-                    if (livingentity2!=player && (livingentity2.position().distanceTo( new Vec3(pos.x,livingentity2.position().y,pos.z))) <7 ) {
-                        livingentity2.invulnerableTime = 0; //looking to change IFrames :)
+                    if (livingentity2!=player && (livingentity2.position().distanceTo( new Vec3(pos.x,livingentity2.position().y,pos.z))) <4 ) {
+                        livingentity2.invulnerableTime = 0;
                         livingentity2.hurt(player.damageSources().playerAttack(player),3+(doom ? 7 : 0));
                         if (doom) {
-                            player.invulnerableTime = 0; //looking to change IFrames again :) //note: it doesnt work here or above so find a fix in the morning
+                            player.invulnerableTime = 0;
                             player.hurt(player.damageSources().cramming(), 2);
                         }
                         Vec3 pos2 = livingentity2.position(); // why don't particles spawn?
@@ -133,12 +133,26 @@ public class utmNetworking {
                 }
                 Entity target = slevel.getEntity(UUID.fromString(targetUUID));
                 if (target instanceof LivingEntity entity) {
-                    TickUtil.runIn(40, () -> {
+                    TickUtil.runIn(10, () -> {
                         Vec3 pos2 = entity.position();
                         entity.invulnerableTime=0;
                         entity.hurt(player.damageSources().playerAttack(player), 4); // is there a better way to get soundsources? // yes. just get it from the origin player or the target wtf.
                         slevel.playSound(null, pos2.x, pos2.y, pos2.z, SoundEvents.PLAYER_ATTACK_CRIT, player.getSoundSource(), 0.25F, 1.0F);
                         slevel.sendParticles(ParticleTypes.CRIT,pos2.x,pos2.y,pos2.z,5,3,3,3,0);
+                    }, slevel);
+                }
+            }
+        }));
+        server(LesserAtkCooldownPayload.DEF, (payload, context) -> context.enqueueWork(() -> {
+            Player player = context.player();
+            Vector3f pos = payload.pos();
+            String targetUUID = payload.targetUUID();
+            if (player.level() instanceof ServerLevel slevel) {
+                ItemStack itemstack = player.getMainHandItem();
+                Entity target = slevel.getEntity(UUID.fromString(targetUUID));
+                if (target instanceof LivingEntity entity) {
+                    TickUtil.runIn(1, () -> {
+                      entity.invulnerableTime=2;
                     }, slevel);
                 }
             }

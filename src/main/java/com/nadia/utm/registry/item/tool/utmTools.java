@@ -1,6 +1,7 @@
 package com.nadia.utm.registry.item.tool;
 
 import com.nadia.utm.event.ForceLoad;
+import com.nadia.utm.item.AridTridentItem;
 import com.nadia.utm.item.FiddleheadItem;
 import com.nadia.utm.item.NetherytraItem;
 import com.nadia.utm.registry.item.utmItemContainer;
@@ -118,7 +119,7 @@ public class utmTools {
 
     public static final utmItemContainer<AxeItem> ARID_AXE = register("arid_axe", () -> {
                 Tier tier = utmToolBuilder.buildTier(
-                        BlockTags.INCORRECT_FOR_WOODEN_TOOL, 2500, 8f, 0f, 15, () -> Ingredient.EMPTY
+                        BlockTags.INCORRECT_FOR_STONE_TOOL, 2500, 9.5f, 0f, 15, () -> Ingredient.EMPTY
                 );
                 return new AxeItem(tier, new Item.Properties().attributes(
                         AxeItem.createAttributes(tier, 17, -3.4f)).rarity(Rarity.RARE));
@@ -130,7 +131,7 @@ public class utmTools {
                         BlockTags.INCORRECT_FOR_WOODEN_TOOL, 5000, 8f, 0f, 15, () -> Ingredient.EMPTY
                 );
                 return new SwordItem(tier, new Item.Properties().attributes(
-                        SwordItem.createAttributes(tier, 6.5f, 6)));
+                        SwordItem.createAttributes(tier, 4f, 0)).rarity(Rarity.RARE));
             }
     ).tags(Tags.Items.ENCHANTABLES, ItemTags.SWORD_ENCHANTABLE, ItemTags.WEAPON_ENCHANTABLE, ItemTags.FIRE_ASPECT_ENCHANTABLE, ItemTags.SWORDS).handheld();
 
@@ -139,7 +140,7 @@ public class utmTools {
                         BlockTags.INCORRECT_FOR_WOODEN_TOOL, 100, 1f, 0f, 15, () -> Ingredient.of(Tags.Items.INGOTS_IRON)
                 );
                 return new ShartSword(tier, new Item.Properties().attributes(
-                        SwordItem.createAttributes(tier, 5, -2.4f)));
+                        SwordItem.createAttributes(tier, 5, -2.4f)).rarity(Rarity.UNCOMMON));
             }
     ).tags(Tags.Items.ENCHANTABLES, ItemTags.SWORD_ENCHANTABLE, ItemTags.WEAPON_ENCHANTABLE, ItemTags.DURABILITY_ENCHANTABLE, ItemTags.SWORDS, Tags.Items.TOOLS_SHIELD).handheld();
     public static final utmItemContainer<SwordItem> SWORD_OF_KIRK = register("sword_of_kirk", () -> {
@@ -147,7 +148,35 @@ public class utmTools {
                         BlockTags.INCORRECT_FOR_WOODEN_TOOL, 256, 1f, 0f, 15, () -> Ingredient.of(Tags.Items.INGOTS_IRON)
                 );
                 return new SwordItem(tier, new Item.Properties().attributes(
-                        SwordItem.createAttributes(tier, 5, -2.4f)));
+                        SwordItem.createAttributes(tier, 5, -2.4f)).rarity(Rarity.UNCOMMON));
             }
     ).tags(Tags.Items.ENCHANTABLES, ItemTags.SWORD_ENCHANTABLE, ItemTags.WEAPON_ENCHANTABLE, ItemTags.DURABILITY_ENCHANTABLE, ItemTags.SWORDS).handheld();
+    public static final utmItemContainer<PickaxeItem> ARID_PICKAXE = register("arid_pickaxe", () -> {
+                Tier tier = utmToolBuilder.buildTier(
+                        BlockTags.INCORRECT_FOR_STONE_TOOL, 6500, 9.5f, 0f, 15, () -> Ingredient.EMPTY
+                );
+                return new PickaxeItem(tier, new Item.Properties().attributes(
+                        PickaxeItem.createAttributes(tier, 8, -3f)).rarity(Rarity.RARE));
+            }
+    ).tags(Tags.Items.ENCHANTABLES, ItemTags.SWORD_ENCHANTABLE, ItemTags.WEAPON_ENCHANTABLE, ItemTags.FIRE_ASPECT_ENCHANTABLE, ItemTags.MINING_ENCHANTABLE, ItemTags.PICKAXES).handheld();
+    public static final utmItemContainer<ShovelItem> ARID_SHOVEL = register("arid_shovel", () -> {
+                Tier tier = utmToolBuilder.buildTier(
+                        BlockTags.INCORRECT_FOR_STONE_TOOL, 6500, 10f, 0f, 15, () -> Ingredient.EMPTY
+                );
+                return new ShovelItem(tier, new Item.Properties().attributes(
+                        ShovelItem.createAttributes(tier, 4, -2.4f)).rarity(Rarity.RARE));
+            }
+    ).tags(Tags.Items.ENCHANTABLES, ItemTags.SWORD_ENCHANTABLE, ItemTags.WEAPON_ENCHANTABLE, ItemTags.FIRE_ASPECT_ENCHANTABLE, ItemTags.MINING_ENCHANTABLE, ItemTags.SHOVELS).handheld();
+    public static final utmItemContainer<ShovelItem> ARID_HOE = register("arid_hoe", () -> {
+                Tier tier = utmToolBuilder.buildTier(
+                        BlockTags.INCORRECT_FOR_STONE_TOOL, 5000, 15f, 0f, 15, () -> Ingredient.EMPTY
+                );
+                return new ShovelItem(tier, new Item.Properties().attributes(
+                        ShovelItem.createAttributes(tier, 4, -2.4f)).rarity(Rarity.RARE));
+            }
+    ).tags(Tags.Items.ENCHANTABLES, ItemTags.SWORD_ENCHANTABLE, ItemTags.WEAPON_ENCHANTABLE, ItemTags.FIRE_ASPECT_ENCHANTABLE, ItemTags.MINING_ENCHANTABLE, ItemTags.MINING_LOOT_ENCHANTABLE, ItemTags.HOES).handheld();
+    public static final utmItemContainer<AridTridentItem> ARID_TRIDENT = register("arid_trident", () -> {
+                return new AridTridentItem(new Item.Properties().stacksTo(1)); //condense pls
+            }
+    ).tags(Tags.Items.ENCHANTABLES, ItemTags.WEAPON_ENCHANTABLE, ItemTags.FIRE_ASPECT_ENCHANTABLE, ItemTags.TRIDENT_ENCHANTABLE);
 }

@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(ServerLevel.class)
+@Mixin(value = ServerLevel.class, remap = false)
 public class ServerLevelMixin {
     @Inject(method = "tick", at = @At("HEAD"))
     private void utm$onClientTick(CallbackInfo ci) {

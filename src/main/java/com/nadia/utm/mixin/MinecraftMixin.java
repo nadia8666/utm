@@ -1,6 +1,7 @@
 package com.nadia.utm.mixin;
 
 import com.llamalad7.mixinextras.sugar.Local;
+import com.nadia.utm.networking.payloads.LesserAtkCooldownPayload;
 import com.nadia.utm.networking.payloads.MyAwesomeKarkParticlePayload;
 import com.nadia.utm.networking.payloads.Sword2AttackPayload;
 import com.nadia.utm.networking.payloads.jumbo_josh;
@@ -77,6 +78,19 @@ public class MinecraftMixin {
                     String targetUUID = result.getEntity().getUUID().toString();
 
                     PacketDistributor.sendToServer(new jumbo_josh(player.position().toVector3f(), targetUUID));
+                    if (inputEvent.shouldSwingHand())
+                        player.swing(InteractionHand.MAIN_HAND);
+                    player.resetAttackStrengthTicker();
+
+                    // for some reason on these special conditions it doesn't actually hit the mob.. which is somethign that is NOt good. i think removing this--
+                    //fixes that.
+                    //  cir.setReturnValue(false);
+                }
+            } else if (itemStack.is(utmTools.ARID_SWORD.get()) && hitResult.getType().equals(HitResult.Type.ENTITY)) {
+                if (hitResult instanceof EntityHitResult result) {
+                    String targetUUID = result.getEntity().getUUID().toString();
+
+                    PacketDistributor.sendToServer(new LesserAtkCooldownPayload(player.position().toVector3f(), targetUUID));
                     if (inputEvent.shouldSwingHand())
                         player.swing(InteractionHand.MAIN_HAND);
                     player.resetAttackStrengthTicker();
