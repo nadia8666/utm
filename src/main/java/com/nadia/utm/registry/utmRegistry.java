@@ -7,6 +7,7 @@ import com.nadia.utm.registry.block.utmBlockEntities;
 import com.nadia.utm.registry.block.utmBlocks;
 import com.nadia.utm.registry.buffs.utmBuffs;
 import com.nadia.utm.registry.data.utmDataComponents;
+import com.nadia.utm.registry.entity.utmEntities;
 import com.nadia.utm.registry.fluid.utmFluids;
 import com.nadia.utm.registry.item.utmItems;
 import com.nadia.utm.registry.loot.utmLoot;
@@ -43,6 +44,7 @@ public class utmRegistry {
     public static final DeferredRegister<?> FLUID_TYPES = utmFluids.FLUID_TYPES;
     public static final DeferredRegister<?> FLUIDS = utmFluids.FLUIDS;
     public static final DeferredRegister<?> DISPLAY_SOURCES = utmDisplaySources.DISPLAY_SOURCES;
+    public static final DeferredRegister<?> ENTITY_TYPES = utmEntities.ENTITY_TYPES;
 
     public static final Set<?> HIDDEN_BLOCKS = new HashSet<>();
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> MAIN = TABS
@@ -75,6 +77,7 @@ public class utmRegistry {
         DISPLAY_SOURCES.register(modEventBus);
         COMPONENTS.register(modEventBus);
         MENUS.register(modEventBus);
+        ENTITY_TYPES.register(modEventBus);
         SOUNDS.register(modEventBus);
         BUFFS.register(modEventBus);
         TABS.register(modEventBus);

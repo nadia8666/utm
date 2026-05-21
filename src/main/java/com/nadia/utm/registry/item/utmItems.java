@@ -106,5 +106,6 @@ public class utmItems {
             STEEL_INGOT = register("steel_ingot").generated(),
             ALUMINUM_SHEET = register("aluminum_sheet").generated(),
             MAGNESIUM_SHEET = register("magnesium_sheet").generated(),
-            STEEL_SHEET = register("steel_sheet").generated();
+            STEEL_SHEET = register("steel_sheet").generated(),
+            COPPER_PLATING = register("copper_plating").generated();
 }

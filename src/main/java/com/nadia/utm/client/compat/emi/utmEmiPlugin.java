@@ -1,11 +1,14 @@
 package com.nadia.utm.client.compat.emi;
 
 import com.nadia.utm.registry.block.utmBlocks;
+import com.nadia.utm.registry.item.tool.utmTools;
+import com.nadia.utm.registry.item.utmItems;
 import dev.emi.emi.api.EmiEntrypoint;
 import dev.emi.emi.api.EmiInitRegistry;
 import dev.emi.emi.api.EmiPlugin;
 import dev.emi.emi.api.EmiRegistry;
 import dev.emi.emi.api.stack.EmiStack;
+import dev.emi.emi.recipe.EmiAnvilRecipe;
 import mezz.jei.api.runtime.IJeiRuntime;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -36,5 +39,11 @@ public class utmEmiPlugin implements EmiPlugin {
         ));
 
         registry.addRecipe(new OxygenFurnaceCategory());
+
+        registry.addRecipe(new EmiAnvilRecipe(
+                EmiStack.of(utmTools.COPPER_THROWING_SPEAR.get()),
+                EmiStack.of(utmItems.COPPER_PLATING.get()),
+                ResourceLocation.fromNamespaceAndPath("utm", "/anvil_repair/copper_throwing_spear")
+        ));
     }
 }

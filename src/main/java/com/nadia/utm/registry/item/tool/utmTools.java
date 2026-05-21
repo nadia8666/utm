@@ -3,6 +3,7 @@ package com.nadia.utm.registry.item.tool;
 import com.nadia.utm.event.ForceLoad;
 import com.nadia.utm.item.FiddleheadItem;
 import com.nadia.utm.item.NetherytraItem;
+import com.nadia.utm.item.ThrowingSpearItem;
 import com.nadia.utm.registry.item.utmItemContainer;
 import com.nadia.utm.registry.tags.utmTags;
 import com.nadia.utm.registry.utmRegistry;
@@ -150,4 +151,7 @@ public class utmTools {
                         SwordItem.createAttributes(tier, 5, -2.4f)));
             }
     ).tags(Tags.Items.ENCHANTABLES, ItemTags.SWORD_ENCHANTABLE, ItemTags.WEAPON_ENCHANTABLE, ItemTags.DURABILITY_ENCHANTABLE, ItemTags.SWORDS).handheld();
+
+    public static final utmItemContainer<ThrowingSpearItem> COPPER_THROWING_SPEAR = register("copper_throwing_spear", () -> new ThrowingSpearItem(new Item.Properties().durability(40).attributes(ThrowingSpearItem.createAttributes()).stacksTo(1))
+    ).tags(ItemTags.VANISHING_ENCHANTABLE);
 }
