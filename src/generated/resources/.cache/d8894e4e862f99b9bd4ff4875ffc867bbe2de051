@@ -1,4 +1,4 @@
-// 1.21.1	2026-04-26T20:55:56.5979434	Item Models: utm
+// 1.21.1	2026-05-21T07:49:35.2408273	Item Models: utm
 0c35c7686bdc2e520fa2ede79bfa3e5855ad5ffc assets/utm/models/item/air_compressor.json
 9d13b4b18c25ee3c81b1cc65fd86954c95187339 assets/utm/models/item/aluminum_ingot.json
 8be274730d1ff844e99a3948cef3e6ec5d0d1e1c assets/utm/models/item/aluminum_ore.json
@@ -11,6 +11,7 @@ f2e9775563c86f68d71b06bb62045008a975a3de assets/utm/models/item/chunk_loader.jso
 336758cbcbfdf58cdfae0d301428baacb9e69221 assets/utm/models/item/copper_axe.json
 b461f6062f97a9a4f36e2c003164cd40afbf068d assets/utm/models/item/copper_hoe.json
 217e72a296aac1f16e6361bccecd2554e576715c assets/utm/models/item/copper_pickaxe.json
+41ec00bc60a7e3749628d32bfa5522a9a371b97e assets/utm/models/item/copper_plating.json
 bc9e209da310ceed24cf8511ef375493917308c7 assets/utm/models/item/copper_shovel.json
 664d628331adc157b5851bb5683780c26db4a20e assets/utm/models/item/copper_sword.json
 4428dd779cf1c9ca27647bfcc5b94d90421be4ad assets/utm/models/item/cyclesword.json

@@ -1,0 +1,28 @@
+{
+  "type": "create:mechanical_crafting",
+  "accept_mirrored": true,
+  "category": "copper",
+  "pattern": [
+    "bscsb",
+    "sscss",
+    "ccbcc",
+    "sscss",
+    "bscsb"
+  ],
+  "key": {
+    "s": {
+      "item": "create:copper_sheet"
+    },
+    "c": {
+      "item": "minecraft:copper_ingot"
+    },
+    "b": {
+      "item": "minecraft:copper_block"
+    }
+  },
+  "result": {
+    "id": "utm:copper_plating",
+    "count": 2
+  },
+  "show_notification": true
+}

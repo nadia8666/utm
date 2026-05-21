@@ -1,0 +1,35 @@
+{
+  "type": "create:mechanical_crafting",
+  "accept_mirrored": true,
+  "category": "copper",
+  "pattern": [
+    "  pplccc",
+    "cPxPclPPPccccccr",
+    "  pplccc"
+  ],
+  "key": {
+    "x": {
+      "item": "minecraft:golden_spear"
+    },
+    "c": {
+      "item": "minecraft:copper_ingot"
+    },
+    "r": {
+      "item": "minecraft:lightning_rod"
+    },
+    "p": {
+      "item": "utm:copper_plating"
+    },
+    "P": {
+      "item": "create:copper_sheet"
+    },
+    "l": {
+      "item": "minecraft:leather"
+    }
+  },
+  "result": {
+    "id": "utm:copper_throwing_spear",
+    "count": 1
+  },
+  "show_notification": true
+}

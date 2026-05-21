@@ -17,5 +17,5 @@ public class utmEntities {
     }
 
     public static final utmEntityContainer<ThrownSpearEntity> THROWN_SPEAR = register("thrown_spear", () ->
-            EntityType.Builder.of(ThrownSpearEntity::new, MobCategory.MISC).sized(0.5f, 0.5f).build("thrown_spear"));
+            EntityType.Builder.<ThrownSpearEntity>of((type, level) -> new ThrownSpearEntity(level), MobCategory.MISC).sized(0.5F, 0.5F).eyeHeight(0.13F).clientTrackingRange(4).updateInterval(20).build("thrown_spear"));
 }

@@ -33,7 +33,13 @@ public class ThrownSpearEntityRenderer extends EntityRenderer<ThrownSpearEntity>
 
         new PoseUtil(ms).push().run(() -> {
             ms.mulPose(Axis.YP.rotationDegrees(Mth.lerp(partialTicks, entity.yRotO, entity.getYRot())));
-            ms.mulPose(Axis.ZP.rotationDegrees(Mth.lerp(partialTicks, entity.xRotO, entity.getXRot())));
+            ms.mulPose(Axis.XN.rotationDegrees(Mth.lerp(partialTicks, entity.xRotO, entity.getXRot())));
+            if (entity.isFlying())
+                entity.LAST_ROTATION = ((entity.level().getGameTime() + partialTicks) * 25) % 360;
+
+            ms.mulPose(Axis.ZP.rotationDegrees(entity.LAST_ROTATION));
+
+            ms.translate(0, 0, -1.25);
         }).run(() -> PartialEntityModelRenderer.render(ms, utmPartialModels.COPPER_THROWING_SPEAR.get(), renderType(entity), buffer, packedLight, 0)).pop();
     }
 
