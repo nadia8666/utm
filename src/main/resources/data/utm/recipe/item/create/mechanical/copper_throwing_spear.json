@@ -3,9 +3,10 @@
   "accept_mirrored": true,
   "category": "copper",
   "pattern": [
-    "  pplccc",
-    "cPxPclPPPccccccr",
-    "  pplccc"
+    "  pplccc ",
+    "cPxPclPPr",
+    "cpppccr  ",
+    "  pplccc "
   ],
   "key": {
     "x": {
