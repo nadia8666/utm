@@ -14,11 +14,11 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.neoforged.api.distmarker.Dist;
-import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import org.jetbrains.annotations.NotNull;
 
 @ForceLoad(dist = Dist.CLIENT)
@@ -42,11 +42,12 @@ public class ThrownSpearEntityRenderer extends EntityRenderer<ThrownSpearEntity>
         return utm.key("textures/entity/copper_throwing_spear.png");
     }
 
+    @SuppressWarnings("deprecation")
     public RenderType renderType(ThrownSpearEntity entity) {
-        return RenderType.entitySolid(getTextureLocation(entity));
+        return RenderType.itemEntityTranslucentCull(TextureAtlas.LOCATION_BLOCKS);
     }
 
     static {
-        utmEvents.register(FMLClientSetupEvent.class, event -> EntityRenderers.register(utmEntities.THROWN_SPEAR.get(), ThrownSpearEntityRenderer::new));
+        utmEvents.register(EntityRenderersEvent.RegisterRenderers.class, event -> event.registerEntityRenderer(utmEntities.THROWN_SPEAR.get(), ThrownSpearEntityRenderer::new));
     }
 }
