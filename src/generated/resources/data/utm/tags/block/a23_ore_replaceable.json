@@ -1,11 +1,11 @@
 {
   "values": [
-    "minecraft:tuff",
-    "minecraft:stone_bricks",
-    "minecraft:andesite",
-    "minecraft:deepslate",
-    "minecraft:stone",
     "minecraft:cobblestone",
-    "minecraft:cobbled_deepslate"
+    "minecraft:deepslate",
+    "minecraft:andesite",
+    "minecraft:stone_bricks",
+    "minecraft:stone",
+    "minecraft:cobbled_deepslate",
+    "minecraft:tuff"
   ]
 }
