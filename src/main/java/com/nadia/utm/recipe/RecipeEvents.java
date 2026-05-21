@@ -35,7 +35,7 @@ public class RecipeEvents {
             int repairedDamage = currentDamage;
 
             while (repairedDamage > 0 && ingotsNeeded < right.getCount()) {
-                repairedDamage -= 5;
+                repairedDamage -= 10;
                 ingotsNeeded++;
             }
 
@@ -45,7 +45,7 @@ public class RecipeEvents {
             output.setDamageValue(repairedDamage);
             event.setOutput(output);
             event.setMaterialCost(ingotsNeeded);
-            event.setCost(0);
+            event.setCost(1);
         }
     }
 }

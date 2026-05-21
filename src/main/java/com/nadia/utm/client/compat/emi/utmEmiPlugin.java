@@ -38,7 +38,7 @@ public class utmEmiPlugin implements EmiPlugin {
         registry.addRecipe(new EmiAnvilRecipe(
                 EmiStack.of(utmTools.COPPER_THROWING_SPEAR.get()),
                 EmiStack.of(utmItems.COPPER_PLATING.get()),
-                ResourceLocation.fromNamespaceAndPath("utm", "anvil_repair/copper_throwing_spear")
+                ResourceLocation.fromNamespaceAndPath("utm", "/anvil_repair/copper_throwing_spear")
         ));
     }
 }

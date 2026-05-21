@@ -144,5 +144,5 @@ public class utmTools {
     ).tags(Tags.Items.ENCHANTABLES, ItemTags.SWORD_ENCHANTABLE, ItemTags.WEAPON_ENCHANTABLE, ItemTags.DURABILITY_ENCHANTABLE, ItemTags.SWORDS, Tags.Items.TOOLS_SHIELD).handheld();
 
     public static final utmItemContainer<ThrowingSpearItem> COPPER_THROWING_SPEAR = register("copper_throwing_spear", () -> new ThrowingSpearItem(new Item.Properties().durability(40).attributes(ThrowingSpearItem.createAttributes()).stacksTo(1))
-    ).tags(ItemTags.DURABILITY_ENCHANTABLE);
+    ).tags(ItemTags.VANISHING_ENCHANTABLE);
 }
