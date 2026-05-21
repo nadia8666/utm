@@ -1,7 +1,7 @@
 package com.nadia.utm.behavior.space;
 
 import com.nadia.utm.event.ForceLoad;
-import com.nadia.utm.event.utmEvents;
+import com.nadia.utm.event.utmEventHost;
 import com.nadia.utm.registry.dimension.utmDimensions;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -117,14 +117,14 @@ public class SpaceEntityManager extends SavedData {
     }
 
     static {
-        utmEvents.register(LevelTickEvent.Post.class, event -> {
+        utmEventHost.register(LevelTickEvent.Post.class, event -> {
             if (event.getLevel() instanceof ServerLevel slevel && slevel.dimension().equals(utmDimensions.SPACE_KEY)) {
                 SpaceEntityManager manager = getInstance(slevel);
                 manager.tick(slevel);
             }
         });
 
-        utmEvents.register(EntityJoinLevelEvent.class, event -> {
+        utmEventHost.register(EntityJoinLevelEvent.class, event -> {
             if (event.getLevel().dimension().equals(utmDimensions.SPACE_KEY) && event.getLevel() instanceof ServerLevel slevel) {
                 if (LOADING_FOR.contains(event.getLevel().dimension())) return;
 

@@ -3,7 +3,7 @@ package com.nadia.utm.client.renderer.advanced_goggles;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.nadia.utm.event.ForceLoad;
 import com.nadia.utm.event.events.OxygenPayloadEvent;
-import com.nadia.utm.event.utmEvents;
+import com.nadia.utm.event.utmEventHost;
 import com.nadia.utm.item.AdvancedGogglesItem;
 import com.nadia.utm.networking.payloads.GetOxygenPayload;
 import com.nadia.utm.networking.utmNetworking;
@@ -357,8 +357,8 @@ public class AdvancedGogglesRenderer {
     }
 
     static {
-        utmEvents.register(RegisterGuiLayersEvent.class, event -> event.registerAbove(VanillaGuiLayers.CROSSHAIR, utm.key("advanced_goggle_info"), AdvancedGogglesRenderer::renderOverlay));
-        utmEvents.register(OxygenPayloadEvent.class, event -> {
+        utmEventHost.register(RegisterGuiLayersEvent.class, event -> event.registerAbove(VanillaGuiLayers.CROSSHAIR, utm.key("advanced_goggle_info"), AdvancedGogglesRenderer::renderOverlay));
+        utmEventHost.register(OxygenPayloadEvent.class, event -> {
             GetOxygenPayload payload = event.PAYLOAD;
             UUID uuid = UUID.fromString(payload.id());
             int oxygen = payload.oxygen();

@@ -1,7 +1,7 @@
 package com.nadia.utm.behavior.space;
 
 import com.nadia.utm.event.ForceLoad;
-import com.nadia.utm.event.utmEvents;
+import com.nadia.utm.event.utmEventHost;
 import com.nadia.utm.registry.attachment.utmAttachments;
 import com.nadia.utm.registry.enchantment.utmEnchantments;
 import com.nadia.utm.registry.planets.utmPlanets;
@@ -83,10 +83,10 @@ public class SpaceStateHandler {
     );
 
     static {
-        utmEvents.register(PlayerTickEvent.Post.class, SpaceStateHandler::onPlayerTick);
-        utmEvents.register(EntityTickEvent.Post.class, SpaceStateHandler::onEntityTick);
-        utmEvents.register(LivingEvent.LivingJumpEvent.class, SpaceStateHandler::onJump);
-        utmEvents.register(LivingFallEvent.class, event -> {
+        utmEventHost.register(PlayerTickEvent.Post.class, SpaceStateHandler::onPlayerTick);
+        utmEventHost.register(EntityTickEvent.Post.class, SpaceStateHandler::onEntityTick);
+        utmEventHost.register(LivingEvent.LivingJumpEvent.class, SpaceStateHandler::onJump);
+        utmEventHost.register(LivingFallEvent.class, event -> {
             Entity entity = event.getEntity();
 
             if (entity.getTags().contains("utm_reentry_landing")) {
@@ -97,7 +97,7 @@ public class SpaceStateHandler {
             }
         });
 
-        utmEvents.register(BonemealEvent.class, event -> {
+        utmEventHost.register(BonemealEvent.class, event -> {
             LevelAccessor accessor = event.getLevel();
             BlockPos pos = event.getPos();
 
@@ -117,7 +117,7 @@ public class SpaceStateHandler {
             }
         });
 
-        utmEvents.register(CropGrowEvent.Pre.class, event -> {
+        utmEventHost.register(CropGrowEvent.Pre.class, event -> {
             LevelAccessor accessor = event.getLevel();
             BlockPos pos = event.getPos();
 

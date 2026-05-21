@@ -1,7 +1,7 @@
 package com.nadia.utm.client.renderer.advanced_goggles;
 
 import com.nadia.utm.event.ForceLoad;
-import com.nadia.utm.event.utmEvents;
+import com.nadia.utm.event.utmEventHost;
 import com.nadia.utm.item.AdvancedGogglesItem;
 import com.nadia.utm.registry.input.utmKeyMappings;
 import net.minecraft.client.Minecraft;
@@ -14,17 +14,17 @@ import org.lwjgl.glfw.GLFW;
 @ForceLoad(dist = Dist.CLIENT)
 public class GoggleInputHandler {
     static {
-        utmEvents.register(InputEvent.MouseButton.Pre.class, event -> changed(event.getButton(), event.getAction(), -1, -1));
+        utmEventHost.register(InputEvent.MouseButton.Pre.class, event -> changed(event.getButton(), event.getAction(), -1, -1));
 
-        utmEvents.register(ScreenEvent.MouseButtonPressed.Pre.class, event -> {
+        utmEventHost.register(ScreenEvent.MouseButtonPressed.Pre.class, event -> {
             if (changed(event.getButton(), GLFW.GLFW_PRESS, (int) event.getMouseX(), (int) event.getMouseY())) {
                 event.setCanceled(true);
             }
         });
 
-        utmEvents.register(ScreenEvent.MouseButtonReleased.Pre.class, event -> changed(event.getButton(), GLFW.GLFW_RELEASE, (int) event.getMouseX(), (int) event.getMouseY()));
+        utmEventHost.register(ScreenEvent.MouseButtonReleased.Pre.class, event -> changed(event.getButton(), GLFW.GLFW_RELEASE, (int) event.getMouseX(), (int) event.getMouseY()));
 
-        utmEvents.register(ScreenEvent.MouseDragged.Pre.class, event -> {
+        utmEventHost.register(ScreenEvent.MouseDragged.Pre.class, event -> {
             if (AdvancedGogglesRenderer.CURRENT_PANEL != null) {
                 AdvancedGogglesRenderer.CURRENT_PANEL.X = (int) event.getMouseX() - AdvancedGogglesRenderer.OFF_X;
                 AdvancedGogglesRenderer.CURRENT_PANEL.Y = (int) event.getMouseY() - AdvancedGogglesRenderer.OFF_Y;
@@ -32,7 +32,7 @@ public class GoggleInputHandler {
             }
         });
 
-        utmEvents.register(InputEvent.Key.class, event -> {
+        utmEventHost.register(InputEvent.Key.class, event -> {
             Minecraft mc = Minecraft.getInstance();
             if (mc.level == null || mc.screen != null) return;
             if (!AdvancedGogglesItem.isWearingAdvancedGoggles(mc.player)) return;

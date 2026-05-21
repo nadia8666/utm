@@ -1,7 +1,7 @@
 package com.nadia.utm.block.misc.oxygen_furnace;
 
 import com.nadia.utm.event.ForceLoad;
-import com.nadia.utm.event.utmEvents;
+import com.nadia.utm.event.utmEventHost;
 import com.nadia.utm.gui.OxygenFurnaceMenu;
 import com.nadia.utm.registry.block.utmBlockEntities;
 import com.nadia.utm.registry.fluid.utmFluids;
@@ -160,7 +160,7 @@ public class OxygenFurnaceBlockEntity extends SmartBlockEntity implements MenuPr
     }
 
     static {
-        utmEvents.register(RegisterCapabilitiesEvent.class, (event) -> {
+        utmEventHost.register(RegisterCapabilitiesEvent.class, (event) -> {
             event.registerBlockEntity(
                     Capabilities.FluidHandler.BLOCK,
                     utmBlockEntities.OXYGEN_FURNACE.get(),

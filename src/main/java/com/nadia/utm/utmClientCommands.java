@@ -2,7 +2,7 @@ package com.nadia.utm;
 
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.nadia.utm.event.ForceLoad;
-import com.nadia.utm.event.utmEvents;
+import com.nadia.utm.event.utmEventHost;
 import com.nadia.utm.registry.attachment.utmAttachments;
 import com.nadia.utm.updater.AutoUpdater;
 import com.nadia.utm.updater.ToastDisplaySignal;
@@ -24,7 +24,7 @@ import static com.nadia.utm.updater.AutoUpdater.VersionTarget;
 @ForceLoad(dist = Dist.CLIENT)
 public class utmClientCommands {
     static {
-        utmEvents.register(RegisterClientCommandsEvent.class, event -> event.getDispatcher().register(Commands.literal("utm")
+        utmEventHost.register(RegisterClientCommandsEvent.class, event -> event.getDispatcher().register(Commands.literal("utm")
                 .then(Commands.literal("update").executes(context -> {
                     AutoUpdater.checkForUpdate();
 

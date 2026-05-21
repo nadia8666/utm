@@ -1,13 +1,20 @@
 package com.nadia.utm.entity.spear;
 
+import com.nadia.utm.registry.data.utmDataComponents;
 import com.nadia.utm.registry.entity.utmEntities;
 import com.nadia.utm.registry.item.tool.utmTools;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
@@ -17,20 +24,41 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Objects;
+
 public class ThrownSpearEntity extends AbstractArrow {
     public float LAST_ROTATION = 0;
     public boolean HIT_ENTITY = false;
+    public ItemStack COPY_STACK;
+
+    private static final EntityDataAccessor<String> MODEL =
+            SynchedEntityData.defineId(ThrownSpearEntity.class, EntityDataSerializers.STRING);
 
     public ThrownSpearEntity(Level level) {
         super(utmEntities.THROWN_SPEAR.get(), level);
+        COPY_STACK = new ItemStack(utmTools.COPPER_THROWING_SPEAR.get());
     }
 
     public ThrownSpearEntity(Level level, LivingEntity shooter, ItemStack stack) {
         super(utmEntities.THROWN_SPEAR.get(), shooter, level, stack, stack);
+        COPY_STACK = stack.copy();
+        updateModel();
     }
 
     public ThrownSpearEntity(Level level, double x, double y, double z, ItemStack stack) {
         super(utmEntities.THROWN_SPEAR.get(), x, y, z, level, stack, stack);
+        COPY_STACK = stack.copy();
+        updateModel();
+    }
+
+    public void updateModel() {
+        if (level().isClientSide) return;
+
+        entityData.set(MODEL, COPY_STACK.getOrDefault(utmDataComponents.THROWING_SPEAR_MODEL, "copper_throwing_spear"));
+    }
+
+    public String getModel() {
+        return entityData.get(MODEL);
     }
 
     @Override
@@ -49,6 +77,12 @@ public class ThrownSpearEntity extends AbstractArrow {
     }
 
     @Override
+    protected void defineSynchedData(SynchedEntityData.@NotNull Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(MODEL, "default");
+    }
+
+    @Override
     public void tickDespawn() {
     }
 
@@ -62,14 +96,34 @@ public class ThrownSpearEntity extends AbstractArrow {
     }
 
     @Override
+    public void addAdditionalSaveData(@NotNull CompoundTag compound) {
+        super.addAdditionalSaveData(compound);
+        compound.putString("SpearModel", getModel());
+    }
+
+    @Override
+    public void readAdditionalSaveData(@NotNull CompoundTag compound) {
+        super.readAdditionalSaveData(compound);
+        entityData.set(MODEL, compound.getString("SpearModel"));
+    }
+
+    @Override
     protected void onHitEntity(EntityHitResult result) {
         HIT_ENTITY = true;
+
+        float[] damage = {0.0F};
+
+        COPY_STACK.getAttributeModifiers().forEach(EquipmentSlot.MAINHAND, (attributeHolder, modifier) -> {
+            if (attributeHolder.is(Objects.requireNonNull(Attributes.ATTACK_DAMAGE.getKey()))) {
+                damage[0] += (float) modifier.amount();
+            }
+        });
 
         Entity entity = result.getEntity();
         Entity owner = this.getOwner();
         DamageSource source = this.damageSources().fallingStalactite(entity);
 
-        if (entity.hurt(source, 5.5F))
+        if (entity.hurt(source, damage[0]))
             if (entity instanceof LivingEntity livingentity) {
                 this.doKnockback(livingentity, source);
                 this.doPostHurtEffects(livingentity);
@@ -92,7 +146,7 @@ public class ThrownSpearEntity extends AbstractArrow {
             if (!itemStack.isEmpty()) {
                 boolean canBreak = itemStack.getEnchantmentLevel(this.registryAccess().holderOrThrow(Enchantments.VANISHING_CURSE)) > 0;
 
-                itemStack.hurtAndBreak(canBreak ? 5 : Math.min(5, itemStack.getMaxDamage()-itemStack.getDamageValue()-1), serverLevel, null, item -> {
+                itemStack.hurtAndBreak(canBreak ? 5 : Math.min(5, itemStack.getMaxDamage() - itemStack.getDamageValue() - 1), serverLevel, null, item -> {
                     this.discard();
                     this.playSound(SoundEvents.ITEM_BREAK, 1.0F, 1.0F);
                 });

@@ -2,7 +2,7 @@ package com.nadia.utm.block.misc.oxygen_collector;
 
 import com.nadia.utm.block.components.OutputOnlyTank;
 import com.nadia.utm.event.ForceLoad;
-import com.nadia.utm.event.utmEvents;
+import com.nadia.utm.event.utmEventHost;
 import com.nadia.utm.registry.block.utmBlockEntities;
 import com.nadia.utm.registry.fluid.utmFluids;
 import com.nadia.utm.util.AdvancementUtil;
@@ -126,7 +126,7 @@ public class OxygenCollectorBlockEntity extends SplitShaftBlockEntity implements
     }
 
     static {
-        utmEvents.register(RegisterCapabilitiesEvent.class, event -> event.registerBlockEntity(
+        utmEventHost.register(RegisterCapabilitiesEvent.class, event -> event.registerBlockEntity(
                 Capabilities.FluidHandler.BLOCK,
                 utmBlockEntities.OXYGEN_COLLECTOR.get(),
                 (be, side) -> (side != Direction.DOWN && side != Direction.UP) ? be.TANK : null

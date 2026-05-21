@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:smithing_transform",
+  "group": "copper",
+  "base": {
+    "item": "utm:copper_throwing_spear"
+  },
+  "addition": {
+    "item": "minecraft:netherite_ingot"
+  },
+  "template": {
+    "item": "minecraft:netherite_upgrade_smithing_template"
+  },
+  "result": {
+    "id": "utm:netherite_throwing_spear",
+    "count": 1
+  }
+}

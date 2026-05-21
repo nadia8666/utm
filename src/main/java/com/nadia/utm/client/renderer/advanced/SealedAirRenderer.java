@@ -3,7 +3,7 @@ package com.nadia.utm.client.renderer.advanced;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.nadia.utm.behavior.space.SealedChunkData;
 import com.nadia.utm.event.ForceLoad;
-import com.nadia.utm.event.utmEvents;
+import com.nadia.utm.event.utmEventHost;
 import com.nadia.utm.item.AdvancedGogglesItem;
 import com.nadia.utm.networking.payloads.RequestSealedDataPayload;
 import com.nadia.utm.registry.attachment.utmAttachments;
@@ -43,7 +43,7 @@ public class SealedAirRenderer {
     }
 
     static {
-        utmEvents.register(RenderLevelStageEvent.class, event -> {
+        utmEventHost.register(RenderLevelStageEvent.class, event -> {
             if (event.getStage() != RenderLevelStageEvent.Stage.AFTER_PARTICLES || !shouldRender())
                 return;
 
