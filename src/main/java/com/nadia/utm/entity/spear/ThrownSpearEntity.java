@@ -11,6 +11,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
@@ -89,7 +90,9 @@ public class ThrownSpearEntity extends AbstractArrow {
             this.playSound(SoundEvents.BELL_BLOCK, 1.0F, 1.0F);
 
             if (!itemStack.isEmpty()) {
-                itemStack.hurtAndBreak(Math.min(5, itemStack.getMaxDamage()-itemStack.getDamageValue()-1), serverLevel, null, item -> {
+                boolean canBreak = itemStack.getEnchantmentLevel(this.registryAccess().holderOrThrow(Enchantments.VANISHING_CURSE)) > 0;
+
+                itemStack.hurtAndBreak(canBreak ? 5 : Math.min(5, itemStack.getMaxDamage()-itemStack.getDamageValue()-1), serverLevel, null, item -> {
                     this.discard();
                     this.playSound(SoundEvents.ITEM_BREAK, 1.0F, 1.0F);
                 });
