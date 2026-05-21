@@ -2,6 +2,7 @@ package com.nadia.utm.client.ui;
 
 import com.nadia.utm.config.utmClientConfig;
 import com.nadia.utm.networking.payloads.TabLayerPayload;
+import com.nadia.utm.utm;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.PlayerFaceRenderer;
@@ -20,7 +21,7 @@ import java.util.Objects;
 
 @EventBusSubscriber(modid = "utm", value = Dist.CLIENT)
 public class TabMenuLayer {
-    public static final ResourceLocation OFFLINE_HEAD = ResourceLocation.fromNamespaceAndPath("utm", "textures/gui/player_offline.png");
+    public static final ResourceLocation OFFLINE_HEAD = utm.key("textures/gui/player_offline.png");
     public static List<TabLayerPayload.PlayerData> CACHE = new ArrayList<>();
 
     @SubscribeEvent

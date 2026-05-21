@@ -116,7 +116,7 @@ public class utmClientEvents {
 
             utmEventHost.register(RegisterDimensionSpecialEffectsEvent.class, event -> {
                 event.register(
-                        ResourceLocation.fromNamespaceAndPath("utm", "2313ag"),
+                        utm.key("2313ag"),
                         new DimensionSpecialEffects(Float.NaN, false, DimensionSpecialEffects.SkyType.NONE, false, false) {
                             @Override
                             public @NotNull Vec3 getBrightnessDependentFogColor(@NotNull Vec3 pos, float arg2) {
@@ -135,7 +135,7 @@ public class utmClientEvents {
                             }
                         });
                 event.register(
-                        ResourceLocation.fromNamespaceAndPath("utm", "space"),
+                        utm.key("space"),
                         new DimensionSpecialEffects(Float.NaN, false, DimensionSpecialEffects.SkyType.NORMAL, false, false) {
                             @Override
                             public @NotNull Vec3 getBrightnessDependentFogColor(@NotNull Vec3 pos, float arg2) {

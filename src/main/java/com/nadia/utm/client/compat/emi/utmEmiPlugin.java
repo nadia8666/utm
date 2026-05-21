@@ -3,6 +3,7 @@ package com.nadia.utm.client.compat.emi;
 import com.nadia.utm.registry.block.utmBlocks;
 import com.nadia.utm.registry.item.tool.utmTools;
 import com.nadia.utm.registry.item.utmItems;
+import com.nadia.utm.utm;
 import dev.emi.emi.api.EmiEntrypoint;
 import dev.emi.emi.api.EmiInitRegistry;
 import dev.emi.emi.api.EmiPlugin;
@@ -10,7 +11,6 @@ import dev.emi.emi.api.EmiRegistry;
 import dev.emi.emi.api.stack.EmiStack;
 import dev.emi.emi.recipe.EmiAnvilRecipe;
 import mezz.jei.api.runtime.IJeiRuntime;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
@@ -32,7 +32,7 @@ public class utmEmiPlugin implements EmiPlugin {
         registry.addWorkstation(OxygenFurnaceCategory.CATEGORY, EmiStack.of(utmBlocks.OXYGEN_FURNACE.ITEM.get()));
 
         registry.addRecipe(new AnvilTransformCategory(
-                ResourceLocation.fromNamespaceAndPath("utm", "/anvil_transform/heavy_metal_anvil"),
+                utm.key("/anvil_transform/heavy_metal_anvil"),
                 new ItemStack(Items.ANVIL),
                 new ItemStack(Items.NETHERITE_INGOT),
                 new ItemStack(utmBlocks.HEAVY_METAL_ANVIL.ITEM.get())
@@ -43,7 +43,7 @@ public class utmEmiPlugin implements EmiPlugin {
         registry.addRecipe(new EmiAnvilRecipe(
                 EmiStack.of(utmTools.COPPER_THROWING_SPEAR.get()),
                 EmiStack.of(utmItems.COPPER_PLATING.get()),
-                ResourceLocation.fromNamespaceAndPath("utm", "/anvil_repair/copper_throwing_spear")
+                utm.key("/anvil_repair/copper_throwing_spear")
         ));
     }
 }

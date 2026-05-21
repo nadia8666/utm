@@ -1,5 +1,6 @@
 package com.nadia.utm.client.ui.glint;
 
+import com.nadia.utm.utm;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
@@ -12,8 +13,8 @@ import org.jetbrains.annotations.NotNull;
 
 public class GlintButton extends AbstractWidget {
     public boolean pressed = true;
-    public static final ResourceLocation BUTTON_DEFAULT = ResourceLocation.fromNamespaceAndPath("utm", "textures/gui/container/glint_table_btn.png");
-    public static final ResourceLocation BUTTON_PRESSED = ResourceLocation.fromNamespaceAndPath("utm", "textures/gui/container/glint_table_btn_p.png");
+    public static final ResourceLocation BUTTON_DEFAULT = utm.key("textures/gui/container/glint_table_btn.png");
+    public static final ResourceLocation BUTTON_PRESSED = utm.key("textures/gui/container/glint_table_btn_p.png");
     private final Runnable onSync;
 
     public GlintButton(int x, int y, int width, int height, Component message, Runnable onSync) {

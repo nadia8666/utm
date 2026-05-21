@@ -1,6 +1,7 @@
 package com.nadia.utm.gui.compat;
 
 import com.nadia.utm.networking.payloads.DropGravePayload;
+import com.nadia.utm.utm;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
@@ -13,7 +14,7 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.NotNull;
 
 public class ObituaryDropButton extends AbstractWidget {
-    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath("utm", "textures/gui/gravestone_descend.png");
+    public static final ResourceLocation TEXTURE = utm.key("textures/gui/gravestone_descend.png");
     private final DropGravePayload PAYLOAD;
     public ObituaryDropButton(int x, int y, int width, int height, Component message, DropGravePayload payload) {
         super(x, y, width, height, message);

@@ -1,8 +1,8 @@
 package com.nadia.utm.registry.song;
 
+import com.nadia.utm.utm;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.JukeboxSong;
 
 public class utmSongs {
@@ -11,6 +11,6 @@ public class utmSongs {
     public static final ResourceKey<JukeboxSong> UNDERTALE = create("undertale");
 
     private static ResourceKey<JukeboxSong> create(String name) {
-        return ResourceKey.create(Registries.JUKEBOX_SONG, ResourceLocation.fromNamespaceAndPath("utm", name));
+        return ResourceKey.create(Registries.JUKEBOX_SONG, utm.key(name));
     }
 }

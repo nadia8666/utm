@@ -1,6 +1,7 @@
 package com.nadia.utm.client.ui.launch;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.nadia.utm.utm;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Renderable;
 import net.minecraft.client.gui.screens.Screen;
@@ -10,7 +11,7 @@ import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 
 public class LaunchScreen extends Screen {
-    public static final ResourceLocation GUI_TEXTURE = ResourceLocation.fromNamespaceAndPath("utm", "textures/gui/launch_contraption.png");
+    public static final ResourceLocation GUI_TEXTURE = utm.key("textures/gui/launch_contraption.png");
     public final int CONTRAPTION_ID;
 
     public LaunchScreen(Component title, int contraptionID) {

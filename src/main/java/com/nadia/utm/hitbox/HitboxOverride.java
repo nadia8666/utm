@@ -1,5 +1,6 @@
 package com.nadia.utm.hitbox;
 
+import com.nadia.utm.utm;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -11,7 +12,7 @@ import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
 @EventBusSubscriber
 public class HitboxOverride {
-    public static final ResourceLocation ELYTRA_SPEED_REACH = ResourceLocation.fromNamespaceAndPath("utm", "elytra_speed_reach");
+    public static final ResourceLocation ELYTRA_SPEED_REACH = utm.key("elytra_speed_reach");
 
     @SubscribeEvent
     public static void onPlayerTick(PlayerTickEvent.Post event) {

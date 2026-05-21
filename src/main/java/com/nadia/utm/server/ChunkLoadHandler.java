@@ -2,11 +2,11 @@ package com.nadia.utm.server;
 
 import com.nadia.utm.block.misc.loader.BlockChunkLoaderBlock;
 import com.nadia.utm.block.misc.loader.ChunkLoaderBlockEntity;
+import com.nadia.utm.event.ForceLoad;
+import com.nadia.utm.event.utmEventHost;
+import com.nadia.utm.utm;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.world.chunk.RegisterTicketControllersEvent;
 import net.neoforged.neoforge.common.world.chunk.TicketController;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
@@ -14,10 +14,10 @@ import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import java.util.HashMap;
 import java.util.Map;
 
-@EventBusSubscriber(modid = "utm")
+@ForceLoad
 public class ChunkLoadHandler {
     public static final TicketController CONTROLLER = new TicketController(
-            ResourceLocation.fromNamespaceAndPath("utm", "chunk_loader"),
+            utm.key("chunk_loader"),
             (level, helper) ->
                     helper.getBlockTickets().forEach((pos, ticketSet) -> {
                         if (!(level.getBlockState(pos).getBlock() instanceof BlockChunkLoaderBlock)) {
@@ -37,26 +37,25 @@ public class ChunkLoadHandler {
         LOADERS.remove(pos, entity);
     }
 
-    @SubscribeEvent
-    public static void onRegisterTicketControllers(RegisterTicketControllersEvent event) {
-        event.register(CONTROLLER);
-    }
-
-    @SubscribeEvent
-    public static void onPlayerJoin(PlayerEvent.PlayerLoggedInEvent event) {
-        if (event.getEntity() instanceof ServerPlayer player) LOADERS.forEach((ignored, entity) -> {
-            if (entity.SOURCE != null && entity.SOURCE == player.getUUID()) {
-                entity.setLoaded(player.serverLevel(), true);
-            }
+    static {
+        utmEventHost.register(RegisterTicketControllersEvent.class, event -> {
+            event.register(CONTROLLER);
         });
-    }
 
-    @SubscribeEvent
-    public static void onPlayerLeave(PlayerEvent.PlayerLoggedOutEvent event) {
-        if (event.getEntity() instanceof ServerPlayer player) LOADERS.forEach((ignored, entity) -> {
-            if (entity.SOURCE != null && entity.SOURCE == player.getUUID()) {
-                entity.setLoaded(player.serverLevel(), false);
-            }
+        utmEventHost.register(PlayerEvent.PlayerLoggedInEvent.class, event -> {
+            if (event.getEntity() instanceof ServerPlayer player) LOADERS.forEach((ignored, entity) -> {
+                if (entity.SOURCE != null && entity.SOURCE == player.getUUID()) {
+                    entity.setLoaded(player.serverLevel(), true);
+                }
+            });
+        });
+
+        utmEventHost.register(PlayerEvent.PlayerLoggedOutEvent.class, event -> {
+            if (event.getEntity() instanceof ServerPlayer player) LOADERS.forEach((ignored, entity) -> {
+                if (entity.SOURCE != null && entity.SOURCE == player.getUUID()) {
+                    entity.setLoaded(player.serverLevel(), false);
+                }
+            });
         });
     }
 }
