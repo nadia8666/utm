@@ -21,4 +21,6 @@ public class utmModels {
     public static final PartialModel THRUST_ION = PartialModel.of(utm.key("block/thrust_ion"));
     public static final PartialModel THRUST_LARGE_1 = PartialModel.of(utm.key("block/thrust_large1"));
     public static final PartialModel THRUST_LARGE_2 = PartialModel.of(utm.key("block/thrust_large2"));
+
+    public static final PartialModel COPPER_THROWING_SPEAR = PartialModel.of(utm.key("item/copper_throwing_spear"));
 }
