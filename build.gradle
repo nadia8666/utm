@@ -124,8 +124,7 @@ dependencies {
     implementation("com.tterrag.registrate:Registrate:${registrate_version}")
 
     // EMI+JEI
-    compileOnly("dev.emi:emi-neoforge:${emi_version}:api")
-    runtimeOnly("dev.emi:emi-neoforge:${emi_version}")
+    implementation("dev.emi:emi-neoforge:${emi_version}")
     compileOnly("mezz.jei:jei-1.21.1-neoforge-api:19.27.0.340")
     runtimeOnly("maven.modrinth:jei:YAcQ6elZ")
 
