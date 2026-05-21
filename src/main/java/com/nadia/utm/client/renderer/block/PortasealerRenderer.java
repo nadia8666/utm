@@ -4,7 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.nadia.utm.block.entity.PortasealerBlockEntity;
 import com.nadia.utm.client.renderer.IBlockstateRotatedRenderer;
 import com.nadia.utm.event.ForceLoad;
-import com.nadia.utm.event.utmEvents;
+import com.nadia.utm.event.utmEventHost;
 import com.nadia.utm.registry.block.utmBlockEntities;
 import com.nadia.utm.util.PoseUtil;
 import com.simibubi.create.foundation.blockEntity.renderer.SafeBlockEntityRenderer;
@@ -33,7 +33,7 @@ public class PortasealerRenderer extends SafeBlockEntityRenderer<PortasealerBloc
     }
 
     static {
-        utmEvents.register(EntityRenderersEvent.RegisterRenderers.class, (event) -> event.registerBlockEntityRenderer(
+        utmEventHost.register(EntityRenderersEvent.RegisterRenderers.class, (event) -> event.registerBlockEntityRenderer(
                 utmBlockEntities.PORTASEALER.get(),
                 PortasealerRenderer::new
         ));

@@ -31,13 +31,13 @@ public class ThrowingSpearItem extends Item implements ProjectileItem {
         super(properties);
     }
 
-    public static ItemAttributeModifiers createAttributes() {
+    public static ItemAttributeModifiers createAttributes(Float damage, Float speed) {
         return ItemAttributeModifiers.builder()
                 .add(
-                        Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_ID, 5.5F, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND
+                        Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_ID, damage, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND
                 )
                 .add(
-                        Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_ID, -2.9F, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND
+                        Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_ID, speed, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND
                 )
                 .build();
     }

@@ -1,7 +1,7 @@
 package com.nadia.utm.client.renderer;
 
 import com.nadia.utm.event.ForceLoad;
-import com.nadia.utm.event.utmEvents;
+import com.nadia.utm.event.utmEventHost;
 import net.minecraft.client.model.PlayerModel;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
@@ -13,7 +13,7 @@ import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 @ForceLoad(dist = Dist.CLIENT)
 public class utmEntityRenderer {
     static {
-        utmEvents.register(EntityRenderersEvent.AddLayers.class, event -> {
+        utmEventHost.register(EntityRenderersEvent.AddLayers.class, event -> {
             for (PlayerSkin.Model skin : event.getSkins())
                 if (event.getSkin(skin) instanceof LivingEntityRenderer<?, ?> renderer)
                     if (renderer.getModel() instanceof PlayerModel<?>) {

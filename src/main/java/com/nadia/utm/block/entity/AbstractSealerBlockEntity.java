@@ -2,7 +2,7 @@ package com.nadia.utm.block.entity;
 
 import com.nadia.utm.event.ForceLoad;
 import com.nadia.utm.event.events.BlockStateChangedEvent;
-import com.nadia.utm.event.utmEvents;
+import com.nadia.utm.event.utmEventHost;
 import com.nadia.utm.registry.fluid.utmFluids;
 import com.nadia.utm.registry.tags.utmTags;
 import com.nadia.utm.util.*;
@@ -337,10 +337,10 @@ public abstract class AbstractSealerBlockEntity extends SplitShaftBlockEntity im
     }
 
     static {
-        utmEvents.register(BlockEvent.EntityPlaceEvent.class, event -> handleWorldChange(event.getLevel(), event.getPos()));
-        utmEvents.register(BlockEvent.BreakEvent.class, event -> handleWorldChange(event.getLevel(), event.getPos()));
-        utmEvents.register(BlockEvent.FluidPlaceBlockEvent.class, event -> handleWorldChange(event.getLevel(), event.getPos()));
-        utmEvents.register(BlockStateChangedEvent.class, event -> handleWorldChange(event.Level, event.Pos));
+        utmEventHost.register(BlockEvent.EntityPlaceEvent.class, event -> handleWorldChange(event.getLevel(), event.getPos()));
+        utmEventHost.register(BlockEvent.BreakEvent.class, event -> handleWorldChange(event.getLevel(), event.getPos()));
+        utmEventHost.register(BlockEvent.FluidPlaceBlockEvent.class, event -> handleWorldChange(event.getLevel(), event.getPos()));
+        utmEventHost.register(BlockStateChangedEvent.class, event -> handleWorldChange(event.Level, event.Pos));
     }
 
     private static void handleWorldChange(LevelAccessor accessor, BlockPos pos) {

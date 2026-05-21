@@ -10,7 +10,7 @@ import java.util.function.Consumer;
 
 /**
  * loads target class immediately apon mod start.
- * mandatory for {@link utmEvents#register(Class, Consumer)} bound events.
+ * mandatory for {@link utmEventHost#register(Class, Consumer)} bound events.
  * otherwise useful for registry/sanity reasons.
  */
 @Retention(RetentionPolicy.RUNTIME)

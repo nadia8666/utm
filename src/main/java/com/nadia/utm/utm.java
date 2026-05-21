@@ -1,33 +1,32 @@
 package com.nadia.utm;
 
-import com.nadia.utm.event.ForceLoad;
-import com.nadia.utm.event.utmEvents;
-import net.minecraft.resources.ResourceLocation;
-import net.neoforged.fml.loading.FMLEnvironment;
-import net.neoforged.fml.loading.FMLPaths;
-import net.neoforged.fml.loading.modscan.ModAnnotation;
-import net.neoforged.neoforgespi.language.ModFileScanData;
-import org.objectweb.asm.Type;
-import org.slf4j.Logger;
-
 import com.mojang.logging.LogUtils;
+import com.nadia.utm.event.ForceLoad;
+import com.nadia.utm.event.utmEventHost;
 import com.nadia.utm.registry.utmRegistry;
 import com.nadia.utm.updater.AutoUpdater;
-
+import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.fml.loading.FMLEnvironment;
+import net.neoforged.fml.loading.FMLPaths;
+import net.neoforged.fml.loading.modscan.ModAnnotation;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
+import net.neoforged.neoforgespi.language.ModFileScanData;
+import org.objectweb.asm.Type;
+import org.slf4j.Logger;
 
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.function.Function;
 
 @Mod(utm.MODID)
@@ -37,7 +36,7 @@ public class utm {
     public static String VERSION = "";
 
     public utm(IEventBus bus, ModContainer container) {
-        utmEvents.setup(bus);
+        utmEventHost.setup(bus);
         loadClasses(container, FMLEnvironment.dist.name());
 
         VERSION = container.getModInfo().getVersion().toString();
@@ -79,7 +78,7 @@ public class utm {
                 try {
                     utm.LOGGER.info("[UTM] Initializing class {}!", data.clazz().getClassName());
                     LOADED_CLASSES.add(data.clazz().getClassName());
-                    Class.forName(data.clazz().getClassName(), true, utmEvents.class.getClassLoader());
+                    Class.forName(data.clazz().getClassName(), true, utmEventHost.class.getClassLoader());
                 } catch (ClassNotFoundException e) {
                     utm.LOGGER.error("[UTM] Failed to load class {} on {}, there WILL be problems!", data.clazz().getClassName(), dist);
                 }
@@ -116,6 +115,6 @@ public class utm {
     }
 
     public static ResourceLocation key(String path) {
-        return ResourceLocation.fromNamespaceAndPath("utm", path);
+        return ResourceLocation.tryBuild("utm", path);
     }
 }

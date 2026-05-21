@@ -4,12 +4,11 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.nadia.utm.Config;
 import com.nadia.utm.behavior.space.SealedChunkData;
 import com.nadia.utm.event.ForceLoad;
-import com.nadia.utm.event.utmEvents;
+import com.nadia.utm.event.utmEventHost;
 import com.nadia.utm.networking.payloads.debug.RequestSealedDataPayload;
 import com.nadia.utm.registry.attachment.utmAttachments;
 import com.nadia.utm.util.PoseUtil;
 import com.nadia.utm.util.SableUtil;
-import dev.ryanhcode.sable.companion.SableCompanion;
 import dev.ryanhcode.sable.sublevel.SubLevel;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
@@ -35,7 +34,7 @@ public class SealedAirDebugRenderer {
     private static final long REFRESH_RATE = 20L;
 
     static {
-        utmEvents.register(RenderLevelStageEvent.class, event -> {
+        utmEventHost.register(RenderLevelStageEvent.class, event -> {
             if (!Config.DEBUG_SEALED_AIR.getAsBoolean() || event.getStage() != RenderLevelStageEvent.Stage.AFTER_PARTICLES)
                 return;
 

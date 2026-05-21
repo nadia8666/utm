@@ -2,7 +2,7 @@ package com.nadia.utm.behavior.space;
 
 import com.nadia.utm.compat.IContraptionNBTAccessor;
 import com.nadia.utm.event.ForceLoad;
-import com.nadia.utm.event.utmEvents;
+import com.nadia.utm.event.utmEventHost;
 import com.nadia.utm.networking.payloads.LaunchContraptionPayload;
 import com.nadia.utm.registry.dimension.utmDimensions;
 import com.nadia.utm.registry.enchantment.utmEnchantments;
@@ -207,10 +207,10 @@ public class SpaceStateHandler {
     }
 
     static {
-        utmEvents.register(PlayerTickEvent.Post.class, SpaceStateHandler::onPlayerTick);
-        utmEvents.register(EntityTickEvent.Post.class, SpaceStateHandler::onEntityTick);
-        utmEvents.register(LivingEvent.LivingJumpEvent.class, SpaceStateHandler::onJump);
-        utmEvents.register(LivingFallEvent.class, event -> {
+        utmEventHost.register(PlayerTickEvent.Post.class, SpaceStateHandler::onPlayerTick);
+        utmEventHost.register(EntityTickEvent.Post.class, SpaceStateHandler::onEntityTick);
+        utmEventHost.register(LivingEvent.LivingJumpEvent.class, SpaceStateHandler::onJump);
+        utmEventHost.register(LivingFallEvent.class, event -> {
             Entity entity = event.getEntity();
 
             if (entity.getTags().contains("utm_reentry_landing")) {

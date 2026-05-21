@@ -3,7 +3,7 @@ package com.nadia.utm.server;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.nadia.utm.event.ForceLoad;
-import com.nadia.utm.event.utmEvents;
+import com.nadia.utm.event.utmEventHost;
 import com.nadia.utm.networking.payloads.TabLayerPayload;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
@@ -136,12 +136,12 @@ public class TabMenuServer {
     }
 
     static {
-        utmEvents.register(ServerTickEvent.Post.class, TabMenuServer::onServerTick);
-        utmEvents.register(ServerStartingEvent.class, TabMenuServer::onServerStarting);
-        utmEvents.register(ServerStoppingEvent.class, TabMenuServer::onServerStopping);
-        utmEvents.register(PlayerEvent.PlayerLoggedInEvent.class, TabMenuServer::onPlayerJoin);
-        utmEvents.register(LivingDamageEvent.Post.class, TabMenuServer::onEntityDamage);
-        utmEvents.register(PlayerEvent.PlayerChangedDimensionEvent.class, TabMenuServer::onDimensionChange);
+        utmEventHost.register(ServerTickEvent.Post.class, TabMenuServer::onServerTick);
+        utmEventHost.register(ServerStartingEvent.class, TabMenuServer::onServerStarting);
+        utmEventHost.register(ServerStoppingEvent.class, TabMenuServer::onServerStopping);
+        utmEventHost.register(PlayerEvent.PlayerLoggedInEvent.class, TabMenuServer::onPlayerJoin);
+        utmEventHost.register(LivingDamageEvent.Post.class, TabMenuServer::onEntityDamage);
+        utmEventHost.register(PlayerEvent.PlayerChangedDimensionEvent.class, TabMenuServer::onDimensionChange);
     }
 
 }

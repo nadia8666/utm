@@ -1,7 +1,7 @@
 package com.nadia.utm;
 
 import com.nadia.utm.event.ForceLoad;
-import com.nadia.utm.event.utmEvents;
+import com.nadia.utm.event.utmEventHost;
 import com.nadia.utm.updater.AutoUpdater;
 import com.nadia.utm.updater.VersionInfo;
 import net.minecraft.commands.Commands;
@@ -14,7 +14,7 @@ import static com.nadia.utm.updater.AutoUpdater.VersionTarget;
 @ForceLoad()
 public class utmCommands {
     static {
-        utmEvents.register(RegisterCommandsEvent.class, event -> event.getDispatcher().register(Commands.literal("utm_server")
+        utmEventHost.register(RegisterCommandsEvent.class, event -> event.getDispatcher().register(Commands.literal("utm_server")
                 .then(Commands.literal("update").executes(context -> {
                     AutoUpdater.checkForUpdate();
 

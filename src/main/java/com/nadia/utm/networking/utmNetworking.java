@@ -1,10 +1,10 @@
 package com.nadia.utm.networking;
 
+import com.nadia.utm.behavior.space.SpaceStateHandler;
 import com.nadia.utm.client.ui.TabMenuLayer;
 import com.nadia.utm.event.ForceLoad;
-import com.nadia.utm.behavior.space.SpaceStateHandler;
 import com.nadia.utm.event.events.SyncSealedDataEvent;
-import com.nadia.utm.event.utmEvents;
+import com.nadia.utm.event.utmEventHost;
 import com.nadia.utm.gui.GlintMenu;
 import com.nadia.utm.networking.payloads.DropGravePayload;
 import com.nadia.utm.networking.payloads.GlintSyncPayload;
@@ -21,9 +21,13 @@ import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.handling.IPayloadHandler;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @ForceLoad
 public class utmNetworking {
-    private static PayloadRegistrar REGISTRAR;
+    public static PayloadRegistrar REGISTRAR;
+    public static final List<Runnable> CALLBACKS = new ArrayList<>();
 
     public static <P extends CustomPacketPayload> void server(PacketDef<P> def, IPayloadHandler<P> consumer) {
         REGISTRAR.playToServer(def.type(), def.codec(), consumer);
@@ -35,7 +39,6 @@ public class utmNetworking {
 
     public static void registerNetworkingEvents(final RegisterPayloadHandlersEvent event) {
         REGISTRAR = event.registrar("1");
-
 
         server(DropGravePayload.DEF, (payload, context) -> context.enqueueWork(() -> DropGravePayload.drop(payload, context)));
         server(GlintSyncPayload.DEF, (payload, context) -> context.enqueueWork(() -> {
@@ -57,6 +60,6 @@ public class utmNetworking {
     }
 
     static {
-        utmEvents.register(RegisterPayloadHandlersEvent.class, utmNetworking::registerNetworkingEvents);
+        utmEventHost.register(RegisterPayloadHandlersEvent.class, utmNetworking::registerNetworkingEvents);
     }
 }

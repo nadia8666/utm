@@ -5,12 +5,12 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import com.nadia.utm.Config;
 import com.nadia.utm.event.ForceLoad;
-import com.nadia.utm.event.utmEvents;
+import com.nadia.utm.event.utmEventHost;
+import com.nadia.utm.utm;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.level.Level;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
-import com.nadia.utm.utm;
 import org.lwjgl.opengl.GL11;
 
 import java.util.ArrayList;
@@ -103,7 +103,7 @@ public class PlanetRenderer {
     }
 
     static {
-        utmEvents.register(RenderLevelStageEvent.class, event -> {
+        utmEventHost.register(RenderLevelStageEvent.class, event -> {
             if (!Config.RENDER_PLANETS.getAsBoolean()) return;
             if (event.getStage() != RenderLevelStageEvent.Stage.AFTER_SKY) return;
             Minecraft mc = Minecraft.getInstance();
