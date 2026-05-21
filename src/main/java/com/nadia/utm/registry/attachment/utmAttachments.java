@@ -26,4 +26,5 @@ public class utmAttachments {
             "sealed_air",
             () -> AttachmentType.builder(SealedChunkData::new).serialize(Codec.unit(() -> new SealedChunkData(Map.of()))).build()
     );
+     // attachemnts like rolos?
 }
