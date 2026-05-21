@@ -2,7 +2,7 @@ package com.nadia.utm.block.misc.oxygen_collector;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.nadia.utm.event.ForceLoad;
-import com.nadia.utm.event.utmEvents;
+import com.nadia.utm.event.utmEventHost;
 import com.nadia.utm.registry.block.utmBlockEntities;
 import com.nadia.utm.registry.model.utmModels;
 import com.simibubi.create.AllPartialModels;
@@ -44,7 +44,7 @@ public class OxygenCollectorRenderer extends KineticBlockEntityRenderer<OxygenCo
     }
 
     static {
-        utmEvents.register(EntityRenderersEvent.RegisterRenderers.class, (event) -> event.registerBlockEntityRenderer(
+        utmEventHost.register(EntityRenderersEvent.RegisterRenderers.class, (event) -> event.registerBlockEntityRenderer(
                 utmBlockEntities.OXYGEN_COLLECTOR.get(),
                 OxygenCollectorRenderer::new
         ));

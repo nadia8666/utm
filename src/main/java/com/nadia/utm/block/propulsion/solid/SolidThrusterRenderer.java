@@ -5,7 +5,7 @@ import com.nadia.utm.block.propulsion.liquid.LiquidFuelThrusterBlock;
 import com.nadia.utm.client.renderer.IBlockstateRotatedRenderer;
 import com.nadia.utm.client.renderer.utmRenderTypes;
 import com.nadia.utm.event.ForceLoad;
-import com.nadia.utm.event.utmEvents;
+import com.nadia.utm.event.utmEventHost;
 import com.nadia.utm.registry.block.utmBlockEntities;
 import com.nadia.utm.registry.model.utmModels;
 import com.nadia.utm.util.PoseUtil;
@@ -83,7 +83,7 @@ public class SolidThrusterRenderer extends SmartBlockEntityRenderer<SolidThruste
     }
 
     static {
-        utmEvents.register(EntityRenderersEvent.RegisterRenderers.class, (event) -> event.registerBlockEntityRenderer(
+        utmEventHost.register(EntityRenderersEvent.RegisterRenderers.class, (event) -> event.registerBlockEntityRenderer(
                 utmBlockEntities.SOLID_THRUSTER.get(),
                 SolidThrusterRenderer::new
         ));

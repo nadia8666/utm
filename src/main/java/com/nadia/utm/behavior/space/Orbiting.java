@@ -1,7 +1,7 @@
 package com.nadia.utm.behavior.space;
 
 import com.nadia.utm.event.ForceLoad;
-import com.nadia.utm.event.utmEvents;
+import com.nadia.utm.event.utmEventHost;
 import com.nadia.utm.registry.dimension.utmDimensions;
 import com.nadia.utm.registry.planets.utmPlanets;
 import com.nadia.utm.util.SableUtil;
@@ -72,7 +72,7 @@ class Orbiting {
     }
 
     static {
-        utmEvents.register(LevelTickEvent.Pre.class, event -> {
+        utmEventHost.register(LevelTickEvent.Pre.class, event -> {
             if (event.getLevel() instanceof ServerLevel level) {
                 if (!level.dimension().equals(utmDimensions.SPACE_KEY)) return;
 
@@ -121,7 +121,7 @@ class Orbiting {
             }
         });
 
-        utmEvents.register(LevelTickEvent.Post.class, event -> {
+        utmEventHost.register(LevelTickEvent.Post.class, event -> {
             if (event.getLevel() instanceof ServerLevel level) {
                 if (!level.dimension().equals(utmDimensions.SPACE_KEY)) return;
 

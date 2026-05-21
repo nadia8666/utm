@@ -4,7 +4,7 @@ import com.nadia.utm.client.ui.TabMenuLayer;
 import com.nadia.utm.event.ForceLoad;
 import com.nadia.utm.event.events.OxygenPayloadEvent;
 import com.nadia.utm.event.events.SyncSealedDataEvent;
-import com.nadia.utm.event.utmEvents;
+import com.nadia.utm.event.utmEventHost;
 import com.nadia.utm.gui.GlintMenu;
 import com.nadia.utm.networking.payloads.*;
 import com.nadia.utm.projectile.DroplessArrow;
@@ -106,16 +106,16 @@ public class utmNetworking {
                 if (doom)
                     slevel.playSound(null, pos.x, pos.y, pos.z, SoundEvents.ANVIL_LAND, player.getSoundSource(), 0.125F, 0.5F);
 
-                for(LivingEntity livingentity2 : slevel.getEntitiesOfClass(LivingEntity.class, new AABB(pos.x-1,pos.y-0.2,pos.z-1,pos.x+1,pos.y+0.2,pos.z+1).inflate(5))) {
-                    if (livingentity2!=player && (livingentity2.position().distanceTo( new Vec3(pos.x,livingentity2.position().y,pos.z))) <4 ) {
+                for (LivingEntity livingentity2 : slevel.getEntitiesOfClass(LivingEntity.class, new AABB(pos.x - 1, pos.y - 0.2, pos.z - 1, pos.x + 1, pos.y + 0.2, pos.z + 1).inflate(5))) {
+                    if (livingentity2 != player && (livingentity2.position().distanceTo(new Vec3(pos.x, livingentity2.position().y, pos.z))) < 7) {
                         livingentity2.invulnerableTime = 0;
-                        livingentity2.hurt(player.damageSources().playerAttack(player),3+(doom ? 7 : 0));
+                        livingentity2.hurt(player.damageSources().playerAttack(player), 3 + (doom ? 7 : 0));
                         if (doom) {
                             player.invulnerableTime = 0;
                             player.hurt(player.damageSources().cramming(), 2);
                         }
                         Vec3 pos2 = livingentity2.position(); // why don't particles spawn?
-                        slevel.sendParticles(ParticleTypes.CRIT,pos2.x,pos2.y,pos2.z,5,3,3,3,0);
+                        slevel.sendParticles(ParticleTypes.CRIT, pos2.x, pos2.y, pos2.z, 5, 3, 3, 3, 0);
                         slevel.playSound(null, pos.x, pos.y, pos.z, SoundEvents.PLAYER_ATTACK_CRIT, player.getSoundSource(), 0.25F, 1.0F);
 
                     }
@@ -135,10 +135,10 @@ public class utmNetworking {
                 if (target instanceof LivingEntity entity) {
                     TickUtil.runIn(10, () -> {
                         Vec3 pos2 = entity.position();
-                        entity.invulnerableTime=0;
+                        entity.invulnerableTime = 0;
                         entity.hurt(player.damageSources().playerAttack(player), 4); // is there a better way to get soundsources? // yes. just get it from the origin player or the target wtf.
                         slevel.playSound(null, pos2.x, pos2.y, pos2.z, SoundEvents.PLAYER_ATTACK_CRIT, player.getSoundSource(), 0.25F, 1.0F);
-                        slevel.sendParticles(ParticleTypes.CRIT,pos2.x,pos2.y,pos2.z,5,3,3,3,0);
+                        slevel.sendParticles(ParticleTypes.CRIT, pos2.x, pos2.y, pos2.z, 5, 3, 3, 3, 0);
                     }, slevel);
                 }
             }
@@ -193,6 +193,6 @@ public class utmNetworking {
     }
 
     static {
-        utmEvents.register(RegisterPayloadHandlersEvent.class, utmNetworking::registerNetworkingEvents);
+        utmEventHost.register(RegisterPayloadHandlersEvent.class, utmNetworking::registerNetworkingEvents);
     }
 }

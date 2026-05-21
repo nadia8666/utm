@@ -2,7 +2,7 @@ package com.nadia.utm.registry.input;
 
 import com.mojang.blaze3d.platform.InputConstants;
 import com.nadia.utm.event.ForceLoad;
-import com.nadia.utm.event.utmEvents;
+import com.nadia.utm.event.utmEventHost;
 import net.minecraft.client.KeyMapping;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
@@ -20,6 +20,6 @@ public class utmKeyMappings {
     );
 
     static {
-        utmEvents.register(RegisterKeyMappingsEvent.class, event -> event.register(ADVANCED_GOGGLES_PIN_KEY));
+        utmEventHost.register(RegisterKeyMappingsEvent.class, event -> event.register(ADVANCED_GOGGLES_PIN_KEY));
     }
 }

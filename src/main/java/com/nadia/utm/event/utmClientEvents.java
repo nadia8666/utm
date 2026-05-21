@@ -43,19 +43,19 @@ public class utmClientEvents {
     @ForceLoad(dist = Dist.CLIENT)
     static class UI {
         static {
-            utmEvents.register(ScreenEvent.Init.Post.class, event -> {
+            utmEventHost.register(ScreenEvent.Init.Post.class, event -> {
                 if (!ToastReady && event.getScreen() instanceof TitleScreen) {
                     ToastReady = true;
                     utmClient.tryToastPopup();
                 }
             });
 
-            utmEvents.register(RegisterMenuScreensEvent.class, event -> {
+            utmEventHost.register(RegisterMenuScreensEvent.class, event -> {
                 event.register(utmMenus.GLINT_MENU.get(), GlintScreen::new);
                 event.register(utmMenus.OXYGEN_FURNACE_MENU.get(), OxygenFurnaceScreen::new);
             });
 
-            utmEvents.register(ItemTooltipEvent.class, event -> {
+            utmEventHost.register(ItemTooltipEvent.class, event -> {
                 ItemStack stack = event.getItemStack();
                 var type = stack.getOrDefault(utmDataComponents.ELYRA_TRIM_TYPE.get(), "");
                 int color = stack.getOrDefault(utmDataComponents.ELYRA_TRIM_COLOR.get(), 0xFFFFFF);
@@ -88,35 +88,35 @@ public class utmClientEvents {
                 }
             });
 
-            utmEvents.register(ToastDisplaySignal.class, event -> utmClient.tryToastPopup());
+            utmEventHost.register(ToastDisplaySignal.class, event -> utmClient.tryToastPopup());
         }
     }
 
     @ForceLoad(dist = Dist.CLIENT)
     static class RENDERER {
         static {
-            utmEvents.register(RegisterRenderBuffersEvent.class, event -> {
+            utmEventHost.register(RegisterRenderBuffersEvent.class, event -> {
                 event.registerRenderBuffer(utmRenderTypes.ADDITIVE_GLINT_ITEM.get());
                 event.registerRenderBuffer(utmRenderTypes.OVERLAY_GLINT_ITEM.get());
                 event.registerRenderBuffer(utmRenderTypes.ADDITIVE_GLINT_ENTITY.get());
                 event.registerRenderBuffer(utmRenderTypes.OVERLAY_GLINT_ENTITY.get());
             });
 
-            utmEvents.register(FMLClientSetupEvent.class, event -> {
+            utmEventHost.register(FMLClientSetupEvent.class, event -> {
                 CuriosRendererRegistry.register(AllItems.COPPER_BACKTANK.get(), BacktankCurioRenderer::new);
                 CuriosRendererRegistry.register(AllItems.NETHERITE_BACKTANK.get(), BacktankCurioRenderer::new);
             });
 
-            utmEvents.register(ModelEvent.RegisterAdditional.class, event -> {
+            utmEventHost.register(ModelEvent.RegisterAdditional.class, event -> {
                 event.register(CitywallsBlockEntityRenderer.CWL);
                 event.register(CitywallsBlockEntityRenderer.OWM);
                 event.register(CitywallsBlockEntityRenderer.OWS);
                 event.register(CitywallsBlockEntityRenderer.CWS);
             });
 
-            utmEvents.register(RegisterDimensionSpecialEffectsEvent.class, event -> {
+            utmEventHost.register(RegisterDimensionSpecialEffectsEvent.class, event -> {
                 event.register(
-                        ResourceLocation.fromNamespaceAndPath("utm", "2313ag"),
+                        utm.key("2313ag"),
                         new DimensionSpecialEffects(Float.NaN, false, DimensionSpecialEffects.SkyType.NONE, false, false) {
                             @Override
                             public @NotNull Vec3 getBrightnessDependentFogColor(@NotNull Vec3 pos, float arg2) {
@@ -135,7 +135,7 @@ public class utmClientEvents {
                             }
                         });
                 event.register(
-                        ResourceLocation.fromNamespaceAndPath("utm", "space"),
+                        utm.key("space"),
                         new DimensionSpecialEffects(Float.NaN, false, DimensionSpecialEffects.SkyType.NORMAL, false, false) {
                             @Override
                             public @NotNull Vec3 getBrightnessDependentFogColor(@NotNull Vec3 pos, float arg2) {
@@ -158,7 +158,7 @@ public class utmClientEvents {
     }
 
     static {
-        utmEvents.register(RegisterClientExtensionsEvent.class, event -> {
+        utmEventHost.register(RegisterClientExtensionsEvent.class, event -> {
             event.registerFluidType(new IClientFluidTypeExtensions() {
                 private static final ResourceLocation STILL = ResourceLocation.fromNamespaceAndPath("minecraft", "block/water_still");
                 private static final ResourceLocation FLOWING = ResourceLocation.fromNamespaceAndPath("minecraft", "block/water_flow");
@@ -210,7 +210,7 @@ public class utmClientEvents {
             }, utmFluids.ANTIWATER_TYPE);
         });
 
-        utmEvents.register(PlaySoundEvent.class, event -> {
+        utmEventHost.register(PlaySoundEvent.class, event -> {
             Minecraft mc = Minecraft.getInstance();
             if (mc.level == null || event.getSound() == null) return;
 
@@ -218,7 +218,7 @@ public class utmClientEvents {
                 event.setSound(null);
         });
 
-        utmEvents.register(SyncSealedDataEvent.class, event -> {
+        utmEventHost.register(SyncSealedDataEvent.class, event -> {
             Level level = Minecraft.getInstance().level;
             if (level != null) {
                 var chunk = level.getChunk(event.PAYLOAD.pos().x, event.PAYLOAD.pos().z);
@@ -226,7 +226,7 @@ public class utmClientEvents {
             }
         });
 
-        utmEvents.register(ViewportEvent.ComputeFogColor.class, event -> {
+        utmEventHost.register(ViewportEvent.ComputeFogColor.class, event -> {
             float alpha = (float) Math.clamp((event.getCamera().getPosition().y - 5000.0) / 1000.0, 0.0, 1.0);
             if (alpha > 0) {
                 float mult = 1.0F - alpha;

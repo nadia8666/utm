@@ -5,6 +5,7 @@ import com.nadia.utm.networking.payloads.GlintSyncPayload;
 import com.nadia.utm.registry.block.utmBlocks;
 import com.nadia.utm.registry.data.utmDataComponents;
 import com.nadia.utm.registry.ui.utmMenus;
+import com.nadia.utm.utm;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
@@ -38,22 +39,22 @@ public class GlintMenu extends AbstractContainerMenu {
 
     public static final List<ResourceLocation> TEXTURES = List.of(
             GLINT_DEFAULT,
-            ResourceLocation.fromNamespaceAndPath("utm", "textures/misc/test_glint.png"),
-            ResourceLocation.fromNamespaceAndPath("utm", "textures/misc/gyig1.png"),
-            ResourceLocation.fromNamespaceAndPath("utm", "textures/misc/boundtosmile.png"),
-            ResourceLocation.fromNamespaceAndPath("utm", "textures/misc/along.png"),
-            ResourceLocation.fromNamespaceAndPath("utm", "textures/misc/along2.png"),
-            ResourceLocation.fromNamespaceAndPath("utm", "textures/misc/along3.png"),
-            ResourceLocation.fromNamespaceAndPath("utm", "textures/misc/along4.png"),
-            ResourceLocation.fromNamespaceAndPath("utm", "textures/misc/glint_grid_thin.png"),
-            ResourceLocation.fromNamespaceAndPath("utm", "textures/misc/glint_grid.png"),
-            ResourceLocation.fromNamespaceAndPath("utm", "textures/misc/glint_checkers.png"),
-            ResourceLocation.fromNamespaceAndPath("utm", "textures/misc/glint_items.png"),
-            ResourceLocation.fromNamespaceAndPath("utm", "textures/misc/best.png"),
-            ResourceLocation.fromNamespaceAndPath("utm", "textures/misc/raginglint.png"),
-            ResourceLocation.fromNamespaceAndPath("utm", "textures/misc/threeg.png"),
-            ResourceLocation.fromNamespaceAndPath("utm", "textures/misc/glowy.png"),
-            ResourceLocation.fromNamespaceAndPath("utm", "textures/misc/threegnoglow.png")
+            utm.key("textures/misc/test_glint.png"),
+            utm.key("textures/misc/gyig1.png"),
+            utm.key("textures/misc/boundtosmile.png"),
+            utm.key("textures/misc/along.png"),
+            utm.key("textures/misc/along2.png"),
+            utm.key("textures/misc/along3.png"),
+            utm.key("textures/misc/along4.png"),
+            utm.key("textures/misc/glint_grid_thin.png"),
+            utm.key("textures/misc/glint_grid.png"),
+            utm.key("textures/misc/glint_checkers.png"),
+            utm.key("textures/misc/glint_items.png"),
+            utm.key("textures/misc/best.png"),
+            utm.key("textures/misc/raginglint.png"),
+            utm.key("textures/misc/threeg.png"),
+            utm.key("textures/misc/glowy.png"),
+            utm.key("textures/misc/threegnoglow.png")
 
     );
 

@@ -3,6 +3,7 @@ package com.nadia.utm.client.ui.oxygen_furnace;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.nadia.utm.gui.OxygenFurnaceMenu;
 import com.nadia.utm.util.PoseUtil;
+import com.nadia.utm.utm;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -17,9 +18,9 @@ import net.p3pp3rf1y.sophisticatedcore.client.gui.utils.GuiHelper;
 import org.jetbrains.annotations.NotNull;
 
 public class OxygenFurnaceScreen extends AbstractContainerScreen<OxygenFurnaceMenu> {
-    public static final ResourceLocation GUI_TEXTURE = ResourceLocation.fromNamespaceAndPath("utm", "textures/gui/container/oxygen_furnace.png");
-    public static final ResourceLocation FIRE_TEXTURE = ResourceLocation.fromNamespaceAndPath("utm", "textures/gui/container/oxygen_furnace_fire.png");
-    public static final ResourceLocation TANK_TEXTURE = ResourceLocation.fromNamespaceAndPath("utm", "textures/gui/container/oxygen_furnace_tank.png");
+    public static final ResourceLocation GUI_TEXTURE = utm.key("textures/gui/container/oxygen_furnace.png");
+    public static final ResourceLocation FIRE_TEXTURE = utm.key("textures/gui/container/oxygen_furnace_fire.png");
+    public static final ResourceLocation TANK_TEXTURE = utm.key("textures/gui/container/oxygen_furnace_tank.png");
 
     public OxygenFurnaceScreen(OxygenFurnaceMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);

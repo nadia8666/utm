@@ -61,4 +61,10 @@ public class utmDataComponents {
                     .persistent(Codec.BOOL)
                     .networkSynchronized(ByteBufCodecs.BOOL)
                     .build());
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<String>> THROWING_SPEAR_MODEL =
+            COMPONENTS.register("throwing_spear_model", () -> DataComponentType.<String>builder()
+                    .persistent(Codec.STRING)
+                    .networkSynchronized(ByteBufCodecs.STRING_UTF8)
+                    .build());
 }

@@ -4,7 +4,7 @@ import com.mojang.logging.LogUtils;
 import com.nadia.utm.config.utmCommonConfig;
 import com.nadia.utm.config.utmServerConfig;
 import com.nadia.utm.event.ForceLoad;
-import com.nadia.utm.event.utmEvents;
+import com.nadia.utm.event.utmEventHost;
 import com.nadia.utm.registry.utmRegistry;
 import com.nadia.utm.updater.AutoUpdater;
 import net.minecraft.resources.ResourceLocation;
@@ -38,7 +38,7 @@ public class utm {
     public static String VERSION = "";
 
     public utm(IEventBus bus, ModContainer container) {
-        utmEvents.setup(bus);
+        utmEventHost.setup(bus);
         loadClasses(container, FMLEnvironment.dist.name());
 
         VERSION = container.getModInfo().getVersion().toString();
@@ -81,7 +81,7 @@ public class utm {
                 try {
                     utm.LOGGER.info("[UTM] Initializing class {}!", data.clazz().getClassName());
                     LOADED_CLASSES.add(data.clazz().getClassName());
-                    Class.forName(data.clazz().getClassName(), true, utmEvents.class.getClassLoader());
+                    Class.forName(data.clazz().getClassName(), true, utmEventHost.class.getClassLoader());
                 } catch (ClassNotFoundException e) {
                     utm.LOGGER.error("[UTM] Failed to load class {} on {}, there WILL be problems!", data.clazz().getClassName(), dist);
                 }

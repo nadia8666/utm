@@ -5,7 +5,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import com.nadia.utm.config.utmClientConfig;
 import com.nadia.utm.event.ForceLoad;
-import com.nadia.utm.event.utmEvents;
+import com.nadia.utm.event.utmEventHost;
 import com.nadia.utm.registry.planets.utmPlanets;
 import com.nadia.utm.utm;
 import net.minecraft.client.Minecraft;
@@ -229,7 +229,7 @@ public class PlanetRenderer {
     }
 
     static {
-        utmEvents.register(RenderLevelStageEvent.class, event -> {
+        utmEventHost.register(RenderLevelStageEvent.class, event -> {
             if (!utmClientConfig.RENDER_PLANETS.getAsBoolean()) return;
             if (event.getStage() != RenderLevelStageEvent.Stage.AFTER_SKY) return;
             Minecraft mc = Minecraft.getInstance();

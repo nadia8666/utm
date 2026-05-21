@@ -2,7 +2,7 @@ package com.nadia.utm.block.misc.citywalls;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.nadia.utm.event.ForceLoad;
-import com.nadia.utm.event.utmEvents;
+import com.nadia.utm.event.utmEventHost;
 import com.nadia.utm.registry.block.utmBlockEntities;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -89,7 +89,7 @@ public class CitywallsBlockEntityRenderer implements BlockEntityRenderer<Citywal
     }
 
     static {
-        utmEvents.register(EntityRenderersEvent.RegisterRenderers.class, (event) -> event.registerBlockEntityRenderer(
+        utmEventHost.register(EntityRenderersEvent.RegisterRenderers.class, (event) -> event.registerBlockEntityRenderer(
                 utmBlockEntities.CITYWALLS_METAL.get(),
                 CitywallsBlockEntityRenderer::new
         ));

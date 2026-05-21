@@ -1,7 +1,7 @@
 package com.nadia.utm.compat;
 
+import com.nadia.utm.utm;
 import com.simibubi.create.AllItems;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.Item;
@@ -19,7 +19,7 @@ public class CuriosCompat {
             applyNetheriteStats(event);
         } else if (item == AllItems.COPPER_BACKTANK.get()) {
             event.addModifier(Attributes.ARMOR, new AttributeModifier(
-                    ResourceLocation.fromNamespaceAndPath("utm", "copper_backtank"),
+                    utm.key("copper_backtank"),
                     4.0,
                     AttributeModifier.Operation.ADD_VALUE
             ));
@@ -28,17 +28,17 @@ public class CuriosCompat {
 
     private static void applyNetheriteStats(CurioAttributeModifierEvent event) {
         event.addModifier(Attributes.ARMOR, new AttributeModifier(
-                ResourceLocation.fromNamespaceAndPath("utm", "netherite_backtank_arm"),
+                utm.key("netherite_backtank_arm"),
                 8.0,
                 AttributeModifier.Operation.ADD_VALUE
         ));
         event.addModifier(Attributes.ARMOR_TOUGHNESS, new AttributeModifier(
-                ResourceLocation.fromNamespaceAndPath("utm", "netherite_backtank_tough"),
+                utm.key("netherite_backtank_tough"),
                 3.0,
                 AttributeModifier.Operation.ADD_VALUE
         ));
         event.addModifier(Attributes.KNOCKBACK_RESISTANCE, new AttributeModifier(
-                ResourceLocation.fromNamespaceAndPath("utm", "netherite_backtank_res"),
+                utm.key("netherite_backtank_res"),
                 0.1,
                 AttributeModifier.Operation.ADD_VALUE
         ));

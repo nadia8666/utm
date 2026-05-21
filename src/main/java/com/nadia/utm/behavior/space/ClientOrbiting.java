@@ -1,7 +1,7 @@
 package com.nadia.utm.behavior.space;
 
 import com.nadia.utm.event.ForceLoad;
-import com.nadia.utm.event.utmEvents;
+import com.nadia.utm.event.utmEventHost;
 import com.nadia.utm.registry.dimension.utmDimensions;
 import com.nadia.utm.registry.planets.utmPlanets;
 import dev.ryanhcode.sable.Sable;
@@ -38,7 +38,7 @@ public class ClientOrbiting {
     static final Vector3d CALC2 = new Vector3d();
 
     static {
-        utmEvents.register(ClientTickEvent.Pre.class, event -> {
+        utmEventHost.register(ClientTickEvent.Pre.class, event -> {
             Minecraft mc = Minecraft.getInstance();
             ClientLevel level = mc.level;
             if (level == null) return;
@@ -98,7 +98,7 @@ public class ClientOrbiting {
             }
         });
 
-        utmEvents.register(ClientTickEvent.Post.class, event -> {
+        utmEventHost.register(ClientTickEvent.Post.class, event -> {
             Minecraft mc = Minecraft.getInstance();
             ClientLevel level = mc.level;
             if (level == null) return;

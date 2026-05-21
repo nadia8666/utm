@@ -2,7 +2,7 @@ package com.nadia.utm.block.misc.sealer.biome;
 
 import com.nadia.utm.block.misc.sealer.AbstractSealerBlockEntity;
 import com.nadia.utm.event.ForceLoad;
-import com.nadia.utm.event.utmEvents;
+import com.nadia.utm.event.utmEventHost;
 import com.nadia.utm.registry.block.utmBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -70,7 +70,7 @@ public class BiomeSealerBlockEntity extends AbstractSealerBlockEntity {
     }
 
     static {
-        utmEvents.register(RegisterCapabilitiesEvent.class, (event) -> event.registerBlockEntity(
+        utmEventHost.register(RegisterCapabilitiesEvent.class, (event) -> event.registerBlockEntity(
                 Capabilities.FluidHandler.BLOCK,
                 utmBlockEntities.BIOME_SEALER.get(),
                 (be, side) -> be.CAPABILITY

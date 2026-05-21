@@ -3,7 +3,7 @@ package com.nadia.utm.block.propulsion.ion;
 import com.nadia.utm.block.propulsion.IProduceThrust;
 import com.nadia.utm.config.utmServerConfig;
 import com.nadia.utm.event.ForceLoad;
-import com.nadia.utm.event.utmEvents;
+import com.nadia.utm.event.utmEventHost;
 import com.nadia.utm.registry.block.utmBlockEntities;
 import com.nadia.utm.registry.fluid.utmFluids;
 import com.nadia.utm.util.utmLang;
@@ -127,7 +127,7 @@ public class IonJetBlockEntity extends KineticBlockEntity implements BlockEntity
     }
 
     static {
-        utmEvents.register(RegisterCapabilitiesEvent.class, (event) -> event.registerBlockEntity(
+        utmEventHost.register(RegisterCapabilitiesEvent.class, (event) -> event.registerBlockEntity(
                 Capabilities.FluidHandler.BLOCK,
                 utmBlockEntities.ION_JET.get(),
                 (be, side) -> be.LOX.getCapability()

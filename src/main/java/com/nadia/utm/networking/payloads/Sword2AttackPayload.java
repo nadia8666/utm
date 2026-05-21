@@ -24,5 +24,4 @@ public record Sword2AttackPayload(Vector3f pos) implements CustomPacketPayload {
     }
 
     public static final PacketDef<Sword2AttackPayload> DEF = new PacketDef<>(TYPE, CODEC);
-
 }

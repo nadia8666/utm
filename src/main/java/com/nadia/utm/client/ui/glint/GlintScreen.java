@@ -4,6 +4,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.nadia.utm.gui.GlintMenu;
 import com.nadia.utm.networking.payloads.GlintSyncPayload;
 import com.nadia.utm.registry.data.utmDataComponents;
+import com.nadia.utm.utm;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -22,7 +23,7 @@ import org.joml.Vector2f;
 import java.util.List;
 
 public class GlintScreen extends AbstractContainerScreen<GlintMenu> {
-    public static final ResourceLocation GUI_TEXTURE = ResourceLocation.fromNamespaceAndPath("utm", "textures/gui/container/glint_table.png");
+    public static final ResourceLocation GUI_TEXTURE = utm.key("textures/gui/container/glint_table.png");
 
     private static final int GRID_X = 56;
     private static final int GRID_Y = 10;

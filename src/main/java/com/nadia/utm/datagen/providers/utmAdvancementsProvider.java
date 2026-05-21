@@ -1,5 +1,6 @@
 package com.nadia.utm.datagen.providers;
 
+import com.nadia.utm.utm;
 import net.minecraft.advancements.*;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.core.HolderLookup;
@@ -8,7 +9,6 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.advancements.AdvancementSubProvider;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.common.data.AdvancementProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
@@ -57,7 +57,7 @@ public class utmAdvancementsProvider extends net.neoforged.neoforge.common.data.
             );
 
             builder.requirements(AdvancementRequirements.allOf(pickups.keySet()));
-            builder.save(saver, ResourceLocation.fromNamespaceAndPath("utm", "adventure/all_discs"), existingFileHelper);
+            builder.save(saver, utm.key("adventure/all_discs"), existingFileHelper);
         }
     }
 }

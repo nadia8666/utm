@@ -1,6 +1,8 @@
 package com.nadia.utm.client.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.nadia.utm.registry.item.tool.utmTools;
+import com.nadia.utm.utm;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ElytraModel;
 import net.minecraft.client.model.geom.EntityModelSet;
@@ -15,7 +17,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
-import com.nadia.utm.registry.item.tool.utmTools;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
@@ -35,8 +36,8 @@ public class NetherytraLayer<T extends AbstractClientPlayer, M extends net.minec
         this.elytraModel = new ElytraModel<>(modelSet.bakeLayer(ModelLayers.ELYTRA));
     }
 
-    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath("utm", "textures/entity/elytra/netherytra.png");
-    private static final ResourceLocation EMISSIVE = ResourceLocation.fromNamespaceAndPath("utm", "textures/entity/elytra/netherytra_e.png");
+    private static final ResourceLocation TEXTURE = utm.key("textures/entity/elytra/netherytra.png");
+    private static final ResourceLocation EMISSIVE = utm.key("textures/entity/elytra/netherytra_e.png");
 
     @Override
     public boolean shouldRender(ItemStack stack, @NotNull T entity) {

@@ -1,6 +1,7 @@
 package com.nadia.utm.client.ui.glint;
 
 import com.nadia.utm.registry.sound.utmSounds;
+import com.nadia.utm.utm;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
@@ -14,7 +15,7 @@ import net.minecraft.util.Mth;
 import org.jetbrains.annotations.NotNull;
 
 public class GlintSlider extends AbstractWidget {
-    public static final ResourceLocation MARKER_IMAGE = ResourceLocation.fromNamespaceAndPath("utm", "textures/gui/container/glint_table_slider.png");
+    public static final ResourceLocation MARKER_IMAGE = utm.key("textures/gui/container/glint_table_slider.png");
 
     private final float minRange;
     private final float maxRange;
