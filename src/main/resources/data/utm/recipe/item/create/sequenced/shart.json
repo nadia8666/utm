@@ -1,0 +1,85 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "minecraft:iron_sword"
+  },
+  "loops": 1,
+  "results": [
+    {
+      "id": "utm:shart",
+      "chance": 100,
+      "count": 1
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "minecraft:iron_sword"
+        }
+      ],
+      "results": [
+        {
+          "id": "utm:fusing_process"
+        }
+      ]
+    },
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "utm:fusing_process"
+        },
+        {
+          "type": "neoforge:single",
+          "amount": 1000,
+          "fluid": "minecraft:lava"
+        }
+      ],
+      "results": [
+        {
+          "id": "utm:fusing_process"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "utm:fusing_process"
+        },
+        {
+          "item": "minecraft:shield"
+        }
+      ],
+      "results": [
+        {
+          "id": "utm:fusing_process"
+        }
+      ]
+    },
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "minecraft:fusing_process"
+        },
+        {
+          "type": "neoforge:single",
+          "amount": 1000,
+          "fluid": "minecraft:water"
+        }
+      ],
+      "results": [
+        {
+          "id": "utm:sword_of_kirk",
+          "count": 1
+        }
+      ]
+    }
+  ],
+  "transitional_item": {
+    "id": "utm:fusing_process"
+  }
+}
