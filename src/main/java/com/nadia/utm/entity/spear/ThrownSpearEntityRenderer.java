@@ -7,7 +7,7 @@ import com.nadia.utm.event.ForceLoad;
 import com.nadia.utm.event.utmEventHost;
 import com.nadia.utm.registry.entity.utmEntities;
 import com.nadia.utm.registry.model.PartialEntityModelRenderer;
-import com.nadia.utm.registry.model.utmModels;
+import com.nadia.utm.registry.model.utmPartialModels;
 import com.nadia.utm.util.PoseUtil;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -41,7 +41,7 @@ public class ThrownSpearEntityRenderer extends EntityRenderer<ThrownSpearEntity>
 
             ms.translate(0, 0, -1.25);
         }).run(() -> PartialEntityModelRenderer.render(ms,
-                utmModels.THROWING_SPEAR_MODELS.getOrDefault(entity.getModel(), utmModels.COPPER_THROWING_SPEAR).get(),
+                utmPartialModels.THROWING_SPEAR_MODELS.getOrDefault(entity.getModel(), utmPartialModels.COPPER_THROWING_SPEAR).get(),
                 renderType(entity), buffer, packedLight, 0)).pop();
     }
 
