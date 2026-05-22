@@ -1,6 +1,22 @@
 {
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "utm:item/arid_trident"
+  "model": {
+    "type": "minecraft:select",
+    "cases": [
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "utm:item/arid_trident_handheld"
+        },
+        "when": [
+          "gui",
+          "ground"
+        ]
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "utm:item/arid_trident_model"
+    },
+    "property": "minecraft:display_context"
   }
 }
