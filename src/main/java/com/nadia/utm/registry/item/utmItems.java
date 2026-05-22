@@ -48,7 +48,9 @@ public class utmItems {
     public static final utmItemContainer<Item> UNFINISHED_GLINT_TABLE = register("unfinished_glint_table").generated(),
             UNFINISHED_ARID_INGOT = register("unfinished_arid_ingot").generated(),
             AIR_COMPRESSOR = register("air_compressor").generated(),
-            UNASSABELED = register("unassabeled").generated();
+            UNASSABELED = register("unassabeled").generated(),
+            FUSING_PROCESS = register("fusing_process").generated();
+
 
     // elytra trim
     public static final utmItemContainer<Item> ELYTRA_TRIM_VEIN = register("elytra_trim_vein").generated().tags(utmTags.ITEM.ELYTRA_TRIM_TEMPLATES, ItemTags.TRIM_TEMPLATES),
