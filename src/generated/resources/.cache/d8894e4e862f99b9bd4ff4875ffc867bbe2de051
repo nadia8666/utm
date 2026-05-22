@@ -1,4 +1,4 @@
-// 1.21.1	2026-05-18T20:33:54.6120843	Item Models: utm
+// 1.21.1	2026-05-22T18:37:12.9135625	Item Models: utm
 6d60e0d2b0873e138bcfa8f5db0ca9cb6d7cd4fa assets/utm/models/item/adv_goggles.json
 0c35c7686bdc2e520fa2ede79bfa3e5855ad5ffc assets/utm/models/item/air_compressor.json
 9d13b4b18c25ee3c81b1cc65fd86954c95187339 assets/utm/models/item/aluminum_ingot.json
@@ -16,6 +16,7 @@ f2e9775563c86f68d71b06bb62045008a975a3de assets/utm/models/item/chunk_loader.jso
 336758cbcbfdf58cdfae0d301428baacb9e69221 assets/utm/models/item/copper_axe.json
 b461f6062f97a9a4f36e2c003164cd40afbf068d assets/utm/models/item/copper_hoe.json
 217e72a296aac1f16e6361bccecd2554e576715c assets/utm/models/item/copper_pickaxe.json
+41ec00bc60a7e3749628d32bfa5522a9a371b97e assets/utm/models/item/copper_plating.json
 bc9e209da310ceed24cf8511ef375493917308c7 assets/utm/models/item/copper_shovel.json
 664d628331adc157b5851bb5683780c26db4a20e assets/utm/models/item/copper_sword.json
 4428dd779cf1c9ca27647bfcc5b94d90421be4ad assets/utm/models/item/cyclesword.json
@@ -33,6 +34,7 @@ a4495964b84cc59be5e289d9966f9ee877a88a18 assets/utm/models/item/enchanted_sword_
 92fcaec4bf4c4e0d70ec342a344a87fc8c646f5f assets/utm/models/item/flint_block.json
 192ecb9b1b7a99765794b5b804b5972e54f4af1d assets/utm/models/item/flint_block_block.json
 6ad9dfbf9e1d77cb8161f7302a0c25940e57aa58 assets/utm/models/item/floatingcore.json
+732707268c836a7047df06fbfaec41e777d4e490 assets/utm/models/item/fusing_process.json
 32f51fa76650fe7f3c9dedb22b4972d5b24ace5f assets/utm/models/item/gimbal.json
 e867380390100baee10f7084ddb96dd4affbaf1e assets/utm/models/item/gimbal_plate.json
 17c810dab8cfad3e3bdffbe6bcbb14b5d9400a87 assets/utm/models/item/glint_table.json
@@ -66,5 +68,6 @@ af1e629fbeb59dec7607fbae2d305b3d5cdeffdd assets/utm/models/item/solid_thruster.j
 97b31be7aa7fb4f3a9024c82df7b130c4ac1156f assets/utm/models/item/steel_sheet.json
 e1ba66d20505138a6af97fb76fd16a7ea431e252 assets/utm/models/item/sword2.json
 7f2b0c2e17bf3a1beaeccf91b4bee1ea1783a1ff assets/utm/models/item/sword_of_kirk.json
+f286a70aaa613920082a80ecabbdb47b3da4be50 assets/utm/models/item/unassabeled.json
 4bb429556d32c018342d162fceee88326f55c9a6 assets/utm/models/item/unfinished_arid_ingot.json
 723955985396594051586dbe811a3de8de5bf99b assets/utm/models/item/unfinished_glint_table.json

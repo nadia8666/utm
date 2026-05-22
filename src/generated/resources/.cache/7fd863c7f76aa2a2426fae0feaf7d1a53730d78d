@@ -1,4 +1,4 @@
-// 1.21.1	2026-05-18T20:33:54.6061011	Tags for minecraft:item mod id utm
+// 1.21.1	2026-05-22T18:37:12.9055832	Tags for minecraft:item mod id utm
 66adac5ce76e09f7316b3221e955af75b73eb2c5 data/c/tags/item/buckets.json
 9cb6f8f0e8c7af656daf9931e94159c0add915a3 data/c/tags/item/enchantables.json
 cc5ee93a6de880a1acd213e033d0123d2bb90869 data/c/tags/item/music_discs.json
@@ -12,7 +12,7 @@ f4c3db116b1c88abe3f5aec2a85614e85916409a data/minecraft/tags/item/enchantable/eq
 4b97b281ba7203c3de5340182abec1ae1f1c627a data/minecraft/tags/item/enchantable/mining.json
 f227975eaf1956e2c82fa940a8a696e830fac972 data/minecraft/tags/item/enchantable/mining_loot.json
 3b8c92e91f971b7a17698fcea8d2e63980abd69c data/minecraft/tags/item/enchantable/sword.json
-67959fef42e5d4ef05ea7312495f5b76ea6a3080 data/minecraft/tags/item/enchantable/trident.json
+129891454b9eed21952fd2c0f6e4b95fdec20743 data/minecraft/tags/item/enchantable/vanishing.json
 683de792311b8161d07e410eef6af5275961ff4b data/minecraft/tags/item/enchantable/weapon.json
 7f6df682e7109ccf2cb863b9b53b3c066e85a1e2 data/minecraft/tags/item/hoes.json
 edb7855f8e527a1c94aefe38b3888e5111b5d1c9 data/minecraft/tags/item/pickaxes.json
