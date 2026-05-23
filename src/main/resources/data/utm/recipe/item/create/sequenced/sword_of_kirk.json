@@ -19,7 +19,7 @@
           "item": "minecraft:iron_sword"
         },
         {
-          "type": "fluid_type",
+          "type": "fluid_stack",
           "amount": 1000,
           "fluid": "minecraft:lava"
         }
@@ -98,10 +98,10 @@
       "type": "create:filling",
       "ingredients": [
         {
-          "item": "minecraft:fusing_process"
+          "item": "utm:fusing_process"
         },
         {
-          "type": "fluid_type",
+          "type": "fluid_stack",
           "amount": 1000,
           "fluid": "minecraft:water"
         }

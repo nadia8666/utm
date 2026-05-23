@@ -24,7 +24,8 @@
     "compat.sable.SwivelBearingBlockEntityMixin",
     "compat.sable.SwivelBearingPlateBlockEntityMixin",
     "compat.sophisticatedcore$sophisticatedbackpacks.PumpUpgradeWrapperMixin",
-    "compat.spears.SpearsMixin"
+    "compat.spears.SpearsMixin",
+    "compat.spears.SpearsNeoForgeMixin"
   ],
   "client": [
     "AnvilScreenMixin",

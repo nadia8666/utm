@@ -21,7 +21,8 @@
       ],
       "results": [
         {
-          "id": "utm:fusing_process"
+          "id": "utm:fusing_process",
+          "count": 1
         }
       ]
     },
@@ -32,7 +33,7 @@
           "item": "utm:fusing_process"
         },
         {
-          "type": "fluid_type",
+          "type": "fluid_stack",
           "amount": 1000,
           "fluid": "minecraft:lava"
         }
@@ -63,18 +64,17 @@
       "type": "create:filling",
       "ingredients": [
         {
-          "item": "minecraft:fusing_process"
+          "item": "utm:fusing_process"
         },
         {
-          "type": "fluid_type",
+          "type": "fluid_stack",
           "amount": 1000,
           "fluid": "minecraft:water"
         }
       ],
       "results": [
         {
-          "id": "utm:sword_of_kirk",
-          "count": 1
+          "id": "utm:sword_of_kirk"
         }
       ]
     }
