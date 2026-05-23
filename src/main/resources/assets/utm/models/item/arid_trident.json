@@ -1,6 +1,33 @@
 {
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "utm:item/arid_trident"
+  "parent": "neoforge:item/default",
+  "base": {
+    "parent": "utm:item/arid_trident_in_hand"
+  },
+  "loader": "neoforge:separate_transforms",
+  "perspectives": {
+    "firstperson_lefthand": {
+      "parent": "utm:item/arid_trident_in_hand"
+    },
+    "firstperson_righthand": {
+      "parent": "utm:item/arid_trident_in_hand"
+    },
+    "thirdperson_lefthand": {
+      "parent": "utm:item/arid_trident_in_hand"
+    },
+    "thirdperson_righthand": {
+      "parent": "utm:item/arid_trident_in_hand"
+    },
+    "head": {
+      "parent": "utm:item/arid_trident_in_hand"
+    },
+    "ground": {
+      "parent": "utm:item/arid_trident_gui"
+    },
+    "fixed": {
+      "parent": "utm:item/arid_trident_gui"
+    },
+    "gui": {
+      "parent": "utm:item/arid_trident_gui"
+    }
   }
 }

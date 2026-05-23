@@ -1,5 +1,4 @@
 {
-	"parent": "builtin/entity",
 	"format_version": "1.9.0",
 	"credit": "Made with Blockbench",
 	"texture_size": [64, 64],
@@ -136,19 +135,19 @@
 	],
 	"display": {
 		"thirdperson_righthand": {
-			"rotation": [0, 90, 0]
+			"rotation": [0, 90, 180]
 		},
 		"thirdperson_lefthand": {
-			"rotation": [0, -90, 0]
+			"rotation": [0, -90, 180]
 		},
 		"firstperson_righthand": {
-			"rotation": [0, 180, -54],
-			"translation": [-2.5, 3.5, 2],
+			"rotation": [-16, -91, -54],
+			"translation": [-2.5, -1.5, 2],
 			"scale": [0.68, 0.68, 0.68]
 		},
 		"firstperson_lefthand": {
-			"rotation": [0, -180, -54],
-			"translation": [-2.5, 3.5, 2],
+			"rotation": [-16, -91, -54],
+			"translation": [-2.5, -1.5, 2],
 			"scale": [0.68, 0.68, 0.68]
 		},
 		"head": {
