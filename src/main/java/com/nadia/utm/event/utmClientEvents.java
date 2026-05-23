@@ -10,6 +10,7 @@ import com.nadia.utm.registry.attachment.utmAttachments;
 import com.nadia.utm.registry.data.utmDataComponents;
 import com.nadia.utm.registry.dimension.utmDimensions;
 import com.nadia.utm.registry.fluid.utmFluids;
+import com.nadia.utm.registry.item.tool.utmTools;
 import com.nadia.utm.registry.ui.utmMenus;
 import com.nadia.utm.updater.ToastDisplaySignal;
 import com.nadia.utm.utm;
@@ -19,6 +20,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.TitleScreen;
 import net.minecraft.client.renderer.DimensionSpecialEffects;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextColor;
 import net.minecraft.resources.ResourceLocation;
@@ -153,6 +155,14 @@ public class utmClientEvents {
                                 return new float[]{0, 0, 0, 0};
                             }
                         });
+            });
+            utmEventHost.register(EntityRenderersEvent.RegisterRenderers.class, event -> {
+                //		event.registerEntityRenderer(TridentRegistry.TIERED_TRIDENT.get(), ThrownTieredTridentRenderer::new);
+                //  i dont know what this code does so i comet it out
+            });
+            utmEventHost.register(ModelEvent.RegisterAdditional.class, event -> {
+                event.register(ModelResourceLocation.inventory(utmTools.ARID_TRIDENT.ITEM.getId().withPrefix("item/")));
+                event.register(ModelResourceLocation.inventory(utmTools.ARID_TRIDENT.ITEM.getId().withPrefix("item/").withSuffix("_in_hand")));
             });
         }
     }
