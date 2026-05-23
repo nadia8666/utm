@@ -94,7 +94,7 @@ public class utmClientEvents {
         }
     }
 
-    @ForceLoad(dist = Dist.CLIENT)
+    @ForceLoad(dist = Dist.CLIENT, deps = {utmTools.class})
     static class RENDERER {
         static {
             utmEventHost.register(RegisterRenderBuffersEvent.class, event -> {
@@ -114,6 +114,9 @@ public class utmClientEvents {
                 event.register(CitywallsBlockEntityRenderer.OWM);
                 event.register(CitywallsBlockEntityRenderer.OWS);
                 event.register(CitywallsBlockEntityRenderer.CWS);
+
+                event.register(ModelResourceLocation.standalone(utm.key("item/arid_trident")));
+                event.register(ModelResourceLocation.standalone(utm.key("item/arid_trident_in_hand")));
             });
 
             utmEventHost.register(RegisterDimensionSpecialEffectsEvent.class, event -> {
@@ -155,14 +158,6 @@ public class utmClientEvents {
                                 return new float[]{0, 0, 0, 0};
                             }
                         });
-            });
-            utmEventHost.register(EntityRenderersEvent.RegisterRenderers.class, event -> {
-                //		event.registerEntityRenderer(TridentRegistry.TIERED_TRIDENT.get(), ThrownTieredTridentRenderer::new);
-                //  i dont know what this code does so i comet it out
-            });
-            utmEventHost.register(ModelEvent.RegisterAdditional.class, event -> {
-                event.register(ModelResourceLocation.inventory(utmTools.ARID_TRIDENT.ITEM.getId().withPrefix("item/")));
-                event.register(ModelResourceLocation.inventory(utmTools.ARID_TRIDENT.ITEM.getId().withPrefix("item/").withSuffix("_in_hand")));
             });
         }
     }
