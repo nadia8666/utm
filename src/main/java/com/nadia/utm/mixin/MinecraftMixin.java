@@ -6,7 +6,6 @@ import com.nadia.utm.networking.payloads.MyAwesomeKarkParticlePayload;
 import com.nadia.utm.networking.payloads.Sword2AttackPayload;
 import com.nadia.utm.networking.payloads.jumbo_josh;
 import com.nadia.utm.registry.item.tool.utmTools;
-import com.nadia.utm.registry.item.utmItems;
 import com.nadia.utm.util.TickUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -65,7 +64,7 @@ public class MinecraftMixin {
                 player.resetAttackStrengthTicker();
 
                 cir.setReturnValue(false);
-            } else if ((itemStack.is(utmItems.SWORD2.get()) || (itemStack.is(utmItems.GLOOMSWORD8.get()))) && player.getAttackStrengthScale(0f) >=1) {
+            } else if ((itemStack.is(utmTools.SWORD2.get()) || (itemStack.is(utmTools.GLOOMSWORD8.get()))) && player.getAttackStrengthScale(0f) >= 1) {
                 PacketDistributor.sendToServer(new Sword2AttackPayload(player.position().toVector3f()));
                 if (inputEvent.shouldSwingHand())
                     player.swing(InteractionHand.MAIN_HAND);
@@ -73,7 +72,7 @@ public class MinecraftMixin {
 
 
                 //cir.setReturnValue(false);
-            } else if (itemStack.is(utmItems.SABEL3.get()) && player.getAttackStrengthScale(0f ) >=1 && hitResult.getType().equals(HitResult.Type.ENTITY)) {
+            } else if (itemStack.is(utmTools.SABEL3.get()) && player.getAttackStrengthScale(0f) >= 1 && hitResult.getType().equals(HitResult.Type.ENTITY)) {
                 if (hitResult instanceof EntityHitResult result) {
                     String targetUUID = result.getEntity().getUUID().toString();
 

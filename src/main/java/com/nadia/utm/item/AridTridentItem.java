@@ -18,6 +18,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ThrownTrident;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TridentItem;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
@@ -27,13 +28,15 @@ import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
 public class AridTridentItem extends TridentItem {
-        public static final int THROW_THRESHOLD_TIME = 20;
-        public static final float BASE_DAMAGE = -1.0F;
-        public static final float SHOOT_POWER = 10F;
+    public static final int THROW_THRESHOLD_TIME = 20;
+    public static final float BASE_DAMAGE = -1.0F;
+    public static final float SHOOT_POWER = 10F;
+
     public AridTridentItem(Properties properties) {
         super(properties);
     }
-        //there is nothing you nee to change about this file
+
+    //there is nothing you nee to change about this file
     @Override
     public @NotNull Projectile asProjectile(@NotNull Level level, Position pos, ItemStack stack, @NotNull Direction direction) {
         ThrownTrident throwntrident = new ThrownAridTrident(level, pos.x(), pos.y(), pos.z(), stack.copyWithCount(1)); //OVERWRITE THROWNTRIDENT
@@ -41,19 +44,32 @@ public class AridTridentItem extends TridentItem {
         return throwntrident;
     }
 
-    public static @NotNull ItemAttributeModifiers createAttributes() {
-        return ItemAttributeModifiers.builder().add(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_ID, (double)-1.0F, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND).add(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_ID, (double)-3F, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND).build();
+    @Override
+    public @NotNull ItemAttributeModifiers getDefaultAttributeModifiers(@NotNull ItemStack stack) {
+        return ItemAttributeModifiers.builder()
+                .add(
+                        Attributes.ATTACK_DAMAGE,
+                        new AttributeModifier(Item.BASE_ATTACK_DAMAGE_ID, -1.0F, AttributeModifier.Operation.ADD_VALUE),
+                        EquipmentSlotGroup.MAINHAND
+                )
+                .add(
+                        Attributes.ATTACK_SPEED,
+                        new AttributeModifier(Item.BASE_ATTACK_SPEED_ID, -3F, AttributeModifier.Operation.ADD_VALUE),
+                        EquipmentSlotGroup.MAINHAND
+                )
+                .build();
     }
+
     private static boolean isTooDamagedToUse(ItemStack stack) {
         return stack.getDamageValue() >= stack.getMaxDamage() - 1;
     }
 
     @Override
-    public void releaseUsing(ItemStack stack, Level level, LivingEntity entityLiving, int timeLeft) {
+    public void releaseUsing(@NotNull ItemStack stack, @NotNull Level level, @NotNull LivingEntity entityLiving, int timeLeft) {
         if (entityLiving instanceof Player player) {
             int i = this.getUseDuration(stack, entityLiving) - timeLeft;
             if (i >= 20) {
-                Holder<SoundEvent> holder = (Holder)EnchantmentHelper.pickHighestLevel(stack, EnchantmentEffectComponents.TRIDENT_SOUND).orElse(SoundEvents.TRIDENT_THROW);
+                Holder<SoundEvent> holder = EnchantmentHelper.pickHighestLevel(stack, EnchantmentEffectComponents.TRIDENT_SOUND).orElse(SoundEvents.TRIDENT_THROW);
                 if (!level.isClientSide) {
                     stack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(entityLiving.getUsedItemHand()));
                     ThrownTrident throwntrident = new ThrownAridTrident(level, player, stack);
@@ -63,7 +79,7 @@ public class AridTridentItem extends TridentItem {
                     }
 
                     level.addFreshEntity(throwntrident);
-                    level.playSound((Player)null, throwntrident, (SoundEvent)holder.value(), SoundSource.PLAYERS, 1.0F, 1.0F);
+                    level.playSound(null, throwntrident, holder.value(), SoundSource.PLAYERS, 1.0F, 1.0F);
                     if (!player.hasInfiniteMaterials()) {
                         player.getInventory().removeItem(stack);
                     }
@@ -75,7 +91,7 @@ public class AridTridentItem extends TridentItem {
 
     }
 
-    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+    public @NotNull InteractionResultHolder<ItemStack> use(@NotNull Level level, Player player, @NotNull InteractionHand hand) {
         ItemStack itemstack = player.getItemInHand(hand);
         if (isTooDamagedToUse(itemstack)) {
             return InteractionResultHolder.fail(itemstack);

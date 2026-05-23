@@ -9,7 +9,7 @@ import com.nadia.utm.gui.GlintMenu;
 import com.nadia.utm.networking.payloads.*;
 import com.nadia.utm.projectile.DroplessArrow;
 import com.nadia.utm.registry.attachment.utmAttachments;
-import com.nadia.utm.registry.item.utmItems;
+import com.nadia.utm.registry.item.tool.utmTools;
 import com.nadia.utm.util.TickUtil;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.protocol.PacketFlow;
@@ -96,7 +96,7 @@ public class utmNetworking {
             Vector3f pos = payload.pos();
             if (player.level() instanceof ServerLevel slevel) {
                 ItemStack itemstack = player.getMainHandItem();
-                boolean doom = !(itemstack.is(utmItems.SWORD2.get()));
+                boolean doom = !(itemstack.is(utmTools.SWORD2.get()));
                 if (!player.isCreative() && !doom) {
                     itemstack.setDamageValue(itemstack.getDamageValue() + 1);
                 }

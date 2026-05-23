@@ -178,9 +178,22 @@ public class utmTools {
             }
     ).tags(Tags.Items.ENCHANTABLES, ItemTags.SWORD_ENCHANTABLE, ItemTags.WEAPON_ENCHANTABLE, ItemTags.FIRE_ASPECT_ENCHANTABLE, ItemTags.MINING_ENCHANTABLE, ItemTags.MINING_LOOT_ENCHANTABLE, ItemTags.HOES).handheld();
     public static final utmItemContainer<AridTridentItem> ARID_TRIDENT = register("arid_trident", () -> {
-                return new AridTridentItem(new Item.Properties().stacksTo(1).attributes(AridTridentItem.createAttributes()).durability(1024)); //condense pls
+        return new AridTridentItem(new Item.Properties().stacksTo(1).durability(1024)); //condense pls
             }
     ).tags(Tags.Items.ENCHANTABLES, ItemTags.WEAPON_ENCHANTABLE, ItemTags.FIRE_ASPECT_ENCHANTABLE);
+
+    public static final utmItemContainer<Item> SWORD2 = register("sword2", new Item.Properties()
+            .attributes(SwordItem.createAttributes(utmToolBuilder.buildTier(
+                    BlockTags.INCORRECT_FOR_WOODEN_TOOL, 1000, 1f, 0f, 0, () -> Ingredient.EMPTY
+            ), 2, -3.5f)).rarity(Rarity.UNCOMMON).durability(1000)).handheld(),
+            GLOOMSWORD8 = register("gloomsword8", new Item.Properties()
+                    .attributes(SwordItem.createAttributes(utmToolBuilder.buildTier(
+                            BlockTags.INCORRECT_FOR_WOODEN_TOOL, 1, 1f, 0f, 0, () -> Ingredient.EMPTY
+                    ), 4, -3.6f)).rarity(Rarity.EPIC)).handheld(),
+            SABEL3 = register("sabel3", new Item.Properties()
+                    .attributes(SwordItem.createAttributes(utmToolBuilder.buildTier(
+                            BlockTags.INCORRECT_FOR_WOODEN_TOOL, 1500, 1f, 0f, 0, () -> Ingredient.EMPTY
+                    ), 5, -2.8f)).rarity(Rarity.RARE)); // Do Not Datagen My Model!
 
     public static final utmItemContainer<ThrowingSpearItem> COPPER_THROWING_SPEAR = register("copper_throwing_spear", () -> new ThrowingSpearItem(new Item.Properties()
             .durability(40)
