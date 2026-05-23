@@ -180,7 +180,7 @@ public class utmTools {
     public static final utmItemContainer<AridTridentItem> ARID_TRIDENT = register("arid_trident", () -> {
         return new AridTridentItem(new Item.Properties().stacksTo(1).durability(1024)); //condense pls
             }
-    ).tags(Tags.Items.ENCHANTABLES, ItemTags.WEAPON_ENCHANTABLE, ItemTags.FIRE_ASPECT_ENCHANTABLE);
+    ).tags(Tags.Items.ENCHANTABLES, ItemTags.WEAPON_ENCHANTABLE, ItemTags.FIRE_ASPECT_ENCHANTABLE, ItemTags.TRIDENT_ENCHANTABLE);
 
     public static final utmItemContainer<Item> SWORD2 = register("sword2", new Item.Properties()
             .attributes(SwordItem.createAttributes(utmToolBuilder.buildTier(
