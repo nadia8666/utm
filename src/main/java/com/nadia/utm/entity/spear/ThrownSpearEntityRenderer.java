@@ -39,7 +39,7 @@ public class ThrownSpearEntityRenderer extends EntityRenderer<ThrownSpearEntity>
 
             ms.mulPose(Axis.ZP.rotationDegrees(entity.LAST_ROTATION));
 
-            ms.translate(0, 0, -1.25);
+            ms.translate(0, 0, -0.25);
         }).run(() -> PartialEntityModelRenderer.render(ms,
                 utmModels.THROWING_SPEAR_MODELS.getOrDefault(entity.getModel(), utmModels.COPPER_THROWING_SPEAR).get(),
                 renderType(entity), buffer, packedLight, 0)).pop();

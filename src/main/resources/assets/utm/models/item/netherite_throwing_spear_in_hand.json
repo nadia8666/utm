@@ -1,0 +1,6 @@
+{
+  "parent": "utm:item/copper_throwing_spear_in_hand",
+  "textures": {
+    "1": "utm:item/netherite_throwing_spear"
+  }
+}

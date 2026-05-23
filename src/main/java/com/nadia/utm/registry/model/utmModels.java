@@ -26,8 +26,8 @@ public class utmModels {
     public static final PartialModel THRUST_LARGE_2 = PartialModel.of(utm.key("block/thrust_large2"));
 
     // TODO: refactor this lol
-    public static final PartialModel COPPER_THROWING_SPEAR = PartialModel.of(utm.key("item/copper_throwing_spear"));
-    public static final PartialModel NETHERITE_THROWING_SPEAR = PartialModel.of(utm.key("item/netherite_throwing_spear"));
+    public static final PartialModel COPPER_THROWING_SPEAR = PartialModel.of(utm.key("item/copper_throwing_spear_in_hand"));
+    public static final PartialModel NETHERITE_THROWING_SPEAR = PartialModel.of(utm.key("item/netherite_throwing_spear_in_hand"));
     public static final Map<String, PartialModel> THROWING_SPEAR_MODELS = new HashMap<>();
     static {
         THROWING_SPEAR_MODELS.put("copper_throwing_spear", COPPER_THROWING_SPEAR);

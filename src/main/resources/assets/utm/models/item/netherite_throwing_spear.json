@@ -1,6 +1,15 @@
 {
-	"parent": "utm:item/copper_throwing_spear",
-	"textures": {
-		"0": "utm:item/netherite_throwing_spear"
-	}
+  "loader": "neoforge:separate_transforms",
+  "gui_light": "front",
+  "base": {
+    "parent": "utm:item/netherite_throwing_spear_in_hand"
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "utm:item/netherite_throwing_spear_item"
+    },
+    "ground": {
+      "parent": "utm:item/netherite_throwing_spear_item"
+    }
+  }
 }
