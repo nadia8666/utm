@@ -10,6 +10,9 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 public class SpearsNeoForgeMixin {
     @Redirect(method = "lambda$registerStuff$9", at = @At(value = "INVOKE", target = "Lnet/neoforged/fml/ModList;isLoaded(Ljava/lang/String;)Z"))
     private static boolean utm$sheldonCopper(ModList instance, String modTarget) {
-        return true;
+        if (modTarget.equals("copperagebackport"))
+            return true;
+
+        return instance.isLoaded(modTarget);
     }
 }
