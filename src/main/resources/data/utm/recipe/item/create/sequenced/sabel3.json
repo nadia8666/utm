@@ -19,7 +19,7 @@
           "item": "minecraft:stick"
         },
         {
-          "item": "create:iron_ingot"
+          "item": "minecraft:iron_ingot"
         }
       ],
       "results": [
@@ -35,7 +35,7 @@
           "item": "utm:unassabeled"
         },
         {
-          "item": "minecraft:iron_bar"
+          "item": "minecraft:iron_bars"
         }
       ],
       "results": [
@@ -51,7 +51,7 @@
           "item": "utm:unassabeled"
         },
         {
-          "item": "minecraft:iron_bar"
+          "item": "minecraft:iron_bars"
         }
       ],
       "results": [
@@ -67,7 +67,7 @@
           "item": "utm:unassabeled"
         },
         {
-          "item": "minecraft:iron_bar"
+          "item": "minecraft:iron_bars"
         }
       ],
       "results": [
@@ -83,7 +83,7 @@
           "item": "utm:unassabeled"
         },
         {
-          "item": "minecraft:iron_bar"
+          "item": "minecraft:iron_bars"
         }
       ],
       "results": [

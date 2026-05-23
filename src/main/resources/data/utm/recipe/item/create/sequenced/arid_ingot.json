@@ -19,7 +19,7 @@
           "item": "minecraft:netherite_ingot"
         },
         {
-          "type": "neoforge:single",
+          "type": "fluid_stack",
           "amount": 1000,
           "fluid": "minecraft:lava"
         }
@@ -37,7 +37,7 @@
           "item": "utm:unfinished_arid_ingot"
         },
         {
-          "type": "neoforge:single",
+          "type": "fluid_stack",
           "amount": 1000,
           "fluid": "minecraft:water"
         }
@@ -55,9 +55,9 @@
           "item": "utm:unfinished_arid_ingot"
         },
         {
-          "type": "neoforge:tag",
+          "type": "fluid_tag",
           "amount": 1000,
-          "tag": "c:milk"
+          "fluid_tag": "c:milk"
         }
       ],
       "results": [
@@ -73,25 +73,7 @@
           "item": "utm:unfinished_arid_ingot"
         },
         {
-          "type": "neoforge:single",
-          "amount": 1000,
-          "fluid": "minecraft:lava"
-        }
-      ],
-      "results": [
-        {
-          "id": "utm:unfinished_arid_ingot"
-        }
-      ]
-    },
-    {
-      "type": "create:filling",
-      "ingredients": [
-        {
-          "item": "utm:unfinished_arid_ingot"
-        },
-        {
-          "type": "neoforge:single",
+          "type": "fluid_stack",
           "amount": 1000,
           "fluid": "minecraft:lava"
         }
@@ -109,7 +91,25 @@
           "item": "utm:unfinished_arid_ingot"
         },
         {
-          "type": "neoforge:single",
+          "type": "fluid_stack",
+          "amount": 1000,
+          "fluid": "minecraft:lava"
+        }
+      ],
+      "results": [
+        {
+          "id": "utm:unfinished_arid_ingot"
+        }
+      ]
+    },
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "utm:unfinished_arid_ingot"
+        },
+        {
+          "type": "fluid_stack",
           "amount": 1000,
           "fluid": "minecraft:water"
         }
@@ -127,9 +127,9 @@
           "item": "utm:unfinished_arid_ingot"
         },
         {
-          "type": "neoforge:tag",
+          "type": "fluid_tag",
           "amount": 1000,
-          "tag": "c:chocolate"
+          "fluid_tag": "c:chocolate"
         }
       ],
       "results": [
@@ -145,25 +145,7 @@
           "item": "utm:unfinished_arid_ingot"
         },
         {
-          "type": "neoforge:single",
-          "amount": 1000,
-          "fluid": "minecraft:lava"
-        }
-      ],
-      "results": [
-        {
-          "id": "utm:unfinished_arid_ingot"
-        }
-      ]
-    },
-    {
-      "type": "create:filling",
-      "ingredients": [
-        {
-          "item": "utm:unfinished_arid_ingot"
-        },
-        {
-          "type": "neoforge:single",
+          "type": "fluid_stack",
           "amount": 1000,
           "fluid": "minecraft:lava"
         }
@@ -181,7 +163,7 @@
           "item": "utm:unfinished_arid_ingot"
         },
         {
-          "type": "neoforge:single",
+          "type": "fluid_stack",
           "amount": 1000,
           "fluid": "minecraft:lava"
         }
@@ -199,7 +181,25 @@
           "item": "utm:unfinished_arid_ingot"
         },
         {
-          "type": "neoforge:single",
+          "type": "fluid_stack",
+          "amount": 1000,
+          "fluid": "minecraft:lava"
+        }
+      ],
+      "results": [
+        {
+          "id": "utm:unfinished_arid_ingot"
+        }
+      ]
+    },
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "utm:unfinished_arid_ingot"
+        },
+        {
+          "type": "fluid_stack",
           "amount": 1000,
           "fluid": "minecraft:water"
         }
@@ -217,9 +217,9 @@
           "item": "utm:unfinished_arid_ingot"
         },
         {
-          "type": "neoforge:tag",
+          "type": "fluid_tag",
           "amount": 1000,
-          "tag": "c:honey"
+          "fluid_tag": "c:honey"
         }
       ],
       "results": [
@@ -249,7 +249,7 @@
           "item": "utm:unfinished_arid_ingot"
         },
         {
-          "type": "neoforge:single",
+          "type": "fluid_stack",
           "amount": 1000,
           "fluid": "minecraft:lava"
         }
@@ -267,9 +267,9 @@
           "item": "utm:unfinished_arid_ingot"
         },
         {
-          "type": "neoforge:tag",
+          "type": "fluid_tag",
           "amount": 1000,
-          "tag": "c:honey"
+          "fluid_tag": "c:honey"
         }
       ],
       "results": [

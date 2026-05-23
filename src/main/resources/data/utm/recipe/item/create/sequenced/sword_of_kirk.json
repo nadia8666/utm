@@ -19,7 +19,7 @@
           "item": "minecraft:iron_sword"
         },
         {
-          "type": "neoforge:single",
+          "type": "fluid_type",
           "amount": 1000,
           "fluid": "minecraft:lava"
         }
@@ -101,7 +101,7 @@
           "item": "minecraft:fusing_process"
         },
         {
-          "type": "neoforge:single",
+          "type": "fluid_type",
           "amount": 1000,
           "fluid": "minecraft:water"
         }
