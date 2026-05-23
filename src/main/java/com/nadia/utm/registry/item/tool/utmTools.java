@@ -185,12 +185,12 @@ public class utmTools {
     public static final utmItemContainer<ThrowingSpearItem> COPPER_THROWING_SPEAR = register("copper_throwing_spear", () -> new ThrowingSpearItem(new Item.Properties()
             .durability(40)
             .component(utmDataComponents.THROWING_SPEAR_MODEL, "copper_throwing_spear")
-            .attributes(ThrowingSpearItem.createAttributes(5.5F, -2.9F)).stacksTo(1))
+            .stacksTo(1), 5.5F, -2.9F)
     ).tags(ItemTags.VANISHING_ENCHANTABLE);
 
     public static final utmItemContainer<ThrowingSpearItem> NETHERITE_THROWING_SPEAR = register("netherite_throwing_spear", () -> new ThrowingSpearItem(new Item.Properties()
             .durability(41)
             .component(utmDataComponents.THROWING_SPEAR_MODEL, "netherite_throwing_spear")
-            .attributes(ThrowingSpearItem.createAttributes(6.5F, -2.9F)).stacksTo(1))
+            .stacksTo(1), 6.5F, -2.9F)
     ).tags(ItemTags.VANISHING_ENCHANTABLE);
 }

@@ -27,20 +27,26 @@ import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
 public class ThrowingSpearItem extends Item implements ProjectileItem {
-    public ThrowingSpearItem(Properties properties) {
+    private final float attackDamage;
+    private final float attackSpeed;
+
+    public ThrowingSpearItem(Properties properties, float attackDamage, float attackSpeed) {
         super(properties);
+        this.attackDamage = attackDamage;
+        this.attackSpeed = attackSpeed;
     }
 
-    public static ItemAttributeModifiers createAttributes(float damage, float speed) {
+    @Override
+    public @NotNull ItemAttributeModifiers getDefaultAttributeModifiers(@NotNull ItemStack stack) {
         return ItemAttributeModifiers.builder()
                 .add(
                         Attributes.ATTACK_DAMAGE,
-                        new AttributeModifier(Item.BASE_ATTACK_DAMAGE_ID, damage, AttributeModifier.Operation.ADD_VALUE),
+                        new AttributeModifier(BASE_ATTACK_DAMAGE_ID, this.attackDamage, AttributeModifier.Operation.ADD_VALUE),
                         EquipmentSlotGroup.MAINHAND
                 )
                 .add(
                         Attributes.ATTACK_SPEED,
-                        new AttributeModifier(Item.BASE_ATTACK_SPEED_ID, speed, AttributeModifier.Operation.ADD_VALUE),
+                        new AttributeModifier(BASE_ATTACK_SPEED_ID, this.attackSpeed, AttributeModifier.Operation.ADD_VALUE),
                         EquipmentSlotGroup.MAINHAND
                 )
                 .build();

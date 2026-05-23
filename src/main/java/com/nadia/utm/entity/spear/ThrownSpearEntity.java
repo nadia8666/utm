@@ -12,19 +12,18 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.Objects;
 
 public class ThrownSpearEntity extends AbstractArrow {
     public float LAST_ROTATION = 0;
@@ -113,9 +112,16 @@ public class ThrownSpearEntity extends AbstractArrow {
 
         float[] damage = {0.0F};
 
-        COPY_STACK.getAttributeModifiers().forEach(EquipmentSlot.MAINHAND, (attributeHolder, modifier) -> {
-            if (attributeHolder.is(Objects.requireNonNull(Attributes.ATTACK_DAMAGE.getKey()))) {
-                damage[0] += (float) modifier.amount();
+        ItemAttributeModifiers modifiers = COPY_STACK.getOrDefault(
+                net.minecraft.core.component.DataComponents.ATTRIBUTE_MODIFIERS,
+                ItemAttributeModifiers.EMPTY
+        );
+
+        modifiers.forEach(EquipmentSlotGroup.MAINHAND, (attributeHolder, modifier) -> {
+            if (attributeHolder != null && attributeHolder.unwrap().left().isPresent() && Attributes.ATTACK_DAMAGE.getKey() != null) {
+                if (attributeHolder.is(Attributes.ATTACK_DAMAGE.getKey())) {
+                    damage[0] += (float) modifier.amount();
+                }
             }
         });
 
