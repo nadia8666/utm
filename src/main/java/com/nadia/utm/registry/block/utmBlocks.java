@@ -228,6 +228,13 @@ public class utmBlocks {
             .requiresCorrectToolForDrops()
             .sound(SoundType.STONE)).dropOre(utmItems.RAW_MAGNESIUM).cube().inheritModel().minePick().mineTier(2);
 
+
+    public static final utmBlockContainer<Block, BlockItem> THANOS_BLOCKS = dualRegister("thanos_blocks", Block::new, BlockBehaviour.Properties.of()
+            .destroyTime(1)
+            //make it lightweight. like aero style. but its super durabile
+            .noLootTable()
+            .sound(SoundType.SLIME_BLOCK)).cube().inheritModel().minePick().mineHoe();
+
     // propulsion
     public static final utmBlockContainer<IonJetBlock, BlockItem> ION_JET = dualRegister("ion_jet", IonJetBlock::new, BlockBehaviour.Properties.of()
             .destroyTime(3)

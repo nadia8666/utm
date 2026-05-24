@@ -77,6 +77,7 @@
   "block.utm.gimbal_plate": "you are not supposed to have this.",
   "block.utm.ship_sensor": "Dynamic Sensor",
   "block.utm.large_basin": "Large Basin",
+  "block.utm.thanos_blocks": "Apple Resin",
 
   "item.utm.copper_sword": "Copper Sword",
   "item.utm.copper_pickaxe": "Copper Pickaxe",
@@ -127,7 +128,9 @@
   "item.utm.arid_shovel": "Arid Shovel",
   "item.utm.arid_hoe": "Arid Hoe",
   "item.utm.arid_trident": "Arid Trident",
-  "item.utm.arid_paxel": "rblxpikmin is a NOOB!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\nNOOB!🐈🐈🐈🐈🐈🐈",
+  "item.utm.arid_paxel": "Arid Paxel",
+  "item.utm.unassabeled": "Unassabeled",
+  "item.utm.fusing_process": "Fusing Process",
 
   "item.utm.enchanted_sword_red": "Enchanted Sword",
   "item.utm.enchanted_sword_green": "Enchanted Sword",
