@@ -212,16 +212,16 @@ public class utmTools {
             .durability(350)
             .component(utmDataComponents.THROWING_SPEAR_MODEL, "copper_throwing_spear")
             .stacksTo(1), 5.5F, -2.9F)
-    ).tags(ItemTags.VANISHING_ENCHANTABLE, utmTags.ITEM.ADD_SPEAR_RECOVERY);
+    ).tags(ItemTags.VANISHING_ENCHANTABLE, utmTags.ITEM.ADD_SPEAR_RECOVERY, utmTags.ITEM.ADD_SPEAR_THROW, utmTags.ITEM.ADD_SHARPNESS);
 
     public static final utmItemContainer<ThrowingSpearItem> NETHERITE_THROWING_SPEAR = register("netherite_throwing_spear", () -> new ThrowingSpearItem(new Item.Properties()
             .durability(550)
             .component(utmDataComponents.THROWING_SPEAR_MODEL, "netherite_throwing_spear")
             .stacksTo(1), 6.5F, -2.6F)
-    ).tags(ItemTags.VANISHING_ENCHANTABLE, utmTags.ITEM.ADD_UNBREAKING, utmTags.ITEM.ADD_SPEAR_RECOVERY, utmTags.ITEM.ADD_SPEAR_THROW);
+    ).tags(ItemTags.VANISHING_ENCHANTABLE, utmTags.ITEM.ADD_UNBREAKING, utmTags.ITEM.ADD_SPEAR_RECOVERY, utmTags.ITEM.ADD_SPEAR_THROW, utmTags.ITEM.ADD_SHARPNESS);
 
     public static final utmItemContainer<TNTThrowingSpearItem> TNT_THROWING_SPEAR = register("tnt_throwing_spear", () -> new TNTThrowingSpearItem(new Item.Properties()
             .component(utmDataComponents.THROWING_SPEAR_MODEL, "tnt_throwing_spear")
             .stacksTo(16), 2.5F, -3.55F)
-    ).tags(ItemTags.VANISHING_ENCHANTABLE, utmTags.ITEM.ADD_SPEAR_THROW);
+    ).tags(ItemTags.VANISHING_ENCHANTABLE, utmTags.ITEM.ADD_SPEAR_THROW, utmTags.ITEM.ADD_MENDING);
 }

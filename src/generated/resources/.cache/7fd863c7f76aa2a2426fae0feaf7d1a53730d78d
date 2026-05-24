@@ -1,4 +1,4 @@
-// 1.21.1	2026-05-23T23:09:40.3044858	Tags for minecraft:item mod id utm
+// 1.21.1	2026-05-23T23:22:32.4595498	Tags for minecraft:item mod id utm
 66adac5ce76e09f7316b3221e955af75b73eb2c5 data/c/tags/item/buckets.json
 cbd821dca78a9d1b17f4f5f1e0da184cc8c58022 data/c/tags/item/enchantables.json
 cc5ee93a6de880a1acd213e033d0123d2bb90869 data/c/tags/item/music_discs.json
@@ -20,7 +20,9 @@ f227975eaf1956e2c82fa940a8a696e830fac972 data/minecraft/tags/item/enchantable/mi
 98da6b0748decfc17f02fa4fe8cc27a1aae0de38 data/minecraft/tags/item/shovels.json
 74391924ce287ef28cceb93dda52a7e2f1f279b6 data/minecraft/tags/item/swords.json
 1ce4e06e062979db32ba844b3c947f681546b641 data/minecraft/tags/item/trim_templates.json
+0aa63e91d5b719a4dad4b7f2802ef031d5f0c527 data/utm/tags/item/add_mending.json
+129891454b9eed21952fd2c0f6e4b95fdec20743 data/utm/tags/item/add_sharpness.json
 129891454b9eed21952fd2c0f6e4b95fdec20743 data/utm/tags/item/add_spear_recovery.json
-e2561fc0090a18365fe689db5bfbde181c6cbacf data/utm/tags/item/add_spear_throw.json
+07f17e27f28bb5c9ef7a6981d495b2e956ca98e1 data/utm/tags/item/add_spear_throw.json
 02c9e00a1aa3ebe3219852355d43efb3241022ab data/utm/tags/item/add_unbreaking.json
 1ce4e06e062979db32ba844b3c947f681546b641 data/utm/tags/item/elytra_trim_templates.json
