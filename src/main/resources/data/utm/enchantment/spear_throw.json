@@ -2,12 +2,8 @@
   "description": {
     "translate": "enchantment.utm.spear_throw"
   },
-  "supported_items": [
-    "#utm:add_spear_throw"
-  ],
-  "primary_items": [
-    "#utm:add_spear_throw"
-  ],
+  "supported_items": "#utm:add_spear_throw",
+  "primary_items": "#utm:add_spear_throw",
   "weight": 5,
   "max_level": 5,
   "min_cost": {

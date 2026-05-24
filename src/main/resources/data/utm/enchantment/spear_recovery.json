@@ -2,12 +2,8 @@
   "description": {
     "translate": "enchantment.utm.spear_recoery"
   },
-  "supported_items": [
-    "#utm:add_spear_recovery"
-  ],
-  "primary_items": [
-    "#utm:add_spear_recovery"
-  ],
+  "supported_items": "#utm:add_spear_recovery",
+  "primary_items": "#utm:add_spear_recovery",
   "weight": 5,
   "max_level": 1,
   "min_cost": {
