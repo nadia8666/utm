@@ -7,6 +7,7 @@ import com.nadia.utm.registry.fluid.utmFluids;
 import com.nadia.utm.registry.song.utmSongs;
 import com.nadia.utm.registry.tags.utmTags;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -99,4 +100,15 @@ public class utmItems {
             MAGNESIUM_SHEET = register("magnesium_sheet").generated(),
             STEEL_SHEET = register("steel_sheet").generated(),
             COPPER_PLATING = register("copper_plating").generated();
+
+    // apples
+    public static final utmItemContainer<Item> ANCIENT_APPLE = register("ancient_apple",
+                    new Item.Properties().food(new FoodProperties.Builder().alwaysEdible().nutrition(2).saturationModifier(2).build())).generated(),
+            BIOME_APPLE = register("biome_apple",
+                    new Item.Properties().food(new FoodProperties.Builder().alwaysEdible().nutrition(2).saturationModifier(2).build())).generated(),
+            PROGRESSION_APPLE = register("progression_apple",
+                    new Item.Properties().food(new FoodProperties.Builder().alwaysEdible().nutrition(2).saturationModifier(2).build())).generated(),
+            MOB_APPLE = register("mob_apple",
+                    new Item.Properties().food(new FoodProperties.Builder().alwaysEdible().nutrition(2).saturationModifier(2).build())).generated();
+    
 }
