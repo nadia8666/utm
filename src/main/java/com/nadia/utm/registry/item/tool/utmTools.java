@@ -145,7 +145,7 @@ public class utmTools {
                         BlockTags.INCORRECT_FOR_WOODEN_TOOL, 100, 1f, 0f, 15, () -> Ingredient.of(Tags.Items.INGOTS_IRON)
                 );
                 return new ShartSword(tier, new Item.Properties().attributes(
-                        SwordItem.createAttributes(tier, 5, -2.4f)).rarity(Rarity.UNCOMMON));
+                        SwordItem.createAttributes(tier, 5, -2.4f)).rarity(Rarity.UNCOMMON)); //todo: give you a blocking animation
             }
     ).tags(Tags.Items.ENCHANTABLES, ItemTags.SWORD_ENCHANTABLE, ItemTags.WEAPON_ENCHANTABLE, ItemTags.DURABILITY_ENCHANTABLE, ItemTags.SWORDS, Tags.Items.TOOLS_SHIELD).handheld();
     public static final utmItemContainer<SwordItem> SWORD_OF_KIRK = register("sword_of_kirk", () -> {
@@ -206,7 +206,7 @@ public class utmTools {
     public static final utmItemContainer<SwordItem> SABEL3 = register("sabel3", () -> {
         Tier tier = utmToolBuilder.buildTier(BlockTags.INCORRECT_FOR_WOODEN_TOOL, 1500, 1f, 0f, 0, () -> Ingredient.EMPTY);
         return new SwordItem(tier, new Item.Properties().rarity(Rarity.RARE).attributes(SwordItem.createAttributes(tier, 5, -2.8f)));
-    });
+    });//todo: fix your sutpid Delay on your second attakc adn also your model
 
     public static final utmItemContainer<ThrowingSpearItem> COPPER_THROWING_SPEAR = register("copper_throwing_spear", () -> new ThrowingSpearItem(new Item.Properties()
             .durability(350)
