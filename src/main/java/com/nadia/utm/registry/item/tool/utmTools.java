@@ -208,7 +208,7 @@ public class utmTools {
             .durability(41)
             .component(utmDataComponents.THROWING_SPEAR_MODEL, "netherite_throwing_spear")
             .stacksTo(1), 6.5F, -2.9F)
-    ).tags(ItemTags.VANISHING_ENCHANTABLE);
+    ).tags(ItemTags.VANISHING_ENCHANTABLE, ItemTags.DURABILITY_ENCHANTABLE, utmTags.ITEM.EMI_REMOVE_MENDING);
 
     public static final utmItemContainer<TNTThrowingSpearItem> TNT_THROWING_SPEAR = register("tnt_throwing_spear", () -> new TNTThrowingSpearItem(new Item.Properties()
             .component(utmDataComponents.THROWING_SPEAR_MODEL, "tnt_throwing_spear")

@@ -11,6 +11,11 @@ public class utmTags {
         public static final TagKey<Item> ELYTRA_TRIM_TEMPLATES = TagKey.create(
                 Registries.ITEM,
                 utm.key("elytra_trim_templates"));
+
+        // these are for emi ONLY, not functional
+        public static final TagKey<Item> EMI_REMOVE_MENDING = TagKey.create(
+                Registries.ITEM,
+                utm.key("emi_remove_mending"));
     }
 
     public static class BLOCK {

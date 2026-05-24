@@ -3,16 +3,23 @@ package com.nadia.utm.client.compat.emi;
 import com.nadia.utm.registry.block.utmBlocks;
 import com.nadia.utm.registry.item.tool.utmTools;
 import com.nadia.utm.registry.item.utmItems;
+import com.nadia.utm.registry.tags.utmTags;
+import com.nadia.utm.util.EnchantUtil;
 import com.nadia.utm.utm;
 import dev.emi.emi.api.EmiEntrypoint;
 import dev.emi.emi.api.EmiInitRegistry;
 import dev.emi.emi.api.EmiPlugin;
 import dev.emi.emi.api.EmiRegistry;
+import dev.emi.emi.api.recipe.VanillaEmiRecipeCategories;
+import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
 import dev.emi.emi.recipe.EmiAnvilRecipe;
 import mezz.jei.api.runtime.IJeiRuntime;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.Enchantments;
+
+import java.util.List;
 
 @EmiEntrypoint
 public class utmEmiPlugin implements EmiPlugin {
@@ -45,5 +52,20 @@ public class utmEmiPlugin implements EmiPlugin {
                 EmiStack.of(utmItems.COPPER_PLATING.get()),
                 utm.key("/anvil_repair/copper_throwing_spear")
         ));
+
+        registry.removeRecipes(recipe -> {
+            if (recipe.getCategory() == VanillaEmiRecipeCategories.ANVIL_REPAIRING) {
+                List<EmiIngredient> inputs = recipe.getInputs();
+                if (inputs.size() >= 2) {
+                    ItemStack tool = inputs.get(0).getEmiStacks().getFirst().getItemStack();
+                    ItemStack book = inputs.get(1).getEmiStacks().getFirst().getItemStack();
+
+                    if (tool.is(utmTags.ITEM.EMI_REMOVE_MENDING))
+                        return EnchantUtil.findEnchants(tool, book, Enchantments.MENDING);
+                }
+            }
+
+            return false;
+        });
     }
 }

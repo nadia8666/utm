@@ -1,6 +1,7 @@
 package com.nadia.utm.item.spear;
 
 import com.nadia.utm.entity.spear.ThrownSpearEntity;
+import com.nadia.utm.util.EnchantUtil;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Position;
@@ -23,6 +24,7 @@ import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.item.enchantment.EnchantmentEffectComponents;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
@@ -129,11 +131,23 @@ public class ThrowingSpearItem extends Item implements ProjectileItem {
         return net.neoforged.neoforge.common.ItemAbilities.DEFAULT_TRIDENT_ACTIONS.contains(itemAbility);
     }
 
+    @Override
+    public boolean isBookEnchantable(@NotNull ItemStack stack, @NotNull ItemStack book) {
+        if (EnchantUtil.findEnchants(stack, book, Enchantments.MENDING))
+            return false;
+
+        return super.isBookEnchantable(stack, book);
+    }
+
     public void hitEnemy(ThrownSpearEntity entity) {
 
     }
 
     public void hitBlock(ThrownSpearEntity entity) {
+
+    }
+
+    public void onTick(ThrownSpearEntity entity) {
 
     }
 }

@@ -11,6 +11,7 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -31,6 +32,7 @@ import java.util.Objects;
 public class ThrownSpearEntity extends AbstractArrow {
     public float LAST_ROTATION = 0;
     public boolean HIT_ENTITY = false;
+    public long HIT_TIME = -1;
     public ItemStack COPY_STACK;
 
     private static final EntityDataAccessor<String> MODEL =
@@ -85,6 +87,36 @@ public class ThrownSpearEntity extends AbstractArrow {
     }
 
     @Override
+    public void tick() {
+        super.tick();
+        if (level().isClientSide) return;
+
+        if (HIT_ENTITY && this.getOwner() instanceof Player owner && owner.isAlive()) {
+            if (this.distanceToSqr(owner) <= 25 && level().getGameTime() - HIT_TIME >= 10) {
+                ItemStack pickupItem = this.getPickupItem();
+
+                if (owner.getInventory().add(pickupItem)) {
+                    this.level().playSound(
+                            owner,
+                            owner.getX(), owner.getY(), owner.getZ(),
+                            SoundEvents.ITEM_PICKUP,
+                            SoundSource.PLAYERS,
+                            1F,
+                            (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F
+                    );
+
+                    this.discard();
+
+                    return;
+                }
+            }
+        }
+
+        if (COPY_STACK.getItem() instanceof ThrowingSpearItem item)
+            item.onTick(this);
+    }
+
+    @Override
     public void tickDespawn() {
     }
 
@@ -114,6 +146,7 @@ public class ThrownSpearEntity extends AbstractArrow {
         if (level().isClientSide) return;
 
         HIT_ENTITY = true;
+        HIT_TIME = level().getGameTime();
 
         float[] damage = {0.0F};
 
