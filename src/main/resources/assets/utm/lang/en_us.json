@@ -98,6 +98,7 @@
   "item.utm.elytra_trim_spades": "Spades Elytra Trim Template",
   "item.utm.fiddlecore": "Fiddlehead Core",
   "item.utm.floatingcore": "Floating Core",
+  "item.utm.electromagneticcore": "Electromagnetic Core",
   "item.utm.incredipak": "Colony Incredi-Pak",
   "item.utm.music_disc_tears": "Music Disc",
   "item.utm.music_disc_lava_chicken": "Music Disc",
@@ -136,6 +137,9 @@
   "item.utm.progression_apple": "Progression Apple",
   "item.utm.biome_apple": "Biome Apple",
   "item.utm.mob_apple": "Mob Apple",
+  "item.utm.electro_canister": "Electromagnetically Sealed Canister",
+  "item.utm.antiwater_canister": "Antiwater Canister",
+
 
   "item.utm.enchanted_sword_red": "Enchanted Sword",
   "item.utm.enchanted_sword_green": "Enchanted Sword",

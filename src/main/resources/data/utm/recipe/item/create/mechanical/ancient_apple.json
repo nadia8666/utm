@@ -4,13 +4,13 @@
   "category": "apple",
   "pattern": [
     "  AAAAA  ",
-    " A     A ",
-    "A       A",
-    "A  dAd  A",
-    "A  AaA  A",
-    "A  dAd  A",
-    "A       A",
-    " A     A ",
+    " AbbNbbA ",
+    "AbSbBbEbA",
+    "AbbdAdbbA",
+    "ANBAaABNA",
+    "AbbdAdbbA",
+    "AbCbBbsbA",
+    " AbbNbbA ",
     "  AAAAA"
   ],
   "key": {
@@ -26,11 +26,23 @@
     "b": {
       "item": "minecraft:book"
     },
-    "P": {
-      "item": "create:copper_sheet"
+    "B": {
+      "item": "minecraft:brush"
     },
-    "l": {
-      "item": "minecraft:leather"
+    "S": {
+      "item": "minecraft:silence_armor_trim_smithing_template"
+    },
+    "E": {
+      "item": "minecraft:eye_armor_trim_smithing_template"
+    },
+    "C": {
+      "item": "minecraft:elytra_trim_ecologist"
+    },
+    "s": {
+      "item": "minecraft:spire_armor_trim_smithing_template"
+    },
+    "N": {
+      "item": "minecraft:nautilus_shell"
     }
   },
   "result": {

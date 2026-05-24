@@ -1,0 +1,149 @@
+{
+  "type": "create:mechanical_crafting",
+  "accept_mirrored": true,
+  "category": "apple",
+  "pattern": [
+    "  AAAAA  ",
+    " A12345A ",
+    "A67890BbA",
+    "ACcDAdEeA",
+    "AFfAaAGgA",
+    "AHhIAiJjA",
+    "AKkLlMmOA",
+    " AoPpQzA ",
+    "  AAAAA"
+  ],
+  "key": {
+    "A": {
+      "item": "utm:thanos_blocks"
+    },
+    "a": {
+      "item": "minecraft:apple"
+    },
+    "1": {
+      "item": "minecraft:pufferfish"
+    },
+    "2": {
+      "item": "minecraft:tropical_fish"
+    },
+    "3": {
+      "item": "minecraft:cod"
+    },
+    "4": {
+      "item": "minecraft:salmon"
+    },
+    "5": {
+      "item": "minecraft:ink_sac"
+    },
+    "6": {
+      "item": "minecraft:slime_ball"
+    },
+    "7": {
+      "item": "minecraft:blaze_rod"
+    },
+    "8": {
+      "item": "minecraft:breeze_rod"
+    },
+    "9": {
+      "item": "minecraft:totem_of_undying"
+    },
+    "0": {
+      "item": "minecraft:wither_rose"
+    },
+    "B": {
+      "item": "minecraft:magma_cream"
+    },
+    "b": {
+      "item": "minecraft:ominous_bottle"
+    },
+    "C": {
+      "item": "minecraft:rotten_flesh"
+    },
+    "c": {
+      "item": "minecraft:turtle_scute"
+    },
+    "D": {
+      "item": "minecraft:armadillo_scute"
+    },
+    "d": {
+      "item": "minecraft:shulker_shell"
+    },
+    "E": {
+      "item": "minecraft:phantom_membrane"
+    },
+    "e": {
+      "item": "minecraft:potion"
+    },
+    "F": {
+      "item": "minecraft:spider_eye"
+    },
+    "f": {
+      "item": "minecraft:gunpowder"
+    },
+    "G": {
+      "item": "minecraft:ghast_tear"
+    },
+    "g": {
+      "item": "minecraft:golden_apple"
+    },
+    "H": {
+      "item": "minecraft:bone"
+    },
+    "h": {
+      "item": "minecraft:skeleton_skull"
+    },
+    "I": {
+      "item": "minecraft:tide_armor_trim_smithing_template"
+    },
+    "i": {
+      "item": "minecraft:ender_pearl"
+    },
+    "J": {
+      "item": "minecraft:verdant_froglight"
+    },
+    "j": {
+      "item": "minecraft:oak_boat"
+    },
+    "K": {
+      "item": "minecraft:string"
+    },
+    "k": {
+      "item": "minecraft:chainmail_helmet"
+    },
+    "L": {
+      "item": "minecraft:chainmail_chestplate"
+    },
+    "l": {
+      "item": "minecraft:trident"
+    },
+    "M": {
+      "item": "minecraft:chainmail_leggings"
+    },
+    "m": {
+      "item": "minecraft:chainmail_boots"
+    },
+    "O": {
+      "item": "minecraft:egg"
+    },
+    "o": {
+      "item": "minecraft:chicken"
+    },
+    "P": {
+      "item": "minecraft:rabbit"
+    },
+    "p": {
+      "item": "minecraft:porkchop"
+    },
+    "Q": {
+      "item": "minecraft:beef"
+    },
+    "z": {
+      "item": "minecraft:mutton"
+    }
+  },
+  "result": {
+    "id": "utm:mob_apple",
+    "count": 1
+  },
+  "show_notification": true
+}

@@ -1,0 +1,62 @@
+{
+  "type": "create:mechanical_crafting",
+  "accept_mirrored": true,
+  "category": "apple",
+  "pattern": [
+    "  AAAAA  ",
+    " A1tet1A ",
+    "A1NDREB1A",
+    "ACDDAEEPA",
+    "AeRAaAReA",
+    "ACEEADDPA",
+    "A1BERDN1A",
+    " A1TeT1A ",
+    "  AAAAA"
+  ],
+  "key": {
+    "A": {
+      "item": "utm:thanos_blocks"
+    },
+    "a": {
+      "item": "minecraft:apple"
+    },
+    "1": {
+      "item": "minecraft:anvil"
+    },
+    "B": {
+      "item": "minecraft:beacon"
+    },
+    "D": {
+      "item": "minecraft:diamond_block"
+    },
+    "E": {
+      "item": "minecraft:emerald_block"
+    },
+    "R": {
+      "item": "minecraft:arid_block"
+    },
+    "T": {
+      "item": "minecraft:turtle_helmet"
+    },
+    "C": {
+      "item": "minecraft:conduit"
+    },
+    "P": {
+      "item": "create:precision_mechanism"
+    },
+    "N": {
+      "item": "minecraft:netherite_block"
+    },
+    "t": {
+      "item": "minecraft:totem_of_undying"
+    },
+    "e": {
+      "item": "minecraft:elytra"
+    }
+  },
+  "result": {
+    "id": "utm:progression_apple",
+    "count": 1
+  },
+  "show_notification": true
+}
