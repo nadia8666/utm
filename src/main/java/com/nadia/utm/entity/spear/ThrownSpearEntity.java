@@ -6,6 +6,9 @@ import com.nadia.utm.registry.data.utmDataComponents;
 import com.nadia.utm.registry.enchantment.utmEnchantments;
 import com.nadia.utm.registry.entity.utmEntities;
 import com.nadia.utm.registry.item.tool.utmTools;
+import dev.ryanhcode.sable.companion.SableCompanion;
+import dev.ryanhcode.sable.sublevel.SubLevel;
+import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -15,6 +18,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -26,10 +30,13 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Vector2f;
+import org.joml.Vector3d;
 
 import java.util.Objects;
 
@@ -252,6 +259,42 @@ public class ThrownSpearEntity extends AbstractArrow {
 
     @Override
     protected void onHitBlock(@NotNull BlockHitResult result) {
+        if (level().getBlockState(result.getBlockPos()).is(Blocks.SLIME_BLOCK)) {
+            Vec3 motion = this.getDeltaMovement();
+
+            Direction localFace = result.getDirection();
+            final Vector3d normal = new Vector3d(
+                    localFace.getStepX(),
+                    localFace.getStepY(),
+                    localFace.getStepZ()
+            );
+
+            Vector3d useNormal;
+            if (SableCompanion.INSTANCE.getContaining(level(), result.getBlockPos()) instanceof SubLevel level)
+                useNormal = level.logicalPose().transformNormal(normal);
+            else
+                useNormal = normal;
+
+            Vec3 worldNormal = new Vec3(useNormal.x, useNormal.y, useNormal.z);
+            Vec3 reflectedMotion = motion.subtract(worldNormal.scale(2.0D * motion.dot(worldNormal)));
+
+            reflectedMotion = reflectedMotion.scale(0.35D);
+            this.setDeltaMovement(reflectedMotion);
+
+            double mx = reflectedMotion.x;
+            double my = reflectedMotion.y;
+            double mz = reflectedMotion.z;
+
+            double horizontalDistance = Math.sqrt(mx * mx + mz * mz);
+            this.setYRot((float) (Mth.atan2(mx, mz) * (180D / Math.PI)));
+            this.setXRot((float) (Mth.atan2(my, horizontalDistance) * (180D / Math.PI)));
+            this.yRotO = this.getYRot();
+            this.xRotO = this.getXRot();
+            this.playSound(SoundEvents.SLIME_BLOCK_FALL, 1.0F, 1.0F);
+
+            return;
+        }
+
         super.onHitBlock(result);
 
         if (HIT_ENTITY) return;
