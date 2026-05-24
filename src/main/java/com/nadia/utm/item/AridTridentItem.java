@@ -72,7 +72,7 @@ public class AridTridentItem extends TridentItem {
                 Holder<SoundEvent> holder = EnchantmentHelper.pickHighestLevel(stack, EnchantmentEffectComponents.TRIDENT_SOUND).orElse(SoundEvents.TRIDENT_THROW);
                 if (!level.isClientSide) {
                     stack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(entityLiving.getUsedItemHand()));
-                    ThrownTrident throwntrident = new ThrownAridTrident(level, player, stack);
+                    ThrownAridTrident throwntrident = new ThrownAridTrident(level, player, stack);
                     throwntrident.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 2.5F, 1.0F);
                     if (player.hasInfiniteMaterials()) {
                         throwntrident.pickup = AbstractArrow.Pickup.CREATIVE_ONLY;

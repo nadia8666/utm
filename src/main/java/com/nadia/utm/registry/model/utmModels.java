@@ -23,11 +23,10 @@ public class utmModels {
 
     public static final PartialModel THRUST_ION = PartialModel.of(utm.key("block/thrust_ion"));
     public static final PartialModel THRUST_LARGE_1 = PartialModel.of(utm.key("block/thrust_large1"));
-    public static final PartialModel THRUST_LARGE_2 = PartialModel.of(utm.key("block/thrust_large2")); //Put citywalls here methinks
-
-    // TODO: refactor this lol
+    public static final PartialModel THRUST_LARGE_2 = PartialModel.of(utm.key("block/thrust_large2")); //Put citywalls here methinks // No
 
     public static final PartialModel ARID_TRIDENT = PartialModel.of(utm.key("item/arid_trident_in_hand"));
+
     public static final Map<String, PartialModel> THROWING_SPEAR_MODELS = new HashMap<>();
     public static final PartialModel COPPER_THROWING_SPEAR = throwingSpear("copper_throwing_spear");
     public static final PartialModel NETHERITE_THROWING_SPEAR = throwingSpear("netherite_throwing_spear");

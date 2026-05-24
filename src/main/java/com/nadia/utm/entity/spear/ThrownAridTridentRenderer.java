@@ -22,10 +22,11 @@ import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings("deprecation")
 @ForceLoad(dist = Dist.CLIENT)
-public class AridTridentEntityRenderer extends EntityRenderer<ThrownAridTrident> {
-    protected AridTridentEntityRenderer(EntityRendererProvider.Context context) {
+public class ThrownAridTridentRenderer extends EntityRenderer<ThrownAridTrident> {
+    protected ThrownAridTridentRenderer(EntityRendererProvider.Context context) {
         super(context);
     }
+
     // separate entity model and item model. its easier
     // make your item model have the ovveride for item hotbar thing like the real trident. then overrides for charging. right.
     // then make the entity have the same json as your like. literally the same json or something as the item model but instead have the activated texture. boom
@@ -40,11 +41,11 @@ public class AridTridentEntityRenderer extends EntityRenderer<ThrownAridTrident>
             ms.mulPose(Axis.YP.rotationDegrees(Mth.lerp(partialTicks, entity.yRotO, entity.getYRot())));
             ms.mulPose(Axis.XN.rotationDegrees(Mth.lerp(partialTicks, entity.xRotO, entity.getXRot())));
 
-
             ms.translate(0, 0, -1.25);
-        }).run(() -> PartialEntityModelRenderer.render(ms,
-                utmModels.THROWING_SPEAR_MODELS.getOrDefault(entity.getModel(), utmModels.COPPER_THROWING_SPEAR).get(),
-                renderType(entity), buffer, packedLight, 0)).pop();
+        }).run(() -> {
+            PartialEntityModelRenderer.render(ms, utmModels.ARID_TRIDENT.get(), renderType(entity), buffer, packedLight, 0);
+            //PartialEntityModelRenderer.render(a, b, c, d, e, f);
+        }).pop();
     }
 
     @Override
@@ -57,6 +58,6 @@ public class AridTridentEntityRenderer extends EntityRenderer<ThrownAridTrident>
     }
 
     static {
-        utmEventHost.register(EntityRenderersEvent.RegisterRenderers.class, event -> event.registerEntityRenderer(utmEntities.THROWN_ARID_TRIDENT.get(), AridTridentEntityRenderer::new));
+        utmEventHost.register(EntityRenderersEvent.RegisterRenderers.class, event -> event.registerEntityRenderer(utmEntities.THROWN_ARID_TRIDENT.get(), ThrownAridTridentRenderer::new));
     }
 }
