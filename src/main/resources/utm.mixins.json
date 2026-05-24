@@ -16,6 +16,7 @@
     "SchematicPlacePacketMixin",
     "ServerLevelMixin",
     "compat.create.AbstractContraptionEntityMixin",
+    "compat.create.BasinRecipeMixin",
     "compat.create.RotationPropagatorMixin",
     "compat.gravestone.GraveBlockEntityMixin",
     "compat.gravestone.GraveBlockMixin",
