@@ -19,7 +19,7 @@ public class utmFluids {
     public static final DeferredHolder<FluidType, FluidType> LIQUID_OXYGEN_TYPE = FLUID_TYPES.register("liquid_oxygen",
             () -> new FluidType(FluidType.Properties.create()
                     .descriptionId("fluid.utm.liquid_oxygen")
-                    .fallDistanceModifier(2f)
+                    .fallDistanceModifier(200f)
                     .canExtinguish(true)
                     .density(1150)
                     .viscosity(200)
@@ -41,6 +41,7 @@ public class utmFluids {
     public static final DeferredHolder<FluidType, FluidType> MOLTEN_STEEL_TYPE = FLUID_TYPES.register("molten_steel",
             () -> new FluidType(FluidType.Properties.create()
                     .descriptionId("fluid.utm.molten_steel")
+                    .fallDistanceModifier(200f)
                     .density(1450)
                     .viscosity(150)
                     .temperature(1800)
