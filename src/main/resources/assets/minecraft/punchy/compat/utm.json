@@ -1,0 +1,64 @@
+{
+  "customGroups": [
+    {
+      "name": "throwing_spears",
+      "items": [
+        "utm:copper_throwing_spear",
+        "utm:netherite_throwing_spear",
+        "utm:tnt_throwing_spear"
+      ]
+    }
+  ],
+  "item": {
+    "throwing_spears": {
+      "armKind": "TRIDENT",
+      "customAnimation": [
+        {
+          "type": "attack",
+          "var_1": "attack_1",
+          "var_2": "attack_3"
+        },
+        {
+          "type": "mining",
+          "name": "attack_3"
+        },
+        {
+          "type": "mining_v2",
+          "start": "new_mining_st_start",
+          "looping": "new_mining_st_loop",
+          "end": "new_mining_st_end"
+        },
+        {
+          "type": "useItem",
+          "name": "use_trident"
+        }
+      ],
+      "transforms": {
+        "right": {
+          "scale": 1.0,
+          "offX": -0.034090877,
+          "offY": 0.0795455,
+          "offZ": 0.113636255,
+          "rotX": -25.909088,
+          "rotY": 0.0,
+          "rotZ": -180.0,
+          "pivotX": 0.0,
+          "pivotY": 0.0,
+          "pivotZ": 0.0
+        },
+        "left": {
+          "scale": 1.0,
+          "offX": 0.0,
+          "offY": 0.0,
+          "offZ": 0.0,
+          "rotX": 0.0,
+          "rotY": 0.0,
+          "rotZ": 0.0,
+          "pivotX": 0.0,
+          "pivotY": 0.0,
+          "pivotZ": 0.0
+        }
+      }
+    }
+  }
+}
