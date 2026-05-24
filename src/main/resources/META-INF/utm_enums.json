@@ -6,7 +6,7 @@
       "constructor": "(ILjava/lang/String;Ljava/util/function/UnaryOperator;)V",
       "parameters": {
         "class": "com/nadia/utm/registry/item/utmRarities",
-        "field": "SCRAP"
+        "field": "MYSTIC"
       }
     }
   ]
