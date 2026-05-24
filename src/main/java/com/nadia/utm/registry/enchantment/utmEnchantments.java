@@ -10,4 +10,14 @@ public class utmEnchantments {
             Registries.ENCHANTMENT,
             utm.key("power_jump")
     );
+
+    public static final ResourceKey<Enchantment> SPEAR_THROW = ResourceKey.create(
+            Registries.ENCHANTMENT,
+            utm.key("spear_throw")
+    );
+
+    public static final ResourceKey<Enchantment> SPEAR_RECOVERY = ResourceKey.create(
+            Registries.ENCHANTMENT,
+            utm.key("spear_recovery")
+    );
 }
