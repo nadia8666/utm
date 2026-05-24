@@ -28,7 +28,7 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nullable;
 
 public class ThrownAridTrident extends AbstractArrow {
-    private static EntityDataAccessor<Boolean> ID_FOIL = SynchedEntityData.defineId(ThrownAridTrident.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> ID_FOIL = SynchedEntityData.defineId(ThrownAridTrident.class, EntityDataSerializers.BOOLEAN);
     private boolean dealtDamage;
     public int clientSideReturnTridentTickCount;
     public ThrownAridTrident(EntityType<? extends ThrownTrident> entityType, Level level) {
@@ -158,9 +158,5 @@ public class ThrownAridTrident extends AbstractArrow {
 
     public boolean shouldRender(double x, double y, double z) {
         return true;
-    }
-
-    static {
-        ID_FOIL = SynchedEntityData.defineId(ThrownTrident.class, EntityDataSerializers.BOOLEAN);
     }
 }

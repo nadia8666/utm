@@ -1,6 +1,6 @@
 {
   "description": {
-    "translate": "enchantment.utm.spear_recoery"
+    "translate": "enchantment.utm.spear_recovery"
   },
   "supported_items": "#utm:add_spear_recovery",
   "primary_items": "#utm:add_spear_recovery",
