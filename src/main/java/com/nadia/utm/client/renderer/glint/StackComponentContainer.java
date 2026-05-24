@@ -47,4 +47,18 @@ public class StackComponentContainer<T> {
 
         return changed;
     }
+
+    public boolean passUpdate(T currentState, MultiBufferSource.BufferSource bufferSource, boolean changed) {
+        T lastState = SUPPLIER != null ? SUPPLIER.apply(THREAD) : THREAD.get();
+
+        boolean thisChanged = !Objects.equals(lastState, currentState);
+
+        if (thisChanged) {
+            if (bufferSource != null) bufferSource.endBatch();
+            THREAD.set(currentState);
+            changed = true;
+        }
+
+        return changed;
+    }
 }

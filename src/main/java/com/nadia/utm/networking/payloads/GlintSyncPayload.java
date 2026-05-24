@@ -1,7 +1,7 @@
 package com.nadia.utm.networking.payloads;
 
 import com.nadia.utm.networking.PacketDef;
-import com.nadia.utm.networking.utmCodecs;
+import com.nadia.utm.registry.codec.utmCodecs;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;

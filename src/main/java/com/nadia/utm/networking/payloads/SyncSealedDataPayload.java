@@ -2,7 +2,7 @@ package com.nadia.utm.networking.payloads;
 
 import com.nadia.utm.behavior.space.SealedChunkData;
 import com.nadia.utm.networking.PacketDef;
-import com.nadia.utm.networking.utmCodecs;
+import com.nadia.utm.registry.codec.utmCodecs;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
