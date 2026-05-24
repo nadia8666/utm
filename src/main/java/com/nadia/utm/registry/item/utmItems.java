@@ -102,7 +102,9 @@ public class utmItems {
             STEEL_SHEET = register("steel_sheet").generated(),
             COPPER_PLATING = register("copper_plating").generated(),
             electro_canister = register("electro_canister").generated(),
-            ANTIWATER_CANISTER = register("antiwater_canister").generated();
+            ANTIWATER_CANISTER = register("antiwater_canister").generated(),
+            ANTIWATER_CONDUIT = register("antiwater_conduit").generated();
+
 
     // apples
     public static final utmItemContainer<Item> ANCIENT_APPLE = register("ancient_apple",
