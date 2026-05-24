@@ -36,12 +36,12 @@ public class ThrownAridTrident extends AbstractArrow {
     }
 
     public ThrownAridTrident(Level level, LivingEntity shooter, ItemStack pickupItemStack) {
-        super(EntityType.TRIDENT, shooter, level, pickupItemStack, (ItemStack)null);
+        super(utmEntities.THROWN_ARID_TRIDENT.get(), shooter, level, pickupItemStack, null);
         this.entityData.set(ID_FOIL, pickupItemStack.hasFoil());
     }
 
     public ThrownAridTrident(Level level, double x, double y, double z, ItemStack pickupItemStack) {
-        super(EntityType.TRIDENT, x, y, z, level, pickupItemStack, pickupItemStack);
+        super(utmEntities.THROWN_ARID_TRIDENT.get(), x, y, z, level, pickupItemStack, pickupItemStack);
         this.entityData.set(ID_FOIL, pickupItemStack.hasFoil());
     }
 
@@ -95,40 +95,43 @@ public class ThrownAridTrident extends AbstractArrow {
     }
     boolean isAcceptibleReturnOwner() {
         Entity entity = this.getOwner();
-        return entity != null && entity.isAlive() ? !(entity instanceof ServerPlayer) || !entity.isSpectator() : false;
+        return entity != null && entity.isAlive() && (!(entity instanceof ServerPlayer) || !entity.isSpectator());
     }
+
     @Nullable
-    protected EntityHitResult findHitEntity(Vec3 startVec, Vec3 endVec) {
+    protected EntityHitResult findHitEntity(@NotNull Vec3 startVec, @NotNull Vec3 endVec) {
         return this.dealtDamage ? null : super.findHitEntity(startVec, endVec);
     }
-    public ItemStack getWeaponItem() {
+
+    public @NotNull ItemStack getWeaponItem() {
         return this.getPickupItemStackOrigin();
     }
 
-    protected boolean tryPickup(Player player) {
+    protected boolean tryPickup(@NotNull Player player) {
         return super.tryPickup(player) || this.isNoPhysics() && this.ownedBy(player) && player.getInventory().add(this.getPickupItem());
     }
 
-    protected ItemStack getDefaultPickupItem() {
+    protected @NotNull ItemStack getDefaultPickupItem() {
         return new ItemStack(Items.TRIDENT);
     }
 
-    protected SoundEvent getDefaultHitGroundSoundEvent() {
+    protected @NotNull SoundEvent getDefaultHitGroundSoundEvent() {
         return SoundEvents.TRIDENT_HIT_GROUND;
     }
 
-    public void playerTouch(Player entity) {
+    public void playerTouch(@NotNull Player entity) {
         if (this.ownedBy(entity) || this.getOwner() == null) {
             super.playerTouch(entity);
         }
 
     }
-    public void readAdditionalSaveData(CompoundTag compound) {
+
+    public void readAdditionalSaveData(@NotNull CompoundTag compound) {
         super.readAdditionalSaveData(compound);
         this.dealtDamage = compound.getBoolean("DealtDamage");
     }
 
-    public void addAdditionalSaveData(CompoundTag compound) {
+    public void addAdditionalSaveData(@NotNull CompoundTag compound) {
         super.addAdditionalSaveData(compound);
         compound.putBoolean("DealtDamage", this.dealtDamage);
     }
