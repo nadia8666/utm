@@ -15,7 +15,7 @@ public class AntiwaterBucketItem extends BucketItem {
     @Override
     public void inventoryTick(@NotNull ItemStack stack, @NotNull Level level, Entity entity, int slotId, boolean isSelected) {
         if (!entity.level().isClientSide) {
-            entity.level().explode(entity, entity.getX(), entity.getY(), entity.getZ(), (float)8, Level.ExplosionInteraction.TNT);
+            entity.level().explode(entity, entity.getX(), entity.getY(), entity.getZ(), 8F, Level.ExplosionInteraction.TNT);
             stack.shrink(1);
         }
     }
