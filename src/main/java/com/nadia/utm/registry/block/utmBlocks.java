@@ -10,6 +10,7 @@ import com.nadia.utm.block.misc.citywalls.CitywallsBlock;
 import com.nadia.utm.block.misc.gimbal.GimbalBlock;
 import com.nadia.utm.block.misc.gimbal.GimbalPlateBlock;
 import com.nadia.utm.block.misc.glint_table.GlintTableBlock;
+import com.nadia.utm.block.misc.large_basin.LargeBasinBlock;
 import com.nadia.utm.block.misc.loader.BlockChunkLoaderBlock;
 import com.nadia.utm.block.misc.loader.PlayerChunkLoaderBlock;
 import com.nadia.utm.block.misc.oxygen_collector.OxygenCollectorBlock;
@@ -153,6 +154,15 @@ public class utmBlocks {
             .noCollission()
             .isViewBlocking((state, level, pos) -> false)
             .isSuffocating((state, level, pos) -> false)).dropSelf().tags(utmTags.BLOCK.SEAL_NOPROP);
+
+    public static final utmBlockContainer<LargeBasinBlock, BlockItem> LARGE_BASIN = dualRegister("large_basin", LargeBasinBlock::new, BlockBehaviour.Properties.of()
+            .destroyTime(10f)
+            .sound(SoundType.METAL)
+            .noOcclusion()
+            .isViewBlocking((state, level, pos) -> false)
+            .isSuffocating((state, level, pos) -> false))
+            .dropSelf().tags(utmTags.BLOCK.SEAL_NOPROP)
+            .minePick().mineTier(3);
 
     public static final utmBlockContainer<RegenDiscBlock, BlockItem> REGEN_DISC = dualRegister("regen_disc", RegenDiscBlock::new, BlockBehaviour.Properties.of()
             .instabreak()

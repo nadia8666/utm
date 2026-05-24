@@ -1,0 +1,22 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "utm:block/large_basin/large_basin"
+    },
+    "facing=east": {
+      "model": "utm:block/large_basin/large_basin_directional",
+      "y": 270
+    },
+    "facing=north": {
+      "model": "utm:block/large_basin/large_basin_directional",
+      "y": 180
+    },
+    "facing=south": {
+      "model": "utm:block/large_basin/large_basin_directional"
+    },
+    "facing=west": {
+      "model": "utm:block/large_basin/large_basin_directional",
+      "y": 90
+    }
+  }
+}

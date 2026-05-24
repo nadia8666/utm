@@ -6,6 +6,7 @@ import com.nadia.utm.block.misc.citywalls.CitywallsBlockEntity;
 import com.nadia.utm.block.misc.gimbal.GimbalBlockEntity;
 import com.nadia.utm.block.misc.gimbal.GimbalPlateBlockEntity;
 import com.nadia.utm.block.misc.glint_table.GlintTableBlockEntity;
+import com.nadia.utm.block.misc.large_basin.LargeBasinBlockEntity;
 import com.nadia.utm.block.misc.loader.ChunkLoaderBlockEntity;
 import com.nadia.utm.block.misc.oxygen_collector.OxygenCollectorBlockEntity;
 import com.nadia.utm.block.misc.oxygen_furnace.OxygenFurnaceBlockEntity;
@@ -66,6 +67,8 @@ public class utmBlockEntities {
     public static final Supplier<BlockEntityType<SolidThrusterBlockEntity>> SOLID_THRUSTER = register("solid_thruster", SolidThrusterBlockEntity::new, utmBlocks.SOLID_THRUSTER);
 
     public static final Supplier<BlockEntityType<AerowallBlockEntity>> AEROWALL = register("aerowall", AerowallBlockEntity::new, utmBlocks.AERO_WALL);
+
+    public static final Supplier<BlockEntityType<LargeBasinBlockEntity>> LARGE_BASIN = register("large_basin", LargeBasinBlockEntity::new, utmBlocks.LARGE_BASIN);
 
     public static final Supplier<BlockEntityType<RegenDiscBlockEntity>> REGEN_DISC = register("regen_disc", RegenDiscBlockEntity::new, utmBlocks.REGEN_DISC);
 
