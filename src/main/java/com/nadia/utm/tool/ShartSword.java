@@ -32,7 +32,7 @@ public class ShartSword extends SwordItem {
 
     public int getUseDuration(@NotNull ItemStack stack, @NotNull LivingEntity entity) {
         return 72000;
-    }
+    } // are you meant to be xbox720?
 
     public @NotNull InteractionResultHolder<ItemStack> use(@NotNull Level level, Player player, @NotNull InteractionHand hand) {
         ItemStack itemstack = player.getItemInHand(hand);

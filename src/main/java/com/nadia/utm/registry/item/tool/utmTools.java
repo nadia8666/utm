@@ -8,9 +8,11 @@ import com.nadia.utm.item.spear.TNTThrowingSpearItem;
 import com.nadia.utm.item.spear.ThrowingSpearItem;
 import com.nadia.utm.registry.data.utmDataComponents;
 import com.nadia.utm.registry.item.utmItemContainer;
+import com.nadia.utm.registry.item.utmRarities;
 import com.nadia.utm.registry.tags.utmTags;
 import com.nadia.utm.registry.utmRegistry;
 import com.nadia.utm.tool.CopperSword;
+import com.nadia.utm.tool.Paxel;
 import com.nadia.utm.tool.ShartSword;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
@@ -182,6 +184,14 @@ public class utmTools {
         return new AridTridentItem(new Item.Properties().stacksTo(1).durability(1024)); //condense pls
             }
     ).tags(Tags.Items.ENCHANTABLES, ItemTags.WEAPON_ENCHANTABLE, ItemTags.FIRE_ASPECT_ENCHANTABLE, ItemTags.TRIDENT_ENCHANTABLE);
+    public static final utmItemContainer<Paxel> ARID_PAXEL = register("arid_paxel", () -> { // no texture yet. Theres no crying until the end
+                Tier tier = utmToolBuilder.buildTier(
+                        BlockTags.INCORRECT_FOR_IRON_TOOL, 10000, 10.25f, 0f, 45, () -> Ingredient.EMPTY
+                );
+                return new Paxel(tier, new Item.Properties().attributes(
+                        Paxel.createAttributes(tier, 10, -3f)).rarity(utmRarities.MYSTIC.getValue()));
+            }
+    ).tags(Tags.Items.ENCHANTABLES, ItemTags.SWORD_ENCHANTABLE, ItemTags.WEAPON_ENCHANTABLE, ItemTags.FIRE_ASPECT_ENCHANTABLE, ItemTags.MINING_ENCHANTABLE, ItemTags.PICKAXES).handheld();
 
     public static final utmItemContainer<SwordItem> SWORD2 = register("sword2", () -> {
         Tier tier = utmToolBuilder.buildTier(BlockTags.INCORRECT_FOR_WOODEN_TOOL, 1000, 1f, 0f, 0, () -> Ingredient.EMPTY);
