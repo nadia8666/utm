@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "arid",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "minecraft:arid_ingot"
+    },
+    {
+      "item": "minecraft:arid_ingot"
+    },    {
+      "item": "minecraft:arid_ingot"
+    },    {
+      "item": "minecraft:arid_ingot"
+    },    {
+      "item": "minecraft:arid_ingot"
+    },    {
+      "item": "minecraft:arid_ingot"
+    },    {
+      "item": "minecraft:arid_ingot"
+    },    {
+      "item": "minecraft:arid_ingot"
+    },    {
+      "item": "minecraft:arid_ingot"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "utm:arid_block"
+  }
+}
