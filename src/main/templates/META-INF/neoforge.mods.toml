@@ -27,6 +27,7 @@ all the small things.
 utility & compat mod between various mods (see deps.)
 automatically updates from github, disablable in config (though, if working with servers I wouldn't recommend it.
 '''
+enumExtensions = "META-INF/utm_enums.json"
 
 [modproperties.utm]
 gitHash="${git_hash}"
