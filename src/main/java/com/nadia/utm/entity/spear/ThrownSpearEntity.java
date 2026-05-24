@@ -6,6 +6,7 @@ import com.nadia.utm.registry.data.utmDataComponents;
 import com.nadia.utm.registry.enchantment.utmEnchantments;
 import com.nadia.utm.registry.entity.utmEntities;
 import com.nadia.utm.registry.item.tool.utmTools;
+import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -15,6 +16,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -26,8 +28,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Vector2f;
 
@@ -252,6 +256,33 @@ public class ThrownSpearEntity extends AbstractArrow {
 
     @Override
     protected void onHitBlock(@NotNull BlockHitResult result) {
+        if (level().getBlockState(result.getBlockPos()).is(Blocks.SLIME_BLOCK)) {
+            Vec3 motion = this.getDeltaMovement();
+
+            Direction face = result.getDirection();
+            double mx = motion.x;
+            double my = motion.y;
+            double mz = motion.z;
+
+            switch (face.getAxis()) {
+                case X -> mx = -mx * 0.35D;
+                case Y -> my = -my * 0.35D;
+                case Z -> mz = -mz * 0.35D;
+            }
+
+            this.setDeltaMovement(new Vec3(mx, my, mz));
+
+            double horizontalDistance = Math.sqrt(mx * mx + mz * mz);
+            this.setYRot((float) (Mth.atan2(mx, mz) * (180D / Math.PI)));
+            this.setXRot((float) (Mth.atan2(my, horizontalDistance) * (180D / Math.PI)));
+            this.yRotO = this.getYRot();
+            this.xRotO = this.getXRot();
+
+            this.playSound(SoundEvents.SLIME_BLOCK_FALL, 1.0F, 1.0F);
+
+            return;
+        }
+
         super.onHitBlock(result);
 
         if (HIT_ENTITY) return;
