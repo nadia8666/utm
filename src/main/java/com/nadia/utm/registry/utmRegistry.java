@@ -1,6 +1,7 @@
 package com.nadia.utm.registry;
 
 import com.nadia.utm.block.displaylink.utmDisplaySources;
+import com.nadia.utm.item.spear.ThrowingSpearItem;
 import com.nadia.utm.registry.attachment.utmAttachments;
 import com.nadia.utm.registry.block.utmBlockContainer;
 import com.nadia.utm.registry.block.utmBlockEntities;
@@ -15,10 +16,12 @@ import com.nadia.utm.registry.particle.utmParticles;
 import com.nadia.utm.registry.recipe.utmRecipes;
 import com.nadia.utm.registry.sound.utmSounds;
 import com.nadia.utm.registry.ui.utmMenus;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
@@ -91,5 +94,9 @@ public class utmRegistry {
 
     public static void postRegister() {
         utmDisplaySources.registerSources();
+
+        utmItems.ITEMS.getEntries().stream()
+                .map(Holder::value).filter(item -> item instanceof ThrowingSpearItem)
+                .forEach(DispenserBlock::registerProjectileBehavior);
     }
 }

@@ -1,0 +1,35 @@
+{
+  "type": "create:mechanical_crafting",
+  "accept_mirrored": true,
+  "category": "spears",
+  "pattern": [
+    "TTT",
+    "sRs",
+    "rsr",
+    " S ",
+    " S ",
+    " s ",
+    " s "
+  ],
+  "key": {
+    "T": {
+      "item": "minecraft:tnt_minecart"
+    },
+    "r": {
+      "item": "simulated:rope_coupling"
+    },
+    "s": {
+      "item": "minecraft:stone"
+    },
+    "S": {
+      "item": "create:shaft"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "result": {
+    "id": "utm:tnt_throwing_spear",
+    "count": 3
+  }
+}

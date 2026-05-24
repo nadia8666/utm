@@ -1,5 +1,6 @@
 package com.nadia.utm.entity.spear;
 
+import com.nadia.utm.item.spear.ThrowingSpearItem;
 import com.nadia.utm.registry.data.utmDataComponents;
 import com.nadia.utm.registry.entity.utmEntities;
 import com.nadia.utm.registry.item.tool.utmTools;
@@ -107,7 +108,9 @@ public class ThrownSpearEntity extends AbstractArrow {
     }
 
     @Override
-    protected void onHitEntity(EntityHitResult result) {
+    protected void onHitEntity(@NotNull EntityHitResult result) {
+        if (level().isClientSide) return;
+
         HIT_ENTITY = true;
 
         float[] damage = {0.0F};
@@ -127,7 +130,7 @@ public class ThrownSpearEntity extends AbstractArrow {
 
         Entity entity = result.getEntity();
         Entity owner = this.getOwner();
-        DamageSource source = this.damageSources().fallingStalactite(entity);
+        DamageSource source = this.damageSources().arrow(this, owner);
 
         if (entity.hurt(source, damage[0]))
             if (entity instanceof LivingEntity livingentity) {
@@ -137,6 +140,9 @@ public class ThrownSpearEntity extends AbstractArrow {
 
         this.setDeltaMovement(this.getDeltaMovement().multiply(-0.01, -0.1, -0.01));
         this.playSound(SoundEvents.TRIDENT_HIT, 1.0F, 1.0F);
+
+        if (COPY_STACK.getItem() instanceof ThrowingSpearItem item)
+            item.hitEnemy(this);
     }
 
     @Override
@@ -160,11 +166,14 @@ public class ThrownSpearEntity extends AbstractArrow {
                 if (!this.isRemoved())
                     this.setPickupItemStack(itemStack);
             }
+
+            if (COPY_STACK.getItem() instanceof ThrowingSpearItem item)
+                item.hitBlock(this);
         }
     }
 
     @Override
     protected boolean tryPickup(@NotNull Player player) {
-        return this.ownedBy(player) && player.getInventory().add(this.getPickupItem());
+        return (this.getOwner() == null || this.ownedBy(player)) && player.getInventory().add(this.getPickupItem());
     }
 }

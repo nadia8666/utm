@@ -1,4 +1,4 @@
-package com.nadia.utm.item;
+package com.nadia.utm.item.spear;
 
 import com.nadia.utm.entity.spear.ThrownSpearEntity;
 import net.minecraft.core.Direction;
@@ -37,6 +37,15 @@ public class ThrowingSpearItem extends Item implements ProjectileItem {
     }
 
     @Override
+    public @NotNull ProjectileItem.DispenseConfig createDispenseConfig() {
+        return ProjectileItem.DispenseConfig.builder()
+                .positionFunction(DispenseConfig.DEFAULT.positionFunction())
+                .uncertainty(0F)
+                .power(3.125F)
+                .build();
+    }
+
+    @Override
     public @NotNull ItemAttributeModifiers getDefaultAttributeModifiers(@NotNull ItemStack stack) {
         return ItemAttributeModifiers.builder()
                 .add(
@@ -65,7 +74,10 @@ public class ThrowingSpearItem extends Item implements ProjectileItem {
                     .orElse(SoundEvents.TRIDENT_THROW);
             level.playSound(null, spear, holder.value(), SoundSource.PLAYERS, 1.0F, 1.0F);
 
-            player.getInventory().removeItem(stack);
+            if (stack.getMaxStackSize() == 1)
+                player.getInventory().removeItem(stack);
+            else
+                stack.shrink(1);
         }
     }
 
@@ -96,7 +108,7 @@ public class ThrowingSpearItem extends Item implements ProjectileItem {
     }
 
     private static boolean isTooDamagedToUse(ItemStack stack) {
-        return stack.getDamageValue() >= stack.getMaxDamage() - 1;
+        return stack.getMaxDamage() != 0 && stack.getDamageValue() >= stack.getMaxDamage() - 1;
     }
 
     @Override
@@ -115,5 +127,13 @@ public class ThrowingSpearItem extends Item implements ProjectileItem {
     @Override
     public boolean canPerformAction(@NotNull ItemStack stack, net.neoforged.neoforge.common.@NotNull ItemAbility itemAbility) {
         return net.neoforged.neoforge.common.ItemAbilities.DEFAULT_TRIDENT_ACTIONS.contains(itemAbility);
+    }
+
+    public void hitEnemy(ThrownSpearEntity entity) {
+
+    }
+
+    public void hitBlock(ThrownSpearEntity entity) {
+
     }
 }

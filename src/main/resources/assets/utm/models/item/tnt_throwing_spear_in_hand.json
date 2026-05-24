@@ -1,9 +1,9 @@
 {
   "loader": "neoforge:obj",
   "flip_v": true,
-  "model": "utm:models/item/copper_throwing_spear.obj",
+  "model": "utm:models/item/tnt_throwing_spear.obj",
   "textures": {
-    "1": "utm:item/copper_throwing_spear"
+    "1": "utm:item/tnt_throwing_spear"
   },
   "display": {
     "thirdperson_righthand": {

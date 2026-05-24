@@ -1,0 +1,15 @@
+{
+  "loader": "neoforge:separate_transforms",
+  "gui_light": "front",
+  "base": {
+    "parent": "utm:item/tnt_throwing_spear_in_hand"
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "utm:item/tnt_throwing_spear_item"
+    },
+    "ground": {
+      "parent": "utm:item/tnt_throwing_spear_item"
+    }
+  }
+}

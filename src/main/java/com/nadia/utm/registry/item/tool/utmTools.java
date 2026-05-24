@@ -4,7 +4,8 @@ import com.nadia.utm.event.ForceLoad;
 import com.nadia.utm.item.AridTridentItem;
 import com.nadia.utm.item.FiddleheadItem;
 import com.nadia.utm.item.NetherytraItem;
-import com.nadia.utm.item.ThrowingSpearItem;
+import com.nadia.utm.item.spear.TNTThrowingSpearItem;
+import com.nadia.utm.item.spear.ThrowingSpearItem;
 import com.nadia.utm.registry.data.utmDataComponents;
 import com.nadia.utm.registry.item.utmItemContainer;
 import com.nadia.utm.registry.tags.utmTags;
@@ -133,7 +134,7 @@ public class utmTools {
                         BlockTags.INCORRECT_FOR_WOODEN_TOOL, 5000, 8f, 0f, 15, () -> Ingredient.EMPTY
                 );
                 return new SwordItem(tier, new Item.Properties().attributes(
-                        SwordItem.createAttributes(tier, 4f, 0)).rarity(Rarity.RARE));
+                        SwordItem.createAttributes(tier, 4f, 0f)).rarity(Rarity.RARE));
             }
     ).tags(Tags.Items.ENCHANTABLES, ItemTags.SWORD_ENCHANTABLE, ItemTags.WEAPON_ENCHANTABLE, ItemTags.FIRE_ASPECT_ENCHANTABLE, ItemTags.SWORDS).handheld();
 
@@ -182,18 +183,20 @@ public class utmTools {
             }
     ).tags(Tags.Items.ENCHANTABLES, ItemTags.WEAPON_ENCHANTABLE, ItemTags.FIRE_ASPECT_ENCHANTABLE, ItemTags.TRIDENT_ENCHANTABLE);
 
-    public static final utmItemContainer<Item> SWORD2 = register("sword2", new Item.Properties()
-            .attributes(SwordItem.createAttributes(utmToolBuilder.buildTier(
-                    BlockTags.INCORRECT_FOR_WOODEN_TOOL, 1000, 1f, 0f, 0, () -> Ingredient.EMPTY
-            ), 2, -3.5f)).rarity(Rarity.UNCOMMON).durability(1000)).handheld(),
-            GLOOMSWORD8 = register("gloomsword8", new Item.Properties()
-                    .attributes(SwordItem.createAttributes(utmToolBuilder.buildTier(
-                            BlockTags.INCORRECT_FOR_WOODEN_TOOL, 1, 1f, 0f, 0, () -> Ingredient.EMPTY
-                    ), 4, -3.6f)).rarity(Rarity.EPIC)).handheld(),
-            SABEL3 = register("sabel3", new Item.Properties()
-                    .attributes(SwordItem.createAttributes(utmToolBuilder.buildTier(
-                            BlockTags.INCORRECT_FOR_WOODEN_TOOL, 1500, 1f, 0f, 0, () -> Ingredient.EMPTY
-                    ), 5, -2.8f)).rarity(Rarity.RARE)); // Do Not Datagen My Model!
+    public static final utmItemContainer<SwordItem> SWORD2 = register("sword2", () -> {
+        Tier tier = utmToolBuilder.buildTier(BlockTags.INCORRECT_FOR_WOODEN_TOOL, 1000, 1f, 0f, 0, () -> Ingredient.EMPTY);
+        return new SwordItem(tier, new Item.Properties().rarity(Rarity.UNCOMMON).durability(1000).attributes(SwordItem.createAttributes(tier, 2, -3.5f)));
+    }).handheld();
+
+    public static final utmItemContainer<SwordItem> GLOOMSWORD8 = register("gloomsword8", () -> {
+        Tier tier = utmToolBuilder.buildTier(BlockTags.INCORRECT_FOR_WOODEN_TOOL, 1, 1f, 0f, 0, () -> Ingredient.EMPTY);
+        return new SwordItem(tier, new Item.Properties().rarity(Rarity.EPIC).attributes(SwordItem.createAttributes(tier, 4, -3.6f)));
+    }).handheld();
+
+    public static final utmItemContainer<SwordItem> SABEL3 = register("sabel3", () -> {
+        Tier tier = utmToolBuilder.buildTier(BlockTags.INCORRECT_FOR_WOODEN_TOOL, 1500, 1f, 0f, 0, () -> Ingredient.EMPTY);
+        return new SwordItem(tier, new Item.Properties().rarity(Rarity.RARE).attributes(SwordItem.createAttributes(tier, 5, -2.8f)));
+    });
 
     public static final utmItemContainer<ThrowingSpearItem> COPPER_THROWING_SPEAR = register("copper_throwing_spear", () -> new ThrowingSpearItem(new Item.Properties()
             .durability(40)
@@ -205,5 +208,10 @@ public class utmTools {
             .durability(41)
             .component(utmDataComponents.THROWING_SPEAR_MODEL, "netherite_throwing_spear")
             .stacksTo(1), 6.5F, -2.9F)
+    ).tags(ItemTags.VANISHING_ENCHANTABLE);
+
+    public static final utmItemContainer<TNTThrowingSpearItem> TNT_THROWING_SPEAR = register("tnt_throwing_spear", () -> new TNTThrowingSpearItem(new Item.Properties()
+            .component(utmDataComponents.THROWING_SPEAR_MODEL, "tnt_throwing_spear")
+            .stacksTo(16), 2.5F, -2.9F)
     ).tags(ItemTags.VANISHING_ENCHANTABLE);
 }
