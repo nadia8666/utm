@@ -13,9 +13,25 @@ public class utmTags {
                 utm.key("elytra_trim_templates"));
 
         // these are for emi ONLY, not functional
-        public static final TagKey<Item> EMI_REMOVE_MENDING = TagKey.create(
+        public static final TagKey<Item> ADD_MENDING = TagKey.create(
                 Registries.ITEM,
-                utm.key("emi_remove_mending"));
+                utm.key("add_mending"));
+
+        public static final TagKey<Item> ADD_UNBREAKING = TagKey.create(
+                Registries.ITEM,
+                utm.key("add_unbreaking"));
+
+        public static final TagKey<Item> ADD_SHARPNESS = TagKey.create(
+                Registries.ITEM,
+                utm.key("add_sharpness"));
+
+        public static final TagKey<Item> ADD_SPEAR_THROW = TagKey.create(
+                Registries.ITEM,
+                utm.key("add_spear_throw"));
+
+        public static final TagKey<Item> ADD_SPEAR_RECOVERY = TagKey.create(
+                Registries.ITEM,
+                utm.key("add_spear_recovery"));
     }
 
     public static class BLOCK {

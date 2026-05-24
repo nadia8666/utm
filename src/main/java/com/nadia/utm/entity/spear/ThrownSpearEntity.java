@@ -3,6 +3,7 @@ package com.nadia.utm.entity.spear;
 import com.nadia.utm.item.spear.ThrowingSpearItem;
 import com.nadia.utm.registry.codec.utmCodecs;
 import com.nadia.utm.registry.data.utmDataComponents;
+import com.nadia.utm.registry.enchantment.utmEnchantments;
 import com.nadia.utm.registry.entity.utmEntities;
 import com.nadia.utm.registry.item.tool.utmTools;
 import net.minecraft.nbt.CompoundTag;
@@ -47,6 +48,9 @@ public class ThrownSpearEntity extends AbstractArrow {
     private static final EntityDataAccessor<Boolean> FOIL =
             SynchedEntityData.defineId(ThrownSpearEntity.class, EntityDataSerializers.BOOLEAN);
 
+    private static final EntityDataAccessor<Boolean> RECOVER =
+            SynchedEntityData.defineId(ThrownSpearEntity.class, EntityDataSerializers.BOOLEAN);
+
     private static final EntityDataAccessor<Integer> GLINT_COLOR =
             SynchedEntityData.defineId(ThrownSpearEntity.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<String> GLINT_LOCATION =
@@ -80,6 +84,7 @@ public class ThrownSpearEntity extends AbstractArrow {
 
         entityData.set(MODEL, COPY_STACK.getOrDefault(utmDataComponents.THROWING_SPEAR_MODEL, "copper_throwing_spear"));
         entityData.set(FOIL, COPY_STACK.hasFoil());
+        entityData.set(RECOVER, COPY_STACK.getEnchantmentLevel(registryAccess().holderOrThrow(utmEnchantments.SPEAR_RECOVERY)) > 0);
 
         entityData.set(GLINT_COLOR, COPY_STACK.getOrDefault(utmDataComponents.GLINT_COLOR, DEFAULT_COLOR));
         entityData.set(GLINT_LOCATION, COPY_STACK.getOrDefault(utmDataComponents.GLINT_TYPE, GLINT_DEFAULT).toString());
@@ -94,6 +99,10 @@ public class ThrownSpearEntity extends AbstractArrow {
 
     public Boolean getFoil() {
         return entityData.get(FOIL);
+    }
+
+    public Boolean getRecover() {
+        return entityData.get(RECOVER);
     }
 
     public Integer getGlintColor() {
@@ -136,6 +145,7 @@ public class ThrownSpearEntity extends AbstractArrow {
         super.defineSynchedData(builder);
         builder.define(MODEL, "default");
         builder.define(FOIL, false);
+        builder.define(RECOVER, false);
 
         builder.define(GLINT_COLOR, DEFAULT_COLOR);
         builder.define(GLINT_LOCATION, GLINT_DEFAULT.toString());
@@ -149,7 +159,7 @@ public class ThrownSpearEntity extends AbstractArrow {
         super.tick();
         if (level().isClientSide) return;
 
-        if (HIT_ENTITY && this.getOwner() instanceof Player owner && owner.isAlive()) {
+        if (HIT_ENTITY && this.getOwner() instanceof Player owner && owner.isAlive() && getRecover()) {
             if (this.distanceToSqr(owner) <= 25 && level().getGameTime() - HIT_TIME >= 10) {
                 ItemStack pickupItem = this.getPickupItem();
 
@@ -218,6 +228,10 @@ public class ThrownSpearEntity extends AbstractArrow {
                 damage[0] += (float) modifier.amount();
             }
         });
+
+        int extraDamage = COPY_STACK.getEnchantmentLevel(this.registryAccess().holderOrThrow(Enchantments.SHARPNESS));
+        if (extraDamage > 0)
+            damage[0] += 0.5F * extraDamage + 0.5F;
 
         Entity entity = result.getEntity();
         Entity owner = this.getOwner();

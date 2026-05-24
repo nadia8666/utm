@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "#minecraft:enchantable/sharp_weapon",
+    "#minecraft:enchantable/sword",
+    "#utm:add_sharpness"
+  ]
+}

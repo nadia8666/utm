@@ -1,6 +1,7 @@
 package com.nadia.utm.item.spear;
 
 import com.nadia.utm.entity.spear.ThrownSpearEntity;
+import com.nadia.utm.registry.enchantment.utmEnchantments;
 import com.nadia.utm.util.EnchantUtil;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
@@ -43,7 +44,7 @@ public class ThrowingSpearItem extends Item implements ProjectileItem {
         return ProjectileItem.DispenseConfig.builder()
                 .positionFunction(DispenseConfig.DEFAULT.positionFunction())
                 .uncertainty(0F)
-                .power(3.125F)
+                .power(3.125F) // TODO: change with enchant force
                 .build();
     }
 
@@ -67,9 +68,12 @@ public class ThrowingSpearItem extends Item implements ProjectileItem {
     public void releaseUsing(@NotNull ItemStack stack, @NotNull Level level, @NotNull LivingEntity entity, int timeCharged) {
         int chargeTime = this.getUseDuration(stack, entity) - timeCharged;
         if (!level.isClientSide && chargeTime >= 5 && entity instanceof Player player) {
+            int throwForce = stack.getEnchantmentLevel(player.registryAccess().holderOrThrow(utmEnchantments.SPEAR_THROW));
+            float velocity = 2.5F + (throwForce * 0.3F);
+
             ThrownSpearEntity spear = new ThrownSpearEntity(level, player, stack);
             spear.pickup = AbstractArrow.Pickup.ALLOWED;
-            spear.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 3.125F, 0F);
+            spear.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, velocity, 0F);
             level.addFreshEntity(spear);
 
             Holder<SoundEvent> holder = EnchantmentHelper.pickHighestLevel(stack, EnchantmentEffectComponents.TRIDENT_SOUND)
