@@ -1,17 +1,22 @@
-// 1.21.1	2026-05-23T23:09:40.3064852	Item Models: utm
+// 1.21.1	2026-05-24T19:27:10.9319849	Item Models: utm
 6d60e0d2b0873e138bcfa8f5db0ca9cb6d7cd4fa assets/utm/models/item/adv_goggles.json
 0c35c7686bdc2e520fa2ede79bfa3e5855ad5ffc assets/utm/models/item/air_compressor.json
 9d13b4b18c25ee3c81b1cc65fd86954c95187339 assets/utm/models/item/aluminum_ingot.json
 8be274730d1ff844e99a3948cef3e6ec5d0d1e1c assets/utm/models/item/aluminum_ore.json
 ac40583efcb0098da55da342d789a331c75c5c1a assets/utm/models/item/aluminum_sheet.json
+f85ad09360d471517691bb8e41bd27134f3c04e9 assets/utm/models/item/ancient_apple.json
 17a1762413883e806058bc2d0cc8d5a35747e4f1 assets/utm/models/item/antiwater_bucket.json
+d00e8bbfc690b4038dc14ac052a6dac3f8578493 assets/utm/models/item/antiwater_canister.json
+afded1bb03411dbf8693280811f28dbf45568295 assets/utm/models/item/antiwater_conduit.json
 679773fb2dc807de14de241f634f4748c3b5e0e4 assets/utm/models/item/arid_axe.json
+e3bb1408fb222598c9b84d2b5549f10607252f97 assets/utm/models/item/arid_block.json
 276d24f6b7bd139310a57f6a60bd05e358af53b3 assets/utm/models/item/arid_hoe.json
 27e2ddb57591da009a7d2abd5330e7a3d8baa304 assets/utm/models/item/arid_ingot.json
 5de52f88841121e4359b931541bd5e7af80e42eb assets/utm/models/item/arid_paxel.json
 8107ecdd563e864bb50807682d69ffff476ffb3a assets/utm/models/item/arid_pickaxe.json
 85c00bb73bf7eb8752d94e12879d0442f821c54c assets/utm/models/item/arid_shovel.json
 e8c545b67cd72e79158a9dcc2a75ccc4d13232ac assets/utm/models/item/arid_sword.json
+93bc3f17e67ac2d634bef237a13295abb6883678 assets/utm/models/item/biome_apple.json
 805f5ab690adf26ccd877c944984eb1ff16f667f assets/utm/models/item/biome_sealer.json
 f2e9775563c86f68d71b06bb62045008a975a3de assets/utm/models/item/chunk_loader.json
 336758cbcbfdf58cdfae0d301428baacb9e69221 assets/utm/models/item/copper_axe.json
@@ -21,6 +26,8 @@ b461f6062f97a9a4f36e2c003164cd40afbf068d assets/utm/models/item/copper_hoe.json
 bc9e209da310ceed24cf8511ef375493917308c7 assets/utm/models/item/copper_shovel.json
 664d628331adc157b5851bb5683780c26db4a20e assets/utm/models/item/copper_sword.json
 4428dd779cf1c9ca27647bfcc5b94d90421be4ad assets/utm/models/item/cyclesword.json
+c75c3d20965f4de54cb4e2796b9689335190d361 assets/utm/models/item/electromagneticcore.json
+ed016039ee06c74188b9bb6033d5c24f91bf8d3e assets/utm/models/item/electro_canister.json
 ceafd2066417f1a8f93c0d45bab1628d1df45c81 assets/utm/models/item/elytra_trim_ecologist.json
 22e1fac4c57ae8fe6cb7c6d3a3be407a7658e072 assets/utm/models/item/elytra_trim_heartstwings.json
 9a8330762b9da0d24e32cd93732263ecc3a2cf66 assets/utm/models/item/elytra_trim_lesser.json
@@ -51,6 +58,7 @@ d9b591e9cc2c687a56bdd31f1728599e97ae2bb8 assets/utm/models/item/liquid_thruster.
 b6874dc12931d9a72815a83720c39c7232a5ca02 assets/utm/models/item/magnesium_ingot.json
 255886452a338d59bc9af8671142e737dabc5092 assets/utm/models/item/magnesium_ore.json
 bd336db203dd4ba9dc1df68464cc90aa6d912160 assets/utm/models/item/magnesium_sheet.json
+28e389105aea3b20bb58a6fa948ad93d18d98df2 assets/utm/models/item/mob_apple.json
 3585f00c05dee3d217b76ee63662e444adae99d3 assets/utm/models/item/molten_steel_bucket.json
 dfac8393a8467bd1ab1ace9e4ad852baf5ad1852 assets/utm/models/item/music_disc_lava_chicken.json
 d1d2c967c30729a23a0453dc02c563694ea48256 assets/utm/models/item/music_disc_tears.json
@@ -60,6 +68,7 @@ aaed7d47793a03535e0fc1e59b89f24ea056bb7d assets/utm/models/item/obsidian_sword.j
 3374c572cdd962361be3dcbe6d1f9a1542cd36c3 assets/utm/models/item/oxygen_furnace.json
 2e991b169a46604733a459264944f9b6d47893bb assets/utm/models/item/player_chunk_loader.json
 222d633b6564a532e01c7d3ca1a2745f4424f305 assets/utm/models/item/portasealer.json
+3b9ca12869c43cbf6b76fe688cb012f3b28f332e assets/utm/models/item/progression_apple.json
 e1ff107dcc5ce5152dee20b1c2a4eedb64eb79dc assets/utm/models/item/raw_aluminum.json
 c94908a0de5dcb69056c5d24ba34e844e921b2d1 assets/utm/models/item/raw_magnesium.json
 dfa92cda8882516d5dcd729379b1da768d248a36 assets/utm/models/item/regen_disc.json
@@ -69,6 +78,7 @@ af1e629fbeb59dec7607fbae2d305b3d5cdeffdd assets/utm/models/item/solid_thruster.j
 97b31be7aa7fb4f3a9024c82df7b130c4ac1156f assets/utm/models/item/steel_sheet.json
 e1ba66d20505138a6af97fb76fd16a7ea431e252 assets/utm/models/item/sword2.json
 7f2b0c2e17bf3a1beaeccf91b4bee1ea1783a1ff assets/utm/models/item/sword_of_kirk.json
+eae1cb358b44edb4605c80f9460949d4afc2acbf assets/utm/models/item/thanos_blocks.json
 f286a70aaa613920082a80ecabbdb47b3da4be50 assets/utm/models/item/unassabeled.json
 4bb429556d32c018342d162fceee88326f55c9a6 assets/utm/models/item/unfinished_arid_ingot.json
 723955985396594051586dbe811a3de8de5bf99b assets/utm/models/item/unfinished_glint_table.json

@@ -1,0 +1,34 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "electro",
+  "key": {
+    "s": {
+      "item": "minecraft:iron_ingot"
+    },
+    "i": {
+      "item": "minecraft:stick"
+    },
+    "g": {
+      "item": "minecraft:lead"
+    },
+    "c": {
+      "item": "minecraft:cyan_dye"
+    },
+    "o": {
+      "item": "minecraft:orange_dye"
+    },
+    "r": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "pattern": [
+    "iri",
+    "i i",
+    "isi"
+  ],
+  "result": {
+    "count": 1,
+    "id": "utm:antiwater_conduit"
+  }
+}

@@ -236,7 +236,7 @@ public class utmBlocks {
             .sound(SoundType.SLIME_BLOCK)).cube().inheritModel().minePick().mineHoe();
     public static final utmBlockContainer<Block, BlockItem> ARID_BLOCK = dualRegister("arid_block", Block::new, BlockBehaviour.Properties.of()
             .destroyTime(6)
-            .sound(SoundType.HEAVY_CORE)).cube().inheritModel().minePick();
+            .sound(SoundType.HEAVY_CORE)).cube().inheritModel().dropSelf().minePick();
 
     // propulsion
     public static final utmBlockContainer<IonJetBlock, BlockItem> ION_JET = dualRegister("ion_jet", IonJetBlock::new, BlockBehaviour.Properties.of()

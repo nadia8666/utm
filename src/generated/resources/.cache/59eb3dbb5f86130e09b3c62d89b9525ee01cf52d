@@ -1,6 +1,7 @@
-// 1.21.1	2026-05-24T10:06:37.6395144	Loot Tables
+// 1.21.1	2026-05-24T19:27:10.9479426	Loot Tables
 79f8f9dea0c7cdb725e30638071b2e6216a483ed data/utm/loot_table/blocks/aerowall.json
 f8c417ff60baca7c6796b4b11326f96ca35b0f99 data/utm/loot_table/blocks/aluminum_ore.json
+00446af025592c5d34f020b34bae77a153bedb7b data/utm/loot_table/blocks/arid_block.json
 d4e8775a0bc83dce60dc1d83731b77333a4fed3b data/utm/loot_table/blocks/biome_sealer.json
 bbbc267fdb298806c35bae4a14b95045887620fa data/utm/loot_table/blocks/chunk_loader.json
 cffc805801ca90da8fc3022b03b2f653dff81aed data/utm/loot_table/blocks/citywalls_metal.json
