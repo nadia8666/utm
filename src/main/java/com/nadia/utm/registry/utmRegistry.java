@@ -7,6 +7,7 @@ import com.nadia.utm.registry.block.utmBlockContainer;
 import com.nadia.utm.registry.block.utmBlockEntities;
 import com.nadia.utm.registry.block.utmBlocks;
 import com.nadia.utm.registry.buffs.utmBuffs;
+import com.nadia.utm.registry.codec.utmCodecs;
 import com.nadia.utm.registry.data.utmDataComponents;
 import com.nadia.utm.registry.entity.utmEntities;
 import com.nadia.utm.registry.fluid.utmFluids;
@@ -48,6 +49,7 @@ public class utmRegistry {
     public static final DeferredRegister<?> FLUIDS = utmFluids.FLUIDS;
     public static final DeferredRegister<?> DISPLAY_SOURCES = utmDisplaySources.DISPLAY_SOURCES;
     public static final DeferredRegister<?> ENTITY_TYPES = utmEntities.ENTITY_TYPES;
+    public static final DeferredRegister<?> ENTITY_DATA_SERIALIZERS = utmCodecs.ENTITY_DATA_SERIALIZERS;
 
     public static final Set<?> HIDDEN_BLOCKS = new HashSet<>();
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> MAIN = TABS
@@ -74,6 +76,7 @@ public class utmRegistry {
     }
 
     public static void registerAll(IEventBus modEventBus) {
+        ENTITY_DATA_SERIALIZERS.register(modEventBus);
         BLOCKS.register(modEventBus);
         ITEMS.register(modEventBus);
         BLOCK_ENTITIES.register(modEventBus);

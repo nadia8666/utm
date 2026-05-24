@@ -1,6 +1,7 @@
 package com.nadia.utm.entity.spear;
 
 import com.nadia.utm.item.spear.ThrowingSpearItem;
+import com.nadia.utm.registry.codec.utmCodecs;
 import com.nadia.utm.registry.data.utmDataComponents;
 import com.nadia.utm.registry.entity.utmEntities;
 import com.nadia.utm.registry.item.tool.utmTools;
@@ -8,6 +9,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -26,8 +28,12 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import org.jetbrains.annotations.NotNull;
+import org.joml.Vector2f;
 
 import java.util.Objects;
+
+import static com.nadia.utm.client.renderer.glint.utmGlintContainer.DEFAULT_COLOR;
+import static com.nadia.utm.client.renderer.glint.utmGlintContainer.GLINT_DEFAULT;
 
 public class ThrownSpearEntity extends AbstractArrow {
     public float LAST_ROTATION = 0;
@@ -37,6 +43,20 @@ public class ThrownSpearEntity extends AbstractArrow {
 
     private static final EntityDataAccessor<String> MODEL =
             SynchedEntityData.defineId(ThrownSpearEntity.class, EntityDataSerializers.STRING);
+
+    private static final EntityDataAccessor<Boolean> FOIL =
+            SynchedEntityData.defineId(ThrownSpearEntity.class, EntityDataSerializers.BOOLEAN);
+
+    private static final EntityDataAccessor<Integer> GLINT_COLOR =
+            SynchedEntityData.defineId(ThrownSpearEntity.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<String> GLINT_LOCATION =
+            SynchedEntityData.defineId(ThrownSpearEntity.class, EntityDataSerializers.STRING);
+    private static final EntityDataAccessor<Vector2f> GLINT_SPEED =
+            SynchedEntityData.defineId(ThrownSpearEntity.class, utmCodecs.ENTITY_VECTOR2F.get());
+    private static final EntityDataAccessor<Vector2f> GLINT_SCALE =
+            SynchedEntityData.defineId(ThrownSpearEntity.class, utmCodecs.ENTITY_VECTOR2F.get());
+    private static final EntityDataAccessor<Boolean> GLINT_ADDITIVE =
+            SynchedEntityData.defineId(ThrownSpearEntity.class, EntityDataSerializers.BOOLEAN);
 
     public ThrownSpearEntity(Level level) {
         super(utmEntities.THROWN_SPEAR.get(), level);
@@ -59,10 +79,41 @@ public class ThrownSpearEntity extends AbstractArrow {
         if (level().isClientSide) return;
 
         entityData.set(MODEL, COPY_STACK.getOrDefault(utmDataComponents.THROWING_SPEAR_MODEL, "copper_throwing_spear"));
+        entityData.set(FOIL, COPY_STACK.hasFoil());
+
+        entityData.set(GLINT_COLOR, COPY_STACK.getOrDefault(utmDataComponents.GLINT_COLOR, DEFAULT_COLOR));
+        entityData.set(GLINT_LOCATION, COPY_STACK.getOrDefault(utmDataComponents.GLINT_TYPE, GLINT_DEFAULT).toString());
+        entityData.set(GLINT_SPEED, COPY_STACK.getOrDefault(utmDataComponents.GLINT_SPEED, new Vector2f(1, 1)));
+        entityData.set(GLINT_SCALE, COPY_STACK.getOrDefault(utmDataComponents.GLINT_SCALE, new Vector2f(1, 1)));
+        entityData.set(GLINT_ADDITIVE, COPY_STACK.getOrDefault(utmDataComponents.GLINT_ADDITIVE, true));
     }
 
     public String getModel() {
         return entityData.get(MODEL);
+    }
+
+    public Boolean getFoil() {
+        return entityData.get(FOIL);
+    }
+
+    public Integer getGlintColor() {
+        return entityData.get(GLINT_COLOR);
+    }
+
+    public ResourceLocation getGlintLocation() {
+        return ResourceLocation.parse(entityData.get(GLINT_LOCATION));
+    }
+
+    public Vector2f getGlintSpeed() {
+        return entityData.get(GLINT_SPEED);
+    }
+
+    public Vector2f getGlintScale() {
+        return entityData.get(GLINT_SCALE);
+    }
+
+    public Boolean getGlintAdditive() {
+        return entityData.get(GLINT_ADDITIVE);
     }
 
     @Override
@@ -84,6 +135,13 @@ public class ThrownSpearEntity extends AbstractArrow {
     protected void defineSynchedData(SynchedEntityData.@NotNull Builder builder) {
         super.defineSynchedData(builder);
         builder.define(MODEL, "default");
+        builder.define(FOIL, false);
+
+        builder.define(GLINT_COLOR, DEFAULT_COLOR);
+        builder.define(GLINT_LOCATION, GLINT_DEFAULT.toString());
+        builder.define(GLINT_SPEED, new Vector2f(1, 1));
+        builder.define(GLINT_SCALE, new Vector2f(1, 1));
+        builder.define(GLINT_ADDITIVE, true);
     }
 
     @Override
