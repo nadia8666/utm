@@ -1,8 +1,9 @@
 package com.nadia.utm.block;
 
-import com.nadia.utm.registry.block.utmBlocks;
+import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.level.block.AnvilBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 
 public class HeavyMetalAnvilBlock extends AnvilBlock {
     public HeavyMetalAnvilBlock(Properties properties) {
@@ -10,6 +11,11 @@ public class HeavyMetalAnvilBlock extends AnvilBlock {
     }
 
     public static BlockState damage(BlockState state) {
-        return utmBlocks.HEAVY_METAL_ANVIL.BLOCK.get().defaultBlockState().setValue(FACING, state.getValue(FACING));
+        return state;
+    }
+
+    @Override
+    public void onLand(@NotNull net.minecraft.world.level.Level level, @NotNull net.minecraft.core.BlockPos pos, @NotNull BlockState state, @NotNull BlockState replaceableState, @NotNull FallingBlockEntity fallingBlock) {
+        super.onLand(level, pos, state, replaceableState, fallingBlock);
     }
 }
