@@ -1,0 +1,41 @@
+{
+  "type": "create:mechanical_crafting",
+  "accept_mirrored": true,
+  "category": "apple",
+  "pattern": [
+    "  AAAAA  ",
+    " A     A ",
+    "A       A",
+    "A  dAd  A",
+    "A  AaA  A",
+    "A  dAd  A",
+    "A       A",
+    " A     A ",
+    "  AAAAA"
+  ],
+  "key": {
+    "A": {
+      "item": "utm:thanos_blocks"
+    },
+    "a": {
+      "item": "minecraft:apple"
+    },
+    "d": {
+      "item": "minecraft:ancient_debris"
+    },
+    "b": {
+      "item": "minecraft:book"
+    },
+    "P": {
+      "item": "create:copper_sheet"
+    },
+    "l": {
+      "item": "minecraft:leather"
+    }
+  },
+  "result": {
+    "id": "utm:ancient_apple",
+    "count": 1
+  },
+  "show_notification": true
+}

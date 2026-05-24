@@ -63,7 +63,8 @@ public class utmItems {
             ELYTRA_TRIM_ROADRUNNER = register("elytra_trim_roadrunner").generated().tags(utmTags.ITEM.ELYTRA_TRIM_TEMPLATES, ItemTags.TRIM_TEMPLATES);
 
     public static final utmItemContainer<Item> FIDDLECORE = register("fiddlecore").generated(),
-            FLOATINGCORE = register("floatingcore").generated();
+            FLOATINGCORE = register("floatingcore").generated(),
+            ELECTROMAGNETICCORE = register("electromagneticcore").generated();
     public static final utmItemContainer<LockedSchematicItem> INCREDI = register("incredipak", () -> new LockedSchematicItem("incredipak.nbt")).generated();
 
     public static final utmItemContainer<AdvancedGogglesItem> GOGGLES = register("adv_goggles", () -> new AdvancedGogglesItem(new Item.Properties().stacksTo(1)))
@@ -99,7 +100,9 @@ public class utmItems {
             ALUMINUM_SHEET = register("aluminum_sheet").generated(),
             MAGNESIUM_SHEET = register("magnesium_sheet").generated(),
             STEEL_SHEET = register("steel_sheet").generated(),
-            COPPER_PLATING = register("copper_plating").generated();
+            COPPER_PLATING = register("copper_plating").generated(),
+            electro_canister = register("electro_canister").generated(),
+            ANTIWATER_CANISTER = register("antiwater_canister").generated();
 
     // apples
     public static final utmItemContainer<Item> ANCIENT_APPLE = register("ancient_apple",

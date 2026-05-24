@@ -1,0 +1,22 @@
+{
+  "type": "create:mixing",
+  "heat_requirement": "superheated",
+  "ingredients": [
+    {
+
+      "type": "fluid_tag",
+      "amount": 1000,
+      "fluid_tag": "c:honey"
+    },
+    {
+      "item": "minecraft:shulker_shell",
+      "count": 1
+    }
+  ],
+  "results": [
+    {
+      "id": "utm:thanos_blocks",
+      "count": 1
+    }
+  ]
+}
