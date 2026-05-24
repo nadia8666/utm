@@ -1,6 +1,10 @@
-package com.nadia.utm.projectile;
+package com.nadia.utm.entity.spear;
 
+import com.nadia.utm.registry.data.utmDataComponents;
+import com.nadia.utm.registry.entity.utmEntities;
+import com.nadia.utm.registry.item.tool.utmTools;
 import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -18,6 +22,14 @@ public class ThrownAridTrident extends ThrownTrident {
     private static final EntityDataAccessor<Byte> ID_LOYALTY = null;
     private static final EntityDataAccessor<Boolean> ID_FOIL = null;
     private boolean dealtDamage;
+    public ItemStack COPY_STACK;
+    public String getModel() {
+        return entityData.get(MODEL);
+    }
+    private static final EntityDataAccessor<String> MODEL =
+            SynchedEntityData.defineId(ThrownAridTrident.class, EntityDataSerializers.STRING);
+
+
     public int clientSideReturnTridentTickCount;
     public ThrownAridTrident(EntityType<? extends ThrownTrident> entityType, Level level) {
         super(entityType, level);
@@ -26,6 +38,15 @@ public class ThrownAridTrident extends ThrownTrident {
     public ThrownAridTrident(Level level, LivingEntity shooter, ItemStack pickupItemStack) {
         super(level, shooter, pickupItemStack);
         this.entityData.set(ID_FOIL, pickupItemStack.hasFoil());
+    }
+    public ThrownAridTrident(Level level) {
+        super(utmEntities.THROWN_ARID_TRIDENT.get(), level);
+        COPY_STACK = new ItemStack(utmTools.ARID_TRIDENT.get());
+    }
+    public void updateModel() {
+        if (level().isClientSide) return;
+
+        entityData.set(MODEL, COPY_STACK.getOrDefault(utmDataComponents.THROWING_SPEAR_MODEL, "copper_throwing_spear"));
     }
 
     public ThrownAridTrident(Level level, double x, double y, double z, ItemStack pickupItemStack) {

@@ -1,6 +1,6 @@
 package com.nadia.utm.item;
 
-import com.nadia.utm.projectile.ThrownAridTrident;
+import com.nadia.utm.entity.spear.ThrownAridTrident;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Position;
