@@ -33,7 +33,7 @@
       "item": "minecraft:emerald_block"
     },
     "R": {
-      "item": "minecraft:arid_block"
+      "item": "utm:arid_block"
     },
     "T": {
       "item": "minecraft:turtle_helmet"

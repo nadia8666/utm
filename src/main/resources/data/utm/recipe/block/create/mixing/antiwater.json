@@ -1,0 +1,138 @@
+{
+  "type": "create:mixing",
+  "heat_requirement": "superheated",
+  "ingredients": [
+    {
+      "item": "utm:ancient_apple",
+      "count": 5
+    },
+    {
+      "item": "utm:progression_apple",
+      "count": 1
+    },
+    {
+      "item": "utm:mob_apple",
+      "count": 1
+    },
+    {
+      "item": "utm:biome_apple",
+      "count": 1
+    },
+    {
+      "type": "neoforge:components",
+      "amount": 1000,
+      "components": {
+        "create:potion_fluid_bottle_type": "regular",
+        "minecraft:potion_contents": {
+          "potion": "minecraft:wind_charged"
+        }
+      },
+      "fluids": "create:potion"
+    },
+    {
+      "type": "neoforge:components",
+      "amount": 1000,
+      "components": {
+        "create:potion_fluid_bottle_type": "regular",
+        "minecraft:potion_contents": {
+          "potion": "minecraft:fire_resistance"
+        }
+      },
+      "fluids": "create:potion"
+    },
+    {
+      "type": "neoforge:components",
+      "amount": 1000,
+      "components": {
+        "create:potion_fluid_bottle_type": "regular",
+        "minecraft:potion_contents": {
+          "potion": "minecraft:weakness"
+        }
+      },
+      "fluids": "create:potion"
+    },
+    {
+      "type": "neoforge:components",
+      "amount": 1000,
+      "components": {
+        "create:potion_fluid_bottle_type": "regular",
+        "minecraft:potion_contents": {
+          "potion": "minecraft:water_breathing"
+        }
+      },
+      "fluids": "create:potion"
+    },
+    {
+      "type": "neoforge:components",
+      "amount": 1000,
+      "components": {
+        "create:potion_fluid_bottle_type": "regular",
+        "minecraft:potion_contents": {
+          "potion": "minecraft:weaving"
+        }
+      },
+      "fluids": "create:potion"
+    },
+    {
+      "type": "neoforge:components",
+      "amount": 1000,
+      "components": {
+        "create:potion_fluid_bottle_type": "regular",
+        "minecraft:potion_contents": {
+          "potion": "minecraft:invisibility"
+        }
+      },
+      "fluids": "create:potion"
+    },
+    {
+      "type": "neoforge:components",
+      "amount": 1000,
+      "components": {
+        "create:potion_fluid_bottle_type": "regular",
+        "minecraft:potion_contents": {
+          "potion": "minecraft:leaping"
+        }
+      },
+      "fluids": "create:potion"
+    },
+    {
+      "type": "neoforge:components",
+      "amount": 1000,
+      "components": {
+        "create:potion_fluid_bottle_type": "regular",
+        "minecraft:potion_contents": {
+          "potion": "minecraft:thick"
+        }
+      },
+      "fluids": "create:potion"
+    },
+    {
+      "type": "neoforge:components",
+      "amount": 1000,
+      "components": {
+        "create:potion_fluid_bottle_type": "regular",
+        "minecraft:potion_contents": {
+          "potion": "minecraft:oozing"
+        }
+      },
+      "fluids": "create:potion"
+    },
+    {
+      "type": "neoforge:components",
+      "amount": 1000,
+      "components": {
+        "create:potion_fluid_bottle_type": "regular",
+        "minecraft:potion_contents": {
+          "potion": "minecraft:turtle_master"
+        }
+      },
+      "fluids": "create:potion"
+    }
+  ],
+  "results": [
+    {
+      "id": "utm:antiwater",
+      "amount": 1000
+    }
+  ]
+}
