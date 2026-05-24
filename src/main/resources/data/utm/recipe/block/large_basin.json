@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "basin",
+  "key": {
+    "m": {
+      "item": "minecraft:mangrove_propagule"
+    },
+    "x": {
+      "item": "create:basin"
+    },
+    "i": {
+      "item": "minecraft:iron_block"
+    },
+    "a": {
+      "item": "utm:arid_ingot"
+    }
+  },
+  "pattern": [
+    "m m",
+    "ixi",
+    "iai"
+  ],
+  "result": {
+    "count": 1,
+    "id": "utm:large_basin"
+  }
+}
