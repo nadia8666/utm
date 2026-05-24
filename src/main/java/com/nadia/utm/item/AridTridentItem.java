@@ -39,7 +39,7 @@ public class AridTridentItem extends TridentItem {
     //there is nothing you nee to change about this file
     @Override
     public @NotNull Projectile asProjectile(@NotNull Level level, Position pos, ItemStack stack, @NotNull Direction direction) {
-        ThrownTrident throwntrident = new ThrownAridTrident(level, pos.x(), pos.y(), pos.z(), stack.copyWithCount(1)); //OVERWRITE THROWNTRIDENT
+        ThrownAridTrident throwntrident = new ThrownAridTrident(level, pos.x(), pos.y(), pos.z(), stack.copyWithCount(1)); //OVERWRITE THROWNTRIDENT
         throwntrident.pickup = AbstractArrow.Pickup.ALLOWED;
         return throwntrident;
     }
