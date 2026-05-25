@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "electro",
+  "key": {
+    "d": {
+      "item": "minecraft:diamond"
+    },
+    "b": {
+      "item": "minecraft:bucket"
+    },
+    "g": {
+      "item": "minecraft:slime_block"
+    },
+    "e": {
+      "item": "minecraft:ender_eye"
+    }
+
+  },
+  "pattern": [
+    "ddd",
+    "beg",
+    "ddd"
+  ],
+  "result": {
+    "count": 1,
+    "id": "utm:particase"
+  }
+}

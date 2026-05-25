@@ -1,0 +1,26 @@
+{
+  "type": "create:mixing",
+  "heat_requirement": "superheated",
+  "ingredients": [
+    {
+      "fluid": "utm:antiwater",
+      "type": "fluid_stack",
+      "amount": 6000
+    },
+    {
+      "fluid": "minecraft:water",
+      "type": "fluid_stack",
+      "amount": 10000
+    },
+    {
+      "item": "utm:positrase",
+      "count": 1
+    }
+  ],
+  "results": [
+    {
+      "id": "utm:antiwater",
+      "amount": 6002
+    }
+  ]
+}

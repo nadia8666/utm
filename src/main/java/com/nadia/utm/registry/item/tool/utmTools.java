@@ -190,7 +190,7 @@ public class utmTools {
                 );
                 return new Paxel(tier, new Item.Properties().attributes(
                         Paxel.createAttributes(tier, 10, -3f)).rarity(utmRarities.MYSTIC.getValue()));
-            }
+            } //todo: investigate why you and arid pickaxe have no visible mining speed buff over netherite pickaxe
     ).tags(Tags.Items.ENCHANTABLES, ItemTags.SWORD_ENCHANTABLE, ItemTags.WEAPON_ENCHANTABLE, ItemTags.FIRE_ASPECT_ENCHANTABLE, ItemTags.MINING_ENCHANTABLE, ItemTags.PICKAXES).handheld();
 
     public static final utmItemContainer<SwordItem> SWORD2 = register("sword2", () -> {

@@ -1,4 +1,4 @@
-// 1.21.1	2026-05-24T19:27:10.9319849	Item Models: utm
+// 1.21.1	2026-05-25T16:07:39.5686397	Item Models: utm
 6d60e0d2b0873e138bcfa8f5db0ca9cb6d7cd4fa assets/utm/models/item/adv_goggles.json
 0c35c7686bdc2e520fa2ede79bfa3e5855ad5ffc assets/utm/models/item/air_compressor.json
 9d13b4b18c25ee3c81b1cc65fd86954c95187339 assets/utm/models/item/aluminum_ingot.json
@@ -26,6 +26,7 @@ b461f6062f97a9a4f36e2c003164cd40afbf068d assets/utm/models/item/copper_hoe.json
 bc9e209da310ceed24cf8511ef375493917308c7 assets/utm/models/item/copper_shovel.json
 664d628331adc157b5851bb5683780c26db4a20e assets/utm/models/item/copper_sword.json
 4428dd779cf1c9ca27647bfcc5b94d90421be4ad assets/utm/models/item/cyclesword.json
+a49b44fb09b01d0016ad92420e4bbbc8d750c2bb assets/utm/models/item/electrase.json
 c75c3d20965f4de54cb4e2796b9689335190d361 assets/utm/models/item/electromagneticcore.json
 ed016039ee06c74188b9bb6033d5c24f91bf8d3e assets/utm/models/item/electro_canister.json
 ceafd2066417f1a8f93c0d45bab1628d1df45c81 assets/utm/models/item/elytra_trim_ecologist.json
@@ -66,8 +67,10 @@ d1d2c967c30729a23a0453dc02c563694ea48256 assets/utm/models/item/music_disc_tears
 a951d96a793876f77a37a1d469861589165ec946 assets/utm/models/item/netherytra.json
 aaed7d47793a03535e0fc1e59b89f24ea056bb7d assets/utm/models/item/obsidian_sword.json
 3374c572cdd962361be3dcbe6d1f9a1542cd36c3 assets/utm/models/item/oxygen_furnace.json
+0a00bcbeefba0ae4d8203c1f37a9d3082833ccdb assets/utm/models/item/particase.json
 2e991b169a46604733a459264944f9b6d47893bb assets/utm/models/item/player_chunk_loader.json
 222d633b6564a532e01c7d3ca1a2745f4424f305 assets/utm/models/item/portasealer.json
+bb4d55e477d599887980d379d34beb68aaba8fbf assets/utm/models/item/positrase.json
 3b9ca12869c43cbf6b76fe688cb012f3b28f332e assets/utm/models/item/progression_apple.json
 e1ff107dcc5ce5152dee20b1c2a4eedb64eb79dc assets/utm/models/item/raw_aluminum.json
 c94908a0de5dcb69056c5d24ba34e844e921b2d1 assets/utm/models/item/raw_magnesium.json

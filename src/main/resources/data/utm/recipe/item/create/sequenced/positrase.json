@@ -1,0 +1,73 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "utm:particase"
+  },
+  "loops": 12,
+  "results": [
+    {
+      "id": "utm:positrase",
+      "chance": 100,
+      "count": 1
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "utm:particase"
+        },
+        {
+          "fluid": "minecraft:water",
+          "type": "fluid_stack",
+          "amount": 1000
+        }
+      ],
+      "results": [
+        {
+          "id": "utm:electrase"
+        }
+      ]
+    },
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "utm:electrase"
+        },
+        {
+          "fluid": "minecraft:water",
+          "type": "fluid_stack",
+          "amount": 1000
+        }
+      ],
+      "results": [
+        {
+          "id": "utm:electrase"
+        }
+      ]
+    },
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "utm:electrase"
+        },
+        {
+          "fluid": "minecraft:lava",
+          "type": "fluid_stack",
+          "amount": 1000
+        }
+      ],
+      "results": [
+        {
+          "id": "utm:electrase"
+        }
+      ]
+    }
+  ],
+  "transitional_item": {
+    "id": "utm:electrase"
+  }
+}
