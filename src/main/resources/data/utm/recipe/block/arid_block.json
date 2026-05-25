@@ -4,24 +4,24 @@
   "category": "building",
   "ingredients": [
     {
-      "item": "minecraft:arid_ingot"
+      "item": "utm:arid_ingot"
     },
     {
-      "item": "minecraft:arid_ingot"
-    },    {
-      "item": "minecraft:arid_ingot"
-    },    {
-      "item": "minecraft:arid_ingot"
-    },    {
-      "item": "minecraft:arid_ingot"
-    },    {
-      "item": "minecraft:arid_ingot"
-    },    {
-      "item": "minecraft:arid_ingot"
-    },    {
-      "item": "minecraft:arid_ingot"
-    },    {
-      "item": "minecraft:arid_ingot"
+      "item": "utm:arid_ingot"
+    },      {
+      "item": "utm:arid_ingot"
+    },  {
+      "item": "utm:arid_ingot"
+    },  {
+      "item": "utm:arid_ingot"
+    },  {
+      "item": "utm:arid_ingot"
+    },  {
+      "item": "utm:arid_ingot"
+    },  {
+      "item": "utm:arid_ingot"
+    },  {
+      "item": "utm:arid_ingot"
     }
   ],
   "result": {
