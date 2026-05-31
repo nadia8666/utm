@@ -182,7 +182,7 @@ public class utmTools {
     ).tags(Tags.Items.ENCHANTABLES, ItemTags.SWORD_ENCHANTABLE, ItemTags.WEAPON_ENCHANTABLE, ItemTags.FIRE_ASPECT_ENCHANTABLE, ItemTags.MINING_ENCHANTABLE, ItemTags.MINING_LOOT_ENCHANTABLE, ItemTags.HOES).handheld();
     public static final utmItemContainer<AridTridentItem> ARID_TRIDENT = register("arid_trident", () -> {
         return new AridTridentItem(new Item.Properties().stacksTo(1).durability(1024).component(utmDataComponents.THROWING_SPEAR_MODEL, "arid_trident")); //condense pls
-            } // todo: arid trident is an antiwater item yet no mystic tag. Add all mystic tags to all POST antiwater stuff.
+            } // todo: arid trident is an antiwater item yet no mystic tag. Add all mystic tags to all POST antiwater stuff. ALSO FIX YOUR PIVOT
     ).tags(Tags.Items.ENCHANTABLES, ItemTags.WEAPON_ENCHANTABLE, ItemTags.FIRE_ASPECT_ENCHANTABLE, ItemTags.TRIDENT_ENCHANTABLE);
     public static final utmItemContainer<Paxel> ARID_PAXEL = register("arid_paxel", () -> { // no texture yet. Theres no crying until the end
                 Tier tier = utmToolBuilder.buildTier(
@@ -226,8 +226,8 @@ public class utmTools {
     ).tags(ItemTags.VANISHING_ENCHANTABLE, utmTags.ITEM.ADD_SPEAR_THROW, utmTags.ITEM.ADD_MENDING);
     public static final utmItemContainer<PickaxeItem> GREENLINE_DIAMOND_PICKAXE = register("greenline_diamond_pickaxe", () -> {
                 Tier tier = utmToolBuilder.buildTier(
-                        BlockTags.INCORRECT_FOR_STONE_TOOL, 1561, 8f, 0f, 150, () -> Ingredient.of(Items.DIAMOND)
-                );
+                        BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 1561, 8f, 0f, 150, () -> Ingredient.of(Items.DIAMOND)
+                ); // that block tag might be wrong hey
                 return new PickaxeItem(tier, new Item.Properties().attributes(
                         PickaxeItem.createAttributes(tier, 5, -2.8f)).rarity(utmRarities.MYSTIC.getValue()));
             }

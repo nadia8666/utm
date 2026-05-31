@@ -20,7 +20,7 @@ public class GreenlineDPickaxeItem extends PickaxeItem {
     public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
         if (Math.abs(entity.getLookAngle().y()) < 0.1f) {
             //THis picakxe is meant to mine faster if youre looking in one specific direction but i have no clue how Tocode that. so : ) hello!
-
+            
         }
     }
 }
