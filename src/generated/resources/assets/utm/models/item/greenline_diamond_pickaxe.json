@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "utm:item/greenline_diamond_pickaxe"
+  }
+}

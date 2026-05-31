@@ -1,0 +1,44 @@
+{
+  "type": "create:mechanical_crafting",
+  "accept_mirrored": true,
+  "category": "apple",
+  "pattern": [
+    "  AAAAA  ",
+    " A12345A ",
+    "A1234512A",
+    "A345A123A",
+    "A45AaA12A",
+    "A345A123A",
+    "A4512345A",
+    " A12345A ",
+    "  AAAAA  "
+  ],
+  "key": {
+    "A": {
+      "item": "utm:thanos_blocks"
+    },
+    "a": {
+      "item": "minecraft:apple"
+    },
+    "1": {
+      "item": "minecraft:iron_sword"
+    },
+    "2": {
+      "item": "minecraft:iron_pickaxe"
+    },
+    "4": {
+      "item": "minecraft:iron_shovel"
+    },
+    "3": {
+      "item": "minecraft:iron_axe"
+    },
+    "5": {
+      "item": "minecraft:iron_hoe"
+    }
+  },
+  "result": {
+    "id": "utm:tool_apple",
+    "count": 1
+  },
+  "show_notification": true
+}

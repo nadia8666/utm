@@ -1,4 +1,4 @@
-// 1.21.1	2026-05-25T16:07:39.5686397	Item Models: utm
+// 1.21.1	2026-05-31T16:11:22.1541092	Item Models: utm
 6d60e0d2b0873e138bcfa8f5db0ca9cb6d7cd4fa assets/utm/models/item/adv_goggles.json
 0c35c7686bdc2e520fa2ede79bfa3e5855ad5ffc assets/utm/models/item/air_compressor.json
 9d13b4b18c25ee3c81b1cc65fd86954c95187339 assets/utm/models/item/aluminum_ingot.json
@@ -49,6 +49,7 @@ e867380390100baee10f7084ddb96dd4affbaf1e assets/utm/models/item/gimbal_plate.jso
 17c810dab8cfad3e3bdffbe6bcbb14b5d9400a87 assets/utm/models/item/glint_table.json
 8fc71452896a2999afd9050c86a47793108cfa4f assets/utm/models/item/gloomsword8.json
 fc48134fda3d120191f6a58897d1bb3fd5632f78 assets/utm/models/item/grate.json
+1c9ff8320cb2b652aa83cf0d84b5352673b609f3 assets/utm/models/item/greenline_diamond_pickaxe.json
 487ba2c00f30efd980d0a646b53d75f69fc4fafe assets/utm/models/item/heavy_metal_anvil.json
 d4548f73a49b6ccf687c599fdf5db4032d1b3fc0 assets/utm/models/item/incredipak.json
 1beffc85c61be34cb43493ffabd9c1930107d759 assets/utm/models/item/interdictor.json
@@ -82,6 +83,7 @@ af1e629fbeb59dec7607fbae2d305b3d5cdeffdd assets/utm/models/item/solid_thruster.j
 e1ba66d20505138a6af97fb76fd16a7ea431e252 assets/utm/models/item/sword2.json
 7f2b0c2e17bf3a1beaeccf91b4bee1ea1783a1ff assets/utm/models/item/sword_of_kirk.json
 eae1cb358b44edb4605c80f9460949d4afc2acbf assets/utm/models/item/thanos_blocks.json
+f1cefbdd825de2c846db523aaa127e00487fd9a1 assets/utm/models/item/tool_apple.json
 f286a70aaa613920082a80ecabbdb47b3da4be50 assets/utm/models/item/unassabeled.json
 4bb429556d32c018342d162fceee88326f55c9a6 assets/utm/models/item/unfinished_arid_ingot.json
 723955985396594051586dbe811a3de8de5bf99b assets/utm/models/item/unfinished_glint_table.json

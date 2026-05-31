@@ -117,6 +117,8 @@ public class utmItems {
             PROGRESSION_APPLE = register("progression_apple",
                     new Item.Properties().food(new FoodProperties.Builder().alwaysEdible().nutrition(2).saturationModifier(2).build())).generated(),
             MOB_APPLE = register("mob_apple",
-                    new Item.Properties().food(new FoodProperties.Builder().alwaysEdible().nutrition(2).saturationModifier(2).build())).generated();
+                    new Item.Properties().food(new FoodProperties.Builder().alwaysEdible().nutrition(2).saturationModifier(2).build())).generated(),
+            TOOL_APPLE = register("tool_apple",
+                   new Item.Properties().food(new FoodProperties.Builder().alwaysEdible().nutrition(2).saturationModifier(2).build())).generated();
     
 }

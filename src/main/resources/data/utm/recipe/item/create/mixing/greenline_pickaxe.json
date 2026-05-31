@@ -10,6 +10,10 @@
     {
       "item": "minecraft:diamond_pickaxe",
       "count": 1
+    },
+    {
+      "item": "utm:tool_apple",
+      "count": 1
     }
   ],
   "results": [
