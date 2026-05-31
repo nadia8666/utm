@@ -1,0 +1,21 @@
+{
+  "type": "create:mixing",
+  "heat_requirement": "superheated",
+  "ingredients": [
+    {
+      "fluid": "utm:antiwater",
+      "type": "fluid_stack",
+      "amount": 1000
+    },
+    {
+      "item": "minecraft:diamond_pickaxe",
+      "count": 1
+    }
+  ],
+  "results": [
+    {
+      "id": "utm:greenline_diamond_pickaxe",
+      "count": 1
+    }
+  ]
+}

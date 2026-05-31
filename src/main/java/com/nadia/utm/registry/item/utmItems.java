@@ -102,7 +102,7 @@ public class utmItems {
             STEEL_SHEET = register("steel_sheet").generated(),
             COPPER_PLATING = register("copper_plating").generated(),
             electro_canister = register("electro_canister").generated(),
-            ANTIWATER_CANISTER = register("antiwater_canister", new Item.Properties().stacksTo(1)).generated(),
+            ANTIWATER_CANISTER = register("antiwater_canister", new Item.Properties().stacksTo(1)).generated(), //todo: think about making this lossy
             ANTIWATER_CONDUIT = register("antiwater_conduit", new Item.Properties().stacksTo(1)).generated(),
             PARTICASE = register("particase", new Item.Properties().stacksTo(1)).generated(),
             ELECTRASE = register("electrase", new Item.Properties().stacksTo(1)).generated(),
