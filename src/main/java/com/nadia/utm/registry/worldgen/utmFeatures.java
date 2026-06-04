@@ -59,13 +59,14 @@ public class utmFeatures {
     public static class BIOME {
         public static final ResourceKey<BiomeModifier> ORES = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, utm.key("2313ag_ores"));
         public static final ResourceKey<Biome> A23_CLIFFS = ResourceKey.create(Registries.BIOME, utm.key("2313ag_stone"));
+        public static final ResourceKey<Biome> INTERSECTION_WORLD= ResourceKey.create(Registries.BIOME, utm.key("intersection_world"));
 
         public static void bootstrap(BootstrapContext<BiomeModifier> context) {
             HolderGetter<PlacedFeature> feats = context.lookup(Registries.PLACED_FEATURE);
             HolderGetter<Biome> biomes = context.lookup(Registries.BIOME);
 
             context.register(ORES, new BiomeModifiers.AddFeaturesBiomeModifier(
-                    HolderSet.direct(biomes.getOrThrow(A23_CLIFFS)),
+                    HolderSet.direct(biomes.getOrThrow(A23_CLIFFS), biomes.getOrThrow(INTERSECTION_WORLD)),
                     HolderSet.direct(feats.getOrThrow(PLACED.ALUMINUM_ORE), feats.getOrThrow(PLACED.MAGNESIUM_ORE)),
                     GenerationStep.Decoration.UNDERGROUND_ORES
             ));
