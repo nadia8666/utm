@@ -23,4 +23,10 @@ public class utmSounds {
 
     public static final DeferredHolder<SoundEvent, SoundEvent> SPACE_MUSIC = SOUNDS.register("space_music",
             () -> SoundEvent.createVariableRangeEvent(utm.key("space_music"))); // yay ;D
+
+    public static final DeferredHolder<SoundEvent, SoundEvent> SR_SWORD = SOUNDS.register("sr_sword",
+            () -> SoundEvent.createVariableRangeEvent(utm.key("sr_sword")));
+
+    public static final DeferredHolder<SoundEvent, SoundEvent> SR_THUNDER = SOUNDS.register("sr_thunder",
+            () -> SoundEvent.createVariableRangeEvent(utm.key("sr_thunder")));
 }
