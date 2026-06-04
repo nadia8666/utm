@@ -46,4 +46,14 @@ public class utmDimensions {
             Registries.DIMENSION_TYPE,
             utm.key("sun_type")
     );
+
+    public static final ResourceKey<Level> INTERSECTION_KEY = ResourceKey.create(
+            Registries.DIMENSION,
+            utm.key("intersection")
+    );
+
+    public static final ResourceKey<DimensionType> INTERSECTION_TYPE = ResourceKey.create(
+            Registries.DIMENSION_TYPE,
+            utm.key("intersection_type")
+    );
 }
