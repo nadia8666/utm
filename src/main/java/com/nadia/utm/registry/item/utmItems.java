@@ -118,6 +118,12 @@ public class utmItems {
                     new Item.Properties().food(new FoodProperties.Builder().alwaysEdible().nutrition(2).saturationModifier(2).build())).generated(),
             MOB_APPLE = register("mob_apple",
                     new Item.Properties().food(new FoodProperties.Builder().alwaysEdible().nutrition(2).saturationModifier(2).build())).generated(),
+            CLOCKWORK_APPLE = register("clockwork_apple",
+                    new Item.Properties().food(new FoodProperties.Builder().alwaysEdible().nutrition(2).saturationModifier(2).build())).generated(),
+            NAUGHT_APPLE = register("naught_apple",
+                    new Item.Properties().food(new FoodProperties.Builder().alwaysEdible().nutrition(2).saturationModifier(2).build())).generated(),
+            CORRECTIVE_APPLE = register("corrective_apple",
+                    new Item.Properties().food(new FoodProperties.Builder().alwaysEdible().nutrition(2).saturationModifier(2).build())).generated(),
             TOOL_APPLE = register("tool_apple",
                    new Item.Properties().food(new FoodProperties.Builder().alwaysEdible().nutrition(2).saturationModifier(2).build())).generated();
     

@@ -1,0 +1,35 @@
+{
+  "type": "create:mechanical_crafting",
+  "accept_mirrored": true,
+  "category": "apple",
+  "pattern": [
+    "  AAAAA  ",
+    " ALLLLLA ",
+    "ALLMMMLLA",
+    "ALMMAMMLA",
+    "ALMAaAMLA",
+    "ALMMAMMLA",
+    "ALLMMMLLA",
+    " ALLLLLA ",
+    "  AAAAA  "
+  ],
+  "key": {
+    "A": {
+      "item": "minecraft:crying_obsidian"
+    },
+    "a": {
+      "item": "utm:naught_apple"
+    },
+    "L": {
+      "item": "minecraft:lapis_block"
+    },
+    "M": {
+      "item": "minecraft:magma_block"
+    }
+  },
+  "result": {
+    "id": "utm:corrective_apple",
+    "count": 1
+  },
+  "show_notification": true
+}
