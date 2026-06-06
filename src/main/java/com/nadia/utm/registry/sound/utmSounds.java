@@ -29,4 +29,6 @@ public class utmSounds {
 
     public static final DeferredHolder<SoundEvent, SoundEvent> SR_THUNDER = SOUNDS.register("sr_thunder",
             () -> SoundEvent.createVariableRangeEvent(utm.key("sr_thunder")));
+    public static final DeferredHolder<SoundEvent, SoundEvent> SR_HIT = SOUNDS.register("sr_hit",
+            () -> SoundEvent.createVariableRangeEvent(utm.key("sr_hit"))); // this hsound has a little really high pitchedn oise you mgith want to kill
 }

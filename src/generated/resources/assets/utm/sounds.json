@@ -47,5 +47,23 @@
         "stream": true
       }
     ]
+  },
+  "sr_hit": {
+    "sounds": [
+      "utm:sfx/sr_hit"
+    ],
+    "subtitle": "subtitles.utm.sr_hit"
+  },
+  "sr_sword": {
+    "sounds": [
+      "utm:sfx/sr_sword"
+    ],
+    "subtitle": "subtitles.utm.sr_sword"
+  },
+  "sr_thunder": {
+    "sounds": [
+      "utm:sfx/sr_thunder"
+    ],
+    "subtitle": "subtitles.utm.sr_thunder"
   }
 }

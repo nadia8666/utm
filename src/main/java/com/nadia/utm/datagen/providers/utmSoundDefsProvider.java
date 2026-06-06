@@ -34,5 +34,15 @@ public class utmSoundDefsProvider extends SoundDefinitionsProvider {
                 sound("utm:music/space_2").stream().weight(1),
                 sound("utm:music/space_3").stream().weight(1)
         ));
+
+        add(utmSounds.SR_SWORD, SoundDefinition.definition().with(
+                sound("utm:sfx/sr_sword")
+        ).subtitle("subtitles.utm.sr_sword"));
+        add(utmSounds.SR_HIT, SoundDefinition.definition().with(
+                sound("utm:sfx/sr_hit")
+        ).subtitle("subtitles.utm.sr_hit"));
+        add(utmSounds.SR_THUNDER, SoundDefinition.definition().with(
+                sound("utm:sfx/sr_thunder")
+        ).subtitle("subtitles.utm.sr_thunder"));
     }
 }
