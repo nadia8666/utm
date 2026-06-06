@@ -48,9 +48,15 @@
       }
     ]
   },
+  "sr_boxing": {
+    "sounds": [
+      "utm:sfx/sr_boxing"
+    ],
+    "subtitle": "subtitles.utm.sr_boxing"
+  },
   "sr_hit": {
     "sounds": [
-      "utm:sfx/sr_hit"
+      "utm:sfx/fl_hit"
     ],
     "subtitle": "subtitles.utm.sr_hit"
   },
