@@ -39,10 +39,13 @@ public class utmSoundDefsProvider extends SoundDefinitionsProvider {
                 sound("utm:sfx/sr_sword")
         ).subtitle("subtitles.utm.sr_sword"));
         add(utmSounds.SR_HIT, SoundDefinition.definition().with(
-                sound("utm:sfx/sr_hit")
+                sound("utm:sfx/fl_hit")
         ).subtitle("subtitles.utm.sr_hit"));
         add(utmSounds.SR_THUNDER, SoundDefinition.definition().with(
                 sound("utm:sfx/sr_thunder")
         ).subtitle("subtitles.utm.sr_thunder"));
+        add(utmSounds.SR_BOXING, SoundDefinition.definition().with(
+                sound("utm:sfx/sr_boxing")
+        ).subtitle("subtitles.utm.sr_boxing"));
     }
 }

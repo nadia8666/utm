@@ -1,0 +1,26 @@
+{
+  "type": "create:mechanical_crafting",
+  "accept_mirrored": true,
+  "category": "glove",
+  "pattern": [
+    "LLLL",
+    "LLlL",
+    " ldl",
+    " ll "
+  ],
+  "key": {
+    "L": {
+      "item": "minecraft:leather"
+    },
+    "l": {
+      "item": "simulated:lapis_block"
+    },
+    "d": {
+      "item": "minecraft:diamond"
+    }
+  },
+  "result": {
+    "id": "utm:glove",
+    "count": 1
+  }
+}

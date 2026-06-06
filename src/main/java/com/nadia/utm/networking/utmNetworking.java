@@ -134,12 +134,12 @@ public class utmNetworking {
                 }
                 Entity target = slevel.getEntity(UUID.fromString(targetUUID));
                 if (target instanceof LivingEntity entity) {
-                    TickUtil.runIn(10, () -> { // this runs instantaneously
+                    TickUtil.runIn(5, () -> { // this runs instantaneously
                         Vec3 pos2 = entity.position();
                         entity.invulnerableTime = 0;
                         entity.hurt(player.damageSources().playerAttack(player), 4); // is there a better way to get soundsources? // yes. just get it from the origin player or the target wtf.
-                        slevel.playSound(null, pos2.x, pos2.y, pos2.z, utmSounds.SR_SWORD, player.getSoundSource(), 0.25F, 1.0F);
-                        slevel.sendParticles(ParticleTypes.CRIT, pos2.x, pos2.y, pos2.z, 5, 3, 3, 3, 0);
+                        slevel.playSound(null, pos2.x, pos2.y, pos2.z, utmSounds.SR_HIT, player.getSoundSource(), 0.25F, 1.0F);
+                        slevel.sendParticles(ParticleTypes.CRIT, pos2.x, pos2.y, pos2.z, 5, 0, 0, 0, 0); //offsets wierd
                     }, slevel);
                 }
             }
@@ -147,14 +147,15 @@ public class utmNetworking {
         server(LesserAtkCooldownPayload.DEF, (payload, context) -> context.enqueueWork(() -> {
             Player player = context.player();
             Vector3f pos = payload.pos();
+            Integer delay = payload.delay();
             String targetUUID = payload.targetUUID();
             if (player.level() instanceof ServerLevel slevel) {
                 ItemStack itemstack = player.getMainHandItem();
                 Entity target = slevel.getEntity(UUID.fromString(targetUUID));
                 if (target instanceof LivingEntity entity) {
-                    TickUtil.runIn(1, () -> {
-                      entity.invulnerableTime=2;
-                    }, slevel);
+                  //  TickUtil.runIn(0, () -> {
+                      entity.invulnerableTime=delay;
+                 //   }, slevel);
                 }
             }
         }));

@@ -134,9 +134,9 @@ public class utmTools {
     public static final utmItemContainer<SwordItem> ARID_SWORD = register("arid_sword", () -> {
                 Tier tier = utmToolBuilder.buildTier(
                         BlockTags.INCORRECT_FOR_WOODEN_TOOL, 5000, 8f, 0f, 15, () -> Ingredient.EMPTY
-                );
+                ); // this doesnt swing forsome reason
                 return new SwordItem(tier, new Item.Properties().attributes(
-                        SwordItem.createAttributes(tier, 4f, 0f)).rarity(Rarity.RARE));
+                        SwordItem.createAttributes(tier, 4f, 0.44f)).rarity(Rarity.RARE));
             }
     ).tags(Tags.Items.ENCHANTABLES, ItemTags.SWORD_ENCHANTABLE, ItemTags.WEAPON_ENCHANTABLE, ItemTags.FIRE_ASPECT_ENCHANTABLE, ItemTags.SWORDS).handheld();
 
@@ -232,4 +232,5 @@ public class utmTools {
                         PickaxeItem.createAttributes(tier, 5, -2.8f)).rarity(utmRarities.MYSTIC.getValue()));
             }
     ).tags(Tags.Items.ENCHANTABLES, ItemTags.MINING_ENCHANTABLE, ItemTags.PICKAXES, ItemTags.DURABILITY_ENCHANTABLE).handheld();
+    public static final utmItemContainer<Item> GLOVE = register("glove").generated();
 }
