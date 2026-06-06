@@ -103,9 +103,9 @@ public class utmNetworking {
                 }
                 //kill people with hamers
                 //#TEAMYELLOW
-                slevel.playSound(null, pos.x, pos.y, pos.z, SoundEvents.VILLAGER_WORK_WEAPONSMITH, player.getSoundSource(), 0.25F, 0.5F);
+                slevel.playSound(null, pos.x, pos.y, pos.z, utmSounds.SR_SWORD, player.getSoundSource(), 0.335F, 1F);
                 if (doom)
-                    slevel.playSound(null, pos.x, pos.y, pos.z, utmSounds.SR_THUNDER, player.getSoundSource(), 0.125F, 0.5F);
+                    slevel.playSound(null, pos.x, pos.y, pos.z, utmSounds.SR_THUNDER, player.getSoundSource(), 0.425F, 1F);
 
                 for (LivingEntity livingentity2 : slevel.getEntitiesOfClass(LivingEntity.class, new AABB(pos.x - 1, pos.y - 0.2, pos.z - 1, pos.x + 1, pos.y + 0.2, pos.z + 1).inflate(5))) {
                     if (livingentity2 != player && (livingentity2.position().distanceTo(new Vec3(pos.x, livingentity2.position().y, pos.z))) < 7) {
@@ -117,7 +117,7 @@ public class utmNetworking {
                         }
                         Vec3 pos2 = livingentity2.position(); // why don't particles spawn?
                         slevel.sendParticles(ParticleTypes.CRIT, pos2.x, pos2.y, pos2.z, 5, 3, 3, 3, 0);
-                        slevel.playSound(null, pos.x, pos.y, pos.z, utmSounds.SR_SWORD, player.getSoundSource(), 0.25F, 1.0F);
+                        slevel.playSound(null, pos.x, pos.y, pos.z, utmSounds.SR_HIT, player.getSoundSource(), 0.25F, 1.0F);
 
                     }
                 }
