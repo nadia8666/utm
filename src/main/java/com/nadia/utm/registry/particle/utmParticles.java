@@ -2,7 +2,9 @@ package com.nadia.utm.registry.particle;
 
 import com.nadia.utm.particle.ColorParticleProvider;
 import com.nadia.utm.particle.ColorParticleType;
+import com.nadia.utm.particle.RedSweepParticle;
 import net.minecraft.core.particles.ParticleType;
+import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -28,6 +30,8 @@ public class utmParticles {
 
         return holder;
     }
+//ok
+   // public static final DeferredHolder<ParticleType<?>, SimpleParticleType> RED_SWEEP = PARTICLE_TYPES.register("rslash", () -> new RedSweepParticle(false) );
 
     public static final DeferredHolder<ParticleType<?>, ColorParticleType> VEIN =
             registerColorParticle("vein");
