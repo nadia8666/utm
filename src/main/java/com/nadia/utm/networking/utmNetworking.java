@@ -105,7 +105,7 @@ public class utmNetworking {
                 //#TEAMYELLOW
                 slevel.playSound(null, pos.x, pos.y, pos.z, utmSounds.SR_SWORD, player.getSoundSource(), 0.335F, 1F);
                 if (doom)
-                    slevel.playSound(null, pos.x, pos.y, pos.z, utmSounds.SR_THUNDER, player.getSoundSource(), 0.425F, 1F);
+                    slevel.playSound(null, pos.x, pos.y, pos.z, utmSounds.SR_THUNDER, player.getSoundSource(), 0.255F, 1F);
 
                 for (LivingEntity livingentity2 : slevel.getEntitiesOfClass(LivingEntity.class, new AABB(pos.x - 1, pos.y - 0.2, pos.z - 1, pos.x + 1, pos.y + 0.2, pos.z + 1).inflate(5))) {
                     if (livingentity2 != player && (livingentity2.position().distanceTo(new Vec3(pos.x, livingentity2.position().y, pos.z))) < 7) {
@@ -116,7 +116,7 @@ public class utmNetworking {
                             player.hurt(player.damageSources().cramming(), 2);
                         }
                         Vec3 pos2 = livingentity2.position(); // why don't particles spawn?
-                        slevel.sendParticles(ParticleTypes.CRIT, pos2.x, pos2.y, pos2.z, 15, 1, 1, 1, 1);
+                        slevel.sendParticles(ParticleTypes.CRIT, pos2.x, pos2.y, pos2.z, 15, 0.5, 0.5, 0.5, 0.2);
                         slevel.playSound(null, pos.x, pos.y, pos.z, utmSounds.SR_HIT, player.getSoundSource(), 0.25F, 1.0F);
 
                     }
@@ -139,7 +139,7 @@ public class utmNetworking {
                         entity.invulnerableTime = 0;
                         entity.hurt(player.damageSources().playerAttack(player), 4); // is there a better way to get soundsources? // yes. just get it from the origin player or the target wtf.
                         slevel.playSound(null, pos2.x, pos2.y, pos2.z, utmSounds.SR_HIT, player.getSoundSource(), 0.25F, 1.0F);
-                        slevel.sendParticles(ParticleTypes.CRIT, pos2.x, pos2.y, pos2.z, 15, 1, 1, 1, 1); //offsets wierd
+                        slevel.sendParticles(ParticleTypes.CRIT, pos2.x, pos2.y, pos2.z, 15, 0.5, 0.5, 0.5, 0.2); //offsets wierd
                     }, slevel);
                 }
             }
