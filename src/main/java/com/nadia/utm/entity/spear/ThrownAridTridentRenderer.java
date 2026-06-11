@@ -26,7 +26,6 @@ public class ThrownAridTridentRenderer extends EntityRenderer<ThrownAridTrident>
     protected ThrownAridTridentRenderer(EntityRendererProvider.Context context) {
         super(context);
     }
-
     // separate entity model and item model. its easier
     // make your item model have the ovveride for item hotbar thing like the real trident. then overrides for charging. right.
     // then make the entity have the same json as your like. literally the same json or something as the item model but instead have the activated texture. boom
@@ -38,12 +37,16 @@ public class ThrownAridTridentRenderer extends EntityRenderer<ThrownAridTrident>
         super.render(entity, entityYaw, partialTicks, ms, buffer, packedLight);
 
         new PoseUtil(ms).push().run(() -> {
-            ms.mulPose(Axis.YP.rotationDegrees(Mth.lerp(partialTicks, entity.yRotO, entity.getYRot())));
-            ms.mulPose(Axis.XN.rotationDegrees(Mth.lerp(partialTicks, entity.xRotO, entity.getXRot())));
 
-            ms.translate(0, 0, -1.25);
+            ms.mulPose(Axis.YP.rotationDegrees(90+Mth.lerp(partialTicks, entity.yRotO, entity.getYRot())));
+            ms.mulPose(Axis.ZN.rotationDegrees(-90+Mth.lerp(partialTicks, entity.xRotO, entity.getXRot())));
+          //  ms.mulPose(Axis.ZP.rotationDegrees(90));
+
+            ms.translate(-0.5, -1.6, -0.5);
         }).run(() -> {
-            PartialEntityModelRenderer.render(ms, utmModels.ARID_TRIDENT.get(), renderType(entity), buffer, packedLight, 0);
+            PartialEntityModelRenderer.render(ms, utmModels.ARID_TRIDENT_E.get(), renderType(entity), buffer, 15, 1);
+         //  PartialEntityModelRenderer.render(ms, utmModels.ARID_TRIDENT.get(), renderType(entity), buffer, packedLight, 0);
+
             //PartialEntityModelRenderer.render(a, b, c, d, e, f);
         }).pop();
     }
