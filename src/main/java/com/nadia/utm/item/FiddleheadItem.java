@@ -35,7 +35,7 @@ public class FiddleheadItem extends Item {
             Vec3 newSpeed = speed.add(add);
 
             player.setDeltaMovement(newSpeed.x, newSpeed.y, newSpeed.z);
-            itemstack.setDamageValue(itemstack.getDamageValue() + 1);
+            itemstack.setDamageValue(itemstack.getDamageValue() + 1); // there is probably a better way to do this with HurtAndBreak...
 
             return InteractionResultHolder.consume(itemstack);
         } else {
