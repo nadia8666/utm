@@ -1,14 +1,14 @@
 package com.nadia.utm.registry.particle;
 
+import com.nadia.utm.event.ForceLoad;
+import com.nadia.utm.event.utmEventHost;
 import com.nadia.utm.particle.ColorParticleProvider;
 import com.nadia.utm.particle.ColorParticleType;
-import com.nadia.utm.particle.RedSweepParticle;
+import com.nadia.utm.particle.RedSweepParticleProvider;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.neoforged.api.distmarker.Dist;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -17,7 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @SuppressWarnings("unused")
-@EventBusSubscriber(modid = "utm", value = Dist.CLIENT)
+@ForceLoad(dist = Dist.CLIENT)
 public class utmParticles {
     public static final DeferredRegister<ParticleType<?>> PARTICLE_TYPES =
             DeferredRegister.create(BuiltInRegistries.PARTICLE_TYPE, "utm");
@@ -30,8 +30,8 @@ public class utmParticles {
 
         return holder;
     }
-//ok
-   // public static final DeferredHolder<ParticleType<?>, SimpleParticleType> RED_SWEEP = PARTICLE_TYPES.register("rslash", () -> new RedSweepParticle(false) );
+
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> RED_SWEEP = PARTICLE_TYPES.register("rslash", () -> new SimpleParticleType(false));
 
     public static final DeferredHolder<ParticleType<?>, ColorParticleType> VEIN =
             registerColorParticle("vein");
@@ -61,8 +61,10 @@ public class utmParticles {
         return COLOR_PARTICLES.get(name + "_trail");
     }
 
-    @SubscribeEvent
-    public static void registerParticleProviders(RegisterParticleProvidersEvent event) {
-        COLOR_PARTICLES.forEach((name, particle) -> event.registerSpriteSet(particle.get(), ColorParticleProvider::new));
+    static {
+        utmEventHost.register(RegisterParticleProvidersEvent.class, event -> {
+            COLOR_PARTICLES.forEach((name, particle) -> event.registerSpriteSet(particle.get(), ColorParticleProvider::new));
+            event.registerSpriteSet(RED_SWEEP.get(), RedSweepParticleProvider::new);
+        });
     }
 }

@@ -4,12 +4,12 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.client.particle.TextureSheetParticle;
-import net.minecraft.core.particles.ParticleOptions;
+import org.jetbrains.annotations.NotNull;
 
 public class RedSweepParticle extends TextureSheetParticle {
     public final SpriteSet sprites;
 
-    public RedSweepParticle(ClientLevel level, double x, double y, double z, double xSpd, double ySpd, double zSpd, ParticleOptions options, SpriteSet sprites) {
+    public RedSweepParticle(ClientLevel level, double x, double y, double z, double xSpd, double ySpd, double zSpd, SpriteSet sprites) {
         super(level, x, y, z);
 
         this.sprites = sprites;
@@ -31,7 +31,7 @@ public class RedSweepParticle extends TextureSheetParticle {
     }
 
     @Override
-    public ParticleRenderType getRenderType() {
+    public @NotNull ParticleRenderType getRenderType() {
         return ParticleRenderType.PARTICLE_SHEET_LIT;
     }
 
