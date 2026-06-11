@@ -1,6 +1,7 @@
 package com.nadia.utm.item;
 
 import com.nadia.utm.entity.spear.ThrownAridTrident;
+import com.nadia.utm.registry.sound.utmSounds;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Position;
@@ -29,7 +30,7 @@ import org.jetbrains.annotations.NotNull;
 public class AridTridentItem extends TridentItem {
     public static final int THROW_THRESHOLD_TIME = 20;
     public static final float BASE_DAMAGE = -1.0F;
-    public static final float SHOOT_POWER = 10F;
+    public static final float SHOOT_POWER = 50F;
 
     public AridTridentItem(Properties properties) {
         super(properties);
@@ -49,7 +50,7 @@ public class AridTridentItem extends TridentItem {
                 .add(
                         Attributes.ATTACK_DAMAGE,
                         new AttributeModifier(Item.BASE_ATTACK_DAMAGE_ID, 3.0F, AttributeModifier.Operation.ADD_VALUE),
-                        EquipmentSlotGroup.MAINHAND
+                        EquipmentSlotGroup.MAINHAND //less damage bcz its meant to eb a THrowing Weapon and not a hitting one
                 )
                 .add(
                         Attributes.ATTACK_SPEED,
@@ -72,13 +73,14 @@ public class AridTridentItem extends TridentItem {
                 if (!level.isClientSide) {
                     stack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(entityLiving.getUsedItemHand()));
                     ThrownAridTrident throwntrident = new ThrownAridTrident(level, player, stack);
-                    throwntrident.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 2.5F, 1.0F);
+                    throwntrident.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 5F, 0.2F);
                     if (player.hasInfiniteMaterials()) {
                         throwntrident.pickup = AbstractArrow.Pickup.CREATIVE_ONLY;
                     }
 
                     level.addFreshEntity(throwntrident);
-                    level.playSound(null, throwntrident, holder.value(), SoundSource.PLAYERS, 1.0F, 1.0F);
+                    level.playSound(null, throwntrident, holder.value(), SoundSource.PLAYERS, 0.8F, 0.8F);
+                    level.playSound(null, throwntrident, utmSounds.PKFRS.get(), SoundSource.PLAYERS, 0.7F, 1.0F);
                     if (!player.hasInfiniteMaterials()) {
                         player.getInventory().removeItem(stack);
                     }
