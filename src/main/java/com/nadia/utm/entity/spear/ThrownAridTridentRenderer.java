@@ -44,9 +44,9 @@ public class ThrownAridTridentRenderer extends EntityRenderer<ThrownAridTrident>
 
             ms.translate(-0.5, -1.6, -0.5);
         }).run(() -> {
-            PartialEntityModelRenderer.render(ms, utmModels.ARID_TRIDENT_E.get(), renderType(entity), buffer, 15, 1);
-         //  PartialEntityModelRenderer.render(ms, utmModels.ARID_TRIDENT.get(), renderType(entity), buffer, packedLight, 0);
-
+           PartialEntityModelRenderer.render(ms, utmModels.ARID_TRIDENT.get(), renderType(entity), buffer, packedLight, 0);
+            PartialEntityModelRenderer.render(ms, utmModels.ARID_TRIDENT_E.get(), renderType(entity), buffer, 0xF000F0, 0);
+            //todo: fire when thrown. fire when hits a thing. sounds
             //PartialEntityModelRenderer.render(a, b, c, d, e, f);
         }).pop();
     }
