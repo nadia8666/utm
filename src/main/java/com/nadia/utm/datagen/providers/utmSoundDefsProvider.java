@@ -48,7 +48,7 @@ public class utmSoundDefsProvider extends SoundDefinitionsProvider {
                 sound("utm:sfx/sr_boxing")
         ).subtitle("subtitles.utm.sr_boxing"));
         add(utmSounds.PKFRS, SoundDefinition.definition().with(
-                sound("utm:sfx/pkfrs")
+                sound("utm:sfx/pkfirebegin")
         ).subtitle("subtitles.utm.pkfrs"));
     }
 }
