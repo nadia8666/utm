@@ -154,7 +154,9 @@ public class utmNetworking {
                 Entity target = slevel.getEntity(UUID.fromString(targetUUID));
                 if (target instanceof LivingEntity entity) {
                   //  TickUtil.runIn(0, () -> {
-                      entity.invulnerableTime=delay; //change dis ish
+                    slevel.playSound(null, entity.getX(), entity.getY(), entity.getZ(), utmSounds.SR_BOXING, player.getSoundSource(), 0.25F, 1.0F);
+
+                    entity.invulnerableTime=delay; //change dis ish
                  //   }, slevel);
                 }
             }
