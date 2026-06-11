@@ -22,14 +22,26 @@ public class RedSweepParticle extends TextureSheetParticle {
         this.gCol = 1;
         this.bCol = 1;
 
+
+        //https://github.com/nadia8666/bee-mod/blob/master/src/main/java/com/ihatebees/particle/custom/StarSweepParticle.java
         this.lifetime = 8;
         this.gravity = 0.0f;
-        this.friction = 1.0f;
+        this.friction = 2.0f - (float)0*0.5f; // the thing i copied from has D but this does not have D so idk what D iss but
         this.setSpriteFromAge(sprites);
 
         this.scale(2.0f);
     }
 
+    public void tick() {
+       // this.pos = this.x;
+       // this.prevPosY = this.y; //my name is unused..?
+       // this.prevPosZ = this.z;
+        if (this.age++ >= this.lifetime) {
+            this.remove();
+        } else {
+            this.setSpriteFromAge(this.sprites);
+        }
+    }
     @Override
     public @NotNull ParticleRenderType getRenderType() {
         return ParticleRenderType.PARTICLE_SHEET_LIT;
