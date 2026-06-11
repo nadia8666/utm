@@ -233,5 +233,7 @@ public class utmTools {
                         PickaxeItem.createAttributes(tier, 5, -2.8f)).rarity(utmRarities.MYSTIC.getValue()));
             }
     ).tags(Tags.Items.ENCHANTABLES, ItemTags.MINING_ENCHANTABLE, ItemTags.PICKAXES, ItemTags.DURABILITY_ENCHANTABLE).handheld();
-    public static final utmItemContainer<Item> GLOVE = register("glove").generated();
+    public static final utmItemContainer<Item> GLOVE = register("glove", new Item.Properties().attributes(SwordItem.createAttributes(utmToolBuilder.buildTier(
+            BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 1000, 2f, 0f, 150, () -> Ingredient.of(Items.DIAMOND)
+    ), 0, 4f))).tags(ItemTags.DURABILITY_ENCHANTABLE).generated(); // don't make it a swordd !!!
 }

@@ -26,6 +26,12 @@
     ],
     "subtitle": "jukebox_song.utm.undertale"
   },
+  "pkfrs": {
+    "sounds": [
+      "utm:sfx/pkfirebegin"
+    ],
+    "subtitle": "subtitles.utm.pkfrs"
+  },
   "slider_drag": {
     "sounds": [
       "utm:slider_drag"

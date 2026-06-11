@@ -116,7 +116,7 @@ public class utmNetworking {
                             player.hurt(player.damageSources().cramming(), 2);
                         }
                         Vec3 pos2 = livingentity2.position(); // why don't particles spawn?
-                        slevel.sendParticles(ParticleTypes.CRIT, pos2.x, pos2.y, pos2.z, 5, 3, 3, 3, 0);
+                        slevel.sendParticles(ParticleTypes.CRIT, pos2.x, pos2.y, pos2.z, 15, 1, 1, 1, 1);
                         slevel.playSound(null, pos.x, pos.y, pos.z, utmSounds.SR_HIT, player.getSoundSource(), 0.25F, 1.0F);
 
                     }
@@ -139,7 +139,7 @@ public class utmNetworking {
                         entity.invulnerableTime = 0;
                         entity.hurt(player.damageSources().playerAttack(player), 4); // is there a better way to get soundsources? // yes. just get it from the origin player or the target wtf.
                         slevel.playSound(null, pos2.x, pos2.y, pos2.z, utmSounds.SR_HIT, player.getSoundSource(), 0.25F, 1.0F);
-                        slevel.sendParticles(ParticleTypes.CRIT, pos2.x, pos2.y, pos2.z, 5, 0, 0, 0, 0); //offsets wierd
+                        slevel.sendParticles(ParticleTypes.CRIT, pos2.x, pos2.y, pos2.z, 15, 1, 1, 1, 1); //offsets wierd
                     }, slevel);
                 }
             }
