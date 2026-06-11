@@ -123,7 +123,7 @@
   "item.utm.shart": "Sword-Shield Fusion",
   "item.utm.sword_of_kirk": "Sword-Arrow Fusion",
   "item.utm.sword2": "long sword 2",
-  "item.utm.gloomsword8": "gloom sword 8",
+  "item.utm.gloomsword8": "gloom sword 2",
   "item.utm.sabel3": "sabel 3",
   "item.utm.copper_plating": "Copper Plating",
   "item.utm.arid_pickaxe": "Arid Pickaxe",
@@ -173,6 +173,8 @@
   "subtitles.utm.sr_thunder": "Thunder Magic",
   "subtitles.utm.sr_hit": "Entity Hurt",
   "subtitles.utm.sr_boxing": "Boxing",
+  "subtitles.utm.pkfrs": "Magical Fire Starting",
+
 
 
   "utm.elytra_trim_type.vein": " Vein Elytra Trim",

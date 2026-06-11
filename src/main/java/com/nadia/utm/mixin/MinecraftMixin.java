@@ -83,7 +83,7 @@ public class MinecraftMixin {
                     //fixes that.
                     //  cir.setReturnValue(false);
                 }
-            } else if (itemStack.is(utmTools.ARID_SWORD.get()) && hitResult.getType().equals(HitResult.Type.ENTITY)) {
+            } else if (itemStack.is(utmTools.ARID_SWORD.get()) && hitResult.getType().equals(HitResult.Type.ENTITY) && 1==2) {
                 if (hitResult instanceof EntityHitResult result) {
                     String targetUUID = result.getEntity().getUUID().toString();
 

@@ -47,6 +47,8 @@ public class ThrownAridTridentRenderer extends EntityRenderer<ThrownAridTrident>
            PartialEntityModelRenderer.render(ms, utmModels.ARID_TRIDENT.get(), renderType(entity), buffer, packedLight, 0);
             PartialEntityModelRenderer.render(ms, utmModels.ARID_TRIDENT_E.get(), renderType(entity), buffer, 0xF000F0, 0);
             //todo: fire when thrown. fire when hits a thing. sounds
+            // this incoming particle is huge with many frames but possibly byou could split it up into one Diamodn epr particle
+            // and just make it spawn multiple of the same particle at a DELAY
             //PartialEntityModelRenderer.render(a, b, c, d, e, f);
         }).pop();
     }
