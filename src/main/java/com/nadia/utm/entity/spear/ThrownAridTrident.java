@@ -1,6 +1,7 @@
 package com.nadia.utm.entity.spear;
 
 import com.nadia.utm.registry.entity.utmEntities;
+import com.nadia.utm.registry.item.tool.utmTools;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -58,7 +59,8 @@ public class ThrownAridTrident extends AbstractArrow {
     protected void onHitEntity(EntityHitResult result) {
         Entity entity = result.getEntity();
 
-        float damage = 999.0F;
+        float damage = 40.0F; // considerable.. ok so the axe doesa lot of damage and is really eay to use. This is harder to use than axe
+        // so more damage to counter act that?
         Entity owner = this.getOwner();
         DamageSource damagesource = this.damageSources().trident(this, owner == null ? this : owner);
 
@@ -76,6 +78,8 @@ public class ThrownAridTrident extends AbstractArrow {
                 this.doPostHurtEffects(livingentity);
             }
         }
+
+        //Hit Stuff Here!
 
         this.setDeltaMovement(this.getDeltaMovement().multiply(-0.01, -0.1, -0.01));
         this.playSound(SoundEvents.TRIDENT_HIT, 1.0F, 1.0F);
@@ -112,7 +116,7 @@ public class ThrownAridTrident extends AbstractArrow {
     }
 
     protected @NotNull ItemStack getDefaultPickupItem() {
-        return new ItemStack(Items.TRIDENT);
+        return new ItemStack(utmTools.ARID_TRIDENT.get());
     }
 
     protected @NotNull SoundEvent getDefaultHitGroundSoundEvent() {
@@ -156,8 +160,8 @@ public class ThrownAridTrident extends AbstractArrow {
     }
 
     protected float getWaterInertia() {
-        return 0.99F;
-    }
+        return 0.2F;
+    } // water inertia
 
     public boolean shouldRender(double x, double y, double z) {
         return true;
