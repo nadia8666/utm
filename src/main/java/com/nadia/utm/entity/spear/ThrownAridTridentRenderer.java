@@ -37,11 +37,12 @@ public class ThrownAridTridentRenderer extends EntityRenderer<ThrownAridTrident>
         super.render(entity, entityYaw, partialTicks, ms, buffer, packedLight);
 
         new PoseUtil(ms).push().run(() -> {
-            ms.translate(-0.5, -1.6, -0.5);
+            ms.translate(-0.5, -0.5, -1.5);
 
 
             ms.mulPose(Axis.YP.rotationDegrees(90+Mth.lerp(partialTicks, entity.yRotO, entity.getYRot())));
             ms.mulPose(Axis.ZN.rotationDegrees(-90+Mth.lerp(partialTicks, entity.xRotO, entity.getXRot())));
+            //old             ms.translate(-0.5, -1.6, -0.5);
           //  ms.mulPose(Axis.ZP.rotationDegrees(90));
 
 
