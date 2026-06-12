@@ -2,10 +2,7 @@ package com.nadia.utm.registry.particle;
 
 import com.nadia.utm.event.ForceLoad;
 import com.nadia.utm.event.utmEventHost;
-import com.nadia.utm.particle.ColorParticleProvider;
-import com.nadia.utm.particle.ColorParticleType;
-import com.nadia.utm.particle.RedSweepParticleProvider;
-import com.nadia.utm.particle.pkfrbProvider;
+import com.nadia.utm.particle.*;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -63,11 +60,12 @@ public class utmParticles {
     public static DeferredHolder<ParticleType<?>, ColorParticleType> getFromString(String name) {
         return COLOR_PARTICLES.get(name + "_trail");
     }
+
     static {
         utmEventHost.register(RegisterParticleProvidersEvent.class, event -> {
-            COLOR_PARTICLES.forEach((name, particle) -> event.registerSpriteSet(particle.get(), ColorParticleProvider::new));
-            event.registerSpriteSet(RED_SWEEP.get(), RedSweepParticleProvider::new);
-            event.registerSpriteSet(PKFIREBEGIN.get(), pkfrbProvider::new); // im lazy
+            COLOR_PARTICLES.forEach((name, particle) -> event.registerSpriteSet(particle.get(), sprites -> new GenericParticleProvider<>(sprites, ColorParticle::new)));
+            event.registerSpriteSet(RED_SWEEP.get(), sprites -> new GenericParticleProvider<>(sprites, RedSweepParticle::new));
+            event.registerSpriteSet(PKFIREBEGIN.get(), sprites -> new GenericParticleProvider<>(sprites, pkfrbParticle::new)); // im lazy
         });
     }
 }
