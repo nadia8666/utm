@@ -4,12 +4,13 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.client.particle.TextureSheetParticle;
+import net.minecraft.core.particles.ParticleOptions;
 import org.jetbrains.annotations.NotNull;
 
 public class pkfrbParticle extends TextureSheetParticle {
     public final SpriteSet sprites;
 
-    public pkfrbParticle(ClientLevel level, double x, double y, double z, double xSpd, double ySpd, double zSpd, SpriteSet sprites) {
+    public pkfrbParticle(ClientLevel level, double x, double y, double z, double xSpd, double ySpd, double zSpd, ParticleOptions ignored, SpriteSet sprites) {
         super(level, x, y, z);
 
         this.sprites = sprites;
@@ -34,9 +35,6 @@ public class pkfrbParticle extends TextureSheetParticle {
     }
 
     public void tick() {
-       // this.pos = this.x;
-       // this.prevPosY = this.y; //my name is unused..?
-       // this.prevPosZ = this.z;
         if (this.age++ >= this.lifetime) {
             this.remove();
         } else {

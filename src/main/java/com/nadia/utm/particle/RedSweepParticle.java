@@ -4,21 +4,21 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.client.particle.TextureSheetParticle;
+import net.minecraft.core.particles.ParticleOptions;
 import org.jetbrains.annotations.NotNull;
 
 public class RedSweepParticle extends TextureSheetParticle {
     public final SpriteSet sprites;
 
-    public RedSweepParticle(ClientLevel level, double x, double y, double z, double quadsizem, SpriteSet sprites) {
-        super(level, x, y, z, (double)0.0F, (double)0.0F, (double)0.0F);
-        //https://github.com/nadia8666/bee-mod/blob/master/src/main/java/com/ihatebees/particle/custom/StarSweepParticle.java
+    public RedSweepParticle(ClientLevel level, double x, double y, double z, double quadsizem, double ignored, double ignored2, ParticleOptions ignored3, SpriteSet sprites) {
+        super(level, x, y, z, 0.0F, 0.0F, 0.0F);
         this.sprites = sprites;
         this.lifetime = 4;
         float f = this.random.nextFloat() * 0.6F + 0.4F;
         this.rCol = f;
         this.gCol = f;
         this.bCol = f;
-        this.quadSize = 1.0F - (float)quadsizem * 0.5F;
+        this.quadSize = 1.0F - (float) quadsizem * 0.5F;
         this.setSpriteFromAge(sprites);
     }
 
@@ -36,6 +36,7 @@ public class RedSweepParticle extends TextureSheetParticle {
             this.setSpriteFromAge(this.sprites);
         }
     }
+
     @Override
     public @NotNull ParticleRenderType getRenderType() {
         return ParticleRenderType.PARTICLE_SHEET_LIT;
