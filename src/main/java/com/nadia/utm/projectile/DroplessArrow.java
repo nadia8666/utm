@@ -7,6 +7,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
@@ -44,7 +45,7 @@ public class DroplessArrow extends Arrow {
         this.setPosRaw(this.getX() - vec31.x, this.getY() - vec31.y, this.getZ() - vec31.z);
         this.playSound(this.getHitGroundSoundEvent(), 1.0F, 1.2F / (this.random.nextFloat() * 0.2F + 0.9F));
         this.inGround = true;
-        this.shakeTime = 60;
+        this.shakeTime = 7;
         this.setCritArrow(false);
         this.setPierceLevel((byte)0);
         this.setSoundEvent(SoundEvents.ARROW_HIT);
@@ -52,15 +53,12 @@ public class DroplessArrow extends Arrow {
     }
 
     @Override
+    protected ItemStack getDefaultPickupItem() {
+        return new ItemStack(Items.AIR);
+    }
+    @Override
     protected boolean tryPickup(Player player) {
-        boolean var10000;
-        switch (this.pickup.ordinal()) {
-            case 0 -> var10000 = false;
-            case 1 -> var10000 = false;
-            case 2 -> var10000 = true;
-            default -> throw new MatchException((String)null, (Throwable)null);
-        }
 
-        return var10000;
+        return false;
     }
 }
