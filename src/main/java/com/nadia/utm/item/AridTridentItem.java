@@ -74,25 +74,23 @@ public class AridTridentItem extends TridentItem {
                 Holder<SoundEvent> holder = EnchantmentHelper.pickHighestLevel(stack, EnchantmentEffectComponents.TRIDENT_SOUND).orElse(SoundEvents.TRIDENT_THROW);
                 if (level instanceof ServerLevel serverLevel) { // modified from level.isclientsicde
                     stack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(entityLiving.getUsedItemHand()));
-                    ThrownAridTrident throwntrident = new ThrownAridTrident(level, player, stack);
-                    throwntrident.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 5F, 0F);
-                    if (player.hasInfiniteMaterials()) {
-                        throwntrident.pickup = AbstractArrow.Pickup.CREATIVE_ONLY;
-                    }
 
-                    level.addFreshEntity(throwntrident);
-                    level.playSound(null, throwntrident, holder.value(), SoundSource.PLAYERS, 0.8F, 0.8F);
-                    level.playSound(null, throwntrident, utmSounds.PKFRS.get(), SoundSource.PLAYERS, 0.7F, 1.0F);
-                    serverLevel.sendParticles(utmParticles.PKFIREBEGIN.get(), throwntrident.position().x + player.getLookAngle().x, throwntrident.position().y + player.getLookAngle().y, throwntrident.position().z + player.getLookAngle().z, 1,0,0,0,0); //so i can send parite
-                    if (!player.hasInfiniteMaterials()) {
+                    ThrownAridTrident trident = new ThrownAridTrident(serverLevel, player, stack);
+                    trident.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 5F, 0F);
+                    if (player.hasInfiniteMaterials())
+                        trident.pickup = AbstractArrow.Pickup.CREATIVE_ONLY;
+                    else
                         player.getInventory().removeItem(stack);
-                    }
+
+                    serverLevel.addFreshEntity(trident);
+                    serverLevel.playSound(null, trident, holder.value(), SoundSource.PLAYERS, 0.8F, 0.8F);
+                    serverLevel.playSound(null, trident, utmSounds.PKFRS.get(), SoundSource.PLAYERS, 0.7F, 1.0F);
+                    serverLevel.sendParticles(utmParticles.PKFIREBEGIN.get(), trident.position().x + player.getLookAngle().x, trident.position().y + player.getLookAngle().y, trident.position().z + player.getLookAngle().z, 1, 0, 0, 0, 0); //so i can send parite
                 }
 
                 player.awardStat(Stats.ITEM_USED.get(this));
             }
         }
-
     }
 
     public @NotNull InteractionResultHolder<ItemStack> use(@NotNull Level level, Player player, @NotNull InteractionHand hand) {

@@ -19,7 +19,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.ThrownTrident;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
@@ -61,6 +60,7 @@ public class ThrownAridTrident extends AbstractArrow {
 
         float damage = 40.0F; // considerable.. ok so the axe doesa lot of damage and is really eay to use. This is harder to use than axe
         // so more damage to counter act that?
+        // nadia: if it can be enchanted probably no
         Entity owner = this.getOwner();
         DamageSource damagesource = this.damageSources().trident(this, owner == null ? this : owner);
 

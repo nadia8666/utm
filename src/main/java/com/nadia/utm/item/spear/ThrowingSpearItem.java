@@ -9,6 +9,7 @@ import net.minecraft.core.Position;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.EquipmentSlotGroup;
@@ -84,6 +85,8 @@ public class ThrowingSpearItem extends Item implements ProjectileItem {
                 player.getInventory().removeItem(stack);
             else
                 stack.shrink(1);
+
+            player.awardStat(Stats.ITEM_USED.get(this));
         }
     }
 
