@@ -23,9 +23,9 @@ public class AridSwordIFrame {
     }
 
     private static void lewfewrngetgrefq4iufrg(LivingDamageEvent.Pre event) {
-        utm.LOGGER.info(String.valueOf((event.getSource().getWeaponItem().getDisplayName())));
         if (Objects.requireNonNull(event.getSource().getWeaponItem()).is(utmTools.ARID_SWORD.get()))
             event.getContainer().setPostAttackInvulnerabilityTicks(0);
+        //doesnt work but thats ok ! NOT!
     }
 
 
