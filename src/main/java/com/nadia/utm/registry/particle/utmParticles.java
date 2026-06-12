@@ -5,6 +5,7 @@ import com.nadia.utm.event.utmEventHost;
 import com.nadia.utm.particle.ColorParticleProvider;
 import com.nadia.utm.particle.ColorParticleType;
 import com.nadia.utm.particle.RedSweepParticleProvider;
+import com.nadia.utm.particle.pkfrbProvider;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -31,7 +32,9 @@ public class utmParticles {
         return holder;
     }
 
-    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> RED_SWEEP = PARTICLE_TYPES.register("rslash", () -> new SimpleParticleType(false));
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> RED_SWEEP = PARTICLE_TYPES.register("rslash", () -> new SimpleParticleType(true));
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> PKFIREBEGIN = PARTICLE_TYPES.register("pkfirebegin", () -> new SimpleParticleType(true));
+
 
     public static final DeferredHolder<ParticleType<?>, ColorParticleType> VEIN =
             registerColorParticle("vein");
@@ -60,11 +63,11 @@ public class utmParticles {
     public static DeferredHolder<ParticleType<?>, ColorParticleType> getFromString(String name) {
         return COLOR_PARTICLES.get(name + "_trail");
     }
-
     static {
         utmEventHost.register(RegisterParticleProvidersEvent.class, event -> {
             COLOR_PARTICLES.forEach((name, particle) -> event.registerSpriteSet(particle.get(), ColorParticleProvider::new));
             event.registerSpriteSet(RED_SWEEP.get(), RedSweepParticleProvider::new);
+            event.registerSpriteSet(PKFIREBEGIN.get(), pkfrbProvider::new); // im lazy
         });
     }
 }
