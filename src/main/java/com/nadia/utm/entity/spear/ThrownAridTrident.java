@@ -17,7 +17,6 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
-import net.minecraft.world.entity.projectile.ThrownTrident;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
@@ -31,8 +30,9 @@ public class ThrownAridTrident extends AbstractArrow {
     private static final EntityDataAccessor<Boolean> ID_FOIL = SynchedEntityData.defineId(ThrownAridTrident.class, EntityDataSerializers.BOOLEAN);
     private boolean dealtDamage;
     public int clientSideReturnTridentTickCount;
-    public ThrownAridTrident(EntityType<? extends ThrownTrident> entityType, Level level) {
-        super(entityType, level);
+
+    public ThrownAridTrident(Level level) {
+        super(utmEntities.THROWN_ARID_TRIDENT.get(), level);
     }
 
     public ThrownAridTrident(Level level, LivingEntity shooter, ItemStack pickupItemStack) {
@@ -45,15 +45,12 @@ public class ThrownAridTrident extends AbstractArrow {
         this.entityData.set(ID_FOIL, pickupItemStack.hasFoil());
     }
 
-    public ThrownAridTrident(Level level) {
-        super(utmEntities.THROWN_ARID_TRIDENT.get(), level);
-    }
-
     @Override
     protected void defineSynchedData(SynchedEntityData.@NotNull Builder builder) {
         super.defineSynchedData(builder);
         builder.define(ID_FOIL, false);
     }
+
     @Override
     protected void onHitEntity(EntityHitResult result) {
         Entity entity = result.getEntity();
@@ -88,15 +85,12 @@ public class ThrownAridTrident extends AbstractArrow {
 
     // from trident
     public void tick() {
-        if (this.inGroundTime > 1) {
+        if (this.inGroundTime > 1)
             this.dealtDamage = true;
-        }
-
-        Entity entity = this.getOwner();
-
 
         super.tick();
     }
+
     boolean isAcceptibleReturnOwner() {
         Entity entity = this.getOwner();
         return entity != null && entity.isAlive() && (!(entity instanceof ServerPlayer) || !entity.isSpectator());
@@ -124,10 +118,8 @@ public class ThrownAridTrident extends AbstractArrow {
     }
 
     public void playerTouch(@NotNull Player entity) {
-        if (this.ownedBy(entity) || this.getOwner() == null) {
+        if (this.ownedBy(entity) || this.getOwner() == null)
             super.playerTouch(entity);
-        }
-
     }
 
     public void readAdditionalSaveData(@NotNull CompoundTag compound) {
@@ -141,22 +133,20 @@ public class ThrownAridTrident extends AbstractArrow {
     }
 
     private byte getLoyaltyFromItem(ItemStack stack) {
-        Level var3 = this.level();
-        byte var10000;
-        if (var3 instanceof ServerLevel serverlevel) {
-            var10000 = (byte) Mth.clamp(EnchantmentHelper.getTridentReturnToOwnerAcceleration(serverlevel, stack, this), 0, 127);
+        Level level = this.level();
+        byte acceleration;
+        if (level instanceof ServerLevel serverlevel) {
+            acceleration = (byte) Mth.clamp(EnchantmentHelper.getTridentReturnToOwnerAcceleration(serverlevel, stack, this), 0, 127);
         } else {
-            var10000 = 0;
+            acceleration = 0;
         }
 
-        return var10000;
+        return acceleration;
     }
 
     public void tickDespawn() {
-        if (this.pickup != Pickup.ALLOWED)  {
+        if (this.pickup != Pickup.ALLOWED)
             super.tickDespawn();
-        }
-
     }
 
     protected float getWaterInertia() {

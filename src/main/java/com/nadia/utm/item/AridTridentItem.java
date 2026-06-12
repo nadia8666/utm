@@ -67,29 +67,27 @@ public class AridTridentItem extends TridentItem {
     }
 
     @Override
-    public void releaseUsing(@NotNull ItemStack stack, @NotNull Level level, @NotNull LivingEntity entityLiving, int timeLeft) {
-        if (entityLiving instanceof Player player) {
-            int i = this.getUseDuration(stack, entityLiving) - timeLeft;
-            if (i >= 20) {
-                Holder<SoundEvent> holder = EnchantmentHelper.pickHighestLevel(stack, EnchantmentEffectComponents.TRIDENT_SOUND).orElse(SoundEvents.TRIDENT_THROW);
-                if (level instanceof ServerLevel serverLevel) { // modified from level.isclientsicde
-                    stack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(entityLiving.getUsedItemHand()));
+    public void releaseUsing(@NotNull ItemStack stack, @NotNull Level level, @NotNull LivingEntity entity, int timeLeft) {
+        if (level.isClientSide) return;
 
-                    ThrownAridTrident trident = new ThrownAridTrident(serverLevel, player, stack);
-                    trident.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 5F, 0F);
-                    if (player.hasInfiniteMaterials())
-                        trident.pickup = AbstractArrow.Pickup.CREATIVE_ONLY;
-                    else
-                        player.getInventory().removeItem(stack);
+        int chargeTime = this.getUseDuration(stack, entity) - timeLeft;
+        if (chargeTime >= 20 && entity instanceof Player player && level instanceof ServerLevel serverLevel) {
+            Holder<SoundEvent> holder = EnchantmentHelper.pickHighestLevel(stack, EnchantmentEffectComponents.TRIDENT_SOUND).orElse(SoundEvents.TRIDENT_THROW);
+            stack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(entity.getUsedItemHand()));
 
-                    serverLevel.addFreshEntity(trident);
-                    serverLevel.playSound(null, trident, holder.value(), SoundSource.PLAYERS, 0.8F, 0.8F);
-                    serverLevel.playSound(null, trident, utmSounds.PKFRS.get(), SoundSource.PLAYERS, 0.7F, 1.0F);
-                    serverLevel.sendParticles(utmParticles.PKFIREBEGIN.get(), trident.position().x + player.getLookAngle().x, trident.position().y + player.getLookAngle().y, trident.position().z + player.getLookAngle().z, 1, 0, 0, 0, 0); //so i can send parite
-                }
+            ThrownAridTrident trident = new ThrownAridTrident(serverLevel, player, stack);
+            trident.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 5F, 0F);
+            if (player.hasInfiniteMaterials())
+                trident.pickup = AbstractArrow.Pickup.CREATIVE_ONLY;
+            else
+                player.getInventory().removeItem(stack);
 
-                player.awardStat(Stats.ITEM_USED.get(this));
-            }
+            serverLevel.addFreshEntity(trident);
+            serverLevel.playSound(null, trident, holder.value(), SoundSource.PLAYERS, 0.8F, 0.8F);
+            serverLevel.playSound(null, trident, utmSounds.PKFRS.get(), SoundSource.PLAYERS, 0.7F, 1.0F);
+            serverLevel.sendParticles(utmParticles.PKFIREBEGIN.get(), trident.position().x + player.getLookAngle().x, trident.position().y + player.getLookAngle().y, trident.position().z + player.getLookAngle().z, 1, 0, 0, 0, 0); //so i can send parite
+
+            player.awardStat(Stats.ITEM_USED.get(this));
         }
     }
 

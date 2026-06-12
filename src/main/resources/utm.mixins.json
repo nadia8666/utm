@@ -7,6 +7,8 @@
     "BacktankBlockEntityMixin",
     "BacktankUtilAccessor",
     "BasinBlockEntityMixin",
+    "ClientboundAddEntityPacketMixin",
+    "ClientboundSetEntityMotionPacketMixin",
     "ElytraItemMixin",
     "EntityMixin",
     "FreeAnvilMixin",
