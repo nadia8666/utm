@@ -1,10 +1,12 @@
 package com.nadia.utm.item;
 
 import com.nadia.utm.entity.spear.ThrownAridTrident;
+import com.nadia.utm.registry.particle.utmParticles;
 import com.nadia.utm.registry.sound.utmSounds;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Position;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -70,10 +72,10 @@ public class AridTridentItem extends TridentItem {
             int i = this.getUseDuration(stack, entityLiving) - timeLeft;
             if (i >= 20) {
                 Holder<SoundEvent> holder = EnchantmentHelper.pickHighestLevel(stack, EnchantmentEffectComponents.TRIDENT_SOUND).orElse(SoundEvents.TRIDENT_THROW);
-                if (!level.isClientSide) {
+                if (level instanceof ServerLevel serverLevel) { // modified from level.isclientsicde
                     stack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(entityLiving.getUsedItemHand()));
                     ThrownAridTrident throwntrident = new ThrownAridTrident(level, player, stack);
-                    throwntrident.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 5F, 0.2F);
+                    throwntrident.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 5F, 0F);
                     if (player.hasInfiniteMaterials()) {
                         throwntrident.pickup = AbstractArrow.Pickup.CREATIVE_ONLY;
                     }
@@ -81,6 +83,7 @@ public class AridTridentItem extends TridentItem {
                     level.addFreshEntity(throwntrident);
                     level.playSound(null, throwntrident, holder.value(), SoundSource.PLAYERS, 0.8F, 0.8F);
                     level.playSound(null, throwntrident, utmSounds.PKFRS.get(), SoundSource.PLAYERS, 0.7F, 1.0F);
+                    serverLevel.sendParticles(utmParticles.PKFIREBEGIN.get(), throwntrident.position().x + player.getLookAngle().x, throwntrident.position().y + player.getLookAngle().y, throwntrident.position().z + player.getLookAngle().z, 1,0,0,0,0); //so i can send parite
                     if (!player.hasInfiniteMaterials()) {
                         player.getInventory().removeItem(stack);
                     }

@@ -9,33 +9,27 @@ import org.jetbrains.annotations.NotNull;
 public class RedSweepParticle extends TextureSheetParticle {
     public final SpriteSet sprites;
 
-    public RedSweepParticle(ClientLevel level, double x, double y, double z, double xSpd, double ySpd, double zSpd, SpriteSet sprites) {
-        super(level, x, y, z);
-
-        this.sprites = sprites;
-
-        this.xd = xSpd;
-        this.yd = ySpd;
-        this.zd = zSpd;
-
-        this.rCol = 1;
-        this.gCol = 1;
-        this.bCol = 1;
-
-
+    public RedSweepParticle(ClientLevel level, double x, double y, double z, double quadsizem, SpriteSet sprites) {
+        super(level, x, y, z, (double)0.0F, (double)0.0F, (double)0.0F);
         //https://github.com/nadia8666/bee-mod/blob/master/src/main/java/com/ihatebees/particle/custom/StarSweepParticle.java
-        this.lifetime = 8;
-        this.gravity = 0.0f;
-        this.friction = 2.0f - (float)0*0.5f; // the thing i copied from has D but this does not have D so idk what D iss but
+        this.sprites = sprites;
+        this.lifetime = 4;
+        float f = this.random.nextFloat() * 0.6F + 0.4F;
+        this.rCol = f;
+        this.gCol = f;
+        this.bCol = f;
+        this.quadSize = 1.0F - (float)quadsizem * 0.5F;
         this.setSpriteFromAge(sprites);
+    }
 
-        this.scale(2.0f);
+    public int getLightColor(float partialTick) {
+        return 15728880;
     }
 
     public void tick() {
-       // this.pos = this.x;
-       // this.prevPosY = this.y; //my name is unused..?
-       // this.prevPosZ = this.z;
+        this.xo = this.x;
+        this.yo = this.y;
+        this.zo = this.z;
         if (this.age++ >= this.lifetime) {
             this.remove();
         } else {
