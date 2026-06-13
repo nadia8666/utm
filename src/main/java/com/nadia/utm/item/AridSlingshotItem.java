@@ -12,6 +12,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.SnowballItem;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
@@ -33,7 +34,7 @@ public class AridSlingshotItem extends Item {
         player.getCooldowns().addCooldown(this,2);
         if (!level.isClientSide) {
             AridStoneEntity gummyballentity = new AridStoneEntity(level, player);
-            gummyballentity.setItem(itemStack);
+
             gummyballentity.shootFromRotation(player,  player.getYRot(), player.getXRot(), 0.0f, 1f, 0f);
             level.addFreshEntity(gummyballentity);
         }
@@ -41,7 +42,6 @@ public class AridSlingshotItem extends Item {
             for (int i =1; i <= multishot; i++ ) {
                 for (int u = 1; u<=2; u++) { //DOUBLE FOR LOOPS :O
                     AridStoneEntity gummyballentity = new AridStoneEntity(level, player);
-                    gummyballentity.setItem(itemStack);
                     gummyballentity.shootFromRotation(player, player.getYRot(), player.getXRot()+((45f/multishot)*i*((-1)^u)), 0.0f, 1f, 0f);
                     level.addFreshEntity(gummyballentity);
                 }
