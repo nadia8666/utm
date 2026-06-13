@@ -7,7 +7,7 @@ import com.nadia.utm.event.events.SyncSealedDataEvent;
 import com.nadia.utm.event.utmEventHost;
 import com.nadia.utm.gui.GlintMenu;
 import com.nadia.utm.networking.payloads.*;
-import com.nadia.utm.projectile.DroplessArrow;
+import com.nadia.utm.entity.projectile.DroplessArrow;
 import com.nadia.utm.registry.attachment.utmAttachments;
 import com.nadia.utm.registry.item.tool.utmTools;
 import com.nadia.utm.util.TickUtil;
