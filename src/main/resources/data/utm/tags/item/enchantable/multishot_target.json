@@ -1,0 +1,7 @@
+{
+  "replace": true,
+  "values": [
+    "#minecraft:enchantable/crossbow",
+    "#utm:add_multishot"
+  ]
+}

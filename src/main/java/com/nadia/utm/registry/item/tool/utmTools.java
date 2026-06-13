@@ -122,23 +122,9 @@ public class utmTools {
             }
     ).tags(Tags.Items.ENCHANTABLES, ItemTags.SWORD_ENCHANTABLE, ItemTags.WEAPON_ENCHANTABLE, ItemTags.DURABILITY_ENCHANTABLE, ItemTags.SWORDS).handheld();
 
-    public static final utmItemContainer<AxeItem> ARID_AXE = register("arid_axe", () -> {
-                Tier tier = utmToolBuilder.buildTier(
-                        BlockTags.INCORRECT_FOR_STONE_TOOL, 2500, 9.5f, 0f, 15, () -> Ingredient.EMPTY
-                );
-                return new AxeItem(tier, new Item.Properties().attributes(
-                        AxeItem.createAttributes(tier, 17, -3.4f)).rarity(Rarity.RARE));
-            }
-    ).tags(Tags.Items.ENCHANTABLES, ItemTags.SWORD_ENCHANTABLE, ItemTags.WEAPON_ENCHANTABLE, ItemTags.FIRE_ASPECT_ENCHANTABLE, ItemTags.MINING_ENCHANTABLE, ItemTags.AXES).handheld();
 
-    public static final utmItemContainer<SwordItem> ARID_SWORD = register("arid_sword", () -> {
-                Tier tier = utmToolBuilder.buildTier(
-                        BlockTags.INCORRECT_FOR_WOODEN_TOOL, 5000, 8f, 0f, 15, () -> Ingredient.EMPTY
-                ); // this doesnt swing forsome reason
-                return new SwordItem(tier, new Item.Properties().attributes(
-                        SwordItem.createAttributes(tier, 4f, 0.44f)).rarity(Rarity.RARE));
-            }
-    ).tags(Tags.Items.ENCHANTABLES, ItemTags.SWORD_ENCHANTABLE, ItemTags.WEAPON_ENCHANTABLE, ItemTags.FIRE_ASPECT_ENCHANTABLE, ItemTags.SWORDS).handheld();
+
+    //fusions
 
     public static final utmItemContainer<ShartSword> SHART = register("shart", () -> {
                 Tier tier = utmToolBuilder.buildTier(
@@ -156,6 +142,18 @@ public class utmTools {
                         SwordItem.createAttributes(tier, 5, -2.4f)).rarity(Rarity.UNCOMMON));
             }
     ).tags(Tags.Items.ENCHANTABLES, ItemTags.SWORD_ENCHANTABLE, ItemTags.WEAPON_ENCHANTABLE, ItemTags.DURABILITY_ENCHANTABLE, ItemTags.SWORDS).handheld();
+
+    //arid
+
+    public static final utmItemContainer<SwordItem> ARID_SWORD = register("arid_sword", () -> {
+                Tier tier = utmToolBuilder.buildTier(
+                        BlockTags.INCORRECT_FOR_WOODEN_TOOL, 5000, 8f, 0f, 15, () -> Ingredient.EMPTY
+                ); // this doesnt swing forsome reason
+                return new SwordItem(tier, new Item.Properties().attributes(
+                        SwordItem.createAttributes(tier, 4f, 0.44f)).rarity(Rarity.RARE));
+            }
+    ).tags(Tags.Items.ENCHANTABLES, ItemTags.SWORD_ENCHANTABLE, ItemTags.WEAPON_ENCHANTABLE, ItemTags.FIRE_ASPECT_ENCHANTABLE, ItemTags.SWORDS).handheld();
+
     public static final utmItemContainer<PickaxeItem> ARID_PICKAXE = register("arid_pickaxe", () -> {
                 Tier tier = utmToolBuilder.buildTier(
                         BlockTags.INCORRECT_FOR_STONE_TOOL, 6500, 9.5f, 0f, 15, () -> Ingredient.EMPTY
@@ -164,6 +162,14 @@ public class utmTools {
                         PickaxeItem.createAttributes(tier, 8, -3f)).rarity(Rarity.RARE));
             }
     ).tags(Tags.Items.ENCHANTABLES, ItemTags.SWORD_ENCHANTABLE, ItemTags.WEAPON_ENCHANTABLE, ItemTags.FIRE_ASPECT_ENCHANTABLE, ItemTags.MINING_ENCHANTABLE, ItemTags.PICKAXES).handheld();
+    public static final utmItemContainer<AxeItem> ARID_AXE = register("arid_axe", () -> {
+                Tier tier = utmToolBuilder.buildTier(
+                        BlockTags.INCORRECT_FOR_STONE_TOOL, 2500, 9.5f, 0f, 15, () -> Ingredient.EMPTY
+                );
+                return new AxeItem(tier, new Item.Properties().attributes(
+                        AxeItem.createAttributes(tier, 17, -3.4f)).rarity(Rarity.RARE));
+            }
+    ).tags(Tags.Items.ENCHANTABLES, ItemTags.SWORD_ENCHANTABLE, ItemTags.WEAPON_ENCHANTABLE, ItemTags.FIRE_ASPECT_ENCHANTABLE, ItemTags.MINING_ENCHANTABLE, ItemTags.AXES).handheld();
     public static final utmItemContainer<ShovelItem> ARID_SHOVEL = register("arid_shovel", () -> {
                 Tier tier = utmToolBuilder.buildTier(
                         BlockTags.INCORRECT_FOR_STONE_TOOL, 6500, 10f, 0f, 15, () -> Ingredient.EMPTY
@@ -192,6 +198,8 @@ public class utmTools {
                         Paxel.createAttributes(tier, 10, -3f)).rarity(utmRarities.MYSTIC.getValue()));
             } //todo: investigate why you and arid pickaxe have no visible mining speed buff over netherite pickaxe
     ).tags(Tags.Items.ENCHANTABLES, ItemTags.SWORD_ENCHANTABLE, ItemTags.WEAPON_ENCHANTABLE, ItemTags.FIRE_ASPECT_ENCHANTABLE, ItemTags.MINING_ENCHANTABLE, ItemTags.PICKAXES).handheld();
+    public static final utmItemContainer<Item> ARID_SLINGSHOT = register("arid_slingshot", new Item.Properties().durability(4000).rarity(Rarity.RARE)).tags(utmTags.ITEM.ADD_MULTISHOT).handheld();
+
 
     public static final utmItemContainer<SwordItem> SWORD2 = register("sword2", () -> {
         Tier tier = utmToolBuilder.buildTier(BlockTags.INCORRECT_FOR_WOODEN_TOOL, 1000, 1f, 0f, 0, () -> Ingredient.EMPTY);
@@ -234,6 +242,6 @@ public class utmTools {
             }
     ).tags(Tags.Items.ENCHANTABLES, ItemTags.MINING_ENCHANTABLE, ItemTags.PICKAXES, ItemTags.DURABILITY_ENCHANTABLE).handheld();
     public static final utmItemContainer<Item> GLOVE = register("glove", new Item.Properties().attributes(SwordItem.createAttributes(utmToolBuilder.buildTier(
-            BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 1000, 2f, 0f, 150, () -> Ingredient.of(Items.DIAMOND)
+            BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 1000, 2f, 0f, 15, () -> Ingredient.of(Items.LEATHER)
     ), 0, 4f))).tags(ItemTags.DURABILITY_ENCHANTABLE).generated(); // don't make it a swordd !!!
 }

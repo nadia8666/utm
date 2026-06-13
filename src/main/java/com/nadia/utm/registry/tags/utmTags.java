@@ -32,6 +32,9 @@ public class utmTags {
         public static final TagKey<Item> ADD_SPEAR_RECOVERY = TagKey.create(
                 Registries.ITEM,
                 utm.key("add_spear_recovery"));
+        public static final TagKey<Item> ADD_MULTISHOT = TagKey.create(
+                Registries.ITEM,
+                utm.key("add_multishot"));
     }
 
     public static class BLOCK {
