@@ -3,10 +3,11 @@ package com.nadia.utm.entity.projectile;
 import com.nadia.utm.event.ForceLoad;
 import com.nadia.utm.event.utmEventHost;
 import com.nadia.utm.registry.entity.utmEntities;
-import com.nadia.utm.utm;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
+import net.neoforged.api.distmarker.Dist;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
-@ForceLoad
+
+@ForceLoad(dist = Dist.CLIENT)
 public class utmThrownItemProjectileRenderer {
 
     static {
