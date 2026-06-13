@@ -11,14 +11,10 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Blaze;
 import net.minecraft.world.entity.projectile.Snowball;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.SnowballItem;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
-
 
 public class AridStoneEntity extends ThrowableItemProjectile {
 
@@ -29,16 +25,16 @@ public class AridStoneEntity extends ThrowableItemProjectile {
 
 
     //my code? deobfustcated
-    public AridStoneEntity(EntityType<? extends Snowball> entityType, Level level) {
+    public AridStoneEntity(EntityType<? extends AridStoneEntity> entityType, Level level) {
         super(entityType, level);
     }
 
     public AridStoneEntity(Level level, LivingEntity shooter) {
-        super(utmEntities.ARID_STONE.get(), shooter, level);
+        super(utmEntities.ARID_STONE.get(), shooter, level); //entitytype
     }
 
     public AridStoneEntity(Level level, double x, double y, double z) {
-        super(EntityType.SNOWBALL, x, y, z, level);
+        super(utmEntities.ARID_STONE.get(), x, y, z, level);
     }
 
     protected Item getDefaultItem() {
