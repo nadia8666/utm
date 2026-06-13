@@ -1,6 +1,7 @@
 package com.nadia.utm.registry.item.tool;
 
 import com.nadia.utm.event.ForceLoad;
+import com.nadia.utm.item.AridSlingshotItem;
 import com.nadia.utm.item.AridTridentItem;
 import com.nadia.utm.item.FiddleheadItem;
 import com.nadia.utm.item.NetherytraItem;
@@ -144,6 +145,7 @@ public class utmTools {
     ).tags(Tags.Items.ENCHANTABLES, ItemTags.SWORD_ENCHANTABLE, ItemTags.WEAPON_ENCHANTABLE, ItemTags.DURABILITY_ENCHANTABLE, ItemTags.SWORDS).handheld();
 
     //arid
+    //todo: you should make all of these fire res
 
     public static final utmItemContainer<SwordItem> ARID_SWORD = register("arid_sword", () -> {
                 Tier tier = utmToolBuilder.buildTier(
@@ -198,7 +200,10 @@ public class utmTools {
                         Paxel.createAttributes(tier, 10, -3f)).rarity(utmRarities.MYSTIC.getValue()));
             } //todo: investigate why you and arid pickaxe have no visible mining speed buff over netherite pickaxe
     ).tags(Tags.Items.ENCHANTABLES, ItemTags.SWORD_ENCHANTABLE, ItemTags.WEAPON_ENCHANTABLE, ItemTags.FIRE_ASPECT_ENCHANTABLE, ItemTags.MINING_ENCHANTABLE, ItemTags.PICKAXES).handheld();
-    public static final utmItemContainer<Item> ARID_SLINGSHOT = register("arid_slingshot", new Item.Properties().durability(4000).rarity(Rarity.RARE)).tags(utmTags.ITEM.ADD_MULTISHOT).handheld();
+    public static final utmItemContainer<AridSlingshotItem> ARID_SLINGSHOT = register("arid_slingshot", () -> {
+                return new AridSlingshotItem(new Item.Properties().rarity(Rarity.RARE).stacksTo(1).durability(4096));
+            }
+    ).tags(Tags.Items.ENCHANTABLES, utmTags.ITEM.ADD_MULTISHOT);
 
 
     public static final utmItemContainer<SwordItem> SWORD2 = register("sword2", () -> {
@@ -243,5 +248,5 @@ public class utmTools {
     ).tags(Tags.Items.ENCHANTABLES, ItemTags.MINING_ENCHANTABLE, ItemTags.PICKAXES, ItemTags.DURABILITY_ENCHANTABLE).handheld();
     public static final utmItemContainer<Item> GLOVE = register("glove", new Item.Properties().attributes(SwordItem.createAttributes(utmToolBuilder.buildTier(
             BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 1000, 2f, 0f, 15, () -> Ingredient.of(Items.LEATHER)
-    ), 0, 4f))).tags(ItemTags.DURABILITY_ENCHANTABLE).generated(); // don't make it a swordd !!!
+    ), 0, 4f)).stacksTo(1)).tags(ItemTags.DURABILITY_ENCHANTABLE).generated(); // don't make it a swordd !!!
 }
