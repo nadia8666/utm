@@ -1,25 +1,20 @@
 package com.nadia.utm.entity.projectile;
 
-import com.nadia.utm.entity.spear.ThrownSpearEntityRenderer;
-import com.nadia.utm.event.ForceLoad;
-import com.nadia.utm.event.utmEventHost;
 import com.nadia.utm.registry.entity.utmEntities;
 import com.nadia.utm.registry.item.utmItems;
-import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.monster.Blaze;
-import net.minecraft.world.entity.projectile.Snowball;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
-import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import org.jetbrains.annotations.NotNull;
 
 
 public class AridStoneEntity extends ThrowableItemProjectile {
@@ -43,13 +38,12 @@ public class AridStoneEntity extends ThrowableItemProjectile {
         super(utmEntities.ARID_STONE.get(), x, y, z, level);
     }
 
-    protected Item getDefaultItem() {
+    protected @NotNull Item getDefaultItem() {
         return utmItems.ARID_INGOT.get();
     }
 
     private ParticleOptions getParticle() {
-        ItemStack itemstack = this.getItem();
-        return (ParticleOptions)(!itemstack.isEmpty() && !itemstack.is(this.getDefaultItem()) ? new ItemParticleOption(ParticleTypes.ITEM, itemstack) : ParticleTypes.ITEM);
+        return new ItemParticleOption(ParticleTypes.ITEM, new ItemStack(this::getDefaultItem));
     }
 
     public void handleEntityEvent(byte id) {
