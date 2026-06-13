@@ -1,7 +1,11 @@
 package com.nadia.utm.entity.projectile;
 
+import com.nadia.utm.entity.spear.ThrownSpearEntityRenderer;
+import com.nadia.utm.event.ForceLoad;
+import com.nadia.utm.event.utmEventHost;
 import com.nadia.utm.registry.entity.utmEntities;
 import com.nadia.utm.registry.item.utmItems;
+import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
@@ -15,9 +19,11 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+
 
 public class AridStoneEntity extends ThrowableItemProjectile {
-
+    //todo: when you make another projectile make a standardprojectilesrenderer and forceload that instead
 
     public AridStoneEntity(Level level) {
         super(utmEntities.ARID_STONE.get(), level);
@@ -43,7 +49,7 @@ public class AridStoneEntity extends ThrowableItemProjectile {
 
     private ParticleOptions getParticle() {
         ItemStack itemstack = this.getItem();
-        return (ParticleOptions)(!itemstack.isEmpty() && !itemstack.is(this.getDefaultItem()) ? new ItemParticleOption(ParticleTypes.ITEM, itemstack) : ParticleTypes.ITEM_SNOWBALL);
+        return (ParticleOptions)(!itemstack.isEmpty() && !itemstack.is(this.getDefaultItem()) ? new ItemParticleOption(ParticleTypes.ITEM, itemstack) : ParticleTypes.ITEM);
     }
 
     public void handleEntityEvent(byte id) {
@@ -72,4 +78,5 @@ public class AridStoneEntity extends ThrowableItemProjectile {
         }
 
     }
+
 }
