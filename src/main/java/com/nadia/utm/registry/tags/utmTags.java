@@ -35,6 +35,12 @@ public class utmTags {
         public static final TagKey<Item> ADD_MULTISHOT = TagKey.create(
                 Registries.ITEM,
                 utm.key("add_multishot"));
+        public static final TagKey<Item> ADD_POWER = TagKey.create(
+                Registries.ITEM,
+                utm.key("add_power"));
+        public static final TagKey<Item> ADD_PIERCING = TagKey.create(
+                Registries.ITEM,
+                utm.key("add_piercing"));
     }
 
     public static class BLOCK {

@@ -2,8 +2,8 @@
   "description": {
     "translate": "enchantment.utm.power_jump"
   },
-  "supported_items": ["create:netherite_diving_boots", "minecraft:netherite_boots"],
-  "primary_items": ["create:netherite_diving_boots", "minecraft:netherite_boots"],
+  "supported_items": ["create:netherite_diving_boots", "minecraft:netherite_boots","utm:arid_trident"],
+  "primary_items": ["create:netherite_diving_boots", "minecraft:netherite_boots","utm:arid_trident"],
   "weight": 5,
   "max_level": 3,
   "min_cost": {

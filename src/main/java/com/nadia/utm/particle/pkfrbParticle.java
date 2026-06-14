@@ -25,13 +25,13 @@ public class pkfrbParticle extends TextureSheetParticle {
 
 
         //https://github.com/nadia8666/bee-mod/blob/master/src/main/java/com/ihatebees/particle/custom/StarSweepParticle.java
-        this.lifetime = 6;
+        this.lifetime = 4;
         this.gravity = 0.0f;
         this.friction = 2.0f - (float)0*0.5f; // the thing i copied from has D but this does not have D so idk what D iss but
         //that thig above is meant to b e scale lol Friction is roblox equivalent of drag
         this.setSpriteFromAge(sprites);
 
-        this.scale(2.0f);
+        this.scale(4.0f);
     }
 
     public void tick() {

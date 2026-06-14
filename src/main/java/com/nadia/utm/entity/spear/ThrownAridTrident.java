@@ -1,5 +1,6 @@
 package com.nadia.utm.entity.spear;
 
+import com.nadia.utm.registry.enchantment.utmEnchantments;
 import com.nadia.utm.registry.entity.utmEntities;
 import com.nadia.utm.registry.item.tool.utmTools;
 import net.minecraft.nbt.CompoundTag;
@@ -19,6 +20,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
@@ -30,19 +32,25 @@ public class ThrownAridTrident extends AbstractArrow {
     private static final EntityDataAccessor<Boolean> ID_FOIL = SynchedEntityData.defineId(ThrownAridTrident.class, EntityDataSerializers.BOOLEAN);
     private boolean dealtDamage;
     public int clientSideReturnTridentTickCount;
+    public ItemStack COPIED_STACK;
+
 
     public ThrownAridTrident(Level level) {
         super(utmEntities.THROWN_ARID_TRIDENT.get(), level);
+        COPIED_STACK = new ItemStack(utmTools.ARID_TRIDENT.get());
+
     }
 
     public ThrownAridTrident(Level level, LivingEntity shooter, ItemStack pickupItemStack) {
         super(utmEntities.THROWN_ARID_TRIDENT.get(), shooter, level, pickupItemStack, null);
         this.entityData.set(ID_FOIL, pickupItemStack.hasFoil());
+        COPIED_STACK = pickupItemStack.copy();
     }
 
     public ThrownAridTrident(Level level, double x, double y, double z, ItemStack pickupItemStack) {
         super(utmEntities.THROWN_ARID_TRIDENT.get(), x, y, z, level, pickupItemStack, pickupItemStack);
         this.entityData.set(ID_FOIL, pickupItemStack.hasFoil());
+        COPIED_STACK = pickupItemStack.copy();
     }
 
     @Override
@@ -67,6 +75,7 @@ public class ThrownAridTrident extends AbstractArrow {
             }
 
             if (level() instanceof ServerLevel serverlevel) {
+                //could be useful in da future for sword particles
                 EnchantmentHelper.doPostAttackEffectsWithItemSource(serverlevel, entity, damagesource, this.getWeaponItem());
             }
 
@@ -77,8 +86,21 @@ public class ThrownAridTrident extends AbstractArrow {
         }
 
         //Hit Stuff Here!
+        int bp = COPIED_STACK.getEnchantmentLevel(this.registryAccess().holderOrThrow(utmEnchantments.POWER_JUMP));
+        int piercing = COPIED_STACK.getEnchantmentLevel(this.registryAccess().holderOrThrow(Enchantments.PIERCING));
 
-        this.setDeltaMovement(this.getDeltaMovement().multiply(-0.01, -0.1, -0.01));
+        if (bp>0) {
+            this.playSound(SoundEvents.TRIDENT_RETURN, 1.0F, 1.0F);
+            float g = ((float) bp /30);
+            this.setDeltaMovement(this.getDeltaMovement().multiply(-g, -g, -g).add(0,5,0));
+
+        } else if (piercing>0) {
+            float g = ((float) piercing /40);
+
+            this.setDeltaMovement(this.getDeltaMovement().multiply(g,g,g));
+        } else {
+            this.setDeltaMovement(this.getDeltaMovement().multiply(-0.01, -0.1, -0.01));
+        }
         this.playSound(SoundEvents.TRIDENT_HIT, 1.0F, 1.0F);
     }
 
