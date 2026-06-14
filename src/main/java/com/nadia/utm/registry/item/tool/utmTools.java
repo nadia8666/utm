@@ -78,9 +78,9 @@ public class utmTools {
             ))
     ).tags(Tags.Items.ENCHANTABLES, ItemTags.SWORD_ENCHANTABLE, ItemTags.WEAPON_ENCHANTABLE, ItemTags.DURABILITY_ENCHANTABLE, ItemTags.HOES).handheld();
 
-    public static final utmItemContainer<FiddleheadItem> FIDDLEHEAD = register("fiddlehead", () -> new FiddleheadItem(new Item.Properties().durability(72000)));
+    public static final utmItemContainer<FiddleheadItem> FIDDLEHEAD = register("fiddlehead", () -> new FiddleheadItem(new Item.Properties().durability(72000).rarity(Rarity.RARE).stacksTo(1)));
 
-    public static final utmItemContainer<NetherytraItem> NETHERYTRA = register("netherytra", () -> new NetherytraItem(new Item.Properties().durability(850).fireResistant()))
+    public static final utmItemContainer<NetherytraItem> NETHERYTRA = register("netherytra", () -> new NetherytraItem(new Item.Properties().durability(850).fireResistant().rarity(Rarity.RARE)))
             .tags(Tags.Items.ENCHANTABLES, ItemTags.EQUIPPABLE_ENCHANTABLE, ItemTags.DURABILITY_ENCHANTABLE, ItemTags.CHEST_ARMOR_ENCHANTABLE).generated();
 
     public static final utmItemContainer<SwordItem> OBSIDIAN_SWORD = register("obsidian_sword", () -> {
@@ -88,7 +88,7 @@ public class utmTools {
                         BlockTags.INCORRECT_FOR_WOODEN_TOOL, 4200, 1f, 0f, 5, () -> Ingredient.of(Tags.Items.OBSIDIANS)
                 );
                 return new SwordItem(tier, new Item.Properties().attributes(
-                        SwordItem.createAttributes(tier, 12, -3.75f)));
+                        SwordItem.createAttributes(tier, 12, -3.75f)).rarity(Rarity.UNCOMMON));
             }
     ).tags(Tags.Items.ENCHANTABLES, ItemTags.SWORD_ENCHANTABLE, ItemTags.WEAPON_ENCHANTABLE, ItemTags.DURABILITY_ENCHANTABLE, ItemTags.SWORDS).handheld();
 
@@ -191,7 +191,7 @@ public class utmTools {
     public static final utmItemContainer<AridTridentItem> ARID_TRIDENT = register("arid_trident", () -> {
         return new AridTridentItem(new Item.Properties().rarity(utmRarities.MYSTIC.getValue()).stacksTo(1).durability(1024).component(utmDataComponents.THROWING_SPEAR_MODEL, "arid_trident")); //condense pls
             }
-    ).tags(Tags.Items.ENCHANTABLES, ItemTags.WEAPON_ENCHANTABLE, ItemTags.FIRE_ASPECT_ENCHANTABLE, ItemTags.TRIDENT_ENCHANTABLE);
+    ).tags(Tags.Items.ENCHANTABLES, utmTags.ITEM.ADD_PIERCING);
     public static final utmItemContainer<Paxel> ARID_PAXEL = register("arid_paxel", () -> { // no texture yet. Theres no crying until the end
                 Tier tier = utmToolBuilder.buildTier(
                         BlockTags.INCORRECT_FOR_IRON_TOOL, 10000, 10.25f, 0f, 45, () -> Ingredient.EMPTY
@@ -201,9 +201,9 @@ public class utmTools {
             } //todo: investigate why you and arid pickaxe have no visible mining speed buff over netherite pickaxe
     ).tags(Tags.Items.ENCHANTABLES, ItemTags.SWORD_ENCHANTABLE, ItemTags.WEAPON_ENCHANTABLE, ItemTags.FIRE_ASPECT_ENCHANTABLE, ItemTags.MINING_ENCHANTABLE, ItemTags.PICKAXES).handheld();
     public static final utmItemContainer<AridSlingshotItem> ARID_SLINGSHOT = register("arid_slingshot", () -> {
-                return new AridSlingshotItem(new Item.Properties().rarity(Rarity.RARE).stacksTo(1).durability(4096));
+                return new AridSlingshotItem(new Item.Properties().rarity(Rarity.RARE).stacksTo(1).durability(5000));
             }
-    ).tags(Tags.Items.ENCHANTABLES, utmTags.ITEM.ADD_MULTISHOT);
+    ).tags(Tags.Items.ENCHANTABLES, utmTags.ITEM.ADD_MULTISHOT, utmTags.ITEM.ADD_POWER).handheld();
 
 
     public static final utmItemContainer<SwordItem> SWORD2 = register("sword2", () -> {

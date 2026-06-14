@@ -60,10 +60,14 @@ public class AridStoneEntity extends ThrowableItemProjectile {
     protected void onHitEntity(EntityHitResult result) {
         super.onHitEntity(result);
         Entity entity = result.getEntity();
-        int i = 3;
-        entity.hurt(this.damageSources().thrown(this, this.getOwner()), (float)i);
+        float i = 3;
+        entity.hurt(this.damageSources().thrown(this, this.getOwner()), i);
+        entity.invulnerableTime=0;
     }
 
+    public boolean shouldRender(double x, double y, double z) {
+        return true;
+    }
     protected void onHit(HitResult result) {
         super.onHit(result);
         if (!this.level().isClientSide) {
