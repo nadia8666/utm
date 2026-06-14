@@ -3,6 +3,8 @@ package com.nadia.utm.entity.spear;
 import com.nadia.utm.registry.enchantment.utmEnchantments;
 import com.nadia.utm.registry.entity.utmEntities;
 import com.nadia.utm.registry.item.tool.utmTools;
+import com.nadia.utm.registry.particle.utmParticles;
+import net.minecraft.client.particle.Particle;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -33,13 +35,13 @@ public class ThrownAridTrident extends AbstractArrow {
     private boolean dealtDamage;
     public int clientSideReturnTridentTickCount;
     public ItemStack COPIED_STACK;
+    public Particle larpicle;
 
 
     public ThrownAridTrident(Level level) {
         super(utmEntities.THROWN_ARID_TRIDENT.get(), level);
         COPIED_STACK = new ItemStack(utmTools.ARID_TRIDENT.get());
-
-    }
+       }
 
     public ThrownAridTrident(Level level, LivingEntity shooter, ItemStack pickupItemStack) {
         super(utmEntities.THROWN_ARID_TRIDENT.get(), shooter, level, pickupItemStack, null);
@@ -91,11 +93,11 @@ public class ThrownAridTrident extends AbstractArrow {
 
         if (bp>0) {
             this.playSound(SoundEvents.TRIDENT_RETURN, 1.0F, 1.0F);
-            float g = ((float) bp /30);
-            this.setDeltaMovement(this.getDeltaMovement().multiply(-g, -g, -g).add(0,5,0));
+            float g = ((float) (Math.pow(bp,1.15)) /12);
+            this.setDeltaMovement(this.getDeltaMovement().multiply(-g, -g, -g).add(0,1.5-(0.5*bp),0));
 
         } else if (piercing>0) {
-            float g = ((float) piercing /40);
+            float g = ((float) piercing /16);
 
             this.setDeltaMovement(this.getDeltaMovement().multiply(g,g,g));
         } else {

@@ -5,36 +5,42 @@ import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.client.particle.TextureSheetParticle;
 import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import org.jetbrains.annotations.NotNull;
 
 public class pkfrbParticle extends TextureSheetParticle {
     public final SpriteSet sprites;
+    public Entity arid;
 
-    public pkfrbParticle(ClientLevel level, double x, double y, double z, double xSpd, double ySpd, double zSpd, ParticleOptions ignored, SpriteSet sprites) {
+    public pkfrbParticle(ClientLevel level, double x, double y, double z, int xSpd, double ySpd, double zSpd, ParticleOptions ignored, SpriteSet sprites) {
         super(level, x, y, z);
 
+
+        this.arid = level.getEntity(xSpd);;
+        this.x = arid.getX();
+        this.y = arid.getY();
+        this.z = arid.getZ();
+
+
         this.sprites = sprites;
-
-        this.xd = xSpd;
-        this.yd = ySpd;
-        this.zd = zSpd;
-
         this.rCol = 1;
         this.gCol = 1;
         this.bCol = 1;
 
 
-        //https://github.com/nadia8666/bee-mod/blob/master/src/main/java/com/ihatebees/particle/custom/StarSweepParticle.java
-        this.lifetime = 4;
+        this.lifetime = 14;
         this.gravity = 0.0f;
-        this.friction = 2.0f - (float)0*0.5f; // the thing i copied from has D but this does not have D so idk what D iss but
-        //that thig above is meant to b e scale lol Friction is roblox equivalent of drag
+        this.friction = 0f;
         this.setSpriteFromAge(sprites);
 
-        this.scale(4.0f);
+        this.scale(8.0f); //verifiy that scale actually works lol it might just not
     }
 
     public void tick() {
+        this.x = arid.getX();
+        this.y = arid.getY();
+        this.z = arid.getZ();
         if (this.age++ >= this.lifetime) {
             this.remove();
         } else {
