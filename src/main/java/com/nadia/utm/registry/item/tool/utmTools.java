@@ -249,5 +249,5 @@ public class utmTools {
     public static final utmItemContainer<BundleofHisItem> BUNDLE_OF_HIS = register("bundle_of_his", () -> {
                 return new BundleofHisItem(new Item.Properties().rarity(Rarity.UNCOMMON).stacksTo(1));
             } //figure out why Shooting upwards is baad
-    );
+    ).generated();
 }

@@ -12,5 +12,7 @@ public class utmThrownItemProjectileRenderer {
 
     static {
         utmEventHost.register(EntityRenderersEvent.RegisterRenderers.class, event -> event.registerEntityRenderer(utmEntities.ARID_STONE.get(), ThrownItemRenderer::new));
+        utmEventHost.register(EntityRenderersEvent.RegisterRenderers.class, event -> event.registerEntityRenderer(utmEntities.PEBBLE.get(), ThrownItemRenderer::new));
+
     }
 }
