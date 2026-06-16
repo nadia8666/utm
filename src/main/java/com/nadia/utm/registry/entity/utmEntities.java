@@ -1,6 +1,7 @@
 package com.nadia.utm.registry.entity;
 
 import com.nadia.utm.entity.projectile.AridStoneEntity;
+import com.nadia.utm.entity.projectile.PebbleEntity;
 import com.nadia.utm.entity.spear.ThrownAridTrident;
 import com.nadia.utm.entity.spear.ThrownSpearEntity;
 import net.minecraft.core.registries.Registries;
@@ -25,6 +26,8 @@ public class utmEntities {
 
     public static final utmEntityContainer<AridStoneEntity> ARID_STONE = register("arid_stone", () ->
             EntityType.Builder.<AridStoneEntity>of((type, level) -> new AridStoneEntity(level), MobCategory.MISC).sized(0.25F, 0.25F).eyeHeight(0.13F).clientTrackingRange(4).updateInterval(10).build("arid_stone"));
+    public static final utmEntityContainer<PebbleEntity> PEBBLE = register("pebble", () ->
+            EntityType.Builder.<PebbleEntity>of((type, level) -> new PebbleEntity(level), MobCategory.MISC).sized(0.25F, 0.25F).eyeHeight(0.13F).clientTrackingRange(4).updateInterval(10).build("pebble"));
 
 
 }

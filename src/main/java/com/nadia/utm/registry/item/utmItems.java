@@ -1,9 +1,6 @@
 package com.nadia.utm.registry.item;
 
-import com.nadia.utm.item.AdvancedGogglesItem;
-import com.nadia.utm.item.AntiwaterBucketItem;
-import com.nadia.utm.item.AridIngotItem;
-import com.nadia.utm.item.LockedSchematicItem;
+import com.nadia.utm.item.*;
 import com.nadia.utm.registry.fluid.utmFluids;
 import com.nadia.utm.registry.song.utmSongs;
 import com.nadia.utm.registry.tags.utmTags;
@@ -90,7 +87,12 @@ public class utmItems {
             () -> new AntiwaterBucketItem(utmFluids.ANTIWATER.get(),
                     new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1))).generated().tags(Tags.Items.BUCKETS);
 
+
+    //bullets
     public static final utmItemContainer<AridIngotItem> ARID_INGOT = register("arid_ingot", () -> new AridIngotItem(new Item.Properties())).generated();
+    public static final utmItemContainer<AridIngotItem> ARID_BULLET = register("arid_bullet", () -> new AridIngotItem(new Item.Properties())).generated();
+    public static final utmItemContainer<PebbleItem> PEBBLE_BULLET = register("pebble_bullet", () -> new PebbleItem(new Item.Properties().stacksTo(1))).generated();
+
 
     // resources
     public static final utmItemContainer<Item> RAW_ALUMINUM = register("raw_aluminum").generated(),

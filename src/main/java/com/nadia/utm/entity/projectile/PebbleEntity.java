@@ -19,29 +19,29 @@ import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.NotNull;
 
 
-public class AridStoneEntity extends ThrowableItemProjectile {
+public class PebbleEntity extends ThrowableItemProjectile {
     //todo: when you make another projectile make a standardprojectilesrenderer and forceload that instead
 
-    public AridStoneEntity(Level level) {
-        super(utmEntities.ARID_STONE.get(), level);
+    public PebbleEntity(Level level) {
+        super(utmEntities.PEBBLE.get(), level);
     }
 
 
     //my code? deobfustcated
-    public AridStoneEntity(EntityType<? extends AridStoneEntity> entityType, Level level) {
+    public PebbleEntity(EntityType<? extends PebbleEntity> entityType, Level level) {
         super(entityType, level);
     }
 
-    public AridStoneEntity(Level level, LivingEntity shooter) {
-        super(utmEntities.ARID_STONE.get(), shooter, level); //entitytype
+    public PebbleEntity(Level level, LivingEntity shooter) {
+        super(utmEntities.PEBBLE.get(), shooter, level); //entitytype
     }
 
-    public AridStoneEntity(Level level, double x, double y, double z) {
-        super(utmEntities.ARID_STONE.get(), x, y, z, level);
+    public PebbleEntity(Level level, double x, double y, double z) {
+        super(utmEntities.PEBBLE.get(), x, y, z, level);
     }
 
     protected @NotNull Item getDefaultItem() {
-        return utmItems.ARID_BULLET.get();
+        return utmItems.PEBBLE_BULLET.get();
     }
 
     private ParticleOptions getParticle() {
@@ -62,7 +62,7 @@ public class AridStoneEntity extends ThrowableItemProjectile {
     protected void onHitEntity(EntityHitResult result) {
         super.onHitEntity(result);
         Entity entity = result.getEntity();
-        float i = 3;
+        float i = 0.5f;
         entity.level().playSound(entity,
                 entity.getBlockPosBelowThatAffectsMyMovement(),
                 utmSounds.SR_HIT.get(),
