@@ -1,10 +1,7 @@
 package com.nadia.utm.registry.item.tool;
 
 import com.nadia.utm.event.ForceLoad;
-import com.nadia.utm.item.AridSlingshotItem;
-import com.nadia.utm.item.AridTridentItem;
-import com.nadia.utm.item.FiddleheadItem;
-import com.nadia.utm.item.NetherytraItem;
+import com.nadia.utm.item.*;
 import com.nadia.utm.item.spear.TNTThrowingSpearItem;
 import com.nadia.utm.item.spear.ThrowingSpearItem;
 import com.nadia.utm.registry.data.utmDataComponents;
@@ -141,7 +138,7 @@ public class utmTools {
                 );
                 return new SwordItem(tier, new Item.Properties().attributes(
                         SwordItem.createAttributes(tier, 5, -2.4f)).rarity(Rarity.UNCOMMON));
-            }
+            } //todo: why does this have two arrow hit sfx?
     ).tags(Tags.Items.ENCHANTABLES, ItemTags.SWORD_ENCHANTABLE, ItemTags.WEAPON_ENCHANTABLE, ItemTags.DURABILITY_ENCHANTABLE, ItemTags.SWORDS).handheld();
 
     //arid
@@ -182,11 +179,11 @@ public class utmTools {
     ).tags(Tags.Items.ENCHANTABLES, ItemTags.SWORD_ENCHANTABLE, ItemTags.WEAPON_ENCHANTABLE, ItemTags.FIRE_ASPECT_ENCHANTABLE, ItemTags.MINING_ENCHANTABLE, ItemTags.SHOVELS).handheld();
     public static final utmItemContainer<ShovelItem> ARID_HOE = register("arid_hoe", () -> {
                 Tier tier = utmToolBuilder.buildTier(
-                        BlockTags.INCORRECT_FOR_STONE_TOOL, 5000, 15f, 0f, 15, () -> Ingredient.EMPTY
+                        BlockTags.INCORRECT_FOR_STONE_TOOL, 50000, 1f, 0f, 15, () -> Ingredient.EMPTY
                 );
                 return new ShovelItem(tier, new Item.Properties().attributes(
                         ShovelItem.createAttributes(tier, 4, -2.4f)).rarity(Rarity.RARE));
-            }
+            } //tills btw
     ).tags(Tags.Items.ENCHANTABLES, ItemTags.SWORD_ENCHANTABLE, ItemTags.WEAPON_ENCHANTABLE, ItemTags.FIRE_ASPECT_ENCHANTABLE, ItemTags.MINING_ENCHANTABLE, ItemTags.MINING_LOOT_ENCHANTABLE, ItemTags.HOES).handheld();
     public static final utmItemContainer<AridTridentItem> ARID_TRIDENT = register("arid_trident", () -> {
         return new AridTridentItem(new Item.Properties().rarity(utmRarities.MYSTIC.getValue()).stacksTo(1).durability(1024).component(utmDataComponents.THROWING_SPEAR_MODEL, "arid_trident")); //condense pls
@@ -202,7 +199,7 @@ public class utmTools {
     ).tags(Tags.Items.ENCHANTABLES, ItemTags.SWORD_ENCHANTABLE, ItemTags.WEAPON_ENCHANTABLE, ItemTags.FIRE_ASPECT_ENCHANTABLE, ItemTags.MINING_ENCHANTABLE, ItemTags.PICKAXES).handheld();
     public static final utmItemContainer<AridSlingshotItem> ARID_SLINGSHOT = register("arid_slingshot", () -> {
                 return new AridSlingshotItem(new Item.Properties().rarity(Rarity.RARE).stacksTo(1).durability(5000));
-            }
+            } //figure out why Shooting upwards is baad
     ).tags(Tags.Items.ENCHANTABLES, utmTags.ITEM.ADD_MULTISHOT, utmTags.ITEM.ADD_POWER).handheld();
 
 
@@ -249,4 +246,8 @@ public class utmTools {
     public static final utmItemContainer<Item> GLOVE = register("glove", new Item.Properties().attributes(SwordItem.createAttributes(utmToolBuilder.buildTier(
             BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 1000, 2f, 0f, 15, () -> Ingredient.of(Items.LEATHER)
     ), 0, 4f)).stacksTo(1)).tags(ItemTags.DURABILITY_ENCHANTABLE).generated(); // don't make it a swordd !!!
+    public static final utmItemContainer<BundleofHisItem> BUNDLE_OF_HIS = register("bundle_of_his", () -> {
+                return new BundleofHisItem(new Item.Properties().rarity(Rarity.UNCOMMON).stacksTo(1));
+            } //figure out why Shooting upwards is baad
+    );
 }

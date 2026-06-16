@@ -1,4 +1,4 @@
-// 1.21.1	2026-06-13T22:26:29.2956334	Item Models: utm
+// 1.21.1	2026-06-15T21:55:31.132882	Item Models: utm
 6d60e0d2b0873e138bcfa8f5db0ca9cb6d7cd4fa assets/utm/models/item/adv_goggles.json
 0c35c7686bdc2e520fa2ede79bfa3e5855ad5ffc assets/utm/models/item/air_compressor.json
 9d13b4b18c25ee3c81b1cc65fd86954c95187339 assets/utm/models/item/aluminum_ingot.json
@@ -10,6 +10,7 @@ d00e8bbfc690b4038dc14ac052a6dac3f8578493 assets/utm/models/item/antiwater_canist
 afded1bb03411dbf8693280811f28dbf45568295 assets/utm/models/item/antiwater_conduit.json
 679773fb2dc807de14de241f634f4748c3b5e0e4 assets/utm/models/item/arid_axe.json
 e3bb1408fb222598c9b84d2b5549f10607252f97 assets/utm/models/item/arid_block.json
+ba2c2fb483d5e93a537a8911cef119c9dcf4310a assets/utm/models/item/arid_bullet.json
 276d24f6b7bd139310a57f6a60bd05e358af53b3 assets/utm/models/item/arid_hoe.json
 27e2ddb57591da009a7d2abd5330e7a3d8baa304 assets/utm/models/item/arid_ingot.json
 5de52f88841121e4359b931541bd5e7af80e42eb assets/utm/models/item/arid_paxel.json
@@ -74,6 +75,7 @@ a951d96a793876f77a37a1d469861589165ec946 assets/utm/models/item/netherytra.json
 aaed7d47793a03535e0fc1e59b89f24ea056bb7d assets/utm/models/item/obsidian_sword.json
 3374c572cdd962361be3dcbe6d1f9a1542cd36c3 assets/utm/models/item/oxygen_furnace.json
 0a00bcbeefba0ae4d8203c1f37a9d3082833ccdb assets/utm/models/item/particase.json
+b2fdd82ab23219d9b3977dd1a74e5f5894815204 assets/utm/models/item/pebble_bullet.json
 2e991b169a46604733a459264944f9b6d47893bb assets/utm/models/item/player_chunk_loader.json
 222d633b6564a532e01c7d3ca1a2745f4424f305 assets/utm/models/item/portasealer.json
 bb4d55e477d599887980d379d34beb68aaba8fbf assets/utm/models/item/positrase.json

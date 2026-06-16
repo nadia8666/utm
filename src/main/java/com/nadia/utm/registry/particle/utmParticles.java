@@ -30,7 +30,7 @@ public class utmParticles {
     }
 
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> RED_SWEEP = PARTICLE_TYPES.register("rslash", () -> new SimpleParticleType(true));
-    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> PKFIREBEGIN = PARTICLE_TYPES.register("pkfirebegin", () -> new SimpleParticleType(true));
+    public static final DeferredHolder<ParticleType<?>, pkfrbParticleType> PKFIREBEGIN = PARTICLE_TYPES.register("pkfirebegin", pkfrbParticleType::new);
 
 
     public static final DeferredHolder<ParticleType<?>, ColorParticleType> VEIN =

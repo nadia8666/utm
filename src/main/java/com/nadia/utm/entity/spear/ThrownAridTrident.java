@@ -61,6 +61,8 @@ public class ThrownAridTrident extends AbstractArrow {
         builder.define(ID_FOIL, false);
     }
 
+
+
     @Override
     protected void onHitEntity(EntityHitResult result) {
         Entity entity = result.getEntity();
@@ -97,7 +99,7 @@ public class ThrownAridTrident extends AbstractArrow {
             this.setDeltaMovement(this.getDeltaMovement().multiply(-g, -g, -g).add(0,1.5-(0.5*bp),0));
 
         } else if (piercing>0) {
-            float g = ((float) piercing /16);
+            float g = ((float) piercing /5);
 
             this.setDeltaMovement(this.getDeltaMovement().multiply(g,g,g));
         } else {

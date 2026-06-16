@@ -8,6 +8,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -33,7 +34,7 @@ public class AridSlingshotItem extends Item {
 
 
         level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.CROSSBOW_SHOOT, player.getSoundSource(), 0.5f, 0.8f);
-        player.getCooldowns().addCooldown(this,5+(multishot*3)+power);
+        player.getCooldowns().addCooldown(this,4+(multishot*3)+power); //5 + 3 + 1
         if (!level.isClientSide) {
             AridStoneEntity gummyballentity = new AridStoneEntity(level, player);
 
@@ -41,10 +42,17 @@ public class AridSlingshotItem extends Item {
             level.addFreshEntity(gummyballentity);
         }
         if (multishot>=1) {
+            boolean sneaking = player.isCrouching();
+            boolean jumping = !player.onGround();
             for (int i =1; i <= multishot; i++ ) {
                 for (int u = 1; u<=2; u++) { //DOUBLE FOR LOOPS :O
                     AridStoneEntity gummyballentity = new AridStoneEntity(level, player);
-                    gummyballentity.shootFromRotation(player, player.getXRot(), (float) (player.getYRot()-((4.5f/multishot)*i*(Math.pow(-1,u)))), 0.0f, 1.5f+(power*(0.4f)*((float) 1 /i)), (float) i /2);
+
+                    double calculation = ((4.5f/multishot)*(sneaking ? 3f/5 : 1)*i*(Math.pow(-1,u)));
+
+                    gummyballentity.shootFromRotation( player, (float) (player.getXRot()-(jumping ? calculation : 0)),
+                            (float) (player.getYRot()-(!jumping ? calculation : 0)),
+                            0.0f, 1.5f+(power*(0.4f)*((float) 1 /i)), (float) i /2);
                     level.addFreshEntity(gummyballentity);
                 }
             }

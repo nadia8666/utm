@@ -1,6 +1,8 @@
 package com.nadia.utm.item;
 
 import com.nadia.utm.entity.spear.ThrownAridTrident;
+import com.nadia.utm.particle.ColorParticleOptions;
+import com.nadia.utm.particle.pkfrbParticleOptions;
 import com.nadia.utm.registry.particle.utmParticles;
 import com.nadia.utm.registry.sound.utmSounds;
 import net.minecraft.core.Direction;
@@ -85,7 +87,7 @@ public class AridTridentItem extends TridentItem {
             serverLevel.addFreshEntity(trident);
             serverLevel.playSound(null, trident, holder.value(), SoundSource.PLAYERS, 0.8F, 0.8F);
             serverLevel.playSound(null, trident, utmSounds.PKFRS.get(), SoundSource.PLAYERS, 0.7F, 1.0F);
-            serverLevel.sendParticles(utmParticles.PKFIREBEGIN.get(), trident.position().x + player.getLookAngle().x, trident.position().y + player.getLookAngle().y, trident.position().z + player.getLookAngle().z, 1, 0, 0, 0, 0); //so i can send parite
+            serverLevel.sendParticles(new pkfrbParticleOptions(utmParticles.PKFIREBEGIN.get(), trident.getId()), trident.position().x + player.getLookAngle().x, trident.position().y + player.getLookAngle().y, trident.position().z + player.getLookAngle().z, 1, 0, 0, 0, 0); //so i can send parite
 
             player.awardStat(Stats.ITEM_USED.get(this));
         }
