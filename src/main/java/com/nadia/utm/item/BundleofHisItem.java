@@ -31,7 +31,7 @@ public class BundleofHisItem extends Item {
             for (int i = 1; i<32; i++) {
                 PebbleEntity gummyballentity = new PebbleEntity(level, player);
 
-                gummyballentity.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0f, 1f, 5f);
+                gummyballentity.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0f, 0.4f, 30f);
                 level.addFreshEntity(gummyballentity);
             }
         }

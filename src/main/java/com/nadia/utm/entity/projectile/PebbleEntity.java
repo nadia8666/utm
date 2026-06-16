@@ -62,7 +62,7 @@ public class PebbleEntity extends ThrowableItemProjectile {
     protected void onHitEntity(EntityHitResult result) {
         super.onHitEntity(result);
         Entity entity = result.getEntity();
-        float i = 0.5f;
+        float i = 1f;
         entity.level().playSound(entity,
                 entity.getBlockPosBelowThatAffectsMyMovement(),
                 utmSounds.SR_HIT.get(),
