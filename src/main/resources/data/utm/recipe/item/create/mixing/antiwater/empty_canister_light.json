@@ -5,21 +5,25 @@
     {
       "fluid": "minecraft:water",
       "type": "fluid_stack",
-      "amount": 1000
+      "amount": 250
     },
     {
       "item": "utm:antiwater_conduit",
       "count": 1
     },
     {
-      "item": "utm:antiwater_canister",
+      "item": "utm:antiwater_canister_light",
       "count": 1
     }
   ],
   "results": [
     {
       "id": "utm:antiwater",
-      "amount": 1000
+      "amount": 250
+    },
+    {
+      "id": "utm:electro_canister_light",
+      "count": 1
     }
   ]
 }
