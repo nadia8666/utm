@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "his",
+  "key": {
+    "s": {
+      "item": "utm:bundle_of_his"
+    },
+    "i": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "isi",
+    " i ",
+    " i "
+  ],
+  "result": {
+    "count": 1,
+    "id": "utm:slingshot"
+  }
+}

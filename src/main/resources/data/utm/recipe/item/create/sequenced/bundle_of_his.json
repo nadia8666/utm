@@ -1,0 +1,35 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "minecraft:string"
+  },
+  "loops": 64,
+  "results": [
+    {
+      "id": "utm:bundle_of_his",
+      "chance": 100,
+      "count": 1
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "minecraft:string"
+        },
+        {
+          "item": "minecraft:cobblestone"
+        }
+      ],
+      "results": [
+        {
+          "id": "utm:fusing_process"
+        }
+      ]
+    }
+  ],
+  "transitional_item": {
+    "id": "utm:fusing_process"
+  }
+}
