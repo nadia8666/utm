@@ -1,0 +1,42 @@
+{
+  "type": "create:mixing",
+  "heat_requirement": "superheated",
+  "ingredients": [
+    {
+      "fluid": "utm:antiwater",
+      "type": "fluid_stack",
+      "amount": 10000
+    },
+    {
+      "fluid": "minecraft:lava",
+      "type": "fluid_stack",
+      "amount": 10000
+    },
+    {
+      "item": "utm:arid_pickaxe",
+      "count": 1
+    },
+    {
+      "item": "utm:arid_axe",
+      "count": 1
+    },
+    {
+      "item": "utm:arid_shovel",
+      "count": 1
+    },
+    {
+      "item": "utm:arid_hoe",
+      "count": 1
+    },
+    {
+      "item": "utm:tool_apple",
+      "count": 1
+    }
+  ],
+  "results": [
+    {
+      "id": "utm:arid_paxel",
+      "count": 1
+    }
+  ]
+}

@@ -1,11 +1,11 @@
 {
   "values": [
-    "utm:liquid_thruster",
-    "utm:magnesium_ore",
+    "utm:ion_jet",
     "utm:gimbal",
-    "utm:solid_thruster",
     "utm:aluminum_ore",
-    "utm:gimbal_plate",
-    "utm:ion_jet"
+    "utm:magnesium_ore",
+    "utm:liquid_thruster",
+    "utm:solid_thruster",
+    "utm:gimbal_plate"
   ]
 }
