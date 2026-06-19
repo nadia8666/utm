@@ -1,14 +1,14 @@
-// 1.21.1	2026-06-13T23:16:24.3199413	Tags for minecraft:item mod id utm
+// 1.21.1	2026-06-19T19:00:57.9233106	Tags for minecraft:item mod id utm
 66adac5ce76e09f7316b3221e955af75b73eb2c5 data/c/tags/item/buckets.json
-0d6f46b69c33aa8b7449fe154396c1e8d3233259 data/c/tags/item/enchantables.json
+6e87fc3a2de1be09ab1275a256255d9e9e9786a7 data/c/tags/item/enchantables.json
 cc5ee93a6de880a1acd213e033d0123d2bb90869 data/c/tags/item/music_discs.json
 d2b273c656d3df662d72e9250b2eb9a40a66cb10 data/c/tags/item/tools/shield.json
 6cd88e214573b659c707666abea9d2e53d37d1ef data/minecraft/tags/item/anvil.json
 c0deb5e075f3767f4d126778320fefc3168e0711 data/minecraft/tags/item/axes.json
 f4c3db116b1c88abe3f5aec2a85614e85916409a data/minecraft/tags/item/enchantable/chest_armor.json
-78a7c8d7920274ed2b0e000755e3b1b609728b46 data/minecraft/tags/item/enchantable/durability.json
+28b8cf867e5ad49684b1b0f06b67dd20037bfe1b data/minecraft/tags/item/enchantable/durability.json
 f4c3db116b1c88abe3f5aec2a85614e85916409a data/minecraft/tags/item/enchantable/equippable.json
-4aa844ddc98083b09f3631611291c43ffa27b594 data/minecraft/tags/item/enchantable/fire_aspect.json
+d0f95333a334936757753e44b2e783d61f746f03 data/minecraft/tags/item/enchantable/fire_aspect.json
 2e6070e8a11cb15e3a939b93ed32d846d597427d data/minecraft/tags/item/enchantable/mining.json
 f227975eaf1956e2c82fa940a8a696e830fac972 data/minecraft/tags/item/enchantable/mining_loot.json
 1fa76fe6b19b829a681d6a65ab24c530f0faf2b6 data/minecraft/tags/item/enchantable/sword.json
@@ -20,9 +20,9 @@ b64e1f68795c6ed04e99d1b4b76c5f54201b74f7 data/minecraft/tags/item/pickaxes.json
 534c65f3d496e7f441bd282ffdbfb3f43e3b1b6d data/minecraft/tags/item/swords.json
 1ce4e06e062979db32ba844b3c947f681546b641 data/minecraft/tags/item/trim_templates.json
 0aa63e91d5b719a4dad4b7f2802ef031d5f0c527 data/utm/tags/item/add_mending.json
-2b8e6b4a0faa0ab056fc79b19c3bc28f6656b7b1 data/utm/tags/item/add_multishot.json
+d376215bc3628b6ac94de0fd8e6bf426d61662fb data/utm/tags/item/add_multishot.json
 67959fef42e5d4ef05ea7312495f5b76ea6a3080 data/utm/tags/item/add_piercing.json
-2b8e6b4a0faa0ab056fc79b19c3bc28f6656b7b1 data/utm/tags/item/add_power.json
+d376215bc3628b6ac94de0fd8e6bf426d61662fb data/utm/tags/item/add_power.json
 129891454b9eed21952fd2c0f6e4b95fdec20743 data/utm/tags/item/add_sharpness.json
 129891454b9eed21952fd2c0f6e4b95fdec20743 data/utm/tags/item/add_spear_recovery.json
 07f17e27f28bb5c9ef7a6981d495b2e956ca98e1 data/utm/tags/item/add_spear_throw.json

@@ -3,7 +3,7 @@
 // (powered by Fernflower decompiler)
 //
 
-package net.minecraft.world.item;
+package com.nadia.utm.item;
 
 import java.util.List;
 import net.minecraft.core.BlockPos;
@@ -16,6 +16,10 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.TieredItem;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.item.component.Tool;
 import net.minecraft.world.item.component.Tool.Rule;

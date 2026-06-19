@@ -2,6 +2,7 @@ package com.nadia.utm.registry.item.tool;
 
 import com.nadia.utm.event.ForceLoad;
 import com.nadia.utm.item.*;
+import com.nadia.utm.item.BatItem;
 import com.nadia.utm.item.spear.TNTThrowingSpearItem;
 import com.nadia.utm.item.spear.ThrowingSpearItem;
 import com.nadia.utm.registry.data.utmDataComponents;
@@ -14,8 +15,8 @@ import com.nadia.utm.tool.Paxel;
 import com.nadia.utm.tool.ShartSword;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.entity.ambient.Bat;
 import net.minecraft.world.item.*;
-import net.minecraft.world.item.BatItem;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -258,4 +259,8 @@ public class utmTools {
                 return new BundleofHisItem(new Item.Properties().rarity(Rarity.UNCOMMON).stacksTo(1));
             } //figure out why Shooting upwards is baad
     ).generated();
+    public static final utmItemContainer<StoneSlingshotItem> SLINGSHOT = register("slingshot", () -> {
+                return new StoneSlingshotItem(new Item.Properties().rarity(Rarity.RARE).stacksTo(1).durability(256));
+            } //figure out why Shooting upwards is baad
+    ).tags(Tags.Items.ENCHANTABLES, utmTags.ITEM.ADD_MULTISHOT, utmTags.ITEM.ADD_POWER, ItemTags.DURABILITY_ENCHANTABLE).handheld();
 }
