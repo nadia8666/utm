@@ -15,6 +15,7 @@ import com.nadia.utm.tool.ShartSword;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.BatItem;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -201,6 +202,11 @@ public class utmTools {
                 return new AridSlingshotItem(new Item.Properties().rarity(Rarity.RARE).stacksTo(1).durability(5000));
             } //figure out why Shooting upwards is baad
     ).tags(Tags.Items.ENCHANTABLES, utmTags.ITEM.ADD_MULTISHOT, utmTags.ITEM.ADD_POWER).handheld();
+    public static final utmItemContainer<Item> ARID_BAT = register("arid_bat", new Item.Properties().attributes(BatItem.createAttributes(utmToolBuilder.buildTier(
+            BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 2048, 2f, 0f, 15, () -> Ingredient.EMPTY
+    ), 7.75f, -2.9f, 10f)).stacksTo(1)).tags(ItemTags.FIRE_ASPECT_ENCHANTABLE).generated(); // don't make it a swordd !!!
+
+
 
 
     public static final utmItemContainer<SwordItem> SWORD2 = register("sword2", () -> {
@@ -218,6 +224,7 @@ public class utmTools {
         Tier tier = utmToolBuilder.buildTier(BlockTags.INCORRECT_FOR_WOODEN_TOOL, 1500, 1f, 0f, 0, () -> Ingredient.EMPTY);
         return new SwordItem(tier, new Item.Properties().rarity(Rarity.RARE).attributes(SwordItem.createAttributes(tier, 5, -2.8f)));
     });//todo: fix your sutpid Delay on your second attakc adn also your model
+    //todo: make it not whiff the first attack every time
 
     public static final utmItemContainer<ThrowingSpearItem> COPPER_THROWING_SPEAR = register("copper_throwing_spear", () -> new ThrowingSpearItem(new Item.Properties()
             .durability(350)
@@ -246,6 +253,7 @@ public class utmTools {
     public static final utmItemContainer<Item> GLOVE = register("glove", new Item.Properties().attributes(SwordItem.createAttributes(utmToolBuilder.buildTier(
             BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 1000, 2f, 0f, 15, () -> Ingredient.of(Items.LEATHER)
     ), 0, 4f)).stacksTo(1)).tags(ItemTags.DURABILITY_ENCHANTABLE).generated(); // don't make it a swordd !!!
+    //todo: make it have less knockback
     public static final utmItemContainer<BundleofHisItem> BUNDLE_OF_HIS = register("bundle_of_his", () -> {
                 return new BundleofHisItem(new Item.Properties().rarity(Rarity.UNCOMMON).stacksTo(1));
             } //figure out why Shooting upwards is baad
