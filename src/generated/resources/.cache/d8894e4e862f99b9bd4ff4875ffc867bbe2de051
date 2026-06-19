@@ -1,4 +1,4 @@
-// 1.21.1	2026-06-15T22:11:59.1206707	Item Models: utm
+// 1.21.1	2026-06-18T23:24:51.6034493	Item Models: utm
 6d60e0d2b0873e138bcfa8f5db0ca9cb6d7cd4fa assets/utm/models/item/adv_goggles.json
 0c35c7686bdc2e520fa2ede79bfa3e5855ad5ffc assets/utm/models/item/air_compressor.json
 9d13b4b18c25ee3c81b1cc65fd86954c95187339 assets/utm/models/item/aluminum_ingot.json
@@ -7,6 +7,7 @@ ac40583efcb0098da55da342d789a331c75c5c1a assets/utm/models/item/aluminum_sheet.j
 f85ad09360d471517691bb8e41bd27134f3c04e9 assets/utm/models/item/ancient_apple.json
 17a1762413883e806058bc2d0cc8d5a35747e4f1 assets/utm/models/item/antiwater_bucket.json
 d00e8bbfc690b4038dc14ac052a6dac3f8578493 assets/utm/models/item/antiwater_canister.json
+894361477482d77d828402f23c49c7fdbaec4171 assets/utm/models/item/antiwater_canister_light.json
 afded1bb03411dbf8693280811f28dbf45568295 assets/utm/models/item/antiwater_conduit.json
 679773fb2dc807de14de241f634f4748c3b5e0e4 assets/utm/models/item/arid_axe.json
 e3bb1408fb222598c9b84d2b5549f10607252f97 assets/utm/models/item/arid_block.json
@@ -34,6 +35,7 @@ bc9e209da310ceed24cf8511ef375493917308c7 assets/utm/models/item/copper_shovel.js
 a49b44fb09b01d0016ad92420e4bbbc8d750c2bb assets/utm/models/item/electrase.json
 c75c3d20965f4de54cb4e2796b9689335190d361 assets/utm/models/item/electromagneticcore.json
 ed016039ee06c74188b9bb6033d5c24f91bf8d3e assets/utm/models/item/electro_canister.json
+bb3028e9b8f14d373c1a0487e04fdadf713bbf6f assets/utm/models/item/electro_canister_light.json
 ceafd2066417f1a8f93c0d45bab1628d1df45c81 assets/utm/models/item/elytra_trim_ecologist.json
 22e1fac4c57ae8fe6cb7c6d3a3be407a7658e072 assets/utm/models/item/elytra_trim_heartstwings.json
 9a8330762b9da0d24e32cd93732263ecc3a2cf66 assets/utm/models/item/elytra_trim_lesser.json
@@ -91,6 +93,7 @@ af1e629fbeb59dec7607fbae2d305b3d5cdeffdd assets/utm/models/item/solid_thruster.j
 e1ba66d20505138a6af97fb76fd16a7ea431e252 assets/utm/models/item/sword2.json
 7f2b0c2e17bf3a1beaeccf91b4bee1ea1783a1ff assets/utm/models/item/sword_of_kirk.json
 eae1cb358b44edb4605c80f9460949d4afc2acbf assets/utm/models/item/thanos_blocks.json
+03ed226a2a2767348838534780e08787dcb54c57 assets/utm/models/item/thanos_blocks_eviles.json
 f1cefbdd825de2c846db523aaa127e00487fd9a1 assets/utm/models/item/tool_apple.json
 f286a70aaa613920082a80ecabbdb47b3da4be50 assets/utm/models/item/unassabeled.json
 4bb429556d32c018342d162fceee88326f55c9a6 assets/utm/models/item/unfinished_arid_ingot.json

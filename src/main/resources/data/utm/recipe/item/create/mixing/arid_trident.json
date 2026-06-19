@@ -1,0 +1,30 @@
+{
+  "type": "create:mixing",
+  "heat_requirement": "superheated",
+  "ingredients": [
+    {
+      "fluid": "utm:antiwater",
+      "type": "fluid_stack",
+      "amount": 10000
+    },
+    {
+      "fluid": "minecraft:lava",
+      "type": "fluid_stack",
+      "amount": 10000
+    },
+    {
+      "item": "minecraft:trident",
+      "count": 1
+    },
+    {
+      "item": "utm:tool_apple",
+      "count": 1
+    }
+  ],
+  "results": [
+    {
+      "id": "utm:arid_trident",
+      "count": 1
+    }
+  ]
+}
