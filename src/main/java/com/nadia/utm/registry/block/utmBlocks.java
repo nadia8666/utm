@@ -234,6 +234,11 @@ public class utmBlocks {
             //make it lightweight. like aero style. but its super durabile
             .noLootTable()
             .sound(SoundType.SLIME_BLOCK)).cube().inheritModel().minePick().mineHoe();
+    public static final utmBlockContainer<Block, BlockItem> THANOS_BLOCKS_EVILES = dualRegister("thanos_blocks_eviles", Block::new, BlockBehaviour.Properties.of()
+            .destroyTime(20)
+            //make it heavy. like not aero style. but its super fragiel
+            .noLootTable()
+            .sound(SoundType.SLIME_BLOCK)).cube().inheritModel().minePick().mineHoe();
     public static final utmBlockContainer<Block, BlockItem> ARID_BLOCK = dualRegister("arid_block", Block::new, BlockBehaviour.Properties.of()
             .destroyTime(6)
             .sound(SoundType.HEAVY_CORE)).cube().inheritModel().dropSelf().minePick();

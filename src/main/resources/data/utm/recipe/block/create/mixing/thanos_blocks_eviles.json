@@ -1,0 +1,21 @@
+{
+  "type": "create:mixing",
+  "heat_requirement": "superheated",
+  "ingredients": [
+    {
+      "fluid": "utm:antiwater",
+      "type": "fluid_stack",
+      "amount": 15
+    },
+    {
+      "item": "utm:thanos_blocks",
+      "count": 1
+    }
+  ],
+  "results": [
+    {
+      "id": "utm:thanos_blocks_eviles",
+      "count": 1
+    }
+  ]
+}

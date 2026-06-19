@@ -9,15 +9,6 @@
     "i": {
       "item": "minecraft:stick"
     },
-    "g": {
-      "item": "minecraft:lead"
-    },
-    "c": {
-      "item": "minecraft:cyan_dye"
-    },
-    "o": {
-      "item": "minecraft:orange_dye"
-    },
     "r": {
       "item": "minecraft:redstone"
     }
