@@ -1,4 +1,4 @@
-// 1.21.1	2026-06-19T19:00:57.9308406	Item Models: utm
+// 1.21.1	2026-06-24T21:57:28.8689814	Item Models: utm
 6d60e0d2b0873e138bcfa8f5db0ca9cb6d7cd4fa assets/utm/models/item/adv_goggles.json
 0c35c7686bdc2e520fa2ede79bfa3e5855ad5ffc assets/utm/models/item/air_compressor.json
 9d13b4b18c25ee3c81b1cc65fd86954c95187339 assets/utm/models/item/aluminum_ingot.json
@@ -33,6 +33,7 @@ bc9e209da310ceed24cf8511ef375493917308c7 assets/utm/models/item/copper_shovel.js
 664d628331adc157b5851bb5683780c26db4a20e assets/utm/models/item/copper_sword.json
 45adf5bfefbbf2ac9a65312108e3a162b3d2cc41 assets/utm/models/item/corrective_apple.json
 4428dd779cf1c9ca27647bfcc5b94d90421be4ad assets/utm/models/item/cyclesword.json
+aa5fa2ab1c1678079dbcf43533a18f744445a67e assets/utm/models/item/cyclesword_dull.json
 a49b44fb09b01d0016ad92420e4bbbc8d750c2bb assets/utm/models/item/electrase.json
 c75c3d20965f4de54cb4e2796b9689335190d361 assets/utm/models/item/electromagneticcore.json
 ed016039ee06c74188b9bb6033d5c24f91bf8d3e assets/utm/models/item/electro_canister.json

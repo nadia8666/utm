@@ -122,6 +122,14 @@ public class utmTools {
             }
     ).tags(Tags.Items.ENCHANTABLES, ItemTags.SWORD_ENCHANTABLE, ItemTags.WEAPON_ENCHANTABLE, ItemTags.DURABILITY_ENCHANTABLE, ItemTags.SWORDS).handheld();
 
+    public static final utmItemContainer<SwordItem> CYCLESWORD_DULL = register("cyclesword_dull", () -> {
+                Tier tier = utmToolBuilder.buildTier(
+                        BlockTags.INCORRECT_FOR_WOODEN_TOOL, 400, 1f, 0f, 15, () -> Ingredient.of(Tags.Items.INGOTS_IRON)
+                );
+                return new SwordItem(tier, new Item.Properties().attributes(
+                        SwordItem.createAttributes(tier, 2.32f, -1f)));
+            }
+    ).tags(Tags.Items.ENCHANTABLES, ItemTags.SWORD_ENCHANTABLE, ItemTags.WEAPON_ENCHANTABLE, ItemTags.DURABILITY_ENCHANTABLE, ItemTags.SWORDS).handheld();
 
 
     //fusions
