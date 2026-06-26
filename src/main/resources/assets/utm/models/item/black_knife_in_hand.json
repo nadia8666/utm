@@ -1,0 +1,55 @@
+{
+	"loader": "neoforge:obj",
+	"format_version": "1.9.0",
+	"credit": " nadia ais ",
+	"flip_v": true,
+	"model": "utm:models/item/black_knife.obj",
+	"textures": {
+		"1": "utm:item/black_knife"
+	},
+	"display": {
+		"thirdperson_righthand": {
+			"translation": [12, 6.75, 12],
+			"scale": [1.5, 1.5, 1.5]
+		},
+		"thirdperson_lefthand": {
+			"translation": [12, 6.75, 12],
+			"scale": [-1.5, 1.5, 1.5]
+		},
+		"firstperson_righthand": {
+			"rotation": [15, 15, 2.27],
+			"translation": [11.5, 2.25, 5.25],
+			"scale": [1.01, 1.01, 1.01]
+		},
+		"firstperson_lefthand": {
+			"rotation": [15, 15, 2.27],
+			"translation": [11.5, 2.25, 5.25],
+			"scale": [-1.01, 1.01, 1.01]
+		},
+		"ground": {
+			"rotation": [0, 0, 52],
+			"translation": [16, 17, 17],
+			"scale": [2.06, 2.06, 2.06]
+		},
+		"gui": {
+			"rotation": [-82.29, 45, -138],
+			"translation": [1.75, 13, 3],
+			"scale": [1.36, 1.36, 1.36]
+		},
+		"head": {
+			"rotation": [-68, 0, 0],
+			"translation": [32, 40.5, -6],
+			"scale": [4, 4, 4]
+		},
+		"fixed": {
+			"rotation": [-86.94, 42.7, 87.93],
+			"translation": [21.25, 20.25, -27],
+			"scale": [3.32, 3.32, 3.32]
+		},
+		"on_shelf": {
+			"rotation": [-90, -68, -90],
+			"translation": [-21.75, 2.75, 25.25],
+			"scale": [2.58, 2.58, 2.58]
+		}
+	}
+}

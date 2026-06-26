@@ -1,22 +1,22 @@
 {
   "values": [
-    "utm:magnesium_ore",
-    "utm:portasealer",
-    "utm:thanos_blocks",
-    "utm:gimbal",
+    "utm:biome_sealer",
+    "utm:launch_contraption",
+    "utm:heavy_metal_anvil",
+    "utm:liquid_thruster",
     "utm:grate",
-    "utm:arid_block",
-    "utm:oxygen_collector",
-    "utm:solid_thruster",
+    "utm:magnesium_ore",
     "utm:oxygen_furnace",
     "utm:ion_jet",
-    "utm:launch_contraption",
-    "utm:biome_sealer",
-    "utm:liquid_thruster",
-    "utm:large_basin",
-    "utm:thanos_blocks_eviles",
-    "utm:heavy_metal_anvil",
     "utm:aluminum_ore",
-    "utm:gimbal_plate"
+    "utm:portasealer",
+    "utm:gimbal",
+    "utm:solid_thruster",
+    "utm:oxygen_collector",
+    "utm:large_basin",
+    "utm:gimbal_plate",
+    "utm:thanos_blocks_eviles",
+    "utm:arid_block",
+    "utm:thanos_blocks"
   ]
 }

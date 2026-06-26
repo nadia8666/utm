@@ -151,7 +151,7 @@ public class utmTools {
             } //todo: why does this have two arrow hit sfx?
     ).tags(Tags.Items.ENCHANTABLES, ItemTags.SWORD_ENCHANTABLE, ItemTags.WEAPON_ENCHANTABLE, ItemTags.DURABILITY_ENCHANTABLE, ItemTags.SWORDS).handheld();
 
-    //arid
+    /// arid
     //todo: you should make all of these fire res
 
     public static final utmItemContainer<SwordItem> ARID_SWORD = register("arid_sword", () -> {
@@ -235,6 +235,9 @@ public class utmTools {
     });//todo: fix your sutpid Delay on your second attakc adn also your model
     //todo: make it not whiff the first attack every time
 
+
+    /// spears
+
     public static final utmItemContainer<ThrowingSpearItem> COPPER_THROWING_SPEAR = register("copper_throwing_spear", () -> new ThrowingSpearItem(new Item.Properties()
             .durability(350)
             .component(utmDataComponents.THROWING_SPEAR_MODEL, "copper_throwing_spear")
@@ -251,6 +254,10 @@ public class utmTools {
             .component(utmDataComponents.THROWING_SPEAR_MODEL, "tnt_throwing_spear")
             .stacksTo(16), 2.5F, -3.55F)
     ).tags(ItemTags.VANISHING_ENCHANTABLE, utmTags.ITEM.ADD_SPEAR_THROW, utmTags.ITEM.ADD_MENDING);
+
+
+
+
     public static final utmItemContainer<PickaxeItem> GREENLINE_DIAMOND_PICKAXE = register("greenline_diamond_pickaxe", () -> {
                 Tier tier = utmToolBuilder.buildTier(
                         BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 1561, 8f, 0f, 150, () -> Ingredient.of(Items.DIAMOND)
@@ -271,4 +278,13 @@ public class utmTools {
                 return new StoneSlingshotItem(new Item.Properties().rarity(Rarity.RARE).stacksTo(1).durability(256));
             } //figure out why Shooting upwards is baad
     ).tags(Tags.Items.ENCHANTABLES, utmTags.ITEM.ADD_MULTISHOT, utmTags.ITEM.ADD_POWER, ItemTags.DURABILITY_ENCHANTABLE).handheld();
+
+    public static final utmItemContainer<SwordItem> BLACK_KNIFE = register("black_knife", () -> {
+                Tier tier = utmToolBuilder.buildTier(
+                        BlockTags.INCORRECT_FOR_NETHERITE_TOOL, 2031, 5f, 0f, 15, () -> Ingredient.EMPTY
+                );
+                return new SwordItem(tier, new Item.Properties().attributes(
+                        SwordItem.createAttributes(tier, 7f, -2.4f)).rarity(Rarity.RARE));
+            }
+    ).tags(Tags.Items.ENCHANTABLES, ItemTags.SWORD_ENCHANTABLE, ItemTags.WEAPON_ENCHANTABLE, ItemTags.FIRE_ASPECT_ENCHANTABLE, ItemTags.DURABILITY_ENCHANTABLE, ItemTags.SWORDS);
 }

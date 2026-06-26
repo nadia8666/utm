@@ -1,13 +1,13 @@
-// 1.21.1	2026-06-24T21:57:28.875577	Tags for minecraft:block mod id utm
+// 1.21.1	2026-06-26T12:54:36.2138222	Tags for minecraft:block mod id utm
 6cd88e214573b659c707666abea9d2e53d37d1ef data/minecraft/tags/block/anvil.json
-99370b002297eaabd86f0624c2e7780a04051eb9 data/minecraft/tags/block/mineable/axe.json
-16b05738e0b1e114da2763f9b5d7e1b765dbca1b data/minecraft/tags/block/mineable/hoe.json
-99db6286b2a26dc1b6b63f271b66901ca4cf2cd1 data/minecraft/tags/block/mineable/pickaxe.json
+99e9fab1f8e962688c5147abe13cb800d99600ef data/minecraft/tags/block/mineable/axe.json
+d4644ffc5684a0d28ffaa7a1fa8b0564195ec0a7 data/minecraft/tags/block/mineable/hoe.json
+bf7c0669789fe8b7ae40fea1f2177f2c1bb83003 data/minecraft/tags/block/mineable/pickaxe.json
 49c587577aa7effe1d58a338d982138e2aa25f7a data/minecraft/tags/block/mineable/shovel.json
-69256f6b1b042d310444ef6b2757c218ee0d1a18 data/minecraft/tags/block/needs_diamond_tool.json
-396f37194c263de8aa77e6cf73f375068218b192 data/minecraft/tags/block/needs_iron_tool.json
-646c01c52ddfeb4c6493351c489cc8d4b42278ff data/minecraft/tags/block/needs_stone_tool.json
-099db74119ac328362063c9a047cfa5dc58ee42f data/utm/tags/block/a23_ore_replaceable.json
+ec7103aa6d27b4433a78b806a9c885409102e51e data/minecraft/tags/block/needs_diamond_tool.json
+0269d2a8e78b1a33708f98dc0a5404a17afc9a62 data/minecraft/tags/block/needs_iron_tool.json
+f7fed015091bdac2ce4cd1727187c0e7742e89d8 data/minecraft/tags/block/needs_stone_tool.json
+93a7461bcfde611889c1b43d424265b6f6ec1490 data/utm/tags/block/a23_ore_replaceable.json
 6dac52f5715696e65598c64bafe11c785e24cf11 data/utm/tags/block/bypass_max_rpm.json
 2a44e8cdee6d1ea5ffbc3c9b51efbda3f8201a63 data/utm/tags/block/seal_noprop.json
 150da1135a6d5d7b9cb1ec65250c0aceaa835dff data/utm/tags/block/solid_rocket_fuel.json

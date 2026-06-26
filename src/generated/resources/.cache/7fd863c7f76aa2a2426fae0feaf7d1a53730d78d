@@ -1,23 +1,23 @@
-// 1.21.1	2026-06-24T21:57:28.8644722	Tags for minecraft:item mod id utm
+// 1.21.1	2026-06-26T12:40:23.5533802	Tags for minecraft:item mod id utm
 66adac5ce76e09f7316b3221e955af75b73eb2c5 data/c/tags/item/buckets.json
-3ebc7b93b07748e726c6f0dbb74d6aeaea25fef4 data/c/tags/item/enchantables.json
+a779488b83e88f0b606a46a046e6af12e6a514dd data/c/tags/item/enchantables.json
 cc5ee93a6de880a1acd213e033d0123d2bb90869 data/c/tags/item/music_discs.json
 d2b273c656d3df662d72e9250b2eb9a40a66cb10 data/c/tags/item/tools/shield.json
 6cd88e214573b659c707666abea9d2e53d37d1ef data/minecraft/tags/item/anvil.json
 c0deb5e075f3767f4d126778320fefc3168e0711 data/minecraft/tags/item/axes.json
 f4c3db116b1c88abe3f5aec2a85614e85916409a data/minecraft/tags/item/enchantable/chest_armor.json
-b1bc617cd2007baf496b2eccf105013b78226cf9 data/minecraft/tags/item/enchantable/durability.json
+cde0269c7492dd192a00b9d73c40c3b33158c3d2 data/minecraft/tags/item/enchantable/durability.json
 f4c3db116b1c88abe3f5aec2a85614e85916409a data/minecraft/tags/item/enchantable/equippable.json
-d0f95333a334936757753e44b2e783d61f746f03 data/minecraft/tags/item/enchantable/fire_aspect.json
+6c6fb6b7c5391952a4c34261ee07d10ac249372d data/minecraft/tags/item/enchantable/fire_aspect.json
 2e6070e8a11cb15e3a939b93ed32d846d597427d data/minecraft/tags/item/enchantable/mining.json
 f227975eaf1956e2c82fa940a8a696e830fac972 data/minecraft/tags/item/enchantable/mining_loot.json
-0edf34fad615cc0e2b9f91d8575436ad186b8f1b data/minecraft/tags/item/enchantable/sword.json
+bc4c41a5b4f421ea9e73a598793a51ea4531ae8a data/minecraft/tags/item/enchantable/sword.json
 07f17e27f28bb5c9ef7a6981d495b2e956ca98e1 data/minecraft/tags/item/enchantable/vanishing.json
-0edf34fad615cc0e2b9f91d8575436ad186b8f1b data/minecraft/tags/item/enchantable/weapon.json
+bc4c41a5b4f421ea9e73a598793a51ea4531ae8a data/minecraft/tags/item/enchantable/weapon.json
 7f6df682e7109ccf2cb863b9b53b3c066e85a1e2 data/minecraft/tags/item/hoes.json
 b64e1f68795c6ed04e99d1b4b76c5f54201b74f7 data/minecraft/tags/item/pickaxes.json
 98da6b0748decfc17f02fa4fe8cc27a1aae0de38 data/minecraft/tags/item/shovels.json
-63b9974797cc2ff30e70367e25e94cecadd72551 data/minecraft/tags/item/swords.json
+1319de224bfec3b89a5aea9a22948b3a5332c2bd data/minecraft/tags/item/swords.json
 1ce4e06e062979db32ba844b3c947f681546b641 data/minecraft/tags/item/trim_templates.json
 0aa63e91d5b719a4dad4b7f2802ef031d5f0c527 data/utm/tags/item/add_mending.json
 d376215bc3628b6ac94de0fd8e6bf426d61662fb data/utm/tags/item/add_multishot.json

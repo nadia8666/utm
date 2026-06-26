@@ -1,0 +1,12 @@
+{
+  "loader": "neoforge:separate_transforms",
+  "gui_light": "front",
+  "base": {
+    "parent": "utm:item/black_knife_in_hand"
+  },
+  "perspectives": {
+    "ground": {
+      "parent": "utm:item/black_knife_in_hand"
+    }
+  }
+}

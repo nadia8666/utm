@@ -1,7 +1,7 @@
 {
   "values": [
-    "utm:player_chunk_loader",
+    "utm:chunk_loader",
     "utm:glint_table",
-    "utm:chunk_loader"
+    "utm:player_chunk_loader"
   ]
 }
