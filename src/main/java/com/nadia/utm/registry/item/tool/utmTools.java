@@ -13,6 +13,8 @@ import com.nadia.utm.registry.utmRegistry;
 import com.nadia.utm.tool.CopperSword;
 import com.nadia.utm.tool.Paxel;
 import com.nadia.utm.tool.ShartSword;
+import net.minecraft.Util;
+import net.minecraft.core.Holder;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.ambient.Bat;
@@ -22,6 +24,7 @@ import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
+import java.util.EnumMap;
 import java.util.function.Supplier;
 
 @ForceLoad(deps = {utmRegistry.class, utmTags.class})
@@ -43,9 +46,33 @@ public class utmTools {
         return new utmItemContainer<>(name, item);
     }
 
+
+    //tiers
+
     public static final Tier TIER_COPPER = utmToolBuilder.buildTier(
             BlockTags.INCORRECT_FOR_IRON_TOOL, 0, 7f, 2, 67,
             () -> Ingredient.of(Tags.Items.INGOTS_COPPER));
+
+
+    public static final Holder<ArmorMaterial> ULTRA_ARMOR_MATERIAL = utmToolBuilder.buildArmorTier("ultra",
+            Util.make(new EnumMap<>(ArmorItem.Type.class), attribute -> {
+                attribute.put(ArmorItem.Type.BOOTS, 1);
+                attribute.put(ArmorItem.Type.LEGGINGS, 2);
+                attribute.put(ArmorItem.Type.CHESTPLATE, 4);
+                attribute.put(ArmorItem.Type.HELMET, 1);
+                attribute.put(ArmorItem.Type.BODY, 15);
+            }) , 30, 8f, 0.0f, () -> Items.AIR);
+    public static final Holder<ArmorMaterial> MEGA_ARMOR_MATERIAL = utmToolBuilder.buildArmorTier("mega",
+            Util.make(new EnumMap<>(ArmorItem.Type.class), attribute -> {
+                attribute.put(ArmorItem.Type.BOOTS, 5);
+                attribute.put(ArmorItem.Type.LEGGINGS, 7);
+                attribute.put(ArmorItem.Type.CHESTPLATE, 10);
+                attribute.put(ArmorItem.Type.HELMET, 5);
+                attribute.put(ArmorItem.Type.BODY, 30);
+            }) , 30, -2f, -1.0f, () -> Items.AIR);
+
+
+    //copper
 
     public static final utmItemContainer<CopperSword> COPPER_SWORD = register("copper_sword", () -> new CopperSword(TIER_COPPER,
             new Item.Properties().attributes(
@@ -287,4 +314,26 @@ public class utmTools {
                         SwordItem.createAttributes(tier, 7f, -2.4f)).rarity(Rarity.RARE));
             }
     ).tags(Tags.Items.ENCHANTABLES, ItemTags.SWORD_ENCHANTABLE, ItemTags.WEAPON_ENCHANTABLE, ItemTags.FIRE_ASPECT_ENCHANTABLE, ItemTags.DURABILITY_ENCHANTABLE, ItemTags.SWORDS);
+
+    //armor
+
+    //ArmorItem.Type.HELMET.getDurability(factor)
+    public static final utmItemContainer<ArmorItem> MEGA_HELMET = register("mega_helmet", () -> new ArmorItem(MEGA_ARMOR_MATERIAL, ArmorItem.Type.HELMET,
+            new Item.Properties().durability(10).rarity(utmRarities.MYSTIC.getValue()))).tags(Tags.Items.ENCHANTABLES, ItemTags.DURABILITY_ENCHANTABLE, ItemTags.ARMOR_ENCHANTABLE, ItemTags.HEAD_ARMOR, ItemTags.HEAD_ARMOR_ENCHANTABLE).generated();
+    public static final utmItemContainer<ArmorItem> MEGA_CHESTPLATE = register("mega_chestplate", () -> new ArmorItem(MEGA_ARMOR_MATERIAL, ArmorItem.Type.CHESTPLATE,
+            new Item.Properties().durability(10).rarity(utmRarities.MYSTIC.getValue()))).tags(Tags.Items.ENCHANTABLES, ItemTags.DURABILITY_ENCHANTABLE, ItemTags.ARMOR_ENCHANTABLE, ItemTags.CHEST_ARMOR, ItemTags.CHEST_ARMOR_ENCHANTABLE).generated();
+    public static final utmItemContainer<ArmorItem> MEGA_LEGGINGS = register("mega_leggings", () -> new ArmorItem(MEGA_ARMOR_MATERIAL, ArmorItem.Type.LEGGINGS,
+            new Item.Properties().durability(10).rarity(utmRarities.MYSTIC.getValue()))).tags(Tags.Items.ENCHANTABLES, ItemTags.DURABILITY_ENCHANTABLE, ItemTags.ARMOR_ENCHANTABLE, ItemTags.LEG_ARMOR, ItemTags.LEG_ARMOR_ENCHANTABLE).generated();
+    public static final utmItemContainer<ArmorItem> MEGA_BOOTS = register("mega_boots", () -> new ArmorItem(MEGA_ARMOR_MATERIAL, ArmorItem.Type.BOOTS,
+            new Item.Properties().durability(10).rarity(utmRarities.MYSTIC.getValue()))).tags(Tags.Items.ENCHANTABLES, ItemTags.DURABILITY_ENCHANTABLE, ItemTags.ARMOR_ENCHANTABLE, ItemTags.FOOT_ARMOR, ItemTags.FOOT_ARMOR_ENCHANTABLE).generated();
+
+    public static final utmItemContainer<ArmorItem> ULTRA_HELMET = register("ultra_helmet", () -> new ArmorItem(ULTRA_ARMOR_MATERIAL, ArmorItem.Type.HELMET,
+            new Item.Properties().durability(10).rarity(utmRarities.MYSTIC.getValue()))).tags(Tags.Items.ENCHANTABLES, ItemTags.DURABILITY_ENCHANTABLE, ItemTags.ARMOR_ENCHANTABLE, ItemTags.HEAD_ARMOR, ItemTags.HEAD_ARMOR_ENCHANTABLE).generated();
+    public static final utmItemContainer<ArmorItem> ULTRA_CHESTPLATE = register("ultra_chestplate", () -> new ArmorItem(ULTRA_ARMOR_MATERIAL, ArmorItem.Type.CHESTPLATE,
+            new Item.Properties().durability(10).rarity(utmRarities.MYSTIC.getValue()))).tags(Tags.Items.ENCHANTABLES, ItemTags.DURABILITY_ENCHANTABLE, ItemTags.ARMOR_ENCHANTABLE, ItemTags.CHEST_ARMOR, ItemTags.CHEST_ARMOR_ENCHANTABLE).generated();
+    public static final utmItemContainer<ArmorItem> ULTRA_LEGGINGS = register("ultra_leggings", () -> new ArmorItem(ULTRA_ARMOR_MATERIAL, ArmorItem.Type.LEGGINGS,
+            new Item.Properties().durability(10).rarity(utmRarities.MYSTIC.getValue()))).tags(Tags.Items.ENCHANTABLES, ItemTags.DURABILITY_ENCHANTABLE, ItemTags.ARMOR_ENCHANTABLE, ItemTags.LEG_ARMOR, ItemTags.LEG_ARMOR_ENCHANTABLE).generated();
+    public static final utmItemContainer<ArmorItem> ULTRA_BOOTS = register("ultra_boots", () -> new ArmorItem(ULTRA_ARMOR_MATERIAL, ArmorItem.Type.BOOTS,
+            new Item.Properties().durability(10).rarity(utmRarities.MYSTIC.getValue()))).tags(Tags.Items.ENCHANTABLES, ItemTags.DURABILITY_ENCHANTABLE, ItemTags.ARMOR_ENCHANTABLE, ItemTags.FOOT_ARMOR, ItemTags.FOOT_ARMOR_ENCHANTABLE).generated();
+
 }
