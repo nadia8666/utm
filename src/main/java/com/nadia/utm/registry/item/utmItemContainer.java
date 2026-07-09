@@ -54,6 +54,10 @@ public class utmItemContainer<I extends Item> {
         getForDatagen().add("generated");
         return this;
     }
+    public utmItemContainer<I> trimmable() {
+        getForDatagen().add("trimmable");
+        return this;
+    }
 
     /**
      * automatically generate the item model (handheldItem)

@@ -11,6 +11,7 @@ import com.nadia.utm.registry.codec.utmCodecs;
 import com.nadia.utm.registry.data.utmDataComponents;
 import com.nadia.utm.registry.entity.utmEntities;
 import com.nadia.utm.registry.fluid.utmFluids;
+import com.nadia.utm.registry.item.utmArmorMaterials;
 import com.nadia.utm.registry.item.utmItems;
 import com.nadia.utm.registry.loot.utmLoot;
 import com.nadia.utm.registry.particle.utmParticles;
@@ -36,6 +37,7 @@ public class utmRegistry {
     public static final DeferredRegister<CreativeModeTab> TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, "utm");
     public static final DeferredRegister.DataComponents COMPONENTS = utmDataComponents.COMPONENTS;
     public static final DeferredRegister.Items ITEMS = utmItems.ITEMS;
+    public static final DeferredRegister<?> ARMOR = utmArmorMaterials.ARMOR;
     public static final DeferredRegister.Blocks BLOCKS = utmBlocks.BLOCKS;
     public static final DeferredRegister<?> MENUS = utmMenus.MENUS;
     public static final DeferredRegister<?> BLOCK_ENTITIES = utmBlockEntities.BLOCK_ENTITIES;
@@ -79,6 +81,7 @@ public class utmRegistry {
         ENTITY_DATA_SERIALIZERS.register(modEventBus);
         BLOCKS.register(modEventBus);
         ITEMS.register(modEventBus);
+        ARMOR.register(modEventBus);
         BLOCK_ENTITIES.register(modEventBus);
         DISPLAY_SOURCES.register(modEventBus);
         COMPONENTS.register(modEventBus);
