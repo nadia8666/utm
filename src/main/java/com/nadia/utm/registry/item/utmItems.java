@@ -107,10 +107,10 @@ public class utmItems {
             STEEL_SHEET = register("steel_sheet").generated(),
             COPPER_PLATING = register("copper_plating").generated(),
             ELECTRO_CANISTER = register("electro_canister").generated(),
-            ANTIWATER_CANISTER = register("antiwater_canister", new Item.Properties().stacksTo(1)).generated(), //todo: think about making this lossy
+            ANTIWATER_CANISTER = register("antiwater_canister", new Item.Properties().stacksTo(1)).generated(), //todo: think about making this lossy, also same as below
             ANTIWATER_CONDUIT = register("antiwater_conduit", new Item.Properties().stacksTo(1)).generated(),
-            ELECTRO_CANISTER_LIGHT = register("electro_canister_light").generated(),
-            ANTIWATER_CANISTER_LIGHT = register("antiwater_canister_light", new Item.Properties().stacksTo(4)).generated(), //todo: think about making this lossy
+            ELECTRO_CANISTER_LIGHT = register("electro_canister_light").generated(), //todo: needs antiwater rarity
+            ANTIWATER_CANISTER_LIGHT = register("antiwater_canister_light", new Item.Properties().stacksTo(4)).generated(), // same as above
             PARTICASE = register("particase", new Item.Properties().stacksTo(1)).generated(),
             ELECTRASE = register("electrase", new Item.Properties().stacksTo(1)).generated(),
             POSITRASE = register("positrase", new Item.Properties().stacksTo(1)).generated();
@@ -127,11 +127,13 @@ public class utmItems {
                     new Item.Properties().food(new FoodProperties.Builder().alwaysEdible().nutrition(2).saturationModifier(2).build())).generated(),
             CLOCKWORK_APPLE = register("clockwork_apple",
                     new Item.Properties().food(new FoodProperties.Builder().alwaysEdible().nutrition(2).saturationModifier(2).build())).generated(),
-            NAUGHT_APPLE = register("naught_apple",
+            NAUGHT_APPLE = register("naught_apple", //needs mystic
                     new Item.Properties().food(new FoodProperties.Builder().alwaysEdible().nutrition(2).saturationModifier(2).build())).generated(),
-            CORRECTIVE_APPLE = register("corrective_apple",
+            CORRECTIVE_APPLE = register("corrective_apple", //needs mystic
                     new Item.Properties().food(new FoodProperties.Builder().alwaysEdible().nutrition(2).saturationModifier(2).build())).generated(),
             TOOL_APPLE = register("tool_apple",
-                   new Item.Properties().food(new FoodProperties.Builder().alwaysEdible().nutrition(2).saturationModifier(2).build())).generated();
+                   new Item.Properties().food(new FoodProperties.Builder().alwaysEdible().nutrition(2).saturationModifier(2).build())).generated(),
+            ARMOR_APPLE = register("armor_apple",
+                    new Item.Properties().food(new FoodProperties.Builder().alwaysEdible().nutrition(2).saturationModifier(2).build())).generated();
     
 }

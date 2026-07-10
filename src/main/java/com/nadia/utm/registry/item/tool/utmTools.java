@@ -230,7 +230,7 @@ public class utmTools {
     ).tags(Tags.Items.ENCHANTABLES, utmTags.ITEM.ADD_MULTISHOT, utmTags.ITEM.ADD_POWER).handheld();
     public static final utmItemContainer<Item> ARID_BAT = register("arid_bat", new Item.Properties().attributes(BatItem.createAttributes(utmToolBuilder.buildTier(
             BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 2048, 2f, 0f, 15, () -> Ingredient.EMPTY
-    ), 7.75f, -2.9f, 10f)).stacksTo(1)).tags(ItemTags.FIRE_ASPECT_ENCHANTABLE).generated(); // don't make it a swordd !!!
+    ), 7.75f, -2.9f, 10f)).stacksTo(1).rarity(utmRarities.MYSTIC.getValue())).tags(ItemTags.FIRE_ASPECT_ENCHANTABLE).generated(); // don't make it a swordd !!!
 
 
 
@@ -317,7 +317,7 @@ public class utmTools {
     public static final utmItemContainer<ArmorItem> MEGA_BOOTS = register("mega_boots", () -> new ArmorItem(MEGA_ARMOR_MATERIAL, ArmorItem.Type.BOOTS,
             new Item.Properties().durability(10).rarity(utmRarities.MYSTIC.getValue()))).tags(Tags.Items.ENCHANTABLES, ItemTags.DURABILITY_ENCHANTABLE, ItemTags.ARMOR_ENCHANTABLE, ItemTags.FOOT_ARMOR, ItemTags.FOOT_ARMOR_ENCHANTABLE, ItemTags.TRIMMABLE_ARMOR).trimmable();
 
-    public static final utmItemContainer<ArmorItem> ULTRA_HELMET = register("ultra_helmet", () -> new ArmorItem(ULTRA_ARMOR_MATERIAL, ArmorItem.Type.HELMET,
+        public static final utmItemContainer<ArmorItem> ULTRA_HELMET = register("ultra_helmet", () -> new ArmorItem(ULTRA_ARMOR_MATERIAL, ArmorItem.Type.HELMET,
             new Item.Properties().durability(10).rarity(utmRarities.MYSTIC.getValue()))).tags(Tags.Items.ENCHANTABLES, ItemTags.DURABILITY_ENCHANTABLE, ItemTags.ARMOR_ENCHANTABLE, ItemTags.HEAD_ARMOR, ItemTags.HEAD_ARMOR_ENCHANTABLE, ItemTags.TRIMMABLE_ARMOR).trimmable();
     public static final utmItemContainer<ArmorItem> ULTRA_CHESTPLATE = register("ultra_chestplate", () -> new ArmorItem(ULTRA_ARMOR_MATERIAL, ArmorItem.Type.CHESTPLATE,
             new Item.Properties().durability(10).rarity(utmRarities.MYSTIC.getValue()))).tags(Tags.Items.ENCHANTABLES, ItemTags.DURABILITY_ENCHANTABLE, ItemTags.ARMOR_ENCHANTABLE, ItemTags.CHEST_ARMOR, ItemTags.CHEST_ARMOR_ENCHANTABLE, ItemTags.TRIMMABLE_ARMOR).trimmable();

@@ -1,0 +1,21 @@
+{
+  "type": "create:mixing",
+  "heat_requirement": "superheated",
+  "ingredients": [
+    {
+      "fluid": "utm:antiwater",
+      "type": "fluid_stack",
+      "amount": 10000
+    },
+    {
+      "item": "utm:music_disc_undertale",
+      "count": 1
+    }
+  ],
+  "results": [
+    {
+      "id": "utm:music_disc_undertale2",
+      "count": 1
+    }
+  ]
+}

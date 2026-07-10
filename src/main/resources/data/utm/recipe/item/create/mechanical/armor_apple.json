@@ -1,0 +1,44 @@
+{
+  "type": "create:mechanical_crafting",
+  "accept_mirrored": true,
+  "category": "apple",
+  "pattern": [
+    "  AAAAA  ",
+    " A12345A ",
+    "A1234512A",
+    "A345A123A",
+    "A45AaA12A",
+    "A345A123A",
+    "A4512345A",
+    " A12345A ",
+    "  AAAAA  "
+  ],
+  "key": {
+    "A": {
+      "item": "utm:thanos_blocks"
+    },
+    "a": {
+      "item": "minecraft:apple"
+    },
+    "1": {
+      "item": "minecraft:iron_helmet"
+    },
+    "2": {
+      "item": "minecraft:iron_chestplate"
+    },
+    "4": {
+      "item": "minecraft:iron_leggings"
+    },
+    "3": {
+      "item": "minecraft:iron_boots"
+    },
+    "5": {
+      "item": "minecraft:shield"
+    }
+  },
+  "result": {
+    "id": "utm:armor_apple",
+    "count": 1
+  },
+  "show_notification": true
+}
