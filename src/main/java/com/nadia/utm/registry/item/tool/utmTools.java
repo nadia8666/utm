@@ -230,7 +230,7 @@ public class utmTools {
     ).tags(Tags.Items.ENCHANTABLES, utmTags.ITEM.ADD_MULTISHOT, utmTags.ITEM.ADD_POWER).handheld();
     public static final utmItemContainer<Item> ARID_BAT = register("arid_bat", new Item.Properties().attributes(BatItem.createAttributes(utmToolBuilder.buildTier(
             BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 2048, 2f, 0f, 15, () -> Ingredient.EMPTY
-    ), 7.75f, -2.9f, 10f)).stacksTo(1).rarity(utmRarities.MYSTIC.getValue())).tags(ItemTags.FIRE_ASPECT_ENCHANTABLE).generated(); // don't make it a swordd !!!
+    ), 7.75f, -2.9f, 10f)).stacksTo(1).rarity(Rarity.RARE)).tags(ItemTags.FIRE_ASPECT_ENCHANTABLE).handheld(); // don't make it a swordd !!!
 
 
 
