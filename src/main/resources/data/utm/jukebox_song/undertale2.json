@@ -1,0 +1,8 @@
+{
+  "comparator_output": 1,
+  "description": {
+    "translate": "jukebox_song.utm.undertale2"
+  },
+  "length_in_seconds": 444,
+  "sound_event": "utm:music_disc_undertale2"
+}

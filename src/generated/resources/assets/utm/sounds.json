@@ -26,6 +26,15 @@
     ],
     "subtitle": "jukebox_song.utm.undertale"
   },
+  "music_disc_undertale2": {
+    "sounds": [
+      {
+        "name": "utm:records/undertale2",
+        "stream": true
+      }
+    ],
+    "subtitle": "jukebox_song.utm.undertale2"
+  },
   "pkfrs": {
     "sounds": [
       "utm:sfx/pkfirebegin"

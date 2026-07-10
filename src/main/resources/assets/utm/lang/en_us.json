@@ -103,6 +103,7 @@
   "item.utm.music_disc_tears": "Music Disc",
   "item.utm.music_disc_lava_chicken": "Music Disc",
   "item.utm.music_disc_undertale": "Music Disc",
+  "item.utm.music_disc_undertale2": "Music Disc",
   "item.utm.arid_axe": "Arid Axe",
   "item.utm.unfinished_arid_ingot": "Arid Ingot..?",
   "item.utm.arid_ingot": "Arid Ingot",
@@ -201,6 +202,8 @@
   "jukebox_song.utm.lava_chicken": "Hyper Potions - Lava Chicken",
   "jukebox_song.utm.tears": "Amos Roddy - Tears",
   "jukebox_song.utm.undertale": "XTRATUNA - AN UNDER'S TALE",
+  "jukebox_song.utm.undertale2": "MAN ON THE INTERNET - UNDERTALE GENOCIDE PACKAGE - MEGALOVANIA",
+
   "utm.gui.launch_contraption_menu": "Launch Contraption",
 
   "enchantment.utm.power_jump": "Boost Pads",

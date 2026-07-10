@@ -231,6 +231,16 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
+    "has_utm:music_disc_undertale2": {
+      "conditions": {
+        "items": [
+          {
+            "items": "utm:music_disc_undertale2"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
     "has_vista:music_disc_sojourn": {
       "conditions": {
         "items": [
@@ -253,6 +263,27 @@
   },
   "requirements": [
     [
+      "has_minecraft:music_disc_far"
+    ],
+    [
+      "has_minecraft:music_disc_cat"
+    ],
+    [
+      "has_utm:music_disc_undertale"
+    ],
+    [
+      "has_minecraft:music_disc_13"
+    ],
+    [
+      "has_minecraft:music_disc_wait"
+    ],
+    [
+      "has_minecraft:music_disc_precipice"
+    ],
+    [
+      "has_minecraft:music_disc_ward"
+    ],
+    [
       "has_minecraft:music_disc_chirp"
     ],
     [
@@ -265,22 +296,13 @@
       "has_minecraft:music_disc_5"
     ],
     [
-      "has_minecraft:music_disc_far"
-    ],
-    [
       "has_minecraft:music_disc_11"
     ],
     [
       "has_aeronautics:music_disc_cloud_skipper"
     ],
     [
-      "has_minecraft:music_disc_cat"
-    ],
-    [
       "has_utm:music_disc_tears"
-    ],
-    [
-      "has_utm:music_disc_undertale"
     ],
     [
       "has_minecraft:music_disc_mellohi"
@@ -295,10 +317,7 @@
       "has_minecraft:music_disc_mall"
     ],
     [
-      "has_minecraft:music_disc_13"
-    ],
-    [
-      "has_minecraft:music_disc_wait"
+      "has_utm:music_disc_undertale2"
     ],
     [
       "has_minecraft:music_disc_blocks"
@@ -310,13 +329,7 @@
       "has_minecraft:music_disc_creator_music_box"
     ],
     [
-      "has_minecraft:music_disc_precipice"
-    ],
-    [
       "has_minecraft:music_disc_strad"
-    ],
-    [
-      "has_minecraft:music_disc_ward"
     ],
     [
       "has_minecraft:music_disc_otherside"

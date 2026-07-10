@@ -1,7 +1,7 @@
-// 1.21.1	2026-07-09T13:23:16.7261037	Tags for minecraft:item mod id utm
+// 1.21.1	2026-07-09T23:01:11.1835014	Tags for minecraft:item mod id utm
 66adac5ce76e09f7316b3221e955af75b73eb2c5 data/c/tags/item/buckets.json
 18bde017b1217bb9f8e000da31901fce09ea66c9 data/c/tags/item/enchantables.json
-cc5ee93a6de880a1acd213e033d0123d2bb90869 data/c/tags/item/music_discs.json
+79fbd85c27ce5793dbbaaae6d5c126bf542b6f4b data/c/tags/item/music_discs.json
 d2b273c656d3df662d72e9250b2eb9a40a66cb10 data/c/tags/item/tools/shield.json
 6cd88e214573b659c707666abea9d2e53d37d1ef data/minecraft/tags/item/anvil.json
 c0deb5e075f3767f4d126778320fefc3168e0711 data/minecraft/tags/item/axes.json

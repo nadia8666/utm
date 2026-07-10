@@ -21,6 +21,9 @@ public class utmSounds {
     public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_DISC_UNDERTALE = SOUNDS.register("music_disc_undertale",
             () -> SoundEvent.createVariableRangeEvent(utm.key("music_disc_undertale")));
 
+    public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_DISC_UNDERTALE2 = SOUNDS.register("music_disc_undertale2",
+            () -> SoundEvent.createVariableRangeEvent(utm.key("music_disc_undertale2")));
+
     public static final DeferredHolder<SoundEvent, SoundEvent> SPACE_MUSIC = SOUNDS.register("space_music",
             () -> SoundEvent.createVariableRangeEvent(utm.key("space_music"))); // yay ;D
 

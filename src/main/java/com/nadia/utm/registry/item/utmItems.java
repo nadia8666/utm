@@ -74,7 +74,9 @@ public class utmItems {
             MUSIC_DISC_LAVA_CHICKEN = register("music_disc_lava_chicken", new Item.Properties()
                     .stacksTo(1).rarity(Rarity.RARE).jukeboxPlayable(utmSongs.LAVA_CHICKEN)).disc().tags(Tags.Items.MUSIC_DISCS),
             MUSIC_DISC_UNDERTALE = register("music_disc_undertale", new Item.Properties()
-                    .stacksTo(1).rarity(Rarity.EPIC).jukeboxPlayable(utmSongs.UNDERTALE)).disc().tags(Tags.Items.MUSIC_DISCS);
+                    .stacksTo(1).rarity(Rarity.EPIC).jukeboxPlayable(utmSongs.UNDERTALE)).disc().tags(Tags.Items.MUSIC_DISCS),
+            MUSIC_DISC_UNDERTALE2 = register("music_disc_undertale2", new Item.Properties()
+                    .stacksTo(1).rarity(Rarity.EPIC).jukeboxPlayable(utmSongs.UNDERTALE2)).disc().tags(Tags.Items.MUSIC_DISCS);
 
     // fluid
     public static final utmItemContainer<BucketItem> LIQUID_OXYGEN_BUCKET = register("liquid_oxygen_bucket",
