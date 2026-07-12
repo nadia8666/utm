@@ -1,0 +1,27 @@
+{
+  "display": {
+    "icon": {
+      "id": "utm:launch_contraption"
+    },
+    "title": "Introducing: Content+",
+    "description": "Good Morning from Arid City! ",
+    "background": "utm:textures/block/arid_block.png",
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "requirement1": {
+      "trigger": "minecraft:changed_dimension",
+      "conditions": {
+        "to": "utm:2313ag"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "requirement1"
+    ]
+  ]
+}

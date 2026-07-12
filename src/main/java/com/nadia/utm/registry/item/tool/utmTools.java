@@ -15,10 +15,15 @@ import com.nadia.utm.tool.Paxel;
 import com.nadia.utm.tool.ShartSword;
 import net.minecraft.Util;
 import net.minecraft.core.Holder;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.entity.EquipmentSlotGroup;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ambient.Bat;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -27,8 +32,9 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import java.util.EnumMap;
 import java.util.function.Supplier;
 
-import static com.nadia.utm.registry.item.utmArmorMaterials.MEGA_ARMOR_MATERIAL;
-import static com.nadia.utm.registry.item.utmArmorMaterials.ULTRA_ARMOR_MATERIAL;
+import static com.nadia.utm.registry.item.utmArmorMaterials.*;
+import static com.nadia.utm.registry.item.utmArmorMaterials.OMEGA_ARMOR_MATERIAL;
+import static net.neoforged.neoforge.common.util.AttributeUtil.*;
 
 @ForceLoad(deps = {utmRegistry.class, utmTags.class})
 public class utmTools {
@@ -318,12 +324,33 @@ public class utmTools {
             new Item.Properties().durability(10).rarity(utmRarities.MYSTIC.getValue()))).tags(Tags.Items.ENCHANTABLES, ItemTags.DURABILITY_ENCHANTABLE, ItemTags.ARMOR_ENCHANTABLE, ItemTags.FOOT_ARMOR, ItemTags.FOOT_ARMOR_ENCHANTABLE, ItemTags.TRIMMABLE_ARMOR).trimmable();
 
         public static final utmItemContainer<ArmorItem> ULTRA_HELMET = register("ultra_helmet", () -> new ArmorItem(ULTRA_ARMOR_MATERIAL, ArmorItem.Type.HELMET,
-            new Item.Properties().durability(10).rarity(utmRarities.MYSTIC.getValue()))).tags(Tags.Items.ENCHANTABLES, ItemTags.DURABILITY_ENCHANTABLE, ItemTags.ARMOR_ENCHANTABLE, ItemTags.HEAD_ARMOR, ItemTags.HEAD_ARMOR_ENCHANTABLE, ItemTags.TRIMMABLE_ARMOR).trimmable();
+            new Item.Properties().durability(11).rarity(utmRarities.MYSTIC.getValue()))).tags(Tags.Items.ENCHANTABLES, ItemTags.DURABILITY_ENCHANTABLE, ItemTags.ARMOR_ENCHANTABLE, ItemTags.HEAD_ARMOR, ItemTags.HEAD_ARMOR_ENCHANTABLE, ItemTags.TRIMMABLE_ARMOR).trimmable();
     public static final utmItemContainer<ArmorItem> ULTRA_CHESTPLATE = register("ultra_chestplate", () -> new ArmorItem(ULTRA_ARMOR_MATERIAL, ArmorItem.Type.CHESTPLATE,
-            new Item.Properties().durability(10).rarity(utmRarities.MYSTIC.getValue()))).tags(Tags.Items.ENCHANTABLES, ItemTags.DURABILITY_ENCHANTABLE, ItemTags.ARMOR_ENCHANTABLE, ItemTags.CHEST_ARMOR, ItemTags.CHEST_ARMOR_ENCHANTABLE, ItemTags.TRIMMABLE_ARMOR).trimmable();
+            new Item.Properties().durability(11).rarity(utmRarities.MYSTIC.getValue()))).tags(Tags.Items.ENCHANTABLES, ItemTags.DURABILITY_ENCHANTABLE, ItemTags.ARMOR_ENCHANTABLE, ItemTags.CHEST_ARMOR, ItemTags.CHEST_ARMOR_ENCHANTABLE, ItemTags.TRIMMABLE_ARMOR).trimmable();
     public static final utmItemContainer<ArmorItem> ULTRA_LEGGINGS = register("ultra_leggings", () -> new ArmorItem(ULTRA_ARMOR_MATERIAL, ArmorItem.Type.LEGGINGS,
-            new Item.Properties().durability(10).rarity(utmRarities.MYSTIC.getValue()))).tags(Tags.Items.ENCHANTABLES, ItemTags.DURABILITY_ENCHANTABLE, ItemTags.ARMOR_ENCHANTABLE, ItemTags.LEG_ARMOR, ItemTags.LEG_ARMOR_ENCHANTABLE, ItemTags.TRIMMABLE_ARMOR).trimmable();
+            new Item.Properties().durability(11).rarity(utmRarities.MYSTIC.getValue()))).tags(Tags.Items.ENCHANTABLES, ItemTags.DURABILITY_ENCHANTABLE, ItemTags.ARMOR_ENCHANTABLE, ItemTags.LEG_ARMOR, ItemTags.LEG_ARMOR_ENCHANTABLE, ItemTags.TRIMMABLE_ARMOR).trimmable();
     public static final utmItemContainer<ArmorItem> ULTRA_BOOTS = register("ultra_boots", () -> new ArmorItem(ULTRA_ARMOR_MATERIAL, ArmorItem.Type.BOOTS,
-            new Item.Properties().durability(10).rarity(utmRarities.MYSTIC.getValue()))).tags(Tags.Items.ENCHANTABLES, ItemTags.DURABILITY_ENCHANTABLE, ItemTags.ARMOR_ENCHANTABLE, ItemTags.FOOT_ARMOR, ItemTags.FOOT_ARMOR_ENCHANTABLE, ItemTags.TRIMMABLE_ARMOR).trimmable();
+            new Item.Properties().durability(11).rarity(utmRarities.MYSTIC.getValue()))).tags(Tags.Items.ENCHANTABLES, ItemTags.DURABILITY_ENCHANTABLE, ItemTags.ARMOR_ENCHANTABLE, ItemTags.FOOT_ARMOR, ItemTags.FOOT_ARMOR_ENCHANTABLE, ItemTags.TRIMMABLE_ARMOR).trimmable();
+
+    public static final utmItemContainer<ArmorItem> OMEGA_HELMET = register("omega_helmet", () -> new ArmorItem(OMEGA_ARMOR_MATERIAL, ArmorItem.Type.HELMET,
+            new Item.Properties().attributes(ItemAttributeModifiers.builder().add(
+                            Attributes.ATTACK_DAMAGE, new AttributeModifier(ResourceLocation.withDefaultNamespace("armor.oh"),
+                            0.10, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), EquipmentSlotGroup.HEAD).build()
+            ).durability(12).rarity(utmRarities.MYSTIC.getValue()))).tags(Tags.Items.ENCHANTABLES, ItemTags.DURABILITY_ENCHANTABLE, ItemTags.ARMOR_ENCHANTABLE, ItemTags.HEAD_ARMOR, ItemTags.HEAD_ARMOR_ENCHANTABLE, ItemTags.TRIMMABLE_ARMOR).trimmable();
+    public static final utmItemContainer<ArmorItem> OMEGA_CHESTPLATE = register("omega_chestplate", () -> new ArmorItem(OMEGA_ARMOR_MATERIAL, ArmorItem.Type.CHESTPLATE,
+            new Item.Properties().attributes(ItemAttributeModifiers.builder().add(
+                            Attributes.ATTACK_DAMAGE, new AttributeModifier(ResourceLocation.withDefaultNamespace("armor.oc"),
+                            0.10, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), EquipmentSlotGroup.CHEST).build()
+            ).durability(12).rarity(utmRarities.MYSTIC.getValue()))).tags(Tags.Items.ENCHANTABLES, ItemTags.DURABILITY_ENCHANTABLE, ItemTags.ARMOR_ENCHANTABLE, ItemTags.CHEST_ARMOR, ItemTags.CHEST_ARMOR_ENCHANTABLE, ItemTags.TRIMMABLE_ARMOR).trimmable();
+    public static final utmItemContainer<ArmorItem> OMEGA_LEGGINGS = register("omega_leggings", () -> new ArmorItem(OMEGA_ARMOR_MATERIAL, ArmorItem.Type.LEGGINGS,
+            new Item.Properties().attributes(ItemAttributeModifiers.builder().add(
+                            Attributes.ATTACK_DAMAGE, new AttributeModifier(ResourceLocation.withDefaultNamespace("armor.ol"),
+                            0.10, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), EquipmentSlotGroup.LEGS).build()
+            ).durability(12).rarity(utmRarities.MYSTIC.getValue()))).tags(Tags.Items.ENCHANTABLES, ItemTags.DURABILITY_ENCHANTABLE, ItemTags.ARMOR_ENCHANTABLE, ItemTags.LEG_ARMOR, ItemTags.LEG_ARMOR_ENCHANTABLE, ItemTags.TRIMMABLE_ARMOR).trimmable();
+    public static final utmItemContainer<ArmorItem> OMEGA_BOOTS = register("omega_boots", () -> new ArmorItem(OMEGA_ARMOR_MATERIAL, ArmorItem.Type.BOOTS,
+            new Item.Properties().attributes(ItemAttributeModifiers.builder().add(
+                            Attributes.ATTACK_DAMAGE, new AttributeModifier(ResourceLocation.withDefaultNamespace("armor.ob"),
+                            0.10, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), EquipmentSlotGroup.FEET).build()
+            ).durability(12).rarity(utmRarities.MYSTIC.getValue()))).tags(Tags.Items.ENCHANTABLES, ItemTags.DURABILITY_ENCHANTABLE, ItemTags.ARMOR_ENCHANTABLE, ItemTags.FOOT_ARMOR, ItemTags.FOOT_ARMOR_ENCHANTABLE, ItemTags.TRIMMABLE_ARMOR).trimmable();
 
 }

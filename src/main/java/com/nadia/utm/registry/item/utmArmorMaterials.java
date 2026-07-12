@@ -58,7 +58,14 @@ public class utmArmorMaterials {
                 attribute.put(ArmorItem.Type.HELMET, 6);
                 attribute.put(ArmorItem.Type.BODY, 30);
             }) , 30, -3f, -1.0f, () -> Items.AIR);
-
+    public static final Holder<ArmorMaterial> OMEGA_ARMOR_MATERIAL = build("omega",
+            Util.make(new EnumMap<>(ArmorItem.Type.class), attribute -> {
+                attribute.put(ArmorItem.Type.BOOTS, -2);
+                attribute.put(ArmorItem.Type.LEGGINGS, -2);
+                attribute.put(ArmorItem.Type.CHESTPLATE, -2);
+                attribute.put(ArmorItem.Type.HELMET, -2);
+                attribute.put(ArmorItem.Type.BODY, 30);
+            }) , 999, 0f, 0.125f, () -> Items.AIR);
 
 
 }
