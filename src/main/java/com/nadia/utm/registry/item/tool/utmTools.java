@@ -332,6 +332,7 @@ public class utmTools {
     public static final utmItemContainer<ArmorItem> ULTRA_BOOTS = register("ultra_boots", () -> new ArmorItem(ULTRA_ARMOR_MATERIAL, ArmorItem.Type.BOOTS,
             new Item.Properties().durability(11).rarity(utmRarities.MYSTIC.getValue()))).tags(Tags.Items.ENCHANTABLES, ItemTags.DURABILITY_ENCHANTABLE, ItemTags.ARMOR_ENCHANTABLE, ItemTags.FOOT_ARMOR, ItemTags.FOOT_ARMOR_ENCHANTABLE, ItemTags.TRIMMABLE_ARMOR).trimmable();
 
+    //todo: bulwark conversion (helmet to chestplate, etc)
     public static final utmItemContainer<ArmorItem> OMEGA_HELMET = register("omega_helmet", () -> new ArmorItem(OMEGA_ARMOR_MATERIAL, ArmorItem.Type.HELMET,
             new Item.Properties().attributes(ItemAttributeModifiers.builder().add(
                             Attributes.ATTACK_DAMAGE, new AttributeModifier(ResourceLocation.withDefaultNamespace("armor.oh"),
