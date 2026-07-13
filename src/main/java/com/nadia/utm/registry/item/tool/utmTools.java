@@ -287,7 +287,7 @@ public class utmTools {
                         BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 1561, 8f, 0f, 150, () -> Ingredient.of(Items.DIAMOND)
                 ); // that block tag might be wrong hey
                 return new PickaxeItem(tier, new Item.Properties().attributes(
-                        PickaxeItem.createAttributes(tier, 5, -2.8f)).rarity(utmRarities.MYSTIC.getValue()));
+                        PickaxeItem.createAttributes(tier, 4, -2.8f)).rarity(utmRarities.MYSTIC.getValue()));
             }
     ).tags(Tags.Items.ENCHANTABLES, ItemTags.MINING_ENCHANTABLE, ItemTags.PICKAXES, ItemTags.DURABILITY_ENCHANTABLE).handheld();
     public static final utmItemContainer<Item> GLOVE = register("glove", new Item.Properties().attributes(SwordItem.createAttributes(utmToolBuilder.buildTier(
