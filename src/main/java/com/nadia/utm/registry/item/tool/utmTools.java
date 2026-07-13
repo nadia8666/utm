@@ -172,6 +172,7 @@ public class utmTools {
                 return new SwordItem(tier, new Item.Properties().attributes(
                         SwordItem.createAttributes(tier, 5, -2.4f)).rarity(Rarity.UNCOMMON));
             } //todo: why does this have two arrow hit sfx?
+            //todo: find this out
     ).tags(Tags.Items.ENCHANTABLES, ItemTags.SWORD_ENCHANTABLE, ItemTags.WEAPON_ENCHANTABLE, ItemTags.DURABILITY_ENCHANTABLE, ItemTags.SWORDS).handheld();
 
     /// arid

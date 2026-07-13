@@ -25,6 +25,7 @@ import com.nadia.utm.registry.fluid.utmFluids;
 import com.nadia.utm.registry.item.utmItems;
 import com.nadia.utm.registry.tags.utmTags;
 import com.nadia.utm.registry.utmRegistry;
+import com.simibubi.create.content.processing.basin.BasinBlock;
 import com.simibubi.create.foundation.item.ItemDescription;
 import com.simibubi.create.foundation.item.KineticStats;
 import com.simibubi.create.foundation.item.TooltipModifier;
@@ -163,6 +164,7 @@ public class utmBlocks {
             .isSuffocating((state, level, pos) -> false))
             .dropSelf().tags(utmTags.BLOCK.SEAL_NOPROP)
             .minePick().mineTier(3);
+
 
     public static final utmBlockContainer<RegenDiscBlock, BlockItem> REGEN_DISC = dualRegister("regen_disc", RegenDiscBlock::new, BlockBehaviour.Properties.of()
             .instabreak()

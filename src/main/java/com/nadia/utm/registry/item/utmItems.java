@@ -135,5 +135,7 @@ public class utmItems {
                    new Item.Properties().food(new FoodProperties.Builder().alwaysEdible().nutrition(2).saturationModifier(2).build())).generated(),
             ARMOR_APPLE = register("armor_apple",
                     new Item.Properties().food(new FoodProperties.Builder().alwaysEdible().nutrition(2).saturationModifier(2).build())).generated();
-    
+
+    //TODO: IMPORTANT!!!! START PUTTING WATER AS OUTPUT IN ANTIWATER RECIPES! IMPORTANT! START DOING THAT!
+
 }
