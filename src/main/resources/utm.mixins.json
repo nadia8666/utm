@@ -37,6 +37,7 @@
     "AnvilScreenMixin",
     "ClientLevelMixin",
     "GameRendererMixin",
+    "GuiMixin",
     "MinecraftMixin",
     "RemainingAirOverlayMixin",
     "SchematicHandlerMixin",

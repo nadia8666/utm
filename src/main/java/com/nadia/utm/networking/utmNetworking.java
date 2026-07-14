@@ -78,7 +78,6 @@ public class utmNetworking {
             if (player.level() instanceof ServerLevel slevel) {
                 slevel.sendParticles(ParticleTypes.SWEEP_ATTACK, pos.x + dir.x, pos.y + dir.y + player.getEyeHeight() - 0.25f, pos.z + dir.z, 0, payload.xOff(), 0.0F, payload.yOff(), 0.0F);
                 DroplessArrow proj = new DroplessArrow(EntityType.ARROW, slevel);
-
                 float pitch = (float) Math.toDegrees(Math.asin(-dir.y()));
                 float yaw = (float) Math.toDegrees(Math.atan2(-dir.x(), dir.z()));
 
