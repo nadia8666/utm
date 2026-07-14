@@ -13,8 +13,8 @@ import dev.ryanhcode.sable.Sable;
 import dev.ryanhcode.sable.api.SubLevelAssemblyHelper;
 import dev.ryanhcode.sable.api.physics.PhysicsPipeline;
 import dev.ryanhcode.sable.api.physics.constraint.ConstraintJointAxis;
-import dev.ryanhcode.sable.api.physics.constraint.free.FreeConstraintConfiguration;
-import dev.ryanhcode.sable.api.physics.constraint.free.FreeConstraintHandle;
+import dev.ryanhcode.sable.api.physics.constraint.FreeConstraintConfiguration;
+import dev.ryanhcode.sable.api.physics.constraint.FreeConstraintHandle;
 import dev.ryanhcode.sable.api.schematic.SubLevelSchematicSerializationContext;
 import dev.ryanhcode.sable.api.sublevel.ServerSubLevelContainer;
 import dev.ryanhcode.sable.api.sublevel.SubLevelContainer;
@@ -449,6 +449,7 @@ public class GimbalBlockEntity extends SmartBlockEntity implements BlockEntitySu
 
         HANDLE = pipeline.addConstraint((ServerSubLevel) Sable.HELPER.getContaining(this), (ServerSubLevel) toAttach, constraint);
 
+        assert HANDLE != null;
         HANDLE.setContactsEnabled(false);
 
         HANDLE.setMotor(ConstraintJointAxis.LINEAR_X, 0, STIFFNESS, DAMPING, false, 0.0);

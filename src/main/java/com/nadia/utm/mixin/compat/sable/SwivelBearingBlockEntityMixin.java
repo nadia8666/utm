@@ -5,7 +5,6 @@ import dev.ryanhcode.sable.api.SubLevelAssemblyHelper;
 import dev.ryanhcode.sable.api.sublevel.SubLevelContainer;
 import dev.ryanhcode.sable.companion.SableCompanion;
 import dev.ryanhcode.sable.sublevel.ServerSubLevel;
-import dev.ryanhcode.sable.sublevel.SubLevel;
 import dev.simulated_team.simulated.content.blocks.swivel_bearing.SwivelBearingBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -26,7 +25,7 @@ public abstract class SwivelBearingBlockEntityMixin implements BlockEntitySubLev
     public abstract void setPlatePos(@Nullable BlockPos swivelPlatePos);
 
     @Shadow
-    public abstract void reattachConstraint(SubLevel toAttach, boolean updatePlate);
+    public abstract void reattachConstraint(ServerSubLevel toAttach, boolean updatePlate);
 
     @Override
     public boolean sable$migrateData(final Map<ServerSubLevel, ServerSubLevel> conversions, final SwivelBearingBlockEntity oldBE, final Map<ServerSubLevel, SubLevelAssemblyHelper.AssemblyTransform> transforms) {

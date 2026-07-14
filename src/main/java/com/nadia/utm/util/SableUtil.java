@@ -16,7 +16,6 @@ import dev.ryanhcode.sable.api.sublevel.SubLevelContainer;
 import dev.ryanhcode.sable.companion.SableCompanion;
 import dev.ryanhcode.sable.companion.math.BoundingBox3i;
 import dev.ryanhcode.sable.companion.math.Pose3d;
-import dev.ryanhcode.sable.physics.impl.rapier.RapierPhysicsPipeline;
 import dev.ryanhcode.sable.platform.SableAssemblyPlatform;
 import dev.ryanhcode.sable.sublevel.ServerSubLevel;
 import dev.ryanhcode.sable.sublevel.SubLevel;
@@ -175,7 +174,6 @@ public class SableUtil {
             SubLevelPhysicsSystem oPhysics = oContainer.physicsSystem();
             PhysicsPipeline oPipeline = oPhysics.getPipeline();
             PhysicsPipeline pipeline = container.physicsSystem().getPipeline();
-            if (!(oPipeline instanceof RapierPhysicsPipeline rapier)) return;
 
             Queue<ServerSubLevel> levelQueue = new LinkedList<>();
             Set<ServerSubLevel> processed = new HashSet<>();
