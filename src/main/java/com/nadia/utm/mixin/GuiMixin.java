@@ -7,12 +7,16 @@ import com.llamalad7.mixinextras.sugar.Local;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.nadia.utm.registry.item.tool.utmTools;
+import com.nadia.utm.registry.sound.utmSounds;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.resources.sounds.SimpleSoundInstance;
+import net.minecraft.client.resources.sounds.Sound;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.TickRateManager;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -25,6 +29,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import java.util.logging.Logger;
 
 @Mixin(value = Gui.class, remap = false)
 public class GuiMixin {
@@ -50,7 +56,7 @@ public class GuiMixin {
  //                    if ((this.minecraft.crosshairPickEntity != null && this.minecraft.crosshairPickEntity instanceof LivingEntity && f >= 1.0F) || this.minecraft.player.getInventory().getSelected().is(utmTools.SWORD2.ITEM())) {
  //Big Mambo rewrite this code so its not poop and stupid
 
-
+/*
      @Definition(id = "f", local = @Local(type = float.class))
      @Expression("f < 1.0")
       @ModifyExpressionValue(method = "renderCrosshair", at = @At(value = "MIXINEXTRAS:EXPRESSION"))
@@ -59,13 +65,16 @@ public class GuiMixin {
          return original || (this.minecraft.player.getInventory().getSelected().is(utmTools.SWORD_OF_KIRK.ITEM()));
      }
 
-
+*/
 
      //SLOW, MAYBE TANKS FRAMES.. SLOW!!
+    @Unique boolean care = false;
     @Unique private static final ResourceLocation CROSSHAIR_ATTACK_INDICATOR_FULL_TEXTURE = ResourceLocation.parse("hud/crosshair_attack_indicator_full");
     @Inject(method = "renderCrosshair", at = @At(value = "TAIL"))
     private void enhancedAttackIndicator$showPlus(GuiGraphics guiGraphics, DeltaTracker deltaTracker, CallbackInfo ci) {
-        if (this.minecraft.player.getInventory().getSelected().is(utmTools.SWORD_OF_KIRK.ITEM())) {
+        float f = this.minecraft.player.getAttackStrengthScale(0.0F);
+     //   Logger.getLogger("utm").warning(String.valueOf(f));
+        if (this.minecraft.crosshairPickEntity == null && this.minecraft.player.getInventory().getSelected().is(utmTools.SWORD_OF_KIRK.ITEM()) && f>=1f) {
             RenderSystem.enableBlend();
             RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.ONE_MINUS_DST_COLOR, GlStateManager.DestFactor.ONE_MINUS_SRC_COLOR, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
             int j = guiGraphics.guiHeight() / 2 - 7 + 16;
@@ -73,7 +82,15 @@ public class GuiMixin {
             guiGraphics.blitSprite(CROSSHAIR_ATTACK_INDICATOR_FULL_TEXTURE, k, j, 16, 16);
             RenderSystem.defaultBlendFunc();
             RenderSystem.disableBlend();
+            if (care==false) {
+                care=true;
 
+                Minecraft.getInstance().getSoundManager().play(
+                        SimpleSoundInstance.forUI(SoundEvents.CROSSBOW_LOADING_END.value(), 1f, .8f)
+                );
+            }
+        } else if (f<1) {
+            care=false;
         }
     }
 
