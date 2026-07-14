@@ -26,30 +26,30 @@ public class DroplessArrow extends Arrow {
         super(level, owner, pickupItemStack, firedFromWeapon);
     }
 
-    @Override
-    protected void onHitBlock(BlockHitResult result) {
-        this.lastState = this.level().getBlockState(result.getBlockPos());
-        super.onHitBlock(result);
-        Vec3 vec3 = result.getLocation().subtract(this.getX(), this.getY(), this.getZ());
-        this.setDeltaMovement(vec3);
-        ItemStack itemstack = this.getWeaponItem();
-        Level var5 = this.level();
-        if (var5 instanceof ServerLevel serverlevel) {
-            if (itemstack != null) {
-                this.hitBlockEnchantmentEffects(serverlevel, result, itemstack);
-            }
-        }
-
-        Vec3 vec31 = vec3.normalize().scale((double)0.05F);
-        this.setPosRaw(this.getX() - vec31.x, this.getY() - vec31.y, this.getZ() - vec31.z);
-        this.playSound(this.getHitGroundSoundEvent(), 1.0F, 1.2F / (this.random.nextFloat() * 0.2F + 0.9F));
-        this.inGround = true;
-        this.shakeTime = 7;
-        this.setCritArrow(false);
-        this.setPierceLevel((byte)0);
-        this.setSoundEvent(SoundEvents.ARROW_HIT);
-        this.resetPiercedEntities();
-    }
+ //   @Override
+ //   protected void onHitBlock(BlockHitResult result) {
+  //      this.lastState = this.level().getBlockState(result.getBlockPos());
+  //      super.onHitBlock(result);
+  //      Vec3 vec3 = result.getLocation().subtract(this.getX(), this.getY(), this.getZ());
+   //     this.setDeltaMovement(vec3);
+   //     ItemStack itemstack = this.getWeaponItem();
+   //     Level var5 = this.level();
+   //     if (var5 instanceof ServerLevel serverlevel) {
+   //         if (itemstack != null) {
+  //              this.hitBlockEnchantmentEffects(serverlevel, result, itemstack);
+ //           }
+ //       }
+//
+ //       Vec3 vec31 = vec3.normalize().scale((double)0.05F);
+ //       this.setPosRaw(this.getX() - vec31.x, this.getY() - vec31.y, this.getZ() - vec31.z);
+  //      this.playSound(this.getHitGroundSoundEvent(), 1.0F, 1.2F / (this.random.nextFloat() * 0.2F + 0.9F));
+ //       this.inGround = true;
+  //      this.shakeTime = 7;
+ //       this.setCritArrow(false);
+ //       this.setPierceLevel((byte)0);
+ //       this.setSoundEvent(SoundEvents.ARROW_HIT);
+ //       this.resetPiercedEntities();
+ //   }
 
     @Override
     protected ItemStack getDefaultPickupItem() {

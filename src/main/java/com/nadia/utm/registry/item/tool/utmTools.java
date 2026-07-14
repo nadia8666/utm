@@ -171,12 +171,12 @@ public class utmTools {
                 );
                 return new SwordItem(tier, new Item.Properties().attributes(
                         SwordItem.createAttributes(tier, 5, -2.4f)).rarity(Rarity.UNCOMMON));
-            } //todo: why does this have two arrow hit sfx?
-            //todo: find this out
+            }
     ).tags(Tags.Items.ENCHANTABLES, ItemTags.SWORD_ENCHANTABLE, ItemTags.WEAPON_ENCHANTABLE, ItemTags.DURABILITY_ENCHANTABLE, ItemTags.SWORDS).handheld();
 
     /// arid
     //todo: you should make all of these fire res
+            //debatable.
 
     public static final utmItemContainer<SwordItem> ARID_SWORD = register("arid_sword", () -> {
                 Tier tier = utmToolBuilder.buildTier(
@@ -308,7 +308,7 @@ public class utmTools {
                         BlockTags.INCORRECT_FOR_NETHERITE_TOOL, 2031, 5f, 0f, 15, () -> Ingredient.EMPTY
                 );
                 return new SwordItem(tier, new Item.Properties().attributes(
-                        SwordItem.createAttributes(tier, 7f, -2.4f)).rarity(Rarity.RARE));
+                        SwordItem.createAttributes(tier, 7f, -2.4f)).rarity(utmRarities.MYSTIC.getValue()));
             }
     ).tags(Tags.Items.ENCHANTABLES, ItemTags.SWORD_ENCHANTABLE, ItemTags.WEAPON_ENCHANTABLE, ItemTags.FIRE_ASPECT_ENCHANTABLE, ItemTags.DURABILITY_ENCHANTABLE, ItemTags.SWORDS);
 
