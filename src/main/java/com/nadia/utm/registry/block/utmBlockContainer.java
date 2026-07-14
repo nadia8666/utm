@@ -53,8 +53,9 @@ public class utmBlockContainer<B extends Block, I extends BlockItem> {
         return Optional.empty();
     }
 
-    public void onRegister(Consumer<? super B> callback) {
+    public utmBlockContainer<B, I> onRegister(Consumer<? super B> callback) {
         this.callbacks.add(callback);
+        return this;
     }
 
     /**

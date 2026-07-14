@@ -35,6 +35,7 @@ public class BasinRecipeMixin {
         cir.setReturnValue(10);
     }
 
+
     /**
      * @author nadiarr
      * @reason what if i want 30 fluids... :DDD
@@ -102,7 +103,7 @@ public class BasinRecipeMixin {
                     if (simulatedRemaining <= 0)
                         continue;
 
-                    if (!fluidIngredient.test(new FluidStack(fluidStack.getFluid(), simulatedRemaining)))
+                    if (!fluidIngredient.test(fluidStack.copyWithAmount(simulatedRemaining)))
                         continue;
 
                     int drainedAmount = Math.min(amountRequired, simulatedRemaining);

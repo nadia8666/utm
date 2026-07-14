@@ -2,12 +2,12 @@ package com.nadia.utm.block.misc.large_basin;
 
 import com.nadia.utm.registry.block.utmBlockEntities;
 import com.simibubi.create.AllShapes;
-import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.content.fluids.transfer.GenericItemEmptying;
 import com.simibubi.create.content.fluids.transfer.GenericItemFilling;
 import com.simibubi.create.content.kinetics.belt.BeltBlockEntity;
 import com.simibubi.create.content.kinetics.belt.behaviour.DirectBeltInputBehaviour;
 import com.simibubi.create.content.logistics.funnel.FunnelBlock;
+import com.simibubi.create.content.processing.basin.BasinBlock;
 import com.simibubi.create.content.processing.basin.BasinBlockEntity;
 import com.simibubi.create.content.processing.basin.BasinOperatingBlockEntity;
 import com.simibubi.create.foundation.block.IBE;
@@ -35,8 +35,6 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -50,17 +48,14 @@ import net.neoforged.neoforge.items.ItemHandlerHelper;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 
-public class LargeBasinBlock extends Block implements IBE<LargeBasinBlockEntity>, IWrenchable {
-    public static final DirectionProperty FACING = BlockStateProperties.FACING_HOPPER;
-
+public class LargeBasinBlock extends BasinBlock {
     public LargeBasinBlock(Properties properties) {
         super(properties);
-        registerDefaultState(defaultBlockState().setValue(FACING, Direction.DOWN));
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> state) {
-        super.createBlockStateDefinition(state.add(FACING));
+        super.createBlockStateDefinition(state);
     }
 
     public static boolean isBasin(LevelReader world, BlockPos pos) {
@@ -105,7 +100,7 @@ public class LargeBasinBlock extends Block implements IBE<LargeBasinBlockEntity>
                 return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
             }
 
-            IItemHandlerModifiable inv = be.getItemCapability();
+            IItemHandlerModifiable inv = ((LargeBasinBlockEntity) be).getItemCapability();
             if (inv == null)
                 inv = new ItemStackHandler(1);
             boolean success = false;
@@ -176,14 +171,15 @@ public class LargeBasinBlock extends Block implements IBE<LargeBasinBlockEntity>
 
     @Override
     public int getAnalogOutputSignal(@NotNull BlockState blockState, @NotNull Level worldIn, @NotNull BlockPos pos) {
-        return getBlockEntityOptional(worldIn, pos).map(LargeBasinBlockEntity::getInputInventory)
+        return getBlockEntityOptional(worldIn, pos).map(BasinBlockEntity::getInputInventory)
                 .map(ItemHelper::calcRedstoneFromInventory)
                 .orElse(0);
     }
 
     @Override
-    public Class<LargeBasinBlockEntity> getBlockEntityClass() {
-        return LargeBasinBlockEntity.class;
+    @SuppressWarnings("unchecked")
+    public Class<BasinBlockEntity> getBlockEntityClass() {
+        return (Class<BasinBlockEntity>) (Object) LargeBasinBlockEntity.class;
     }
 
     @Override
