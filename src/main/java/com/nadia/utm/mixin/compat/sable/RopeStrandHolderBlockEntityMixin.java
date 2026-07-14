@@ -34,7 +34,7 @@ public interface RopeStrandHolderBlockEntityMixin extends BlockEntitySubLevelAct
 
         if (newStart == null || newEnd == null) return false;
 
-        newStart.getBehavior().createRope(newEnd.getBehavior());
+        newStart.getBehavior().createRope(newEnd.getBehavior(), false);
         return true;
     }
 

@@ -2,7 +2,6 @@ package com.nadia.utm.datagen.providers;
 
 import com.nadia.utm.registry.block.utmBlockContainer;
 import com.nadia.utm.registry.item.utmItemContainer;
-import com.nadia.utm.utm;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceKey;
@@ -24,7 +23,8 @@ public class utmItemModelProvider extends ItemModelProvider {
     public utmItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
         super(output, "utm", existingFileHelper);
     }
-    private static LinkedHashMap<ResourceKey<TrimMaterial>, Float> trimMaterials = new LinkedHashMap<>();
+
+    private static final LinkedHashMap<ResourceKey<TrimMaterial>, Float> trimMaterials = new LinkedHashMap<>();
     static {
         trimMaterials.put(TrimMaterials.QUARTZ, 0.1F);
         trimMaterials.put(TrimMaterials.IRON, 0.2F);
@@ -38,6 +38,7 @@ public class utmItemModelProvider extends ItemModelProvider {
         trimMaterials.put(TrimMaterials.AMETHYST, 1.0F);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     protected void registerModels() {
         utmBlockContainer.DATAGEN_TARGETS.forEach((c, tags) -> {
