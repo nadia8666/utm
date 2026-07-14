@@ -17,6 +17,7 @@
     "ItemEntityMixin",
     "LevelMixin",
     "SchematicPlacePacketMixin",
+    "ServerLoginPacketListenerImplMixin",
     "compat.create.AbstractContraptionEntityMixin",
     "compat.create.BasinBlockEntityMixin",
     "compat.create.BasinRecipeMixin",

@@ -2,6 +2,9 @@ package com.nadia.utm.config;
 
 import net.neoforged.neoforge.common.ModConfigSpec;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class utmServerConfig {
     private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
     public static final ModConfigSpec.IntValue HEAVY_METAL_ANVIL_LEVEL_REQUIREMENT;
@@ -9,6 +12,7 @@ public class utmServerConfig {
     public static final ModConfigSpec.IntValue LIQUID_THRUSTER_FORCE;
     public static final ModConfigSpec.IntValue SOLID_THRUSTER_FORCE;
     public static final ModConfigSpec.IntValue ELYTRA_DECAY_TIME;
+    public static final ModConfigSpec.ConfigValue<List<? extends String>> CRACKED_USERNAMES;
     public static final ModConfigSpec SPEC;
 
     static {
@@ -21,6 +25,10 @@ public class utmServerConfig {
         ION_THRUSTER_FORCE = BUILDER.defineInRange("ionThrusterForce", 125, 0, 1500);
         LIQUID_THRUSTER_FORCE = BUILDER.defineInRange("liquidThrusterForce", 850, 0, 4000);
         SOLID_THRUSTER_FORCE = BUILDER.defineInRange("solidThrusterForce", 1670, 0, 14000);
+        BUILDER.pop();
+
+        BUILDER.push("server_login");
+        CRACKED_USERNAMES = BUILDER.defineListAllowEmpty("crackedUsernames", new ArrayList<>(), () -> "Notch", (a) -> true);
         BUILDER.pop();
 
         SPEC = BUILDER.build();

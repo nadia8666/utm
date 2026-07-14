@@ -18,6 +18,8 @@
 
   "utm.configuration.server_physics": "Physics Options",
   "utm.configuration.server_physics.tooltip": "Change the settings of physics objects",
+  "utm.configuration.server_login": "Login Options",
+  "utm.configuration.server_login.tooltip": "Change how utm manages login information",
 
   "utm.configuration.section.utm.client.toml": "COMMON",
   "utm.configuration.section.utm.client.toml.title": "COMMON",
@@ -48,6 +50,8 @@
   "utm.configuration.solidThrusterForce.tooltip": "Full power thruster velocity.",
   "utm.configuration.elytraDecayTime": "Elytra Decay Time",
   "utm.configuration.elytraDecayTime.tooltip": "Amount of ticks per each durability point.",
+  "utm.configuration.crackedUsernames": "Cracked Usernames",
+  "utm.configuration.crackedUsernames.tooltip": "List of usernames to force allow joining as.",
 
   "block.utm.heavy_metal_anvil": "Heavy-Metal Anvil",
   "block.utm.grate": "Grating",
