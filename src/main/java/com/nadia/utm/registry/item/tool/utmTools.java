@@ -291,15 +291,15 @@ public class utmTools {
             }
     ).tags(Tags.Items.ENCHANTABLES, ItemTags.MINING_ENCHANTABLE, ItemTags.PICKAXES, ItemTags.DURABILITY_ENCHANTABLE).handheld();
     public static final utmItemContainer<Item> GLOVE = register("glove", new Item.Properties().attributes(SwordItem.createAttributes(utmToolBuilder.buildTier(
-            BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 1000, 2f, 0f, 15, () -> Ingredient.of(Items.LEATHER)
-    ), 0, 4f)).stacksTo(1)).tags(ItemTags.DURABILITY_ENCHANTABLE).generated(); // don't make it a swordd !!!
+            BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 0, 2f, 0f, 15, () -> Ingredient.of(Items.LEATHER)
+    ), 0, 4f)).durability(512).stacksTo(1)).tags(ItemTags.DURABILITY_ENCHANTABLE).generated(); // don't make it a swordd !!!
     //todo: make it have less knockback
     public static final utmItemContainer<BundleofHisItem> BUNDLE_OF_HIS = register("bundle_of_his", () -> {
                 return new BundleofHisItem(new Item.Properties().rarity(Rarity.UNCOMMON).stacksTo(1));
             } //figure out why Shooting upwards is baad
     ).generated();
     public static final utmItemContainer<StoneSlingshotItem> SLINGSHOT = register("slingshot", () -> {
-                return new StoneSlingshotItem(new Item.Properties().rarity(Rarity.RARE).stacksTo(1).durability(256));
+                return new StoneSlingshotItem(new Item.Properties().stacksTo(1).durability(256));
             } //figure out why Shooting upwards is baad
     ).tags(Tags.Items.ENCHANTABLES, utmTags.ITEM.ADD_MULTISHOT, utmTags.ITEM.ADD_POWER, ItemTags.DURABILITY_ENCHANTABLE, utmTags.ITEM.ADD_FLAME).handheld();
 

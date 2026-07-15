@@ -39,7 +39,7 @@ public class utmSounds {
     public static final DeferredHolder<SoundEvent, SoundEvent> PKFRS = SOUNDS.register("pkfrs",
             () -> SoundEvent.createVariableRangeEvent(utm.key("pkfrs")));
     public static final DeferredHolder<SoundEvent, SoundEvent> PKFRS2 = SOUNDS.register("pkfrs2",
-            () -> SoundEvent.createVariableRangeEvent(utm.key("pkfrs2")));
+            () -> SoundEvent.createVariableRangeEvent(utm.key("pkfrs2"))); //MONO
 
 }
 
