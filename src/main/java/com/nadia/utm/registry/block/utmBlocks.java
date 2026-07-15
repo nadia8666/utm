@@ -222,6 +222,10 @@ public class utmBlocks {
             () -> new LiquidBlock(utmFluids.ANTIWATER.get(),
                     BlockBehaviour.Properties.ofFullCopy(Blocks.WATER).noLootTable()));
 
+    public static final DeferredBlock<LiquidBlock> MUNDANEWATER_BLOCK = BLOCKS.register("mundane",
+            () -> new LiquidBlock(utmFluids.MUNDANEWATER.get(),
+                    BlockBehaviour.Properties.ofFullCopy(Blocks.LAVA).noLootTable()));
+
     public static final utmBlockContainer<Block, BlockItem> ALUMINUM_ORE = dualRegister("aluminum_ore", Block::new, BlockBehaviour.Properties.of()
             .destroyTime(3)
             .requiresCorrectToolForDrops()

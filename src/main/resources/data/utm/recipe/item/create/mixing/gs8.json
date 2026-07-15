@@ -1,14 +1,15 @@
 {
+
   "type": "create:mixing",
   "heat_requirement": "superheated",
   "ingredients": [
     {
       "fluid": "utm:antiwater",
       "type": "fluid_stack",
-      "amount": 1000
+      "amount": 5000
     },
     {
-      "item": "minecraft:netherite_sword",
+      "item": "utm:sword2",
       "count": 1
     },
     {
@@ -18,13 +19,13 @@
   ],
   "results": [
     {
-      "id": "utm:black_knife",
+      "id": "utm:gloomsword8",
       "count": 1
     },
     {
       "fluid": "minecraft:water",
       "type": "fluid_stack",
-      "amount": 1100
+      "amount": 5500
     }
   ]
 }

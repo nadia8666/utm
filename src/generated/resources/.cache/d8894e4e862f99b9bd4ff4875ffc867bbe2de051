@@ -1,4 +1,4 @@
-// 1.21.1	2026-07-14T15:57:50.9997552	Item Models: utm
+// 1.21.1	2026-07-15T16:13:56.1832929	Item Models: utm
 6d60e0d2b0873e138bcfa8f5db0ca9cb6d7cd4fa assets/utm/models/item/adv_goggles.json
 0c35c7686bdc2e520fa2ede79bfa3e5855ad5ffc assets/utm/models/item/air_compressor.json
 9d13b4b18c25ee3c81b1cc65fd86954c95187339 assets/utm/models/item/aluminum_ingot.json
@@ -118,6 +118,7 @@ b6e1a65eb502a4f2408ef37d75b475c882b8eb9a assets/utm/models/item/mega_leggings_qu
 c6feee1aabde85a5584629598a6e853098a3a8a9 assets/utm/models/item/mega_leggings_redstone_trim.json
 28e389105aea3b20bb58a6fa948ad93d18d98df2 assets/utm/models/item/mob_apple.json
 3585f00c05dee3d217b76ee63662e444adae99d3 assets/utm/models/item/molten_steel_bucket.json
+e6990f170da14358cc0015a3cfc54ed90d13a24c assets/utm/models/item/mundanewater_bucket.json
 dfac8393a8467bd1ab1ace9e4ad852baf5ad1852 assets/utm/models/item/music_disc_lava_chicken.json
 d1d2c967c30729a23a0453dc02c563694ea48256 assets/utm/models/item/music_disc_tears.json
 0863eba1b1947d63eb417c549e5467e9f0749c0c assets/utm/models/item/music_disc_undertale.json

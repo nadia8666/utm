@@ -2,6 +2,7 @@ package com.nadia.utm.registry.fluid;
 
 import com.nadia.utm.registry.block.utmBlocks;
 import com.nadia.utm.registry.item.utmItems;
+import com.nadia.utm.registry.item.utmRarities;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.material.Fluid;
@@ -66,7 +67,7 @@ public class utmFluids {
                     .density(1)
                     .viscosity(1)
                     .temperature(900)
-                    .rarity(Rarity.EPIC)));
+                    .rarity(utmRarities.MYSTIC.getValue())));
 
     public static final DeferredHolder<Fluid, BaseFlowingFluid.Source> ANTIWATER = FLUIDS.register("antiwater",
             () -> new BaseFlowingFluid.Source(utmFluids.ANTIWATER_PROPERTIES));
@@ -78,5 +79,24 @@ public class utmFluids {
             ANTIWATER_TYPE, ANTIWATER, FLOWING_ANTIWATER)
             .bucket(utmItems.ANTIWATER_BUCKET.ITEM())
             .block(utmBlocks.ANTIWATER_BLOCK);
+
+    public static final DeferredHolder<FluidType, FluidType> MUNDANEWATER_TYPE = FLUID_TYPES.register("mundanewater",
+            () -> new FluidType(FluidType.Properties.create()
+                    .descriptionId("fluid.utm.mundanewater")
+                    .density(8)
+                    .viscosity(8)
+                    .temperature(20)
+                    .rarity(utmRarities.MYSTIC.getValue())));
+
+    public static final DeferredHolder<Fluid, BaseFlowingFluid.Source> MUNDANEWATER = FLUIDS.register("mundanewater",
+            () -> new BaseFlowingFluid.Source(utmFluids.MUNDANEWATER_PROPERTIES));
+
+    public static final DeferredHolder<Fluid, BaseFlowingFluid.Flowing> FLOWING_MUNDANEWATER = FLUIDS.register("flowing_mundanewater",
+            () -> new BaseFlowingFluid.Flowing(utmFluids.MUNDANEWATER_PROPERTIES));
+
+    protected static final BaseFlowingFluid.Properties MUNDANEWATER_PROPERTIES = new BaseFlowingFluid.Properties(
+            MUNDANEWATER_TYPE, MUNDANEWATER, FLOWING_MUNDANEWATER)
+            .bucket(utmItems.MUNDANEWATER_BUCKET.ITEM())
+            .block(utmBlocks.MUNDANEWATER_BLOCK);
 
 }

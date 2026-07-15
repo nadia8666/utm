@@ -20,6 +20,11 @@
     {
       "id": "utm:greenline_diamond_pickaxe",
       "count": 1
+    },
+    {
+      "fluid": "minecraft:water",
+      "type": "fluid_stack",
+      "amount": 1100
     }
   ]
 }

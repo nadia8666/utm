@@ -46,7 +46,7 @@ public class BasinBlockEntityMixin {
         if (basin.getLevel() == null || basin.getLevel().isClientSide) return;
         int tnAntiwater = 0;
         int tnWater = 0;
-        int tnExperiecne = 0;
+        int tnCOOLANT = 0;
         for (SmartFluidTankBehaviour tank : basin.getTanks()) {
             IFluidHandler capability = tank.getCapability();
             for (int i = 0; i < capability.getTanks(); i++) {
@@ -57,21 +57,23 @@ public class BasinBlockEntityMixin {
                 } else if (stack.is(Fluids.WATER)) {
                     tnWater += stack.getAmount();
 
-                } else if (stack.is(AllFluids.CHOCOLATE)) { // tough find!
-                    tnExperiecne += stack.getAmount(); //..not experience
+                } else if (stack.is(utmFluids.MUNDANEWATER)) { // tougher find!
+                    tnCOOLANT += stack.getAmount(); //..not experience And it never was
                 }
             }
 
         }
         if (tnAntiwater > 0) {
+            // i dont know if order of operations but i sure hope they are!
             boolean lb = (basin instanceof LargeBasinBlockEntity);
-            boolean cooled = (tnExperiecne > (tnWater*2)+tnAntiwater);
+            double coolantAlpha = Math.clamp(tnCOOLANT/tnAntiwater,0,1);
             boolean wp = (tnWater > 0);
-            int finalChance = Mth.floor(1000 * (lb ? 10 : 1) * (cooled ? 30 : 1) / (wp ? 0.5 : 1));
+            boolean ChaosMix = (coolantAlpha>0 && wp);
+            int finalChance = Mth.floor(20*100 * (lb ? 10 : 1) * (49*coolantAlpha+1) * (wp ? 0.25 : 1) * (ChaosMix ? 0.01 : 1));
             int rand = basin.getLevel().getRandom().nextIntBetweenInclusive(1, finalChance);
             // if water present reduce to 10
             if (rand == 1) {
-                basin.getLevel().explode(null, basin.getBlockPos().getX() + 0.5D, basin.getBlockPos().getY() + 0.5D, basin.getBlockPos().getZ() + 0.5D, 12F, true, Level.ExplosionInteraction.BLOCK);
+                basin.getLevel().explode(null, basin.getBlockPos().getX() + 0.5D, basin.getBlockPos().getY() + 0.5D, basin.getBlockPos().getZ() + 0.5D, 10F + (float) tnAntiwater /1000, true, Level.ExplosionInteraction.BLOCK);
                 return;
             }
         }

@@ -88,6 +88,9 @@ public class utmItems {
     public static final utmItemContainer<AntiwaterBucketItem> ANTIWATER_BUCKET = register("antiwater_bucket",
             () -> new AntiwaterBucketItem(utmFluids.ANTIWATER.get(),
                     new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1))).generated().tags(Tags.Items.BUCKETS);
+    public static final utmItemContainer<AntiwaterBucketItem> MUNDANEWATER_BUCKET = register("mundanewater_bucket",
+            () -> new AntiwaterBucketItem(utmFluids.MUNDANEWATER.get(),
+                    new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1))).generated().tags(Tags.Items.BUCKETS);
 
 
     //bullets

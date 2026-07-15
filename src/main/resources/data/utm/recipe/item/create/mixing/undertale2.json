@@ -16,6 +16,11 @@
     {
       "id": "utm:music_disc_undertale2",
       "count": 1
+    },
+    {
+      "fluid": "minecraft:water",
+      "type": "fluid_stack",
+      "amount": 10000
     }
   ]
 }
