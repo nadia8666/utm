@@ -41,6 +41,9 @@ public class utmTags {
         public static final TagKey<Item> ADD_PIERCING = TagKey.create(
                 Registries.ITEM,
                 utm.key("add_piercing"));
+        public static final TagKey<Item> ADD_FLAME = TagKey.create(
+                Registries.ITEM,
+                utm.key("add_flame"));
     }
 
     public static class BLOCK {

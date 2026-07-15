@@ -68,6 +68,8 @@ public class PebbleEntity extends ThrowableItemProjectile {
                 utmSounds.SR_HIT.get(),
                 SoundSource.NEUTRAL,0.1f,1);
         entity.hurt(this.damageSources().thrown(this, this.getOwner()), i);
+        if (this.getRemainingFireTicks()>0)
+             entity.setRemainingFireTicks(this.getRemainingFireTicks());
         entity.invulnerableTime=0;
     }
 

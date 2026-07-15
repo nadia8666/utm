@@ -1,0 +1,31 @@
+{
+  "display": {
+    "icon": {
+      "id": "utm:greenline_diamond_pickaxe"
+    },
+    "title": "Green Fifteen Green Hundred line",
+    "description": "Green Create green a green stronger green pickaxe line",
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "parent": "utm:story/netherite_pick",
+  "criteria": {
+    "has_gdiamond_pickaxe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "utm:greenline_diamond_pickaxe"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_gdiamond_pickaxe"
+    ]
+  ]
+}

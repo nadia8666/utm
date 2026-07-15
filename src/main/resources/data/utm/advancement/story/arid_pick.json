@@ -1,0 +1,31 @@
+{
+  "display": {
+    "icon": {
+      "id": "utm:arid_pickaxe"
+    },
+    "title":  "Benson pickaxe                                                                                                                          hi",
+    "description": "Upgrade to impostor select pickaxe by the imposters which they vented and created chaos in the airship skeld as well as fungle in which case to solve it for the crewmates they had to rush to do their tasks",
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "utm:story/greenline_diamond_pick",
+  "criteria": {
+    "has_arnetherite_pickaxe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "utm:arid_pickaxe"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_arnetherite_pickaxe"
+    ]
+  ]
+}

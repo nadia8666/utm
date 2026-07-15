@@ -189,7 +189,7 @@ public class utmTools {
 
     public static final utmItemContainer<PickaxeItem> ARID_PICKAXE = register("arid_pickaxe", () -> {
                 Tier tier = utmToolBuilder.buildTier(
-                        BlockTags.INCORRECT_FOR_STONE_TOOL, 6500, 9.5f, 0f, 15, () -> Ingredient.EMPTY
+                        BlockTags.INCORRECT_FOR_STONE_TOOL, 6500, 9.75f, 0f, 15, () -> Ingredient.EMPTY
                 );
                 return new PickaxeItem(tier, new Item.Properties().attributes(
                         PickaxeItem.createAttributes(tier, 8, -3f)).rarity(Rarity.RARE));
@@ -225,16 +225,16 @@ public class utmTools {
     ).tags(Tags.Items.ENCHANTABLES, utmTags.ITEM.ADD_PIERCING);
     public static final utmItemContainer<Paxel> ARID_PAXEL = register("arid_paxel", () -> { // no texture yet. Theres no crying until the end
                 Tier tier = utmToolBuilder.buildTier(
-                        BlockTags.INCORRECT_FOR_IRON_TOOL, 10000, 10.25f, 0f, 45, () -> Ingredient.EMPTY
+                        BlockTags.INCORRECT_FOR_IRON_TOOL, 10000, 11f, 0f, 45, () -> Ingredient.EMPTY
                 );
                 return new Paxel(tier, new Item.Properties().attributes(
                         Paxel.createAttributes(tier, 10, -3f)).rarity(utmRarities.MYSTIC.getValue()));
             } //todo: investigate why you and arid pickaxe have no visible mining speed buff over netherite pickaxe
     ).tags(Tags.Items.ENCHANTABLES, ItemTags.SWORD_ENCHANTABLE, ItemTags.WEAPON_ENCHANTABLE, ItemTags.FIRE_ASPECT_ENCHANTABLE, ItemTags.MINING_ENCHANTABLE, ItemTags.PICKAXES).handheld();
     public static final utmItemContainer<AridSlingshotItem> ARID_SLINGSHOT = register("arid_slingshot", () -> {
-                return new AridSlingshotItem(new Item.Properties().rarity(Rarity.RARE).stacksTo(1).durability(5000));
+                return new AridSlingshotItem(new Item.Properties().stacksTo(1).durability(5000));
             } //figure out why Shooting upwards is baad
-    ).tags(Tags.Items.ENCHANTABLES, utmTags.ITEM.ADD_MULTISHOT, utmTags.ITEM.ADD_POWER).handheld();
+    ).tags(Tags.Items.ENCHANTABLES, utmTags.ITEM.ADD_MULTISHOT, utmTags.ITEM.ADD_POWER, utmTags.ITEM.ADD_FLAME).handheld();
     public static final utmItemContainer<Item> ARID_BAT = register("arid_bat", new Item.Properties().attributes(BatItem.createAttributes(utmToolBuilder.buildTier(
             BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 2048, 2f, 0f, 15, () -> Ingredient.EMPTY
     ), 7.75f, -2.9f, 10f)).stacksTo(1).rarity(Rarity.RARE)).tags(ItemTags.FIRE_ASPECT_ENCHANTABLE).handheld(); // don't make it a swordd !!!
@@ -301,7 +301,12 @@ public class utmTools {
     public static final utmItemContainer<StoneSlingshotItem> SLINGSHOT = register("slingshot", () -> {
                 return new StoneSlingshotItem(new Item.Properties().rarity(Rarity.RARE).stacksTo(1).durability(256));
             } //figure out why Shooting upwards is baad
-    ).tags(Tags.Items.ENCHANTABLES, utmTags.ITEM.ADD_MULTISHOT, utmTags.ITEM.ADD_POWER, ItemTags.DURABILITY_ENCHANTABLE).handheld();
+    ).tags(Tags.Items.ENCHANTABLES, utmTags.ITEM.ADD_MULTISHOT, utmTags.ITEM.ADD_POWER, ItemTags.DURABILITY_ENCHANTABLE, utmTags.ITEM.ADD_FLAME).handheld();
+
+    public static final utmItemContainer<AntiSlingshotItem> ANTI_SLINGSHOT = register("anti_slingshot", () -> {
+                return new AntiSlingshotItem(new Item.Properties().rarity(utmRarities.MYSTIC.getValue()).stacksTo(1).durability(512));
+            } //figure out why Shooting upwards is baad
+    ).tags(Tags.Items.ENCHANTABLES, utmTags.ITEM.ADD_MULTISHOT, utmTags.ITEM.ADD_POWER, ItemTags.DURABILITY_ENCHANTABLE, utmTags.ITEM.ADD_FLAME).handheld();
 
     public static final utmItemContainer<SwordItem> BLACK_KNIFE = register("black_knife", () -> {
                 Tier tier = utmToolBuilder.buildTier(

@@ -41,6 +41,12 @@
     ],
     "subtitle": "subtitles.utm.pkfrs"
   },
+  "pkfrs2": {
+    "sounds": [
+      "utm:sfx/pkfrs2"
+    ],
+    "subtitle": "subtitles.utm.pkfrs2"
+  },
   "slider_drag": {
     "sounds": [
       "utm:slider_drag"

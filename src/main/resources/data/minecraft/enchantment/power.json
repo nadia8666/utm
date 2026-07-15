@@ -36,6 +36,6 @@
   "slots": [
     "mainhand"
   ],
-  "supported_items": "#utm:add_power",
+  "supported_items": "#utm:enchantable/power_target",
   "weight": 10
 }

@@ -10,7 +10,7 @@
     "announce_to_chat": true,
     "hidden": false
   },
-  "parent": "minecraft:nether/obtain_ancient_debris",
+  "parent": "utm:story/diamond_pick",
   "criteria": {
     "has_netherite_pickaxe": {
       "trigger": "minecraft:inventory_changed",

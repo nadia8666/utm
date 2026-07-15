@@ -31,12 +31,17 @@ public class AridSlingshotItem extends Item {
         ItemStack itemStack = player.getItemInHand(usedHand);
         int multishot = itemStack.getEnchantmentLevel(level.registryAccess().holderOrThrow(Enchantments.MULTISHOT));
         int power = itemStack.getEnchantmentLevel(level.registryAccess().holderOrThrow(Enchantments.POWER));;
+        int flame = itemStack.getEnchantmentLevel(level.registryAccess().holderOrThrow(Enchantments.FLAME));;
 
 
         level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.CROSSBOW_SHOOT, player.getSoundSource(), 0.5f, 0.8f);
-        player.getCooldowns().addCooldown(this,4+(multishot*3)+power); //5 + 3 + 1
+        if (flame>0) level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.FIRECHARGE_USE, player.getSoundSource(), 0.3f, 0.8f);
+
+        player.getCooldowns().addCooldown(this,4+(multishot*3)+power+flame*2); //5 + 3 + 1
         if (!level.isClientSide) {
             AridStoneEntity gummyballentity = new AridStoneEntity(level, player);
+            gummyballentity.setRemainingFireTicks(flame*200);
+
 
             gummyballentity.shootFromRotation(player,  player.getXRot(), player.getYRot(), 0.0f, 1.5f+(power*0.4f), 0f);
             level.addFreshEntity(gummyballentity);
@@ -49,7 +54,7 @@ public class AridSlingshotItem extends Item {
                     AridStoneEntity gummyballentity = new AridStoneEntity(level, player);
 
                     double calculation = ((4.5f/multishot)*(sneaking ? 3f/5 : 1)*i*(Math.pow(-1,u)));
-
+                    gummyballentity.setRemainingFireTicks(flame*200);
                     gummyballentity.shootFromRotation( player, (float) (player.getXRot()-(jumping ? calculation : 0)),
                             (float) (player.getYRot()-(!jumping ? calculation : 0)),
                             0.0f, 1.5f+(power*(0.4f)*((float) 1 /i)), (float) i /2);
@@ -60,7 +65,7 @@ public class AridSlingshotItem extends Item {
 
         player.awardStat(Stats.ITEM_USED.get(this));
         if (!player.getAbilities().invulnerable) { //formerly creative mode..
-            itemStack.hurtAndBreak(1+(multishot==0 ? 0 : (multishot*2)), player, EquipmentSlot.MAINHAND);
+            itemStack.hurtAndBreak(1+(multishot==0 ? 0 : (multishot*2))+flame, player, EquipmentSlot.MAINHAND);
             //so THIS is how hurtAndBreak works..
         }
         return InteractionResultHolder.success(itemStack);    }

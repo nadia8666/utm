@@ -1,6 +1,6 @@
-// 1.21.1	2026-07-11T21:23:38.8868938	Tags for minecraft:item mod id utm
+// 1.21.1	2026-07-14T16:51:29.2453032	Tags for minecraft:item mod id utm
 66adac5ce76e09f7316b3221e955af75b73eb2c5 data/c/tags/item/buckets.json
-90e82c1fe3c6c2c1381c714fd53ebea1e6182f57 data/c/tags/item/enchantables.json
+70be7d67c505f7fd52e610256d85083b43aced76 data/c/tags/item/enchantables.json
 79fbd85c27ce5793dbbaaae6d5c126bf542b6f4b data/c/tags/item/music_discs.json
 d2b273c656d3df662d72e9250b2eb9a40a66cb10 data/c/tags/item/tools/shield.json
 6cd88e214573b659c707666abea9d2e53d37d1ef data/minecraft/tags/item/anvil.json
@@ -8,7 +8,7 @@ c0deb5e075f3767f4d126778320fefc3168e0711 data/minecraft/tags/item/axes.json
 e2c163d5da7217bb492c944caf7c171da6b0d289 data/minecraft/tags/item/chest_armor.json
 88faf69da4999059c00ab05b58941720889fcb44 data/minecraft/tags/item/enchantable/armor.json
 cc9939dba696aa25fc33dba536ebb9627fca1dfe data/minecraft/tags/item/enchantable/chest_armor.json
-11a38f618caee552393629cb65a69ebf5f2d597b data/minecraft/tags/item/enchantable/durability.json
+f787d193911c1bf5b5d7ed9eae374d067ec5d89a data/minecraft/tags/item/enchantable/durability.json
 f4c3db116b1c88abe3f5aec2a85614e85916409a data/minecraft/tags/item/enchantable/equippable.json
 6c6fb6b7c5391952a4c34261ee07d10ac249372d data/minecraft/tags/item/enchantable/fire_aspect.json
 629d671c50d237f7b2cde7ba81253d6738de831c data/minecraft/tags/item/enchantable/foot_armor.json
@@ -28,10 +28,11 @@ b64e1f68795c6ed04e99d1b4b76c5f54201b74f7 data/minecraft/tags/item/pickaxes.json
 1319de224bfec3b89a5aea9a22948b3a5332c2bd data/minecraft/tags/item/swords.json
 88faf69da4999059c00ab05b58941720889fcb44 data/minecraft/tags/item/trimmable_armor.json
 1ce4e06e062979db32ba844b3c947f681546b641 data/minecraft/tags/item/trim_templates.json
+ccd01a8f156609193ca6d7085de162e500688c8d data/utm/tags/item/add_flame.json
 0aa63e91d5b719a4dad4b7f2802ef031d5f0c527 data/utm/tags/item/add_mending.json
-d376215bc3628b6ac94de0fd8e6bf426d61662fb data/utm/tags/item/add_multishot.json
+ccd01a8f156609193ca6d7085de162e500688c8d data/utm/tags/item/add_multishot.json
 67959fef42e5d4ef05ea7312495f5b76ea6a3080 data/utm/tags/item/add_piercing.json
-d376215bc3628b6ac94de0fd8e6bf426d61662fb data/utm/tags/item/add_power.json
+ccd01a8f156609193ca6d7085de162e500688c8d data/utm/tags/item/add_power.json
 129891454b9eed21952fd2c0f6e4b95fdec20743 data/utm/tags/item/add_sharpness.json
 129891454b9eed21952fd2c0f6e4b95fdec20743 data/utm/tags/item/add_spear_recovery.json
 07f17e27f28bb5c9ef7a6981d495b2e956ca98e1 data/utm/tags/item/add_spear_throw.json

@@ -1,0 +1,31 @@
+{
+  "display": {
+    "icon": {
+      "id": "utm:arid_paxel"
+    },
+    "title": "Kick axe the paxel axe in the shovel paxel in the pickaxe way Don't wait for the noobs to pass the wall rush twice into the safe spots and out pickaxe the stone",
+    "description": "Dude i can't believe my so retro yellow epic blue duck mario 64 nintendo entertainment system Olyympicks training duck jump over hte spikes and retro Its going too fast stop rushing me Double rushers tend to attack the stadium watch out for their fire attacks. ",
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "parent": "utm:story/arid_pick",
+  "criteria": {
+    "has_arpnetherite_pickaxe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "utm:arid_paxel"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_arpnetherite_pickaxe"
+    ]
+  ]
+}
