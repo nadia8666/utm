@@ -213,6 +213,21 @@ public class utmClientEvents {
                     return FLOWING;
                 }
             }, utmFluids.ANTIWATER_TYPE);
+
+            event.registerFluidType(new IClientFluidTypeExtensions() {
+                private static final ResourceLocation STILL = utm.key("block/mundanewater_still");
+                private static final ResourceLocation FLOWING = utm.key("block/mundanewater_flow");
+
+                @Override
+                public @NotNull ResourceLocation getStillTexture() {
+                    return STILL;
+                }
+
+                @Override
+                public @NotNull ResourceLocation getFlowingTexture() {
+                    return FLOWING;
+                }
+            }, utmFluids.MUNDANEWATER_TYPE);
         });
 
         utmEventHost.register(PlaySoundEvent.class, event -> {

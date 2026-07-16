@@ -184,7 +184,7 @@ public class utmTools {
                 ); // this doesnt swing forsome reason
                 return new SwordItem(tier, new Item.Properties().attributes(
                         SwordItem.createAttributes(tier, 4f, 0.44f)).rarity(Rarity.RARE));
-            }
+            } //todo: fix these
     ).tags(Tags.Items.ENCHANTABLES, ItemTags.SWORD_ENCHANTABLE, ItemTags.WEAPON_ENCHANTABLE, ItemTags.FIRE_ASPECT_ENCHANTABLE, ItemTags.SWORDS).handheld();
 
     public static final utmItemContainer<PickaxeItem> ARID_PICKAXE = register("arid_pickaxe", () -> {
@@ -200,7 +200,7 @@ public class utmTools {
                         BlockTags.INCORRECT_FOR_STONE_TOOL, 2500, 9.5f, 0f, 15, () -> Ingredient.EMPTY
                 );
                 return new AxeItem(tier, new Item.Properties().attributes(
-                        AxeItem.createAttributes(tier, 17, -3.4f)).rarity(Rarity.RARE));
+                        AxeItem.createAttributes(tier, 17, -3.4f)).rarity(Rarity.RARE)); //maybe make you Not damages 17
             }
     ).tags(Tags.Items.ENCHANTABLES, ItemTags.SWORD_ENCHANTABLE, ItemTags.WEAPON_ENCHANTABLE, ItemTags.FIRE_ASPECT_ENCHANTABLE, ItemTags.MINING_ENCHANTABLE, ItemTags.AXES).handheld();
     public static final utmItemContainer<ShovelItem> ARID_SHOVEL = register("arid_shovel", () -> {
@@ -222,30 +222,31 @@ public class utmTools {
     public static final utmItemContainer<AridTridentItem> ARID_TRIDENT = register("arid_trident", () -> {
         return new AridTridentItem(new Item.Properties().rarity(utmRarities.MYSTIC.getValue()).stacksTo(1).durability(1024).component(utmDataComponents.THROWING_SPEAR_MODEL, "arid_trident")); //condense pls
             }
-    ).tags(Tags.Items.ENCHANTABLES, utmTags.ITEM.ADD_PIERCING);
+    ).tags(Tags.Items.ENCHANTABLES, utmTags.ITEM.ADD_PIERCING, utmTags.ITEM.ADD_LOOTING); // looting not confirmed to work but who cares
     public static final utmItemContainer<Paxel> ARID_PAXEL = register("arid_paxel", () -> { // no texture yet. Theres no crying until the end
                 Tier tier = utmToolBuilder.buildTier(
-                        BlockTags.INCORRECT_FOR_IRON_TOOL, 10000, 11f, 0f, 45, () -> Ingredient.EMPTY
+                        BlockTags.INCORRECT_FOR_IRON_TOOL, 10000, 11.2f, 0f, 45, () -> Ingredient.EMPTY
                 );
                 return new Paxel(tier, new Item.Properties().attributes(
                         Paxel.createAttributes(tier, 10, -3f)).rarity(utmRarities.MYSTIC.getValue()));
             } //todo: investigate why you and arid pickaxe have no visible mining speed buff over netherite pickaxe
+            //answer its just because its a really small increase but itt is REal
     ).tags(Tags.Items.ENCHANTABLES, ItemTags.SWORD_ENCHANTABLE, ItemTags.WEAPON_ENCHANTABLE, ItemTags.FIRE_ASPECT_ENCHANTABLE, ItemTags.MINING_ENCHANTABLE, ItemTags.PICKAXES).handheld();
     public static final utmItemContainer<AridSlingshotItem> ARID_SLINGSHOT = register("arid_slingshot", () -> {
-                return new AridSlingshotItem(new Item.Properties().stacksTo(1).durability(5000));
+                return new AridSlingshotItem(new Item.Properties().rarity(Rarity.RARE).stacksTo(1).durability(5000));
             } //figure out why Shooting upwards is baad
     ).tags(Tags.Items.ENCHANTABLES, utmTags.ITEM.ADD_MULTISHOT, utmTags.ITEM.ADD_POWER, utmTags.ITEM.ADD_FLAME).handheld();
     public static final utmItemContainer<Item> ARID_BAT = register("arid_bat", new Item.Properties().attributes(BatItem.createAttributes(utmToolBuilder.buildTier(
             BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 2048, 2f, 0f, 15, () -> Ingredient.EMPTY
-    ), 7.75f, -2.9f, 10f)).stacksTo(1).rarity(Rarity.RARE)).tags(ItemTags.FIRE_ASPECT_ENCHANTABLE).handheld(); // don't make it a swordd !!!
+    ), 7.75f, -2.9f, 10f)).stacksTo(1).rarity(Rarity.RARE)).tags(ItemTags.FIRE_ASPECT_ENCHANTABLE, utmTags.ITEM.ADD_LOOTING).handheld(); // don't make it a swordd !!!
 
 
-
+    /// Sr
 
     public static final utmItemContainer<SwordItem> SWORD2 = register("sword2", () -> {
         Tier tier = utmToolBuilder.buildTier(BlockTags.INCORRECT_FOR_WOODEN_TOOL, 1000, 1f, 0f, 0, () -> Ingredient.EMPTY);
         return new SwordItem(tier, new Item.Properties().rarity(Rarity.UNCOMMON).durability(1000).attributes(SwordItem.createAttributes(tier, 2, -3.5f)));
-    }).handheld();
+    }).handheld(); // these dont have enchantments because they're SR.. stuff
 
     public static final utmItemContainer<SwordItem> GLOOMSWORD8 = register("gloomsword8", () -> {
         Tier tier = utmToolBuilder.buildTier(BlockTags.INCORRECT_FOR_WOODEN_TOOL, 1, 1f, 0f, 0, () -> Ingredient.EMPTY);
@@ -259,7 +260,10 @@ public class utmTools {
     });//todo: fix your sutpid Delay on your second attakc adn also your model
     //todo: make it not whiff the first attack every time
 
-
+    public static final utmItemContainer<Item> GLOVE = register("glove", new Item.Properties().attributes(SwordItem.createAttributes(utmToolBuilder.buildTier(
+            BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 0, 2f, 0f, 15, () -> Ingredient.of(Items.LEATHER)
+    ), 0, 4f)).durability(512).stacksTo(1)).tags(ItemTags.DURABILITY_ENCHANTABLE).generated(); // don't make it a swordd !!!
+    //todo: make it have less knockback
     /// spears
 
     public static final utmItemContainer<ThrowingSpearItem> COPPER_THROWING_SPEAR = register("copper_throwing_spear", () -> new ThrowingSpearItem(new Item.Properties()
@@ -290,10 +294,7 @@ public class utmTools {
                         PickaxeItem.createAttributes(tier, 4, -2.8f)).rarity(utmRarities.MYSTIC.getValue()));
             }
     ).tags(Tags.Items.ENCHANTABLES, ItemTags.MINING_ENCHANTABLE, ItemTags.PICKAXES, ItemTags.DURABILITY_ENCHANTABLE).handheld();
-    public static final utmItemContainer<Item> GLOVE = register("glove", new Item.Properties().attributes(SwordItem.createAttributes(utmToolBuilder.buildTier(
-            BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 0, 2f, 0f, 15, () -> Ingredient.of(Items.LEATHER)
-    ), 0, 4f)).durability(512).stacksTo(1)).tags(ItemTags.DURABILITY_ENCHANTABLE).generated(); // don't make it a swordd !!!
-    //todo: make it have less knockback
+
     public static final utmItemContainer<BundleofHisItem> BUNDLE_OF_HIS = register("bundle_of_his", () -> {
                 return new BundleofHisItem(new Item.Properties().rarity(Rarity.UNCOMMON).stacksTo(1));
             } //figure out why Shooting upwards is baad

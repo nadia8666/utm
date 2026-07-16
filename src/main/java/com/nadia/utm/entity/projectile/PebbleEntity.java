@@ -18,6 +18,8 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Random;
+
 
 public class PebbleEntity extends ThrowableItemProjectile {
     //todo: when you make another projectile make a standardprojectilesrenderer and forceload that instead
@@ -69,7 +71,7 @@ public class PebbleEntity extends ThrowableItemProjectile {
                 SoundSource.NEUTRAL,0.1f,1);
         entity.hurt(this.damageSources().thrown(this, this.getOwner()), i);
         if (this.getRemainingFireTicks()>0)
-             entity.setRemainingFireTicks(this.getRemainingFireTicks());
+             entity.setRemainingFireTicks(Math.round(this.getRemainingFireTicks()/5));
         entity.invulnerableTime=0;
     }
 
