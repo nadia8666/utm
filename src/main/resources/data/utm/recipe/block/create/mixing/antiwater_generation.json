@@ -19,17 +19,16 @@
   ],
   "results": [
     {
+      "id": "utm:particase"
+    },
+    {
       "id": "utm:antiwater",
       "amount": 6002
     },
     {
-      "fluid": "minecraft:water",
-      "type": "fluid_stack",
+      "id": "minecraft:water",
+      "type": "neoforge_single",
       "amount": 1
-    },
-    {
-      "item": "utm:particase",
-      "count": 1
     }
   ]
 }

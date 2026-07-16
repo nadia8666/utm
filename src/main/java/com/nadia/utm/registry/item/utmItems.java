@@ -88,8 +88,8 @@ public class utmItems {
     public static final utmItemContainer<AntiwaterBucketItem> ANTIWATER_BUCKET = register("antiwater_bucket",
             () -> new AntiwaterBucketItem(utmFluids.ANTIWATER.get(),
                     new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1))).generated().tags(Tags.Items.BUCKETS);
-    public static final utmItemContainer<AntiwaterBucketItem> MUNDANEWATER_BUCKET = register("mundanewater_bucket",
-            () -> new AntiwaterBucketItem(utmFluids.MUNDANEWATER.get(),
+    public static final utmItemContainer<BucketItem> MUNDANEWATER_BUCKET = register("mundanewater_bucket",
+            () -> new BucketItem(utmFluids.MUNDANEWATER.get(),
                     new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1))).generated().tags(Tags.Items.BUCKETS);
 
 
@@ -137,7 +137,9 @@ public class utmItems {
             TOOL_APPLE = register("tool_apple",
                    new Item.Properties().food(new FoodProperties.Builder().alwaysEdible().nutrition(2).saturationModifier(2).build())).generated(),
             ARMOR_APPLE = register("armor_apple",
-                    new Item.Properties().food(new FoodProperties.Builder().alwaysEdible().nutrition(2).saturationModifier(2).build())).generated();
+                    new Item.Properties().food(new FoodProperties.Builder().alwaysEdible().nutrition(2).saturationModifier(2).build())).generated(),
+            AUGMENTATION_APPLE = register("augmentation_apple", // needs mystic
+                    new Item.Properties().food(new FoodProperties.Builder().alwaysEdible().nutrition(64).saturationModifier(64).build())).generated();
 
     //TODO: IMPORTANT!!!! START PUTTING WATER AS OUTPUT IN ANTIWATER RECIPES! IMPORTANT! START DOING THAT!
 

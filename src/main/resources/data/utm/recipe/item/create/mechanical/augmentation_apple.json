@@ -1,0 +1,35 @@
+{
+  "type": "create:mechanical_crafting",
+  "accept_mirrored": true,
+  "category": "apple",
+  "pattern": [
+    "  AAAAA  ",
+    " ALLLLLA ",
+    "ALLMMMLLA",
+    "ALMMAMMLA",
+    "ALMAaAMLA",
+    "ALMMAMMLA",
+    "ALLMMMLLA",
+    " ALLLLLA ",
+    "  AAAAA  "
+  ],
+  "key": {
+    "A": {
+      "item": "utm:thanos_blocks_eviles"
+    },
+    "a": {
+      "item": "utm:naught_apple"
+    },
+    "L": {
+      "item": "minecraft:diamond_block"
+    },
+    "M": {
+      "item": "minecraft:gold_block"
+    }
+  },
+  "result": {
+    "id": "utm:augmentation_apple",
+    "count": 1
+  },
+  "show_notification": true
+}

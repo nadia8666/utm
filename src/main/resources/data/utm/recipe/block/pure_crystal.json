@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "pure_crystal",
+  "key": {
+    "o": {
+      "item": "minecraft:quartz_block"
+    },
+    "x": {
+      "item": "minecraft:amethyst_block"
+    }
+  },
+  "pattern": [
+    "ooo",
+    "oxo",
+    "ooo"
+  ],
+  "result": {
+    "count": 1,
+    "id": "utm:pure_crystal"
+  }
+}

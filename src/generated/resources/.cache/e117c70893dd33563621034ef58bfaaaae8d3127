@@ -1,13 +1,15 @@
-// 1.21.1	2026-06-18T23:24:51.6164947	Block States: utm
+// 1.21.1	2026-07-15T16:49:30.7552419	Block States: utm
 340a7d991c794d89c976d5329715b1df653a0f8f assets/utm/blockstates/aluminum_ore.json
 90ae1f725854e9b2f4619cf0e9385f04c70627c5 assets/utm/blockstates/arid_block.json
 ca0e2a49a87918e52906edb9d0726fea54911838 assets/utm/blockstates/magnesium_ore.json
+28c7dfd3c5dc9d05bbfdca80a6f9c436c94f5f0a assets/utm/blockstates/pure_crystal.json
 ca5c0ebbab076b08ad12194cb4237fddee46dcea assets/utm/blockstates/regen_disc.json
 9930eccb528f4f566cc149ed0511a41999c882fc assets/utm/blockstates/thanos_blocks.json
 61d3acaeaa42cc96db9e730f61cfcaf774c5ad0d assets/utm/blockstates/thanos_blocks_eviles.json
 bc1bcfcba4581919b2300079c4b9f2dee6daccc1 assets/utm/models/block/aluminum_ore.json
 fdee2baca25eb25becfe05d8d48dc27afd8e9833 assets/utm/models/block/arid_block.json
 aac97c445c90a6ff90adcaa515c2560d935ec707 assets/utm/models/block/magnesium_ore.json
+12f8d90151c690a8fb05e8fcf208d5d694fe8231 assets/utm/models/block/pure_crystal.json
 8b8448307d27093c67eadf3247c11b72acf4f276 assets/utm/models/block/regen_disc.json
 69937d4edb74edf6ff1d388e28c774745c985679 assets/utm/models/block/thanos_blocks.json
 3d02cf7ed93e362c36e86ac595baad191d5c12ac assets/utm/models/block/thanos_blocks_eviles.json

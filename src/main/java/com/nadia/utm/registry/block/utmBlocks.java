@@ -210,6 +210,11 @@ public class utmBlocks {
             .destroyTime(100.0f)
             .sound(SoundType.GRAVEL)).dropSelf().inheritModel().mineShovel();
 
+    public static final utmBlockContainer<Block, BlockItem> PURE_CRYSTAL = dualRegister("pure_crystal", Block::new, BlockBehaviour.Properties.of()
+            .destroyTime(5.0f)
+            .explosionResistance(31)
+            .sound(SoundType.AMETHYST)).cube().dropSelf().inheritModel().minePick();
+
     public static final DeferredBlock<LiquidBlock> LIQUID_OXYGEN_BLOCK = BLOCKS.register("liquid_oxygen",
             () -> new LiquidBlock(utmFluids.LIQUID_OXYGEN.get(),
                     BlockBehaviour.Properties.ofFullCopy(Blocks.WATER).noLootTable()));

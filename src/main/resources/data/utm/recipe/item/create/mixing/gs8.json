@@ -23,8 +23,8 @@
       "count": 1
     },
     {
-      "fluid": "minecraft:water",
-      "type": "fluid_stack",
+      "id": "minecraft:water",
+      "type": "neoforge:single",
       "amount": 5500
     }
   ]

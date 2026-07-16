@@ -35,6 +35,7 @@ public class utmBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(utmBlocks.FLINT_BLOCK_BLOCK.BLOCK.get());
         dropSelf(utmBlocks.LAUNCH_CONTRAPTION.BLOCK.get());
         dropSelf(utmBlocks.OXYGEN_COLLECTOR.BLOCK.get());
+        //why add this?
 
         utmBlockContainer.DATAGEN_TARGETS.forEach((c, tags) -> {
             for (String tag : tags) {
