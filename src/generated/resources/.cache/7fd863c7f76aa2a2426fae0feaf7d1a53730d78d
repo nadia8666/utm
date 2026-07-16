@@ -1,4 +1,4 @@
-// 1.21.1	2026-07-15T16:13:56.1735968	Tags for minecraft:item mod id utm
+// 1.21.1	2026-07-15T23:25:28.6213326	Tags for minecraft:item mod id utm
 96838609d2e28c88dcd55c76096fa0c6cab38f56 data/c/tags/item/buckets.json
 70be7d67c505f7fd52e610256d85083b43aced76 data/c/tags/item/enchantables.json
 79fbd85c27ce5793dbbaaae6d5c126bf542b6f4b data/c/tags/item/music_discs.json
@@ -8,7 +8,7 @@ c0deb5e075f3767f4d126778320fefc3168e0711 data/minecraft/tags/item/axes.json
 e2c163d5da7217bb492c944caf7c171da6b0d289 data/minecraft/tags/item/chest_armor.json
 88faf69da4999059c00ab05b58941720889fcb44 data/minecraft/tags/item/enchantable/armor.json
 cc9939dba696aa25fc33dba536ebb9627fca1dfe data/minecraft/tags/item/enchantable/chest_armor.json
-f787d193911c1bf5b5d7ed9eae374d067ec5d89a data/minecraft/tags/item/enchantable/durability.json
+14764de411ee9490b9188368ca2e81d878b20f3e data/minecraft/tags/item/enchantable/durability.json
 f4c3db116b1c88abe3f5aec2a85614e85916409a data/minecraft/tags/item/enchantable/equippable.json
 6c6fb6b7c5391952a4c34261ee07d10ac249372d data/minecraft/tags/item/enchantable/fire_aspect.json
 629d671c50d237f7b2cde7ba81253d6738de831c data/minecraft/tags/item/enchantable/foot_armor.json
@@ -29,6 +29,7 @@ b64e1f68795c6ed04e99d1b4b76c5f54201b74f7 data/minecraft/tags/item/pickaxes.json
 88faf69da4999059c00ab05b58941720889fcb44 data/minecraft/tags/item/trimmable_armor.json
 1ce4e06e062979db32ba844b3c947f681546b641 data/minecraft/tags/item/trim_templates.json
 ccd01a8f156609193ca6d7085de162e500688c8d data/utm/tags/item/add_flame.json
+5b38891620db2b5619d3694cdbc03f64b7360298 data/utm/tags/item/add_looting.json
 0aa63e91d5b719a4dad4b7f2802ef031d5f0c527 data/utm/tags/item/add_mending.json
 ccd01a8f156609193ca6d7085de162e500688c8d data/utm/tags/item/add_multishot.json
 67959fef42e5d4ef05ea7312495f5b76ea6a3080 data/utm/tags/item/add_piercing.json

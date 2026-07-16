@@ -240,6 +240,7 @@ public class utmTools {
             BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 2048, 2f, 0f, 15, () -> Ingredient.EMPTY
     ), 7.75f, -2.9f, 10f)).stacksTo(1).rarity(Rarity.RARE)).tags(ItemTags.FIRE_ASPECT_ENCHANTABLE, utmTags.ITEM.ADD_LOOTING).handheld(); // don't make it a swordd !!!
 
+    public static final utmItemContainer<EggItem> ARID_EGG = register("arid_egg", () -> new EggItem(new Item.Properties().rarity(Rarity.RARE)));
 
     /// Sr
 

@@ -1,23 +1,23 @@
 {
   "display": {
     "icon": {
-      "id": "utm:arid_ingot"
+      "id": "utm:arid_egg"
     },
-    "title": "Introducing: Content+",
-    "description": "Good Morning from Arid City! ",
-    "background": "utm:textures/block/arid_block.png",
-    "frame": "goal",
+    "title": "eco BOOST",
+    "description": "This could hatch into the awesome chicken",
+    "frame": "challenge",
     "show_toast": true,
     "announce_to_chat": true,
-    "hidden": false
+    "hidden": true
   },
+  "parent": "utm:rblx/root",
   "criteria": {
     "1": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "items": "utm:arid_ingot"
+            "items": "utm:arid_egg"
           }
         ]
       }
