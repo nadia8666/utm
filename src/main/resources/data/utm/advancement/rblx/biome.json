@@ -1,0 +1,31 @@
+{
+  "display": {
+    "icon": {
+      "id": "utm:biome_apple"
+    },
+    "title": "Around the worlds",
+    "description": "Forge an apple of diverse elements",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "utm:rblx/ancient",
+  "criteria": {
+    "1": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "utm:biome_apple"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "1"
+    ]
+  ]
+}

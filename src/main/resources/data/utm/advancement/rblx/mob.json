@@ -1,0 +1,31 @@
+{
+  "display": {
+    "icon": {
+      "id": "utm:mob_apple"
+    },
+    "title": "The Last Apple",
+    "description": "Forge an apple of living elements",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "utm:rblx/biome",
+  "criteria": {
+    "1": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "utm:mob_apple"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "1"
+    ]
+  ]
+}
