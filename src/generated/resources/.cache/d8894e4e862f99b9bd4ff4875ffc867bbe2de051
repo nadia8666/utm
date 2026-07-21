@@ -1,4 +1,4 @@
-// 1.21.1	2026-07-15T16:49:30.7231476	Item Models: utm
+// 1.21.1	2026-07-21T00:39:07.4011578	Item Models: utm
 6d60e0d2b0873e138bcfa8f5db0ca9cb6d7cd4fa assets/utm/models/item/adv_goggles.json
 0c35c7686bdc2e520fa2ede79bfa3e5855ad5ffc assets/utm/models/item/air_compressor.json
 9d13b4b18c25ee3c81b1cc65fd86954c95187339 assets/utm/models/item/aluminum_ingot.json
@@ -14,6 +14,7 @@ afded1bb03411dbf8693280811f28dbf45568295 assets/utm/models/item/antiwater_condui
 29765eb18be21f2dcfe1af8a1f3f6a5dde5c0c81 assets/utm/models/item/arid_bat.json
 e3bb1408fb222598c9b84d2b5549f10607252f97 assets/utm/models/item/arid_block.json
 ba2c2fb483d5e93a537a8911cef119c9dcf4310a assets/utm/models/item/arid_bullet.json
+b3bd2401fea16bffefd1fac09b7ea2c47c48ad3a assets/utm/models/item/arid_egg.json
 276d24f6b7bd139310a57f6a60bd05e358af53b3 assets/utm/models/item/arid_hoe.json
 27e2ddb57591da009a7d2abd5330e7a3d8baa304 assets/utm/models/item/arid_ingot.json
 5de52f88841121e4359b931541bd5e7af80e42eb assets/utm/models/item/arid_paxel.json

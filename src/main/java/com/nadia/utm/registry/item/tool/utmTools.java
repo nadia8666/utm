@@ -184,7 +184,7 @@ public class utmTools {
                 ); // this doesnt swing forsome reason
                 return new SwordItem(tier, new Item.Properties().attributes(
                         SwordItem.createAttributes(tier, 4f, 0.44f)).rarity(Rarity.RARE));
-            } //todo: fix these
+            } //todoNE: fix these
     ).tags(Tags.Items.ENCHANTABLES, ItemTags.SWORD_ENCHANTABLE, ItemTags.WEAPON_ENCHANTABLE, ItemTags.FIRE_ASPECT_ENCHANTABLE, ItemTags.SWORDS).handheld();
 
     public static final utmItemContainer<PickaxeItem> ARID_PICKAXE = register("arid_pickaxe", () -> {
@@ -229,7 +229,7 @@ public class utmTools {
                 );
                 return new Paxel(tier, new Item.Properties().attributes(
                         Paxel.createAttributes(tier, 10, -3f)).rarity(utmRarities.MYSTIC.getValue()));
-            } //todo: investigate why you and arid pickaxe have no visible mining speed buff over netherite pickaxe
+            } //todoNE: investigate why you and arid pickaxe have no visible mining speed buff over netherite pickaxe
             //answer its just because its a really small increase but itt is REal
     ).tags(Tags.Items.ENCHANTABLES, ItemTags.SWORD_ENCHANTABLE, ItemTags.WEAPON_ENCHANTABLE, ItemTags.FIRE_ASPECT_ENCHANTABLE, ItemTags.MINING_ENCHANTABLE, ItemTags.PICKAXES).handheld();
     public static final utmItemContainer<AridSlingshotItem> ARID_SLINGSHOT = register("arid_slingshot", () -> {
@@ -240,7 +240,7 @@ public class utmTools {
             BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 2048, 2f, 0f, 15, () -> Ingredient.EMPTY
     ), 7.75f, -2.9f, 10f)).stacksTo(1).rarity(Rarity.RARE)).tags(ItemTags.FIRE_ASPECT_ENCHANTABLE, utmTags.ITEM.ADD_LOOTING).handheld(); // don't make it a swordd !!!
 
-    public static final utmItemContainer<EggItem> ARID_EGG = register("arid_egg", () -> new EggItem(new Item.Properties().rarity(Rarity.RARE)));
+    public static final utmItemContainer<EggItem> ARID_EGG = register("arid_egg", () -> new EggItem(new Item.Properties().rarity(Rarity.RARE))).generated();
 
     /// Sr
 
@@ -259,7 +259,7 @@ public class utmTools {
     public static final utmItemContainer<SwordItem> SABEL3 = register("sabel3", () -> {
         Tier tier = utmToolBuilder.buildTier(BlockTags.INCORRECT_FOR_WOODEN_TOOL, 1500, 1f, 0f, 0, () -> Ingredient.EMPTY);
         return new SwordItem(tier, new Item.Properties().rarity(Rarity.RARE).attributes(SwordItem.createAttributes(tier, 5, -2.8f)));
-    });//todo: fix your sutpid Delay on your second attakc adn also your model
+    });//todoNE: fix your sutpid Delay on your second attakc adn also your model
     //todo: make it not whiff the first attack every time
 
     public static final utmItemContainer<Item> GLOVE = register("glove", new Item.Properties().attributes(SwordItem.createAttributes(utmToolBuilder.buildTier(
