@@ -16,6 +16,7 @@
     "HitEffectMixin",
     "ItemEntityMixin",
     "LevelMixin",
+    "LivingEntityMixin",
     "SchematicPlacePacketMixin",
     "ServerLoginPacketListenerImplMixin",
     "compat.create.AbstractContraptionEntityMixin",

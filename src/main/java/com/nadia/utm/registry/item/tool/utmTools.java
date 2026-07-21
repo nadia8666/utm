@@ -246,8 +246,9 @@ public class utmTools {
 
     public static final utmItemContainer<SwordItem> SWORD2 = register("sword2", () -> {
         Tier tier = utmToolBuilder.buildTier(BlockTags.INCORRECT_FOR_WOODEN_TOOL, 1000, 1f, 0f, 0, () -> Ingredient.EMPTY);
-        return new SwordItem(tier, new Item.Properties().rarity(Rarity.UNCOMMON).durability(1000).attributes(SwordItem.createAttributes(tier, 2, -3.5f)));
+        return new SwordItem(tier, new Item.Properties().rarity(Rarity.UNCOMMON).durability(1000).attributes(SwordItem.createAttributes(tier, 4, -3.5f)));
     }).handheld(); // these dont have enchantments because they're SR.. stuff
+    // 3->5
 
     public static final utmItemContainer<SwordItem> GLOOMSWORD8 = register("gloomsword8", () -> {
         Tier tier = utmToolBuilder.buildTier(BlockTags.INCORRECT_FOR_WOODEN_TOOL, 1, 1f, 0f, 0, () -> Ingredient.EMPTY);

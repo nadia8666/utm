@@ -81,13 +81,13 @@ public class MinecraftMixin {
 
                     // for some reason on these special conditions it doesn't actually hit the mob.. which is somethign that is NOt good. i think removing this--
                     //fixes that.
-                    //  cir.setReturnValue(false);
+                    //cir.setReturnValue(false);
                 }
             } else if (itemStack.is(utmTools.ARID_SWORD.get()) && hitResult.getType().equals(HitResult.Type.ENTITY) && 1==2) {
                 if (hitResult instanceof EntityHitResult result) {
                     String targetUUID = result.getEntity().getUUID().toString();
 
-                    PacketDistributor.sendToServer(new LesserAtkCooldownPayload(player.position().toVector3f(), targetUUID, 5));
+               //     PacketDistributor.sendToServer(new LesserAtkCooldownPayload(player.position().toVector3f(), targetUUID, 5));
                     if (inputEvent.shouldSwingHand())
                         player.swing(InteractionHand.MAIN_HAND);
                     player.resetAttackStrengthTicker();
@@ -100,7 +100,7 @@ public class MinecraftMixin {
                 if (hitResult instanceof EntityHitResult result) {
                     String targetUUID = result.getEntity().getUUID().toString();
 
-                    PacketDistributor.sendToServer(new LesserAtkCooldownPayload(player.position().toVector3f(), targetUUID, 1));
+               //     PacketDistributor.sendToServer(new LesserAtkCooldownPayload(player.position().toVector3f(), targetUUID, 1));
                     player.resetAttackStrengthTicker();
 
                     // for some reason on these special conditions it doesn't actually hit the mob.. which is somethign that is NOt good. i think removing this--

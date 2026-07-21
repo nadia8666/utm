@@ -27,6 +27,8 @@ import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
+import net.neoforged.neoforge.event.entity.living.LivingEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.handling.IPayloadHandler;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
@@ -109,7 +111,7 @@ public class utmNetworking {
                 for (LivingEntity livingentity2 : slevel.getEntitiesOfClass(LivingEntity.class, new AABB(pos.x - 1, pos.y - 0.2, pos.z - 1, pos.x + 1, pos.y + 0.2, pos.z + 1).inflate(5))) {
                     if (livingentity2 != player && (livingentity2.position().distanceTo(new Vec3(pos.x, livingentity2.position().y, pos.z))) < 7) {
                         livingentity2.invulnerableTime = 0;
-                        livingentity2.hurt(player.damageSources().playerAttack(player), 3 + (doom ? 7 : 0));
+                        livingentity2.hurt(player.damageSources().playerAttack(player), 5 + (doom ? 5 : 0));
                         if (doom) {
                             player.invulnerableTime = 0;
                             player.hurt(player.damageSources().cramming(), 2);
@@ -154,7 +156,6 @@ public class utmNetworking {
                 if (target instanceof LivingEntity entity) {
                   //  TickUtil.runIn(0, () -> {
                     slevel.playSound(null, entity.getX(), entity.getY(), entity.getZ(), utmSounds.SR_BOXING, player.getSoundSource(), 0.25F, 1.0F);
-
                     entity.invulnerableTime=delay; //change dis ish
                  //   }, slevel);
                 }
