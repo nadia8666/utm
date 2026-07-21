@@ -2,7 +2,6 @@ package com.nadia.utm.registry.item.tool;
 
 import com.nadia.utm.event.ForceLoad;
 import com.nadia.utm.item.*;
-import com.nadia.utm.item.BatItem;
 import com.nadia.utm.item.spear.TNTThrowingSpearItem;
 import com.nadia.utm.item.spear.ThrowingSpearItem;
 import com.nadia.utm.registry.data.utmDataComponents;
@@ -13,15 +12,12 @@ import com.nadia.utm.registry.utmRegistry;
 import com.nadia.utm.tool.CopperSword;
 import com.nadia.utm.tool.Paxel;
 import com.nadia.utm.tool.ShartSword;
-import net.minecraft.Util;
-import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ambient.Bat;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -29,12 +25,9 @@ import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-import java.util.EnumMap;
 import java.util.function.Supplier;
 
 import static com.nadia.utm.registry.item.utmArmorMaterials.*;
-import static com.nadia.utm.registry.item.utmArmorMaterials.OMEGA_ARMOR_MATERIAL;
-import static net.neoforged.neoforge.common.util.AttributeUtil.*;
 
 @ForceLoad(deps = {utmRegistry.class, utmTags.class})
 public class utmTools {
@@ -177,6 +170,7 @@ public class utmTools {
     /// arid
     //todo: you should make all of these fire res
             //debatable.
+    // stop talking to you're seves
 
     public static final utmItemContainer<SwordItem> ARID_SWORD = register("arid_sword", () -> {
                 Tier tier = utmToolBuilder.buildTier(
