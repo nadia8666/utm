@@ -38,11 +38,17 @@ public class utmBlockContainer<B extends Block, I extends BlockItem> {
     }
 
     public static utmBlockContainer<?, ?> fromBlock(Block block) {
-        for (utmBlockContainer<?, ?> container : ALL_BLOCKS) {
+        for (utmBlockContainer<?, ?> container : ALL_BLOCKS)
             if (container.BLOCK.get().equals(block)) return container;
-        }
 
         throw new RuntimeException("[UTM] unable to find block " + block);
+    }
+
+    public static Optional<utmBlockContainer<?, ?>> fromBlockUnsafe(Block block) {
+        for (utmBlockContainer<?, ?> container : ALL_BLOCKS)
+            if (container.BLOCK.get().equals(block)) return Optional.of(container);
+
+        return Optional.empty();
     }
 
     public static Optional<utmBlockContainer<?, ?>> fromItem(Item item) {
@@ -92,6 +98,17 @@ public class utmBlockContainer<B extends Block, I extends BlockItem> {
      */
     public utmBlockContainer<B, I> dropOre(utmItemContainer<?> item) {
         getForDatagen().add("dropOre:" + item.ITEM().getId().getPath());
+        return this;
+    }
+
+    /**
+     * skips datagen drops for block so you can use premade loot tables
+     *
+     * @return block container
+     * @datagen
+     */
+    public utmBlockContainer<B, I> dropNull() {
+        getForDatagen().add("dropNull");
         return this;
     }
 

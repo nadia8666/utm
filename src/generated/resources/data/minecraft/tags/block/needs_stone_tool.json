@@ -1,5 +1,6 @@
 {
   "values": [
+    "utm:blucky_block",
     "utm:chunk_loader",
     "utm:player_chunk_loader"
   ]

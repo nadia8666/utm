@@ -4,6 +4,7 @@
   "compatibilityLevel": "JAVA_21",
   "plugin": "com.nadia.utm.mixin.ConfigPlugin",
   "mixins": [
+    "AnvilMenuMixin",
     "BacktankBlockEntityMixin",
     "BacktankUtilAccessor",
     "BasinBlockEntityMixin",
@@ -11,7 +12,6 @@
     "ClientboundSetEntityMotionPacketMixin",
     "ElytraItemMixin",
     "EntityMixin",
-    "FreeAnvilMixin",
     "HitboxMixin",
     "HitEffectMixin",
     "ItemEntityMixin",

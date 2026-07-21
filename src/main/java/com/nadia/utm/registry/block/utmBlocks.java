@@ -5,6 +5,7 @@ import com.nadia.utm.block.HeavyMetalAnvilBlock;
 import com.nadia.utm.block.InterdictorBlock;
 import com.nadia.utm.block.LaunchContraptionBlock;
 import com.nadia.utm.block.displaylink.utmDisplaySources;
+import com.nadia.utm.block.misc.BluckyBlock;
 import com.nadia.utm.block.misc.aerowall.AerowallBlock;
 import com.nadia.utm.block.misc.citywalls.CitywallsBlock;
 import com.nadia.utm.block.misc.gimbal.GimbalBlock;
@@ -282,4 +283,8 @@ public class utmBlocks {
             .noOcclusion()
             .sound(SoundType.METAL)).dropSelf().inheritModel().minePick().mineTier(2).hideFromTab();
 
+    public static final utmBlockContainer<BluckyBlock, BlockItem> BLUCKY_BLOCK = dualRegister("blucky_block", BluckyBlock::new, BlockBehaviour.Properties.of()
+            .destroyTime(2)
+            .sound(SoundType.COPPER))
+            .cube().inheritModel().minePick().mineTier(1).dropNull();
 }

@@ -1,7 +1,6 @@
 package com.nadia.utm.datagen.providers;
 
 import com.nadia.utm.registry.block.utmBlockContainer;
-import com.nadia.utm.registry.block.utmBlocks;
 import com.nadia.utm.registry.item.utmItems;
 import com.nadia.utm.registry.utmRegistry;
 import net.minecraft.core.Holder;
@@ -21,22 +20,6 @@ public class utmBlockLootTableProvider extends BlockLootSubProvider {
 
     @Override
     protected void generate() {
-        dropSelf(utmBlocks.HEAVY_METAL_ANVIL.BLOCK.get());
-        dropSelf(utmBlocks.GLINT_TABLE.BLOCK.get());
-        dropSelf(utmBlocks.GRATE.BLOCK.get());
-        dropSelf(utmBlocks.CITYWALLS_METAL.BLOCK.get());
-        dropSelf(utmBlocks.CITYWALLS_SHRINE.BLOCK.get());
-        dropSelf(utmBlocks.OUTPOSTWALLS_METAL.BLOCK.get());
-        dropSelf(utmBlocks.OUTPOSTWALLS_SHRINE.BLOCK.get());
-        dropSelf(utmBlocks.CHUNK_LOADER.BLOCK.get());
-        dropSelf(utmBlocks.PLAYER_CHUNK_LOADER.BLOCK.get());
-        dropSelf(utmBlocks.INTERDICTOR.BLOCK.get());
-        dropSelf(utmBlocks.FLINT_BLOCK.BLOCK.get());
-        dropSelf(utmBlocks.FLINT_BLOCK_BLOCK.BLOCK.get());
-        dropSelf(utmBlocks.LAUNCH_CONTRAPTION.BLOCK.get());
-        dropSelf(utmBlocks.OXYGEN_COLLECTOR.BLOCK.get());
-        //why add this?
-
         utmBlockContainer.DATAGEN_TARGETS.forEach((c, tags) -> {
             for (String tag : tags) {
                 if (tag.equals("dropSelf"))
@@ -54,6 +37,6 @@ public class utmBlockLootTableProvider extends BlockLootSubProvider {
 
     @Override
     protected @NotNull Iterable<Block> getKnownBlocks() {
-        return utmRegistry.BLOCKS.getEntries().stream().map(Holder::value)::iterator;
+        return utmRegistry.BLOCKS.getEntries().stream().filter(P -> utmBlockContainer.fromBlockUnsafe(P.get()).map(utmBlockContainer -> !utmBlockContainer.getForDatagen().contains("dropNull")).orElse(true)).map(Holder::value)::iterator;
     }
 }

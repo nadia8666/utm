@@ -18,8 +18,8 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 
 @SuppressWarnings("SameReturnValue")
 @Mixin(value = AnvilMenu.class, remap = false)
-public abstract class FreeAnvilMixin extends ItemCombinerMenu {
-    public FreeAnvilMixin(MenuType<?> pType, int pContainerId, Inventory pPlayerInventory, ContainerLevelAccess pAccess) {
+public abstract class AnvilMenuMixin extends ItemCombinerMenu {
+    public AnvilMenuMixin(MenuType<?> pType, int pContainerId, Inventory pPlayerInventory, ContainerLevelAccess pAccess) {
         super(pType, pContainerId, pPlayerInventory, pAccess);
     }
 

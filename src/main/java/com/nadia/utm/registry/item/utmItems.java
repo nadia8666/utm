@@ -116,7 +116,8 @@ public class utmItems {
             ANTIWATER_CANISTER_LIGHT = register("antiwater_canister_light", new Item.Properties().stacksTo(4)).generated(), // same as above
             PARTICASE = register("particase", new Item.Properties().stacksTo(1)).generated(),
             ELECTRASE = register("electrase", new Item.Properties().stacksTo(1)).generated(),
-            POSITRASE = register("positrase", new Item.Properties().stacksTo(1)).generated();
+            POSITRASE = register("positrase", new Item.Properties().stacksTo(1)).generated(),
+            BLAPIS_BLAZULI = register("blapis_blazuli", new Item.Properties().food(new FoodProperties.Builder().alwaysEdible().nutrition(-5).saturationModifier(-2).build())).generated();
 
 
     // apples
