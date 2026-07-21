@@ -87,7 +87,6 @@ public class MinecraftMixin {
                 if (hitResult instanceof EntityHitResult result) {
                     String targetUUID = result.getEntity().getUUID().toString();
 
-               //     PacketDistributor.sendToServer(new LesserAtkCooldownPayload(player.position().toVector3f(), targetUUID, 5));
                     if (inputEvent.shouldSwingHand())
                         player.swing(InteractionHand.MAIN_HAND);
                     player.resetAttackStrengthTicker();
@@ -102,6 +101,7 @@ public class MinecraftMixin {
 
                //     PacketDistributor.sendToServer(new LesserAtkCooldownPayload(player.position().toVector3f(), targetUUID, 1));
                     player.resetAttackStrengthTicker();
+                    PacketDistributor.sendToServer(new LesserAtkCooldownPayload(player.position().toVector3f(), targetUUID, 1));
 
                     // for some reason on these special conditions it doesn't actually hit the mob.. which is somethign that is NOt good. i think removing this--
                     //fixes that.

@@ -238,7 +238,7 @@ public class utmTools {
     ).tags(Tags.Items.ENCHANTABLES, utmTags.ITEM.ADD_MULTISHOT, utmTags.ITEM.ADD_POWER, utmTags.ITEM.ADD_FLAME).handheld();
     public static final utmItemContainer<Item> ARID_BAT = register("arid_bat", new Item.Properties().attributes(BatItem.createAttributes(utmToolBuilder.buildTier(
             BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 2048, 2f, 0f, 15, () -> Ingredient.EMPTY
-    ), 7.75f, -2.9f, 10f)).stacksTo(1).rarity(Rarity.RARE)).tags(ItemTags.FIRE_ASPECT_ENCHANTABLE, utmTags.ITEM.ADD_LOOTING).handheld(); // don't make it a swordd !!!
+    ), 5.85f, -2.9f, 10f)).stacksTo(1).rarity(Rarity.RARE)).tags(ItemTags.FIRE_ASPECT_ENCHANTABLE, utmTags.ITEM.ADD_LOOTING).handheld(); // don't make it a swordd !!!
 
     public static final utmItemContainer<EggItem> ARID_EGG = register("arid_egg", () -> new EggItem(new Item.Properties().rarity(Rarity.RARE))).generated();
 
@@ -251,7 +251,7 @@ public class utmTools {
     // 3->5
 
     public static final utmItemContainer<SwordItem> GLOOMSWORD8 = register("gloomsword8", () -> {
-        Tier tier = utmToolBuilder.buildTier(BlockTags.INCORRECT_FOR_WOODEN_TOOL, 1, 1f, 0f, 0, () -> Ingredient.EMPTY);
+        Tier tier = utmToolBuilder.buildTier(BlockTags.INCORRECT_FOR_WOODEN_TOOL, -1, 1f, 0f, 0, () -> Ingredient.EMPTY);
         return new SwordItem(tier, new Item.Properties().rarity(utmRarities.MYSTIC.getValue()).attributes(SwordItem.createAttributes(tier, 4, -3.6f)));
     }).handheld(); ///too: change you to like glome sword 2 or somethign because 8 is too much You are not a GS! alternatively give it a new sprite
     /// and make it a gs Completed

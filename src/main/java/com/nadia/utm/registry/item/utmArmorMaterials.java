@@ -44,10 +44,10 @@ public class utmArmorMaterials {
 
     public static final Holder<ArmorMaterial> ULTRA_ARMOR_MATERIAL = build("ultra",
             Util.make(new EnumMap<>(ArmorItem.Type.class), attribute -> {
-                attribute.put(ArmorItem.Type.BOOTS, 1);
-                attribute.put(ArmorItem.Type.LEGGINGS, 2);
-                attribute.put(ArmorItem.Type.CHESTPLATE, 4);
-                attribute.put(ArmorItem.Type.HELMET, 1);
+                attribute.put(ArmorItem.Type.BOOTS, 2);
+                attribute.put(ArmorItem.Type.LEGGINGS, 4);
+                attribute.put(ArmorItem.Type.CHESTPLATE, 5);
+                attribute.put(ArmorItem.Type.HELMET, 2);
                 attribute.put(ArmorItem.Type.BODY, 15);
             }) , 30, 5f, 0.0f, () -> Items.AIR);
     public static final Holder<ArmorMaterial> MEGA_ARMOR_MATERIAL = build("mega",
