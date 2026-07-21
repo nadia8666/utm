@@ -54,7 +54,8 @@ public class GlintMenu extends AbstractContainerMenu {
             utm.key("textures/misc/raginglint.png"),
             utm.key("textures/misc/threeg.png"),
             utm.key("textures/misc/glowy.png"),
-            utm.key("textures/misc/threegnoglow.png")
+            utm.key("textures/misc/threegnoglow.png"),
+            utm.key("textures/misc/glint_whitepng")
 
     );
 

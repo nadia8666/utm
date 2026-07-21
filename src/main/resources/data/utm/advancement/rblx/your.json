@@ -1,0 +1,31 @@
+{
+  "display": {
+    "icon": {
+      "id": "utm:antiwater_canister"
+    },
+    "title": "your did it",
+    "description": "Successfully contain a canister of Antiwater",
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "utm:rblx/mob",
+  "criteria": {
+    "1": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "utm:antiwater_canister"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "1"
+    ]
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "display": {
+    "icon": {
+      "id": "utm:anti_slingshot"
+    },
+    "title": "The shtrongiest Shotgun ever made in the life",
+    "description": "craft the toughest slingshot ever made in the history of the game",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "utm:rblx/your",
+  "criteria": {
+    "1": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "utm:anti_slingshot"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "1"
+    ]
+  ]
+}
