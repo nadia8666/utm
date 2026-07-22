@@ -40,6 +40,8 @@ public class utmSounds {
             () -> SoundEvent.createVariableRangeEvent(utm.key("pkfrs")));
     public static final DeferredHolder<SoundEvent, SoundEvent> PKFRS2 = SOUNDS.register("pkfrs2",
             () -> SoundEvent.createVariableRangeEvent(utm.key("pkfrs2"))); //MONO
+    public static final DeferredHolder<SoundEvent, SoundEvent> BAPPLE = SOUNDS.register("bapple",
+            () -> SoundEvent.createVariableRangeEvent(utm.key("bapple"))); //little nightmares 2
 
 }
 

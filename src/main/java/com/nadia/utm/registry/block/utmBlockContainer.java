@@ -195,7 +195,7 @@ public class utmBlockContainer<B extends Block, I extends BlockItem> {
     }
 
     /**
-     * combined with {@link #minePick()}/{@link #mineAxe()}/{@link #mineShovel()}/{@link #mineHoe()} ()} to require a tool of tier x or higher
+     * combined with {@link #minePick()}/{@link #mineAxe()}/{@link #mineShovel()}/{@link #mineHoe()} to require a tool of tier x or higher
      *
      * @param tier 0, 1, 2, 3, 4 : wood, stone, iron, diamond, netherite
      * @datagen

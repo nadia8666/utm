@@ -24,6 +24,7 @@ import com.nadia.utm.block.propulsion.liquid.LiquidFuelThrusterBlock;
 import com.nadia.utm.block.propulsion.solid.SolidThrusterBlock;
 import com.nadia.utm.registry.fluid.utmFluids;
 import com.nadia.utm.registry.item.utmItems;
+import com.nadia.utm.registry.item.utmRarities;
 import com.nadia.utm.registry.tags.utmTags;
 import com.nadia.utm.registry.utmRegistry;
 import com.simibubi.create.api.behaviour.movement.MovementBehaviour;
@@ -83,6 +84,10 @@ public class utmBlocks {
         DeferredBlock<B> blockTarget = register(name, wrappedFunc, props);
 
         DeferredItem<BlockItem> itemTarget = utmRegistry.ITEMS.registerItem(name, p -> {
+            // TODO: lold ont do this slop - nadia
+            if (name.equals("blucky_block"))
+                p.rarity(utmRarities.BLUE.getValue());
+
             BlockItem i = new BlockItem(blockTarget.get(), p);
             pairCallbacks.forEach(c -> c.accept(blockTarget.get(), i));
             return i;

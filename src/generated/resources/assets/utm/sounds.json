@@ -1,4 +1,10 @@
 {
+  "bapple": {
+    "sounds": [
+      "utm:sfx/bapple"
+    ],
+    "subtitle": "subtitles.utm.bapple"
+  },
   "music_disc_lava_chicken": {
     "sounds": [
       {

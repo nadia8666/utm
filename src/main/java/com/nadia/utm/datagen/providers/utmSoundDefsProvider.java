@@ -57,5 +57,8 @@ public class utmSoundDefsProvider extends SoundDefinitionsProvider {
         add(utmSounds.PKFRS2, SoundDefinition.definition().with(
                 sound("utm:sfx/pkfrs2")
         ).subtitle("subtitles.utm.pkfrs2"));
+        add(utmSounds.BAPPLE, SoundDefinition.definition().with(
+                sound("utm:sfx/bapple")
+        ).subtitle("subtitles.utm.bapple"));
     }
 }

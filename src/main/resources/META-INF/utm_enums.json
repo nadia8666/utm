@@ -8,6 +8,15 @@
         "class": "com/nadia/utm/registry/item/utmRarities",
         "field": "MYSTIC"
       }
+    },
+    {
+      "enum": "net/minecraft/world/item/Rarity",
+      "name": "UTM_BLUE",
+      "constructor": "(ILjava/lang/String;Ljava/util/function/UnaryOperator;)V",
+      "parameters": {
+        "class": "com/nadia/utm/registry/item/utmRarities",
+        "field": "BLUE"
+      }
     }
   ]
 }

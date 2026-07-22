@@ -2,7 +2,6 @@ package com.nadia.utm.item;
 
 import com.nadia.utm.entity.projectile.PebbleEntity;
 import com.nadia.utm.registry.sound.utmSounds;
-import com.nadia.utm.util.EnchantUtil;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
@@ -13,10 +12,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
-import org.jetbrains.annotations.NotNull;
 
-import java.util.logging.Logger;
-
+// dont hink about this class - nadia
 public class AntiSlingshotItem extends Item {
     public AntiSlingshotItem(Properties properties) {
         super(properties);
