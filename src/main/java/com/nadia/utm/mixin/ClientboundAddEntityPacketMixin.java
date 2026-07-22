@@ -17,9 +17,9 @@ import java.util.UUID;
 @Mixin(value = ClientboundAddEntityPacket.class, remap = false)
 public class ClientboundAddEntityPacketMixin {
     @Shadow
-    private byte xRot;
+    public byte xRot;
     @Shadow
-    private byte yRot;
+    public byte yRot;
     @Unique
     private byte utm$xRot2, utm$yRot2;
 
