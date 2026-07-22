@@ -32,23 +32,22 @@ public class ClientboundSetEntityMotionPacketMixin implements ScaledClientMotion
         float scale = MathHelper.getOversizeScale(pDeltaMovement, new Vec3(d1, d2, d3));
         this.utm$deltaScale = scale > 0.0f ? scale : 1.0f;
 
-        this.xa = (int) (pDeltaMovement.x * utm$deltaScale * 8000);
-        this.ya = (int) (pDeltaMovement.y * utm$deltaScale * 8000);
-        this.za = (int) (pDeltaMovement.z * utm$deltaScale * 8000);
+        this.xa = (int) (pDeltaMovement.x * this.utm$deltaScale * 8000.0);
+        this.ya = (int) (pDeltaMovement.y * this.utm$deltaScale * 8000.0);
+        this.za = (int) (pDeltaMovement.z * this.utm$deltaScale * 8000.0);
     }
 
     @ModifyConstant(method = {"getXa", "getYa", "getZa"}, constant = @Constant(doubleValue = 8000d))
     private double addDeltaScale(double constant) {
-        if (this.utm$deltaScale <= 0.0f)
-            return constant;
-        return constant / this.utm$deltaScale;
+        if (this.utm$deltaScale <= 0.00001f || Float.isNaN(this.utm$deltaScale)) return constant;
+        return constant / (double) this.utm$deltaScale;
     }
 
     @Inject(method = "<init>(Lnet/minecraft/network/FriendlyByteBuf;)V", at = @At("TAIL"))
     private void readScaleFromNW(FriendlyByteBuf pBuffer, CallbackInfo ci) {
         if (pBuffer.isReadable(4)) {
             float scale = pBuffer.readFloat();
-            this.utm$deltaScale = scale > 0.0f ? scale : 1.0f;
+            this.utm$deltaScale = (Float.isFinite(scale) && scale > 0.0f) ? scale : 1.0f; // MIGHT NOT NEED TO BE THIS PRECISE BUT WHO CARES.
         } else {
             this.utm$deltaScale = 1.0f;
         }
@@ -56,7 +55,7 @@ public class ClientboundSetEntityMotionPacketMixin implements ScaledClientMotion
 
     @Inject(method = "write", at = @At("TAIL"))
     private void addScaleToNW(FriendlyByteBuf pBuffer, CallbackInfo ci) {
-        pBuffer.writeFloat(this.utm$deltaScale);
+        pBuffer.writeFloat(this.utm$deltaScale > 0.0f ? this.utm$deltaScale : 1.0f);
     }
 
     @Override
