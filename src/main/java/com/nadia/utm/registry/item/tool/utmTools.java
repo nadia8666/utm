@@ -245,10 +245,11 @@ public class utmTools {
     // 3->5
 
     public static final utmItemContainer<SwordItem> GLOOMSWORD8 = register("gloomsword8", () -> {
-        Tier tier = utmToolBuilder.buildTier(BlockTags.INCORRECT_FOR_WOODEN_TOOL, -1, 1f, 0f, 0, () -> Ingredient.EMPTY);
+        Tier tier = utmToolBuilder.buildTier(BlockTags.INCORRECT_FOR_WOODEN_TOOL, 10000, 1f, 0f, 0, () -> Ingredient.EMPTY);
         return new SwordItem(tier, new Item.Properties().rarity(utmRarities.MYSTIC.getValue()).attributes(SwordItem.createAttributes(tier, 4, -3.6f)));
     }).handheld(); ///too: change you to like glome sword 2 or somethign because 8 is too much You are not a GS! alternatively give it a new sprite
     /// and make it a gs Completed
+    // it damages itself on whiffs so eventually fix that but for now Just give it some duarbilits
 
     public static final utmItemContainer<SwordItem> SABEL3 = register("sabel3", () -> {
         Tier tier = utmToolBuilder.buildTier(BlockTags.INCORRECT_FOR_WOODEN_TOOL, 1500, 1f, 0f, 0, () -> Ingredient.EMPTY);

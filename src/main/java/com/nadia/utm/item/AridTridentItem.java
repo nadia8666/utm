@@ -93,6 +93,12 @@ public class AridTridentItem extends TridentItem {
         }
     }
 
+    @Override
+    public boolean isFoil(ItemStack stack) {
+        return false;
+    } // no foil
+
+
     public @NotNull InteractionResultHolder<ItemStack> use(@NotNull Level level, Player player, @NotNull InteractionHand hand) {
         ItemStack itemstack = player.getItemInHand(hand);
         if (isTooDamagedToUse(itemstack)) {
