@@ -3,7 +3,6 @@ package com.nadia.utm.entity.spear;
 import com.nadia.utm.registry.enchantment.utmEnchantments;
 import com.nadia.utm.registry.entity.utmEntities;
 import com.nadia.utm.registry.item.tool.utmTools;
-import com.nadia.utm.registry.particle.utmParticles;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -43,16 +42,16 @@ public class ThrownAridTrident extends AbstractArrow {
         COPIED_STACK = new ItemStack(utmTools.ARID_TRIDENT.get());
        }
 
-    public ThrownAridTrident(Level level, LivingEntity shooter, ItemStack pickupItemStack) {
-        super(utmEntities.THROWN_ARID_TRIDENT.get(), shooter, level, pickupItemStack, null);
-        this.entityData.set(ID_FOIL, pickupItemStack.hasFoil());
-        COPIED_STACK = pickupItemStack.copy();
+    public ThrownAridTrident(Level level, LivingEntity shooter, ItemStack stack) {
+        super(utmEntities.THROWN_ARID_TRIDENT.get(), shooter, level, stack, stack);
+        this.entityData.set(ID_FOIL, stack.hasFoil());
+        COPIED_STACK = stack.copy();
     }
 
-    public ThrownAridTrident(Level level, double x, double y, double z, ItemStack pickupItemStack) {
-        super(utmEntities.THROWN_ARID_TRIDENT.get(), x, y, z, level, pickupItemStack, pickupItemStack);
-        this.entityData.set(ID_FOIL, pickupItemStack.hasFoil());
-        COPIED_STACK = pickupItemStack.copy();
+    public ThrownAridTrident(Level level, double x, double y, double z, ItemStack stack) {
+        super(utmEntities.THROWN_ARID_TRIDENT.get(), x, y, z, level, stack, stack);
+        this.entityData.set(ID_FOIL, stack.hasFoil());
+        COPIED_STACK = stack.copy();
     }
 
     @Override
@@ -60,8 +59,6 @@ public class ThrownAridTrident extends AbstractArrow {
         super.defineSynchedData(builder);
         builder.define(ID_FOIL, false);
     }
-
-
 
     @Override
     protected void onHitEntity(EntityHitResult result) {
@@ -110,11 +107,12 @@ public class ThrownAridTrident extends AbstractArrow {
 
 
     // from trident
+    @Override
     public void tick() {
+        super.tick();
+
         if (this.inGroundTime > 1)
             this.dealtDamage = true;
-
-        super.tick();
     }
 
     boolean isAcceptibleReturnOwner() {
@@ -127,32 +125,39 @@ public class ThrownAridTrident extends AbstractArrow {
         return this.dealtDamage ? null : super.findHitEntity(startVec, endVec);
     }
 
+    @Override
     public @NotNull ItemStack getWeaponItem() {
         return this.getPickupItemStackOrigin();
     }
 
+    @Override
     protected boolean tryPickup(@NotNull Player player) {
         return super.tryPickup(player) || this.isNoPhysics() && this.ownedBy(player) && player.getInventory().add(this.getPickupItem());
     }
 
+    @Override
     protected @NotNull ItemStack getDefaultPickupItem() {
         return new ItemStack(utmTools.ARID_TRIDENT.get());
     }
 
+    @Override
     protected @NotNull SoundEvent getDefaultHitGroundSoundEvent() {
         return SoundEvents.TRIDENT_HIT_GROUND;
     }
 
+    @Override
     public void playerTouch(@NotNull Player entity) {
         if (this.ownedBy(entity) || this.getOwner() == null)
             super.playerTouch(entity);
     }
 
+    @Override
     public void readAdditionalSaveData(@NotNull CompoundTag compound) {
         super.readAdditionalSaveData(compound);
         this.dealtDamage = compound.getBoolean("DealtDamage");
     }
 
+    @Override
     public void addAdditionalSaveData(@NotNull CompoundTag compound) {
         super.addAdditionalSaveData(compound);
         compound.putBoolean("DealtDamage", this.dealtDamage);
@@ -170,15 +175,18 @@ public class ThrownAridTrident extends AbstractArrow {
         return acceleration;
     }
 
+    @Override
     public void tickDespawn() {
         if (this.pickup != Pickup.ALLOWED)
             super.tickDespawn();
     }
 
+    @Override
     protected float getWaterInertia() {
         return 0.2F;
     } // water inertia
 
+    @Override
     public boolean shouldRender(double x, double y, double z) {
         return true;
     }

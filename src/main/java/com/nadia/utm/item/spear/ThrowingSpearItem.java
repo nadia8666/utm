@@ -42,27 +42,13 @@ public class ThrowingSpearItem extends Item implements ProjectileItem {
 
     @Override
     public @NotNull ProjectileItem.DispenseConfig createDispenseConfig() {
-        return ProjectileItem.DispenseConfig.builder()
-                .positionFunction(DispenseConfig.DEFAULT.positionFunction())
-                .uncertainty(0F)
-                .power(3.125F) // TODO: change with enchant force
+        return ProjectileItem.DispenseConfig.builder().positionFunction(DispenseConfig.DEFAULT.positionFunction()).uncertainty(0F).power(3.125F) // TODO: change with enchant force
                 .build();
     }
 
     @Override
     public @NotNull ItemAttributeModifiers getDefaultAttributeModifiers(@NotNull ItemStack stack) {
-        return ItemAttributeModifiers.builder()
-                .add(
-                        Attributes.ATTACK_DAMAGE,
-                        new AttributeModifier(BASE_ATTACK_DAMAGE_ID, this.attackDamage, AttributeModifier.Operation.ADD_VALUE),
-                        EquipmentSlotGroup.MAINHAND
-                )
-                .add(
-                        Attributes.ATTACK_SPEED,
-                        new AttributeModifier(BASE_ATTACK_SPEED_ID, this.attackSpeed, AttributeModifier.Operation.ADD_VALUE),
-                        EquipmentSlotGroup.MAINHAND
-                )
-                .build();
+        return ItemAttributeModifiers.builder().add(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_ID, this.attackDamage, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND).add(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_ID, this.attackSpeed, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND).build();
     }
 
     @Override
@@ -72,19 +58,20 @@ public class ThrowingSpearItem extends Item implements ProjectileItem {
             int throwForce = stack.getEnchantmentLevel(player.registryAccess().holderOrThrow(utmEnchantments.SPEAR_THROW));
             float velocity = 2.5F + (throwForce * 0.3F);
 
+            // entity
             ThrownSpearEntity spear = new ThrownSpearEntity(level, player, stack);
-            spear.pickup = AbstractArrow.Pickup.ALLOWED;
             spear.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, velocity, 0F);
+
+            spear.pickup = AbstractArrow.Pickup.ALLOWED;
+
+            if (stack.getMaxStackSize() == 1) player.getInventory().removeItem(stack);
+            else stack.shrink(1);
+
             level.addFreshEntity(spear);
 
-            Holder<SoundEvent> holder = EnchantmentHelper.pickHighestLevel(stack, EnchantmentEffectComponents.TRIDENT_SOUND)
-                    .orElse(SoundEvents.TRIDENT_THROW);
+            // sound
+            Holder<SoundEvent> holder = EnchantmentHelper.pickHighestLevel(stack, EnchantmentEffectComponents.TRIDENT_SOUND).orElse(SoundEvents.TRIDENT_THROW);
             level.playSound(null, spear, holder.value(), SoundSource.PLAYERS, 1.0F, 1.0F);
-
-            if (stack.getMaxStackSize() == 1)
-                player.getInventory().removeItem(stack);
-            else
-                stack.shrink(1);
 
             player.awardStat(Stats.ITEM_USED.get(this));
         }
@@ -140,8 +127,7 @@ public class ThrowingSpearItem extends Item implements ProjectileItem {
 
     @Override
     public boolean isBookEnchantable(@NotNull ItemStack stack, @NotNull ItemStack book) {
-        if (EnchantUtil.findEnchants(stack, book, Enchantments.MENDING))
-            return false;
+        if (EnchantUtil.findEnchants(stack, book, Enchantments.MENDING)) return false;
 
         return super.isBookEnchantable(stack, book);
     }

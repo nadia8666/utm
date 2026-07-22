@@ -22,7 +22,7 @@ public class utmEntities {
     public static final utmEntityContainer<ThrownSpearEntity> THROWN_SPEAR = register("thrown_spear", () ->
             EntityType.Builder.<ThrownSpearEntity>of((type, level) -> new ThrownSpearEntity(level), MobCategory.MISC).sized(0.5F, 0.5F).eyeHeight(0.13F).clientTrackingRange(4).updateInterval(20).build("thrown_spear"));
     public static final utmEntityContainer<ThrownAridTrident> THROWN_ARID_TRIDENT = register("thrown_arid_trident", () ->
-            EntityType.Builder.<ThrownAridTrident>of((type, level) -> new ThrownAridTrident(level), MobCategory.MISC).sized(0.5F, 0.5F).eyeHeight(0.13F).clientTrackingRange(4).updateInterval(5).build("thrown_arid_trident"));
+            EntityType.Builder.<ThrownAridTrident>of((type, level) -> new ThrownAridTrident(level), MobCategory.MISC).sized(0.5F, 0.5F).eyeHeight(0.13F).clientTrackingRange(4).updateInterval(1).build("thrown_arid_trident"));
 
     public static final utmEntityContainer<AridStoneEntity> ARID_STONE = register("arid_stone", () ->
             EntityType.Builder.<AridStoneEntity>of((type, level) -> new AridStoneEntity(level), MobCategory.MISC).sized(0.25F, 0.25F).eyeHeight(0.13F).clientTrackingRange(4).updateInterval(10).build("arid_stone"));

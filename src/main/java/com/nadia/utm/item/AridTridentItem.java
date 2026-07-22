@@ -1,13 +1,10 @@
 package com.nadia.utm.item;
 
 import com.nadia.utm.entity.spear.ThrownAridTrident;
-import com.nadia.utm.particle.ColorParticleOptions;
 import com.nadia.utm.particle.pkfrbParticleOptions;
 import com.nadia.utm.registry.particle.utmParticles;
 import com.nadia.utm.registry.sound.utmSounds;
-import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
-import net.minecraft.core.Position;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -21,7 +18,6 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
-import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TridentItem;
@@ -41,12 +37,12 @@ public class AridTridentItem extends TridentItem {
     }
 
     //there is nothing you nee to change about this file
-    @Override
+    /*@Override
     public @NotNull Projectile asProjectile(@NotNull Level level, Position pos, ItemStack stack, @NotNull Direction direction) {
         ThrownAridTrident throwntrident = new ThrownAridTrident(level, pos.x(), pos.y(), pos.z(), stack.copyWithCount(1)); //OVERWRITE THROWNTRIDENT
         throwntrident.pickup = AbstractArrow.Pickup.ALLOWED;
         return throwntrident;
-    }
+    }*/
 
     @Override
     public @NotNull ItemAttributeModifiers getDefaultAttributeModifiers(@NotNull ItemStack stack) {
@@ -70,24 +66,29 @@ public class AridTridentItem extends TridentItem {
 
     @Override
     public void releaseUsing(@NotNull ItemStack stack, @NotNull Level level, @NotNull LivingEntity entity, int timeLeft) {
-        if (level.isClientSide) return;
-
         int chargeTime = this.getUseDuration(stack, entity) - timeLeft;
-        if (chargeTime >= 20 && entity instanceof Player player && level instanceof ServerLevel serverLevel) {
-            Holder<SoundEvent> holder = EnchantmentHelper.pickHighestLevel(stack, EnchantmentEffectComponents.TRIDENT_SOUND).orElse(SoundEvents.TRIDENT_THROW);
+        if (!level.isClientSide && chargeTime >= 20 && entity instanceof Player player) {
+            //item
             stack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(entity.getUsedItemHand()));
 
-            ThrownAridTrident trident = new ThrownAridTrident(serverLevel, player, stack);
+            // entity
+            ThrownAridTrident trident = new ThrownAridTrident(level, player, stack);
             trident.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 5F, 0F);
             if (player.hasInfiniteMaterials())
                 trident.pickup = AbstractArrow.Pickup.CREATIVE_ONLY;
             else
                 player.getInventory().removeItem(stack);
 
-            serverLevel.addFreshEntity(trident);
-            serverLevel.playSound(null, trident, holder.value(), SoundSource.PLAYERS, 0.8F, 0.8F);
-            serverLevel.playSound(null, trident, utmSounds.PKFRS.get(), SoundSource.PLAYERS, 0.7F, 1.0F);
-            serverLevel.sendParticles(new pkfrbParticleOptions(utmParticles.PKFIREBEGIN.get(), trident.getId()), trident.position().x + player.getLookAngle().x, trident.position().y + player.getLookAngle().y, trident.position().z + player.getLookAngle().z, 1, 0, 0, 0, 0); //so i can send parite
+            level.addFreshEntity(trident);
+
+            // sound
+            Holder<SoundEvent> holder = EnchantmentHelper.pickHighestLevel(stack, EnchantmentEffectComponents.TRIDENT_SOUND).orElse(SoundEvents.TRIDENT_THROW);
+            level.playSound(null, trident, holder.value(), SoundSource.PLAYERS, 0.8F, 0.8F);
+            level.playSound(null, trident, utmSounds.PKFRS.get(), SoundSource.PLAYERS, 0.7F, 1.0F);
+
+            // particle
+            if (level instanceof ServerLevel sLevel)
+                sLevel.sendParticles(new pkfrbParticleOptions(utmParticles.PKFIREBEGIN.get(), trident.getId()), trident.position().x + player.getLookAngle().x, trident.position().y + player.getLookAngle().y, trident.position().z + player.getLookAngle().z, 1, 0, 0, 0, 0); //so i can send parite
 
             player.awardStat(Stats.ITEM_USED.get(this));
         }
