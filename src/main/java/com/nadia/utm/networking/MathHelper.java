@@ -14,6 +14,10 @@ public class MathHelper {
     }
 
     public static float getOversizeScale(Vec3 original, Vec3 clamped) {
-        return pickLargest((float) (clamped.x / original.x), (float) (clamped.y / original.y), (float) (clamped.z / original.z));
+        if (clamped.equals(original)) return 1;
+        float x = original.x == 0 ? 0 : (float) (original.x / clamped.x);
+        float y = original.y == 0 ? 0 : (float) (original.y / clamped.y);
+        float z = original.z == 0 ? 0 : (float) (original.z / clamped.z);
+        return pickLargest(x, y, z);
     }
 }
