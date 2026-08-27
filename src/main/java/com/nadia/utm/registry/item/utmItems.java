@@ -10,6 +10,7 @@ import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Rarity;
+import net.minecraft.world.level.block.TorchBlock;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -145,6 +146,10 @@ public class utmItems {
 
     public static final utmItemContainer<BappleItem> BAPPLE = register("bapple", // neebs dlue
             () -> new BappleItem(new Item.Properties().food(new FoodProperties.Builder().alwaysEdible().nutrition(-2).saturationModifier(-8132023).fast().build()).rarity(utmRarities.BLUE.getValue()))).generated();
+
+    public static final utmItemContainer<Item> YELLOW_COAL = register("yellow_coal").generated();
+    public static final utmItemContainer<Item> NICE_TORCH = register("nice_torch").generated();
+
 
     //TODO: IMPORTANT!!!! START PUTTING WATER AS OUTPUT IN ANTIWATER RECIPES! IMPORTANT! START DOING THAT!
     //ok
